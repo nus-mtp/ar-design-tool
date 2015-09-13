@@ -34,6 +34,7 @@ public class ActionButton : MonoBehaviour {
 		}
 		if (Screen.orientation == ScreenOrientation.LandscapeLeft || Screen.orientation == ScreenOrientation.LandscapeRight) {
 			isShow = true;
+			imageTarget.SetActive (true);
 		}
 
 		GameObject.Find ("Canvas").GetComponent<Canvas> ().enabled = true; // Show UI after we're done
