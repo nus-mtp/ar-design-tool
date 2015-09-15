@@ -132,15 +132,17 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
+  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!1002 &2000001
 EditorExtensionImpl:
   serializedVersion: 6
 --- !u!23 &2300000
-Renderer:
+MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -148,15 +150,19 @@ Renderer:
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
-  m_LightmapIndex: 255
-  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
   - {fileID: 2100000, guid: e6eb16febd64e6b4a8a3f5918233c4da, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
-  m_LightProbeAnchor: {fileID: 0}
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
 --- !u!81 &8100000
@@ -240,7 +246,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4114ca95ba12f394a8ad43abfc86745c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  VuforiaLicenseKey: 
+  VuforiaLicenseKey: AelUoPb/////AAAAARItpDkG0EI6uialDEIFGW4WWrMJTOjWpIkdn1G9WDbYy5L/ioCJwqw3XTXS2sFR8uiwZAZ6z9ztBdcshvwm8cnHl4vJ/LLt2Q1Byk6qOYXRxVK57CTbJ87rZzaUoeia9+ctG2Sc6Vyz//RLu8+UhV1LvsGaDcbcKXersE+W/cxHIGiHYUti1QZ71C90obplfpSd7icV8u+ieMYll3dY9bZBbuVJSTKpaI9NWlOcRJpN0Sjp4SjlyQuC/8dNZMktNpFPlE9VGEwYFZrUFuSSNtVWfmHaxgjP594Kk0gPH8FedwFKoOj1Oy9yqMHDaRcquDvbFXcEMrjt8EU/6u4/JAMLZJtR7PtY/jmQiOcOzfo0
   mCameraOffset: 0
   mSkewFrustum: 1
   CameraDeviceModeSetting: -1
@@ -257,6 +263,7 @@ MonoBehaviour:
   mSecondaryCamera: {fileID: 0}
   mUsingHeadset: 0
   mHeadsetID: 
+  mEyewearUserCalibrationProfileId: -1
   mSynchronizePoseUpdates: 0
 --- !u!1002 &11400007
 EditorExtensionImpl:
@@ -361,7 +368,6 @@ Prefab:
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 100000}
   m_IsPrefabParent: 1
-  m_IsExploded: 1
 --- !u!1002 &100100001
 EditorExtensionImpl:
   serializedVersion: 6
