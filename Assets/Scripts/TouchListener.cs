@@ -7,7 +7,6 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 	TrackableBehaviour trackable;
 	private GameObject panel;
 
-
 	// Use this for initialization
 	void Start () {
 		trackable = (TrackableBehaviour)UnityEngine.Object.FindObjectOfType(typeof(TrackableBehaviour));
@@ -22,10 +21,10 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 			Ray ray =Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit)){
-				if(hit.collider.tag == "Zinc")
+				if(hit.collider.tag == "BottleCap")
 				{
-					GameObject obj=GameObject.FindGameObjectWithTag("Zinc");
-					//Debug.Log ("Yeah i can click on it" + obj.name);
+					GameObject obj=GameObject.FindGameObjectWithTag("BottleCap");
+					Debug.Log ("Yeah i can click on it" + obj.name);
 					//informationTextbox.SetActive (true);
 				}
 				if(hit.collider.tag == "Ginger"){
