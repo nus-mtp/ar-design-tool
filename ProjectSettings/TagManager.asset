@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - cube
+  - BlackCurrantTarget
+  - BoneTarget
+  - BabyTarget
+  - EnergyTarget
+  - Zinc
+  - infoTextbox
+  - Panel
+  - VitA
+  - Ginger
   layers:
   - Default
   - TransparentFX
