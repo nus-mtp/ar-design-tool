@@ -6,18 +6,25 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 
 	TrackableBehaviour trackable;
 	private GameObject panel;
+	private GameObject pill;
+	private GameObject click;
+	private GameObject sample;
 
 	// Use this for initialization
 	void Start () {
 		trackable = (TrackableBehaviour)UnityEngine.Object.FindObjectOfType(typeof(TrackableBehaviour));
 		panel = GameObject.FindGameObjectWithTag("Panel");
+		pill = GameObject.FindGameObjectWithTag ("Pill");
+		click = GameObject.FindGameObjectWithTag ("ClickMe");
+
 		panel.SetActive (true);
+		pill.SetActive (false);
 
 		trackable.RegisterTrackableEventHandler(this);
 	}
 	
 	void Update () {
-		if (Input.GetMouseButtonDown(0)){ // if left button pressed...
+		if (Input.GetMouseButtonDown(0)){ 
 			Ray ray =Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit)){
@@ -25,17 +32,8 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 				{
 					GameObject obj=GameObject.FindGameObjectWithTag("BottleCap");
 					Debug.Log ("Yeah i can click on it" + obj.name);
-					//informationTextbox.SetActive (true);
-				}
-				if(hit.collider.tag == "Ginger"){
-					GameObject obj=GameObject.FindGameObjectWithTag("Ginger");
-					//Debug.Log ("Yeah yo!");
-					//informationTextbox.SetActive (true);
-				}
-				if(hit.collider.tag == "VitA"){
-					GameObject obj=GameObject.FindGameObjectWithTag("VitA");
-					//Debug.Log ("Yeah vitA!");
-					//informationTextbox.SetActive (true);
+					pill.SetActive(true);
+					click.SetActive(false);
 				}
 			}
 		}

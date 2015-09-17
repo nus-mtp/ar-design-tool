@@ -12,6 +12,8 @@ TagManager:
   - infoTextbox
   - Panel
   - ClickMe
+  - Pill
+  - SampleUI
   layers:
   - Default
   - TransparentFX
