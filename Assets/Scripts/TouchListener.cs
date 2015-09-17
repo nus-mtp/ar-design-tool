@@ -9,6 +9,7 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 	private GameObject pill;
 	private GameObject click;
 	private GameObject sample;
+	public static bool hasbeenClicked = false;
 
 	// Use this for initialization
 	void Start () {
@@ -16,9 +17,11 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 		panel = GameObject.FindGameObjectWithTag("Panel");
 		pill = GameObject.FindGameObjectWithTag ("Pill");
 		click = GameObject.FindGameObjectWithTag ("ClickMe");
+		sample = GameObject.FindGameObjectWithTag ("SampleUI");
 
 		panel.SetActive (true);
 		pill.SetActive (false);
+		sample.SetActive (false);
 
 		trackable.RegisterTrackableEventHandler(this);
 	}
@@ -31,9 +34,15 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 				if(hit.collider.tag == "BottleCap")
 				{
 					GameObject obj=GameObject.FindGameObjectWithTag("BottleCap");
-					Debug.Log ("Yeah i can click on it" + obj.name);
+					//Debug.Log ("Yeah i can click on it" + obj.name);
 					pill.SetActive(true);
 					click.SetActive(false);
+				}
+				if(hit.collider.tag == "Pill")
+				{
+					GameObject obj=GameObject.FindGameObjectWithTag("Pill");
+					sample.SetActive (true);
+					hasbeenClicked = true;
 				}
 			}
 		}

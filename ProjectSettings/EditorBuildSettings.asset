@@ -12,10 +12,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Old/PrototypeVer2.unity
   - enabled: 0
-    path: Assets/Scenes/Old/PrototypeVer2.unity
-  - enabled: 0
     path: Assets/Scenes/Old/RootConceptProto.unity
   - enabled: 0
     path: Assets/Scenes/Old/PrototypeVer2.unity
-  - enabled: 1
+  - enabled: 0
+    path: Assets/Scenes/Old/PrototypeVer2.unity
+  - enabled: 0
     path: Assets/Scenes/SwisseProto.unity
+  - enabled: 1
+    path: Assets/Scenes/SwisseProtoVer2.unity
