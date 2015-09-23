@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - BottleCap
+  - BlackCurrantTarget
+  - BoneTarget
+  - BabyTarget
+  - EnergyTarget
+  - infoTextbox
+  - Panel
+  - ClickMe
+  - Pill
+  - SampleUI
   layers:
   - Default
   - TransparentFX
