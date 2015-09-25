@@ -4,24 +4,4 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/Old/PrototypeVer1.unity
-  - enabled: 0
-    path: Assets/Scenes/Old/PrototypeVer2.unity
-  - enabled: 0
-    path: Assets/Scenes/Old/PrototypeVer2.unity
-  - enabled: 0
-    path: Assets/Scenes/Old/RootConceptProto.unity
-  - enabled: 0
-    path: Assets/Scenes/Old/PrototypeVer2.unity
-  - enabled: 0
-    path: Assets/Scenes/Old/PrototypeVer2.unity
-  - enabled: 0
-    path: Assets/Scenes/SwisseProto.unity
-  - enabled: 0
-    path: Assets/Scenes/SwisseProtoVer2.unity
-  - enabled: 1
-    path: Assets/WZScene.unity
-  - enabled: 1
-    path: Assets/2dIngredientDisplay.unity
+  m_Scenes: []
