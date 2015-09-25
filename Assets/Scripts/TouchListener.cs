@@ -2,9 +2,8 @@
 using System.Collections;
 using Vuforia;
 
-public class TouchListener : MonoBehaviour , ITrackableEventHandler {
+public class TouchListener : MonoBehaviour {
 
-	TrackableBehaviour trackable;
 	private GameObject panel;
 	private GameObject pill;
 	private GameObject click;
@@ -13,21 +12,24 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 
 	// Use this for initialization
 	void Start () {
-		trackable = (TrackableBehaviour)UnityEngine.Object.FindObjectOfType(typeof(TrackableBehaviour));
 		panel = GameObject.FindGameObjectWithTag("Panel");
 		pill = GameObject.FindGameObjectWithTag ("Pill");
 		click = GameObject.FindGameObjectWithTag ("ClickMe");
-		sample = GameObject.FindGameObjectWithTag ("SampleUI");
-
-		panel.SetActive (true);
+        
 		pill.SetActive (false);
-		sample.SetActive (false);
-
-		trackable.RegisterTrackableEventHandler(this);
-	}
+        panel.SetActive(true);
+    }
 	
 	void Update () {
-		if (Input.GetMouseButtonDown(0)){ 
+        if (CustomTrackerBehaviour.isTracked)
+        {
+            panel.SetActive(false);
+        }
+        else
+        {
+            panel.SetActive(true);
+        }
+        if (Input.GetMouseButtonDown(0)){ 
 			Ray ray =Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit)){
@@ -46,16 +48,5 @@ public class TouchListener : MonoBehaviour , ITrackableEventHandler {
 				}
 			}
 		}
-	}
-
-	// Called when the trackable state has changed.
-	public void OnTrackableStateChanged(TrackableBehaviour.Status previousStatus,TrackableBehaviour.Status newStatus){
-		
-		if( newStatus == TrackableBehaviour.Status.DETECTED || newStatus == TrackableBehaviour.Status.TRACKED ){
-			panel.SetActive(false);
-		}else{
-			panel.SetActive(true);
-		}
-	}
-	
+	}	
 }
