@@ -80,11 +80,19 @@ public class CustomTrackerBehaviour : MonoBehaviour, ITrackableEventHandler {
     
     private void OnTrackerFoundHandler()
     {
-
+        // From Wenzhao
+        Canvas canvasObject = (Canvas)FindObjectOfType(typeof(Canvas));
+        {
+            canvasObject.enabled = true;
+        }
     }
 
     private void OnTrackerLostHandler()
     {
-
+        // From Wenzhao
+        Canvas canvasObject = (Canvas)FindObjectOfType(typeof(Canvas));
+        {
+            canvasObject.enabled = false;
+        }
     }
 }

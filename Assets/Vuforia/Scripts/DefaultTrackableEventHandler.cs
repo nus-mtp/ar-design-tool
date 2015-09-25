@@ -70,7 +70,7 @@ namespace Vuforia
         {
             Renderer[] rendererComponents = GetComponentsInChildren<Renderer>(true);
             Collider[] colliderComponents = GetComponentsInChildren<Collider>(true);
-
+ 
             // Enable rendering:
             foreach (Renderer component in rendererComponents)
             {
