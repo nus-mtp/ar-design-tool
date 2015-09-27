@@ -5,17 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - BottleCap
-  - BlackCurrantTarget
-  - BoneTarget
-  - BabyTarget
-  - EnergyTarget
-  - infoTextbox
   - Panel
   - ClickMe
   - Pill
+  - infoTextbox
   - SampleUI
-  - Virtual Button
-  - IngredientsGroup
+  - GroupLayer1
   layers:
   - Default
   - TransparentFX

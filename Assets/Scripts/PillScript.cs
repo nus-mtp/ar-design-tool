@@ -13,7 +13,7 @@ public class PillScript : MonoBehaviour {
 		halo = GetComponent ("Halo");
 		halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
 
-		status = TouchListener.hasbeenClicked;
+		status = TouchController.hasbeenClicked;
 		//sample = GameObject.FindGameObjectWithTag("SampleUI");
 		//sample.SetActive (false);
 	}
