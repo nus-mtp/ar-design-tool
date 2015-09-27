@@ -10,7 +10,7 @@ public class IngredientsGroup : MonoBehaviour
 
     Dictionary<string, List<string>> allIngredientsGroup;
     public Transform ingredientButton;
-    private const string BUTTONTAG = "IngredientsGroup";
+    private const string BUTTONTAG = "GroupLayer1";
     string jsonFileName = "IngredientsGroup";
 
     // Use this for initialization
