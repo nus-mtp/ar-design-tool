@@ -16,8 +16,8 @@ public class IngredientTouchListener : AbstractTouchListener {
 
     public override void touchHandler()
     {
-        Debug.Log("hey, i am ButtonType");
-        spawnIngredientsButton(ButtonType);
+        Debug.Log("hey, i am" +  gameObject.name);
+        spawnIngredientsButton();
     }
 
 
@@ -25,9 +25,10 @@ public class IngredientTouchListener : AbstractTouchListener {
     void Start()
     {
         readJson();
+        ButtonType = gameObject.name;
     }
 
-    public void spawnIngredientsButton(string ButtonType)
+    public void spawnIngredientsButton()
     {
         Canvas canvasObject = (Canvas)FindObjectOfType(typeof(Canvas));
         Transform temp;
@@ -42,7 +43,8 @@ public class IngredientTouchListener : AbstractTouchListener {
 
             for (int i = 0; i < columns; i++)
             {
-                temp = Instantiate(ingredientButton) as Transform;
+                loadPrefabs(ingredientGroup[i]);
+                /*temp = Instantiate(ingredientButton) as Transform;
                 temp.SetParent(canvasObject.transform, true);
                 temp.localScale = new Vector3(1, 1, 1);
                 temp.localPosition = new Vector3((-columns / 2 + i) * width, 20, 0);
@@ -50,6 +52,7 @@ public class IngredientTouchListener : AbstractTouchListener {
                 Text name = temp.GetChild(0).GetComponent<Text>();
                 Debug.Log(name.text);
                 name.text = ingredientGroup[i];
+                */
             }
 
             GameObject[] tagged = GameObject.FindGameObjectsWithTag(BUTTONTAG);
@@ -66,5 +69,16 @@ public class IngredientTouchListener : AbstractTouchListener {
         TextAsset ta = (TextAsset)Resources.Load("JSON/IngredientsGroup");
         string jsonString = ta.text;
         allIngredientsGroup = JsonMapper.ToObject<Dictionary<string, List<string>>>(jsonString);
+    }
+
+    private GameObject loadPrefabs(string prefabName)
+    {
+        Debug.Log("Prefabs/" + prefabName);
+        GameObject instance = Instantiate(Resources.Load("Prefabs/Vitamins/" + prefabName, typeof(GameObject))) as GameObject;
+        GameObject.FindGameObjectsWithTag(BUTTONTAG);
+        GameObject[] tagged = GameObject.FindGameObjectsWithTag("ObjectTarget");
+        instance.transform.SetParent(tagged[0].transform,false);
+        instance.name = prefabName;
+        return instance;
     }
 }
