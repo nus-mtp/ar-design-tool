@@ -11,6 +11,8 @@ TagManager:
   - infoTextbox
   - SampleUI
   - GroupLayer1
+  - IngredientsGroup
+  - ObjectTarget
   layers:
   - Default
   - TransparentFX
