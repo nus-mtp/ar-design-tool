@@ -2,7 +2,7 @@
 using System.Collections;
 using Vuforia;
 
-public class TouchListener : MonoBehaviour {
+public class TouchController : MonoBehaviour {
 
 	private GameObject panel;
 	private GameObject pill;
@@ -29,6 +29,7 @@ public class TouchListener : MonoBehaviour {
         {
             panel.SetActive(true);
         }
+
         if (Input.GetMouseButtonDown(0)){ 
 			Ray ray =Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
@@ -46,6 +47,15 @@ public class TouchListener : MonoBehaviour {
 					sample.SetActive (true);
 					hasbeenClicked = true;
 				}
+                if(hit.collider)
+                {
+                    GameObject obj = hit.collider.gameObject;
+                    AbstractTouchListener objListener = obj.GetComponent<AbstractTouchListener>();
+                    if(objListener != null)
+                    {
+                        objListener.touchHandler();
+                    }
+                }
 			}
 		}
 	}	
