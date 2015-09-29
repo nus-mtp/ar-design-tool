@@ -53,7 +53,7 @@ public class TouchController : MonoBehaviour {
                     AbstractTouchListener objListener = obj.GetComponent<AbstractTouchListener>();
                     if(objListener != null)
                     {
-                        objListener.touchHandler();
+                        objListener.touchHandler(); 
                     }
                 }
 			}
