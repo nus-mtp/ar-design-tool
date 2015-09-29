@@ -6,8 +6,6 @@ using System.Collections;
 public class IndividualIngredientTouchListener : AbstractTouchListener{
     public Texture backgroundTexture;
     public Texture closeTexture;
-    public const string homeSceneName = "WZScene";
-    public const string thisSceneName = "2dIngredientDisplay";
     public Ingredient ingredient;
     
 
@@ -18,7 +16,6 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     public override void touchHandler()
     {
-        Debug.Log(gameObject.name + " works");
         createGUI();
     }
 
@@ -40,7 +37,6 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
     {
         if (GUI.Button(new Rect(0, 0, Screen.width * .05f, Screen.width * .05f), closeTexture, ""))
         {
-            Debug.Log("Back");
             enabled = false;
         }
 
@@ -69,8 +65,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     private void readJson(string ingredientName)
     {
-        TextAsset ta = (TextAsset)Resources.Load("JSON/" + ingredientName);
-        string jsonString = ta.text;
+        string jsonString = Database.readIngredient(ingredientName);
         Debug.Log(jsonString);
         ingredient = Ingredient.fromJson(jsonString);
     }
