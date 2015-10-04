@@ -189,11 +189,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74057108}
   m_LocalRotation: {x: -.0362376794, y: .00790615752, z: -.717350781, w: .695724308}
-  m_LocalPosition: {x: .293000013, y: .721000016, z: .257999986}
-  m_LocalScale: {x: .0750599653, y: .0750599504, z: .0750599205}
+  m_LocalPosition: {x: -.380309582, y: 4.33757639, z: -.116321519}
+  m_LocalScale: {x: 1.88851714, y: .169663221, z: .170539916}
   m_Children: []
-  m_Father: {fileID: 2081694580}
-  m_RootOrder: 4
+  m_Father: {fileID: 611585769}
+  m_RootOrder: 0
 --- !u!114 &74057110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -270,6 +270,7 @@ GameObject:
   - 4: {fileID: 611585769}
   - 33: {fileID: 611585771}
   - 136: {fileID: 611585770}
+  - 114: {fileID: 611585772}
   m_Layer: 0
   m_Name: BottleCap
   m_TagString: BottleCap
@@ -286,9 +287,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .463000029, y: .549000025, z: .310000002}
   m_LocalScale: {x: .447004318, y: .0396534801, z: .447036952}
-  m_Children: []
+  m_Children:
+  - {fileID: 74057109}
   m_Father: {fileID: 2081694580}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!136 &611585770
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -309,6 +311,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 611585768}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &611585772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 611585768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4ac298add25455e90cb447b2307d28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &757126219
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +420,7 @@ Transform:
   m_LocalScale: {x: .0239467919, y: .0239467919, z: .0239467919}
   m_Children: []
   m_Father: {fileID: 2081694580}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!212 &981709852
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -643,7 +656,7 @@ Transform:
   m_LocalScale: {x: .0199999996, y: .0199999996, z: .0199999996}
   m_Children: []
   m_Father: {fileID: 2081694580}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!102 &1164353146
 TextMesh:
   serializedVersion: 3
@@ -1482,7 +1495,6 @@ Transform:
   - {fileID: 1293621275}
   - {fileID: 2045189133}
   - {fileID: 1880207687}
-  - {fileID: 74057109}
   - {fileID: 611585769}
   - {fileID: 981709851}
   - {fileID: 1164353145}

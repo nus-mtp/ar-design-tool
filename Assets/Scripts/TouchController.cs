@@ -8,12 +8,10 @@ public class TouchController : MonoBehaviour {
 	private GameObject pill;
 	private GameObject click;
 	private GameObject sample;
-	public static bool hasbeenClicked = false;
 
 	// Use this for initialization
 	void Start () {
 		panel = GameObject.FindGameObjectWithTag("Panel");
-		pill = GameObject.FindGameObjectWithTag ("Pill");
 		click = GameObject.FindGameObjectWithTag ("ClickMe");
         
 		pill.SetActive (false);
@@ -34,19 +32,6 @@ public class TouchController : MonoBehaviour {
 			Ray ray =Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
 			if (Physics.Raycast(ray, out hit)){
-				if(hit.collider.tag == "BottleCap")
-				{
-					GameObject obj=GameObject.FindGameObjectWithTag("BottleCap");
-					//Debug.Log ("Yeah i can click on it" + obj.name);
-					pill.SetActive(true);
-					click.SetActive(false);
-				}
-				if(hit.collider.tag == "Pill")
-				{
-					GameObject obj=GameObject.FindGameObjectWithTag("Pill");
-					sample.SetActive (true);
-					hasbeenClicked = true;
-				}
                 if(hit.collider)
                 {
                     GameObject obj = hit.collider.gameObject;
