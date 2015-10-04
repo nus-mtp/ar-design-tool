@@ -3,13 +3,13 @@ using System.Collections;
 
 public class PillScript : MonoBehaviour {
 
-	Component halo;
+	//Component halo;
 	//private bool status;
 
 	// Use this for initialization
 	void Start () {
-		halo = GetComponent ("Halo");
-		halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
+//		halo = GetComponent ("Halo");
+//		halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
 		this.gameObject.SetActive (false);    //to set the pill to be false during the start
 
 		//status = TouchController.hasbeenClicked;

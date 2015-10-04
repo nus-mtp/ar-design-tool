@@ -5,16 +5,11 @@ using Vuforia;
 public class TouchController : MonoBehaviour {
 
 	private GameObject panel;
-	private GameObject pill;
-	private GameObject click;
-	private GameObject sample;
+	public static bool objectIsFound = false;
 
 	// Use this for initialization
 	void Start () {
 		panel = GameObject.FindGameObjectWithTag("Panel");
-		click = GameObject.FindGameObjectWithTag ("ClickMe");
-        
-		pill.SetActive (false);
         panel.SetActive(true);
     }
 	
@@ -22,10 +17,12 @@ public class TouchController : MonoBehaviour {
         if (CustomTrackerBehaviour.isTracked)
         {
             panel.SetActive(false);
+			objectIsFound = true;
         }
         else
         {
             panel.SetActive(true);
+			objectIsFound = false;
         }
 
         if (Input.GetMouseButtonDown(0)){ 
