@@ -2,31 +2,50 @@
 using System.Collections;
 
 public class PillScript : MonoBehaviour {
-
-	//Component halo;
-	//private bool status;
+	
+	bool status = false;
+	float jumpUpTime = 1.5f;
+	float jumpDownTime = 1.5f;
+	float jumpUpTimeCounter;
+	float jumpDownTimeCounter;
+	int noOfClick = 0;
 
 	// Use this for initialization
 	void Start () {
-//		halo = GetComponent ("Halo");
-//		halo.GetType().GetProperty("enabled").SetValue(halo, true, null);
 		this.gameObject.SetActive (false);    //to set the pill to be false during the start
-
-		//status = TouchController.hasbeenClicked;
-		//sample = GameObject.FindGameObjectWithTag("SampleUI");
-		//sample.SetActive (false);
+		jumpUpTimeCounter = 0f;
+		jumpDownTimeCounter = 0f;
 	}
-
-	public void SetToShow(bool status){
-		this.gameObject.SetActive (status);
-		Debug.Log ("I've shown the pill");
-	}
+	
 	// Update is called once per frame
 	void Update () {
-//		if (Input.GetMouseButtonDown(0)){
-//			halo.GetType ().GetProperty ("enabled").SetValue (halo, false, null);
-//			Debug.Log ("hit me");
-//
-//		}
+		status = BottleCapTouchListener.isClicked;
+		if (status) {
+			jumpUpAndDown ();
+		} 
+		resetTimeCounter ();
 	}
+
+	//to jump up and down of an object
+	public void jumpUpAndDown(){
+		if (jumpUpTimeCounter < jumpUpTime) {
+			jumpUpTimeCounter += Time.deltaTime;
+			transform.Translate (Vector3.up * 10 * Time.deltaTime, Space.World);
+		} else {
+			if (jumpDownTimeCounter < jumpDownTime) {
+				jumpDownTimeCounter += Time.deltaTime;
+				transform.Translate (Vector3.down * 10 * Time.deltaTime, Space.World);
+			}
+		}
+	}
+
+	//to reset the time counter
+	public void resetTimeCounter(){
+		if (jumpDownTimeCounter > 1.5f && jumpUpTimeCounter > 1.5f) {
+			jumpDownTimeCounter = 0f;
+			jumpUpTimeCounter = 0f;
+		}
+	}
+
+
 }

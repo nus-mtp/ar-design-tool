@@ -7,7 +7,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
 	Component halo;
 	Transform pill;
 	bool statusTracked;
-	bool isClicked = false;
+	public static bool isClicked = false;
 
 	void Start(){
 		halo = GetComponent ("Halo");
