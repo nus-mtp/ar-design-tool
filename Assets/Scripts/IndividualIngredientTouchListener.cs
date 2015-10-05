@@ -65,7 +65,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     private void readJson(string ingredientName)
     {
-        string jsonString = Database.readIngredient(ingredientName);
+        string jsonString = Database.readJSON(ingredientName);
         Debug.Log(jsonString);
         ingredient = Ingredient.fromJson(jsonString);
     }

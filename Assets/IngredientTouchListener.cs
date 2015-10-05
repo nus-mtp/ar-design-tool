@@ -57,14 +57,13 @@ public class IngredientTouchListener : AbstractTouchListener {
 
     private void readJson()
     {
-        TextAsset ta = (TextAsset)Resources.Load("JSON/IngredientsGroup");
-        string jsonString = ta.text;
+        string jsonString = Database.readJSON("IngredientsGroup");
         allIngredientsGroup = JsonMapper.ToObject<Dictionary<string, List<string>>>(jsonString);
     }
 
     private GameObject loadPrefabs(string prefabName)
     {
-        GameObject instance = Instantiate(Resources.Load("Prefabs/" + prefabName, typeof(GameObject))) as GameObject;
+        GameObject instance = Instantiate(Database.loadPrefab(prefabName));
         GameObject.FindGameObjectsWithTag(BUTTONTAG);
         GameObject[] tagged = GameObject.FindGameObjectsWithTag("ObjectTarget");
         instance.transform.SetParent(tagged[0].transform,false);
