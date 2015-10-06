@@ -31,6 +31,6 @@ Assets/Standard Assets/
 *.DS_Store
 
 # Vuforia QCAR
-QCAR/vufsen.dat
+*.dat
 QCAR/somedata16
 
