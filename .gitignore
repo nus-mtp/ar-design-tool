@@ -26,3 +26,11 @@ sysinfo.txt
 
 # Standard Assets
 Assets/Standard Assets/
+
+# Mac OS X .DS_Store
+*.DS_Store
+
+# Vuforia QCAR
+QCAR/vufsen.dat
+QCAR/somedata16
+
