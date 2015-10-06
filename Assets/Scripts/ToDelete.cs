@@ -11,6 +11,6 @@ public class ToDelete : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        Debug.Log(CameraProperties.fget(CameraProperties.EULER_ROTATION_Z).ToString());
+        Debug.Log(CameraProperties.fget(CameraProperties.EULER_ROTATION_Y).ToString());
 	}
 }
