@@ -1,1 +1,1 @@
-{"herbs":["ginseng","good stuff","random"],"vitamins":["vitaminA","vitaminB","VitaminC"]}
+{"herbs":["ginseng","good stuff","random"],"vitamins":["vitaminE","vitaminB","VitaminC"]}
