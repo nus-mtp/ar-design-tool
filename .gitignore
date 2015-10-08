@@ -27,10 +27,6 @@ sysinfo.txt
 # Standard Assets
 Assets/Standard Assets/
 
-# Mac OS X .DS_Store
+# Ignore vufsen.dat and DS_Store
+QCAR/vufsen.dat
 *.DS_Store
-
-# Vuforia QCAR
-*.dat
-QCAR/somedata16
-
