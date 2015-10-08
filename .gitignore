@@ -26,3 +26,6 @@ sysinfo.txt
 
 # Standard Assets
 Assets/Standard Assets/
+
+# Ignore vufsen.dat
+QCAR/vufsen.dat
