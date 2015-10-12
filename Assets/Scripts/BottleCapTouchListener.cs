@@ -6,6 +6,7 @@ using Vuforia;
 public class BottleCapTouchListener : AbstractTouchListener {
 	Component halo;
 	Transform pill;
+
 	bool statusTracked;
 	public static bool isClicked = false;
 
