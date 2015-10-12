@@ -9,10 +9,11 @@ using LitJson;
 public class IngredientTouchListener : AbstractTouchListener {
 
     Dictionary<string, List<string>> allIngredientsGroup;
-    public Transform ingredientButton;
+    List<GameObject> individualIngredientsArr = new List<GameObject>();
     private const string BUTTONTAG = "GroupLayer1";
     string jsonFileName = "IngredientsGroup";
     string buttonType;
+    bool ingredientsShown = false;
 
     public override void touchHandler()
     {
@@ -25,6 +26,7 @@ public class IngredientTouchListener : AbstractTouchListener {
     void Start()
     {
         readJson();
+        Debug.Log("name: " + gameObject.name);
         buttonType = gameObject.name;
     }
 
@@ -32,25 +34,41 @@ public class IngredientTouchListener : AbstractTouchListener {
     {
         Canvas canvasObject = (Canvas)FindObjectOfType(typeof(Canvas));
         Transform temp;
-        RectTransform rt = (RectTransform)ingredientButton;
-        float width = rt.rect.width;
-        float height = rt.rect.height;
-        if (allIngredientsGroup.ContainsKey(buttonType))
+
+
+        if (ingredientsShown)
         {
-
-            List<string> ingredientGroup = allIngredientsGroup[buttonType];
-            int columns = ingredientGroup.Count;
-
-            for (int i = 0; i < columns; i++)
+            foreach (GameObject go in individualIngredientsArr)
             {
-                loadPrefabs(ingredientGroup[i]);
+                Destroy(go);
             }
-
-            GameObject[] tagged = GameObject.FindGameObjectsWithTag(BUTTONTAG);
-            foreach (GameObject button in tagged)
+            ingredientsShown = !ingredientsShown;
+            Debug.Log(ingredientsShown);
+        }
+        else
+        {
+            if (allIngredientsGroup.ContainsKey(buttonType))
             {
-                button.SetActive(false);
+                List<string> ingredientGroup = allIngredientsGroup[buttonType];
+                int columns = ingredientGroup.Count;
+                Debug.Log(columns);
+
+                for (int i = 0; i < columns; i++)
+                {
+                    individualIngredientsArr.Add(loadPrefabs(ingredientGroup[i]));
+                }
+
+                GameObject[] tagged = GameObject.FindGameObjectsWithTag(BUTTONTAG);
+                foreach (GameObject button in tagged)
+                {
+                    button.SetActive(false);
+                }
+
+                gameObject.SetActive(true);
+
             }
+            ingredientsShown = !ingredientsShown;
+            Debug.Log(ingredientsShown);
         }
 
     }
@@ -58,6 +76,7 @@ public class IngredientTouchListener : AbstractTouchListener {
     private void readJson()
     {
         string jsonString = Database.readJSON("IngredientsGroup");
+        Debug.Log("string: " + jsonString);
         allIngredientsGroup = JsonMapper.ToObject<Dictionary<string, List<string>>>(jsonString);
     }
 
