@@ -21,7 +21,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
         shake = false;
         shakeTimeLimit = 0.0f;
         halo = GetComponent ("Halo");
-        fadeCounter = 0.0f;
+        fadeCounter = 1.5f;
 	}
 
 	void Update(){
@@ -48,7 +48,6 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
     public void flickering()
     {
-        setHalo(true);
         if (fadeCounter >= fadeOnLimit)
         {
             up = -1;
@@ -59,7 +58,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
             up = 1;
             setHalo(true);
         }
-        fadeCounter -= 10 * up;
+        Debug.Log(fadeCounter);
+        fadeCounter += 0.005f * up;
     }
 
 	public override void touchHandler()
