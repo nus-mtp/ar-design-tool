@@ -175,6 +175,7 @@ GameObject:
   - 23: {fileID: 74057112}
   - 114: {fileID: 74057110}
   - 114: {fileID: 74057111}
+  - 122: {fileID: 74057115}
   m_Layer: 0
   m_Name: Pill
   m_TagString: Pill
@@ -226,7 +227,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: ebfe1fbcdaf6f4353b4b823e788ad0f4, type: 2}
+  - {fileID: 2100000, guid: fb2ea5e9a543c384daf9018c29bb2204, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -260,6 +261,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74057108}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!122 &74057115
+Halo:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 74057108}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4285976521
+  m_Size: 10
 --- !u!4 &337413828 stripped
 Transform:
   m_PrefabParentObject: {fileID: 421766, guid: 025967aa9fdc3204f8bb049c360f09df, type: 2}
