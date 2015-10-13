@@ -35,4 +35,12 @@ public class BottleCapTouchListener : AbstractTouchListener {
 		//disable the glow
 		isClicked = true;
 	}
+
+    public void isShake()
+    {
+        if(CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) < 50.0)
+        {
+
+        }
+    }
 }
