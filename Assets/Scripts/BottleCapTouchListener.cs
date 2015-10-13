@@ -7,30 +7,33 @@ public class BottleCapTouchListener : AbstractTouchListener {
 	Component halo;
 	Transform pill;
 
+    bool shake;
 	bool statusTracked;
 	public static bool isClicked = false;
 
-	float switchOnTime = 1.5f;
-	float switchOffTime = 1.5f;
-	float switchOnCounter;
-	float switchOffCounter;
+	float fadeOnLimit = 1.5f;
+	float fadeOffLimit = 0.0f;
+	float fadeCounter;
+    float shakeTimeLimit;
+    int up;
 
 	void Start(){
-		halo = GetComponent ("Halo");
-		switchOnCounter = 0f;
-		switchOffCounter = 0f;
+        shake = false;
+        shakeTimeLimit = 0.0f;
+        halo = GetComponent ("Halo");
+        fadeCounter = 0.0f;
 	}
 
 	void Update(){
 		statusTracked = TouchController.objectIsFound;
 		setHalo (false);
+        isShake();
 
 		if (statusTracked) {
 			flickering ();
-			resetTimeCounter();
 		}
 
-		if (isClicked == true) {
+		if (isClicked == true) {    
 			setHalo (false);
 		}
 	}
@@ -39,17 +42,25 @@ public class BottleCapTouchListener : AbstractTouchListener {
 		halo.GetType ().GetProperty ("enabled").SetValue (halo, status, null);
 	}
 
-	public void flickering(){
-		if (switchOnCounter < switchOnTime) {
-			switchOnCounter += Time.deltaTime;
-			setHalo (true);
-		} else {
-			if(switchOffCounter < switchOffTime){
-				switchOffCounter += Time.deltaTime;
-				setHalo (false);
-			}
-		}
-	}
+    public void changeSize (float size){
+        RenderSettings.haloStrength -= size;
+    }
+
+    public void flickering()
+    {
+        setHalo(true);
+        if (fadeCounter >= fadeOnLimit)
+        {
+            up = -1;
+            setHalo(false);
+        }
+        else if (fadeCounter <= fadeOffLimit)
+        {
+            up = 1;
+            setHalo(true);
+        }
+        fadeCounter -= 10 * up;
+    }
 
 	public override void touchHandler()
 	{	pill= this.gameObject.transform.GetChild(0);
@@ -61,16 +72,21 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
     public void isShake()
     {
-        if(CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) < 50.0)
+        
+        if (CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) > 50.0 && CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) < 310.0)
         {
-
+            shake = true;
+            shakeTimeLimit = 0.50f;
+        }
+        if (shake)
+        {
+            shakeTimeLimit -= Time.deltaTime;
+            if (shakeTimeLimit <= 0.0f)
+                shake = false;
+            if (CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) < 40.0 && CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) > 340.0)
+            {
+                Debug.Log("shake!");
+            }
         }
     }
-	
-	public void resetTimeCounter(){
-		if (switchOffCounter > 1.5f && switchOnCounter > 1.5f) {
-			switchOnCounter = 0f;
-			switchOffCounter = 0f;
-		}
-	}
 }

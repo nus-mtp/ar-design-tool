@@ -33,6 +33,7 @@ public class TouchController : MonoBehaviour {
                 {
                     GameObject obj = hit.collider.gameObject;
                     AbstractTouchListener objListener = obj.GetComponent<AbstractTouchListener>();
+                    Debug.Log(objListener);
                     if(objListener != null)
                     {
                         objListener.touchHandler(); 

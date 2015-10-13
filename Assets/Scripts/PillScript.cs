@@ -65,7 +65,7 @@ public class PillScript : MonoBehaviour {
     {
         timeSinceAppear += Time.deltaTime;
         if (timeSinceAppear <= 1.50f)
-            transform.Translate(Vector3.up * (1.55f - 2.0f * timeSinceAppear), Space.World);
+            transform.Translate(Vector3.up * (1.50f - 2.0f * timeSinceAppear), Space.World);
         else
             jumpUpAndDown();
     }
