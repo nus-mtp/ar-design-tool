@@ -20,6 +20,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
 		if (isClicked == true) {
 			setHalo (false);
 		}
+
+        Debug.Log(CameraProperties.fget(CameraProperties.EULER_ROTATION_Z));
 	}
 
 	public void setHalo (bool status){
