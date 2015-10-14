@@ -31,7 +31,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     public override void touchHandler() {
         createGUI();
-        addToUndo();
+       // addToUndo();
     }
 
     private void OnGUI() {
@@ -112,9 +112,9 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
     }
 
     void Update() {
-        if (Input.GetKey(KeyCode.Escape)) {
-            // back button pressed
-            enabled = false;
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            undo();
         }
     }
 } 

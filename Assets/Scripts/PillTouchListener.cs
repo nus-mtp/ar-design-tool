@@ -30,6 +30,7 @@ public class PillTouchListener : AbstractTouchListener {
         {
             Destroy(b);
         }
+        buttons = new List<GameObject>();
     }
 	
 	public void spawnIngredientButtons()
