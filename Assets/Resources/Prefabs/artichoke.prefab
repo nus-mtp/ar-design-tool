@@ -11,7 +11,7 @@ GameObject:
   - 65: {fileID: 6540214}
   - 114: {fileID: 11493990}
   m_Layer: 0
-  m_Name: Artichoke
+  m_Name: artichoke
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

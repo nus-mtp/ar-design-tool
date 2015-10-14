@@ -95,7 +95,6 @@ GameObject:
   - 4: {fileID: 41294703}
   - 33: {fileID: 41294702}
   - 136: {fileID: 41294701}
-  - 23: {fileID: 41294700}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -103,31 +102,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!23 &41294700
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2333680, guid: b31314fd43260214a8aa7895ee17e34a,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 41294699}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: fb2ea5e9a543c384daf9018c29bb2204, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
 --- !u!136 &41294701
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -329,7 +303,7 @@ Transform:
   m_GameObject: {fileID: 214182526}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: .308771938, y: .642105281, z: .317889988}
-  m_LocalScale: {x: .0705594718, y: .00701754401, z: .0686835796}
+  m_LocalScale: {x: .0452791266, y: .00450326875, z: .0440753363}
   m_Children: []
   m_Father: {fileID: 2081694580}
   m_RootOrder: 0
@@ -1229,9 +1203,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 1983667219}
   - 33: {fileID: 1983667224}
-  - 136: {fileID: 1983667223}
   - 114: {fileID: 1983667221}
   - 122: {fileID: 1983667220}
+  - 65: {fileID: 1983667222}
   m_Layer: 0
   m_Name: BottleCap
   m_TagString: Untagged
@@ -1275,8 +1249,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a4ac298add25455e90cb447b2307d28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &1983667223
-CapsuleCollider:
+--- !u!65 &1983667222
+BoxCollider:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -1284,9 +1258,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: .5
-  m_Height: 2
-  m_Direction: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &1983667224
 MeshFilter:

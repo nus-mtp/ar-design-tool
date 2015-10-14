@@ -10,53 +10,49 @@ public class BottleCapTouchListener : AbstractTouchListener {
     bool shake;
 	bool statusTracked;
 	public static bool isClicked = false;
+	private GameObject arrow;
 
+	bool isFlickering = true;
 	float fadeOnLimit = 1.5f;
 	float fadeOffLimit = 0.0f;
 	float fadeCounter;
     float shakeTimeLimit;
     int up;
 
-    GameObject arrow;
-
 	void Start(){
         shake = false;
         shakeTimeLimit = 0.0f;
-        halo = GetComponent ("Halo");
         fadeCounter = 0.0f;
+
+		halo = GetComponent ("Halo");
         setHalo(false);
-        arrow = GameObject.Find("Arrow");
+		arrow = GameObject.Find("Arrow");
     }
 
     public override void undo()
     {
         Debug.Log("Bottle cap touch listener is undoing");
         arrow.SetActive(true);
-        setHalo(true);
         pill.gameObject.SetActive(false);
     }
+	
 
 	void Update(){
 		statusTracked = TouchController.objectIsFound;
         isShake();
 
 		if (statusTracked) {
-			flickering ();
-		}
-
-		if (isClicked == true) {    
-			setHalo (false);
-            arrow.SetActive(false);
+			if (isFlickering == true) {
+				flickering ();
+			}
+		} else {
+			setHalo(false);
 		}
 	}
 
 	public void setHalo (bool status){
 		halo.GetType ().GetProperty ("enabled").SetValue (halo, status, null);
 	}
-
-    public void changeSize (float size){
-        RenderSettings.haloStrength -= size;
-    }
 
     public void flickering()
     {
@@ -72,15 +68,20 @@ public class BottleCapTouchListener : AbstractTouchListener {
         }
         fadeCounter += 0.05f * up;
     }
+	
 
 	public override void touchHandler()
 	{	pill= this.gameObject.transform.GetChild(0);
 		pill.gameObject.SetActive (true);
 
+		arrow.SetActive (false);
+		isClicked = true;
+		setHalo (false);
 		//disable the glow
 		isClicked = true;
-        this.gameObject.GetComponent<Collider>().enabled = false;
-        addToUndo();
+        //this.gameObject.GetComponent<Collider>().enabled = false;
+		isFlickering = false;
+		addToUndo();
 	}
 
     public void isShake()
@@ -102,4 +103,5 @@ public class BottleCapTouchListener : AbstractTouchListener {
             }
         }
     }
+	
 }
