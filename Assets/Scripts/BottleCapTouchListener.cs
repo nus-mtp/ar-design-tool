@@ -34,6 +34,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
         Debug.Log("Bottle cap touch listener is undoing");
         arrow.SetActive(true);
         pill.gameObject.SetActive(false);
+		isFlickering = true;
+		setCollider (true);
     }
 	
 
@@ -52,6 +54,10 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 	public void setHalo (bool status){
 		halo.GetType ().GetProperty ("enabled").SetValue (halo, status, null);
+	}
+
+	public void setCollider (bool status){
+		this.gameObject.GetComponent<Collider>().enabled = status;
 	}
 
     public void flickering()
@@ -77,10 +83,11 @@ public class BottleCapTouchListener : AbstractTouchListener {
 		arrow.SetActive (false);
 		isClicked = true;
 		setHalo (false);
-		//disable the glow
 		isClicked = true;
-        //this.gameObject.GetComponent<Collider>().enabled = false;
 		isFlickering = false;
+
+		// set the collider to false
+		setCollider (false);
 		addToUndo();
 	}
 
