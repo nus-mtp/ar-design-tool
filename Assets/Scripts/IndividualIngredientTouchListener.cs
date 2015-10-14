@@ -24,8 +24,14 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         initializeGUIStyle();
 	}
 
+    public override void undo()
+    {
+        enabled = false;
+    }
+
     public override void touchHandler() {
         createGUI();
+        addToUndo();
     }
 
     private void OnGUI() {

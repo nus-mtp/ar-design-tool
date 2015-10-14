@@ -20,7 +20,17 @@ public class PillTouchListener : AbstractTouchListener {
 		Debug.Log("hey, i am pill");
 		spawnIngredientButtons();
 		gameObject.SetActive (false);
-	}   	
+        addToUndo();
+	}
+
+    public override void undo()
+    {
+        gameObject.SetActive(true);
+        foreach (GameObject b in buttons)
+        {
+            Destroy(b);
+        }
+    }
 	
 	public void spawnIngredientButtons()
 	{
