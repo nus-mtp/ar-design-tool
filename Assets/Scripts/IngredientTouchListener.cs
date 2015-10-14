@@ -19,6 +19,7 @@ public class IngredientTouchListener : AbstractTouchListener {
     {
         Debug.Log("hey, i am" +  gameObject.name);
         spawnIngredientsButton();
+		gameObject.SetActive (false);
     }
 
 
