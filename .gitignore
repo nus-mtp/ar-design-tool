@@ -28,5 +28,5 @@ sysinfo.txt
 Assets/Standard Assets/
 
 # Ignore vufsen.dat and DS_Store
-QCAR/vufsen.dat
+*.dat
 *.DS_Store

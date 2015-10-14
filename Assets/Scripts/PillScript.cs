@@ -2,14 +2,13 @@
 using System.Collections;
 
 public class PillScript : MonoBehaviour {
-	
 	bool status = false;
 	float jumpUpTime = 1.5f;
 	float jumpDownTime = 1.5f;
 	float jumpUpTimeCounter;
 	float jumpDownTimeCounter;
-	int noOfClick = 0;
 
+    /*
 	// Use this for initialization
 	void Start () {
 		this.gameObject.SetActive (false);    //to set the pill to be false during the start
@@ -25,16 +24,17 @@ public class PillScript : MonoBehaviour {
 		} 
 		resetTimeCounter ();
 	}
+    */
 
-	//to jump up and down of an object
-	public void jumpUpAndDown(){
+    //to jump up and down of an object
+    public void jumpUpAndDown(){
 		if (jumpUpTimeCounter < jumpUpTime) {
 			jumpUpTimeCounter += Time.deltaTime;
-			transform.Translate (Vector3.up * 10 * Time.deltaTime, Space.World);
+			transform.Translate (Vector3.up * 5 * Time.deltaTime, Space.World);
 		} else {
 			if (jumpDownTimeCounter < jumpDownTime) {
 				jumpDownTimeCounter += Time.deltaTime;
-				transform.Translate (Vector3.down * 10 * Time.deltaTime, Space.World);
+				transform.Translate (Vector3.down * 5 * Time.deltaTime, Space.World);
 			}
 		}
 	}
@@ -47,5 +47,26 @@ public class PillScript : MonoBehaviour {
 		}
 	}
 
+    private float timeSinceAppear = 0.0f;
 
+    public void Start()
+    {
+        this.gameObject.SetActive(false);
+    }
+
+    public void Update()
+    {
+        if (BottleCapTouchListener.isClicked)
+            pop();
+        resetTimeCounter();
+    }
+
+    private void pop()
+    {
+        timeSinceAppear += Time.deltaTime;
+        if (timeSinceAppear <= 1.50f)
+            transform.Translate(Vector3.up * (1.50f - 2.0f * timeSinceAppear), Space.World);
+        else
+            jumpUpAndDown();
+    }
 }
