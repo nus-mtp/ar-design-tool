@@ -29,7 +29,7 @@ public class UndoStack : MonoBehaviour {
 
     public void undoAction()
     {
-        if (undoStack.Count > 0)
+        if (undoStack.Count > 0 && TouchController.objectIsFound)
         {
             AbstractTouchListener tl = undoStack.Pop();
             Debug.Log("Popped:" + tl);
