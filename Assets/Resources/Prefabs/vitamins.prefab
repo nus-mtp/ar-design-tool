@@ -26,7 +26,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 107390}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .407000005, y: .958999991, z: .0839999989}
+  m_LocalPosition: {x: .407000005, y: .800000012, z: .400000006}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children: []
   m_Father: {fileID: 0}
@@ -104,6 +104,14 @@ Prefab:
       propertyPath: closeTexture
       value: 
       objectReference: {fileID: 2800000, guid: af6037bdb063c4603a33f16ed2e2476a, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: .800000012
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 107390}

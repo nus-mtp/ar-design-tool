@@ -1,1 +1,6 @@
-{"name":"Artichoke","alternativeNames":["choke you"],"imageLocation":["artichoke.jpeg"],"description":"this is a artichoke"}
+{
+	"name":"ARTICHOKE",
+	"alternativeNames":["choke you"],
+	"imageLocation":["artichoke.jpeg"],
+	"description":"this is a artichoke"
+}
