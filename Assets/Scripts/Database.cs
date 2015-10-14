@@ -13,7 +13,7 @@ public class Database {
     }
 
     public static GameObject loadPrefab(string prefabName)
-    {
+	{	Debug.Log ("Prefab name " + prefabName); 
         GameObject go = Resources.Load("Prefabs/" + prefabName, typeof(GameObject)) as GameObject;
         return go;
     }

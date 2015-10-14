@@ -17,16 +17,19 @@ public class BottleCapTouchListener : AbstractTouchListener {
     float shakeTimeLimit;
     int up;
 
+    GameObject arrow;
+
 	void Start(){
         shake = false;
         shakeTimeLimit = 0.0f;
         halo = GetComponent ("Halo");
-        fadeCounter = 1.5f;
-	}
+        fadeCounter = 0.0f;
+        setHalo(false);
+        arrow = GameObject.Find("Arrow");
+    }
 
 	void Update(){
 		statusTracked = TouchController.objectIsFound;
-		setHalo (false);
         isShake();
 
 		if (statusTracked) {
@@ -35,6 +38,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 		if (isClicked == true) {    
 			setHalo (false);
+            arrow.SetActive(false);
 		}
 	}
 
@@ -58,8 +62,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
             up = 1;
             setHalo(true);
         }
-        Debug.Log(fadeCounter);
-        fadeCounter += 0.005f * up;
+        fadeCounter += 0.05f * up;
     }
 
 	public override void touchHandler()
@@ -68,6 +71,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 		//disable the glow
 		isClicked = true;
+        this.gameObject.GetComponent<Collider>().enabled = false;
 	}
 
     public void isShake()
@@ -76,7 +80,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
         if (CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) > 50.0 && CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) < 310.0)
         {
             shake = true;
-            shakeTimeLimit = 0.50f;
+            shakeTimeLimit = 1.50f;
         }
         if (shake)
         {
@@ -85,7 +89,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
                 shake = false;
             if (CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) < 40.0 && CameraProperties.fget(CameraProperties.EULER_ROTATION_Z) > 340.0)
             {
-                Debug.Log("shake!");
+                isClicked = true;
             }
         }
     }
