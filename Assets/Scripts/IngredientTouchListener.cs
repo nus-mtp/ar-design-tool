@@ -22,7 +22,11 @@ public class IngredientTouchListener : AbstractTouchListener {
 		gameObject.SetActive (false);
     }
 
-
+    public override void undo()
+    {
+        spawnIngredientsButton();
+        gameObject.SetActive(true);
+    }
     // Use this for initialization
     void Start()
     {

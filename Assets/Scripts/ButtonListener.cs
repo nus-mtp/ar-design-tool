@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class ButtonListener : AbstractTouchListener{
-    public Renderer rend;
+    private Renderer rend;
     public const string buttonTag = "IngredientButton";
-    public GameObject[] buttonsArray;
+    private GameObject[] buttonsArray;
+    private GameObject model;
 
     public override void touchHandler()
     {
@@ -12,6 +13,13 @@ public class ButtonListener : AbstractTouchListener{
        Debug.Log("I am button, this is my name:" + gameObject.name);
        loadModel();
        destroyButtons();
+       addToUndo();
+    }
+
+    public override void undo()
+    {
+        reLoadButtons();
+        destroyModel();
     }
 
     private void destroyButtons()
@@ -22,8 +30,21 @@ public class ButtonListener : AbstractTouchListener{
             g.SetActive(false);
         }
     }
+
+    private void reLoadButtons()
+    {
+        foreach (GameObject g in buttonsArray)
+        {
+            g.SetActive(true);
+        }
+    }
+
     private void loadModel(){
-        loadPrefabs(gameObject.name);
+        model = loadPrefabs(gameObject.name);
+    }
+
+    private void destroyModel(){
+        Destroy(model);
     }
 	// Use this for initialization
 	void Start () {

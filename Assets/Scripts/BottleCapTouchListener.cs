@@ -28,6 +28,14 @@ public class BottleCapTouchListener : AbstractTouchListener {
         arrow = GameObject.Find("Arrow");
     }
 
+    public override void undo()
+    {
+        Debug.Log("Bottle cap touch listener is undoing");
+        arrow.SetActive(true);
+        setHalo(true);
+        pill.gameObject.SetActive(false);
+    }
+
 	void Update(){
 		statusTracked = TouchController.objectIsFound;
         isShake();
@@ -72,6 +80,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
 		//disable the glow
 		isClicked = true;
         this.gameObject.GetComponent<Collider>().enabled = false;
+        addToUndo();
 	}
 
     public void isShake()
