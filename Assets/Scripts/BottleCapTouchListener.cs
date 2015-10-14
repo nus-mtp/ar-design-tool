@@ -13,6 +13,11 @@ public class BottleCapTouchListener : AbstractTouchListener {
 	private GameObject arrow;
 
 	bool isFlickering = true;
+	float jumpUpTime = 1.5f;
+	float jumpDownTime = 1.5f;
+	float jumpUpTimeCounter;
+	float jumpDownTimeCounter;
+
 	float fadeOnLimit = 1.5f;
 	float fadeOffLimit = 0.0f;
 	float fadeCounter;
@@ -46,6 +51,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
 		if (statusTracked) {
 			if (isFlickering == true) {
 				flickering ();
+				jumpUpAndDown();
+				resetTimeCounter();
 			}
 		} else {
 			setHalo(false);
@@ -74,7 +81,25 @@ public class BottleCapTouchListener : AbstractTouchListener {
         }
         fadeCounter += 0.05f * up;
     }
-	
+
+	public void jumpUpAndDown(){
+		if (jumpUpTimeCounter < jumpUpTime) {
+			jumpUpTimeCounter += Time.deltaTime;
+			arrow.transform.Translate (Vector3.up * 10 * Time.deltaTime, Space.World);
+		} else {
+			if (jumpDownTimeCounter < jumpDownTime) {
+				jumpDownTimeCounter += Time.deltaTime;
+				arrow.transform.Translate (Vector3.down * 10 * Time.deltaTime, Space.World);
+			}
+		}
+	}
+
+	public void resetTimeCounter(){
+		if (jumpDownTimeCounter > 1.5f && jumpUpTimeCounter > 1.5f) {
+			jumpDownTimeCounter = 0f;
+			jumpUpTimeCounter = 0f;
+		}
+	}
 
 	public override void touchHandler()
 	{	pill= this.gameObject.transform.GetChild(0);
