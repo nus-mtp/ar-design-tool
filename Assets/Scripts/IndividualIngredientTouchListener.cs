@@ -2,8 +2,15 @@
 using UnityEngine.UI;
 using Vuforia;
 using System.Collections;
+using System.Collections.Generic;
 
 public class IndividualIngredientTouchListener : AbstractTouchListener{
+    private static float descriptionStartHeight;
+    private static float titleBoxStartHeight;
+    private static float titleBoxEndHeight;
+    private static float imagesStartHeight;
+    private static float imageHeight;
+
     private Vector3 scale = new Vector3();
     private float originalHeight = 1920;
     private float originalWidth = 1080;
@@ -16,6 +23,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
     public Ingredient ingredient;
 
     public GUIStyle titleStyle;
+    public GUIStyle imageStyle;
     public GUIStyle descriptionStyle;
 
 	// Use this for initialization
@@ -24,14 +32,8 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         initializeGUIStyle();
 	}
 
-    public override void undo()
-    {
-        enabled = false;
-    }
-
     public override void touchHandler() {
         createGUI();
-       // addToUndo();
     }
 
     private void OnGUI() {
@@ -39,10 +41,11 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         Screen.orientation = ScreenOrientation.Portrait;
         drawBackground();
         drawTitleBox();
+        drawImages();
         drawDescriptionBox();
         // drawBackButton();
         // GUI.matrix = svMat; // restore matrix
-        // Screen.orientation = ScreenOrientation.AutoRotation;
+        Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
     // private void setScale() {
@@ -58,20 +61,21 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         styleOffset.x = 10;
         styleOffset.y = 10;
         titleStyle.contentOffset = styleOffset;
-        styleOffset.y = -20;  
+        styleOffset.y = 0;  
         descriptionStyle.contentOffset = styleOffset;
+        imageStyle.contentOffset = styleOffset;
     }
 
-    private void handleMatrix() {
-        svMat = GUI.matrix;
-        GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
-    }
+    // private void handleMatrix() {
+    //     svMat = GUI.matrix;
+    //     GUI.matrix = Matrix4x4.TRS(Vector3.zero, Quaternion.identity, scale);
+    // }
 
-    private void calculateScale() {
-        scale.x = Screen.width/originalWidth;
-        scale.y = Screen.height/originalHeight;
-        scale.z = 1;
-    }
+    // private void calculateScale() {
+    //     scale.x = Screen.width/originalWidth;
+    //     scale.y = Screen.height/originalHeight;
+    //     scale.z = 1;
+    // }
 
     private void drawBackground() {
         GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height*0.05f), blackBGTexture);
@@ -79,17 +83,29 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
     }
 
     private void drawTitleBox() {
-        // titleStyle.margin.left = 100;
-        
-        // Debug.Log("left: " + titleStyle.margin.left);
-        GUI.Box(new Rect(0, Screen.height*0.05f, Screen.width, Screen.height *0.075f), ingredient.name, titleStyle);
-        // GUI.Box(new Rect(0, Screen.height*0.05f, Screen.width, Screen.height *0.075f), ingredient.name);
-
+        titleBoxStartHeight = Screen.height * 0.05f;
+        titleBoxEndHeight = Screen.height * 0.08f;
+        GUI.Box(new Rect(0, titleBoxStartHeight, Screen.width, Screen.height *0.08f), ingredient.name, titleStyle);
     }
 
-    // GUI.Box(new Rect(Screen.width * .1f, 0, Screen.width * .9f, Screen.height * .1f), ingredient.name);
+    private void drawImages(){
+        float widthOffset = 0.0f;
+        for (int i = 0; i < ingredient.imageLocation.Count; i++) {
+            drawImage(widthOffset * i, ingredient.imageLocation[i]);
+        }
+    }
+
+    private void drawImage(float widthOffset, string imageLocation) {
+        Texture ingredientImage = Database.readImage(imageLocation);
+        imagesStartHeight = titleBoxEndHeight;
+        GUI.Box(new Rect(widthOffset, imagesStartHeight, Screen.width, Screen.height * 0.5f), ingredientImage, imageStyle);
+        imageHeight = ingredientImage.height;
+        Debug.Log("image height: " + imageHeight);
+    }
+
     private void drawDescriptionBox() {
-        GUI.Box(new Rect(0, Screen.height * .125f, Screen.width, Screen.height), ingredient.description, descriptionStyle);
+        descriptionStartHeight = imagesStartHeight + imageHeight;
+        GUI.Box(new Rect(0, descriptionStartHeight, Screen.width, Screen.height), ingredient.description, descriptionStyle);
         // GUI.Box(new Rect(0, Screen.height * .125f, Screen.width, Screen.height), ingredient.description);
     }
 
@@ -111,10 +127,13 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         ingredient = Ingredient.fromJson(jsonString);
     }
 
+    public override void undo() {
+    }
+
     void Update() {
-        if (Input.GetKey(KeyCode.Escape))
-        {
-            undo();
+        if (Input.GetKeyUp(KeyCode.Escape)) {
+            // back button pressed
+            enabled = false;
         }
     }
 } 
