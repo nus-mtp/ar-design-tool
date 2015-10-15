@@ -47,6 +47,10 @@ public class UndoStack : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-      
-	}
+        if (Input.GetKeyUp(KeyCode.Escape))
+        {
+            // back button pressed
+            undoAction();
+        }
+    }
 }

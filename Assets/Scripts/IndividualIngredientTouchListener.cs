@@ -34,6 +34,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     public override void touchHandler() {
         createGUI();
+        addToUndo();
     }
 
     private void OnGUI() {
@@ -127,13 +128,11 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         ingredient = Ingredient.fromJson(jsonString);
     }
 
-    public override void undo() {
+    public override void undo() { 
+        enabled = false;
     }
 
     void Update() {
-        if (Input.GetKeyUp(KeyCode.Escape)) {
-            // back button pressed
-            enabled = false;
-        }
+        
     }
 } 
