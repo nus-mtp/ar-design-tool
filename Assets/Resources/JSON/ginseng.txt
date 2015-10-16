@@ -1,6 +1,6 @@
 {
 "name":"GINSENG","alternativeNames":["ren sheng"],
-"imageLocation":["ginseng.jpeg"],
+"imageLocation":["ginseng"],
 "description":"Korean ginseng is native to China and Korea and has been used in various systems of medicine for many centuries. 
 The major active components of Ginseng are a diverse group of steroidal saponins, labeled ginsenosides, which are thought to be responsible for the herb’s claimed medicinal properties.
 Traditional uses/Functions:
