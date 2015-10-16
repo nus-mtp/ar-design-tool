@@ -163,13 +163,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 74057108}
   m_LocalRotation: {x: -.0362376794, y: .00790615752, z: -.717350781, w: .695724308}
-  m_LocalPosition: {x: .020841036, y: 2.58999991, z: .0309999995}
+  m_LocalPosition: {x: .020841036, y: .930000007, z: .0309999995}
   m_LocalScale: {x: 1.28291857, y: .217214748, z: .196746573}
   m_Children:
   - {fileID: 527107105}
-  - {fileID: 214182530}
   m_Father: {fileID: 1983667219}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &74057110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,12 +302,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 214182526}
-  m_LocalRotation: {x: .0362376794, y: -.00790615752, z: .717350781, w: .695724308}
-  m_LocalPosition: {x: 1.53293657, y: .267590821, z: -.252771139}
-  m_LocalScale: {x: .555502415, y: .0565866344, z: .546891987}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0180518571, y: -.0700000003, z: .0584256575}
+  m_LocalScale: {x: .0936386883, y: .0724411681, z: .0751287565}
   m_Children: []
-  m_Father: {fileID: 74057109}
-  m_RootOrder: 1
+  m_Father: {fileID: 1983667219}
+  m_RootOrder: 0
 --- !u!1001 &527107104
 Prefab:
   m_ObjectHideFlags: 0
@@ -318,31 +317,31 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1.56526494
+      value: -1.51999998
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.381260276
+      value: -.370000005
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_LocalPosition.z
-      value: .235445619
+      value: .219999999
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_LocalRotation.x
-      value: .546794295
+      value: .546794355
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_LocalRotation.y
-      value: .53392899
+      value: .53392905
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_LocalRotation.z
-      value: .479139239
+      value: .479139268
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_LocalRotation.w
-      value: .431695938
+      value: .431695968
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_RootOrder
@@ -359,6 +358,14 @@ Prefab:
     - target: {fileID: 400002, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
       propertyPath: m_LocalScale.z
       value: .907095671
+      objectReference: {fileID: 0}
+    - target: {fileID: 11900000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
+      propertyPath: m_FarClipPlane
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11900000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
+      propertyPath: m_FieldOfView
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 28a5e79925e3ce04a82856c16a572cbe, type: 2}
@@ -395,7 +402,7 @@ Transform:
   m_LocalScale: {x: .869287848, y: .145668507, z: .227590725}
   m_Children: []
   m_Father: {fileID: 1983667219}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!212 &529757071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1283,6 +1290,7 @@ Transform:
   m_LocalPosition: {x: .301999986, y: .602999985, z: .294}
   m_LocalScale: {x: .375138819, y: .0628628433, z: .408895493}
   m_Children:
+  - {fileID: 214182530}
   - {fileID: 74057109}
   - {fileID: 529757070}
   m_Father: {fileID: 2081694580}
