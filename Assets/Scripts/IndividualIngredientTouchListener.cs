@@ -44,7 +44,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         drawTitleBox();
         drawImages();
         drawDescriptionBox();
-        // drawBackButton();
+        drawBackButton();
         // GUI.matrix = svMat; // restore matrix
         Screen.orientation = ScreenOrientation.AutoRotation;
     }
@@ -111,7 +111,9 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
     }
 
     private void drawBackButton() {
-        if (GUI.Button(new Rect(0, 0, Screen.width * .075f, Screen.width * .075f), closeTexture, "")) {
+        float startWidth = Screen.width - Screen.width*0.08f;
+        
+        if (GUI.Button(new Rect(startWidth, 0, Screen.width * .075f, Screen.width * .075f), closeTexture, "")) {
             enabled = false;
         }
     }
