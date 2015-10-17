@@ -4,7 +4,7 @@ using System;
 using Vuforia;
 
 public class BottleCapTouchListener : AbstractTouchListener {
-	Component halo;
+//	Component halo;
 	Transform pill;
 
     bool shake;
@@ -29,8 +29,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
         shakeTimeLimit = 0.0f;
         fadeCounter = 0.0f;
 
-		halo = GetComponent ("Halo");
-        setHalo(false);
+//		halo = GetComponent ("Halo");
+        //setHalo(false);
 		arrow = GameObject.Find("Arrow");
     }
 
@@ -55,13 +55,13 @@ public class BottleCapTouchListener : AbstractTouchListener {
 				resetTimeCounter();
 			}
 		} else {
-			setHalo(false);
+			//setHalo(false);
 		}
 	}
 
-	public void setHalo (bool status){
-		halo.GetType ().GetProperty ("enabled").SetValue (halo, status, null);
-	}
+//	public void setHalo (bool status){
+//		halo.GetType ().GetProperty ("enabled").SetValue (halo, status, null);
+//	}
 
 	public void setCollider (bool status){
 		this.gameObject.GetComponent<Collider>().enabled = status;
@@ -72,12 +72,12 @@ public class BottleCapTouchListener : AbstractTouchListener {
         if (fadeCounter >= fadeOnLimit)
         {
             up = -1;
-            setHalo(false);
+           // setHalo(false);
         }
         else if (fadeCounter <= fadeOffLimit)
         {
             up = 1;
-            setHalo(true);
+            //setHalo(true);
         }
         fadeCounter += 0.05f * up;
     }
@@ -107,7 +107,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 		arrow.SetActive (false);
 		isClicked = true;
-		setHalo (false);
+		//setHalo (false);
 		isClicked = true;
 		isFlickering = false;
 
