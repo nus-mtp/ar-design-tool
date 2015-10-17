@@ -106,7 +106,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     private void drawDescriptionBox() {
         descriptionStartHeight = imagesStartHeight + imageHeight;
-        GUI.Box(new Rect(0, descriptionStartHeight, Screen.width, Screen.height), ingredient.description, descriptionStyle);
+        GUI.Box(new Rect(0, descriptionStartHeight, Screen.width * 0.95f, Screen.height), ingredient.description, descriptionStyle);
         // GUI.Box(new Rect(0, Screen.height * .125f, Screen.width, Screen.height), ingredient.description);
     }
 
