@@ -6,6 +6,7 @@ using Vuforia;
 public class BottleCapTouchListener : AbstractTouchListener {
 //	Component halo;
 	Transform pill;
+	BottleCapTouchListener script;
 
     bool shake;
 	bool statusTracked;
@@ -32,6 +33,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
 //		halo = GetComponent ("Halo");
         //setHalo(false);
 		arrow = GameObject.Find("Arrow");
+		script = GetComponent<BottleCapTouchListener> ();
     }
 
     public override void undo()
@@ -41,6 +43,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
         pill.gameObject.SetActive(false);
 		isFlickering = true;
 		setCollider (true);
+		setScript (true);
     }
 	
 
@@ -65,6 +68,12 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 	public void setCollider (bool status){
 		this.gameObject.GetComponent<Collider>().enabled = status;
+	}
+
+
+	public void setScript (bool status){
+		Debug.Log ("My status" + status);
+		script.enabled = status;
 	}
 
     public void flickering()
@@ -113,6 +122,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 		// set the collider to false
 		setCollider (false);
+		setScript (false);
 		addToUndo();
 	}
 
