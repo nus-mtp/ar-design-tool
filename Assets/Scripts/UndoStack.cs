@@ -35,6 +35,11 @@ public class UndoStack : MonoBehaviour {
             Debug.Log("Popped:" + tl);
             tl.undo();
         }
+        else if (undoStack.Peek().GetType() == typeof(IndividualIngredientTouchListener))
+        {
+            AbstractTouchListener tl = undoStack.Pop();
+            tl.undo();
+        }
         else
         {
             Debug.Log("UndoStack is empty");
