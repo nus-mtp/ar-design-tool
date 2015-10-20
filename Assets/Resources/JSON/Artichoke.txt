@@ -1,0 +1,8 @@
+{
+	"name":"ARTICHOKE",
+	"alternativeNames":["Cynara cardunculus var. scolymus"],
+	"imageLocation":["Artichoke"],
+	"description":"The edible portions of the buds consist primarily of the fleshy lower portions of the involucral bracts and the base, known as the heart; the mass of immature florets in the center of the bud is called the choke or beard. These are inedible in older, larger flowers.
+
+	Studies have shown artichoke to aid digestion, liver function and gallbladder function, and raise the ratio of HDL to LDL. This reduces cholesterol levels, which diminishes the risk for arteriosclerosis and coronary heart disease. Aqueous extracts from artichoke leaves have also been shown to reduce cholesterol by inhibiting HMG-CoA reductase and having a hypolipidemic influence, lowering blood cholesterol."
+}

@@ -1,0 +1,6 @@
+{
+	"name":"FISH",
+	"alternativeNames":["pisces"],
+	"imageLocation":["fish"],
+	"description":"Fish (plural: fish or fishes) are vertebrates which live in water and breathe using gills. That is a simple way to define fish, but it is not quite accurate. Some amphibia are not fish, but live in water and have external gills. That is why biologists use a more complicated definition: fish are gill-bearing aquatic vertebrates which lack limbs with digits (fingers & toes). It is loaded with important nutrients, such as protein and vitamin D. Fish is also the world's best source of omega-3 fatty acids, which are incredibly important for your body and brain."
+}

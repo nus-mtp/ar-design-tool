@@ -1,1 +1,9 @@
-{"name":"ginseng","alternativeNames":["ren sheng"],"imageLocation":["ginseng.jpeg"],"description":"this is a korean ginseng"}
+{
+"name":"GINSENG","alternativeNames":["ren sheng"],
+"imageLocation":["ginseng"],
+"description":"Korean ginseng is native to China and Korea and has been used in various systems of medicine for many centuries. 
+The major active components of Ginseng are a diverse group of steroidal saponins, labeled ginsenosides, which are thought to be responsible for the herb’s claimed medicinal properties.
+Traditional uses/Functions:
+Korean ginseng has been used for invigoration and reduction in fatigue both physical and mental. Panax 
+Ginseng has also been used to support a healthy glucose level. The description presented in the nutrients glossary is for informational purposes only. It is based on widely available scientific and / or traditional references. Levels vary by product. The ingredient in the product is not intended to prevent, treat, cure or alleviate the medical symptoms described."
+}

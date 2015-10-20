@@ -13,6 +13,7 @@ TagManager:
   - GroupLayer1
   - IngredientsGroup
   - ObjectTarget
+  - IngredientButton
   layers:
   - Default
   - TransparentFX
