@@ -98,8 +98,8 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     private void drawImage(float widthOffset, string imageLocation) {
         Texture ingredientImage = Database.readImage(imageLocation);
-        imagesStartHeight = titleBoxEndHeight;
-        GUI.Box(new Rect(widthOffset, imagesStartHeight, Screen.width, Screen.height * 0.5f), ingredientImage, imageStyle);
+        imagesStartHeight = titleBoxEndHeight + Screen.height * 0.02f;
+        GUI.Box(new Rect(widthOffset, imagesStartHeight, Screen.width, Screen.height * 0.4f), ingredientImage, imageStyle);
         imageHeight = ingredientImage.height;
         Debug.Log("image height: " + imageHeight);
     }
