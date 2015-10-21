@@ -41,11 +41,12 @@ public class PillTouchListener : AbstractTouchListener {
         Renderer rend  = buttons[0].GetComponent<Renderer>();
         Vector3 size = rend.bounds.size;
         int columns = 2;
+
         for (int i = 0; i < thingsToSpawn.Length; i++)
         {
             
             GameObject current = buttons[i];
-            Vector3 translateVector = new Vector3(size.x * 1.0f * (i% columns - (float)columns/2.0f )  , size.x * 1.0f * (i / columns), 0f);
+            Vector3 translateVector = new Vector3(size.x * 1.0f * (i% columns - (float)columns/2.0f ) * 1.25f, size.x * 1.0f * (i / columns) * 0.75f, 0f);
             current.transform.Translate(translateVector);
             TextMesh textMesh = current.GetComponentInChildren<TextMesh>();
             textMesh.text = thingsToSpawn[i];
