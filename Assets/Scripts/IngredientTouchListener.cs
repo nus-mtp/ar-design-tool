@@ -27,6 +27,12 @@ public class IngredientTouchListener : AbstractTouchListener {
         spawnIngredientsButton();
         gameObject.SetActive(true);
     }
+
+    public override string getNextSceneName()
+    {
+        return "vitamins";
+        throw new NotImplementedException();
+    }
     // Use this for initialization
     void Start()
     {

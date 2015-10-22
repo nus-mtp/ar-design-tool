@@ -26,9 +26,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 456492}
   - 212: {fileID: 21264892}
+  - 114: {fileID: 11407562}
+  - 65: {fileID: 6582814}
   m_Layer: 0
   m_Name: Default button
-  m_TagString: Untagged
+  m_TagString: IngredientButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -53,7 +55,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 125630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.19999981, y: 1.70000005, z: -.0199999996}
+  m_LocalPosition: {x: -6.19999981, y: 1.70000005, z: -.5}
   m_LocalScale: {x: 2.10526323, y: 2.10526323, z: 2.10526323}
   m_Children: []
   m_Father: {fileID: 456492}
@@ -82,6 +84,18 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!65 &6582814
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198104}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 24, y: 13.5400009, z: .200000003}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!102 &10261220
 TextMesh:
   serializedVersion: 3
@@ -103,6 +117,17 @@ TextMesh:
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
+--- !u!114 &11407562
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9c2950e85b71054cb62af40147e573f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21264892
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -135,7 +160,19 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: IngredientButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.z
+      value: -.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: .00999999978
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 198104}

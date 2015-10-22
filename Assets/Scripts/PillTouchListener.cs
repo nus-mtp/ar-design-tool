@@ -10,6 +10,7 @@ public class PillTouchListener : AbstractTouchListener {
     string[] thingsToSpawn;
     List<GameObject> buttons = new List<GameObject>();
     private const string buttonName = "Default button";
+    private const string nextScene = "Key Ingredients";
     void Start()
     {
         readJson();
@@ -31,6 +32,11 @@ public class PillTouchListener : AbstractTouchListener {
             Destroy(b);
         }
         buttons = new List<GameObject>();
+    }
+
+    public override string getNextSceneName()
+    {
+        return nextScene;
     }
 	
 	public void spawnIngredientButtons()

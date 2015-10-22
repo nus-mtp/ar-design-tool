@@ -64,7 +64,7 @@ GameObject:
   - 114: {fileID: 11453244}
   - 65: {fileID: 6595532}
   m_Layer: 0
-  m_Name: PIll
+  m_Name: Pill
   m_TagString: Pill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -3,51 +3,66 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class UndoStack : MonoBehaviour {
-    private static readonly UndoStack theOne = new UndoStack();
-    private static Stack<AbstractTouchListener> undoStack  = new Stack<AbstractTouchListener>();
-    
-    public static UndoStack getInstance()
+    private static UndoStack theOne;
+    public static UndoStack instance
     {
-        return theOne;
-    }
-
-    private UndoStack()
-    {
-        
-    }
-
-    public void addToUndo(AbstractTouchListener tl){
-        Debug.Log("Added to undostack:" + tl);
-        undoStack.Push(tl);
-        Debug.Log("Current items in undostack");
-        foreach (AbstractTouchListener a in undoStack)
+        get
         {
-            Debug.Log(a);
+            if (theOne == null)
+            {
+                GameObject go = new GameObject("UndoStack");
+                go.AddComponent<UndoStack>();
+            }
+
+            return theOne;
         }
-        Debug.Log("End of List");
+    }
+
+    private Stack<AbstractTouchListener> undoStack{get;set;}
+
+    //private onstructor
+    private UndoStack() { }
+  
+    public void addToUndo(AbstractTouchListener tl)
+    {
+        undoStack.Push(tl);
+
+    }
+    public AbstractTouchListener getCurrentStatus()
+    {
+        if (undoStack.Count > 0)
+        {
+            AbstractTouchListener current = undoStack.Peek();
+            return current;
+
+        }
+        return null;
     }
 
     public void undoAction()
     {
-        if (undoStack.Count > 0 && TouchController.objectIsFound)
-        {
-            AbstractTouchListener tl = undoStack.Pop();
-            Debug.Log("Popped:" + tl);
-            tl.undo();
-        }
-        else if (undoStack.Peek().GetType() == typeof(IndividualIngredientTouchListener))
-        {
-            AbstractTouchListener tl = undoStack.Pop();
-            tl.undo();
-        }
-        else
-        {
-            Debug.Log("UndoStack is empty");
+        if(undoStack.Count > 0 ){
+            if (TouchController.objectIsFound)
+            {
+                AbstractTouchListener tl = undoStack.Pop();
+                tl.undo();
+            }
+            else if (undoStack.Peek().GetType() == typeof(IndividualIngredientTouchListener))
+            {
+                AbstractTouchListener tl = undoStack.Pop();
+                tl.undo();
+            }
         }
     }
+
+    void Awake()
+    {
+        theOne = this;
+    }
+
 	// Use this for initialization
 	void Start () {
-        getInstance();
+       undoStack = new Stack<AbstractTouchListener>();
 	}
 	
 	// Update is called once per frame
