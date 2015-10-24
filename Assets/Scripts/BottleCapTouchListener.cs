@@ -25,6 +25,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
     float shakeTimeLimit;
     int up;
 
+    private const string nextScene = "Pill";
+
 	void Start(){
         shake = false;
         shakeTimeLimit = 0.0f;
@@ -45,8 +47,11 @@ public class BottleCapTouchListener : AbstractTouchListener {
 		setCollider (true);
 		setScript (true);
     }
-	
 
+    public override string getNextSceneName()
+    {
+        return nextScene;
+    }
 	void Update(){
 		statusTracked = TouchController.objectIsFound;
         isShake();
@@ -111,7 +116,9 @@ public class BottleCapTouchListener : AbstractTouchListener {
 	}
 
 	public override void touchHandler()
-	{	pill= this.gameObject.transform.GetChild(0);
+	{
+        addToUndo();
+        pill= this.gameObject.transform.GetChild(0);
 		pill.gameObject.SetActive (true);
 
 		arrow.SetActive (false);
@@ -122,8 +129,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 		// set the collider to false
 		setCollider (false);
-		setScript (false);
-		addToUndo();
+		setScript (false);	
 	}
 
     public void isShake()

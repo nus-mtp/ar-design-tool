@@ -26,6 +26,8 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
     public GUIStyle imageStyle;
     public GUIStyle descriptionStyle;
 
+    private const string nextScene = "More Information";
+
 	// Use this for initialization
 	void Start () {
         enabled = false;
@@ -37,6 +39,10 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         addToUndo();
     }
 
+    public override string getNextSceneName()
+    {
+        return nextScene;
+    }
     private void OnGUI() {
         // setScale();
         Screen.orientation = ScreenOrientation.Portrait;
@@ -114,7 +120,8 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
         float startWidth = Screen.width - Screen.width*0.08f;
         
         if (GUI.Button(new Rect(startWidth, 0, Screen.width * .075f, Screen.width * .075f), closeTexture, "")) {
-            enabled = false;
+            UndoStack us = UndoStack.instance;
+            us.undoAction();
         }
     }
 

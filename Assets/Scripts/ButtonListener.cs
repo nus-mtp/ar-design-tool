@@ -22,6 +22,11 @@ public class ButtonListener : AbstractTouchListener{
         destroyModel();
     }
 
+    public override string getNextSceneName()
+    {
+        return gameObject.name;
+    }
+
     private void destroyButtons()
     {
         buttonsArray = GameObject.FindGameObjectsWithTag(buttonTag);
