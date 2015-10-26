@@ -31,7 +31,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 	// Use this for initialization
 	void Start () {
         enabled = false;
-        initializeGUIStyle();
+        //initializeGUIStyle();
 	}
 
     public override void touchHandler() {
