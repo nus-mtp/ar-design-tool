@@ -7,6 +7,8 @@ public class ButtonListener : AbstractTouchListener{
     private GameObject[] buttonsArray;
     private GameObject model;
 
+	public const string nextSceneName = "Tap on the ";
+
     public override void touchHandler()
     {
 
@@ -24,7 +26,7 @@ public class ButtonListener : AbstractTouchListener{
 
     public override string getNextSceneName()
     {
-        return gameObject.name;
+        return nextSceneName + gameObject.name;
     }
 
     private void destroyButtons()

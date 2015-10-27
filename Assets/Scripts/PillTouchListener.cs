@@ -10,7 +10,7 @@ public class PillTouchListener : AbstractTouchListener {
     string[] thingsToSpawn;
     List<GameObject> buttons = new List<GameObject>();
     private const string buttonName = "Default button";
-    private const string nextScene = "Key Ingredients";
+    private const string nextScene = "Choose an ingredient";
     void Start()
     {
         readJson();

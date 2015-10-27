@@ -12,6 +12,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
 	bool statusTracked;
 	public static bool isClicked = false;
 	private GameObject arrow;
+	private GameObject interactable;
+	private GameObject textToTap;
 
 	bool isFlickering = true;
 	float jumpUpTime = 1.5f;
@@ -25,7 +27,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
     float shakeTimeLimit;
     int up;
 
-    private const string nextScene = "Pill";
+    private const string nextScene = "Tap the pill";
 
 	void Start(){
         shake = false;
@@ -35,6 +37,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
 //		halo = GetComponent ("Halo");
         //setHalo(false);
 		arrow = GameObject.Find("Arrow");
+		interactable = GameObject.Find ("Interactable");
+		textToTap = GameObject.Find ("TextToTap");
 		script = GetComponent<BottleCapTouchListener> ();
     }
 
@@ -42,6 +46,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
     {
         Debug.Log("Bottle cap touch listener is undoing");
         arrow.SetActive(true);
+		interactable.SetActive (true);
+		textToTap.SetActive (true);
         pill.gameObject.SetActive(false);
 		isFlickering = true;
 		setCollider (true);
@@ -52,6 +58,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
     {
         return nextScene;
     }
+
 	void Update(){
 		statusTracked = TouchController.objectIsFound;
         isShake();
@@ -122,6 +129,8 @@ public class BottleCapTouchListener : AbstractTouchListener {
 		pill.gameObject.SetActive (true);
 
 		arrow.SetActive (false);
+		interactable.SetActive (false);
+		textToTap.SetActive (false);
 		isClicked = true;
 		//setHalo (false);
 		isClicked = true;
