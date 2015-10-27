@@ -4,6 +4,7 @@ using Vuforia;
 
 public class TouchController : MonoBehaviour {
 
+    public ModalPanel mp;
 	private GameObject panel;
 	public static bool objectIsFound = false;
 
@@ -11,6 +12,9 @@ public class TouchController : MonoBehaviour {
 	void Start () {
 		panel = GameObject.FindGameObjectWithTag("Panel");
         panel.SetActive(true);
+        if (!mp)
+            mp = ModalPanel.Instance();
+        mp.Close();
     }
 	
 	void Update () {

@@ -17,25 +17,35 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
     private Matrix4x4 svMat;
     private Vector2 styleOffset;
 
+    private Ingredient ingredient;
+
     public Texture whiteBGTexture;
     public Texture blackBGTexture;
     public Texture closeTexture;
-    public Ingredient ingredient;
 
     public GUIStyle titleStyle;
     public GUIStyle imageStyle;
     public GUIStyle descriptionStyle;
 
-    private const string nextScene = "More Information";
+    public ModalPanel mp;
 
+    private const string nextScene = "More Information";
+    
 	// Use this for initialization
 	void Start () {
         enabled = false;
-        initializeGUIStyle();
+        if (!mp)
+            mp = ModalPanel.Instance();
+        mp.Close();
+        //initializeGUIStyle();
 	}
 
     public override void touchHandler() {
-        createGUI();
+        string name = gameObject.name;
+        readJson(name);
+        if (!mp)
+            mp = ModalPanel.Instance();
+        mp.Display(ingredient.name, ingredient.imageLocation[0], null, ingredient.description);
         addToUndo();
     }
 
@@ -139,6 +149,9 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     public override void undo() { 
         enabled = false;
+        if (!mp)
+            mp = ModalPanel.Instance();
+        mp.Close();
     }
 
     void Update() {
