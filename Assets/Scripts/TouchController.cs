@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 using Vuforia;
 
 public class TouchController : MonoBehaviour {
+    
+    private GameObject panel;
 
     public ModalPanel mp;
-	private GameObject panel;
 	public static bool objectIsFound = false;
 
 	// Use this for initialization
