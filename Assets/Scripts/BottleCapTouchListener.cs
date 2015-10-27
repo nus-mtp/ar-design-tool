@@ -27,7 +27,7 @@ public class BottleCapTouchListener : AbstractTouchListener {
     float shakeTimeLimit;
     int up;
 
-    private const string nextScene = "Pill";
+    private const string nextScene = "Tap the pill";
 
 	void Start(){
         shake = false;
