@@ -6,6 +6,7 @@ public class Database {
     private const string JSON_PATH = "JSON/";
     private const string PREFAB_PATH = "Prefabs/";
     private const string IMAGERESOURCE_PATH = "ImageResources/";
+    private const string SPRITERESOURCE_PATH = "SpriteResources/";
 
     public static string readJSON(string objectName)
     {
@@ -19,11 +20,16 @@ public class Database {
         return go;
     }
 
-    public static Texture readImage(string imageLocation)
+    public static Texture2D readImage(string imageLocation)
     {
-        Texture image = (Texture)Resources.Load(IMAGERESOURCE_PATH + imageLocation);
+        Texture2D image = (Texture2D)Resources.Load(IMAGERESOURCE_PATH + imageLocation);
         return image;
     }
 
+    public static Sprite readImageSprite(string imageLocation)
+    {
+        Sprite image = Resources.Load<Sprite>(SPRITERESOURCE_PATH + imageLocation);
+        return image;
+    }
 }
 
