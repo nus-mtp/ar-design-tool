@@ -6,8 +6,8 @@ using Vuforia;
 public class TouchController : MonoBehaviour {
     
     private GameObject panel;
+    private ModalPanel mp;
 
-    public ModalPanel mp;
 	public static bool objectIsFound = false;
 
 	// Use this for initialization
@@ -34,8 +34,8 @@ public class TouchController : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)){ 
 			Ray ray =Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
-			if (Physics.Raycast(ray, out hit)){
-                if(hit.collider)
+            if (Physics.Raycast(ray, out hit)){
+                if(hit.collider && !EventSystem.current.IsPointerOverGameObject())
                 {
                     GameObject obj = hit.collider.gameObject;
                     AbstractTouchListener objListener = obj.GetComponent<AbstractTouchListener>();
