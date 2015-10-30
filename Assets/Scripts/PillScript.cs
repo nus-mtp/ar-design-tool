@@ -8,24 +8,6 @@ public class PillScript : MonoBehaviour {
 	float jumpUpTimeCounter;
 	float jumpDownTimeCounter;
 
-    /*
-	// Use this for initialization
-	void Start () {
-		this.gameObject.SetActive (false);    //to set the pill to be false during the start
-		jumpUpTimeCounter = 0f;
-		jumpDownTimeCounter = 0f;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		status = BottleCapTouchListener.isClicked;
-		if (status) {
-			jumpUpAndDown ();
-		} 
-		resetTimeCounter ();
-	}
-    */
-
     //to jump up and down of an object
     public void jumpUpAndDown(){
 		if (jumpUpTimeCounter < jumpUpTime) {
@@ -48,11 +30,6 @@ public class PillScript : MonoBehaviour {
 	}
 
     private float timeSinceAppear = 0.0f;
-
-    public void Start()
-    {
-        this.gameObject.SetActive(false);
-    }
 
     public void Update()
     {

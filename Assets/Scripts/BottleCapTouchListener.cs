@@ -4,9 +4,6 @@ using System;
 using Vuforia;
 
 public class BottleCapTouchListener : AbstractTouchListener {
-//	Component halo;
-	Transform pill;
-	BottleCapTouchListener script;
 
     bool shake;
 	bool statusTracked;
@@ -20,26 +17,18 @@ public class BottleCapTouchListener : AbstractTouchListener {
 	float jumpDownTime = 1.5f;
 	float jumpUpTimeCounter;
 	float jumpDownTimeCounter;
-
-	float fadeOnLimit = 1.5f;
-	float fadeOffLimit = 0.0f;
-	float fadeCounter;
+	
     float shakeTimeLimit;
-    int up;
 
     private const string nextScene = "Tap the pill";
 
 	void Start(){
         shake = false;
         shakeTimeLimit = 0.0f;
-        fadeCounter = 0.0f;
 
-//		halo = GetComponent ("Halo");
-        //setHalo(false);
 		arrow = GameObject.Find("Arrow");
 		interactable = GameObject.Find ("Interactable");
 		textToTap = GameObject.Find ("TextToTap");
-		script = GetComponent<BottleCapTouchListener> ();
     }
 
     public override void undo()
@@ -48,10 +37,11 @@ public class BottleCapTouchListener : AbstractTouchListener {
         arrow.SetActive(true);
 		interactable.SetActive (true);
 		textToTap.SetActive (true);
-        pill.gameObject.SetActive(false);
+
+		gameObject.SetActive (true);
+		DestroyPill ();
+		//set the new method
 		isFlickering = true;
-		setCollider (true);
-		setScript (true);
     }
 
     public override string getNextSceneName()
@@ -65,44 +55,13 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 		if (statusTracked) {
 			if (isFlickering == true) {
-				flickering ();
 				jumpUpAndDown();
 				resetTimeCounter();
 			}
-		} else {
-			//setHalo(false);
-		}
+		} 
 	}
 
-//	public void setHalo (bool status){
-//		halo.GetType ().GetProperty ("enabled").SetValue (halo, status, null);
-//	}
-
-	public void setCollider (bool status){
-		this.gameObject.GetComponent<Collider>().enabled = status;
-	}
-
-
-	public void setScript (bool status){
-		Debug.Log ("My status" + status);
-		script.enabled = status;
-	}
-
-    public void flickering()
-    {
-        if (fadeCounter >= fadeOnLimit)
-        {
-            up = -1;
-           // setHalo(false);
-        }
-        else if (fadeCounter <= fadeOffLimit)
-        {
-            up = 1;
-            //setHalo(true);
-        }
-        fadeCounter += 0.05f * up;
-    }
-
+	
 	public void jumpUpAndDown(){
 		if (jumpUpTimeCounter < jumpUpTime) {
 			jumpUpTimeCounter += Time.deltaTime;
@@ -124,21 +83,19 @@ public class BottleCapTouchListener : AbstractTouchListener {
 
 	public override void touchHandler()
 	{
-        addToUndo();
-        pill= this.gameObject.transform.GetChild(0);
-		pill.gameObject.SetActive (true);
+		//spawn the pill
 
 		arrow.SetActive (false);
 		interactable.SetActive (false);
 		textToTap.SetActive (false);
-		isClicked = true;
-		//setHalo (false);
+
 		isClicked = true;
 		isFlickering = false;
+		
+		spawnPill();
+		gameObject.SetActive (false);
 
-		// set the collider to false
-		setCollider (false);
-		setScript (false);	
+		addToUndo();
 	}
 
     public void isShake()
@@ -159,6 +116,23 @@ public class BottleCapTouchListener : AbstractTouchListener {
                 isClicked = true;
             }
         }
+    }
+	public void DestroyPill(){
+		GameObject Pill = GameObject.Find ("Pill");
+		Destroy (Pill);
+	}
+
+    public void spawnPill(){
+    	GameObject Pill = loadPrefab("Pill");
+    }
+	
+    private GameObject loadPrefab (String prefabName)
+    {
+    	GameObject instance = Instantiate(Database.loadPrefab(prefabName));
+    	GameObject[] tagged = GameObject.FindGameObjectsWithTag("ObjectTarget");
+		instance.transform.SetParent(tagged[0].transform,false);
+		instance.name = "Pill";
+		return instance;
     }
 	
 }
