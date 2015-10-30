@@ -370,7 +370,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 429126}
   - 212: {fileID: 21215860}
-  - 95: {fileID: 9522144}
+  - 95: {fileID: 9525404}
   m_Layer: 0
   m_Name: Interactable_Fish
   m_TagString: Untagged
@@ -571,8 +571,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184680}
   m_LocalRotation: {x: 0, y: .707106829, z: 0, w: .707106709}
-  m_LocalPosition: {x: .0273000002, y: -0, z: -.00930000003}
-  m_LocalScale: {x: .0388035178, y: .0388035178, z: .0388035178}
+  m_LocalPosition: {x: .0273000002, y: .0120999999, z: -.00930000003}
+  m_LocalScale: {x: .0184237752, y: .0184237752, z: .0184237752}
   m_Children: []
   m_Father: {fileID: 435180}
   m_RootOrder: 2
@@ -941,7 +941,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: .0799999982, y: .150000006, z: .280000001}
   m_Center: {x: .00999999978, y: .0199999996, z: -.0199999996}
---- !u!95 &9522144
+--- !u!95 &9525404
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
@@ -950,7 +950,7 @@ Animator:
   m_GameObject: {fileID: 184680}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 42f68fc1fbaaa46d7855f9003d7cb26c, type: 2}
+  m_Controller: {fileID: 9100000, guid: 51427334ff33b44f29c739551acc4dc0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
