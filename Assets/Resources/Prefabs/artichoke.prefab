@@ -85,7 +85,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181148}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 1.60000002, y: 33.4000015, z: 54.5999985}
   m_LocalScale: {x: 7.74238253, y: 7.74237967, z: 22.384428}
   m_Children: []
@@ -98,7 +98,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156254}
   m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
-  m_LocalPosition: {x: .307000011, y: .722000003, z: .246999994}
+  m_LocalPosition: {x: .307000011, y: .721000016, z: .296999991}
   m_LocalScale: {x: .00499999989, y: .00499999989, z: .00499999989}
   m_Children:
   - {fileID: 411624}
@@ -380,7 +380,7 @@ Projector:
   serializedVersion: 2
   m_NearClipPlane: .100000001
   m_FarClipPlane: 200
-  m_FieldOfView: 30
+  m_FieldOfView: 70
   m_AspectRatio: 1
   m_Orthographic: 0
   m_OrthographicSize: 2
@@ -427,11 +427,11 @@ Prefab:
       objectReference: {fileID: 2100000, guid: 8263a6ccc5a5acc4089eaefb4cd491c9, type: 2}
     - target: {fileID: 0}
       propertyPath: m_FarClipPlane
-      value: 100
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_FieldOfView
-      value: 50
+      value: 70
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
