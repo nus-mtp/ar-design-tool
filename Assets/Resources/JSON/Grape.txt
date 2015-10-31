@@ -1,5 +1,5 @@
 {	
-"name":"GRAPE",
+"name":"Grape",
 "alternativeNames":["Vitis"],
 "imageLocation":["grape"],
 "description":"Grape leaves, sap, and fruit have purportedly been used medicinally since the time of the ancient Greeks. Grape seed is an excellent source of various vitamins, minerals, and polyphenols including flavonoids, proanthocyanidins, and procyanidins.

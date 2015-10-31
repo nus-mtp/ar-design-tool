@@ -29,7 +29,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     public ModalPanel mp;
 
-    private const string nextScene = "More Information";
+    private const string nextScene = "More information about ";
     
 	// Use this for initialization
 	void Start () {
@@ -51,7 +51,7 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
 
     public override string getNextSceneName()
     {
-        return nextScene;
+        return nextScene + ingredient.name;
     }
     private void OnGUI() {
         // setScale();
