@@ -34,8 +34,9 @@ public class TouchController : MonoBehaviour {
         if (Input.GetMouseButtonDown(0)){ 
 			Ray ray =Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
+            int touchId = Input.touchCount == 0 ? -1 : Input.GetTouch(0).fingerId;
             if (Physics.Raycast(ray, out hit)){
-                if(hit.collider && !EventSystem.current.IsPointerOverGameObject())
+                if (hit.collider && !EventSystem.current.IsPointerOverGameObject(touchId))
                 {
                     GameObject obj = hit.collider.gameObject;
                     AbstractTouchListener objListener = obj.GetComponent<AbstractTouchListener>();
