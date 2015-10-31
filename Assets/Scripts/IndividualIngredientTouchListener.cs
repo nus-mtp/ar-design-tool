@@ -55,14 +55,14 @@ public class IndividualIngredientTouchListener : AbstractTouchListener{
     }
     private void OnGUI() {
         // setScale();
-        Screen.orientation = ScreenOrientation.Portrait;
+        // Screen.orientation = ScreenOrientation.Portrait;
         drawBackground();
         drawTitleBox();
         drawImages();
         drawDescriptionBox();
         drawBackButton();
         // GUI.matrix = svMat; // restore matrix
-        Screen.orientation = ScreenOrientation.AutoRotation;
+        // Screen.orientation = ScreenOrientation.AutoRotation;
     }
 
     // private void setScale() {
