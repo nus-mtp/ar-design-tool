@@ -995,7 +995,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22474458, guid: 52e4507ecb42b8841b70b3a4f03949ac, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 148.434952
+      value: 148.048203
       objectReference: {fileID: 0}
     - target: {fileID: 11403350, guid: 52e4507ecb42b8841b70b3a4f03949ac, type: 2}
       propertyPath: m_FontData.m_Alignment

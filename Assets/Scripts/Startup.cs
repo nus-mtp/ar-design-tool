@@ -3,9 +3,8 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-// [InitializeOnLoad]
 public class Startup : MonoBehaviour {
-    static Startup() {
+    void Start() {
         Debug.Log("up and running");
         MasterStateController.fixOrientation();
     }
