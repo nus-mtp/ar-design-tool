@@ -20,6 +20,6 @@ The following is the folder structure
 ##Installation
 
 1. Install node.js: [https://nodejs.org/en/](https://nodejs.org/en/)
-2. Check installation by typing **node --version** and **npm -version (check both npm and node)
+2. Check installation by typing **node --version** and **npm -version** (check both npm and node)
 3. Open terminal in root folder and type **npm install**
 4. Start server by typing **npm start** (preferable) or **node index.js**
