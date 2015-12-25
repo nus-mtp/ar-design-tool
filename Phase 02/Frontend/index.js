@@ -15,7 +15,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/babylon', function(req, res) {
-    res.sendFile('babylon/babylon_demo.html', {root: root});
+    res.sendFile('babylon_demo/babylon_demo.html', {root: root});
 });
 
 app.get('/minko', function(req, res) {
@@ -23,7 +23,7 @@ app.get('/minko', function(req, res) {
 });
 
 app.get('/three', function(req, res) {
-    res.sendFile('three/three_demo.html', {root: root});
+    res.sendFile('three_demo/three_demo.html', {root: root});
 });
 
 app.listen(port);
