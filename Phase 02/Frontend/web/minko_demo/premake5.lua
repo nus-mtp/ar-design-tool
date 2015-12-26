@@ -14,10 +14,3 @@ minko.project.solution(PROJECT_NAME)
         minko.plugin.enable("assimp")        
         minko.plugin.enable("jpeg")
         minko.plugin.enable("png")
-        minko.plugin.enable("html-overlay")
-                        
-        configuration { "cc=clang" }
-            buildoptions {
-                "-Wno-extern-c-compat",
-                "-Wno-objc-missing-super-calls"
-            }
