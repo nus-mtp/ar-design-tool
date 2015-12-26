@@ -11,8 +11,13 @@ minko.project.solution(PROJECT_NAME)
 
 		-- plugin
 		minko.plugin.enable("sdl")
-		--minko.plugin.enable("bullet")
-		--minko.plugin.enable("jpeg")
-		--minko.plugin.enable("serializer")
-		--minko.plugin.enable("particles")
-		--minko.plugin.enable("png")
+        minko.plugin.enable("assimp")        
+        minko.plugin.enable("jpeg")
+        minko.plugin.enable("png")
+        minko.plugin.enable("html-overlay")
+                        
+        configuration { "cc=clang" }
+            buildoptions {
+                "-Wno-extern-c-compat",
+                "-Wno-objc-missing-super-calls"
+            }
