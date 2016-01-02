@@ -18,7 +18,6 @@ Makefile
 *.tlog
 *.idb
 *.pdb
-*.obj
 *.ilk
 *.lastbuildstate
 *.vsglog
