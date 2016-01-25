@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>Demo Tree Js</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<style>
+			body { margin: 0; overflow: hidden;}
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>        
+        <select id="model-option">
+            <option value="assets/teddy.obj">Teddy</option>
+            <option value="assets/cow.obj">Cow</option>
+        </select>
+		<script src="https://ajax.googleapis.com/ajax/libs/threejs/r69/three.min.js"></script>
+		<script src="three_objloader.js"></script>
+		<script>
+            var option = document.getElementById("model-option");
+            
+			var scene = new THREE.Scene();
+            
+            var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+            
+            var renderer = new THREE.WebGLRenderer();
+            renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+            document.body.appendChild(renderer.domElement);
+            
+            var ambient = new THREE.AmbientLight(0x101030);
+            scene.add(ambient);
+
+            var directionalLight = new THREE.DirectionalLight(0xffeedd);
+            directionalLight.position.set(0, 0, 1);
+            scene.add(directionalLight);
+            
+            var obj = null;
+            var loader = new THREE.OBJLoader();
+            loader.load(option.value, function(_obj) {
+                obj = _obj;
+                scene.add(obj);
+                obj.position.y -= 10;
+                obj.rotation.x += Math.PI / 2;
+                obj.rotation.z += Math.PI / 2;
+                obj.scale.x = 0.5;
+                obj.scale.y = 0.5;
+                obj.scale.z = 0.5;
+                camera.lookAt(obj.position);
+            });
+            
+            var render = function() {
+                requestAnimationFrame(render);
+                renderer.render(scene, camera);
+                if(obj != null) {
+                    obj.rotation.x += 0.01;
+                }
+            };
+            
+            option.addEventListener("change", function(evt) {
+                if(obj != null) {
+                    scene.remove(obj);
+                    obj = null;
+                }
+                loader.load(evt.target.value, function(_obj) {
+                    obj = _obj;
+                    scene.add(obj);
+                    obj.position.y -= 10;
+                    obj.rotation.x += Math.PI / 2;
+                    obj.rotation.z += Math.PI / 2;
+                    obj.scale.x = 0.5;
+                    obj.scale.y = 0.5;
+                    obj.scale.z = 0.5;
+                    camera.lookAt(obj.position);
+                });
+            });
+            
+            render();
+		</script>
+	</body>
+</html>
