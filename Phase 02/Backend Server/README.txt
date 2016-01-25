@@ -44,3 +44,33 @@
 
 	Step 9: Create gulpfile at root folder of project
 	> https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+
+//==================
+	Running Server
+	================//
+	To run the server:
+	> nodemon start 
+	or
+	> nodemon bin/www
+
+	if server crashes:
+	> npm install
+	> nodemon start
+
+//==================
+	Folder Structure
+	================//
+
+	server (root folder)
+	|-bin 
+	|	|- www <-- server config goes here
+	|-node_modules 
+	|-public <-- static files go here
+	|	|- Images
+	|	|- Javascript
+	|	|- sass
+	|	|- stylesheets
+	|-route 
+	|-views <-- html views go here
+	|-app.js <-- main app 
+	|-package.json 
