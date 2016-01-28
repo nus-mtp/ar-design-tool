@@ -2,7 +2,8 @@
 <html>
 	<head>
 		<meta charset='utf-8'>
-		<title>passport angular demo</title> 
+		<title>passport angular demo</title>
+		<link rel="stylesheet" type="text/css" href="./static/css/bootstrap.css"> 
 	</head>
 	<body>
 		<div class="container" ng-app="app">
@@ -14,6 +15,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 		<script src="http://angular-ui.github.io/ui-router/release/angular-ui-router.js"></script>
-		<script src="./static/scripts/app.js"></script>
+		<script src="./scripts/app.js"></script>
+		<script src="./static/js/bootstrap.js"></script>
 	</body>
 </html>
