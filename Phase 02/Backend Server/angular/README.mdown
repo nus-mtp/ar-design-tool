@@ -1,0 +1,14 @@
+//---------------
+	Folder Structure
+	---------------//
+	|-----	static				(all static files go here)
+	|	|-----	css				(CSS files go here)
+	|	|-----	fonts 			(font files go here)
+	|	|-----	js  			(js files go here)
+	|	|-----	less			(less files go here)
+	|	L-----	modules			(controllers for js modules go here)
+	|-----	views 				(HTML page files go here)
+	|	L-----	partials		(partial views go here)
+	|-----	ardesign.js 		(app)
+	|-----	package.json 		(npm file)
+	L-----	README.MD

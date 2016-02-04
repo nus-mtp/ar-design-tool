@@ -10,7 +10,6 @@ app.set('view engine', 'dot');
 // app.enable('view cache');
 
 app.use('/partials', express.static(path.join(__dirname, 'views/partials')));
-app.use('/scripts', express.static(path.join(__dirname, 'scripts')));
 app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use('/views', express.static(path.join(__dirname, 'views')));
 
