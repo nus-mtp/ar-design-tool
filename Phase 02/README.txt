@@ -57,20 +57,9 @@
 	> npm install
 	> nodemon start
 
-//==================
+//---------------
 	Folder Structure
-	================//
-
-	server (root folder)
-	|-bin 
-	|	|- www <-- server config goes here
-	|-node_modules 
-	|-public <-- static files go here
-	|	|- Images
-	|	|- Javascript
-	|	|- sass
-	|	|- stylesheets
-	|-route 
-	|-views <-- html views go here
-	|-app.js <-- main app 
-	|-package.json 
+	---------------//
+	|-----	AR Design 		(Files for the webapp)
+	|-----	Backend Server	(Backend team's folders)
+	L-----	Frontend 		(Frontend team's folder)
