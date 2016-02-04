@@ -45,6 +45,9 @@
 	Step 9: Create gulpfile at root folder of project
 	> https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 
+	Step 10: Install Mochajs
+	> npm install -g mocha
+
 //==================
 	Running Server
 	================//

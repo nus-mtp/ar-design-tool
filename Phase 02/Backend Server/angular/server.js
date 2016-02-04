@@ -1,25 +1,23 @@
-var express	= require('express'),
-	engine	= require('express-dot-engine'),
-	path	= require('path');
+var path	= require('path'),
+	express	= require('express'),
+	engine	= require('express-dot-engine');
 
 var app = express();
 
 app.engine('dot', engine.__express);
-app.set('views', path.join(__dirname, 'static/views'));
+app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'dot');
 // app.enable('view cache');
 
-app.use('/static', express.static(path.join(__dirname, 'static')));
-app.use('/views', express.static(path.join(__dirname, 'static/views')));
-app.use('/partials', express.static(path.join(__dirname, 'static/views/partials')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/server', express.static(path.join(__dirname, 'server')));
+app.use('/views', express.static(path.join(__dirname, 'public/views')));
+app.use('/routes', express.static(path.join(__dirname, 'server/routes')));
+app.use('/partials', express.static(path.join(__dirname, 'public/views/partials')));
 
-app.get('/', function (req, res) {
-	res.render('index');
-});
+var routes = require('./server/routes/router');
 
-app.get('/login', function (req, es) {
-	res.render('login');
-});
+app.use('/', routes);
 
 app.listen(3000, function() {
     console.log('listening on *:3000');

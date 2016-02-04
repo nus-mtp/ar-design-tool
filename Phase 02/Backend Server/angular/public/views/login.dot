@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>passport angular demo</title>
+		<link rel="stylesheet" type="text/css" href="./public/css/bootstrap.css"> 
+	</head>
+	<body>
+		<div class="container">
+			<a href="/">login page</a>
+		</div>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+		<script src="/public/js/bootstrap.js"></script>
+	</body>
+</html>
