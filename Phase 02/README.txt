@@ -1,1 +1,6 @@
-This folder consists of all work started in the second semester.
+//---------------
+	Folder Structure
+	---------------//
+	|-----	AR Design (Files for the webapp)
+	|-----	Backend Server (Backend team's folders)
+	L-----	Frontend (Frontend team's folder)
