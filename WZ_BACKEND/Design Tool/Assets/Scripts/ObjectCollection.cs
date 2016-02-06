@@ -64,6 +64,23 @@ public class ObjectCollection : MonoBehaviour{
         currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT;
     }
 
+    public void spawnLoadedState(State state)
+    {
+        foreach (StateObject s in state.stateObjects)
+        {
+            foreach (GameObject g in userObjects)
+            {
+                if (g.name.Equals(s.modelName))
+                {
+                    GameObject toSpawn = Instantiate(g);
+                    toSpawn.name = g.name;
+                    inSceneObjects.Add(toSpawn);
+                    SetActiveGameObject(toSpawn);
+                }
+            }
+        }
+    }
+
     void Awake()
     {
         userObjects = new List<GameObject>();
@@ -71,6 +88,5 @@ public class ObjectCollection : MonoBehaviour{
         LoadAssetBundle lab = gameObject.GetComponent<LoadAssetBundle>();
         lab.DownloadAndInstantiate();
     }
-
 
 }

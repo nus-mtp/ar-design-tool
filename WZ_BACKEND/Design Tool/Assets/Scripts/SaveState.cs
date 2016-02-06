@@ -48,6 +48,7 @@ public class SaveState : MonoBehaviour {
         else
         {
             Debug.Log(www.text);
+            www.Dispose();
         }
 
     }
@@ -56,11 +57,9 @@ public class SaveState : MonoBehaviour {
     {
         BinaryFormatter bf = new BinaryFormatter();
         State toSerialize = new State(objectCollection.GetInSceneObjects());
-        string filePath  = Application.persistentDataPath + "/" + SAVE_FILE_NAME;
-        FileStream file = File.Open(filePath, FileMode.OpenOrCreate);
-        bf.Serialize(file, toSerialize);
-        file.Close();
-        return File.ReadAllBytes(filePath);
+        MemoryStream s = new MemoryStream();
+        bf.Serialize(s, toSerialize);
+        return s.ToArray();
     }
 
    
