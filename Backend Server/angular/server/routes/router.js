@@ -1,5 +1,6 @@
 var express 	= require('express'),
 	passport 	= require('passport');
+
 var router 	= express.Router();
 
 router.get('/', function (req, res) {
@@ -7,6 +8,10 @@ router.get('/', function (req, res) {
 });
 
 router.get('/login', function (req, res) {
+	console.log(req.cookies);
+	console.log('===============')
+	console.log(req.session);
+
 	res.render('login');
 });
 
@@ -19,6 +24,11 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 	failureRedirect: '/login' 
 }));
 
-
+function isLoggedIn(req, res, next) {
+	if(req.isAuthenticated()) {
+		return next();
+	}
+	res.redirect('/login');
+}
 
 module.exports = router;
