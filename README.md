@@ -5,9 +5,9 @@
 	
 	A tool for you to build augmented reality apps
 
-//===========================
+//============
 	Installation instructions
-	=========================//
+	============//
 
 	Step 1: Install chocolatey for windows via command prompt (administrator)
 	> open command prompt (run as admin)
@@ -52,9 +52,9 @@
 	Step 9: Create gulpfile at root folder of project
 	> https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 
-//==================
+//============
 	Running Server
-	================//
+	============//
 	
 	To run the server:
 	> nodemon start 
@@ -65,9 +65,9 @@
 	> npm install
 	> nodemon start
 
-//---------------
+//============
 	Folder Structure
-	---------------//
+	============//
 
 	|-----	AR Design 		(Files for the webapp) <---- CI for this folder
 	|-----	Backend Server	(Backend team's folders)
