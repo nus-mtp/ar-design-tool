@@ -2,6 +2,7 @@
 //============
 	Ar Design Tool
 	============//
+	
 	A tool for you to build augmented reality apps
 
 //===========================
@@ -54,6 +55,7 @@
 //==================
 	Running Server
 	================//
+	
 	To run the server:
 	> nodemon start 
 	or
@@ -66,6 +68,9 @@
 //---------------
 	Folder Structure
 	---------------//
+
 	|-----	AR Design 		(Files for the webapp) <---- CI for this folder
+
 	|-----	Backend Server	(Backend team's folders)
+	
 	L-----	Frontend 		(Frontend team's folder)
