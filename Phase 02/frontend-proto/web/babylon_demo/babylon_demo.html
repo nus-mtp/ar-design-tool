@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head> 
+        <title>Demo for Babylon JS</title>
+        <style>
+            html, body
+            {
+                overflow: hidden;
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            #renderCanvas
+            {
+                width: 100%;
+                height: 100%;
+                touch-action: none;
+            }
+        </style>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handjs/1.3.11/hand.js"></script>
+        <script src="http://cdn.babylonjs.com/2-2/babylon.js"></script>
+        <script src="babylon_objloader.js"></script>
+    </head>
+    <body>
+        <h1>Babylon JS Demo</h1>
+        <select id="model-option">
+            <option value="teddy.obj">Teddy</option>
+            <option value="cow.obj">Cow</option>
+        </select>
+        <canvas id="renderCanvas"></canvas>
+        <script src="babylon_init.js"></script>
+    </body>
+</html>

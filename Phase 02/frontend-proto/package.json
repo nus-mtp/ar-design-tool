@@ -1,0 +1,14 @@
+{
+  "name": "frontendDemo",
+  "version": "0.0.1",
+  "description": "Demo Showcasing 3 different WebGL Framework",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index"
+  },
+  "author": "Jeffrey Effendy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}

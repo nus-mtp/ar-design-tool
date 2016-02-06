@@ -1,0 +1,10 @@
+{	
+"name":"Grape",
+"alternativeNames":["Vitis"],
+"imageLocation":["grape"],
+"description":"Grape leaves, sap, and fruit have purportedly been used medicinally since the time of the ancient Greeks. Grape seed is an excellent source of various vitamins, minerals, and polyphenols including flavonoids, proanthocyanidins, and procyanidins.
+
+Functions: 
+Grape seed has been used extract to support microcirculation and the cardiovascular health. It is also used as a source of antioxidants.
+The description presented in the nutrients glossary is for informational purposes only. It is based on widely available scientific and / or traditional references. Levels vary by product. The ingredient in the product is not intended to prevent, treat, cure or alleviate the medical symptoms described."
+}

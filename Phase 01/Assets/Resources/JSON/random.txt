@@ -1,0 +1,1 @@
+{"name":"random","alternativeNames":["random bomb"],"imageLocation":["random.jpeg"],"description":"this is a korean random"}
