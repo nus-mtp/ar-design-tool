@@ -9,6 +9,7 @@
   "author": "john",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "chai": "^3.5.0",
     "cookie-parser": "^1.4.1",
     "express": "^4.13.4",
@@ -16,6 +17,7 @@
     "express-session": "^1.13.0",
     "mongoose": "^4.4.2",
     "morgan": "^1.6.1",
+    "node-gyp": "^3.2.1",
     "passport-google": "^0.3.0",
     "path": "^0.12.7"
   }
