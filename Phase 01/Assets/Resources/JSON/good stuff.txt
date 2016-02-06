@@ -1,1 +1,0 @@
-{"name":"good stuff","alternativeNames":["the bomb"],"imageLocation":["good stuff.jpeg"],"description":"This is bad stuff"}
