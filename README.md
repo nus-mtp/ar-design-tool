@@ -70,7 +70,5 @@
 	---------------//
 
 	|-----	AR Design 		(Files for the webapp) <---- CI for this folder
-
 	|-----	Backend Server	(Backend team's folders)
-	
 	L-----	Frontend 		(Frontend team's folder)
