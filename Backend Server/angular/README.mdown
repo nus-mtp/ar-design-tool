@@ -1,6 +1,5 @@
-//---------------
-	Folder Structure
-	---------------//
+##Folder Structure
+
 	|-----	server				(controller files for backendserver go here)
 	|	|-----	modules				(backend module files go here)
 	|	L-----	routes				(routing files go here)
