@@ -39,7 +39,6 @@
 		===========//
 
 	Step 8: Install node dependencies 
-	> cd into project dir
 	> npm install 
 
 	(gulp/ grunt, node-sass-middleware, mongoose, kerberos)
@@ -50,9 +49,9 @@
 ##Running Server
 	
 	To run the server:
-	> nodemon start 
+	> npm start 
 	or
-	> nodemon bin/www
+	> nodemon ardesign
 
 	if server crashes:
 	> npm install
