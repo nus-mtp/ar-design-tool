@@ -1,3 +1,3 @@
 (function() {
-  angular.module('ardesignApp.controllers', ['todoApp.services']);
+  angular.module('ardesignApp.controllers', ['ardesignApp.services']);
 })();

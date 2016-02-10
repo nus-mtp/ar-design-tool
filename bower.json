@@ -27,6 +27,8 @@
     "angular-route": "^1.4.9",
     "angular-mocks": "^1.4.9",
     "font-awesome": "^4.5.0",
-    "angular-ui-router": "ui-router#^0.2.18"
+    "angular-ui-router": "ui-router#^0.2.18",
+    "jquery-ui": "^1.11.4",
+    "bootswatch": "^3.3.6+1"
   }
 }
