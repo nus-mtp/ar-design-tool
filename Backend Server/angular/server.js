@@ -2,6 +2,7 @@ var engine			= require('express-dot-engine'),
 	session 		= require('express-session'),
 	cookieParser 	= require('cookie-parser'),
 	mongoose		= require('mongoose'),
+	passport		= require('passport'),
 	express			= require('express'),
 	morgan			= require('morgan'),
 	path			= require('path');
@@ -12,6 +13,7 @@ var app 	= express(),
 var routes 		= require('./server/routes/router');
 var configDB 	= require('./server/config/database.js');
 mongoose.connect(configDB.url);
+require('./server/modules/passport')(passport);
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -21,10 +23,14 @@ app.use(session({
 	resave: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'dot');
-// app.enable('view cache');
+app.enable('view cache');
 
 
 app.use('/public', express.static(path.join(__dirname, 'public')));

@@ -1,13 +1,23 @@
-var GoogleStrategy 	= require('passport-google').Strategy;
+var GoogleStrategy 	= require('passport-google-oauth').OAuth2Strategy;
 var User 			= require('../models/user');
-var configAuth		= require('/auth');
+var configAuth		= require('../config/auth');
 
 module.exports = function(passport) {
+	passport.serializeUser(function(user, done) {
+		done(null, user.id);
+	});
+
+	passport.deserializeUser(function(id, done) {
+		User.findById(id, function(err, user) {
+			done(err, user);
+		});
+	});
+
 	passport.use(new GoogleStrategy({
 		clientID: configAuth.googleAuth.clientID,
 		clientSecret: configAuth.googleAuth.clientSecret,
-		callbackURL: configAuth.googleAuth.callbackURL
-	}),
+		callbackURL: configAuth.googleAuth.callbackURL,
+	},
 	function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
 			User.findOne({'google.id': profile.id}, function(err, user){
@@ -32,6 +42,6 @@ module.exports = function(passport) {
 					console.log(profile);
 				}
 			});
-		});	
-	}); 
-} 
+		}); 
+	}));
+}	
