@@ -1,7 +1,6 @@
 var engine			= require('express-dot-engine'),
 	session 		= require('express-session'),
 	cookieParser 	= require('cookie-parser'),
-	mongoose		= require('mongoose'),
 	passport		= require('passport'),
 	express			= require('express'),
 	morgan			= require('morgan'),
@@ -36,5 +35,6 @@ app.use('/vendors', express.static(path.join(__dirname, 'bower_components')));
 app.use('/', routes);
 
 app.listen(port, function() {
+	console.log('//===============')
     console.log('listening on *: ' + port);
 });

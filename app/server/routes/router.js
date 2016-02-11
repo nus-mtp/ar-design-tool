@@ -9,7 +9,6 @@ router.get('/', isLoggedIn, function (req, res) {
 
 router.get('/login', function (req, res) {
 	console.log(req.cookies);
-	console.log('===============')
 	console.log(req.session);
 
 	res.render('login');
@@ -25,6 +24,8 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 }));
 
 router.get('/logout', function(req, res) {
+	console.log("logging out!");
+	console.log('===============//')
 	req.logout();
 	res.redirect('/');
 });
@@ -33,6 +34,7 @@ function isLoggedIn(req, res, next) {
 	if(req.isAuthenticated()) {
 		return next();
 	}
+	console.log('not logged in, redirecting to login!');
 	res.redirect('/login');
 }
 
