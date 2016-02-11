@@ -1,0 +1,36 @@
+{
+  "name": "angular",
+  "version": "1.0.0",
+  "description": "AR Design Tool",
+  "main": "ardesign.js",
+  "scripts": {
+    "start": "nodemon ardesign",    
+    "test": "./node_modules/.bin/gulp test:local",
+    "test-ci": "./node_modules/.bin/gulp test:ci"
+  },
+  "author": "cinematron",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "chai": "^3.5.0",
+    "cookie-parser": "^1.4.1",
+    "express": "^4.13.4",
+    "express-dot-engine": "^1.0.7",
+    "express-session": "^1.13.0",
+    "gulp": "^3.9.0",
+    "gulp-codecov": "^2.0.1",
+    "gulp-istanbul": "^0.10.3",
+    "gulp-mocha": "^2.2.0",
+    "gulp-open": "^1.0.0",
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.19",
+    "karma-chrome-launcher": "^0.2.2",
+    "karma-coverage": "^0.5.3",
+    "karma-jasmine": "^0.3.7",
+    "morgan": "^1.6.1",
+    "mysql": "~2.10.2",
+    "passport": "^0.3.2",
+    "passport-google-oauth": "^1.0.0",
+    "path": "^0.12.7"
+  }
+}
