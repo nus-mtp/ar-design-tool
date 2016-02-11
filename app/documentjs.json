@@ -1,0 +1,7 @@
+{
+	"sites": {
+		"api": {
+			"glob": "{public, server}/**/*.{js,md}s"
+		}
+	}
+}
