@@ -1,9 +1,10 @@
 /**
- * @module {{}} auth/passportgoogle
+ * @module passportgoogle
  * @parent Server_Modules
- * @param passport
- *
  * This module configures passportjs 
+ *
+ * @param {{}} passport 
+ *	Requires passportjs
  * 
  */
 var GoogleStrategy 	= require('passport-google-oauth').OAuth2Strategy;
@@ -21,7 +22,11 @@ module.exports = function(passport) {
 		});
 	});
 
-
+	/**
+	 * @function passport.use.GoogleStrategy
+	 * @parent passportgoogle
+	 * This function configures passportjs to use the Google strategy
+	 */
 	passport.use(new GoogleStrategy({
 		clientID: configAuth.googleAuth.clientID,
 		clientSecret: configAuth.googleAuth.clientSecret,
