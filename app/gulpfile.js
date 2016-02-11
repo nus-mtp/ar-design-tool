@@ -1,11 +1,12 @@
 var gulp = require('gulp');
 
 // testing
-var karma = require('karma');
-var mocha = require('gulp-mocha');
-var istanbul = require('gulp-istanbul');
-var codecov = require('gulp-codecov');
-var open = require('gulp-open');
+
+var istanbul  = require('gulp-istanbul');
+var codecov   = require('gulp-codecov');
+var mocha     = require('gulp-mocha');
+var open      = require('gulp-open');
+var karma     = require('karma');
 
 gulp.task('frontend-test', function(done) {
   return new karma.Server({

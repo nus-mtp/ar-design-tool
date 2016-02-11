@@ -1,8 +1,28 @@
-var express	= require('express')
-var engine	= require('express-dot-engine');
-var path	= require('path');
+var engine			= require('express-dot-engine'),
+	session 		= require('express-session'),
+	cookieParser 	= require('cookie-parser'),
+	mongoose		= require('mongoose'),
+	passport		= require('passport'),
+	express			= require('express'),
+	morgan			= require('morgan'),
+	path			= require('path');
 
-var app = express();
+var app = express(),
+	port 	= process.env.PORT || 3000;
+
+var routes 		= require('./server/routes/router');
+require('./server/modules/passport')(passport);
+
+app.use(morgan('dev'));
+app.use(cookieParser());
+app.use(session({
+	secret: 'thisIsASecret cat',
+	saveUninitialized: true,
+	resave: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.engine('dot', engine.__express);
 app.set('views', path.join(__dirname, 'public/views'));
@@ -10,16 +30,11 @@ app.set('view engine', 'dot');
 app.enable('view cache');
 
 app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/server', express.static(path.join(__dirname, 'server')));
 app.use('/vendors', express.static(path.join(__dirname, 'bower_components')));
 
-app.get('/', function (req, res) {
-	res.render('index');
-});
+app.use('/', routes);
 
-app.get('/login', function (req, es) {
-	res.render('login');
-});
-
-app.listen(3000, function() {
-    console.log('listening on *:3000');
+app.listen(port, function() {
+    console.log('listening on *: ' + port);
 });
