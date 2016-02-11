@@ -1,7 +1,9 @@
 ##Ar Design Tool
+
 	A tool for you to build augmented reality apps
 
 ##Installation instructions
+
 	Step 1: Install chocolatey for windows via command prompt (administrator)
 	> open command prompt (run as admin)
 	>  @powershell -NoProfile -ExecutionPolicy Bypass -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
@@ -32,6 +34,7 @@
 	> https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
 
 ##Folder Structure
+
 	|-----	api		 			(Contains consolidated documentation) 
 	|-----	app		 			(Files for the webapp) 
 	|-----	backend_server_demo	(Backend team's folders)

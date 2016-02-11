@@ -1,7 +1,8 @@
 {
 	"sites": {
 		"api": {
-			"glob": "{public, server}/**/*.{js,md}s"
+			"ignore": "{node_modules,bower_components,test}/**/*",
+			"parent": "VUMIX"
 		}
 	}
 }

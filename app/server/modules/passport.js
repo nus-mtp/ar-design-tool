@@ -1,3 +1,10 @@
+/**
+ * @module {{}} auth/passportgoogle
+ * @parent Server_Modules
+ * 
+ * Hi
+ * 
+ */
 var GoogleStrategy 	= require('passport-google-oauth').OAuth2Strategy;
 var User 			= require('../models/user');
 var configAuth		= require('../config/auth');
@@ -12,6 +19,7 @@ module.exports = function(passport) {
 			done(err, user);
 		});
 	});
+
 
 	passport.use(new GoogleStrategy({
 		clientID: configAuth.googleAuth.clientID,

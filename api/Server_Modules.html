@@ -3,8 +3,8 @@
 	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
 
 	INSTEAD CHANGE:
-	source: README.md
-	@page VUMIX
+	source: server\modules.md
+	@property Server_Modules
 ######################################################################## -->
 
 <!--[if lt IE 7]>
@@ -24,7 +24,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
-	<title>VUMIX  - VUMIX</title>
+	<title>VUMIX  - Server_Modules</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
@@ -72,11 +72,18 @@
 		<ul class="api cascading primary-grouping"> 
 	
 		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="index.html" data-search="VUMIX">
+				VUMIX
+			</a>
+			
+		</li>
+		
 		
 			
 			<li class="search-container active">
-			<a class="sidebar-title" href="index.html" data-search="VUMIX">
-				VUMIX
+			<a class="sidebar-title" href="Server_Modules.html" data-search="Server_Modules">
+				Server_Modules
 			</a>
 			
 	<ul>
@@ -85,8 +92,8 @@
 				
 				
 				<li class="search-container">
-					<a class="property" href="Server_Modules.html" data-search="Server_Modules">
-						Server_Modules
+					<a class="module" href="auth__passportgoogle.html" data-search="auth/passportgoogle">
+						auth/passportgoogle
 					</a>
 				</li>
 				
@@ -110,9 +117,9 @@
 		
 		<section class="title">
 			<div class="heading">
-<h1>VUMIX</h1>
+<h1>Server_Modules</h1>
 	<ul class="tags">
-		<li>page</li>
+		<li>property</li>
 	</ul>
 	
 	
@@ -143,7 +150,8 @@
 
 		
 		<section class="description">
-			<p>##Ar Design Tool</p>
+			<p>Server side modules go here.
+##Folder Structure</p>
 
 		</section>
 		
@@ -157,30 +165,11 @@
 
 		
 		<section class="comment">
-			<pre><code>A tool for you to build augmented reality apps
-</code></pre>
-<p>##Running Server</p>
-<pre><code>To run the server:
-&gt; nodemon start 
-or
-&gt; nodemon ardesign
-
-if server crashes:
-&gt; npm install
-&gt; nodemon start or nodemon ardesign
-</code></pre>
-<p>##Folder Structure</p>
-<pre><code>|-----  bower_components    (Dependencies installed by bower)
-|-----  node_modules        (Dependencies installed by npm) 
-|-----  public              (Static files to be served to frontend) 
-|-----  server              (Modules and configs used by server)
-|-----  test                            
-|-----  ardesign.js         (app file)
-|-----  bower.json
-|-----  documentjs.json
-|-----  gulpfile.js
-|-----  package.json        
-L-----  README.MD           
+			<pre><code>|-----  config      (Config files go here)
+|-----  models      (db models go here) 
+|-----  modules     (server side modules go here) 
+|-----  routes      (routes go here)
+L-----  server.MD
 </code></pre>
 
 		</section>
@@ -211,7 +200,7 @@ L-----  README.MD
 	
 	
 	<script type="text/javascript">
-		var docObject = {"type":"page","name":"VUMIX","src":"README.md","description":"##Ar Design Tool","ignore":"{node_modules,bower_components,test}/**/*","glob":{"pattern":"**/*.{md,js}","ignore":"{node_modules,bower_components}/**/*","cwd":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\app"},"dest":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\api","generators":["html"],"docConfigDest":"../app/documentjs.json","project":{}};
+		var docObject = {"type":"property","name":"Server_Modules","src":"server\\modules.md","description":"Server side modules go here.\r\n##Folder Structure","title":"","parent":"VUMIX","ignore":"{node_modules,bower_components,test}/**/*","glob":{"pattern":"**/*.{md,js}","ignore":"{node_modules,bower_components}/**/*","cwd":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\app"},"dest":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\api","generators":["html"],"docConfigDest":"../app/documentjs.json","project":{}};
 	</script>
 	
 	
