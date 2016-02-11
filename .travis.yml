@@ -16,6 +16,7 @@ addons:
     - mysql-client-5.6
     
 before_script:
+  - cd app
   - npm install -g bower
   - bower install
 
@@ -24,4 +25,4 @@ before_install:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
   
-script: cd app && npm run test-ci
+script: npm run test-ci
