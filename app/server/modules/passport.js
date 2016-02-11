@@ -1,8 +1,8 @@
 /**
  * @module {{}} auth/passportgoogle
  * @parent Server_Modules
- * 
- * Hi
+ * @param passport
+ * This module configures passportjs 
  * 
  */
 var GoogleStrategy 	= require('passport-google-oauth').OAuth2Strategy;
