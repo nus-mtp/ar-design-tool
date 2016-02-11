@@ -43,7 +43,6 @@ public class LoadAssetBundle : MonoBehaviour {
 
         // Load and retrieve the AssetBundle
         bundle = www.assetBundle;
-        Debug.Log(bundle);
         if (bundle == null)
         {
             downloadStatus.color = Color.red;

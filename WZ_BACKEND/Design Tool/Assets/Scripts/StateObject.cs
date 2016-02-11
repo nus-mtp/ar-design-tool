@@ -20,6 +20,7 @@ public class StateObject
 
     public void InitializeGameObject(GameObject g)
     {
+        g.name = modelName;
         g.transform.position = position.ToVector3();
         g.transform.rotation = rotation.ToQuaternion();
         g.transform.localScale = scale.ToVector3();

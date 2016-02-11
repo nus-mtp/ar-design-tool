@@ -4,7 +4,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ObjectCollection : MonoBehaviour{
+public class ObjectCollection : MonoBehaviour
+{
 
     private List<GameObject> userObjects;
     private List<GameObject> inSceneObjects;
@@ -13,15 +14,52 @@ public class ObjectCollection : MonoBehaviour{
     public GameObject activeGameobject;
     public Text currentSelectedDisplay;
     public GameObject spawnButtonPrefab;
+    public GameObject spawnButtonList;
 
     private ObjectCollection()
     {
-       
+
     }
 
     public int GetSize()
     {
         return userObjects.Count;
+    }
+
+    public void PrepareUserObjects()
+    {
+        int i=0;
+        foreach (GameObject g in userObjects)
+        {
+            AddMeshCollider(g);
+            AttachDragScript(g);
+            GameObject modelButton = Instantiate(spawnButtonPrefab);
+            modelButton.transform.parent = spawnButtonList.transform;
+            Text buttonName = modelButton.GetComponentInChildren<Text>();
+            buttonName.text = g.name;
+            SpawnObjectWrapper spawn = modelButton.GetComponentInChildren<SpawnObjectWrapper>();
+            spawn.indexToSpawn = i;
+            i++;
+        }
+    }
+
+    private void AddMeshCollider(GameObject go)
+    {
+        MeshCollider[] meshColliders = go.GetComponentsInChildren<MeshCollider>();
+
+        foreach (MeshCollider childCollider in meshColliders)
+        {
+            MeshCollider meshCollider = go.AddComponent<MeshCollider>();
+            meshCollider.sharedMesh = childCollider.sharedMesh;
+            childCollider.enabled = false;
+        }
+
+        
+    }
+
+    private void AttachDragScript(GameObject go)
+    {
+        go.AddComponent<Draggable>();
     }
 
     public List<GameObject> GetInSceneObjects()
@@ -35,12 +73,13 @@ public class ObjectCollection : MonoBehaviour{
         return clone;
     }
 
-    public void SetActiveGameObject(GameObject o){
+    public void SetActiveGameObject(GameObject o)
+    {
         if (inSceneObjects.Contains(o))
         {
             activeGameobject = o;
             currentSelectedDisplay.color = Color.black;
-            currentSelectedDisplay.text =CURRENT_SELECTED_ITEM_TEXT +  o.name;
+            currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT + o.name;
         }
     }
 
@@ -73,7 +112,7 @@ public class ObjectCollection : MonoBehaviour{
                 if (g.name.Equals(s.modelName))
                 {
                     GameObject toSpawn = Instantiate(g);
-                    toSpawn.name = g.name;
+                    s.InitializeGameObject(toSpawn);
                     inSceneObjects.Add(toSpawn);
                     SetActiveGameObject(toSpawn);
                 }

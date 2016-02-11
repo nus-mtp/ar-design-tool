@@ -15,7 +15,7 @@ public class CreateAssetBundles
     const string PREFAB_EXTENSION = ".prefab";
    
 
-    private static readonly List<string> acceptedModelFormats = new List<string> { ".obj", ".fbx", ".3ds" };
+    private static readonly List<string> acceptedModelFormats = new List<string> {".obj",".3ds",".fbx"};
     
     [MenuItem("Assets/Build WebGL AssetBundles")]
     static void BuildAllAssetBundles()
@@ -59,15 +59,27 @@ public class CreateAssetBundles
         }
     }
 
-    static void CreatePreFabs(List<string> objNames, List<string> prefabPaths)
+    private static void CreatePreFabs(List<string> objNames, List<string> prefabPaths)
     {
         foreach (string objName in objNames)
         {
             GameObject go = Object.Instantiate(FileLoader.loadModels(objName)) as GameObject;
+            //AddMeshCollider(go);
             string outputPath =  ASSET_PATH + ASSET_BUNDLE_OBJECTS_PATH + objName + PREFAB_EXTENSION;
             PrefabUtility.CreatePrefab(outputPath, go,ReplacePrefabOptions.ReplaceNameBased);
             prefabPaths.Add(outputPath);
             Object.DestroyImmediate(go);
+        }
+    }
+
+    private static void AddMeshCollider(GameObject go)
+    {
+        MeshFilter[] meshFilters = go.GetComponentsInChildren<MeshFilter>();
+
+        foreach (MeshFilter meshFilter in meshFilters)
+        {
+            MeshCollider meshCollider = go.AddComponent<MeshCollider>();
+            meshCollider.sharedMesh = meshFilter.sharedMesh;
         }
     }
 

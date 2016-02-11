@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b9f20630e5c34b94bb7e0c135159586a
-timeCreated: 1453961831
+guid: a6f2a295113311a4892840e3e512017a
+timeCreated: 1455135404
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -37,6 +37,12 @@ ModelImporter:
     4300006: Plane03
     4300008: Plane04
     4300010: Plane05
+    6400000: Object04
+    6400002: Plane01
+    6400004: Plane02
+    6400006: Plane03
+    6400008: Plane04
+    6400010: Plane05
   materials:
     importMaterials: 1
     materialName: 0
@@ -63,7 +69,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importBlendShapes: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
