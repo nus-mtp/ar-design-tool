@@ -2,6 +2,7 @@
  * @module {{}} auth/passportgoogle
  * @parent Server_Modules
  * @param passport
+ *
  * This module configures passportjs 
  * 
  */
