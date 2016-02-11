@@ -1,17 +1,16 @@
-var express	= require('express'),
-	engine	= require('express-dot-engine'),
-	path	= require('path');
+var express	= require('express')
+var engine	= require('express-dot-engine');
+var path	= require('path');
 
 var app = express();
 
 app.engine('dot', engine.__express);
-app.set('views', path.join(__dirname, 'static/views'));
+app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'dot');
-// app.enable('view cache');
+app.enable('view cache');
 
-app.use('/static', express.static(path.join(__dirname, 'static')));
-app.use('/views', express.static(path.join(__dirname, 'static/views')));
-app.use('/partials', express.static(path.join(__dirname, 'static/views/partials')));
+app.use('/public', express.static(path.join(__dirname, 'public')));
+app.use('/vendors', express.static(path.join(__dirname, 'bower_components')));
 
 app.get('/', function (req, res) {
 	res.render('index');
