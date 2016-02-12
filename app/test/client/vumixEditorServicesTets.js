@@ -10,7 +10,7 @@ describe("vumixEditorApp.services", function() {
       mockService = unityMapper;
     }));
     
-    it("setTransformMode, will call SendMessage with appropriate arguments", function() {
+    it("calls setTransformMode and call SendMessage with appropriate arguments", function() {
       window.SendMessage = function(gameObject, method, args){};
       spyOn(window, 'SendMessage');
       mockService.setTransformMode("translate");
