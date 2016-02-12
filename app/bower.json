@@ -24,7 +24,6 @@
     "angular": "^1.4.9",
     "jquery": "^2.2.0",
     "bootstrap": "^3.3.6",
-    "angular-route": "^1.4.9",
     "angular-mocks": "^1.4.9",
     "font-awesome": "^4.5.0",
     "angular-ui-router": "ui-router#^0.2.18",
