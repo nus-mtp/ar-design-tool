@@ -7,6 +7,16 @@ var istanbul = require('gulp-istanbul');
 var codecov = require('gulp-codecov');
 var open = require('gulp-open');
 
+//linting
+var jshint = require('gulp-jshint');
+var jshintStylish = require('jshint-stylish');
+
+gulp.task('lint', function() {
+  return gulp.src(['public/**/*.js', '!public/resources/**/*.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter(jshintStylish));
+});
+
 gulp.task('frontend-test', function(done) {
   return new karma.Server({
     configFile: __dirname + '/test/karma.conf.js',
@@ -43,11 +53,11 @@ gulp.task('open-backend-coverage', ['backend-test'], function() {
     .pipe(open({ app: 'chrome' }));
 });
 
-gulp.task('test:local', ['open-frontend-coverage', 'open-backend-coverage'], function() {
+gulp.task('test:local', ['open-frontend-coverage', 'open-backend-coverage', 'lint'], function() {
   
 })
 
-gulp.task('test:ci', ['frontend-test', 'backend-test'], function() {
+gulp.task('test:ci', ['frontend-test', 'backend-test', 'lint'], function() {
   return gulp.src(['./test/coverage/mocha/lcov/lcov.info', './test/coverage/jasmine/lcov/lcov.info'])
     .pipe(codecov());
 });
