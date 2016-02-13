@@ -14,54 +14,50 @@
 	Step 2: Install nodejs *yes to everything
 	> choco install nodejs
 
-	Step 3: Install express *need to global it
-	> npm install -g express-generator
-
-	Step 4: Install nodemon
+	Step 3: Install nodemon
 	> npm install -g nodemon
 
-	Step 5: Install MongoDB *ensure python 2.7 is installed
-	( if python 2.7 is not installed) 
-		> choco install python2
-	> choco install mongodb
+	Step 4: Install Gulp
+	> npm install -g gulp
+	
+	Step 5: Install Bower
+	> npm install -g bower
 
-	Step 6: Install Gulp or Grunt
-	> npm install -g gulp or npm install -g grunt-cli
-
-	Step 7: Install node-gyp:
+	Step 6 (optional): Install node-gyp (requires Python 2.7, not 3.x):
 	> npm install -g node-gyp
 
-		//===========
-		creating project via express
-		express helps create the scaffolding (template of your project directories)
-		server is kept in bin/www (default app name is www)
-
-			******* creating a new project
-		express <<project name>>
-		******* creating a new project
-		===========//
-
-	Step 8: Install node dependencies 
+	Step 7: Install dependencies 
 	> npm install 
-
-	(gulp/ grunt, node-sass-middleware, mongoose, kerberos)
-
-	Step 9: Create gulpfile at root folder of project
-	> https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+	> bower install
 
 ##Running Server
 	
 	To run the server:
 	> npm start 
-	or
-	> nodemon ardesign
 
 	if server crashes:
 	> npm install
-	> nodemon start
 
 ##Folder Structure
 
 	|-----	AR Design 		(Files for the webapp) <---- CI for this folder
 	|-----	Backend Server	(Backend team's folders)
 	L-----	Frontend 		(Frontend team's folder)
+
+##Testing Guide (Javascript Test)
+	To run all test:
+	> npm test
+	
+	To run front end test only
+	> gulp open-frontend-coverage
+	
+	To run back end test only
+	> gulp open-backend-coverage
+	
+	To check Javascript linter
+	> gulp lint
+	
+	Guidelines:
+		- Make sure code is inside the coverage
+		- Make sure coverage is above 90%
+		- Linter has no warnings
