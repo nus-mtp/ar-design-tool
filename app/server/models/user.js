@@ -1,11 +1,9 @@
-// var mongoose 	= require('mongoose');
-// var userSchema 	= mongoose.Schema ({
-// 	google: {
-// 		id: String,
-// 		token: String,
-// 		email: String,
-// 		name: String
-// 	}
-// });
+var seq 		= require('sequelize');
+var userSchema 	= seq.define('googleUser', {
+	id: seq.STRING,
+	token: seq.STRING,
+	email: seq.STRING,
+	name: seq.STRING
+});
 
-// module.exports = mongoose.model('User', userSchema);
+module.exports = seq.model('User', userSchema);

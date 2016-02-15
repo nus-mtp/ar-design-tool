@@ -10,7 +10,7 @@
 	<body>
 		<div class="container">
 			<div style="margin-top: 100px" class="jumbotron text-center">
-				<h1><span class="fa fa-lock"></span> Node Authentication</h1>
+				<h1><span class="fa fa-lock"></span> Login with Google</h1>
 				<a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
 			</div>
 		</div>
