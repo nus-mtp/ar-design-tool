@@ -1,6 +1,6 @@
 ##Ar Design Tool
 
-	A tool for you to build augmented reality apps
+	A tool for you to build augmented reality apps.
 
 ##Installation instructions
 
