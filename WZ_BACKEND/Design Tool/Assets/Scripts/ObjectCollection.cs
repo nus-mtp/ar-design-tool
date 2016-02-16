@@ -32,9 +32,9 @@ public class ObjectCollection : MonoBehaviour
         foreach (GameObject g in userObjects)
         {
             AddMeshCollider(g);
-            AttachDragScript(g);
+            AttachScripts(g);
             GameObject modelButton = Instantiate(spawnButtonPrefab);
-            modelButton.transform.parent = spawnButtonList.transform;
+            modelButton.transform.SetParent(spawnButtonList.transform);
             Text buttonName = modelButton.GetComponentInChildren<Text>();
             buttonName.text = g.name;
             SpawnObjectWrapper spawn = modelButton.GetComponentInChildren<SpawnObjectWrapper>();
@@ -57,9 +57,9 @@ public class ObjectCollection : MonoBehaviour
         
     }
 
-    private void AttachDragScript(GameObject go)
+    private void AttachScripts(GameObject go)
     {
-        go.AddComponent<Draggable>();
+        go.AddComponent<Transformable>();
     }
 
     public List<GameObject> GetInSceneObjects()
@@ -77,7 +77,12 @@ public class ObjectCollection : MonoBehaviour
     {
         if (inSceneObjects.Contains(o))
         {
+            if (activeGameobject != null)
+            {
+                activeGameobject.GetComponent<Transformable>().destroyElements();
+            }
             activeGameobject = o;
+            activeGameobject.GetComponent<Transformable>().initializeObjects();
             currentSelectedDisplay.color = Color.black;
             currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT + o.name;
         }
@@ -98,6 +103,7 @@ public class ObjectCollection : MonoBehaviour
 
     public void RemoveActiveObject()
     {
+        activeGameobject.GetComponent<Transformable>().destroyElements();
         inSceneObjects.Remove(activeGameobject);
         Destroy(activeGameobject);
         currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT;
