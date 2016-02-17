@@ -17,8 +17,8 @@ module.exports = function(passport) {
 	});
 
 	passport.deserializeUser(function(id, done) {
-		User.findById(id, function(err, user) {
-			done(err, user);
+		User.findById(id).then(function(user) {
+			done(user);
 		});
 	});
 
@@ -34,28 +34,17 @@ module.exports = function(passport) {
 	},
 	function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
-			User.findOne({'google.id': profile.id}, function(err, user){
-				// if cannot find user
-				if(err)
-					return done(err);
-				// if found user, return no error and return user to callback
-				if(user)
-					return done(null, user);
-				else {
-					var newUser = new User();
-					newUser.google.id = profile.id;
-					newUser.google.token = accessToken;
-					newUser.google.name = profile.name.displayName;
-					newUser.google.email = profile.emails[0].value;
-
-					newUser.save(function(err) {
-						if(err) 
-							throw err;
-						return done(null, newUser);
-					});
-					console.log(profile);
-				}
-			});
-		}); 
+			User.findOrCreate({where: {'id': profile.id}, 
+				defaults: {
+					name: profile.name.displayName,
+					token: accessToken,
+					email: profile.emails[0].value,
+					googleId: profile.id
+				}}).spread(function(user, created) {
+					plain: true
+				})
+				console.log(created);
+			})
+		}; 
 	}));
 }	

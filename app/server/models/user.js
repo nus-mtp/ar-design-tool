@@ -1,9 +1,11 @@
-var seq 		= require('sequelize');
-// var userSchema 	= seq.define('googleUser', {
-// 	id: seq.STRING,
-// 	token: seq.STRING,
-// 	email: seq.STRING,
-// 	name: seq.STRING
-// });
+var seq = require('sequelize');
 
-// module.exports = seq.model('User', userSchema);
+var User = seq.define('googleUser', {
+	id: seq.INTEGER.UNSIGNED, //need to set to incremental
+	name: seq.STRING,
+	token: seq.STRING,
+	email: seq.STRING,
+	googleId: seq.STRING
+});
+
+module.exports = User;
