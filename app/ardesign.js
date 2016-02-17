@@ -28,13 +28,16 @@ app.set('views', path.join(__dirname, 'public/views'));
 app.set('view engine', 'dot');
 app.enable('view cache');
 
+//set static files
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/server', express.static(path.join(__dirname, 'server')));
 app.use('/vendors', express.static(path.join(__dirname, 'bower_components')));
+app.use('/resources', express.static(path.join(__dirname, 'public/resources')));
+app.use('/vumixEditorApp', express.static(path.join(__dirname, 'public/vumixEditorApp')));
+app.use('/vumixManagerApp', express.static(path.join(__dirname, 'public/vumixManagerApp')));
 
 app.use('/', routes);
 
 app.listen(port, function() {
 	console.log('//===============')
     console.log('listening on *: ' + port);
-});

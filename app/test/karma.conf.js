@@ -23,6 +23,9 @@ module.exports = function(config) {
       '../public/*.js',
       '../public/controllers/*.js',
       '../public/services/*.js',
+      '../public/vumixEditorApp/*.js',
+      '../public/vumixEditorApp/services/*.js',
+      '../public/vumixEditorApp/controllers/*.js',
       // test
       'client/*.js'
     ],
@@ -34,6 +37,9 @@ module.exports = function(config) {
       '../public/*.js': ['coverage'],
       '../public/controllers/*.js': ['coverage'],
       '../public/services/*.js': ['coverage']
+      '../public/vumixEditorApp/*.js': ['coverage'],      
+      '../public/vumixEditorApp/services/*.js': ['coverage'],
+      '../public/vumixEditorApp/controllers/*.js': ['coverage']
     },
 
 

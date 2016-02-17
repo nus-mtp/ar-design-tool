@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/nus-mtp/ar-design-tool.svg?branch=master)](https://travis-ci.org/nus-mtp/ar-design-tool)
+[![codecov.io](https://codecov.io/github/nus-mtp/ar-design-tool/coverage.svg?branch=master)](https://codecov.io/github/nus-mtp/ar-design-tool?branch=master)
+
 ##Ar Design Tool
 
 	A tool for you to build augmented reality apps.
@@ -11,27 +14,21 @@
 	Step 2: Install nodejs *yes to everything
 	> choco install nodejs
 
-	Step 3: Install bower
-	> npm install -g bower
-
-	Step 4: Install nodemon
+	Step 3: Install nodemon
 	> npm install -g nodemon
 
-	Step 5: Install documentJS
-	> npm install -g documentjs
+	Step 4: Install Gulp
+	> npm install -g gulp
+	
+	Step 5: Install Bower
+	> npm install -g bower
 
-	Step 6: Install Gulp 
-	> npm install -g gulp 
+	Step 6 (optional): Install node-gyp (requires Python 2.7, not 3.x):
+	> npm install -g node-gyp
 
-	Step 7: Install bower dependencies 
-	> cd into project dir
-	> bower install 
-
-	Step 8: Install node dependencies 
+	Step 7: Install dependencies 
 	> npm install 
-
-	Step 9: Create gulpfile at root folder of project
-	> https://github.com/gulpjs/gulp/blob/master/docs/getting-started.md
+	> bower install
 
 ##Folder Structure
 
@@ -44,3 +41,35 @@
 	|-----	bower.json			
 	|-----	coverage-final.json
 	L-----	README.MD 			
+
+##Running Server
+	
+	To run the server:
+	> npm start 
+
+	if server crashes:
+	> npm install
+
+##Folder Structure
+
+	|-----	AR Design 		(Files for the webapp) <---- CI for this folder
+	|-----	Backend Server	(Backend team's folders)
+	L-----	Frontend 		(Frontend team's folder)
+
+##Testing Guide (Javascript Test)
+	To run all test:
+	> npm test
+	
+	To run front end test only
+	> gulp open-frontend-coverage
+	
+	To run back end test only
+	> gulp open-backend-coverage
+	
+	To check Javascript linter
+	> gulp lint
+	
+	Guidelines:
+		- Make sure code is inside the coverage
+		- Make sure coverage is above 90%
+		- Linter has no warnings

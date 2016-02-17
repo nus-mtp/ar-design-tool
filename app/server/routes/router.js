@@ -4,7 +4,15 @@ var express 	= require('express'),
 var router 	= express.Router();
 
 router.get('/', isLoggedIn, function (req, res) {
-	res.render('index');
+	res.render('indexView');
+});
+
+router.get('/manager', function(req, res) {
+	res.render('vumixManagerView');
+});
+
+router.get('/editor', function(req, res) {
+	res.render('vumixEditorView');
 });
 
 router.get('/login', function (req, res) {
