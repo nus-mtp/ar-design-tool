@@ -17,12 +17,10 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // dependency
+
       '../bower_components/angular/angular.min.js',
       '../bower_components/angular-ui-router/release/angular-ui-router.min.js',
       '../bower_components/angular-mocks/angular-mocks.js',
-      '../public/*.js',
-      '../public/controllers/*.js',
-      '../public/services/*.js',
       '../public/vumixEditorApp/*.js',
       '../public/vumixEditorApp/services/*.js',
       '../public/vumixEditorApp/controllers/*.js',
@@ -34,9 +32,6 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {      
-      '../public/*.js': ['coverage'],
-      '../public/controllers/*.js': ['coverage'],
-      '../public/services/*.js': ['coverage']
       '../public/vumixEditorApp/*.js': ['coverage'],      
       '../public/vumixEditorApp/services/*.js': ['coverage'],
       '../public/vumixEditorApp/controllers/*.js': ['coverage']
