@@ -19,7 +19,7 @@ router.get('/login', function (req, res) {
 	console.log(req.cookies);
 	console.log(req.session);
 
-	res.render('login');
+	res.render('loginView');
 });
 
 router.get('/auth/google/', passport.authenticate('google', {

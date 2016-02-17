@@ -4,7 +4,7 @@
   "description": "AR Design Tool",
   "main": "ardesign.js",
   "scripts": {
-    "start": "nodemon ardesign",
+    "start": "nodemon vumix",
     "test": "./node_modules/.bin/gulp test:local",
     "test-ci": "./node_modules/.bin/gulp test:ci"
   },

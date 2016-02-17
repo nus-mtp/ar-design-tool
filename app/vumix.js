@@ -24,7 +24,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.engine('dot', engine.__express);
-app.set('views', path.join(__dirname, 'public/views'));
+app.set('views', path.join(__dirname, 'server/views'));
 app.set('view engine', 'dot');
 app.enable('view cache');
 
@@ -41,3 +41,4 @@ app.use('/', routes);
 app.listen(port, function() {
 	console.log('//===============')
     console.log('listening on *: ' + port);
+});

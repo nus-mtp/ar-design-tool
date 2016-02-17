@@ -21,7 +21,7 @@
 	|-----	public		 		(Static files to be served to frontend) 
 	|-----	server				(Modules and configs used by server)
 	|-----	test							
-	|-----	ardesign.js			(app file)
+	|-----	vumix.js			(app file)
 	|-----	bower.json
 	|-----	documentjs.json
 	|-----	gulpfile.js
