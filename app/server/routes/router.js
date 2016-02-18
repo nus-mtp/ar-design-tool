@@ -20,6 +20,7 @@ router.get('/login', function (req, res) {
 	console.log(req.session);
 
 	res.render('loginView');
+
 });
 
 router.get('/auth/google/', passport.authenticate('google', {
@@ -27,14 +28,15 @@ router.get('/auth/google/', passport.authenticate('google', {
 }));
 
 router.get('/auth/google/callback', passport.authenticate('google', { 
-	successRedirect: '/', 
-	failureRedirect: '/login' 
+	successRedirect: 'http://localhost:3000', 
+	failureRedirect: 'http://localhost:3000/login' 
 }));
 
 router.get('/logout', function(req, res) {
 	console.log("logging out!");
 	console.log('===============//')
 	req.logout();
+	req.session.destroy();
 	res.redirect('/');
 });
 

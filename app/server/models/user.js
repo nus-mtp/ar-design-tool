@@ -3,10 +3,12 @@
 module.exports = function(sequelize, dataTypes) {
 	var User = sequelize.define('googleUser', {
 		id: {
-			type: dataTypes.BIGINT.UNSIGNED,
+			type: dataTypes.STRING,
 			primaryKey: true
-		},
-		name: dataTypes.STRING,
+		}, 
+		name: {
+			type: dataTypes.STRING
+		}, 
 		token: dataTypes.STRING,
 		email: dataTypes.STRING
 	}, {

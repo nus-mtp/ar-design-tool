@@ -17,7 +17,9 @@ module.exports = function(passport) {
 	});
 
 	passport.deserializeUser(function(id, done) {
-		models.googleUser.findById(id).then(function(user) {
+		console.log('in deserializeUser...')
+		console.log(id)
+		models.googleUser.find({where: {id: id}}).then(function(user) {
 			done(user);
 		});
 	});
@@ -30,13 +32,12 @@ module.exports = function(passport) {
 	passport.use(new GoogleStrategy({
 		clientID: configAuth.googleAuth.clientID,
 		clientSecret: configAuth.googleAuth.clientSecret,
-		callbackURL: configAuth.googleAuth.callbackURL,
+		callbackURL: configAuth.googleAuth.callbackURL
 	},
 	function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
 			console.log("this is my profile received by google:")
 			console.log(profile)
-			console.log("this is my user:")
 			models.googleUser.findOrCreate({where: {'id': profile.id}, 
 				defaults: {
 					id: profile.id,
@@ -48,7 +49,11 @@ module.exports = function(passport) {
 				console.log(googleUser.get({
 					plain: true
 				}))
-				console.log(created);
+				if(created) {
+					console.log('successfully created in db!');
+				} else {
+					console.log('failed to create');
+				}
 			})
 		})
 	}));
