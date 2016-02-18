@@ -23,5 +23,6 @@
     <script type="text/javascript" src="vumixEditorApp/services/unityMapperService.js"></script>
     <script type="text/javascript" src="vumixEditorApp/controllers/_controllers.js"></script>
     <script type="text/javascript" src="vumixEditorApp/controllers/editorController.js"></script>
+    <script type="text/javascript" src="vendors/jsPlumb/dist/js/jsPlumb-2.0.7.js"></script>
 	</body>
 </html>
