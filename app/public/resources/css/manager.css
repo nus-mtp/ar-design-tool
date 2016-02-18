@@ -1,0 +1,40 @@
+/* Custom */
+
+.size{
+    padding-top: 10px; 
+    padding-bottom: 10px;   
+}
+
+.info {
+     width: 1440px;
+     height: 300px;
+     position: relative;
+     background: #f55;
+}
+
+/* Styling side-bar */
+.side-bar{
+    float:left;
+    background-color: lightblue;
+    word-wrap: break-word;
+    width: 32%;
+}
+
+.sidebar-style{
+    padding: 20px;
+}
+
+/* Styling page content */
+.responsive-page{
+    background-color: slategrey;
+    height: 1200px;
+}
+
+/* Draw a rounded rectangle */
+#rcorners {
+    /*border-radius: 25px;*/
+    border: 2px solid #73AD21;
+    margin: 20px; 
+    width: 200px;
+    height: 200px; 
+}
