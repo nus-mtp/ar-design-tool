@@ -8,7 +8,7 @@
  * 
  */
 var GoogleStrategy 	= require('passport-google-oauth').OAuth2Strategy;
-var User 			= require('../models/user');
+var models 			= require('../models');
 var configAuth		= require('../config/auth');
 
 module.exports = function(passport) {
@@ -17,7 +17,7 @@ module.exports = function(passport) {
 	});
 
 	passport.deserializeUser(function(id, done) {
-		User.findById(id).then(function(user) {
+		models.googleUser.findById(id).then(function(user) {
 			done(user);
 		});
 	});
@@ -34,17 +34,22 @@ module.exports = function(passport) {
 	},
 	function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
-			User.findOrCreate({where: {'id': profile.id}, 
+			console.log("this is my profile received by google:")
+			console.log(profile)
+			console.log("this is my user:")
+			models.googleUser.findOrCreate({where: {'id': profile.id}, 
 				defaults: {
-					name: profile.name.displayName,
+					id: profile.id,
+					name: profile.displayName,
 					token: accessToken,
-					email: profile.emails[0].value,
-					googleId: profile.id
-				}}).spread(function(user, created) {
+					email: profile.emails[0].value
+				}
+			}).spread(function(googleUser, created) {
+				console.log(googleUser.get({
 					plain: true
-				})
+				}))
 				console.log(created);
 			})
-		}; 
+		})
 	}));
 }	

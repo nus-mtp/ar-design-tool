@@ -1,11 +1,22 @@
-var seq = require('sequelize');
+"use strict";
 
-var User = seq.define('googleUser', {
-	id: seq.INTEGER.UNSIGNED, //need to set to incremental
-	name: seq.STRING,
-	token: seq.STRING,
-	email: seq.STRING,
-	googleId: seq.STRING
-});
-
-module.exports = User;
+module.exports = function(sequelize, dataTypes) {
+	var User = sequelize.define('googleUser', {
+		id: {
+			type: dataTypes.BIGINT.UNSIGNED,
+			primaryKey: true
+		},
+		name: dataTypes.STRING,
+		token: dataTypes.STRING,
+		email: dataTypes.STRING
+	}, {
+		timestamps: true,
+		updatedAt: 'updateTimestamp',
+		classMethods: {
+			associate: function(models) {
+				// User.hasMany(models.Task)
+			}
+		}
+	});
+	return User
+}
