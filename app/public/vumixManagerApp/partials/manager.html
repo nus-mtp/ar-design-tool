@@ -1,0 +1,126 @@
+<nav class="navbar navbar-inverse size">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Vumix</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">Link</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+        </li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Link</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="col-xs-6 col-md-4">
+            <!-- Sidebar content-->
+            <div class="side-bar sidebar-style" style="position:fixed">
+                <h1>Hi welcome to Vumix!</h1>
+                <h3>Click below button to create a project or a model</h3>
+                
+                <div class="btn-group">
+                    <a href="#" class="btn btn-primary" id ="create_button">Create new project</a>
+                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"  data-toggle="modal" data-target="#myModal" id="first_opt">New project</a></li>
+                        <li class="divider"></li>
+                        <li><a href="#" id="second_opt">Duplicate project</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-xs-6 col-md-8 responsive-page" id="tabs">
+            <!-- Body content-->
+            <h1 id="content-header">Existing project</h1>
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#project" data-toggle="tab" aria-expanded="false">Project</a></li>
+                <li class=""><a href="#model" data-toggle="tab" aria-expanded="true">Model</a></li>
+             </ul>
+             
+            <div id="myTabContent" class="tab-content">
+                <div class="tab-pane fade active in" id="project">
+                    <p id="rcorners">Project 1</p>
+                    <p id="rcorners">Project 2</p>
+                </div>
+                <div class="tab-pane fade" id="model">
+                    <p id="rcorners">Model 1</p>
+                    <p id="rcorners">Model 2</p>
+                </div>
+            </div>
+        </div> <!-- Responsive page-->
+        
+        <!-- Modal-->
+        <div class="modal fade"" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title" id="modal-title">Create a new project</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="navbar-form navbar-left" role="search">
+                            <div class="form-group">
+                            	 <input type="text" class="form-control" placeholder="Name">
+                            </div>
+                        </form>
+                        </br>
+                        <p id="modal-desc">Click or drag and drop vuforia package</p>
+                        
+                        <form action="/file-upload" class="dropzone">
+                            <div class="fallback" style="margin-left:15px;">
+                                <input name="file" type="file" multiple />
+                            </div>
+                        </form>
+                        
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<script type="text/javascript">
+
+$(function() {
+    $('a[href="#project"]').click(function(){
+       $("#content-header").text("Existing project");
+       $("#create_button").text("Create a new project");
+       $("#first_opt").text("New project");
+       $("#second_opt").text("Duplicate project");
+       $("#modal-title").text("Create a new project");
+       $("#modal-desc").text("Click or drag and drop vuforia package");
+    }); 
+    
+    $('a[href="#model"]').click(function(){
+       $("#content-header").text("Existing model");
+       $("#create_button").text("Upload a new model");
+       $("#first_opt").text("Upload new model");
+       $("#second_opt").text("Delete model");
+       $("#modal-title").text("Upload a new model");
+       $("#modal-desc").text("Click or drag and drop new model");
+    }); 
+});
+
+</script>

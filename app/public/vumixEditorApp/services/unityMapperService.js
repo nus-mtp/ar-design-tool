@@ -5,6 +5,6 @@
         setTransformMode: function(val) {
           SendMessage("EditorPlayer", "SetTransformMode", val);
         }
-      }
+      };
     }); 
 })();
