@@ -17,4 +17,5 @@ bower_components/
 
 # Test coverage #
 #################
-test/coverage
+coverage/
+coverage-final.json
