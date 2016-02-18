@@ -9,13 +9,13 @@ public class Draggable : MonoBehaviour
 
     private Vector3 screenPoint;
     private Vector3 offset;
-    private ObjectCollection objectCollection;
+    private StateManager stateManager;
 
     void OnMouseDown()
     {
         if (EventSystem.current.IsPointerOverGameObject() == false)
         {
-            objectCollection.SetActiveGameObject(gameObject);
+            stateManager.SetActiveGameObject(gameObject);
             screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
             offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
@@ -38,7 +38,7 @@ public class Draggable : MonoBehaviour
     void Awake()
     {
         GameObject controlScripts = GameObject.FindGameObjectWithTag("ControlScripts");
-        objectCollection = controlScripts.GetComponent<ObjectCollection>();
+        stateManager = controlScripts.GetComponent<StateManager>();
     }
 }
 

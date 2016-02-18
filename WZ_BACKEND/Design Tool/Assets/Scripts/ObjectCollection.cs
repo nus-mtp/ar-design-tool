@@ -8,11 +8,9 @@ public class ObjectCollection : MonoBehaviour
 {
 
     private List<GameObject> userObjects;
-    private List<GameObject> inSceneObjects;
-    private const string CURRENT_SELECTED_ITEM_TEXT = "Current Selected Item: ";
+    private StateManager stateManager;
 
     public GameObject activeGameobject;
-    public Text currentSelectedDisplay;
     public GameObject spawnButtonPrefab;
     public GameObject spawnButtonList;
 
@@ -62,10 +60,10 @@ public class ObjectCollection : MonoBehaviour
         go.AddComponent<Transformable>();
     }
 
-    public List<GameObject> GetInSceneObjects()
+    public List<GameObject> GetUserObjects()
     {
         List<GameObject> clone = new List<GameObject>();
-        foreach (GameObject g in inSceneObjects)
+        foreach (GameObject g in userObjects)
         {
             clone.Add(g);
         }
@@ -73,27 +71,11 @@ public class ObjectCollection : MonoBehaviour
         return clone;
     }
 
-    public void SetActiveGameObject(GameObject o)
-    {
-        if (inSceneObjects.Contains(o))
-        {
-            if (activeGameobject != null)
-            {
-                activeGameobject.GetComponent<Transformable>().destroyElements();
-            }
-            activeGameobject = o;
-            activeGameobject.GetComponent<Transformable>().initializeObjects();
-            currentSelectedDisplay.color = Color.black;
-            currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT + o.name;
-        }
-    }
-
     public void SpawnObject(int i)
     {
         GameObject inScene = Instantiate(userObjects[i]);
         inScene.name = userObjects[i].name;
-        inSceneObjects.Add(inScene);
-        SetActiveGameObject(inScene);
+        stateManager.AddToState(inScene);
     }
 
     public void AddGameObjects(GameObject o)
@@ -101,35 +83,10 @@ public class ObjectCollection : MonoBehaviour
         userObjects.Add(o);
     }
 
-    public void RemoveActiveObject()
-    {
-        activeGameobject.GetComponent<Transformable>().destroyElements();
-        inSceneObjects.Remove(activeGameobject);
-        Destroy(activeGameobject);
-        currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT;
-    }
-
-    public void spawnLoadedState(State state)
-    {
-        foreach (StateObject s in state.stateObjects)
-        {
-            foreach (GameObject g in userObjects)
-            {
-                if (g.name.Equals(s.modelName))
-                {
-                    GameObject toSpawn = Instantiate(g);
-                    s.InitializeGameObject(toSpawn);
-                    inSceneObjects.Add(toSpawn);
-                    SetActiveGameObject(toSpawn);
-                }
-            }
-        }
-    }
-
     void Awake()
     {
         userObjects = new List<GameObject>();
-        inSceneObjects = new List<GameObject>();
+        stateManager = gameObject.GetComponent<StateManager>();
         LoadAssetBundle lab = gameObject.GetComponent<LoadAssetBundle>();
         lab.DownloadAndInstantiate();
     }

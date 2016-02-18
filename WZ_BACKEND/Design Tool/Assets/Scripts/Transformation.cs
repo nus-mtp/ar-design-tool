@@ -8,7 +8,7 @@ public class Transformation : MonoBehaviour
     public float rotationSpeed = 70.0f;
     public float translationSpeed = 5.0f;
     public GameObject transformationTarget;
-    public ObjectCollection objectCollection;
+    public StateManager stateManager;
     bool repeatScaleUp = false;
     bool repeatScaleDown = false;
     bool repeatRotateRight = false;
@@ -27,7 +27,7 @@ public class Transformation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transformationTarget = objectCollection.activeGameobject;
+        transformationTarget = stateManager.GetActiveGameObject();
 
         if (repeatScaleUp)
         {
@@ -321,7 +321,7 @@ public class Transformation : MonoBehaviour
 
     void Awake()
     {
-        objectCollection = gameObject.GetComponent<ObjectCollection>();
+        stateManager = gameObject.GetComponent<StateManager>();
     }
 
 }

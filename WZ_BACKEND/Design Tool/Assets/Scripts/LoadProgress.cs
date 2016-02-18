@@ -1,14 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
-public class LoadState : MonoBehaviour {
+public class LoadProgress : MonoBehaviour {
 
 	// Use this for initialization
 	private const string SAVE_DATA_URL = "./state.dat";
     private byte[] saveData;
-    private ObjectCollection objectCollection;
+    private StateManager stateManager;
     public void Load()
     {
         StartCoroutine(DownLoadData());
@@ -32,13 +33,13 @@ public class LoadState : MonoBehaviour {
         www.Dispose();
         BinaryFormatter bf = new BinaryFormatter();
         Stream stream = new MemoryStream(saveData);
-        State state = (State)bf.Deserialize(stream);
-        objectCollection.spawnLoadedState(state);
+        List<SerialState> states = (List<SerialState>)bf.Deserialize(stream);
+        stateManager.InitialzeStates(states);
     }
     
     void Awake()
     {
-        objectCollection = gameObject.GetComponent<ObjectCollection>();
+        stateManager = gameObject.GetComponent<StateManager>();
     }
 
 }

@@ -5,7 +5,6 @@ using System;
 public class RotateHandler : AbstractTransformHandler
 {
     private float perQuarter = 20.0f;
-    private Vector3[] positions = new Vector3[3];
 
     public override void onDrag(Vector3 from, Vector3 to)
     {

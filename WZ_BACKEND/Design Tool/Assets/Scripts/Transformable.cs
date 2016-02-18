@@ -7,7 +7,7 @@ using System.Collections;
 public class Transformable : MonoBehaviour
 {
     public static TransformMode MODE = TransformMode.Translate;
-    private static ObjectCollection objectCollection;
+    private static StateManager stateManager;
 
     const string NAME_ROTATE = "rotate";
     const string NAME_TRANSLATE = "translate";
@@ -33,7 +33,7 @@ public class Transformable : MonoBehaviour
 
         }
 
-        objectCollection.activeGameobject.GetComponent<Transformable>().initializeObjects();
+        stateManager.GetActiveGameObject().GetComponent<Transformable>().initializeObjects();
     }
 
     public void destroyElements()
@@ -207,7 +207,7 @@ public class Transformable : MonoBehaviour
     {
         if (EventSystem.current.IsPointerOverGameObject() == false)
         {
-            objectCollection.SetActiveGameObject(gameObject);
+            stateManager.SetActiveGameObject(gameObject);
             screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
             offset = gameObject.transform.position - Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z));
@@ -230,7 +230,7 @@ public class Transformable : MonoBehaviour
     void Awake()
     {
         GameObject controlScripts = GameObject.FindGameObjectWithTag("ControlScripts");
-        objectCollection = controlScripts.GetComponent<ObjectCollection>();
+        stateManager = controlScripts.GetComponent<StateManager>();
     }
 
 
