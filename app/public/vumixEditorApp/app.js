@@ -16,6 +16,14 @@
               controllerAs: 'viewmodel'
             }
           }
-        });
+        })    
+        .state('statemanager', {
+          url: '/manager',
+          views:{
+              '':{
+                  templateUrl: 'vumixEditorApp/partials/statemanager.html'
+              }
+          }
+      });
     }]);  
 })();
