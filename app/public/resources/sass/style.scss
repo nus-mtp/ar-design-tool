@@ -1,0 +1,37 @@
+//colors
+@import 'partials/color';
+
+.size {
+  padding-bottom: 10px;
+  padding-top: 10px;
+}
+
+.info {
+  background: '$color_carnation_approx';
+  height: 300px;
+  position: relative;
+  width: 1440px;
+}
+
+.side-bar {
+  background-color: '$color_regent_st_blue_approx';
+  float: left;
+  width: 32%;
+  word-wrap: break-word;
+}
+
+.sidebar-style {
+  padding: 20px;
+}
+
+.responsive-page {
+  background-color: '$slate_gray';
+  height: 1200px;
+}
+
+.rcorners {
+  border: 2px solid '$color_lima_approx';
+  height: 200px;
+  margin: 20px;
+  width: 200px;
+}

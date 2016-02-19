@@ -5,7 +5,7 @@
             <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
             <link rel="stylesheet" href="vendors/bootswatch/superhero/bootstrap.min.css" />
             <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
-            <link rel="stylesheet" href="resources/css/manager.css" />   
+            <link rel="stylesheet" href="resources/css/style.css" />   
             <title> Vumix Manager Application</title>
      </head>
      <body>
