@@ -7,14 +7,14 @@
 }
 
 .info {
-  background: '$color_carnation_approx';
+  background: $color-carnation-approx;
   height: 300px;
   position: relative;
   width: 1440px;
 }
 
 .side-bar {
-  background-color: '$color_regent_st_blue_approx';
+  background-color: $color-regent-st-blue-approx;
   float: left;
   width: 32%;
   word-wrap: break-word;
@@ -25,12 +25,12 @@
 }
 
 .responsive-page {
-  background-color: '$slate_gray';
+  background-color: $slate-gray;
   height: 1200px;
 }
 
 .rcorners {
-  border: 2px solid '$color_lima_approx';
+  border: 2px solid $color-lima-approx;
   height: 200px;
   margin: 20px;
   width: 200px;
