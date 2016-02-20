@@ -1,7 +1,7 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-	var Model = sequelize.define("model", {
+	var State = sequelize.define("state", {
 		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
@@ -11,22 +11,12 @@ module.exports = function(sequelize, DataTypes) {
 		name: {
 			type: DataTypes.STRING
 		},
-		file_size: {
-			type : DataTypes.DECIMAL
-		},
-		file_extension: {
-			type: DataTypes.STRING
-		},
-		date_uploaded: {
-			type: DataTypes.DATE
-		},
-		file_location: {
-			type: DataTypes.STRING
+		thumbnail: {
+			type : DataTypes.STRING
 		}
 	}, {
-		timestamps: true,
-		updatedAt: 'updateTimestamp',
-		freezeTableName: true,
+		timestamps: false,
+		freezeTableName: true
 		classMethods: {
 			create: function(models) {
 			//   Test.create({
@@ -36,5 +26,5 @@ module.exports = function(sequelize, DataTypes) {
 			}
 		}
 	});
-	return Model;
+	return State;
 };

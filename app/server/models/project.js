@@ -1,8 +1,8 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-	var Model = sequelize.define("model", {
-		id: {
+	var Project = sequelize.define("project", {
+		id:{
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
@@ -11,30 +11,31 @@ module.exports = function(sequelize, DataTypes) {
 		name: {
 			type: DataTypes.STRING
 		},
-		file_size: {
-			type : DataTypes.DECIMAL
-		},
-		file_extension: {
+		company_name: {
 			type: DataTypes.STRING
 		},
-		date_uploaded: {
+		marker_type: {
+			type: DataTypes.STRING
+		},
+		date_created: {
+			type : DataTypes.DATE
+		},
+		last_modified: {
+			type : DataTypes.DATE
+		},
+		last_published: {
 			type: DataTypes.DATE
-		},
-		file_location: {
-			type: DataTypes.STRING
 		}
 	}, {
-		timestamps: true,
-		updatedAt: 'updateTimestamp',
+		timestamps: false,
 		freezeTableName: true,
 		classMethods: {
 			create: function(models) {
-			//   Test.create({
-			//       username: 'stella',
-			//       user_id: 10
+			//   Project.create({
+			//       username: 'stella'
 			//   })
 			}
 		}
 	});
-	return Model;
+	return Project;
 };
