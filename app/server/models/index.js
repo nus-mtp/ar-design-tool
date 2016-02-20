@@ -4,7 +4,7 @@ var fs = require('fs'),
 	path = require('path'),
 	Sequelize = require('sequelize');
 
-var CONFIG_DB = require(path.join(__dirname + '/../config/db'));
+var CONFIG_DB = require(path.join(__dirname + '/../config/localdb'));
 var sequelize = new Sequelize(CONFIG_DB.url);
 var db = {};
 
