@@ -66,7 +66,7 @@ gulp.task('test:local', ['open-frontend-coverage', 'open-backend-coverage', 'lin
   
 })
 
-gulp.task('test:ci', ['frontend-test', 'backend-test', 'lint'], function() {
+gulp.task('test:ci', ['frontend-test', 'backend-test', 'lint', 'sasslint'], function() {
   return gulp.src(['./test/coverage/mocha/lcov/lcov.info', './test/coverage/jasmine/lcov/lcov.info'])
     .pipe(codecov());
 });
