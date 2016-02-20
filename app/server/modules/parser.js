@@ -1,8 +1,12 @@
 var	program	= require('commander');
 
+var remoteDB = false;
+
 var processArg = function() {
 	program
 		.option('-p, --production', 'set production environment')
+		.option('-r, --remote', 'set dbconfig to remote db')
+		.option('-l, --local', 'set dbconfig to local db')
 		.parse(process.argv);
 
 	console.log('//===============');
@@ -13,6 +17,16 @@ var processArg = function() {
 		console.log('setting env to dev');
 		process.env.NODE_ENV = 'dev';
 	}
+	if(program.remote) {
+		console.log('connecting to remote db');
+		remoteDB = true;
+	} else {
+		remoteDB = false;
+		console.log('connecting to local db');
+	}
 }
 
 module.exports.processArg = processArg;
+module.exports.getRemoteDB = function() {
+	return remoteDB;
+}
