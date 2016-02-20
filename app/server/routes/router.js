@@ -4,7 +4,6 @@ var express 	= require('express'),
 var router 	= express.Router();
 
 router.get('/', isLoggedIn, function (req, res) {
-	console.log('reached index')
 	res.render('vumixManagerView');
 });
 
