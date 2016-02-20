@@ -1,12 +1,14 @@
 var engine			= require('express-dot-engine'),
 	session 		= require('express-session'),
 	cookieParser 	= require('cookie-parser'),
-	program			= require('commander'),
 	passport		= require('passport'),
 	express			= require('express'),
 	morgan			= require('morgan'),
 	glob			= require('glob'),
 	path			= require('path');
+
+var parse = require('./server/modules/parser.js');
+parse.processArg();
 
 var app = express(),
 	port = process.env.PORT || 3000;
@@ -40,27 +42,10 @@ app.use('/vumixManagerApp', express.static(path.join(__dirname, 'public/vumixMan
 
 app.use('/', routes);
 
-// var syncdb = require('./server/modules/syncdb')
-	// files.forEach(function(file){
-	// 	var model = db.import(file);
-	// 	// console.log(model)
-	// 	models[model.name] = model;
-	// });
-	// for (var model in models) {
-	// 	console.log(model)
-	// }
-// var CONFIG_DB = require('./server/config/db');
-// var db = new seq(CONFIG_DB.url);
-// var googleUser = db.import(path.join(__dirname + '/server/models/user'));
 var models = require('./server/models/');
-
-// program
-// 	.option('-r, --remote', 'use remote db')
-// 	.parse(process.argv);
 
 models.sequelize.sync().then(function() {
 	app.listen(port, function() {
-		console.log('//===============')
 	    console.log('listening on *: ' + port);
 	});
 });
