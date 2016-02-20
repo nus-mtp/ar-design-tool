@@ -53,13 +53,21 @@
 	  @ param(without space) passport 
 	  Requires passportjs
 
-##Creating localdb config file and connecting to local db
+##Setting up db config file
 
-	Add localdb.js file in the following folder: ./app/server/config/
-	
+	Add db.js file in the following folder: ./app/server/config/
+	It should have two parameters "remote" and "local".
 	The file should look like this:
 	module.exports = {
-		'url': "mysql://root:{your root password}@localhost:3306/test"
+		'remote': {
+			'url': 'mysql://root:password@localhost:3308/vumix'
+		},
+		'local': {
+			'url': "mysql://root:{your local password}@localhost:{port num}/est"		
+		}
 	}
+
+	Default is to use your local db. To use remote db, use the --remote flag:
+	nodemon vumix -r
 
 	Ensure that you have a your local mysql server running and a schema called 'test' already created.

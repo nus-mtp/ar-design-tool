@@ -22,6 +22,6 @@ coverage/
 coverage-final.json
 
 
-# Local DB Config #
-###################
-app/server/config/localdb.js
+# DB Config #
+#############
+app/server/config/db.js

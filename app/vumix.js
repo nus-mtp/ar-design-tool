@@ -1,6 +1,7 @@
 var engine			= require('express-dot-engine'),
 	session 		= require('express-session'),
-	cookieParser 	= require('cookie-parser')
+	cookieParser 	= require('cookie-parser'),
+	program			= require('commander'),
 	passport		= require('passport'),
 	express			= require('express'),
 	morgan			= require('morgan'),
@@ -51,8 +52,11 @@ app.use('/', routes);
 // var CONFIG_DB = require('./server/config/db');
 // var db = new seq(CONFIG_DB.url);
 // var googleUser = db.import(path.join(__dirname + '/server/models/user'));
-
 var models = require('./server/models/');
+
+// program
+// 	.option('-r, --remote', 'use remote db')
+// 	.parse(process.argv);
 
 models.sequelize.sync().then(function() {
 	app.listen(port, function() {

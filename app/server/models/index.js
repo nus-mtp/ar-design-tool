@@ -1,10 +1,22 @@
 "use strict";
-
-var fs = require('fs'),
+var Sequelize = require('sequelize'),
+	program = require('commander'),
 	path = require('path'),
-	Sequelize = require('sequelize');
+	fs = require('fs');
 
-var CONFIG_DB = require(path.join(__dirname + '/../config/localdb'));
+var CONFIG_DB = require(path.join(__dirname + '/../config/db'));
+
+program
+	.option('-r, --remote', 'use remote db')
+	.parse(process.argv);
+
+if(program.remote) {
+	console.log('program flag remote')
+	CONFIG_DB = CONFIG_DB['remote'];
+} else {
+	CONFIG_DB = CONFIG_DB['local'];
+}
+
 var sequelize = new Sequelize(CONFIG_DB.url);
 var db = {};
 
