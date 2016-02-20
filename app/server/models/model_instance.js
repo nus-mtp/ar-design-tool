@@ -15,6 +15,9 @@ module.exports = function(sequelize, DataTypes) {
 		timestamps: false,
 		freezeTableName: true,
 		classMethods: {
+			associate: function(models) {
+				Model_instance.belongsTo(models.model);
+			},
 			create: function(models) {
 			}
 		}

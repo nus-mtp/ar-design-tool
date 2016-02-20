@@ -30,6 +30,10 @@ module.exports = function(sequelize, DataTypes) {
 		timestamps: false,
 		freezeTableName: true,
 		classMethods: {
+			associate: function(models) {
+				Project.hasMany(models.model_instance);
+				Project.hasMany(models.state);
+			},
 			create: function(models) {
 			//   Project.create({
 			//       username: 'stella'
