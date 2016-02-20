@@ -1,0 +1,426 @@
+<style>
+.web_dialog
+{
+    display: none;
+    position: fixed;
+    width: 350px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-left: -190px;
+    margin-top: -100px;
+    background-color: #ffffff;
+    padding: 0px;
+    z-index: 102;
+    font-family: Verdana;
+    font-size: 10pt;
+    border: 1px solid lightblue;
+}
+.web_dialog_title
+{
+    border-bottom: solid 2px lightblue;
+    background-color: lightblue;
+    padding: 10px;
+    color: White;
+}
+.web_dialog_title a
+{
+    color: White;
+    font-size: 10pt;
+    text-decoration: none;
+}
+.align_right
+{
+    text-align: right;
+}
+    
+.w {
+    margin-top: 20px;
+    padding: 50px;
+    position: absolute;
+    z-index: 4;
+    border: 1px solid #2e6f9a;
+    box-shadow: 2px 2px 19px #e0e0e0;
+    -o-box-shadow: 2px 2px 19px #e0e0e0;
+    -webkit-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    cursor: move;
+    background-color: white;
+    font-size: 11px;
+    -webkit-transition: background-color 0.25s ease-in;
+    -moz-transition: background-color 0.25s ease-in;
+    transition: background-color 0.25s ease-in;
+}
+.w:hover {
+    background-color: lightblue;
+    
+}
+.aLabel {
+ 	background-color:white; 
+	padding:0.4em; 
+	font:12px sans-serif; 
+	color:#444;
+	z-index:21;
+	border:1px dotted gray;
+	opacity:1;
+	filter:alpha(opacity=80);
+}
+.aLabel._jsPlumb_hover, ._jsPlumb_source_hover, ._jsPlumb_target_hover {
+    background-color: #1e8151;
+    color: white;
+}
+    
+.ep {
+    position: absolute;
+    bottom: 37%;
+    right: 5px;
+    width: 1em;
+    height: 1em;
+    background-color: orange;
+    cursor: pointer;
+    box-shadow: 0 0 2px black;
+    -webkit-transition: -webkit-box-shadow 0.25s ease-in;
+    -moz-transition: -moz-box-shadow 0.25s ease-in;
+    transition: box-shadow 0.25s ease-in;
+}
+.ep:hover {
+    box-shadow: 0px 0px 6px black;
+}
+.statemachine-demo ._jsPlumb_endpoint {
+    z-index: 3;
+}
+#state1 {
+    left: 10em;
+    top: 5em;
+}
+    
+.dragHover {
+    border: 2px solid orange;
+}
+path, ._jsPlumb_endpoint {
+    cursor:pointer;
+}
+
+.top{
+  margin-top: 10%;
+}
+
+
+.scrollbar
+{
+	margin-left: 30px;
+	float: left;
+	height: 500px;
+	width: 200px;
+	background: #F5F5F5;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+}
+
+.force-overflow
+{
+	min-height: 450px;
+}
+</style>
+<!-- Navbar -->
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/manager">Back</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right ">
+      <li><a href=""><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" style="margin-right:60px">Save</button>
+</a></li>
+    </ul>
+  </div>
+</nav>
+    
+    <!-- Modal for save button -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p><center>Work has been saved.</p></center>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    <div class="jtk-demo-canvas canvas-wide statemachine-demo jtk-surface jtk-surface-nopan" id="canvas">
+        
+        <div class="row">
+             <div class="scrollbar" id="style-default">
+            
+            <div class = "input-group">
+               <input type = "text" class = "form-control" placeholder="State Name">
+               <div class = "input-group-btn">
+                  
+                  <button type = "button" class = "btn btn-default" tabindex = "-1">
+                     Create!
+                  </button>
+                   
+               </div><!-- /btn-group -->
+            </div><!-- /input-group -->
+                <div class="top"></div>
+                
+            <div class="dropdown">
+  <button class="btn btn-default btn-md dropdown-toggle" type="button" data-toggle="dropdown">Root State
+  <span class="caret"></span></button>
+  <ul class="dropdown-menu">
+    <li><a href="/editor#/statemanager">Duplicate this state</a></li>
+    <li><a href="/editor">Go to editor</a></li>
+    <li><a href="/editor#/statemanager">Delete this state</a></li>
+  </ul>
+</div>
+        
+      <div class="force-overflow"></div>
+    </div>
+           
+        <div class="col-sm-8">
+    <!-- Each state -->
+    
+    <div class="w" id="state1">ROOT STATE
+        <div class="ep"></div>
+    </div>
+    </div>
+     </div>
+    </div>
+
+
+    <script>
+        
+    jsPlumb.ready(function () {
+    
+    var connectionTypes = {};
+    connectionTypes['NORMAL'] = {
+        connector: ["StateMachine", {
+            curviness: 5
+        }],
+        paintStyle: {
+            strokeStyle: "#979797",
+            lineWidth: 2,
+            outlineColor: "transparent",
+            outlineWidth: 4,
+            cssClass: 'NORMAL'
+        },
+        hoverPaintStyle: {
+            strokeStyle: "#64c8c8"
+        },
+        overlays: [
+            ["Arrow", {
+                location: 1,
+                id: "arrow1",
+                length: 10,
+                width: 10,
+                foldback: 0.8
+            }],
+            ["Label", {
+                label: "FOO",
+                id: "label",
+                cssClass: "aLabel"
+            }]
+            
+        ]
+    };
+  
+
+    // setup some defaults for jsPlumb.
+    var instance = jsPlumb.getInstance({
+        Endpoint: ["Dot", {
+            radius: 2
+        }],       
+        Container: "canvas"
+    });
+
+    instance.registerConnectionTypes(connectionTypes);
+
+    window.jsp = instance;
+
+    var canvas = document.getElementById("canvas");
+    var windows = jsPlumb.getSelector(".statemachine-demo .w");
+
+    
+    instance.bind("click", function (c) {
+        instance.detach(c);
+    });
+
+    
+    instance.bind("connection", function (info) {
+        info.connection.getOverlay("label").setLabel("info.connection.id");
+    });
+
+    // bind a double click listener to "canvas"; add new node when this occurs.
+    //jsPlumb.on(canvas, "dblclick", function (e) {
+      // newNode(e.offsetX, e.offsetY);
+    //});
+    
+   
+    //
+    // initialise element as connection targets and source.
+    //
+    var initNode = function (el) {
+
+        // initialise draggable elements.
+        instance.draggable(el);
+
+        instance.makeSource(el, {
+            filter: ".ep",
+            anchor: "Continuous",
+            connectorStyle: {
+                strokeStyle: "black",
+                lineWidth: 2,
+                outlineColor: "transparent",
+                outlineWidth: 4
+            },
+            overlays: [
+					[ "Arrow", { location:0.8 } ],
+					[ "Label", { 
+						location:0.2,
+						id:"label",
+                        label:"Connected",
+						cssClass:"aLabel",
+                        events:{
+                    click:function(labelOverlay, originalEvent) { 
+                    ShowDialog();
+          }
+        }
+					}]
+				],
+            maxConnections: 10,
+            onMaxConnections: function (info, e) {
+                alert("Maximum connections (" + info.maxConnections + ") reached");
+            }
+        });
+
+        instance.makeTarget(el, {
+            dropOptions: {
+                hoverClass: "dragHover"
+            },
+            anchor: "Continuous",
+            allowLoopback: true
+        });
+
+        instance.fire("jsPlumbDemoNodeAdded", el);
+    };
+
+    var newNode = function (x, y) {
+        var d = document.createElement("div");
+        var id = jsPlumbUtil.uuid();
+        d.className = "w";
+        d.id = id;
+        d.innerHTML = "STATE" + "<div class=\"ep\"></div>";
+        d.style.left = x + "px";
+        d.style.top = y + 150 + "px";
+        instance.getContainer().appendChild(d);
+        initNode(d);
+        return d;
+    };
+
+    // suspend drawing and initialise.
+    instance.batch(function () {
+        for (var i = 0; i < windows.length; i++) {
+            initNode(windows[i], true);
+        }
+        // and finally, make a few connections
+        
+    });
+
+    jsPlumb.fire("jsPlumbDemoLoaded", instance);
+
+});
+     $(document).ready(function ()
+        {
+            $("#btnShowModal").click(function (e)
+            {
+                ShowDialog(true);
+                e.preventDefault();
+            });
+
+            $("#btnClose").click(function (e)
+            {
+                HideDialog();
+                e.preventDefault();
+            });
+
+            $("#btnSubmit").click(function (e)
+            {
+                HideDialog();
+                e.preventDefault();
+            });
+        });
+
+        function ShowDialog()
+        {
+            $("#overlay").show();
+            $("#dialog").fadeIn(300);
+
+            if (modal)
+            {
+                $("#overlay").unbind("click");
+            }
+            else
+            {
+                $("#overlay").click(function (e)
+                {
+                    HideDialog();
+                });
+            }
+        }
+
+        function HideDialog()
+        {
+            $("#overlay").hide();
+            $("#dialog").fadeOut(300);
+        } 
+    </script>
+    
+    <form id="form1" runat="server">     
+    
+    <div id="output"></div>
+    
+    <div id="dialog" class="web_dialog">
+        <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
+            <tr>
+                <td class="web_dialog_title"></td>
+                <td class="web_dialog_title align_right">
+                    <a href="#" id="btnClose">Close</a>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-left: 10px;">
+                    <b>Choose the active button/model for this connection. </b>
+                </td>
+            </tr>
+            <tr>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-left: 15px;">
+                    <div id="brands">
+                        <input id="brand1" name="brand" type="radio" checked="checked" value="model1" /> Model Name 1<br>
+                        <input id="brand2" name="brand" type="radio" value="model2" /> Model Name 2 <br>
+                        <input id="brand3" name="brand" type="radio" value="model3" /> Model Name 3 <br>
+                    </div>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" style="text-align: center;">
+                    <input id="btnSubmit" type="button" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    </form>
