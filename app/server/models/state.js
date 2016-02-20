@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
 		}
 	}, {
 		timestamps: false,
-		freezeTableName: true
+		freezeTableName: true,
 		classMethods: {
 			create: function(models) {
 			//   Test.create({
