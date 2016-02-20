@@ -13,14 +13,18 @@ var configAuth		= require('../config/auth');
 
 module.exports = function(passport) {
 	passport.serializeUser(function(user, done) {
+		console.log('in serializeUser...')
 		done(null, user.id);
 	});
 
 	passport.deserializeUser(function(id, done) {
 		console.log('in deserializeUser...')
 		console.log(id)
+		// models.googleUser.find({where: {id: id}}).then(function(user){
+		// 	done(null, user);
+		// });
 		models.googleUser.find({where: {id: id}}).then(function(user) {
-			done(user);
+			done(null, user);
 		});
 	});
 
@@ -36,8 +40,8 @@ module.exports = function(passport) {
 	},
 	function(accessToken, refreshToken, profile, done) {
 		process.nextTick(function() {
-			console.log("this is my profile received by google:")
-			console.log(profile)
+			// console.log("this is my profile received by google:")
+			// console.log(profile)
 			models.googleUser.findOrCreate({where: {'id': profile.id}, 
 				defaults: {
 					id: profile.id,
@@ -52,9 +56,10 @@ module.exports = function(passport) {
 				if(created) {
 					console.log('successfully created in db!');
 				} else {
-					console.log('failed to create');
+					console.log('Did not create in db');
 				}
-			})
+				done(null, profile);
+			});
 		})
 	}));
 }	

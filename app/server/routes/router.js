@@ -4,7 +4,8 @@ var express 	= require('express'),
 var router 	= express.Router();
 
 router.get('/', isLoggedIn, function (req, res) {
-	res.render('indexView');
+	console.log('reached index')
+	res.render('vumixManagerView');
 });
 
 router.get('/manager', function(req, res) {
@@ -16,11 +17,7 @@ router.get('/editor', function(req, res) {
 });
 
 router.get('/login', function (req, res) {
-	console.log(req.cookies);
-	console.log(req.session);
-
 	res.render('loginView');
-
 });
 
 router.get('/auth/google/', passport.authenticate('google', {
@@ -28,8 +25,8 @@ router.get('/auth/google/', passport.authenticate('google', {
 }));
 
 router.get('/auth/google/callback', passport.authenticate('google', { 
-	successRedirect: 'http://localhost:3000', 
-	failureRedirect: 'http://localhost:3000/login' 
+	successRedirect: '/', 
+	failureRedirect: '/login' 
 }));
 
 router.get('/logout', function(req, res) {
@@ -41,7 +38,9 @@ router.get('/logout', function(req, res) {
 });
 
 function isLoggedIn(req, res, next) {
+	console.log('checking whether logged in:')
 	if(req.isAuthenticated()) {
+		console.log('authenticated!')
 		return next();
 	}
 	console.log('not logged in, redirecting to login!');
