@@ -52,3 +52,14 @@
 	 
 	  @ param(without space) passport 
 	  Requires passportjs
+
+##Creating localdb config file and connecting to local db
+
+	Add localdb.js file in the following folder: ./app/server/config/
+	
+	The file should look like this:
+	module.exports = {
+		'url': "mysql://root:{your root password}@localhost:3306/test"
+	}
+
+	Ensure that you have a your local mysql server running and a schema called 'test' already created.
