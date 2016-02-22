@@ -34,7 +34,7 @@ gulp.task('open-frontend-coverage', ['frontend-test'], function() {
 
 gulp.task('prepare-istanbul-reporter', function() {
   return gulp.src(['server/*.js', 'server/**/*.js'])
-    .pipe(istanbul())
+    .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire());
 });
 
