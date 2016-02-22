@@ -5,7 +5,8 @@ var engine			= require('express-dot-engine'),
 	express			= require('express'),
 	morgan			= require('morgan'),
 	glob			= require('glob'),
-	path			= require('path');
+	path			= require('path'),
+    bodyParser      = require('body-parser');
 
 var parse = require('./server/modules/parser.js');
 parse.processArg();
@@ -13,7 +14,10 @@ parse.processArg();
 var app = express(),
 	port = process.env.PORT || 3000;
 
-var routes = require('./server/routes/router');
+var routes      = require('./server/routes/router');
+var users       = require('./server/routes/users');
+var projects    = require('./server/routes/projects');
+var models      = require('./server/routes/models');
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -32,6 +36,9 @@ require('./server/modules/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //set static files
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/server', express.static(path.join(__dirname, 'server')));
@@ -40,7 +47,14 @@ app.use('/resources', express.static(path.join(__dirname, 'public/resources')));
 app.use('/vumixEditorApp', express.static(path.join(__dirname, 'public/vumixEditorApp')));
 app.use('/vumixManagerApp', express.static(path.join(__dirname, 'public/vumixManagerApp')));
 
+//set web routing
 app.use('/', routes);
+
+//set restful api routing
+app.use('/api/users', users);
+app.use('/api/users/:userId/projects', projects);
+app.use('/api/users/:userId/models', models);
+app.use('/api/projects/:projectId/models', models);
 
 var models = require('./server/models/');
 
