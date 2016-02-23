@@ -14,10 +14,11 @@ parse.processArg();
 var app = express(),
 	port = process.env.PORT || 3000;
 
-var routes      = require('./server/routes/router');
-var users       = require('./server/routes/users');
-var projects    = require('./server/routes/projects');
-var models      = require('./server/routes/models');
+var routes          = require('./server/routes/router');
+var users           = require('./server/routes/users');
+var projects        = require('./server/routes/projects');
+var models          = require('./server/routes/models');
+var modelEntities   = require('./server/routes/modelEntities');
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -54,7 +55,7 @@ app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/users/:userId/projects', projects);
 app.use('/api/users/:userId/models', models);
-app.use('/api/projects/:projectId/models', models);
+app.use('/api/projects/:projectId/models', modelEntities);
 
 var models = require('./server/models/');
 
@@ -63,3 +64,5 @@ models.sequelize.sync().then(function() {
 	    console.log('listening on *: ' + port);
 	});
 });
+
+module.exports = app;

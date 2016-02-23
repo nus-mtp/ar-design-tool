@@ -8,7 +8,7 @@ var router = express.Router({mergeParams: true});
 // api: /api/projects/{projectId}/models
 router.get('/', function(req, res) {
     var modelEntities = [];
-    stubApi.models.forEach(function(e,i) {
+    stubApi.modelEntities.forEach(function(e,i) {
        if (e.projectId.toString() === req.params.projectId) {
            modelEntities.push(e);
        } 
@@ -86,7 +86,7 @@ router.put('/:id', function(req, res) {
     var modelEntity = (function(el) {
         var index = -1;
         el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id && e.userId.toString() === req.params.userid) {
+            if (e.id.toString() === req.params.id && e.projectId.toString() === req.params.projectId) {
                 index = i;                
             } 
         });
@@ -94,7 +94,7 @@ router.put('/:id', function(req, res) {
     })(stubApi.modelEntities);
     if (modelEntity) {
         modelEntity.name = req.body.name || modelEntity.name;
-        modelEntity.clickable = req.body.clickable || modelEntity.clickable;
+        modelEntity.clickable = req.body.clickable != undefined ? req.body.clickable : modelEntity.clickable;
         res.json({status: "ok", length: 1, data: [modelEntity]});
     } else {
         res.json({status: "fail", message: "model entity is not found", length: 0, data: []});
