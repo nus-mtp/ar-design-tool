@@ -25,4 +25,4 @@ coverage-final.json
 
 # DB Config #
 #############
-app/server/config/db.js
+# app/server/config/db.js #
