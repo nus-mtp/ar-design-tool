@@ -14,3 +14,8 @@
 	|-----	ardesign.js 		(app)
 	|-----	package.json 		(npm file)
 	L-----	README.MD
+
+##Middlewares
+morgan: 			Outputs performance (response) time info into console
+cookie-parser:		Parses cookie headers and populates req.cookies
+express-session:	Ensures that the server is talking to the same person and not some hijacker 

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset='utf-8'>
+		<title>VUMIX</title>
+	    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
+	    <link rel="stylesheet" href="vendors/bootswatch/superhero/bootstrap.min.css" />
+	    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div style="margin-top: 100px" class="jumbotron text-center">
+				<h1><span class="fa fa-lock"></span> Login with Google</h1>
+				<a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
+    	<script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
+    	<script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+	</body>
+</html>

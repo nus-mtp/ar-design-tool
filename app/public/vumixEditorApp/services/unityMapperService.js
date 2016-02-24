@@ -3,8 +3,8 @@
     .factory('unityMapper', function() {
       return {
         setTransformMode: function(val) {
-          SendMessage("EditorPlayer", "SetTransformMode", val);
+          SendMessage("Control Scripts", "SetTransformMode", val);
         }
-      }
+      };
     }); 
 })();

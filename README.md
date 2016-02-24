@@ -2,8 +2,8 @@
 [![codecov.io](https://codecov.io/github/nus-mtp/ar-design-tool/coverage.svg?branch=master)](https://codecov.io/github/nus-mtp/ar-design-tool?branch=master)
 
 ##Ar Design Tool
-	
-	A tool for you to build augmented reality apps
+
+	A tool for you to build augmented reality apps.
 
 ##Installation instructions
 
@@ -29,6 +29,18 @@
 	Step 7: Install dependencies 
 	> npm install 
 	> bower install
+
+##Folder Structure
+
+	|-----	api		 			(Contains consolidated documentation) 
+	|-----	app		 			(Files for the webapp) 
+	|-----	backend_server_demo	(Backend team's folders)
+	|-----	bower_components	(Dependencies installed by bower)
+	|-----	.gitignore			
+	|-----	.travis.yml			(travis ci yml file)
+	|-----	bower.json			
+	|-----	coverage-final.json
+	L-----	README.MD 			
 
 ##Running Server
 	
