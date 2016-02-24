@@ -1,12 +1,12 @@
 var engine			= require('express-dot-engine'),
 	session 		= require('express-session'),
 	cookieParser 	= require('cookie-parser'),
+    bodyParser      = require('body-parser'),
 	passport		= require('passport'),
 	express			= require('express'),
 	morgan			= require('morgan'),
 	glob			= require('glob'),
-	path			= require('path'),
-    bodyParser      = require('body-parser');
+	path			= require('path');
 
 var parse = require('./server/modules/parser.js');
 parse.processArg();

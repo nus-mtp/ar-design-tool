@@ -5,6 +5,23 @@ var expect      = require('chai').expect,
 var api = supertest(app);
 
 
+// Webserver Routing
+
+describe('App Routing', function() {
+    describe('call index page', function() {
+        it('should return with ok stauts', function(done) {
+            api
+                .get('/login')
+                .expect(200)
+                .end(function(err, res) {
+                    expect(res.statusCode).to.equal(200);
+                    done();
+                }); 
+        });
+    });
+});
+
+
 // User API Test
 
 describe('users APi', function () {
