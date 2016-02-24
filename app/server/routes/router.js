@@ -7,10 +7,6 @@ router.get('/', isLoggedIn, function (req, res) {
 	res.render('vumixManagerView');
 });
 
-router.get('/manager', function(req, res) {
-	res.render('vumixManagerView');
-});
-
 router.get('/editor', function(req, res) {
 	res.render('vumixEditorView');
 });

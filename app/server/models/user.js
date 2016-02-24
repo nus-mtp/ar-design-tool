@@ -16,7 +16,7 @@ module.exports = function(sequelize, dataTypes) {
 		updatedAt: 'updateTimestamp',
 		classMethods: {
 			associate: function(models) {
-				// User.hasMany(models.Task)
+				User.hasMany(models.project);
 			}
 		}
 	});
