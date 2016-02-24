@@ -63,7 +63,7 @@
 			'url': 'mysql://root:password@localhost:3308/vumix'
 		},
 		'local': {
-			'url': "mysql://root:{your local password}@localhost:{port num}/est"		
+			'url': "mysql://root:{your local password}@localhost:{port num}/test"		
 		}
 	}
 

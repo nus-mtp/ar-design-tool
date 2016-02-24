@@ -26,16 +26,16 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 
 router.get('/logout', function(req, res) {
 	console.log("logging out!");
-	console.log('===============//')
+	console.log('===============//');
 	req.logout();
 	req.session.destroy();
 	res.redirect('/');
 });
 
 function isLoggedIn(req, res, next) {
-	console.log('checking whether logged in:')
+	console.log('checking whether logged in:');
 	if(req.isAuthenticated()) {
-		console.log('authenticated!')
+		console.log('authenticated!');
 		return next();
 	}
 	console.log('not logged in, redirecting to login!');
