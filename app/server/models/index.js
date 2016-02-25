@@ -4,7 +4,14 @@ var Sequelize = require('sequelize'),
 	fs = require('fs');
 
 var parse 		= require(path.join(__dirname + '/../modules/parser'));
-var CONFIG_DB 	= require(path.join(__dirname + '/../config/db'));
+var CONFIG_DB;
+
+if(process.env.ENV_VARIABLE == 'test-travis') {
+	CONFIG_DB = require(path.join(__dirname + '/../config/travisdb'));
+} else {
+	CONFIG_DB = require(path.join(__dirname + '/../config/db'));
+}
+
 
 if(parse.getRemoteDB()) {
 	CONFIG_DB = CONFIG_DB['remote'];

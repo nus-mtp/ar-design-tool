@@ -21,8 +21,8 @@ var processArg = function() {
 		console.log('connecting to remote db');
 		remoteDB = true;
 	} else {
-		remoteDB = false;
 		console.log('connecting to local db');
+		remoteDB = false;
 	}
 }
 
