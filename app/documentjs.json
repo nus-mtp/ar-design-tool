@@ -1,6 +1,6 @@
 {
 	"sites": {
-		"api": {
+		"docs": {
 			"ignore": "{node_modules,bower_components,test}/**/*",
 			"parent": "VUMIX"
 		}

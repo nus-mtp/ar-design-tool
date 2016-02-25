@@ -53,6 +53,14 @@
 	  @ param(without space) passport 
 	  Requires passportjs
 
+##Generate docs using DocumentJS
+
+	Ensure that documentjs is installed globally.
+	> npm install -g documentjs
+
+	To generate docs:
+	> documentjs
+
 ##Setting up db config file
 
 	Add db.js file in the following folder: ./app/server/config/

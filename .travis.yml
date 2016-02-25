@@ -3,6 +3,9 @@ node_js:
   - "5.4.0"
   - "0.12"
 
+env:
+  - NODE_ENV=test-travis
+
 services:
   - mysql
 
