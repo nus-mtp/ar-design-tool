@@ -36,6 +36,9 @@ p {
 .center {
   text-align: center; }
 
+.section {
+  padding-top: 24px; }
+
 h1 {
   font-family: 'Open Sans';
   font-size: 24px;
@@ -73,6 +76,9 @@ p {
 
 .center {
   text-align: center; }
+
+.section {
+  padding-top: 24px; }
 
 .sidebar-style {
   margin-top: 70px;
@@ -143,7 +149,7 @@ li {
 
 button {
   background-color: #FF9640;
-  height: 40px;
+  height: 41px;
   width: 100%; }
 
 input {
@@ -153,7 +159,6 @@ input {
   width: 100%; }
 
 .main {
-  height: 300px;
   margin-left: 24px;
   margin-right: auto;
   margin-top: 24px;
