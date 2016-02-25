@@ -14,10 +14,10 @@ parse.processArg();
 var app = express(),
 	port = process.env.PORT || 3000;
 
-var routes          = require('./server/routes/router');
 var users           = require('./server/routes/users');
-var projects        = require('./server/routes/projects');
+var routes          = require('./server/routes/router');
 var models          = require('./server/routes/models');
+var projects        = require('./server/routes/projects');
 var modelEntities   = require('./server/routes/modelEntities');
 
 app.use(morgan('dev'));
@@ -33,6 +33,7 @@ app.set('views', path.join(__dirname, 'server/views'));
 app.set('view engine', 'dot');
 app.enable('view cache');
 
+// setup passportjs
 require('./server/modules/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
