@@ -39,6 +39,47 @@ p {
 .section {
   padding-top: 24px; }
 
+h1 {
+  font-family: 'Open Sans';
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 26.4px; }
+
+h2 {
+  font-family: 'Open Sans';
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 26.4px; }
+
+h3 {
+  font-family: 'Open Sans';
+  font-size: 14px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 500;
+  line-height: 15.4px; }
+
+p {
+  font-family: 'Open Sans';
+  font-size: 12px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 400;
+  line-height: 20px; }
+
+.padding-left {
+  padding-left: 16px; }
+
+.center {
+  text-align: center; }
+
+.section {
+  padding-top: 24px; }
+
 .sidebar-style {
   margin-top: 70px;
   padding: 20px; }
@@ -170,3 +211,6 @@ input {
 .sub-menu {
   margin-top: 5px;
   width: 224px; }
+
+body {
+  background-color: #FFFFFF; }

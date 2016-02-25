@@ -1,109 +1,96 @@
-<nav class="navbar navbar-inverse size">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Vumix</a>
-    </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">Link</a></li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+<div class ="nav-bar">
+    <ul>
+        <li><h1 class="padding-left">Vumix File Manager</h1></li>
+        <li>
+            <nav class="menu">
+                <ul class="clearfix">
+                    <li> 
+                        <a href="#dropdown" data-toggle="dropdown">Welcome, user! <span class="arrow">&#9660;</span></a>
+                        <ul class="sub-menu">
+                            <li><a href="#">Log Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
-      </ul>
+    </ul>
+</div>
+
+<div class="wrapper">
+  <div class="sidebar">
+       <section class="main">
+        <form class="search" method="post" action="index.html" >
+            <input type="text" name="q" placeholder="Search..." />
+            <ul class="results" >
+                <li><a href="index.html">Search Result #1<br /><span>Description...</span></a></li>
+                <li><a href="index.html">Search Result #2<br /><span>Description...</span></a></li>
+                <li><a href="index.html">Search Result #3<br /><span>Description...</span></a></li>
+                <li><a href="index.html">Search Result #4</a></li>
+            </ul>
+        </form>
+      </section>
+      <div id="welcome_page" class="side-bar-padding">
+          <h1 class="center" style="margin-top: 50%; margin-bottom: 20%"> Welcome to Vumix </h1>
+          <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
+          <button type="button" class="center" id="createProject">Create</button>
+      </div>
+      <div id="create_project" class="side-bar-padding">
+          <h1 class="center" style="margin-top: 50%; margin-bottom: 20%"> Create Your New Project</h1>
+          <span>
+              <form>
+                <h1> Organisation Name</h1>
+                <input type="text" name="org_name" placeholder="Organisation Name"><br>
+                <h1> Project Name</h1>
+                <input type="text" name="project_name" placeholder="Project Name"><br>
+                <h1> Target Name</h1>
+                <span>
+                    <input type="text" name="target_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 26%; float:right;">Browse</button>
+                </span>
+                <a href="https://developer.vuforia.com/">Find out how to create a target</a>
+                <input type="submit" class="center" value="Create" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
+              </form>
+          </span>
+      </div>    
+  </div>
+  
+  <div class="content">
+
+    <div class="container section">
+        <div class="row">
+            <div class = "col-md-3"> .col md3</div>
+            <div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>
+        </div>
     </div>
   </div>
-</nav>
 
-<div class="container-fluid">
-    <div class="row-fluid">
-        <div class="col-xs-6 col-md-4">
-            <!-- Sidebar content-->
-            <div class="side-bar sidebar-style" style="position:fixed">
-                <h1>Hi welcome to Vumix!</h1>
-                <h3>Click below button to create a project or a model</h3>
-                
-                <div class="btn-group">
-                    <a href="#" class="btn btn-primary" id ="create_button">Create new project</a>
-                    <a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#"  data-toggle="modal" data-target="#myModal" id="first_opt">New project</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#" id="second_opt">Duplicate project</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        
-        <div class="col-xs-6 col-md-8 responsive-page" id="tabs">
-            <!-- Body content-->
-            <h1 id="content-header">Existing project</h1>
-            <ul class="nav nav-tabs">
-                <li class="active"><a href="#project" data-toggle="tab" aria-expanded="false">Project</a></li>
-                <li class=""><a href="#model" data-toggle="tab" aria-expanded="true">Model</a></li>
-             </ul>
-             
-            <div id="myTabContent" class="tab-content">
-                <div class="tab-pane fade active in" id="project">
-                    <p id="rcorners"><a href="/editor#/statemanager">Project 1</a></p>
-                    <p id="rcorners">Project 2</p>
-                </div>
-                <div class="tab-pane fade" id="model">
-                    <p id="rcorners">Model 1</p>
-                    <p id="rcorners">Model 2</p>
-                </div>
-            </div>
-        </div> <!-- Responsive page-->
-        
-        <!-- Modal-->
-        <div class="modal fade"" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        <h4 class="modal-title" id="modal-title">Create a new project</h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="navbar-form navbar-left" role="search">
-                            <div class="form-group">
-                            	 <input type="text" class="form-control" placeholder="Name">
-                            </div>
-                        </form>
-                        </br>
-                        <p id="modal-desc">Click or drag and drop vuforia package</p>
-                        
-                        <form action="/file-upload" class="dropzone">
-                            <div class="fallback" style="margin-left:15px;">
-                                <input name="file" type="file" multiple />
-                            </div>
-                        </form>
-                        
-                    </div>
-                    
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-    </div>
+  <div class="cleared">
+  </div>
 </div>
 
 <script type="text/javascript">
 
 $(function() {
+    $(document).ready(function(){
+        var curr_height = $(window).height();
+        $('.sidebar').css("height", curr_height);
+        $('a[href="#dropdown"]').css("margin-left", $(window).width()/1.34);
+        $(".sub-menu").css("margin-left", $(window).width()/1.34);
+        
+        $("#create_project").hide();
+        $(".sub-menu").hide();
+         
+        $('#createProject').click(function(){
+           $("#welcome_page").hide();
+           $("#create_project").show(); 
+        });
+        
+        $('a[href="#dropdown"]').click(function(){
+           $(".sub-menu").toggle();
+        });
+    });
+    
     $('a[href="#project"]').click(function(){
        $("#content-header").text("Existing project");
        $("#create_button").text("Create a new project");

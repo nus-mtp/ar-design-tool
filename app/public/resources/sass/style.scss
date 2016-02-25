@@ -1,0 +1,7 @@
+@import 'partials/color';
+@import 'partials/typography';
+@import './manager';
+
+body {
+  background-color: $bg-color;
+}
