@@ -5,8 +5,8 @@ var Sequelize = require('sequelize'),
 
 var parse 		= require(path.join(__dirname + '/../modules/parser'));
 var CONFIG_DB;
-
-if(process.env.ENV_VARIABLE == 'test-travis') {
+console.log(process.env.NODE_ENV)
+if(process.env.NODE_ENV == 'test-travis') {
 	CONFIG_DB = require(path.join(__dirname + '/../config/travisdb'));
 } else {
 	CONFIG_DB = require(path.join(__dirname + '/../config/db'));
