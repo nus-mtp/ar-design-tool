@@ -106,16 +106,15 @@ path, ._jsPlumb_endpoint {
 }
 
 .top{
-  margin-top: 10%;
+  margin-top: 5%;
 }
-
 
 .scrollbar
 {
 	margin-left: 30px;
 	float: left;
 	height: 500px;
-	width: 200px;
+	width: 230px;
 	background: #F5F5F5;
 	overflow-y: scroll;
 	margin-bottom: 25px;
@@ -153,33 +152,19 @@ path, ._jsPlumb_endpoint {
   </div>
 </div>
     
-    <div class="jtk-demo-canvas canvas-wide statemachine-demo jtk-surface jtk-surface-nopan" id="canvas">
+  <div class="jtk-demo-canvas canvas-wide statemachine-demo jtk-surface jtk-surface-nopan" id="canvas">
         
         <div class="row">
              <div class="scrollbar" id="style-default">
-            
-            <div class = "input-group">
-               <input type = "text" class = "form-control" placeholder="State Name">
-               <div class = "input-group-btn">
-                  
-                  <button type = "button" class = "btn btn-default" tabindex = "-1">
-                     Create!
-                  </button>
-                   
-               </div><!-- /btn-group -->
-            </div><!-- /input-group -->
-                <div class="top"></div>
-                
-            <div class="dropdown">
-  <button class="btn btn-default btn-md dropdown-toggle" type="button" data-toggle="dropdown">Root State
-  <span class="caret"></span></button>
-  <ul class="dropdown-menu">
-    <li><a href="/editor#/statemanager">Duplicate this state</a></li>
-    <li><a href="/editor">Go to editor</a></li>
-    <li><a href="/editor#/statemanager">Delete this state</a></li>
-  </ul>
-</div>
-        
+                 
+    <button id="add" style="margin-top:10px">Create New State</button>
+
+    <div id="items">
+	
+        <div class="top"><button>Root State <a href="/editor"><button class="editor" style="right:30px"><span class="glyphicon glyphicon-modal-window"></span></button></a></button>
+        </div>
+        </div>
+                 
       <div class="force-overflow"></div>
     </div>
            
@@ -193,6 +178,16 @@ path, ._jsPlumb_endpoint {
      </div>
     </div>
 
+<script>
+   //when the Add Field button is clicked
+$("#add").click(function (e) {
+	//Append a new row of code to the "#items" div
+	$("#items").append('<div class="top"><input type="text" placeholder="Enter State Name" name="input[]"><button class="delete"><span class="glyphicon glyphicon-minus"></span></button><a href="/editor"><button class="editor"><span class="glyphicon glyphicon-modal-window"></span></button></a></div>');
+});
+        $("body").on("click", ".delete", function (e) {
+	$(this).parent("div").remove();
+});
+    </script>
 
     <script>
         
@@ -256,11 +251,10 @@ path, ._jsPlumb_endpoint {
         info.connection.getOverlay("label").setLabel("info.connection.id");
     });
 
-    // bind a double click listener to "canvas"; add new node when this occurs.
-    //jsPlumb.on(canvas, "dblclick", function (e) {
-      // newNode(e.offsetX, e.offsetY);
-    //});
-    
+    // bind a double click listener to the "create" button; add new node when this occurs.
+    jsPlumb.on(add, "click", function (e) {
+       newNode(e.offsetX, e.offsetY);
+    });
    
     //
     // initialise element as connection targets and source.
@@ -315,7 +309,7 @@ path, ._jsPlumb_endpoint {
         var id = jsPlumbUtil.uuid();
         d.className = "w";
         d.id = id;
-        d.innerHTML = "STATE" + "<div class=\"ep\"></div>";
+        d.innerHTML = "" + "<div class=\"ep\"></div>";
         d.style.left = x + "px";
         d.style.top = y + 150 + "px";
         instance.getContainer().appendChild(d);
