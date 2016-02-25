@@ -48,6 +48,7 @@ app.use('/vendors', express.static(path.join(__dirname, 'bower_components')));
 app.use('/resources', express.static(path.join(__dirname, 'public/resources')));
 app.use('/vumixEditorApp', express.static(path.join(__dirname, 'public/vumixEditorApp')));
 app.use('/vumixManagerApp', express.static(path.join(__dirname, 'public/vumixManagerApp')));
+app.use('/assetbundles', express.static(path.join(__dirname, 'public/resources/webgl/assetbundles')));
 
 //set web routing
 app.use('/', routes);
