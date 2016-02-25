@@ -17,6 +17,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // dependency
+
       '../bower_components/angular/angular.min.js',
       '../bower_components/angular-ui-router/release/angular-ui-router.min.js',
       '../bower_components/angular-mocks/angular-mocks.js',

@@ -2,11 +2,11 @@ var gulp = require('gulp');
 var sass = require('gulp-sass');
 
 // testing
-var karma = require('karma');
-var mocha = require('gulp-mocha');
-var istanbul = require('gulp-istanbul');
-var codecov = require('gulp-codecov');
-var open = require('gulp-open');
+var istanbul  = require('gulp-istanbul');
+var codecov   = require('gulp-codecov');
+var mocha     = require('gulp-mocha');
+var open      = require('gulp-open');
+var karma     = require('karma');
 
 //linting
 var jshint = require('gulp-jshint');
@@ -43,7 +43,7 @@ gulp.task('open-frontend-coverage', ['frontend-test'], function() {
 
 gulp.task('prepare-istanbul-reporter', function() {
   return gulp.src(['server/*.js', 'server/**/*.js'])
-    .pipe(istanbul())
+    .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire());
 });
 
