@@ -20,47 +20,14 @@
 
 // Nav bar style
 .nav-bar {
-  height: 1px;
-  width: 100%;
-}
-
-ul {
   background-color: $light-blue;
-  height: 70px;
-  list-style-type: none;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  position: fixed;
-  width: 100%;
-}
-
-li {
-  float: left;
-
-  a {
-    color: $bg-color;
-    display: block;
-    font-size: 24px;
-    padding: 16px;
-    text-align: center;
-    text-decoration: none;
-
-    &:hover {  
-      background-color: $hover-color;
-    }
-
-    &:focus {
-      color: $bg-color;
-      text-decoration: none;
-    }
-  }
+  height: 50px;
 }
 
 // Container fluid
 .wrapper {
-  margin-left: 350px;
-  margin-top: 70px;
+  margin-left: 300px;
+  margin-top: 50px;
 }
 
 .content {
@@ -72,9 +39,9 @@ li {
 .sidebar {
   background-color: $purple;
   float: left;
-  margin-left: -350px;
+  margin-left: -300px;
   position: fixed;
-  width: 350px;
+  width: 300px;
   word-wrap: break-word;
 }
 
@@ -104,13 +71,13 @@ input {
   margin-left: 24px;
   margin-right: auto;
   margin-top: 24px;
-  width: 300px;
+  width: 250px;
 }
 
 .search {
   margin: 0 auto;
   position: relative;
-  width: 300px;
+  width: 250px;
 
   input {
     background: url('../images/search.png');
@@ -158,10 +125,5 @@ input {
       position: relative;
     }
   }
-}
-
-.sub-menu {
-  margin-top: 5px;
-  width: 224px;
 }
 

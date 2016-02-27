@@ -95,37 +95,12 @@ p {
   width: 200px; }
 
 .nav-bar {
-  height: 1px;
-  width: 100%; }
-
-ul {
   background-color: #0097FF;
-  height: 70px;
-  list-style-type: none;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  position: fixed;
-  width: 100%; }
-
-li {
-  float: left; }
-  li a {
-    color: #FFFFFF;
-    display: block;
-    font-size: 24px;
-    padding: 16px;
-    text-align: center;
-    text-decoration: none; }
-    li a:hover {
-      background-color: #87CEFA; }
-    li a:focus {
-      color: #FFFFFF;
-      text-decoration: none; }
+  height: 50px; }
 
 .wrapper {
-  margin-left: 350px;
-  margin-top: 70px; }
+  margin-left: 300px;
+  margin-top: 50px; }
 
 .content {
   background-color: #FFFFFF;
@@ -135,9 +110,9 @@ li {
 .sidebar {
   background-color: #4A5099;
   float: left;
-  margin-left: -350px;
+  margin-left: -300px;
   position: fixed;
-  width: 350px;
+  width: 300px;
   word-wrap: break-word; }
 
 .cleared {
@@ -162,12 +137,12 @@ input {
   margin-left: 24px;
   margin-right: auto;
   margin-top: 24px;
-  width: 300px; }
+  width: 250px; }
 
 .search {
   margin: 0 auto;
   position: relative;
-  width: 300px; }
+  width: 250px; }
   .search input {
     background: url("../images/search.png");
     background-color: #FFFFFF;
@@ -207,10 +182,6 @@ input {
       margin: 0 -1px;
       padding: 6px 40px 6px 10px;
       position: relative; }
-
-.sub-menu {
-  margin-top: 5px;
-  width: 224px; }
 
 body {
   background-color: #FFFFFF; }
