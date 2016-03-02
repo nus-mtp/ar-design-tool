@@ -1,7 +1,7 @@
 var engine			= require('express-dot-engine'),
 	session 		= require('express-session'),
 	cookieParser 	= require('cookie-parser'),
-    bodyParser      = require('body-parser'),
+  bodyParser      = require('body-parser'),
 	passport		= require('passport'),
 	express			= require('express'),
 	morgan			= require('morgan'),
@@ -19,6 +19,7 @@ var routes          = require('./server/routes/router');
 var models          = require('./server/routes/models');
 var projects        = require('./server/routes/projects');
 var modelEntities   = require('./server/routes/modelEntities');
+var unity           = require('./server/routes/unity');
 
 app.use(morgan('dev'));
 app.use(cookieParser());
@@ -38,26 +39,32 @@ require('./server/modules/passport')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 //set static files
-app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('/server', express.static(path.join(__dirname, 'server')));
+app.use('/', express.static(path.join(__dirname, 'public')));
 app.use('/vendors', express.static(path.join(__dirname, 'bower_components')));
-app.use('/resources', express.static(path.join(__dirname, 'public/resources')));
-app.use('/vumixEditorApp', express.static(path.join(__dirname, 'public/vumixEditorApp')));
-app.use('/vumixManagerApp', express.static(path.join(__dirname, 'public/vumixManagerApp')));
+
+//static files for webgl
 app.use('/assetbundles', express.static(path.join(__dirname, 'public/resources/webgl/assetbundles')));
+app.use('/TemplateData', express.static(path.join(__dirname, 'public/resources/webgl/TemplateData')));
 
 //set web routing
 app.use('/', routes);
+
+app.post('/upload.php', function(req, res) {
+  console.log("files:" + req.files);
+});
 
 //set restful api routing
 app.use('/api/users', users);
 app.use('/api/users/:userId/projects', projects);
 app.use('/api/users/:userId/models', models);
 app.use('/api/projects/:projectId/models', modelEntities);
+
+//set routing for webgl api calls
+app.use('/', unity);
 
 var models = require('./server/models/');
 

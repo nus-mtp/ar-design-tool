@@ -14,7 +14,7 @@ var jshintStylish = require('jshint-stylish');
 var sassLint = require('gulp-sass-lint');
 
 gulp.task('lint', function() {
-  return gulp.src(['public/**/*.js', '!public/resources/**/*.js'])
+  return gulp.src(['public/**/*.js', '!public/resources/**/*.js', 'server/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter(jshintStylish));
 });
