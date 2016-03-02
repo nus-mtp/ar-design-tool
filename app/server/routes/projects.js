@@ -1,5 +1,6 @@
-var express = require('express'),
-    stubApi = require('../config/stubApi');
+var stubApi = require('../config/stubApi'),
+    models  = require('../models'),
+    express = require('express');
 
 var router = express.Router({mergeParams: true});
 
@@ -7,6 +8,7 @@ var router = express.Router({mergeParams: true});
 // GET
 // api: /api/users/{userId}/projects
 router.get('/', function(req, res) {
+    //TODO: return all projects by user
     var projects = [];
     stubApi.projects.forEach(function(e,i) {
        if (e.userId.toString() === req.params.userId) {
@@ -20,6 +22,7 @@ router.get('/', function(req, res) {
 // GET
 // api: /api/users/{userId}/projects/{id}
 router.get('/:id', function(req, res) {
+    //TODO: return project by user
     var projects = [];
     stubApi.projects.forEach(function(e,i) {
        if (e.userId.toString() === req.params.userId) {
@@ -47,6 +50,7 @@ router.get('/:id', function(req, res) {
 // api: /api/users/{userId}/projects
 // required body param: name
 router.post('/', function(req, res) {
+    //TODO: add project 
     var project = {
         id: 99,
         userId: req.params.userId,
@@ -68,8 +72,10 @@ router.delete('/:id', function(req, res) {
             } 
         });
         return index < 0 ? undefined : el.splice(index,1)[0];
+        //TODO: check whether project exists
     })(stubApi.projects);
     if (project) {
+        //TODO: delete project
         res.json({status: "ok", length: 1, data: [project]});
     } else {
         res.json({status: "fail", message: "project is not found", length: 0, data: []});
@@ -89,8 +95,10 @@ router.put('/:id', function(req, res) {
             } 
         });
         return index < 0 ? undefined : el[index];
+        //TODO: check whether project exists
     })(stubApi.projects);
     if (project) {
+        //TODO: edit project 
         project.name = req.body.name || project.name;
         res.json({status: "ok", length: 1, data: [project]});
     } else {

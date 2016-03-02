@@ -1,5 +1,11 @@
-var express = require('express'),
-    stubApi = require('../config/stubApi');
+/**
+ * @module user_api
+ * @parent Vumix
+ * This is the api for user models  
+ */
+var stubApi = require('../config/stubApi'),
+    models  = require('../models'),
+    express = require('express');
 
 var router = express.Router();
 
@@ -7,6 +13,7 @@ var router = express.Router();
 // GET
 // api: /api/users
 router.get('/', function(req, res) {
+    //TODO: return all users in db
     res.json({status: "ok", length: stubApi.users.length, data: stubApi.users});
 });
 
@@ -22,8 +29,10 @@ router.get('/:id', function(req, res) {
             } 
         });
         return index < 0 ? undefined : el[index];
+        //TODO: change stubApi.users to check whether user exists
     })(stubApi.users);
     if (user) {
+        //TODO: return instance of user
         res.json({status: "ok", length: 1, data: [user]});
     } else {
         res.json({status: "fail", message: "user is not found", length: 0, data: []});
@@ -40,6 +49,7 @@ router.post('/', function(req, res) {
         name: req.body.name,
         email: req.body.email
     };
+    //TODO: change stubAPI.users.push to create user in db
     stubApi.users.push(user);
     res.json({status: "ok", length: 1, data: [user]});
 });
@@ -55,9 +65,11 @@ router.delete('/:id', function(req, res) {
                 index = i;                
             } 
         });
-        return index < 0 ? undefined : el.splice(index,1)[0];
+        return index < 0 ? undefined : el.splice(index,1)[0];   
+        //TODO: change stubAPI.users to check whether user exists
     })(stubApi.users);
     if (user) {
+        //TODO: delete user in db
         res.json({status: "ok", length: 1, data: [user]});
     } else {
         res.json({status: "fail", message: "user is not found", length: 0, data: []});
@@ -77,8 +89,10 @@ router.put('/:id', function(req, res) {
             } 
         });
         return index < 0 ? undefined : el[index];
+        //TODO: change stubAPI.users to check whether user exists
     })(stubApi.users);
     if (user) {
+        //TODO: update existing user
         user.name = req.body.name || user.name;
         user.email = req.body.email || user.email;
         res.json({status: "ok", length: 1, data: [user]});

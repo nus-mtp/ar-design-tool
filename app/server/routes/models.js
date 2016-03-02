@@ -1,5 +1,6 @@
-var express = require('express'),
-    stubApi = require('../config/stubApi');
+var stubApi = require('../config/stubApi'),
+    models  = require('../models'),
+    express = require('express');
 
 var router = express.Router({mergeParams: true});
 
