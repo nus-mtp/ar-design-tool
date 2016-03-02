@@ -1,27 +1,31 @@
+@import 'partials/alignment';
 @import 'partials/color';
 @import 'partials/typography';
-
-.sidebar-style {
-  margin-top: 70px;
-  padding: 20px;
-}
-
-.responsive-page {
-  background-color: $slate-gray;
-  height: 1200px;
-}
-
-.rcorners {
-  border: 2px solid $color-lima-approx;
-  height: 200px;
-  margin: 20px;
-  width: 200px;
-}
 
 // Nav bar style
 .nav-bar {
   background-color: $light-blue;
   height: 50px;
+}
+
+.top-bar {
+  background-color: $light-blue;  
+  margin-top: 2px;
+}
+
+.btn-default.active {
+  background-color: $bg-color;
+  color: $light-blue;
+}
+
+.custom-pill {
+  a {
+    color: $bg-color;
+  }  
+
+  a:active {
+    background-color: $purple;
+  } 
 }
 
 // Container fluid
@@ -68,6 +72,7 @@ input {
 }
 
 .main {
+  margin-bottom: 24px;
   margin-left: 24px;
   margin-right: auto;
   margin-top: 24px;
@@ -127,3 +132,37 @@ input {
   }
 }
 
+
+.flex-container {
+  -webkit-flex-flow: row wrap;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-around;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.flex-item {
+  background: $light-orange;
+  color: $bg-color;
+  font-size: 3em;
+  font-weight: bold;
+  height: 170px;
+  line-height: 150px;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 200px;
+
+  p {
+    background-color: $hover-color;
+    font-size: 13px;
+    margin-left: -5px;
+    margin-top: -4px;
+    width: inherit;
+  }
+}

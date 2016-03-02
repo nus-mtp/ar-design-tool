@@ -11,7 +11,8 @@
           url: '/manager',
           views: {
             "manager": {
-              templateUrl: '/vumixManagerApp/partials/manager.html'
+              templateUrl: '/vumixManagerApp/partials/manager.html',
+              controller: 'managerController'
             }
           }
         });

@@ -9,19 +9,14 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
              <ul class="nav navbar-nav">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                <li>
+                    <ul class ="center-align" >
+                        <span class ="top-bar"><a href="#project" class="btn btn-default top-bar" data-toggle="tab" >Project</a></span>
+                        <span class ="top-bar"><a href="#model" class="btn btn-default top-bar" data-toggle="tab" >Model</a></span>
                     </ul>
-                </li>
+               </li>
             </ul>
+            
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, User!<span class="caret"></span></a>
@@ -64,24 +59,86 @@
                 <input type="text" name="project_name" placeholder="Project Name"><br>
                 <h1> Target Name</h1>
                 <span>
-                    <input type="text" name="target_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 26%; float:right;">Browse</button>
+                    <input type="text" name="target_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 28%; float:right;">Browse</button>
                 </span>
                 <a href="https://developer.vuforia.com/">Find out how to create a target</a>
                 <input type="submit" class="center" value="Create" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
+              </form>
+          </span>
+      </div>
+      <div id="upload_model" class="side-bar-padding">
+           <h1 class="center" style="margin-top: 50%; margin-bottom: 20%"> Upload Your New Model Here</h1>
+           <span>
+              <form>
+                <h1> Model Name</h1>
+                <input type="text" name="model_name" placeholder="Model Name"><br>
+                <h1> File</h1>
+                <span>
+                    <input type="text" name="file_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 28%; float:right;">Browse</button>
+                </span>
+                <input type="submit" class="center" value="Upload" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
               </form>
           </span>
       </div>    
   </div>
   
   <div class="content">
-
-    <div class="container section">
-        <div class="row">
-            <div class = "col-md-3"> .col md3</div>
+    <div class="container section" style="width:auto;"> 
+        <!--to display project-->
+        <div ng-controller="managerController">
+            <p ng-repeat="pr in listModels">The data {{data.id}}</p>
+            
+            <!--<div class = "col-md-3"> .co lmd3</div>
             <div class = "col-md-3"> .co lmd3</div>
-            <div class = "col-md-3"> .co lmd3</div>
-            <div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>-->
+            <ul class="flex-container" id="project_list">
+                <li class="flex-item">1
+                    <p>Project Name 1</p>
+                </li>
+                <li class="flex-item">2
+                    <p>Project Name 2</p>
+                </li>
+                <li class="flex-item">3
+                    <p>Project Name 3</p>
+                </li>
+                <li class="flex-item">4
+                    <p>Project Name 4</p>
+                </li>
+                <li class="flex-item">5
+                    <p>Project Name 5</p>
+                </li>
+            </ul>
+            
+            <form action ="#" class="dropzone" id="dropdown_project">
+                <input type = "file" name = "file">
+            </form>
         </div>
+        
+        <!--to display model-->
+        <div ng-controller="managerController">
+            <p ng-repeat="pr in listModels">The data {{data.id}}</p>
+            
+            <ul class="flex-container" id="model_list">
+                <li class="flex-item">1
+                    <p>Model Name 1</p>
+                </li>
+                <li class="flex-item">2
+                    <p>Model Name 2</p>
+                </li>
+                <li class="flex-item">3
+                    <p>Model Name 3</p>
+                </li>
+                <li class="flex-item">4
+                    <p>Model Name 4</p>
+                </li>
+                <li class="flex-item">5
+                    <p>Model Name 5</p>
+                </li>
+                <li class="flex-item">6</li>
+                <li class="flex-item">7</li>
+            </ul>
+        </div>
+        
     </div>
   </div>
 
@@ -93,39 +150,54 @@
 
 $(function() {
     $(document).ready(function(){
-        var curr_height = $(window).height();
-        $('.sidebar').css("height", curr_height);
-        $('.sidebar').css("min-height", curr_height);
+        Dropzone.autoDiscover = false;
+        var createDropzone = new Dropzone ("#dropdown_project");
         
+        var height = $(window).height();
+        $('.sidebar').css("min-height", height);
+        
+        // when user resize their window
+        $(window).resize(function(){
+            console.log("here");
+            var curr_height = $(window).height();
+            // if(curr_height < height){
+            //     $('.sidebar').css("position", "absolute");  //current setup!
+            // }else if(curr_height == height){
+            //     $('.sidebar').css("position", "fixed");
+            // }
+        });
+        
+        $('a[href="#project"]').addClass("active");
         $("#create_project").hide();
-        $(".sub-menu").hide();
+        $("#model_list").hide();
+        $('#upload_model').hide();
          
         $('#createProject').click(function(){
            $("#welcome_page").hide();
            $("#create_project").show(); 
+           $('#upload_model').hide();
         });
         
-        $('a[href="#dropdown"]').click(function(){
-           $(".sub-menu").toggle();
-        });
     });
     
     $('a[href="#project"]').click(function(){
-       $("#content-header").text("Existing project");
-       $("#create_button").text("Create a new project");
-       $("#first_opt").text("New project");
-       $("#second_opt").text("Duplicate project");
-       $("#modal-title").text("Create a new project");
-       $("#modal-desc").text("Click or drag and drop vuforia package");
+        $('#welcome_page').show();
+        $('#project_list').show();
+        $('#create_project').hide();
+        $('#upload_model').hide();
+        $('#model_list').hide();
+        $('a[href="#project"]').addClass("active");
+        $('a[href="#model"]').removeClass("active");
     }); 
     
     $('a[href="#model"]').click(function(){
-       $("#content-header").text("Existing model");
-       $("#create_button").text("Upload a new model");
-       $("#first_opt").text("Upload new model");
-       $("#second_opt").text("Delete model");
-       $("#modal-title").text("Upload a new model");
-       $("#modal-desc").text("Click or drag and drop new model");
+        $('#welcome_page').hide();
+        $('#create_project').hide();
+        $('#project_list').hide();
+        $('#upload_model').show();
+        $('#model_list').show();
+        $('a[href="#model"]').addClass("active");
+        $('a[href="#project"]').removeClass("active");
     }); 
 });
 
