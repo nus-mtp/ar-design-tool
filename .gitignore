@@ -31,3 +31,4 @@ npm-debug.log
 # Save File #
 #############
 app/public/state.dat
+app/server/config/db.js
