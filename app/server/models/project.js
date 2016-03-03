@@ -6,25 +6,34 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
-			allowNull : false
+			allowNull : false,
+			unique: true
 		},
-		name: {
-			type: DataTypes.STRING
+		name: { 
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		company_name: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		marker_type: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		date_created: {
-			type : DataTypes.DATE
+			type: DataTypes.DATE,
+			allowNull: false,
+			defaultValue: DataTypes.NOW
 		},
 		last_modified: {
-			type : DataTypes.DATE
+			type: DataTypes.DATE,
+			allowNull: false,
+			defaultValue: DataTypes.NOW
 		},
 		last_published: {
-			type: DataTypes.DATE
+			type: DataTypes.DATE,
+			allowNull: true
 		}
 	}, {
 		timestamps: false,
@@ -36,7 +45,7 @@ module.exports = function(sequelize, DataTypes) {
 			},
 			create: function(models) {
 			//   Project.create({
-			//       username: 'stella'
+			//       username: 'stella'x
 			//   })
 			}
 		}

@@ -9,11 +9,16 @@ var stubApi = require('../config/stubApi'),
 
 var router = express.Router();
 
-// fetchAll
-// GET
-// api: /api/users
+/**
+ * @module fetchall users
+ * @parent user_api
+ * Returns all users registered with the system
+ * GET
+ * api: /api/users
+ */
 router.get('/', function(req, res) {
     //TODO: return all users in db
+    // var users = models.findAll
     res.json({status: "ok", length: stubApi.users.length, data: stubApi.users});
 });
 

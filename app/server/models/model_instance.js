@@ -6,10 +6,21 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
-			allowNull : false
-		} ,
+			allowNull: false,
+			unique: true
+		},
+		userID: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
+		name: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
 		clickable: {
-			type: DataTypes.BOOLEAN
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: false
 		}
 	}, {
 		timestamps: false,
@@ -17,6 +28,7 @@ module.exports = function(sequelize, DataTypes) {
 		classMethods: {
 			associate: function(models) {
 				Model_instance.belongsTo(models.model);
+				Model_instance.belongsTo(models.project);
 			},
 			create: function(models) {
 			}

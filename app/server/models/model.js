@@ -6,22 +6,33 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
-			allowNull : false
+			allowNull: false,
+			unique: true
+		},
+		userID: {
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		name: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		file_size: {
-			type : DataTypes.DECIMAL
+			type : DataTypes.DECIMAL,
+			allowNull: false
 		},
 		file_extension: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		date_uploaded: {
-			type: DataTypes.DATE
+			type: DataTypes.DATE,
+			allowNull: false,
+			defaultValue: DataTypes.NOW
 		},
 		file_location: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		}
 	}, {
 		timestamps: true,
