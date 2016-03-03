@@ -128,54 +128,32 @@
   <div class="content">
     <div class="container section" style="width:auto;"> 
         <!--to display project-->
-        <div ng-controller="managerController">
-            <p ng-repeat="pr in listModels">The data {{data.id}}</p>
+        <div ng-controller="managerController" id="project_list" class="flex-container" >
+            <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
             
             <!--<div class = "col-md-3"> .co lmd3</div>
             <div class = "col-md-3"> .co lmd3</div>
             <div class = "col-md-3"> .co lmd3</div>-->
-            <ul class="flex-container" id="project_list">
+            <ul  ng-repeat ="pr in listProjects">
                 <li class="flex-item">1
-                    <p>Project Name 1</p>
-                </li>
-                <li class="flex-item">2
-                    <p>Project Name 2</p>
-                </li>
-                <li class="flex-item">3
-                    <p>Project Name 3</p>
-                </li>
-                <li class="flex-item">4
-                    <p>Project Name 4</p>
-                </li>
-                <li class="flex-item">5
-                    <p>Project Name 5</p>
+                    <p>{{pr.name}}</p>
                 </li>
             </ul>
            
         </div>
         
         <!--to display model-->
-        <div ng-controller="managerController">
-            <p ng-repeat="pr in listModels">The data {{data.id}}</p>
+        <div ng-controller="modelController" id="model_list" class="flex-container" >
+            <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
+             <!--<div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>-->
             
-            <ul class="flex-container" id="model_list">
-                <li class="flex-item">1
-                    <p>Model Name 1</p>
-                </li>
+            <ul ng-repeat= "model in listModels" >
                 <li class="flex-item">2
-                    <p>Model Name 2</p>
+                    <p>{{model.name}}</p>
                 </li>
-                <li class="flex-item">3
-                    <p>Model Name 3</p>
-                </li>
-                <li class="flex-item">4
-                    <p>Model Name 4</p>
-                </li>
-                <li class="flex-item">5
-                    <p>Model Name 5</p>
-                </li>
-                <li class="flex-item">6</li>
-                <li class="flex-item">7</li>
+                
             </ul>
         </div>
         
@@ -245,6 +223,8 @@ $(function() {
         $('#create_project').hide();
         $('#upload_model').hide();
         $('#model_list').hide();
+        $('#project_list').show();
+        $('#model_list').hide();
         $('a[href="#project"]').addClass("active");
         $('a[href="#model"]').removeClass("active");
     }); 
@@ -253,6 +233,8 @@ $(function() {
         $('#welcome_page').hide();
         $('#create_project').hide();
         $('#project_list').hide();
+        $('#project_list').hide();
+        $('#model_list').show();
         $('#upload_model').show();
         $('#model_list').show();
         $('a[href="#model"]').addClass("active");
