@@ -26,8 +26,7 @@
                 </li>
             </ul>
         </div>
-        
-      
+       
     </div>
 </nav>
   
@@ -58,11 +57,33 @@
                 <h1> Project Name</h1>
                 <input type="text" name="project_name" placeholder="Project Name"><br>
                 <h1> Target Name</h1>
-                <span>
-                    <input type="text" name="target_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 28%; float:right;">Browse</button>
-                </span>
+                <input type="text" name="target_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 28%; float:right;" id="browse_package">Browse</button>
+                <!--modal to upload vuforia package-->
+                <div class="modal" id="package_modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">        
+                            <div class="modal-header">
+                                <button type="button" class="close right" aria-hidden="true" id="close_browse">&times</button>
+                                <h4 class="modal-title">Upload Your Vuforia Package</h4>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                       Drag and drop your vuforia package into the box below or click on the box to upload it
+                                    </div>
+                                </div>
+                                <form class="form-horizontal" id="add-product-form" action="#" method="post">
+                                    <div id="dropzone_project" class="dropzone" style="color:#000000"></div> <!-- This is the dropzone element -->
+                                </form>
+                            </div>           
+                        </div>
+                    </div>
+                </div>
+               <!--end of modal-->
                 <a href="https://developer.vuforia.com/">Find out how to create a target</a>
                 <input type="submit" class="center" value="Create" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
+             
               </form>
           </span>
       </div>
@@ -73,9 +94,31 @@
                 <h1> Model Name</h1>
                 <input type="text" name="model_name" placeholder="Model Name"><br>
                 <h1> File</h1>
-                <span>
-                    <input type="text" name="file_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 28%; float:right;">Browse</button>
-                </span>
+                <input type="text" name="file_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 28%; float:right;" id="browse_model">Browse</button>
+                <!--modal to upload a model-->
+                <div class="modal" id="upload_modal">
+                   <div class="modal-dialog">
+                        <div class="modal-content">        
+                            <div class="modal-header">
+                                <button type="button" class="close right" aria-hidden="true" id="close_upload">&times</button>
+                                <h4 class="modal-title">Upload Your Models</h4>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                       Drag and drop your new models into the box below or click on the box to upload it
+                                    </div>
+                                </div>
+                                                
+                                <form class="form-horizontal" id="add-product-form" action="#" method="post">
+                                    <div id="dropzone_model" class="dropzone" style="color:#000000"></div> <!-- This is the dropzone element -->
+                                </form>
+                            </div>           
+                        </div>
+                    </div>
+                </div>
+                <!--end of modal-->
                 <input type="submit" class="center" value="Upload" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
               </form>
           </span>
@@ -108,10 +151,7 @@
                     <p>Project Name 5</p>
                 </li>
             </ul>
-            
-            <form action ="#" class="dropzone" id="dropdown_project">
-                <input type = "file" name = "file">
-            </form>
+           
         </div>
         
         <!--to display model-->
@@ -151,7 +191,9 @@
 $(function() {
     $(document).ready(function(){
         Dropzone.autoDiscover = false;
-        var createDropzone = new Dropzone ("#dropdown_project");
+        var createDropzone = new Dropzone ("div#dropzone_project", { url: "#"});
+        var uploadDropzone = new Dropzone ("div#dropzone_model", { url: "#"});
+        
         
         var height = $(window).height();
         $('.sidebar').css("min-height", height);
@@ -178,6 +220,23 @@ $(function() {
            $('#upload_model').hide();
         });
         
+        // handle modal
+        $('#browse_package').click(function(){
+           $('#package_modal').show(); 
+        });
+        
+        $('#browse_model').click(function(){
+           $('#upload_modal').show(); 
+        });
+        
+        $('#close_browse').click(function(){
+           $('#package_modal').hide();
+        });
+        
+        $('#close_upload').click(function(){
+           $('#upload_modal').hide();;
+        })
+        // close modal
     });
     
     $('a[href="#project"]').click(function(){

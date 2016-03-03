@@ -3,6 +3,10 @@
   justify-content: center;
   align-items: center; }
 
+.right {
+  display: flex;
+  justify-content: flex-end; }
+
 h1 {
   font-family: 'Open Sans';
   font-size: 24px;
@@ -44,6 +48,12 @@ p {
 .section {
   padding-top: 24px; }
 
+.modal-body {
+  background-color: #FFFFFF; }
+
+.modal-header, .modal-title {
+  background-color: #CC8262; }
+
 .nav-bar {
   background-color: #0097FF;
   height: 50px; }
@@ -55,12 +65,6 @@ p {
 .btn-default.active {
   background-color: #FFFFFF;
   color: #0097FF; }
-
-.custom-pill a {
-  color: #FFFFFF; }
-
-.custom-pill a:active {
-  background-color: #4A5099; }
 
 .wrapper {
   margin-left: 300px;
@@ -85,6 +89,9 @@ p {
 .side-bar-padding {
   padding-left: 32px;
   padding-right: 32px; }
+
+.panel-body {
+  background-color: #0097FF; }
 
 button {
   background-color: #FF9640;

@@ -1,5 +1,13 @@
-.center-align{
+//aligment
+
+.center-align {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
+.right {
+  display: flex;
+  justify-content: flex-end;
+}
+

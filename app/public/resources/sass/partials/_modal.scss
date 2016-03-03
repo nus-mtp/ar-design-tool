@@ -1,0 +1,9 @@
+@import 'partials/color';
+
+.modal-body {
+  background-color: $bg-color;
+}
+
+.modal-header, .modal-title {
+  background-color: $light-brown;
+}

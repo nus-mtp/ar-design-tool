@@ -1,6 +1,7 @@
 @import 'partials/alignment';
 @import 'partials/color';
 @import 'partials/typography';
+@import 'partials/modal';
 
 // Nav bar style
 .nav-bar {
@@ -16,16 +17,6 @@
 .btn-default.active {
   background-color: $bg-color;
   color: $light-blue;
-}
-
-.custom-pill {
-  a {
-    color: $bg-color;
-  }  
-
-  a:active {
-    background-color: $purple;
-  } 
 }
 
 // Container fluid
@@ -56,6 +47,10 @@
 .side-bar-padding {
   padding-left: 32px;
   padding-right: 32px;
+}
+
+.panel-body{
+  background-color: $light-blue;
 }
 
 button {
