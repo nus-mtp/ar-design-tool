@@ -21,7 +21,9 @@
           url: '/statemanager',
           views:{
               '':{
-                  templateUrl: '/vumixEditorApp/partials/statemanager.html'
+                  templateUrl: '/vumixEditorApp/partials/statemanager.html',
+                  controller: 'stateManagerController',
+                  controllerAs: 'viewmodel'
               }
           }
       });
