@@ -95,7 +95,7 @@ router.put('/:id', function(req, res) {
     })(stubApi.modelEntities);
     if (modelEntity) {
         modelEntity.name = req.body.name || modelEntity.name;
-        modelEntity.clickable = req.body.clickable != undefined ? req.body.clickable : modelEntity.clickable;
+        modelEntity.clickable = req.body.clickable !== undefined ? req.body.clickable : modelEntity.clickable;
         res.json({status: "ok", length: 1, data: [modelEntity]});
     } else {
         res.json({status: "fail", message: "model entity is not found", length: 0, data: []});
