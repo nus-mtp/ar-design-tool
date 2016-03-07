@@ -56,6 +56,10 @@
 	|-----	Backend Server	(Backend team's folders)
 	L-----	Frontend 		(Frontend team's folder)
 
+##Run SASS watch 
+	To run SASS watch
+	> gulp
+
 ##Testing Guide (Javascript Test)
 	To run all test:
 	> npm test
@@ -68,6 +72,9 @@
 	
 	To check Javascript linter
 	> gulp lint
+	
+	To check SASS lint
+	> gulp sasslint
 	
 	Guidelines:
 		- Make sure code is inside the coverage
