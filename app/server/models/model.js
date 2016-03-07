@@ -9,10 +9,6 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false,
 			unique: true
 		},
-		userID: {
-			type: DataTypes.STRING,
-			allowNull: false
-		},
 		name: {
 			type: DataTypes.STRING,
 			allowNull: false

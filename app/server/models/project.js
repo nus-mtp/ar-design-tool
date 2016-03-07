@@ -21,6 +21,12 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
+		project_dat_file: {
+			type: DataTypes.STRING
+		},
+		assetbundle_id: {
+			type: DataTypes.INTEGER
+		},
 		date_created: {
 			type: DataTypes.DATE,
 			allowNull: false,
@@ -39,10 +45,6 @@ module.exports = function(sequelize, DataTypes) {
 		timestamps: false,
 		freezeTableName: true,
 		classMethods: {
-			associate: function(models) {
-				Project.hasMany(models.model_instance);
-				Project.hasMany(models.state);
-			},
 			create: function(models) {
 			//   Project.create({
 			//       username: 'stella'x
