@@ -1,22 +1,22 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid nav-bar">
         <div class="navbar-header">
-             <a class="navbar-brand" href="#">Vumix File Manager</a>
-             <!--<ul class="breadcrumb">
+            <a class="navbar-brand" href="#">Vumix File Manager</a>
+            <!--<ul class="breadcrumb">
                 <li class="active">Home</li>
              </ul>-->
-         </div>
+        </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-             <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav">
                 <li>
-                    <ul class ="center-align" >
-                        <span class ="top-bar"><a href="#project" class="btn btn-default top-bar" data-toggle="tab" >Project</a></span>
-                        <span class ="top-bar"><a href="#model" class="btn btn-default top-bar" data-toggle="tab" >Model</a></span>
+                    <ul class="center-align">
+                        <span class="top-bar"><a href="#project" class="btn btn-default top-bar" data-toggle="tab" >Project</a></span>
+                        <span class="top-bar"><a href="#model" class="btn btn-default top-bar" data-toggle="tab" >Model</a></span>
                     </ul>
-               </li>
+                </li>
             </ul>
-            
+
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, User!<span class="caret"></span></a>
@@ -28,20 +28,20 @@
         </div>
     </div>
 </nav>
-  
+
 <div class="wrapper">
-  <div class="sidebar">
-      <div id="welcome_page" class="side-bar-padding">
-          <div class="search" style="margin-top:10px">
-              <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
-          </div>
-          <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Welcome to Vumix </h1>
-          <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
-          <button type="button" class="center" id="createProject">Create</button>
-      </div>
-      <div id="create_project" class="side-bar-padding">
-          <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Create Your New Project</h1>
-          <span>
+    <div class="sidebar">
+        <div id="welcome_page" class="side-bar-padding">
+            <div class="search" style="margin-top:10px">
+                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+            </div>
+            <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Welcome to Vumix </h1>
+            <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
+            <button type="button" class="center" id="createProject">Create</button>
+        </div>
+        <div id="create_project" class="side-bar-padding">
+            <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Create Your New Project</h1>
+            <span>
               <form>
                 <h1> Company Name</h1>
                 <input type="text" name="org_name" placeholder="Company Name"><br>
@@ -77,13 +77,13 @@
              
               </form>
           </span>
-      </div>
-      <div id="upload_model" class="side-bar-padding">
-           <div class="search" style="margin-top:10px">
-               <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
-           </div>
-           <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Upload Your New Model Here</h1>
-           <span>
+        </div>
+        <div id="upload_model" class="side-bar-padding">
+            <div class="search" style="margin-top:10px">
+                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+            </div>
+            <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Upload Your New Model Here</h1>
+            <span>
               <form>
                 <h1> Model Name</h1>
                 <input type="text" name="model_name" placeholder="Model Name"><br>
@@ -116,39 +116,39 @@
                 <input type="submit" class="center" value="Upload" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
               </form>
           </span>
-      </div>    
-  </div>
-  
-  <div class="content">
-    <div class="container section" style="width:auto;"> 
-        <!--to display project-->
-        <div ng-controller="managerController" id="project_list" class="flex-container" >
-            <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
-            
-            <!--<div class = "col-md-3"> .co lmd3</div>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container section" style="width:auto;">
+            <!--to display project-->
+            <div ng-controller="managerController" id="project_list" class="flex-container">
+                <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
+
+                <!--<div class = "col-md-3"> .co lmd3</div>
             <div class = "col-md-3"> .co lmd3</div>
             <div class = "col-md-3"> .co lmd3</div>-->
-            
-                <ul  ng-repeat ="pr in listProjects | filter:search">
+
+                <ul ng-repeat="pr in listProjects | filter:search">
                     <a href="/editor#/statemanager" class="">
                         <li class="flex-item">1
                             <p>{{pr.name}}</p>
                         </li>
                     </a>
                 </ul>
-           
-        </div>
-        
-        <!--to display model-->
-        <div ng-controller="modelController" id="model_list" class="flex-container" >
-            <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
-             <!--<div class = "col-md-3"> .co lmd3</div>
+
+            </div>
+
+            <!--to display model-->
+            <div ng-controller="modelController" id="model_list" class="flex-container">
+                <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
+                <!--<div class = "col-md-3"> .co lmd3</div>
             <div class = "col-md-3"> .co lmd3</div>
             <div class = "col-md-3"> .co lmd3</div>-->
-            
-            <ul ng-repeat= "model in listModels | filter:search" >
-                <a href="#"" class="">
-                    <li class="flex-item">2
+
+                <ul ng-repeat="model in listModels | filter:search">
+                    <a href="#" " class=" ">
+                    <li class="flex-item ">2
                         <p>{{model.name}}</p>
                     </li>
                 </a>
@@ -158,41 +158,41 @@
     </div>
   </div>
 
-  <div class="cleared">
+  <div class="cleared ">
   </div>
 </div>
 
-<script type="text/javascript">
+<script type="text/javascript ">
 
 $(function() {
     $(document).ready(function(){
         Dropzone.autoDiscover = false;
-        var createDropzone = new Dropzone ("div#dropzone_project", { url: "#"});
-        var uploadDropzone = new Dropzone ("div#dropzone_model", { url: "#"});
+        var createDropzone = new Dropzone ("div#dropzone_project ", { url: "# "});
+        var uploadDropzone = new Dropzone ("div#dropzone_model ", { url: "# "});
         
         
         var height = $(window).height();
-        $('.sidebar').css("min-height", height);
+        $('.sidebar').css("min-height ", height);
         
         // when user resize their window
         $(window).resize(function(){
-            console.log("here");
+            console.log("here ");
             var curr_height = $(window).height();
             // if(curr_height < height){
-            //     $('.sidebar').css("position", "absolute");  //current setup!
+            //     $('.sidebar').css("position ", "absolute ");  //current setup!
             // }else if(curr_height == height){
-            //     $('.sidebar').css("position", "fixed");
+            //     $('.sidebar').css("position ", "fixed ");
             // }
         });
         
-        $('a[href="#project"]').addClass("active");
-        $("#create_project").hide();
-        $("#model_list").hide();
+        $('a[href="#project "]').addClass("active ");
+        $("#create_project ").hide();
+        $("#model_list ").hide();
         $('#upload_model').hide();
          
         $('#createProject').click(function(){
-           $("#welcome_page").hide();
-           $("#create_project").show(); 
+           $("#welcome_page ").hide();
+           $("#create_project ").show(); 
            $('#upload_model').hide();
         });
         
@@ -215,7 +215,7 @@ $(function() {
         // close modal
     });
     
-    $('a[href="#project"]').click(function(){
+    $('a[href="#project "]').click(function(){
         $('#welcome_page').show();
         $('#project_list').show();
         $('#create_project').hide();
@@ -223,11 +223,11 @@ $(function() {
         $('#model_list').hide();
         $('#project_list').show();
         $('#model_list').hide();
-        $('a[href="#project"]').addClass("active");
-        $('a[href="#model"]').removeClass("active");
+        $('a[href="#project "]').addClass("active ");
+        $('a[href="#model "]').removeClass("active ");
     }); 
     
-    $('a[href="#model"]').click(function(){
+    $('a[href="#model "]').click(function(){
         $('#welcome_page').hide();
         $('#create_project').hide();
         $('#project_list').hide();
@@ -235,8 +235,8 @@ $(function() {
         $('#model_list').show();
         $('#upload_model').show();
         $('#model_list').show();
-        $('a[href="#model"]').addClass("active");
-        $('a[href="#project"]').removeClass("active");
+        $('a[href="#model "]').addClass("active ");
+        $('a[href="#project "]').removeClass("active ");
     }); 
 });
 

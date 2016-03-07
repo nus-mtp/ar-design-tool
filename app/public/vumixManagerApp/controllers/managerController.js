@@ -13,5 +13,5 @@
                $scope.listModels = response.data; 
                console.log($scope.listModels);
             });
-    })
+    });
 })();
