@@ -1,7 +1,7 @@
 var engine			= require('express-dot-engine'),
 	session 		= require('express-session'),
 	cookieParser 	= require('cookie-parser'),
-  bodyParser      = require('body-parser'),
+  	bodyParser      = require('body-parser'),
 	passport		= require('passport'),
 	express			= require('express'),
 	morgan			= require('morgan'),
@@ -63,6 +63,10 @@ app.use('/', unity);
 var models = require('./server/models/');
 
 models.sequelize.sync().then(function() {
+	if(process.env.NODE_ENV == 'test-travis') {
+		var create 	= require('./server/modules/createTestDB.js');
+		create.createTestDB();
+	}
 	app.listen(port, function() {
 	    console.log('listening on *: ' + port);
 	});
