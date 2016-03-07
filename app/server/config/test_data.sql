@@ -1,3 +1,5 @@
+USE test;
+GO
 INSERT INTO googleusers (id, name, token, email, createdAt, updateTimestamp)
 VALUES ('1', 'Jeffrey', 'iamtoken1', 'wawa1@wawa.com', '2038-01-19 03:14:07.999999', '2038-01-19 03:14:07.999999');
 
@@ -33,3 +35,4 @@ VALUES ('2', "2", "Apple", 226, "3ds","models/apple.3ds", "2038-01-19 03:14:07.9
 
 INSERT INTO model (id, uid, name, file_size, file_extension, file_location, createdAt, updateTimestamp, date_uploaded)
 VALUES ('3', "1", "Grape", 2, "3ds","models/grape.3ds", "2038-01-19 03:14:07.999999", "2038-01-19 03:14:07.999999", "2038-01-19 03:14:07.999999");
+GO

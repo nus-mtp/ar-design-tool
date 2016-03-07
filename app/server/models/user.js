@@ -26,8 +26,18 @@ module.exports = function(sequelize, dataTypes) {
 		updatedAt: 'updateTimestamp',
 		classMethods: {
 			associate: function(models) {
-				User.hasMany(models.project);
-				User.hasMany(models.model);
+				User.hasMany(models.project, {
+					foreignKey: {
+						name: 'uid',
+						allowNull: false
+					}
+				});
+				User.hasMany(models.model, {
+					foreignKey: {
+						name: 'uid',
+						allowNull: false
+					}
+				});
 			}
 		}
 	});

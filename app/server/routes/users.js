@@ -17,31 +17,22 @@ var router = express.Router();
  * api: /api/users
  */
 router.get('/', function(req, res) {
-    //TODO: return all users in db
-    // var users = models.findAll
-    res.json({status: "ok", length: stubApi.users.length, data: stubApi.users});
+    models.googleUser.findAll().then(function(users){
+        res.json({status: "ok", length: users.length, data: users});            
+    });
 });
 
 // fetchOne
 // GET
 // api: /api/users/{id}
 router.get('/:id', function(req, res) {
-    var user = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id) {
-                index = i;
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-        //TODO: change stubApi.users to check whether user exists
-    })(stubApi.users);
-    if (user) {
-        //TODO: return instance of user
-        res.json({status: "ok", length: 1, data: [user]});
-    } else {
-        res.json({status: "fail", message: "user is not found", length: 0, data: []});
-    }
+    models.googleUser.findById(req.params.id).then(function(user) {
+        if(user) {
+            res.json({status: "ok", length: 1, data: [user]});
+        } else {
+            res.json({status: "fail", message: "user not found", length: 0, data: []});
+        }
+    });
 });
 
 // insert

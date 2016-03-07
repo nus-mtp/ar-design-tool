@@ -6,8 +6,7 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true,
-			allowNull : false,
-			unique: true
+			allowNull : false
 		},
 		name: { 
 			type: DataTypes.STRING,
@@ -22,10 +21,12 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false
 		},
 		project_dat_file: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		assetbundle_id: {
-			type: DataTypes.INTEGER
+			type: DataTypes.INTEGER,
+			allowNull: false
 		},
 		date_created: {
 			type: DataTypes.DATE,
