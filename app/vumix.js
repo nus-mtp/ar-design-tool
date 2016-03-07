@@ -18,7 +18,6 @@ var users           = require('./server/routes/users');
 var routes          = require('./server/routes/router');
 var models          = require('./server/routes/models');
 var projects        = require('./server/routes/projects');
-var modelEntities   = require('./server/routes/modelEntities');
 var unity           = require('./server/routes/unity');
 
 app.use(morgan('dev'));
@@ -57,7 +56,6 @@ app.use('/', routes);
 app.use('/api/users', users);
 app.use('/api/users/:userId/projects', projects);
 app.use('/api/users/:userId/models', models);
-app.use('/api/projects/:projectId/models', modelEntities);
 
 //set routing for webgl api calls
 app.use('/', unity);

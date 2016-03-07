@@ -1,5 +1,4 @@
-# OS generated files #
-######################
+# OS generated files 
 .DS_Store
 .DS_Store?
 ._*
@@ -10,24 +9,21 @@ ehthumbs.db
 Thumbs.db
 
 
-# Node modules #
-################
+# Node modules 
 node_modules/
 bower_components/
 
 
-# Test coverage #
-#################
+# Test coverage 
 test/coverage
 coverage/
 coverage-final.json
 
 
-# DB Config #
-#############
+# DB Config 
 app/server/config/db.js 
 npm-debug.log
 
-# Save File #
-#############
+
+# Save File 
 app/public/state.dat
