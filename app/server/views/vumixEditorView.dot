@@ -18,11 +18,12 @@
     <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="vendors/angular/angular.js"></script>
     <script type="text/javascript" src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="vendors/jsPlumb/dist/js/jsPlumb-2.0.7.js"></script>
     <script type="text/javascript" src="vumixEditorApp/app.js"></script>
     <script type="text/javascript" src="vumixEditorApp/services/_services.js"></script>
     <script type="text/javascript" src="vumixEditorApp/services/unityMapperService.js"></script>
     <script type="text/javascript" src="vumixEditorApp/controllers/_controllers.js"></script>
     <script type="text/javascript" src="vumixEditorApp/controllers/editorController.js"></script>
-    <script type="text/javascript" src="vendors/jsPlumb/dist/js/jsPlumb-2.0.7.js"></script>
+    <script type="text/javascript" src="vumixEditorApp/controllers/managerController.js"></script>
 	</body>
 </html>
