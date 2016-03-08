@@ -64,8 +64,8 @@ var models = require('./server/models/');
 
 models.sequelize.sync().then(function() {
 	// if(process.env.NODE_ENV == 'test-travis') {
-	// 	var create 	= require('./server/modules/createTestDB.js');
-	// 	create.createTestDB();
+		// var create 	= require('./server/modules/createTestDB.js');
+		// create.createTestDB();
 	// }
 	app.listen(port, function() {
 	    console.log('listening on *: ' + port);

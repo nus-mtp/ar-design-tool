@@ -22,9 +22,13 @@ router.get('/', function(req, res) {
     });
 });
 
-// fetchOne
-// GET
-// api: /api/users/{id}
+/**
+ * @module fetchOne users
+ * @parent user_api
+ * Returns one user with {id} registered with the system
+ * GET
+ * api: /api/users/{id}
+ */
 router.get('/:id', function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {
         if(user) {
@@ -35,10 +39,14 @@ router.get('/:id', function(req, res) {
     });
 });
 
-// insert
-// POST
-// api: /api/users
-// required body param: name, email
+/**
+ * @module insert user
+ * @parent user_api
+ * @params req.body.id, req.body.name, req.body.token, req.body.email
+ * create new user
+ * POST
+ * api: /api/users
+ */
 router.post('/', function(req, res) {
     var newUser = {
         id: '2',
@@ -61,9 +69,13 @@ router.post('/', function(req, res) {
     });
 });
 
-// delete
-// DELETE
-// api: /api/users/{id}
+/**
+ * @module delete user
+ * @parent user_api
+ * Delete user with {id}
+ * DELETE
+ * api: /api/users/{id}
+ */
 router.delete('/:id', function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {
         if(user) {
@@ -80,10 +92,14 @@ router.delete('/:id', function(req, res) {
     });
 });
 
-// edit
-// PUT
-// api: /api/users/{id}
-// body param: name, email
+/**
+ * @module update user
+ * @parent user_api
+ * @params req.body.name, req.body.email
+ * update user with {id}
+ * PUT
+ * api: /api/users/{id}
+ */
 router.put('/:id', function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {
         if(user) {

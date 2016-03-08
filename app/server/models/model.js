@@ -5,8 +5,7 @@ module.exports = function(sequelize, DataTypes) {
 		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
-			autoIncrement: true,
-			unique: true
+			autoIncrement: true
 		},
 		name: {
 			type: DataTypes.STRING,
@@ -20,11 +19,6 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		date_uploaded: {
-			type: DataTypes.DATE,
-			allowNull: false,
-			defaultValue: DataTypes.NOW
-		},
 		file_location: {
 			type: DataTypes.STRING,
 			allowNull: false
@@ -34,12 +28,12 @@ module.exports = function(sequelize, DataTypes) {
 		updatedAt: 'updateTimestamp',
 		freezeTableName: true,
 		classMethods: {
-			create: function(models) {
+			// create: function(models) {
 			//   Test.create({
 			//       username: 'stella',
 			//       user_id: 10
 			//   })
-			}
+			// }
 		}
 	});
 	return Model;

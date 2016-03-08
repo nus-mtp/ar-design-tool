@@ -40,16 +40,18 @@ router.get('/:id', function(req, res) {
 // api: /api/users/{userId}/projects
 // required body param: name
 router.post('/', function(req, res) {
-    //TODO: add project 
     var newProj = {
-        id: 99,
         uid: req.params.userId,
-        name: req.body.name
+        name: req.body.name,
+        company_name: req.body.com,
+        marker_type: req.body.marker,
+        project_dat_file: req.body.dat,
+        assetbundle_id: req.body.assetid
     };
     models.project.find({
         where: {
             uid: newProj.uid,
-            id: newProj.id
+            name: newProj.name
         }
     }).then(function(project) {
         if(project) {
@@ -60,32 +62,25 @@ router.post('/', function(req, res) {
             });            
         }
     });
-
-
-    stubApi.projects.push(project);
-    res.json({status: "ok", length: 1, data: [project]});
 });
 
 // delete
 // DELETE
 // api: /api/users/{userId}/projects/{id}
 router.delete('/:id', function(req, res) {
-    var project = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id && e.userId.toString() === req.params.userId) {
-                index = i;                
-            } 
-        });
-        return index < 0 ? undefined : el.splice(index,1)[0];
-        //TODO: check whether project exists
-    })(stubApi.projects);
-    if (project) {
-        //TODO: delete project
-        res.json({status: "ok", length: 1, data: [project]});
-    } else {
-        res.json({status: "fail", message: "project is not found", length: 0, data: []});
-    }
+    models.project.findById(req.params.id).then(function(project) {
+        if(project) {
+            models.project.destroy({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function(row_deleted) {
+                res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [project]});        
+            });
+        } else {
+            res.json({status: "fail", message: "project not found", length: 0, data: []});
+        }
+    });
 });
 
 // edit
@@ -93,23 +88,28 @@ router.delete('/:id', function(req, res) {
 // api: /api/users/{userId}/projects/{id}
 // body param: name
 router.put('/:id', function(req, res) {
-    var project = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id && e.userId.toString() === req.params.userId) {
-                index = i;                
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-        //TODO: check whether project exists
-    })(stubApi.projects);
-    if (project) {
-        //TODO: edit project 
-        project.name = req.body.name || project.name;
-        res.json({status: "ok", length: 1, data: [project]});
-    } else {
-        res.json({status: "fail", message: "project is not found", length: 0, data: []});
-    }
+    models.project.findById(req.params.id).then(function(project) {
+        if(project) {
+            models.project.update({
+                name: req.body.name || project.name,
+                company_name: req.body.company_name || project.company_name,
+                marker_type: req.body.marker_type || project.marker_type,
+                project_dat_file: req.body.project_dat_file || project.project_dat_file,
+                assetbundle_id: req.body.assetbundle_id || project.assetbundle_id,
+                last_published: req.body.last_published || project.last_published    
+            }, { 
+                where: {
+                    id: req.params.id
+                }
+            }).then(function() {
+                models.project.findById(req.params.id).then(function(updatedProject) {
+                     res.json({status: "ok", message: "updated project", length: 1, data: [updatedProject]});
+                });
+            });
+        } else {
+            res.json({status: "fail", message: "project not found", length: 0, data: []});
+        }
+    });
 });
 
 module.exports = router;

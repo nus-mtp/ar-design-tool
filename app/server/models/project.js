@@ -2,7 +2,7 @@
 
 module.exports = function(sequelize, DataTypes) {
 	var Project = sequelize.define("project", {
-		id:{
+		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
 			autoIncrement: true
@@ -27,29 +27,20 @@ module.exports = function(sequelize, DataTypes) {
 			type: DataTypes.INTEGER,
 			allowNull: false
 		},
-		date_created: {
-			type: DataTypes.DATE,
-			allowNull: false,
-			defaultValue: DataTypes.NOW
-		},
-		last_modified: {
-			type: DataTypes.DATE,
-			allowNull: false,
-			defaultValue: DataTypes.NOW
-		},
 		last_published: {
 			type: DataTypes.DATE,
 			allowNull: true
 		}
 	}, {
-		timestamps: false,
+		timestamps: true,
+		updatedAt: 'updateTimestamp',
 		freezeTableName: true,
 		classMethods: {
-			create: function(models) {
+			// create: function(models) {
 			//   Project.create({
 			//       username: 'stella'x
 			//   })
-			}
+			// }
 		}
 	});
 	return Project;
