@@ -3,8 +3,7 @@
  * @parent VUMIX
  * This is the api for users 
  */
-var stubApi = require('../config/stubApi'),
-    models  = require('../models'),
+var models  = require('../models'),
     express = require('express');
 
 var router = express.Router();

@@ -1,5 +1,5 @@
 var engine			= require('express-dot-engine'),
-	session 		= require('express-session'),
+	session			= require('express-session'),
 	cookieParser 	= require('cookie-parser'),
   	bodyParser      = require('body-parser'),
 	passport		= require('passport'),
@@ -23,9 +23,9 @@ var unity           = require('./server/routes/unity');
 app.use(morgan('dev'));
 app.use(cookieParser());
 app.use(session({
-	secret: 'thisIsASecret cat',
+	resave: true,
 	saveUninitialized: true,
-	resave: true
+	secret: 'podjgoqwpeignIQWEPEIOGASgthisIsASecretCatQ12113gSAGAGQ51236'
 }));
 
 app.engine('dot', engine.__express);

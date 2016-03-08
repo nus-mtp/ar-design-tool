@@ -1,12 +1,20 @@
-var stubApi = require('../config/stubApi'),
-    models  = require('../models'),
+/**
+ * @module modelApi
+ * @parent VUMIX
+ * This is the api for user models  
+ */
+var models  = require('../models'),
     express = require('express');
 
 var router = express.Router({mergeParams: true});
 
-// fetchAll
-// GET
-// api: /api/users/{userId}/models
+/**
+ * @module fetchAllModels
+ * @parent modelApi
+ * Returns all models of user with {userid}
+ * GET
+ * api: /api/users/{userId}/models
+ */
 router.get('/', function(req, res) {
     models.model.findAll({
         where: {
@@ -17,9 +25,13 @@ router.get('/', function(req, res) {
     });
 });
 
-// fetchOne
-// GET
-// api: /api/users/{userId}/models/{id}
+/**
+ * @module fetchOneModel
+ * @parent modelApi
+ * Returns one model with {id} of user with {userid}
+ * GET
+ * api: /api/users/{userId}/models/{id}
+ */
 router.get('/:id', function(req, res) {
     models.model.find({
         where: {
@@ -35,10 +47,14 @@ router.get('/:id', function(req, res) {
     });
 });
 
-// insert
-// POST
-// api: /api/users/{userId}/models
-// required body param: name
+/**
+ * @module insertModel
+ * @parent modelApi
+ * @param req.body.userId, req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location
+ * create new model owned by user with {userId}
+ * POST
+ * api: /api/users/{userId}/models
+ */
 router.post('/', function(req, res) {
     var newModel = {
         uid: req.params.userId,
@@ -63,9 +79,13 @@ router.post('/', function(req, res) {
     });
 });
 
-// delete
-// DELETE
-// api: /api/users/{userId}/models/{id}
+/**
+ * @module deleteModel
+ * @parent modelApi
+ * Delete model with {id} owned by user with {userId}
+ * DELETE
+ * api: /api/users/{userId}/models/{id}
+ */
 router.delete('/:id', function(req, res) {
     models.model.findById(req.params.id).then(function(model) {
         if(model) {
@@ -82,10 +102,14 @@ router.delete('/:id', function(req, res) {
     });
 });
 
-// edit
-// PUT
-// api: /api/users/{userId}/models/{id}
-// body param: name
+/**
+ * @module updateModel
+ * @parent modelApi
+ * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location
+ * update model with {id} owned by user with {userId}
+ * PUT
+ * api: /api/users/{userId}/models/{id}
+ */
 router.put('/:id', function(req, res) {
     models.model.findById(req.params.id).then(function(model) {
         if(model) {
