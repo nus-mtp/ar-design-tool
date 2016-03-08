@@ -41,11 +41,27 @@ router.get('/:id', function(req, res) {
 // required body param: name
 router.post('/', function(req, res) {
     //TODO: add project 
-    var project = {
+    var newProj = {
         id: 99,
-        userId: req.params.userId,
+        uid: req.params.userId,
         name: req.body.name
     };
+    models.project.find({
+        where: {
+            uid: newProj.uid,
+            id: newProj.id
+        }
+    }).then(function(project) {
+        if(project) {
+            res.json({status: "fail", message: "project already exists!", length: 0, data: []});
+        } else {
+            models.project.create(newProj).then(function() {
+                res.json({status: "ok", message: "new project created!", length: 1, data: [newProj]});
+            });            
+        }
+    });
+
+
     stubApi.projects.push(project);
     res.json({status: "ok", length: 1, data: [project]});
 });
