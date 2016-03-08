@@ -1,4 +1,4 @@
-     <style type="text/css">
+<style type="text/css">
        .item {
         min-width: 180px;
         min-height: 80px;
@@ -41,9 +41,9 @@
     }
     
     .w {
-    max-width: 200px;
+    max-width: 180px;
     margin-top: 1px;
-    padding-right: 20px;
+    padding-right: 10px;
     padding-left: 5px;
     position: absolute;
     z-index: 4;
@@ -253,15 +253,8 @@
 					[ "Arrow", { location:0.5 } ],
 					[ "Label", { 
 						location:[ 2, 2],
-						id:"label",
                         label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
 						cssClass:"aLabel",
-                        events:{
-                    click:function(labelOverlay, originalEvent) { 
-                    //alert('These two states are connected');
-                    ShowDialog();
-          }
-        }
 					}]
 				],
             maxConnections: 10,
@@ -272,18 +265,23 @@
 
 	  jsPlumb.on(add, "click", function (e) {
 		var newState = $('<div>').attr('id', 'state' + i).addClass('w');
-         var button = $('<button id="delete" style="margin-top:10px"><span class="glyphicon glyphicon-remove-circle"></span></button></div>');
+         var button = $('<button id="delete" style="margin-top:10px"><span class="glyphicon glyphicon-remove-circle"></span></button><a href="/editor" style="margin-left:100px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
 		var title = $('<div>').addClass('title');
 		var stateName = $('<input>').attr('type', 'text');
 		title.append(stateName);
 		newState.append(button);
-        newState.append('<a href="/editor" style="margin-left:100px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
+        //newState.append('<a href="/editor" style="margin-left:100px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
 		var connect = $('<div>').addClass('connect');
 		
+        var top = 50, left = 50;
+        
+        if (i<=3){
 		newState.css({
-		  'top': e.pageY + i * 20,
-		  'left': e.pageX + i * 100
+		  'top': e.pageY + i * top,
+		  'left': e.pageX + 1 * left
 		});
+            top*=-200;
+        };
 		
 		newState.append(title);
 		newState.append(connect);
@@ -309,15 +307,9 @@
 					[ "Arrow", { location:0.5 } ],
 					[ "Label", { 
 						location:0.2,
-						id:"label",
                         label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
 						cssClass:"aLabel",
-                        events:{
-                    click:function(labelOverlay, originalEvent) { 
-                    //alert('These two states are connected');
-                    ShowDialog();
-          }
-        }
+                        id:"Label"
 					}]
 				],
             maxConnections: 10,
@@ -337,6 +329,12 @@
           // handle deletion here
           jsPlumb.detachAllConnections($(newState));
           $(newState).remove();
+          $.each(jsPlumb.getAllConnections(), function (idx, connection) {
+                        if (connection.isVisible()) {//hide
+                            connection.setVisible(false);
+                        };
+                        connection.removeOverlay("Label");
+          });
   	      $('#deleteState').modal('hide');
          });
 		  e.stopPropagation();
