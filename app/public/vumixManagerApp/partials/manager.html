@@ -35,20 +35,23 @@
             <div class="search" style="margin-top:10px">
                 <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
             </div>
-            <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Welcome to Vumix </h1>
+            <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
             <button type="button" class="center" id="createProject">Create</button>
         </div>
         <div id="create_project" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Create Your New Project</h1>
+            <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
             <span>
               <form>
-                <h1> Company Name</h1>
+                <h2> Company Name</h2>
                 <input type="text" name="org_name" placeholder="Company Name"><br>
-                <h1> Project Name</h1>
+                <h2> Project Name</h2>
                 <input type="text" name="project_name" placeholder="Project Name"><br>
-                <h1> Target Name</h1>
-                <input type="text" name="target_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 28%; float:right;" id="browse_package">Browse</button>
+                <h2> License Key</h2>
+                <input type="text" name="license_key" placeholder="License Key"><br>
+                <h2> Upload Your Vuforia Package</h2>
+                <input type="text" name="target_name" placeholder="Vuforia Package Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 28%; float:right;" id="browse_package">Browse</button>
+           
                 <!--modal to upload vuforia package-->
                 <div class="modal" id="package_modal">
                     <div class="modal-dialog">
@@ -82,7 +85,7 @@
             <div class="search" style="margin-top:10px">
                 <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
             </div>
-            <h1 class="center" style="margin-top: 30%; margin-bottom: 20%"> Upload Your New Model Here</h1>
+            <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
             <span>
               <form>
                 <h1> Model Name</h1>
@@ -158,11 +161,11 @@
     </div>
   </div>
 
-  <div class="cleared ">
+  <div class="cleared">
   </div>
 </div>
 
-<script type="text/javascript ">
+<script type="text/javascript">
 
 $(function() {
     $(document).ready(function(){
@@ -172,11 +175,11 @@ $(function() {
         
         
         var height = $(window).height();
-        $('.sidebar').css("min-height ", height);
+        $('.sidebar').css("min-height", height);
         
         // when user resize their window
         $(window).resize(function(){
-            console.log("here ");
+            console.log("here");
             var curr_height = $(window).height();
             // if(curr_height < height){
             //     $('.sidebar').css("position ", "absolute ");  //current setup!
@@ -185,8 +188,8 @@ $(function() {
             // }
         });
         
-        $('a[href="#project "]').addClass("active ");
-        $("#create_project ").hide();
+        $('a[href="#project"]').addClass("active ");
+        $("#create_project").hide();
         $("#model_list ").hide();
         $('#upload_model').hide();
          
@@ -215,7 +218,7 @@ $(function() {
         // close modal
     });
     
-    $('a[href="#project "]').click(function(){
+    $('a[href="#project"]').click(function(){
         $('#welcome_page').show();
         $('#project_list').show();
         $('#create_project').hide();
@@ -227,7 +230,7 @@ $(function() {
         $('a[href="#model "]').removeClass("active ");
     }); 
     
-    $('a[href="#model "]').click(function(){
+    $('a[href="#model"]').click(function(){
         $('#welcome_page').hide();
         $('#create_project').hide();
         $('#project_list').hide();
