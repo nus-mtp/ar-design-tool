@@ -1,6 +1,12 @@
 (function() {
   angular.module('vumixEditorApp.controllers')
-    .controller('editorController', function(unityMapper) {
-      this.setTransformMode = unityMapper.setTransformMode;
+    .controller('editorController', function(
+      $scope,
+      unityMapperService, 
+      editorService
+    ) {
+      $scope.setTransformMode = unityMapperService.setTransformMode;
+      
+      $scope.editorService = editorService;
     }); 
 })();

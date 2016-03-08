@@ -17,13 +17,17 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // dependency
-
       '../bower_components/angular/angular.min.js',
       '../bower_components/angular-ui-router/release/angular-ui-router.min.js',
       '../bower_components/angular-mocks/angular-mocks.js',
-      '../public/vumixEditorApp/*.js',
+      '../public/vumixEditorApp/*.js',      
       '../public/vumixEditorApp/services/*.js',
+      '../public/vumixEditorApp/directives/*.js',
       '../public/vumixEditorApp/controllers/*.js',
+      '../public/vumixManagerApp/*.js',      
+      '../public/vumixManagerApp/services/*.js',
+      '../public/vumixManagerApp/directives/*.js',
+      '../public/vumixManagerApp/controllers/*.js',
       // test
       'client/*.js'
     ],
@@ -34,7 +38,12 @@ module.exports = function(config) {
     preprocessors: {      
       '../public/vumixEditorApp/*.js': ['coverage'],      
       '../public/vumixEditorApp/services/*.js': ['coverage'],
-      '../public/vumixEditorApp/controllers/*.js': ['coverage']
+      '../public/vumixEditorApp/directives/*.js': ['coverage'],
+      '../public/vumixEditorApp/controllers/*.js': ['coverage'],
+      '../public/vumixManagerApp/*.js': ['coverage'],      
+      '../public/vumixManagerApp/services/*.js': ['coverage'],
+      '../public/vumixManagerApp/directives/*.js': ['coverage'],
+      '../public/vumixManagerApp/controllers/*.js': ['coverage']
     },
 
 

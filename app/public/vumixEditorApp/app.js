@@ -5,17 +5,17 @@
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-      $urlRouterProvider.otherwise('/manager');
+      $urlRouterProvider.otherwise('/manager/editor');
       $stateProvider
         .state('stateManager', {
           url: '/manager',
-          views:{
-              '':{
-                  templateUrl: '/vumixEditorApp/partials/stateManager.html',
-                  controller: 'managerController',
-                  controllerAs: 'viewmodel'
-              }
-          }
-      });
+          templateUrl: '/vumixEditorApp/partials/stateManager.html',
+          controller: 'managerController'
+        })
+        .state('stateManager.editor', {
+          url: '/editor',
+          templateUrl: '/vumixEditorApp/partials/stateEditor.html',
+          controller: 'editorController'
+        });
     }]);  
 })();

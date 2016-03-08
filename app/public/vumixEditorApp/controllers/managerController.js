@@ -1,5 +1,9 @@
 (function() {
   angular.module('vumixEditorApp.controllers')
-    .controller('managerController', function() {
+    .controller('managerController', function(
+      $scope,
+      editorService
+    ) {
+      $scope.editorService = editorService;
     }); 
 })();
