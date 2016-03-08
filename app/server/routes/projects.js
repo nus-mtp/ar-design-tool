@@ -8,41 +8,31 @@ var router = express.Router({mergeParams: true});
 // GET
 // api: /api/users/{userId}/projects
 router.get('/', function(req, res) {
-    //TODO: return all projects by user
-    var projects = [];
-    stubApi.projects.forEach(function(e,i) {
-       if (e.userId.toString() === req.params.userId) {
-           projects.push(e);
-       } 
+    models.project.findAll({
+        where: {
+            uid: req.params.userId
+        }
+    }).then(function(projects){
+        res.json({status: "ok", length: projects.length, data: projects});            
     });
-    res.json({status: "ok", length: projects.length, data: projects});
 });
 
 // fetchOne
 // GET
 // api: /api/users/{userId}/projects/{id}
 router.get('/:id', function(req, res) {
-    //TODO: return project by user
-    var projects = [];
-    stubApi.projects.forEach(function(e,i) {
-       if (e.userId.toString() === req.params.userId) {
-           projects.push(e);
-       } 
+    models.project.find({
+        where: {
+            uid: req.params.userId,
+            id: req.params.id
+        }
+    }).then(function(project) {
+        if(project) {
+            res.json({status: "ok", length: 1, data: [project]});
+        } else {
+            res.json({status: "fail", message: "project not found", length: 0, data: []});
+        }
     });
-    var project = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id) {
-                index = i;
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-    })(projects);
-    if (project) {
-        res.json({status: "ok", length: 1, data: [project]});
-    } else {
-        res.json({status: "fail", message: "project is not found", length: 0, data: []});
-    }
 });
 
 // insert

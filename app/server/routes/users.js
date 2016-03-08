@@ -17,31 +17,22 @@ var router = express.Router();
  * api: /api/users
  */
 router.get('/', function(req, res) {
-    //TODO: return all users in db
-    // var users = models.findAll
-    res.json({status: "ok", length: stubApi.users.length, data: stubApi.users});
+    models.googleUser.findAll().then(function(users){
+        res.json({status: "ok", length: users.length, data: users});            
+    });
 });
 
 // fetchOne
 // GET
 // api: /api/users/{id}
 router.get('/:id', function(req, res) {
-    var user = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id) {
-                index = i;
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-        //TODO: change stubApi.users to check whether user exists
-    })(stubApi.users);
-    if (user) {
-        //TODO: return instance of user
-        res.json({status: "ok", length: 1, data: [user]});
-    } else {
-        res.json({status: "fail", message: "user is not found", length: 0, data: []});
-    }
+    models.googleUser.findById(req.params.id).then(function(user) {
+        if(user) {
+            res.json({status: "ok", length: 1, data: [user]});
+        } else {
+            res.json({status: "fail", message: "user not found", length: 0, data: []});
+        }
+    });
 });
 
 // insert
@@ -49,36 +40,44 @@ router.get('/:id', function(req, res) {
 // api: /api/users
 // required body param: name, email
 router.post('/', function(req, res) {
-    var user = {
-        id: 99,
+    var newUser = {
+        id: '2',
         name: req.body.name,
+        token: '123123123123',
         email: req.body.email
     };
-    //TODO: change stubAPI.users.push to create user in db
-    stubApi.users.push(user);
-    res.json({status: "ok", length: 1, data: [user]});
+    models.googleUser.find({
+        where: {
+            token: newUser.token
+        }
+    }).then(function(user) {
+        if(user) {
+            res.json({status: "fail", message: "user already exists!", length: 0, data: []});
+        } else {
+            models.googleUser.create(newUser).then(function() {
+                res.json({status: "ok", message: "new user created!", length: 1, data: [newUser]});
+            });            
+        }
+    });
 });
 
 // delete
 // DELETE
 // api: /api/users/{id}
 router.delete('/:id', function(req, res) {
-    var user = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id) {
-                index = i;                
-            } 
-        });
-        return index < 0 ? undefined : el.splice(index,1)[0];   
-        //TODO: change stubAPI.users to check whether user exists
-    })(stubApi.users);
-    if (user) {
-        //TODO: delete user in db
-        res.json({status: "ok", length: 1, data: [user]});
-    } else {
-        res.json({status: "fail", message: "user is not found", length: 0, data: []});
-    }
+    models.googleUser.findById(req.params.id).then(function(user) {
+        if(user) {
+            models.googleUser.destroy({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function(row_deleted) {
+                res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [user]});        
+            });
+        } else {
+            res.json({status: "fail", message: "user not found", length: 0, data: []});
+        }
+    });
 });
 
 // edit
@@ -86,24 +85,24 @@ router.delete('/:id', function(req, res) {
 // api: /api/users/{id}
 // body param: name, email
 router.put('/:id', function(req, res) {
-    var user = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id) {
-                index = i;
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-        //TODO: change stubAPI.users to check whether user exists
-    })(stubApi.users);
-    if (user) {
-        //TODO: update existing user
-        user.name = req.body.name || user.name;
-        user.email = req.body.email || user.email;
-        res.json({status: "ok", length: 1, data: [user]});
-    } else {
-        res.json({status: "fail", message: "user is not found", length: 0, data: []});
-    }
+    models.googleUser.findById(req.params.id).then(function(user) {
+        if(user) {
+            models.googleUser.update({
+                name: req.body.name || user.name,
+                email: req.body.email || user.email    
+            }, { 
+                where: {
+                    id: req.params.id
+                }
+            }).then(function() {
+                models.googleUser.findById(req.params.id).then(function(updatedUser) {
+                     res.json({status: "ok", message: "updated user", length: 1, data: [updatedUser]});
+                });
+            });
+        } else {
+            res.json({status: "fail", message: "user not found", length: 0, data: []});
+        }
+    });
 });
 
 module.exports = router;

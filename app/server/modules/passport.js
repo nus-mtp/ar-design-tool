@@ -46,7 +46,7 @@ module.exports = function(passport) {
 			}).spread(function(googleUser, created) {
 				console.log(googleUser.get({
 					plain: true
-				}))
+				}));
 				if(created) {
 					console.log('successfully created in db!');
 				} else {
@@ -54,6 +54,6 @@ module.exports = function(passport) {
 				}
 				done(null, profile);
 			});
-		})
+		});
 	}));
-}	
+};	

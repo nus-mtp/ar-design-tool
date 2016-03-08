@@ -5,4 +5,4 @@ module.exports = {
     'local': {
         'url': "mysql://root:password@localhost:3306/test"        
     }
-}
+};
