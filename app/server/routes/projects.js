@@ -1,12 +1,21 @@
+/**
+ * @module projectApi
+ * @parent VUMIX
+ * This is the api for user projects  
+ */
 var stubApi = require('../config/stubApi'),
     models  = require('../models'),
     express = require('express');
 
 var router = express.Router({mergeParams: true});
 
-// fetchAll
-// GET
-// api: /api/users/{userId}/projects
+/**
+ * @module fetchAllProjects
+ * @parent projectApi
+ * Returns all projects of user with {userid}
+ * GET
+ * api: /api/users/{userId}/projects
+ */
 router.get('/', function(req, res) {
     models.project.findAll({
         where: {
@@ -17,9 +26,13 @@ router.get('/', function(req, res) {
     });
 });
 
-// fetchOne
-// GET
-// api: /api/users/{userId}/projects/{id}
+/**
+ * @module fetchOneProject
+ * @parent projectApi
+ * Returns one project with {id} of user with {userid}
+ * GET
+ * api: /api/users/{userId}/projects/{id}
+ */
 router.get('/:id', function(req, res) {
     models.project.find({
         where: {
@@ -35,18 +48,22 @@ router.get('/:id', function(req, res) {
     });
 });
 
-// insert
-// POST
-// api: /api/users/{userId}/projects
-// required body param: name
+/**
+ * @module insertProject
+ * @parent projectApi
+ * @param req.body.userId, req.body.name, req.body.company_name, req.body.marker_type, req.body.project_dat_file, req.body.assetbundle_id
+ * create new project owned by user with {userId}
+ * POST
+ * api: /api/users/{userId}/projects
+ */
 router.post('/', function(req, res) {
     var newProj = {
         uid: req.params.userId,
         name: req.body.name,
-        company_name: req.body.com,
-        marker_type: req.body.marker,
-        project_dat_file: req.body.dat,
-        assetbundle_id: req.body.assetid
+        company_name: req.body.company_name,
+        marker_type: req.body.marker_type,
+        project_dat_file: req.body.project_dat_file,
+        assetbundle_id: req.body.assetbundle_id
     };
     models.project.find({
         where: {
@@ -64,9 +81,13 @@ router.post('/', function(req, res) {
     });
 });
 
-// delete
-// DELETE
-// api: /api/users/{userId}/projects/{id}
+/**
+ * @module deleteProject
+ * @parent projectApi
+ * Delete project with {id} owned by user with {userId}
+ * DELETE
+ * api: /api/users/{userId}/projects/{id}
+ */
 router.delete('/:id', function(req, res) {
     models.project.findById(req.params.id).then(function(project) {
         if(project) {
@@ -83,10 +104,14 @@ router.delete('/:id', function(req, res) {
     });
 });
 
-// edit
-// PUT
-// api: /api/users/{userId}/projects/{id}
-// body param: name
+/**
+ * @module updateProject
+ * @parent projectApi
+ * @param req.body.name, req.body.company_name, req.body.marker_type, req.body.project_dat_file, req.body.assetbundle_id, req.body.last_published
+ * update project with {id} owned by user with {userId}
+ * PUT
+ * api: /api/users/{userId}/projects/{id}
+ */
 router.put('/:id', function(req, res) {
     models.project.findById(req.params.id).then(function(project) {
         if(project) {

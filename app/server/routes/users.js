@@ -1,7 +1,7 @@
 /**
  * @module userApi
  * @parent VUMIX
- * This is the api for user models  
+ * This is the api for users 
  */
 var stubApi = require('../config/stubApi'),
     models  = require('../models'),

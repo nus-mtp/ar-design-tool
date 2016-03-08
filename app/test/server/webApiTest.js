@@ -5,7 +5,7 @@ var expect      = require('chai').expect,
 var api = supertest(app);
 
 // User API Test
-describe('users APi', function () {
+// describe('users APi', function () {
 //     describe('fetchAll', function() {
 //         it('should return with ok status', function(done) {
 //             api
@@ -115,11 +115,11 @@ describe('users APi', function () {
 //             });
 //         }); 
 //     });
-});
+// });
 
 
 // Project API Test
-describe('projects APi', function () {
+// describe('projects APi', function () {
     // describe('fetchAll', function() {
     //     it('should return with ok status', function(done) {
     //         api
@@ -227,115 +227,115 @@ describe('projects APi', function () {
     //         });
     //     }); 
     // });
-});
+// });
 
 
 // Model API Test
-describe('models APi', function () {
-    describe('fetchAll', function() {
-        it('should return with ok status', function(done) {
-            api
-            .get('/api/users/1/models')
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.status).to.equal('ok');
-                done();
-            });
-        }); 
-    });
+// describe('models APi', function () {
+//     describe('fetchAll', function() {
+//         it('should return with ok status', function(done) {
+//             api
+//             .get('/api/users/1/models')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//     });
     
-    describe('fetchOne', function() {
-        it('should return with ok status', function(done) {
-            api
-            .get('/api/users/1/models/1')
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.status).to.equal('ok');
-                done();
-            });
-        });
-        it('should return with fail status', function(done) {
-            api
-            .get('/api/users/1/models/10')
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.status).to.equal('fail');
-                done();
-            });
-        }); 
-    });
+//     describe('fetchOne', function() {
+//         it('should return with ok status', function(done) {
+//             api
+//             .get('/api/users/1/models/1')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         });
+//         it('should return with fail status', function(done) {
+//             api
+//             .get('/api/users/1/models/10')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('fail');
+//                 done();
+//             });
+//         }); 
+//     });
     
-    describe('insert', function() {
-        it('should return with ok status', function(done) {
-            api
-            .post('/api/users/1/models')
-            .send({ 
-            	name:'New Model',
-            	file_size: 123458,
-            	file_extension: '3ds' ,
-            	file_location: 'location123'
-            })
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.status).to.equal('ok');
-                done();
-            });
-        }); 
-    });
+//     describe('insert', function() {
+//         it('should return with ok status', function(done) {
+//             api
+//             .post('/api/users/1/models')
+//             .send({ 
+//             	name:'New Model',
+//             	file_size: 123458,
+//             	file_extension: '3ds' ,
+//             	file_location: 'location123'
+//             })
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//     });
     
-    describe('delete', function() {
-        it('should return with ok status', function(done) {
-            api
-            .delete('/api/users/1/models/4')
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.status).to.equal('ok');
-                done();
-            });
-        }); 
-        it('should return with fail status', function(done) {
-            api
-            .delete('/api/users/1/models/4')
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.status).to.equal('fail');
-                done();
-            });
-        }); 
-    });
+//     describe('delete', function() {
+//         it('should return with ok status', function(done) {
+//             api
+//             .delete('/api/users/1/models/4')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//         it('should return with fail status', function(done) {
+//             api
+//             .delete('/api/users/1/models/4')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('fail');
+//                 done();
+//             });
+//         }); 
+//     });
     
-    describe('edit', function() {
-        it('should return with ok status with new value', function(done) {
-            api
-            .put('/api/users/1/models/1')
-            .send({ name:'Old Model' })
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.data[0].name).to.equal('Old Model');
-                expect(res.body.status).to.equal('ok');
-                done();
-            });
-        }); 
-        it('should return with ok status with old value', function(done) {
-            api
-            .put('/api/users/1/models/1')
-            .send({ name:'Orange' })
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.data[0].name).to.equal('Orange');
-                expect(res.body.status).to.equal('ok');
-                done();
-            });
-        }); 
-        it('should return with fail status', function(done) {
-            api
-            .put('/api/users/1/models/209000')
-            .send({ name:'Old Model' })
-            .expect(200)
-            .end(function(err, res) {
-                expect(res.body.status).to.equal('fail');
-                done();
-            });
-        }); 
-    });
-});
+//     describe('edit', function() {
+//         it('should return with ok status with new value', function(done) {
+//             api
+//             .put('/api/users/1/models/1')
+//             .send({ name:'Old Model' })
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.data[0].name).to.equal('Old Model');
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//         it('should return with ok status with old value', function(done) {
+//             api
+//             .put('/api/users/1/models/1')
+//             .send({ name:'Orange' })
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.data[0].name).to.equal('Orange');
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//         it('should return with fail status', function(done) {
+//             api
+//             .put('/api/users/1/models/209000')
+//             .send({ name:'Old Model' })
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('fail');
+//                 done();
+//             });
+//         }); 
+//     });
+// });
