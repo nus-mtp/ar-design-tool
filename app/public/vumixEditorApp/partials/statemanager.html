@@ -177,7 +177,7 @@
   </div>
 </div>
 
-<!-- Modal for delete button -->
+<!-- Modal warning for delete state button -->
 <div class="modal fade" id="deleteState" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
@@ -186,6 +186,21 @@
       </div>
     <div class="modal-footer">
       <a href="#" id="btnYes" class="btn danger">Yes</a>
+      <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal warning for delete connection -->
+<div class="modal fade" id="deleteConn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p><center>Are you sure you want to delete this connection?</p></center>
+      </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYesConn" class="btn danger">Yes</a>
       <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
     </div>
     </div>
@@ -326,7 +341,11 @@
         });
           
         jsPlumb.bind('dblclick', function (connection, e) {
-            jsPlumb.detach(connection);
+            $('#deleteConn').modal('show');
+            $('#btnYesConn').click(function(){
+                jsPlumb.detach(connection);
+                $('#deleteConn').modal('hide');
+            });
         });
 
 		stateName.keyup(function(e) {
