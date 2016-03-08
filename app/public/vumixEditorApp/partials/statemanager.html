@@ -121,6 +121,7 @@
         font-family: 'Roboto Condensed', sans-serif;
         font-size:20px;
     }
+        
     </style>
 
     <title>Vumix State Manager</title>
@@ -274,7 +275,7 @@
 		var stateName = $('<input>').attr('type', 'text');
 		title.append(stateName);
 		newState.append(button);
-        newState.append('<a href="/editor"><button id="editor" style="margin-top:10px"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
+        newState.append('<a href="/editor"><button id="editor" style="margin-left:100px"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
 		var connect = $('<div>').addClass('connect');
 		
 		newState.css({
@@ -330,22 +331,24 @@
         
         button.click(function(e){
           $('#deleteState').modal('show');
+          $('#btnYes').click(function() {
+          // handle deletion here
+          jsPlumb.detachAllConnections($(newState));
+          $(newState).remove();
+  	      $('#deleteState').modal('hide');
+         });
 		  e.stopPropagation();
         });
           
-        $('#btnYes').click(function() {
-        // handle deletion here
-         jsPlumb.detachAllConnections($(newState));
-         $(newState).remove();
-  	     $('#deleteState').modal('hide');
-        });
-          
         jsPlumb.bind('dblclick', function (connection, e) {
-            $('#deleteConn').modal('show');
+            //There's a bug where modal yes button only works once.
+            /*$('#deleteConn').modal('show');
             $('#btnYesConn').click(function(){
                 jsPlumb.detach(connection);
                 $('#deleteConn').modal('hide');
-            });
+                e.stopPropagation();
+            });*/
+            jsPlumb.detach(connection);
         });
 
 		stateName.keyup(function(e) {
