@@ -1,7 +1,7 @@
 {
 	"sites": {
 		"docs": {
-			"ignore": "{node_modules,bower_components,test}/**/*",
+			"ignore": "{node_modules,bower_components,test,public}/**/*, gulpfile.js",
 			"parent": "VUMIX"
 		}
 	}

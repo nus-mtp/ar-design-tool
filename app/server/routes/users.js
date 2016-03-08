@@ -1,6 +1,6 @@
 /**
- * @module user_api
- * @parent Vumix
+ * @module userApi
+ * @parent VUMIX
  * This is the api for user models  
  */
 var stubApi = require('../config/stubApi'),
@@ -10,8 +10,8 @@ var stubApi = require('../config/stubApi'),
 var router = express.Router();
 
 /**
- * @module fetchall users
- * @parent user_api
+ * @module fetchAllUsers
+ * @parent userApi
  * Returns all users registered with the system
  * GET
  * api: /api/users
@@ -23,8 +23,8 @@ router.get('/', function(req, res) {
 });
 
 /**
- * @module fetchOne users
- * @parent user_api
+ * @module fetchOneUser
+ * @parent userApi
  * Returns one user with {id} registered with the system
  * GET
  * api: /api/users/{id}
@@ -40,9 +40,9 @@ router.get('/:id', function(req, res) {
 });
 
 /**
- * @module insert user
- * @parent user_api
- * @params req.body.id, req.body.name, req.body.token, req.body.email
+ * @module insertUser
+ * @parent userApi
+ * @param req.body.id, req.body.name, req.body.token, req.body.email
  * create new user
  * POST
  * api: /api/users
@@ -70,8 +70,8 @@ router.post('/', function(req, res) {
 });
 
 /**
- * @module delete user
- * @parent user_api
+ * @module deleteUser
+ * @parent userApi
  * Delete user with {id}
  * DELETE
  * api: /api/users/{id}
@@ -93,9 +93,9 @@ router.delete('/:id', function(req, res) {
 });
 
 /**
- * @module update user
- * @parent user_api
- * @params req.body.name, req.body.email
+ * @module updateUser
+ * @parent userApi
+ * @param req.body.name, req.body.email
  * update user with {id}
  * PUT
  * api: /api/users/{id}
