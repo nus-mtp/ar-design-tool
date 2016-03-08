@@ -7,8 +7,8 @@
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
       $urlRouterProvider.otherwise('/manager');
       $stateProvider
-        .state('statemanager', {
-          url: '/stateManager',
+        .state('stateManager', {
+          url: '/manager',
           views:{
               '':{
                   templateUrl: '/vumixEditorApp/partials/stateManager.html',

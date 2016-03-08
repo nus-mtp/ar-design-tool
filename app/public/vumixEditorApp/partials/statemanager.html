@@ -1,22 +1,41 @@
-<style>
-
-</style>
-<!-- Navbar -->
     <nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/manager">Back</a>
-    </div>
-    <ul class="nav navbar-nav navbar-right ">
-      <li><a href=""><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#myModal" style="margin-right:60px">Save</button>
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">Back</a>
+        </div>
+        <ul class="nav navbar-nav navbar-right ">
+            <li><a href="#"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#save">Save</button>
 </a></li>
-    </ul>
-  </div>
-</nav>
+        </ul>
+        </div>
+      </nav>
     
-    <!-- Modal for save button -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
+    <!-- Modal for model options button -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p><center>Choose your clickable object.</p></center>
+        <div class="radio">
+        <label><input type="radio" name="optradio">Object 1</label>
+        </div>
+        <div class="radio">
+          <label><input type="radio" name="optradio">Object 2</label>
+        </div>
+        <div class="radio disabled">
+          <label><input type="radio" name="optradio">Object 3</label>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for save button -->
+    <div class="modal fade" id="save" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body">
         <p><center>Work has been saved.</p></center>
@@ -27,121 +46,69 @@
     </div>
   </div>
 </div>
+
+<!-- Modal warning for delete state button -->
+<div class="modal fade" id="deleteState" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p><center>Are you sure you want to delete this state?</p></center>
+      </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYes" class="btn danger">Yes</a>
+      <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal warning for delete connection -->
+<div class="modal fade" id="deleteConn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <p><center>Are you sure you want to delete this connection?</p></center>
+      </div>
+    <div class="modal-footer">
+      <a href="#" id="btnYesConn" class="btn danger">Yes</a>
+      <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </div>
+    </div>
+  </div>
+</div>
     
-  <div class="jtk-demo-canvas canvas-wide statemachine-demo jtk-surface jtk-surface-nopan" id="canvas">
-        
-        <div class="row">
+     <div class="row">
              <div class="scrollbar" id="style-default">
-                 
-    <button id="add" style="margin-top:10px">Create New State</button>
-
-    <div id="items">
-	
-        <div class="top"><button>Root State <a href="/editor"><button class="editor" style="right:30px"><span class="glyphicon glyphicon-modal-window"></span></button></a></button>
+             <div id="items">
+                 <h1>Step One:</h1>
+                <button type = "button" class="btn btn-primary btn-md" id="add">Click here to create a new state!</button><p></p>
+                 <h1>Step Two:</h1>
+                 <p>Give your state a name.</p>
+                 <h1>Step Three:</h1>
+                 <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
+                 <h1>Step Four:</h1>
+                 <p>Drag and drop lines from the blue circle to connect your states.</p>
+                 <h1>Step Five:</h1>
+                 <p>Choose your clickable object by clicking <span class='glyphicon glyphicon-resize-horizontal'></span></p>
+                 <br>
+                 <p>Made a mistake? Double click on your connection line to delete it. Click <span class="glyphicon glyphicon-remove-circle"></span> to delete your entire state.</p>
         </div>
+              <div class="force-overflow"></div>
+         </div>
+          <div class="col-sm-8">
+    <div id="container">
+        <div class="w" id="root" style = "margin-top:200px"><a href="/editor" style="margin-left:80px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a><div class="title">Root State</div><div class="ep"></div></div>
         </div>
-                 
-      <div class="force-overflow"></div>
-    </div>
-           
-        <div class="col-sm-8">
-    <!-- Each state -->
+         </div></div> 
+
+    </body>
+  <script type="text/javascript">
+   var i = 1;
+      
+	jsPlumb.ready(function() {
     
-    <div class="w" id="state1">ROOT STATE
-        <div class="ep"></div>
-    </div>
-    </div>
-     </div>
-    </div>
-
-<script>
-   //when the Add Field button is clicked
-$("#add").click(function (e) {
-	//Append a new row of code to the "#items" div
-	$("#items").append('<div class="top"><input type="text" placeholder="Enter State Name" name="input[]"><button class="delete"><span class="glyphicon glyphicon-minus"></span></button><a href="/editor"><button class="editor"><span class="glyphicon glyphicon-modal-window"></span></button></a></div>');
-});
-        $("body").on("click", ".delete", function (e) {
-	$(this).parent("div").remove();
-});
-    </script>
-
-    <script>
-        
-    jsPlumb.ready(function () {
-    
-    var connectionTypes = {};
-    connectionTypes['NORMAL'] = {
-        connector: ["StateMachine", {
-            curviness: 5
-        }],
-        paintStyle: {
-            strokeStyle: "#979797",
-            lineWidth: 2,
-            outlineColor: "transparent",
-            outlineWidth: 4,
-            cssClass: 'NORMAL'
-        },
-        hoverPaintStyle: {
-            strokeStyle: "#64c8c8"
-        },
-        overlays: [
-            ["Arrow", {
-                location: 1,
-                id: "arrow1",
-                length: 10,
-                width: 10,
-                foldback: 0.8
-            }],
-            ["Label", {
-                label: "FOO",
-                id: "label",
-                cssClass: "aLabel"
-            }]
-            
-        ]
-    };
-  
-
-    // setup some defaults for jsPlumb.
-    var instance = jsPlumb.getInstance({
-        Endpoint: ["Dot", {
-            radius: 2
-        }],       
-        Container: "canvas"
-    });
-
-    instance.registerConnectionTypes(connectionTypes);
-
-    window.jsp = instance;
-
-    var canvas = document.getElementById("canvas");
-    var windows = jsPlumb.getSelector(".statemachine-demo .w");
-
-    
-    instance.bind("click", function (c) {
-        instance.detach(c);
-    });
-
-    
-    instance.bind("connection", function (info) {
-        info.connection.getOverlay("label").setLabel("info.connection.id");
-    });
-
-    // bind a double click listener to the "create" button; add new node when this occurs.
-    jsPlumb.on(add, "click", function (e) {
-       newNode(e.offsetX, e.offsetY);
-    });
-   
-    //
-    // initialise element as connection targets and source.
-    //
-    var initNode = function (el) {
-
-        // initialise draggable elements.
-        instance.draggable(el);
-
-        instance.makeSource(el, {
-            filter: ".ep",
+      jsPlumb.makeSource("root", {
+         filter: ".ep",
             anchor: "Continuous",
             connectorStyle: {
                 strokeStyle: "black",
@@ -150,14 +117,15 @@ $("#add").click(function (e) {
                 outlineWidth: 4
             },
             overlays: [
-					[ "Arrow", { location:0.8 } ],
+					[ "Arrow", { location:0.5 } ],
 					[ "Label", { 
-						location:0.2,
+						location:[ 2, 2],
 						id:"label",
-                        label:"Connected",
+                        label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
 						cssClass:"aLabel",
                         events:{
                     click:function(labelOverlay, originalEvent) { 
+                    //alert('These two states are connected');
                     ShowDialog();
           }
         }
@@ -169,128 +137,101 @@ $("#add").click(function (e) {
             }
         });
 
-        instance.makeTarget(el, {
-            dropOptions: {
-                hoverClass: "dragHover"
-            },
+	  jsPlumb.on(add, "click", function (e) {
+		var newState = $('<div>').attr('id', 'state' + i).addClass('w');
+         var button = $('<button id="delete" style="margin-top:10px"><span class="glyphicon glyphicon-remove-circle"></span></button></div>');
+		var title = $('<div>').addClass('title');
+		var stateName = $('<input>').attr('type', 'text');
+		title.append(stateName);
+		newState.append(button);
+        newState.append('<a href="/editor" style="margin-left:100px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
+		var connect = $('<div>').addClass('connect');
+		
+		newState.css({
+		  'top': e.pageY + i * 20,
+		  'left': e.pageX + i * 100
+		});
+		
+		newState.append(title);
+		newState.append(connect);
+		connect.append("<div class=\"ep\"></div>");
+          
+		$('#container').append(newState);
+		
+		jsPlumb.makeTarget(newState, {
+		  anchor: 'Continuous'
+		});
+		
+		jsPlumb.makeSource(connect, {
+		  parent: newState,
+		  filter: ".ep",
             anchor: "Continuous",
-            allowLoopback: true
+            connectorStyle: {
+                strokeStyle: "black",
+                lineWidth: 2,
+                outlineColor: "transparent",
+                outlineWidth: 4
+            },
+            overlays: [
+					[ "Arrow", { location:0.5 } ],
+					[ "Label", { 
+						location:0.2,
+						id:"label",
+                        label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
+						cssClass:"aLabel",
+                        events:{
+                    click:function(labelOverlay, originalEvent) { 
+                    //alert('These two states are connected');
+                    ShowDialog();
+          }
+        }
+					}]
+				],
+            maxConnections: 10,
+            onMaxConnections: function (info, e) {
+                alert("Maximum connections (" + info.maxConnections + ") reached");
+            }
         });
 
-        instance.fire("jsPlumbDemoNodeAdded", el);
-    };
-
-    var newNode = function (x, y) {
-        var d = document.createElement("div");
-        var id = jsPlumbUtil.uuid();
-        d.className = "w";
-        d.id = id;
-        d.innerHTML = "" + "<div class=\"ep\"></div>";
-        d.style.left = x + "px";
-        d.style.top = y + 150 + "px";
-        instance.getContainer().appendChild(d);
-        initNode(d);
-        return d;
-    };
-
-    // suspend drawing and initialise.
-    instance.batch(function () {
-        for (var i = 0; i < windows.length; i++) {
-            initNode(windows[i], true);
-        }
-        // and finally, make a few connections
+		
+		jsPlumb.draggable(newState, {
+		  containment: 'parent'
+		});
         
-    });
-
-    jsPlumb.fire("jsPlumbDemoLoaded", instance);
-
-});
-     $(document).ready(function ()
-        {
-            $("#btnShowModal").click(function (e)
-            {
-                ShowDialog(true);
-                e.preventDefault();
-            });
-
-            $("#btnClose").click(function (e)
-            {
-                HideDialog();
-                e.preventDefault();
-            });
-
-            $("#btnSubmit").click(function (e)
-            {
-                HideDialog();
-                e.preventDefault();
-            });
+        button.click(function(e){
+          $('#deleteState').modal('show');
+          $('#btnYes').click(function() {
+          // handle deletion here
+          jsPlumb.detachAllConnections($(newState));
+          $(newState).remove();
+  	      $('#deleteState').modal('hide');
+         });
+		  e.stopPropagation();
+        });
+          
+        jsPlumb.bind('dblclick', function (connection, e) {
+            //There's a bug where yes button only works once.
+            /*$('#deleteConn').modal('show');
+            $('#btnYesConn').click(function(){
+                jsPlumb.detach(connection);
+                $('#deleteConn').modal('hide');
+                e.stopPropagation();
+            });*/
+            jsPlumb.detach(connection);
         });
 
-        function ShowDialog()
-        {
-            $("#overlay").show();
-            $("#dialog").fadeIn(300);
+		stateName.keyup(function(e) {
+		  if (e.keyCode === 13) {
+		    //var state = $(this).closest('.item');
+			//state.children('.title').text(this.value);
+			$(this).parent().text(this.value);
+		  }
+		});
+		
+		stateName.focus();
+		
+		i++;    
+	  });  
+	});  
 
-            if (modal)
-            {
-                $("#overlay").unbind("click");
-            }
-            else
-            {
-                $("#overlay").click(function (e)
-                {
-                    HideDialog();
-                });
-            }
-        }
-
-        function HideDialog()
-        {
-            $("#overlay").hide();
-            $("#dialog").fadeOut(300);
-        } 
     </script>
-    
-    <form id="form1" runat="server">     
-    
-    <div id="output"></div>
-    
-    <div id="dialog" class="web_dialog">
-        <table style="width: 100%; border: 0px;" cellpadding="3" cellspacing="0">
-            <tr>
-                <td class="web_dialog_title"></td>
-                <td class="web_dialog_title align_right">
-                    <a href="#" id="btnClose">Close</a>
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="padding-left: 10px;">
-                    <b>Choose the active button/model for this connection. </b>
-                </td>
-            </tr>
-            <tr>
-                <td>&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td colspan="2" style="padding-left: 15px;">
-                    <div id="brands">
-                        <input id="brand1" name="brand" type="radio" checked="checked" value="model1" /> Model Name 1<br>
-                        <input id="brand2" name="brand" type="radio" value="model2" /> Model Name 2 <br>
-                        <input id="brand3" name="brand" type="radio" value="model3" /> Model Name 3 <br>
-                    </div>
-                </td>
-            </tr>
-            
-            <tr>
-                <td colspan="2" style="text-align: center;">
-                    <input id="btnSubmit" type="button" value="Submit" />
-                </td>
-            </tr>
-        </table>
-    </div>
-    </form>
