@@ -53,10 +53,6 @@ app.use('/TemplateData', express.static(path.join(__dirname, 'public/resources/w
 //set web routing
 app.use('/', routes);
 
-app.post('/upload.php', function(req, res) {
-  console.log("files:" + req.files);
-});
-
 //set restful api routing
 app.use('/api/users', users);
 app.use('/api/users/:userId/projects', projects);
