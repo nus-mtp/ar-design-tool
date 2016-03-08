@@ -63,6 +63,18 @@ p {
   display: flex;
   justify-content: flex-end; }
 
+.btn-large {
+  background-color: #FF9640;
+  height: 41px;
+  width: 100%; }
+
+.btn-browse {
+  background-color: #CC8262;
+  float: right;
+  height: 40px;
+  margin-top: -40px;
+  width: 28%; }
+
 h1 {
   font-family: 'Open Sans';
   font-size: 18px;
@@ -148,11 +160,6 @@ p {
 
 .panel-body {
   background-color: #0097FF; }
-
-button {
-  background-color: #FF9640;
-  height: 41px;
-  width: 100%; }
 
 input {
   color: #555860;

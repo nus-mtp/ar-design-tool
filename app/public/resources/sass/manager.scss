@@ -1,4 +1,5 @@
 @import 'partials/alignment';
+@import 'partials/button';
 @import 'partials/color';
 @import 'partials/typography';
 @import 'partials/modal';
@@ -51,12 +52,6 @@
 
 .panel-body{
   background-color: $light-blue;
-}
-
-button {
-  background-color: $light-orange;
-  height: 41px;
-  width: 100%;
 }
 
 input {
