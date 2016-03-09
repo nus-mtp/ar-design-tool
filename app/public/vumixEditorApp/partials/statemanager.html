@@ -118,11 +118,10 @@
 <script type="text/javascript">
   var i = 1;
   
-  // code taken from https://gist.github.com/umidjons/1fb8ae674df4c71f85cf (posted by RPDeshaies)
-  var AngularHelper = (function () {
-    var AngularHelper = function () { };
+  var angularHelper = (function () {
+    var angularHelper = function () { };
     var defaultApplicationName = "vumixEditorApp";
-    AngularHelper.Compile = function ($targetDom, htmlToCompile, applicationName) {
+    angularHelper.compile = function ($targetDom, htmlToCompile, applicationName) {
       var $injector = angular.injector(["ng", applicationName || defaultApplicationName]);
       $injector.invoke(["$compile", "$rootScope", function ($compile, $rootScope) {
         var $scope = $targetDom.append(htmlToCompile).scope();
@@ -130,57 +129,57 @@
         $rootScope.$digest();
       }]);
     }
-    return AngularHelper;
+    return angularHelper;
   })();
-
-	jsPlumb.ready(function() {    
-    jsPlumb.makeSource("root", {
-      filter: ".ep",
-        anchor: "Continuous",
-        connectorStyle: {
-          strokeStyle: "black",
-          lineWidth: 2,
-          outlineColor: "transparent",
-          outlineWidth: 4
-        },
-        overlays: [
-      [ "Arrow", { location:0.5 } ],
-      [ "Label", { 
-        location:[ 2, 2],
-        label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
-        cssClass:"aLabel",
-      }]
-    ],
-        maxConnections: 10,
-        onMaxConnections: function (info, e) {
-            alert("Maximum connections (" + info.maxConnections + ") reached");
-        }
-    });
-
+  
+	jsPlumb.ready(function() {
+    
+      jsPlumb.makeSource("root", {
+         filter: ".ep",
+            anchor: "Continuous",
+            connectorStyle: {
+                strokeStyle: "black",
+                lineWidth: 2,
+                outlineColor: "transparent",
+                outlineWidth: 4
+            },
+            overlays: [
+					[ "Arrow", { location:0.5 } ],
+					[ "Label", { 
+						location:[ 2, 2],
+                        label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
+						cssClass:"aLabel",
+					}]
+				],
+            maxConnections: 10,
+            onMaxConnections: function (info, e) {
+                alert("Maximum connections (" + info.maxConnections + ") reached");
+            }
+        });
 	  jsPlumb.on(add, "click", function (e) {
 		var newState = $('<div>').attr('id', 'state' + i).addClass('w');
     var button = $('<button id="delete" style="margin-top:10px"><span class="glyphicon glyphicon-remove-circle"></span></button><a ng-click="editorService.openEditor()" href="" style="margin-left:100px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
 		var title = $('<div>').addClass('title');
 		var stateName = $('<input>').attr('type', 'text');
 		title.append(stateName);
-		angularHelper.compile(newState, button);
-		var connect = $('<div>').addClass('connect');
-
-    var top = 50, left = 50;
-    
-    if (i<=3){
-      newState.css({
-        'top': e.pageY + i * top,
-        'left': e.pageX + 1 * left
-      });
-      top*=-200;
-    };
+		newState.append(button);
+    var connect = $('<div>').addClass('connect');
+		
+        var top = 50, left = 50;
+        
+        if (i<=3){
+		newState.css({
+		  'top': e.pageY + i * top,
+		  'left': e.pageX + 1 * left
+		});
+            top*=-200;
+        };
 		
 		newState.append(title);
 		newState.append(connect);
 		connect.append("<div class=\"ep\"></div>");
           
-		$('#container').append(newState);
+    angularHelper.compile($('#container'), newState);
 		
 		jsPlumb.makeTarget(newState, {
 		  anchor: 'Continuous'
@@ -200,25 +199,24 @@
 					[ "Arrow", { location:0.5 } ],
 					[ "Label", { 
 						location:0.2,
-                        label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
+            label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
 						cssClass:"aLabel",
-                        id:"Label"
+            id:"Label"
 					}]
 				],
             maxConnections: 10,
-            onMaxConnections: function (info, e) {              
-            alert("Maximum connections (" + info.maxConnections + ") reached");
-        }
-      });
-
-
-      jsPlumb.draggable(newState, {
-        containment: 'parent'
-      });
-
-      button.click(function(e){
-        $('#deleteState').modal('show');
-        $('#btnYes').click(function() {
+            onMaxConnections: function (info, e) {
+                alert("Maximum connections (" + info.maxConnections + ") reached");
+            }
+        });
+		
+		jsPlumb.draggable(newState, {
+		  containment: 'parent'
+		});
+        
+        button.click(function(e){
+          $('#deleteState').modal('show');
+          $('#btnYes').click(function() {
           // handle deletion here
           jsPlumb.detachAllConnections($(newState));
           $(newState).remove();
@@ -230,8 +228,8 @@
           });
   	      $('#deleteState').modal('hide');
          });
-		    e.stopPropagation();
-      });
+		  e.stopPropagation();
+        });
           
         jsPlumb.bind('dblclick', function (connection, e) {
             //There's a bug where yes button only works once.
@@ -243,30 +241,17 @@
             });*/
             jsPlumb.detach(connection);
         });
-        e.stopPropagation();
-      });
-
-      jsPlumb.bind('dblclick', function (connection, e) {
-        //There's a bug where yes button only works once.
-        /*$('#deleteConn').modal('show');
-        $('#btnYesConn').click(function(){
-        jsPlumb.detach(connection);
-        $('#deleteConn').modal('hide');
-        e.stopPropagation();
-        });*/
-        jsPlumb.detach(connection);
-      });
-
-      stateName.keyup(function(e) {
-        if (e.keyCode === 13) {
-          //var state = $(this).closest('.item');
-          //state.children('.title').text(this.value);
-          $(this).parent().text(this.value);
-        }
-      });
-
-      stateName.focus();
-
-      i++;    
-    });  
+		stateName.keyup(function(e) {
+		  if (e.keyCode === 13) {
+		    //var state = $(this).closest('.item');
+			//state.children('.title').text(this.value);
+			$(this).parent().text(this.value);
+		  }
+		});
+		
+		stateName.focus();
+		
+		i++;    
+	  });  
+	});  
 </script>
