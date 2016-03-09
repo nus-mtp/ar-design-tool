@@ -54,10 +54,6 @@ public class StateObjectChanger : MonoBehaviour {
             toggle.isOn = true;
             dropDown = GetComponentInChildren<Dropdown>();
             UpdateOptions();
-            dropDown.onValueChanged.AddListener(delegate
-            {
-                SetStateChange();
-            });
             dropDown.value = so.transitionStateId;
             transitionStateText.text = TRANSITION_STATE_DISPLAY + so.transitionStateId;
         }
@@ -83,6 +79,7 @@ public class StateObjectChanger : MonoBehaviour {
 
     public void SetStateChange()
     {
+        Debug.Log(dropDown.value);
         if (dropDown == null)
         {
             dropDown = GetComponentInChildren<Dropdown>();
