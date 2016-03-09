@@ -23,7 +23,8 @@
         <script type="text/javascript" src="vumixManagerApp/app.js"></script>
         <script type="text/javascript" src="vumixManagerApp/services/_services.js"></script>
         <script type="text/javascript" src="vumixManagerApp/controllers/_controllers.js"></script>
-        <script type="text/javascript" src="vumixManagerApp/controllers/managerController.js"></script>
+        <script type="text/javascript" src="vumixManagerApp/controllers/modelController.js"></script>
+        <script type="text/javascript" src="vumixManagerApp/controllers/projectController.js"></script>
         <script type="text/javascript" src="vumixManagerApp/controllers/dropzone.js"></script>
 	</body>
 </html>

@@ -37,47 +37,24 @@
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
-            <button type="button" class="center btn-large" id="createProject">Create</button>
+            <button type="button" class="center btn-large" id="createProject">Start</button>
         </div>
         <div id="create_project" class="side-bar-padding">
             <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
             <span>
-              <form>
+              <form ng-controller="projectController">
                 <h2> Company Name</h2>
-                <input type="text" name="org_name" placeholder="Company Name"><br>
+                <input type="text" name="org_name" placeholder="Company Name" ng-model="project.company_name"><br>
                 <h2> Project Name</h2>
-                <input type="text" name="project_name" placeholder="Project Name"><br>
+                <input type="text" name="project_name" placeholder="Project Name" ng-model="project.project_name"><br>
                 <h2> License Key</h2>
-                <input type="text" name="license_key" placeholder="License Key"><br>
+                <input type="text" name="license_key" placeholder="License Key" ng-model="project.license_key"><br>
                 <h2> Upload Your Vuforia Package</h2>
-                <input type="text" name="target_name" placeholder="Vuforia Package Name" style="width:72%;"><br><button class="btn-browse" id="browse_package">Browse</button>
-           
-                <!--modal to upload vuforia package-->
-                <div class="modal" id="package_modal">
-                    <div class="modal-dialog">
-                        <div class="modal-content">        
-                            <div class="modal-header">
-                                <button type="button" class="close right" aria-hidden="true" id="close_browse">&times</button>
-                                <h4 class="modal-title">Upload Your Vuforia Package</h4>
-                            </div>
-                            
-                            <div class="modal-body">
-                                <div class="panel panel-info">
-                                    <div class="panel-body">
-                                       Drag and drop your vuforia package into the box below or click on the box to upload it
-                                    </div>
-                                </div>
-                                <form class="form-horizontal" id="add-product-form" action="#" method="post">
-                                    <div id="dropzone_project" class="dropzone" style="color:#000000"></div> <!-- This is the dropzone element -->
-                                </form>
-                            </div>           
-                        </div>
-                    </div>
-                </div>
-               <!--end of modal-->
+                <form class="form-horizontal" id="add-product-form" action="#" method="post">
+                    <div id="dropzone_project" class="dropzone" style="color:#000000; min-height: 100px;"></div> <!-- This is the dropzone element -->
+                </form>
                 <a href="https://developer.vuforia.com/">Find out how to create a target</a>
-                <input type="submit" class="center" value="Create" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
-             
+                <input type="submit" class="center" value="Create" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF" ng-click="createProject()">
               </form>
           </span>
         </div>
@@ -91,32 +68,10 @@
                 <h1> Model Name</h1>
                 <input type="text" name="model_name" placeholder="Model Name"><br>
                 <h1> File</h1>
-                <input type="text" name="file_name" placeholder="Target Name" style="width:72%;"><br><button class="btn-browse" id="browse_model">Browse</button>
-                <!--modal to upload a model-->
-                <div class="modal" id="upload_modal">
-                   <div class="modal-dialog">
-                        <div class="modal-content">        
-                            <div class="modal-header">
-                                <button type="button" class="close right" aria-hidden="true" id="close_upload">&times</button>
-                                <h4 class="modal-title">Upload Your Models</h4>
-                            </div>
-                            
-                            <div class="modal-body">
-                                <div class="panel panel-info">
-                                    <div class="panel-body">
-                                       Drag and drop your new models into the box below or click on the box to upload it
-                                    </div>
-                                </div>
-                                                
-                                <form class="form-horizontal" id="add-product-form" action="#" method="post">
-                                    <div id="dropzone_model" class="dropzone" style="color:#000000"></div> <!-- This is the dropzone element -->
-                                </form>
-                            </div>           
-                        </div>
-                    </div>
-                </div>
-                <!--end of modal-->
-                <input type="submit" class="center" value="Upload" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
+                <form class="form-horizontal" id="add-product-form" action="#" method="post">
+                    <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div> <!-- This is the dropzone element -->
+                </form>
+                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
               </form>
           </span>
         </div>
@@ -127,10 +82,6 @@
             <!--to display project-->
             <div ng-controller="managerController" id="project_list" class="flex-container">
                 <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
-
-                <!--<div class = "col-md-3"> .co lmd3</div>
-            <div class = "col-md-3"> .co lmd3</div>
-            <div class = "col-md-3"> .co lmd3</div>-->
 
                 <ul ng-repeat="pr in listProjects | filter:search">
                     <a href="/editor#/statemanager" class="">
@@ -145,10 +96,7 @@
             <!--to display model-->
             <div ng-controller="modelController" id="model_list" class="flex-container">
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
-                <!--<div class = "col-md-3"> .co lmd3</div>
-            <div class = "col-md-3"> .co lmd3</div>
-            <div class = "col-md-3"> .co lmd3</div>-->
-
+                
                 <ul ng-repeat="model in listModels | filter:search">
                     <a href="#" " class=" ">
                     <li class="flex-item ">2
@@ -199,23 +147,6 @@ $(function() {
            $('#upload_model').hide();
         });
         
-        // handle modal
-        $('#browse_package').click(function(){
-           $('#package_modal').show(); 
-        });
-        
-        $('#browse_model').click(function(){
-           $('#upload_modal').show(); 
-        });
-        
-        $('#close_browse').click(function(){
-           $('#package_modal').hide();
-        });
-        
-        $('#close_upload').click(function(){
-           $('#upload_modal').hide();;
-        })
-        // close modal
     });
     
     $('a[href="#project"]').click(function(){
