@@ -93,6 +93,18 @@
 			
 			
 		
+			
+				
+				
+				<li class="search-container">
+					<a class="module" href="userApi.html" data-search="userApi">
+						userApi
+					</a>
+				</li>
+				
+			
+			
+		
 	</ul>
 
 		</li>
@@ -175,7 +187,7 @@ if server crashes:
 |-----  public              (Static files to be served to frontend) 
 |-----  server              (Modules and configs used by server)
 |-----  test                            
-|-----  ardesign.js         (app file)
+|-----  vumix.js            (app file)
 |-----  bower.json
 |-----  documentjs.json
 |-----  gulpfile.js
@@ -206,6 +218,31 @@ Example:
   @ param(without space) passport 
   Requires passportjs
 </code></pre>
+<p>##Generate docs using DocumentJS</p>
+<pre><code>Ensure that documentjs is installed globally.
+&gt; npm install -g documentjs
+
+To generate docs:
+&gt; documentjs
+</code></pre>
+<p>##Setting up db config file</p>
+<pre><code>Add db.js file in the following folder: ./app/server/config/
+It should have two parameters &quot;remote&quot; and &quot;local&quot;.
+The file should look like this:
+module.exports = {
+    'remote': {
+        'url': 'mysql://root:password@localhost:3308/vumix'
+    },
+    'local': {
+        'url': &quot;mysql://root:{your local password}@localhost:{port num}/test&quot;       
+    }
+}
+
+Default is to use your local db. To use remote db, use the --remote flag:
+nodemon vumix -r
+
+Ensure that you have a your local mysql server running and a schema called 'test' already created.
+</code></pre>
 
 		</section>
 		
@@ -235,7 +272,7 @@ Example:
 	
 	
 	<script type="text/javascript">
-		var docObject = {"type":"page","name":"VUMIX","src":"README.md","description":"##Ar Design Tool","ignore":"{node_modules,bower_components,test}/**/*","glob":{"pattern":"**/*.{md,js}","ignore":"{node_modules,bower_components}/**/*","cwd":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\app"},"dest":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\api","generators":["html"],"docConfigDest":"../app/documentjs.json","project":{}};
+		var docObject = {"type":"page","name":"VUMIX","src":"README.md","description":"##Ar Design Tool","ignore":"{node_modules,bower_components,test,public}/**/*, gulpfile.js","glob":{"pattern":"**/*.{md,js}","ignore":"{node_modules,bower_components}/**/*","cwd":"D:\\My Documents\\repo\\ar-design-tool\\app"},"dest":"D:\\My Documents\\repo\\ar-design-tool\\docs","generators":["html"],"docConfigDest":"../app/documentjs.json","project":{}};
 	</script>
 	
 	

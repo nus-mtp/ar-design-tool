@@ -27,9 +27,9 @@ var processArg = function() {
 		console.log('connecting to local db');
 		remoteDB = false;
 	}
-}
+};
 
 module.exports.processArg = processArg;
 module.exports.getRemoteDB = function() {
 	return remoteDB;
-}
+};
