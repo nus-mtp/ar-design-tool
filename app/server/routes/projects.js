@@ -62,8 +62,8 @@ router.post('/', function(req, res) {
         name: req.body.name,
         company_name: req.body.company_name,
         marker_type: req.body.marker_type,
-        project_dat_file: req.body.project_dat_file,
-        assetbundle_id: req.body.assetbundle_id
+        // project_dat_file: req.body.project_dat_file,
+        // assetbundle_id: req.body.assetbundle_id
     };
     models.project.find({
         where: {

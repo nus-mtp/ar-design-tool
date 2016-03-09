@@ -22,11 +22,11 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		project_dat_file: {
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
 		},
 		assetbundle_id: {
 			type: DataTypes.INTEGER,
-			allowNull: false
+			allowNull: true
 		},
 		last_published: {
 			type: DataTypes.DATE,
