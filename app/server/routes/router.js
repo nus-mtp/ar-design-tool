@@ -1,5 +1,4 @@
-var csession 		= require('client-sessions'),
-	passport 		= require('passport'),
+var passport 		= require('passport'),
 	express 		= require('express');
 
 var router 	= express.Router();
