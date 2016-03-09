@@ -23,9 +23,9 @@ coverage-final.json
 # DB Config #
 #############
 app/server/config/db.js
-config/db.js 
 npm-debug.log
 
 
-# Save File 
+# Save File #
+#############
 app/public/state.dat
