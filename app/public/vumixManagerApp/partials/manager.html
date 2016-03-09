@@ -1,67 +1,163 @@
-<div class ="nav-bar">
-    <ul>
-        <li><h1 class="padding-left">Vumix File Manager</h1></li>
-        <li>
-            <nav class="menu">
-                <ul class="clearfix">
-                    <li> 
-                        <a href="#dropdown" data-toggle="dropdown">Welcome, user! <span class="arrow">&#9660;</span></a>
-                        <ul class="sub-menu">
-                            <li><a href="#">Log Out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </li>
-    </ul>
-</div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid nav-bar">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Vumix File Manager</a>
+            <!--<ul class="breadcrumb">
+                <li class="active">Home</li>
+             </ul>-->
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+            <ul class="nav navbar-nav">
+                <li>
+                    <ul class="center-align">
+                        <span class="top-bar"><a href="#project" class="btn btn-default top-bar" data-toggle="tab" >Project</a></span>
+                        <span class="top-bar"><a href="#model" class="btn btn-default top-bar" data-toggle="tab" >Model</a></span>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, User!<span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="/logout">Log Out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
 <div class="wrapper">
-  <div class="sidebar">
-       <section class="main">
-        <form class="search" method="post" action="index.html" >
-            <input type="text" name="q" placeholder="Search..." />
-            <ul class="results" >
-                <li><a href="index.html">Search Result #1<br /><span>Description...</span></a></li>
-                <li><a href="index.html">Search Result #2<br /><span>Description...</span></a></li>
-                <li><a href="index.html">Search Result #3<br /><span>Description...</span></a></li>
-                <li><a href="index.html">Search Result #4</a></li>
-            </ul>
-        </form>
-      </section>
-      <div id="welcome_page" class="side-bar-padding">
-          <h1 class="center" style="margin-top: 50%; margin-bottom: 20%"> Welcome to Vumix </h1>
-          <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
-          <button type="button" class="center" id="createProject">Create</button>
-      </div>
-      <div id="create_project" class="side-bar-padding">
-          <h1 class="center" style="margin-top: 50%; margin-bottom: 20%"> Create Your New Project</h1>
-          <span>
+    <div class="sidebar">
+        <div id="welcome_page" class="side-bar-padding">
+            <div class="search" style="margin-top:10px">
+                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+            </div>
+            <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
+            <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
+            <button type="button" class="center btn-large" id="createProject">Create</button>
+        </div>
+        <div id="create_project" class="side-bar-padding">
+            <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
+            <span>
               <form>
-                <h1> Organisation Name</h1>
-                <input type="text" name="org_name" placeholder="Organisation Name"><br>
-                <h1> Project Name</h1>
+                <h2> Company Name</h2>
+                <input type="text" name="org_name" placeholder="Company Name"><br>
+                <h2> Project Name</h2>
                 <input type="text" name="project_name" placeholder="Project Name"><br>
-                <h1> Target Name</h1>
-                <span>
-                    <input type="text" name="target_name" placeholder="Target Name" style="width:74%;"><br><button style="background-color:#CC8262; margin-top: -39px; width: 26%; float:right;">Browse</button>
-                </span>
+                <h2> License Key</h2>
+                <input type="text" name="license_key" placeholder="License Key"><br>
+                <h2> Upload Your Vuforia Package</h2>
+                <input type="text" name="target_name" placeholder="Vuforia Package Name" style="width:72%;"><br><button class="btn-browse" id="browse_package">Browse</button>
+           
+                <!--modal to upload vuforia package-->
+                <div class="modal" id="package_modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">        
+                            <div class="modal-header">
+                                <button type="button" class="close right" aria-hidden="true" id="close_browse">&times</button>
+                                <h4 class="modal-title">Upload Your Vuforia Package</h4>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                       Drag and drop your vuforia package into the box below or click on the box to upload it
+                                    </div>
+                                </div>
+                                <form class="form-horizontal" id="add-product-form" action="#" method="post">
+                                    <div id="dropzone_project" class="dropzone" style="color:#000000"></div> <!-- This is the dropzone element -->
+                                </form>
+                            </div>           
+                        </div>
+                    </div>
+                </div>
+               <!--end of modal-->
                 <a href="https://developer.vuforia.com/">Find out how to create a target</a>
                 <input type="submit" class="center" value="Create" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
+             
               </form>
           </span>
-      </div>    
-  </div>
-  
-  <div class="content">
-
-    <div class="container section">
-        <div class="row">
-            <div class = "col-md-3"> .col md3</div>
-            <div class = "col-md-3"> .co lmd3</div>
-            <div class = "col-md-3"> .co lmd3</div>
-            <div class = "col-md-3"> .co lmd3</div>
         </div>
+        <div id="upload_model" class="side-bar-padding">
+            <div class="search" style="margin-top:10px">
+                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+            </div>
+            <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
+            <span>
+              <form>
+                <h1> Model Name</h1>
+                <input type="text" name="model_name" placeholder="Model Name"><br>
+                <h1> File</h1>
+                <input type="text" name="file_name" placeholder="Target Name" style="width:72%;"><br><button class="btn-browse" id="browse_model">Browse</button>
+                <!--modal to upload a model-->
+                <div class="modal" id="upload_modal">
+                   <div class="modal-dialog">
+                        <div class="modal-content">        
+                            <div class="modal-header">
+                                <button type="button" class="close right" aria-hidden="true" id="close_upload">&times</button>
+                                <h4 class="modal-title">Upload Your Models</h4>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <div class="panel panel-info">
+                                    <div class="panel-body">
+                                       Drag and drop your new models into the box below or click on the box to upload it
+                                    </div>
+                                </div>
+                                                
+                                <form class="form-horizontal" id="add-product-form" action="#" method="post">
+                                    <div id="dropzone_model" class="dropzone" style="color:#000000"></div> <!-- This is the dropzone element -->
+                                </form>
+                            </div>           
+                        </div>
+                    </div>
+                </div>
+                <!--end of modal-->
+                <input type="submit" class="center" value="Upload" style="margin-top:48px; background-color:#FF9640; color:#FFFFFF">
+              </form>
+          </span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="container section" style="width:auto;">
+            <!--to display project-->
+            <div ng-controller="managerController" id="project_list" class="flex-container">
+                <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
+
+                <!--<div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>-->
+
+                <ul ng-repeat="pr in listProjects | filter:search">
+                    <a href="/editor#/statemanager" class="">
+                        <li class="flex-item">1
+                            <p>{{pr.name}}</p>
+                        </li>
+                    </a>
+                </ul>
+
+            </div>
+
+            <!--to display model-->
+            <div ng-controller="modelController" id="model_list" class="flex-container">
+                <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
+                <!--<div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>
+            <div class = "col-md-3"> .co lmd3</div>-->
+
+                <ul ng-repeat="model in listModels | filter:search">
+                    <a href="#" " class=" ">
+                    <li class="flex-item ">2
+                        <p>{{model.name}}</p>
+                    </li>
+                </a>
+            </ul>
+        </div>
+        
     </div>
   </div>
 
@@ -73,40 +169,77 @@
 
 $(function() {
     $(document).ready(function(){
-        var curr_height = $(window).height();
-        $('.sidebar').css("height", curr_height);
-        $('a[href="#dropdown"]').css("margin-left", $(window).width()/1.34);
-        $(".sub-menu").css("margin-left", $(window).width()/1.34);
+        Dropzone.autoDiscover = false;
+        var createDropzone = new Dropzone ("div#dropzone_project ", { url: "# "});
+        var uploadDropzone = new Dropzone ("div#dropzone_model ", { url: "# "});
         
+        
+        var height = $(window).height();
+        $('.sidebar').css("min-height", height);
+        
+        // when user resize their window
+        $(window).resize(function(){
+            console.log("here");
+            var curr_height = $(window).height();
+            // if(curr_height < height){
+            //     $('.sidebar').css("position ", "absolute ");  //current setup!
+            // }else if(curr_height == height){
+            //     $('.sidebar').css("position ", "fixed ");
+            // }
+        });
+        
+        $('a[href="#project"]').addClass("active ");
         $("#create_project").hide();
-        $(".sub-menu").hide();
+        $("#model_list ").hide();
+        $('#upload_model').hide();
          
         $('#createProject').click(function(){
-           $("#welcome_page").hide();
-           $("#create_project").show(); 
+           $("#welcome_page ").hide();
+           $("#create_project ").show(); 
+           $('#upload_model').hide();
         });
         
-        $('a[href="#dropdown"]').click(function(){
-           $(".sub-menu").toggle();
+        // handle modal
+        $('#browse_package').click(function(){
+           $('#package_modal').show(); 
         });
+        
+        $('#browse_model').click(function(){
+           $('#upload_modal').show(); 
+        });
+        
+        $('#close_browse').click(function(){
+           $('#package_modal').hide();
+        });
+        
+        $('#close_upload').click(function(){
+           $('#upload_modal').hide();;
+        })
+        // close modal
     });
     
     $('a[href="#project"]').click(function(){
-       $("#content-header").text("Existing project");
-       $("#create_button").text("Create a new project");
-       $("#first_opt").text("New project");
-       $("#second_opt").text("Duplicate project");
-       $("#modal-title").text("Create a new project");
-       $("#modal-desc").text("Click or drag and drop vuforia package");
+        $('#welcome_page').show();
+        $('#project_list').show();
+        $('#create_project').hide();
+        $('#upload_model').hide();
+        $('#model_list').hide();
+        $('#project_list').show();
+        $('#model_list').hide();
+        $('a[href="#project "]').addClass("active ");
+        $('a[href="#model "]').removeClass("active ");
     }); 
     
     $('a[href="#model"]').click(function(){
-       $("#content-header").text("Existing model");
-       $("#create_button").text("Upload a new model");
-       $("#first_opt").text("Upload new model");
-       $("#second_opt").text("Delete model");
-       $("#modal-title").text("Upload a new model");
-       $("#modal-desc").text("Click or drag and drop new model");
+        $('#welcome_page').hide();
+        $('#create_project').hide();
+        $('#project_list').hide();
+        $('#project_list').hide();
+        $('#model_list').show();
+        $('#upload_model').show();
+        $('#model_list').show();
+        $('a[href="#model "]').addClass("active ");
+        $('a[href="#project "]').removeClass("active ");
     }); 
 });
 
