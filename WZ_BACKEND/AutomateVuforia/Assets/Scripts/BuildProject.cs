@@ -11,7 +11,7 @@ using Vuforia;
 
 
 public class BuildProject : MonoBehaviour {
-    const string DEFAULT_SCENE_NAME = "Assets/Scenes/abc.unity";
+    const string DEFAULT_SCENE_NAME = "Assets/Scenes/main.unity";
     const string VUFORIA_PACKAGE_PATH = "/Resources/Vuforia/marker.unitypackage";
     const string AR_CAMERA_PREFAB_NAME = "ARCamera";
     const string IMAGE_TARGET_PREFAB_NAME = "ImageTarget";
@@ -20,8 +20,6 @@ public class BuildProject : MonoBehaviour {
     const string IMAGE_DATASET_PATH = "/Editor/QCAR/ImageTargetTextures";
     const string OBJECT_DATASET_PATH = "/Editor/QCAR/TargetSetData";
     const string MODELS_DATA_PATH = "/Resources/Obj";
-
- 
 
     const int INVALID_PACKAGE_ERROR_CODE = 2;
 
@@ -120,8 +118,6 @@ public class BuildProject : MonoBehaviour {
     {
         Scene currentScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
         ARCamera = Instantiate(FileLoader.LoadVuforia(AR_CAMERA_PREFAB_NAME));
-        AssetDatabase.ImportPackage(Application.dataPath + VUFORIA_PACKAGE_PATH, false);
-        AssetDatabase.SaveAssets();
         string[] dataSetTrackerName = ReadDataSetTrackerName(markerType);
         Vuforia.DatabaseLoadBehaviour vuforiaTrackerPackage = ARCamera.GetComponent<Vuforia.DatabaseLoadBehaviour>();
         vuforiaTrackerPackage.SetupDataSets(dataSetTrackerName[0]);
@@ -139,13 +135,21 @@ public class BuildProject : MonoBehaviour {
        
     }
 
-    [MenuItem("File/Build Android 2D")]
-    static void BuildAndroid2D()
+    [MenuItem("File/ImportPackage")]
+    public static void ImportPackage()
     {
-       
+        AssetDatabase.ImportPackage(Application.dataPath + VUFORIA_PACKAGE_PATH, false);
+        AssetDatabase.SaveAssets();
+        AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+    }
+
+    [MenuItem("File/Build Android 2D")]
+    public static void BuildAndroid2D()
+    {
         SetupVuforiaTools(MarkerType.IMAGE);
         SetUpModels(marker2d);
         BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.Android, BuildOptions.None);
+        CleanProject();
        
         
     }
@@ -180,12 +184,10 @@ public class BuildProject : MonoBehaviour {
     }
 
     [MenuItem("Assets/Uninstall Previous")]
-     static void UnistallVuforiaMarkerPackage()
+     static void CleanProject()
      {
         bool status = AssetDatabase.DeleteAsset("Assets/Editor/QCAR");
-        Debug.Log(status);
         status = AssetDatabase.DeleteAsset("Assets/StreamingAssets");
-        Debug.Log(status);
      }
 }
 #endif
