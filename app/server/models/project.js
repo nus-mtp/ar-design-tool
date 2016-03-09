@@ -1,6 +1,6 @@
 /*jslint node: true */
 "use strict";
-
+// TODO: add vuforia package item
 module.exports = function(sequelize, DataTypes) {
 	var Project = sequelize.define("project", {
 		id: {

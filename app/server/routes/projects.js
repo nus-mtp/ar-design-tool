@@ -56,6 +56,7 @@ router.get('/:id', function(req, res) {
  * api: /api/users/{userId}/projects
  */
 router.post('/', function(req, res) {
+    // TODO: add vuforia package and remove project dat and asset bundle (these two only saved when saved)
     var newProj = {
         uid: req.params.userId,
         name: req.body.name,
