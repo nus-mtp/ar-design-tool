@@ -1,66 +1,29 @@
+@import 'partials/alignment';
+@import 'partials/button';
 @import 'partials/color';
 @import 'partials/typography';
-
-.sidebar-style {
-  margin-top: 70px;
-  padding: 20px;
-}
-
-.responsive-page {
-  background-color: $slate-gray;
-  height: 1200px;
-}
-
-.rcorners {
-  border: 2px solid $color-lima-approx;
-  height: 200px;
-  margin: 20px;
-  width: 200px;
-}
+@import 'partials/modal';
 
 // Nav bar style
 .nav-bar {
-  height: 1px;
-  width: 100%;
-}
-
-ul {
   background-color: $light-blue;
-  height: 70px;
-  list-style-type: none;
-  margin: 0;
-  overflow: hidden;
-  padding: 0;
-  position: fixed;
-  width: 100%;
+  height: 50px;
 }
 
-li {
-  float: left;
+.top-bar {
+  background-color: $light-blue;  
+  margin-top: 2px;
+}
 
-  a {
-    color: $bg-color;
-    display: block;
-    font-size: 24px;
-    padding: 16px;
-    text-align: center;
-    text-decoration: none;
-
-    &:hover {  
-      background-color: $hover-color;
-    }
-
-    &:focus {
-      color: $bg-color;
-      text-decoration: none;
-    }
-  }
+.btn-default.active {
+  background-color: $bg-color;
+  color: $light-blue;
 }
 
 // Container fluid
 .wrapper {
-  margin-left: 350px;
-  margin-top: 70px;
+  margin-left: 300px;
+  margin-top: 50px;
 }
 
 .content {
@@ -72,9 +35,9 @@ li {
 .sidebar {
   background-color: $purple;
   float: left;
-  margin-left: -350px;
+  margin-left: -300px;
   position: fixed;
-  width: 350px;
+  width: 300px;
   word-wrap: break-word;
 }
 
@@ -87,10 +50,8 @@ li {
   padding-right: 32px;
 }
 
-button {
-  background-color: $light-orange;
-  height: 41px;
-  width: 100%;
+.panel-body{
+  background-color: $light-blue;
 }
 
 input {
@@ -101,16 +62,17 @@ input {
 }
 
 .main {
+  margin-bottom: 24px;
   margin-left: 24px;
   margin-right: auto;
   margin-top: 24px;
-  width: 300px;
+  width: 250px;
 }
 
 .search {
   margin: 0 auto;
   position: relative;
-  width: 300px;
+  width: 250px;
 
   input {
     background: url('../images/search.png');
@@ -160,8 +122,37 @@ input {
   }
 }
 
-.sub-menu {
-  margin-top: 5px;
-  width: 224px;
+
+.flex-container {
+  -webkit-flex-flow: row wrap;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  justify-content: flex-start;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+.flex-item {
+  background: $light-orange;
+  color: $bg-color;
+  font-size: 3em;
+  font-weight: bold;
+  height: 170px;
+  line-height: 150px;
+  margin-top: 10px;
+  padding: 5px;
+  text-align: center;
+  width: 200px;
+
+  p {
+    background-color: $hover-color;
+    font-size: 13px;
+    margin-left: -5px;
+    margin-top: -4px;
+    width: inherit;
+  }
+}

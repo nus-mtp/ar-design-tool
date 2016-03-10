@@ -6,6 +6,15 @@
 
 /* Jeffrey's */
 
+.fullscreen-overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+}
+
 .resizable-panels { 
   position: absolute;
   top: 0;
@@ -96,3 +105,129 @@ form.compressed div {
 .form-label + input {
   margin-bottom: 20px;
 }
+
+/* Michelle's */
+.item {
+        min-width: 180px;
+        min-height: 80px;
+	    position: absolute;
+        border: 1px solid black;
+        background-color: white;
+      }
+
+
+      #container {
+        border: 1px solid white;
+        width: 1000px;
+        height: 1000px;
+      }
+	  
+	.title {
+	  padding: 10px;
+	  cursor: move;
+	}
+		
+	.connect {
+	  width: 100%;
+	  height: 20px;
+	  background-color: white;
+	  cursor: pointer;
+	}
+    
+    .scrollbar {
+	margin-left: 30px;
+	float: left;
+	height: 1000px;
+	width: 250px;
+	background: #F5F5F5;
+	overflow-y: scroll;
+	margin-bottom: 25px;
+    }
+    
+    .force-overflow {
+	min-height: 1000px;
+    }
+    
+    .w {
+    max-width: 180px;
+    margin-top: 1px;
+    padding-right: 10px;
+    padding-left: 5px;
+    position: absolute;
+    z-index: 4;
+    border: 1px solid #2e6f9a;
+    box-shadow: 2px 2px 19px #e0e0e0;
+    -o-box-shadow: 2px 2px 19px #e0e0e0;
+    -webkit-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    cursor: move;
+    background-color: white;
+    font-size: 11px;
+    -webkit-transition: background-color 0.25s ease-in;
+    -moz-transition: background-color 0.25s ease-in;
+    transition: background-color 0.25s ease-in;
+    }
+    
+    .rootButton{
+    top:100%;   
+    }
+    
+    .ep {
+    position: absolute;
+    bottom: 30%;
+    right: 10px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    background-color: lightskyblue;
+    cursor: pointer;
+    box-shadow: 0 0 2px black;
+    -webkit-transition: -webkit-box-shadow 0.25s ease-in;
+    -moz-transition: -moz-box-shadow 0.25s ease-in;
+    transition: box-shadow 0.25s ease-in;
+    }
+        
+    .ep:hover {
+    box-shadow: 0px 0px 6px black;
+    }
+        
+    .aLabel {
+ 	background-color:white; 
+	padding:0.4em; 
+	font:12px sans-serif; 
+	color:#444;
+	z-index:21;
+	border:1px dotted gray;
+	opacity:1;
+	filter:alpha(opacity=80);
+    }
+        
+    .aLabel._jsPlumb_hover, ._jsPlumb_source_hover, ._jsPlumb_target_hover {
+    background-color: #1e8151;
+    color: white;
+    }
+        
+    .glyphicon.glyphicon-resize-horizontal {
+    font-size: 20px;
+}
+    #root {
+    font-size: 15px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-top: 5px;
+    }
+    
+    p{
+        font-family: 'Palanquin', sans-serif;
+        font-size: 15px;
+        opacity: 0.7;
+    }
+    
+    h1{
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size:20px;
+    }
