@@ -1,3 +1,4 @@
+/*jslint node: true */
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
@@ -5,35 +6,35 @@ module.exports = function(sequelize, DataTypes) {
 		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
-			autoIncrement: true,
-			allowNull : false
+			autoIncrement: true
 		},
 		name: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		file_size: {
-			type : DataTypes.DECIMAL
+			type : DataTypes.DECIMAL,
+			allowNull: false
 		},
 		file_extension: {
-			type: DataTypes.STRING
-		},
-		date_uploaded: {
-			type: DataTypes.DATE
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		file_location: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		}
 	}, {
 		timestamps: true,
 		updatedAt: 'updateTimestamp',
 		freezeTableName: true,
 		classMethods: {
-			create: function(models) {
+			// create: function(models) {
 			//   Test.create({
 			//       username: 'stella',
 			//       user_id: 10
 			//   })
-			}
+			// }
 		}
 	});
 	return Model;

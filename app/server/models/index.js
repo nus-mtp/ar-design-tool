@@ -1,10 +1,13 @@
+/*jslint node: true */
 "use strict";
-var Sequelize = require('sequelize'),
-	path = require('path'),
-	fs = require('fs');
 
-var parse 		= require(path.join(__dirname + '/../modules/parser'));
+var Sequelize 	= require('sequelize'),
+	path 		= require('path'),
+	fs 			= require('fs');
+
+var parse = require(path.join(__dirname + '/../modules/parser'));
 var CONFIG_DB;
+
 if(process.env.NODE_ENV == 'test-travis') {
 	CONFIG_DB = require(path.join(__dirname + '/../config/travisdb'));
 } else {
@@ -13,9 +16,9 @@ if(process.env.NODE_ENV == 'test-travis') {
 
 
 if(parse.getRemoteDB()) {
-	CONFIG_DB = CONFIG_DB['remote'];
+	CONFIG_DB = CONFIG_DB.remote;
 } else {
-	CONFIG_DB = CONFIG_DB['local'];
+	CONFIG_DB = CONFIG_DB.local;
 }
 
 var sequelize = new Sequelize(CONFIG_DB.url);

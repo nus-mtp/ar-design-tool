@@ -1,101 +1,136 @@
-var express = require('express'),
-    stubApi = require('../config/stubApi');
+/**
+ * @module modelApi
+ * @parent VUMIX
+ * This is the api for user models  
+ */
+var models  = require('../models'),
+    express = require('express');
 
 var router = express.Router({mergeParams: true});
 
-// fetchAll
-// GET
-// api: /api/users/{userId}/models
+/**
+ * @module fetchAllModels
+ * @parent modelApi
+ * Returns all models of user with {userid}
+ * GET
+ * api: /api/users/{userId}/models
+ */
 router.get('/', function(req, res) {
-    var models = [];
-    stubApi.models.forEach(function(e,i) {
-       if (e.userId.toString() === req.params.userId) {
-           models.push(e);
-       } 
+    models.model.findAll({
+        where: {
+            uid: req.params.userId
+        }
+    }).then(function(models){
+        res.json({status: "ok", length: models.length, data: models});            
     });
-    res.json({status: "ok", length: models.length, data: models});
 });
 
-// fetchOne
-// GET
-// api: /api/users/{userId}/models/{id}
+/**
+ * @module fetchOneModel
+ * @parent modelApi
+ * Returns one model with {id} of user with {userid}
+ * GET
+ * api: /api/users/{userId}/models/{id}
+ */
 router.get('/:id', function(req, res) {
-    var models = [];
-    stubApi.models.forEach(function(e,i) {
-       if (e.userId.toString() === req.params.userId) {
-           models.push(e);
-       } 
+    models.model.find({
+        where: {
+            uid: req.params.userId,
+            id: req.params.id
+        }
+    }).then(function(model) {
+        if(model) {
+            res.json({status: "ok", length: 1, data: [model]});
+        } else {
+            res.json({status: "fail", message: "model not found", length: 0, data: []});
+        }
     });
-    var model = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id) {
-                index = i;
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-    })(models);
-    if (model) {
-        res.json({status: "ok", length: 1, data: [model]});
-    } else {
-        res.json({status: "fail", message: "model is not found", length: 0, data: []});
-    }
 });
 
-// insert
-// POST
-// api: /api/users/{userId}/models
-// required body param: name
+/**
+ * @module insertModel
+ * @parent modelApi
+ * @param req.body.userId, req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location
+ * create new model owned by user with {userId}
+ * POST
+ * api: /api/users/{userId}/models
+ */
 router.post('/', function(req, res) {
-    var model = {
-        id: 99,
-        userId: req.params.userId,
-        name: req.body.name
+    var newModel = {
+        uid: req.params.userId,
+        name: req.body.name,
+        file_size: req.body.file_size,
+        file_extension: req.body.file_extension,
+        file_location: req.body.file_location
     };
-    stubApi.models.push(model);
-    res.json({status: "ok", length: 1, data: [model]});
+    models.model.find({
+        where: {
+            uid: newModel.uid,
+            name: newModel.name
+        }
+    }).then(function(model) {
+        if(model) {
+            res.json({status: "fail", message: "model already exists!", length: 0, data: []});
+        } else {
+            models.model.create(newModel).then(function() {
+                res.json({status: "ok", message: "new model created!", length: 1, data: [newModel]});
+            });            
+        }
+    });
 });
 
-// delete
-// DELETE
-// api: /api/users/{userId}/models/{id}
+/**
+ * @module deleteModel
+ * @parent modelApi
+ * Delete model with {id} owned by user with {userId}
+ * DELETE
+ * api: /api/users/{userId}/models/{id}
+ */
 router.delete('/:id', function(req, res) {
-    var model = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id && e.userId.toString() === req.params.userId) {
-                index = i;                
-            } 
-        });
-        return index < 0 ? undefined : el.splice(index,1)[0];
-    })(stubApi.models);
-    if (model) {
-        res.json({status: "ok", length: 1, data: [model]});
-    } else {
-        res.json({status: "fail", message: "model is not found", length: 0, data: []});
-    }
+    models.model.findById(req.params.id).then(function(model) {
+        if(model) {
+            models.model.destroy({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function(row_deleted) {
+                res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [model]});        
+            });
+        } else {
+            res.json({status: "fail", message: "model not found", length: 0, data: []});
+        }
+    });
 });
 
-// edit
-// PUT
-// api: /api/users/{userId}/models/{id}
-// body param: name
+/**
+ * @module updateModel
+ * @parent modelApi
+ * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location
+ * update model with {id} owned by user with {userId}
+ * PUT
+ * api: /api/users/{userId}/models/{id}
+ */
 router.put('/:id', function(req, res) {
-    var model = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id && e.userId.toString() === req.params.userId) {
-                index = i;                
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-    })(stubApi.models);
-    if (model) {
-        model.name = req.body.name || model.name;
-        res.json({status: "ok", length: 1, data: [model]});
-    } else {
-        res.json({status: "fail", message: "model is not found", length: 0, data: []});
-    }
+    models.model.findById(req.params.id).then(function(model) {
+        if(model) {
+            models.model.update({
+                name: req.body.name || model.name,
+                file_size: req.body.file_size || model.file_size,
+                file_extension: req.body.file_extension || model.file_extension,
+                file_location: req.body.file_location || model.file_location
+            }, { 
+                where: {
+                    id: req.params.id
+                }
+            }).then(function() {
+                models.model.findById(req.params.id).then(function(updatedModel) {
+                     res.json({status: "ok", message: "updated model", length: 1, data: [updatedModel]});
+                });
+            });
+        } else {
+            res.json({status: "fail", message: "model not found", length: 0, data: []});
+        }
+    });
 });
 
 module.exports = router;

@@ -2,7 +2,7 @@
   <nav class="navbar navbar-default">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href=""><i class="fa fa-angle-left fa-lg" style="padding-right: 10px"></i>Project Name</a>
+        <a class="navbar-brand" href="" ng-click="editorService.closeEditor()"><i class="fa fa-angle-left fa-lg" style="padding-right: 10px"></i>Project Name - StateName</a>
       </div>
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
@@ -18,9 +18,9 @@
   <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav navbar-cursor">
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Selection Cursor"><i class="fa fa-mouse-pointer"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Translation Cursor" ng-click="viewmodel.setTransformMode('translate')"><i class="fa fa-arrows"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotation Cursor" ng-click="viewmodel.setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Cursor" ng-click="viewmodel.setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Translation Cursor" ng-click="setTransformMode('translate')"><i class="fa fa-arrows"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotation Cursor" ng-click="setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Cursor" ng-click="setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
     </ul>
     <ul class="nav navbar-nav navbar-font">
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Create Text"><i class="fa fa-text-height"></i></a></li>

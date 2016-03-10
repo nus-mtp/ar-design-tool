@@ -1,156 +1,27 @@
-<style type="text/css">
-       .item {
-        min-width: 180px;
-        min-height: 80px;
-	    position: absolute;
-        border: 1px solid black;
-        background-color: white;
-      }
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Back</a>
+    </div>
+    <ul class="nav navbar-nav navbar-right ">
+      <li>
+        <a href="#">
+          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#save">Save</button>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
-
-      #container {
-        border: 1px solid white;
-        width: 1000px;
-        height: 1000px;
-      }
-	  
-	.title {
-	  padding: 10px;
-	  cursor: move;
-	}
-		
-	.connect {
-	  width: 100%;
-	  height: 20px;
-	  background-color: white;
-	  cursor: pointer;
-	}
-    
-    .scrollbar {
-	margin-left: 30px;
-	float: left;
-	height: 1000px;
-	width: 250px;
-	background: #F5F5F5;
-	overflow-y: scroll;
-	margin-bottom: 25px;
-    }
-    
-    .force-overflow {
-	min-height: 1000px;
-    }
-    
-    .w {
-    max-width: 180px;
-    margin-top: 1px;
-    padding-right: 10px;
-    padding-left: 5px;
-    position: absolute;
-    z-index: 4;
-    border: 1px solid #2e6f9a;
-    box-shadow: 2px 2px 19px #e0e0e0;
-    -o-box-shadow: 2px 2px 19px #e0e0e0;
-    -webkit-box-shadow: 2px 2px 19px #e0e0e0;
-    -moz-box-shadow: 2px 2px 19px #e0e0e0;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-    opacity: 0.8;
-    filter: alpha(opacity=80);
-    cursor: move;
-    background-color: white;
-    font-size: 11px;
-    -webkit-transition: background-color 0.25s ease-in;
-    -moz-transition: background-color 0.25s ease-in;
-    transition: background-color 0.25s ease-in;
-    }
-    
-    .rootButton{
-    top:100%;   
-    }
-    
-    .ep {
-    position: absolute;
-    bottom: 30%;
-    right: 10px;
-    width: 1em;
-    height: 1em;
-    border-radius: 50%;
-    background-color: lightskyblue;
-    cursor: pointer;
-    box-shadow: 0 0 2px black;
-    -webkit-transition: -webkit-box-shadow 0.25s ease-in;
-    -moz-transition: -moz-box-shadow 0.25s ease-in;
-    transition: box-shadow 0.25s ease-in;
-    }
-        
-    .ep:hover {
-    box-shadow: 0px 0px 6px black;
-    }
-        
-    .aLabel {
- 	background-color:white; 
-	padding:0.4em; 
-	font:12px sans-serif; 
-	color:#444;
-	z-index:21;
-	border:1px dotted gray;
-	opacity:1;
-	filter:alpha(opacity=80);
-    }
-        
-    .aLabel._jsPlumb_hover, ._jsPlumb_source_hover, ._jsPlumb_target_hover {
-    background-color: #1e8151;
-    color: white;
-    }
-        
-    .glyphicon.glyphicon-resize-horizontal {
-    font-size: 20px;
-}
-    #root {
-    font-size: 15px;
-    padding-right: 20px;
-    padding-bottom: 10px;
-    padding-top: 5px;
-    }
-    
-    p{
-        font-family: 'Palanquin', sans-serif;
-        font-size: 15px;
-        opacity: 0.7;
-    }
-    
-    h1{
-        font-family: 'Roboto Condensed', sans-serif;
-        font-size:20px;
-    }
-        
-    </style>
-
-    <title>Vumix State Manager</title>
-
-  <body>
-      
-     <!-- Navbar -->
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">Back</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right ">
-            <li><a href="#"><button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#save">Save</button>
-</a></li>
-        </ul>
-        </div>
-      </nav>
-    
-    <!-- Modal for model options button -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
+<!-- Modal for model options button -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body">
         <p><center>Choose your clickable object.</p></center>
         <div class="radio">
-        <label><input type="radio" name="optradio">Object 1</label>
+          <!-- check on how to use label in html -->
+          <label><input type="radio" name="optradio">Object 1</label>
         </div>
         <div class="radio">
           <label><input type="radio" name="optradio">Object 2</label>
@@ -167,8 +38,8 @@
 </div>
 
 <!-- Modal for save button -->
-    <div class="modal fade" id="save" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
+<div class="modal fade" id="save" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body">
         <p><center>Work has been saved.</p></center>
@@ -182,62 +53,85 @@
 
 <!-- Modal warning for delete state button -->
 <div class="modal fade" id="deleteState" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body">
         <p><center>Are you sure you want to delete this state?</p></center>
       </div>
-    <div class="modal-footer">
-      <a href="#" id="btnYes" class="btn danger">Yes</a>
-      <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
-    </div>
+      <div class="modal-footer">
+        <a href="#" id="btnYes" class="btn danger">Yes</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- Modal warning for delete connection -->
 <div class="modal fade" id="deleteConn" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-sm" role="document">
+  <div class="modal-dialog modal-sm" role="document">
     <div class="modal-content">
       <div class="modal-body">
         <p><center>Are you sure you want to delete this connection?</p></center>
       </div>
-    <div class="modal-footer">
-      <a href="#" id="btnYesConn" class="btn danger">Yes</a>
-      <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
-    </div>
+      <div class="modal-footer">
+        <a href="#" id="btnYesConn" class="btn danger">Yes</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+      </div>
     </div>
   </div>
 </div>
-    
-     <div class="row">
-             <div class="scrollbar" id="style-default">
-             <div id="items">
-                 <h1>Step One:</h1>
-                <button type = "button" class="btn btn-primary btn-md" id="add">Click here to create a new state!</button><p></p>
-                 <h1>Step Two:</h1>
-                 <p>Give your state a name.</p>
-                 <h1>Step Three:</h1>
-                 <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
-                 <h1>Step Four:</h1>
-                 <p>Drag and drop lines from the blue circle to connect your states.</p>
-                 <h1>Step Five:</h1>
-                 <p>Choose your clickable object by clicking <span class='glyphicon glyphicon-resize-horizontal'></span></p>
-                 <br>
-                 <p>Made a mistake? Double click on your connection line to delete it. Click <span class="glyphicon glyphicon-remove-circle"></span> to delete your entire state.</p>
-        </div>
-              <div class="force-overflow"></div>
-         </div>
-          <div class="col-sm-8">
-    <div id="container">
-        <div class="w" id="root" style = "margin-top:200px"><a href="/editor" style="margin-left:80px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a><div class="title">Root State</div><div class="ep"></div></div>
-        </div>
-         </div></div> 
 
-    </body>
-  <script type="text/javascript">
-   var i = 1;
-      
+<div class="row">
+  <div class="scrollbar" id="style-default">
+    <div id="items">
+      <h1>Step One:</h1>
+      <button type = "button" class="btn btn-primary btn-md" id="add">Click here to create a new state!</button><p></p>
+      <h1>Step Two:</h1>
+      <p>Give your state a name.</p>
+      <h1>Step Three:</h1>
+      <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
+      <h1>Step Four:</h1>
+      <p>Drag and drop lines from the blue circle to connect your states.</p>
+      <h1>Step Five:</h1>
+      <p>Choose your clickable object by clicking <span class='glyphicon glyphicon-resize-horizontal'></span></p>
+      <br>
+      <p>Made a mistake? Double click on your connection line to delete it. 
+        Click <span class="glyphicon glyphicon-remove-circle"></span> to delete your entire state.
+      </p>
+  </div>
+  <div class="force-overflow"></div>
+  </div>
+  <div class="col-sm-8">
+    <div id="container">
+      <div class="w" id="root" style = "margin-top:200px">
+        <a ng-click="editorService.openEditor()" href="" style="margin-left:80px">
+          <button id="editor"><span class="glyphicon glyphicon-new-window"></span></button>
+        </a>
+        <div class="title">Root State</div><div class="ep"></div>
+      </div>
+    </div>
+  </div>
+</div> 
+
+<div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
+
+<script type="text/javascript">
+  var i = 1;
+  
+  var angularHelper = (function () {
+    var angularHelper = function () { };
+    var defaultApplicationName = "vumixEditorApp";
+    angularHelper.compile = function ($targetDom, htmlToCompile, applicationName) {
+      var $injector = angular.injector(["ng", applicationName || defaultApplicationName]);
+      $injector.invoke(["$compile", "$rootScope", function ($compile, $rootScope) {
+        var $scope = $targetDom.append(htmlToCompile).scope();
+        $compile($targetDom)($scope || $rootScope);
+        $rootScope.$digest();
+      }]);
+    }
+    return angularHelper;
+  })();
+  
 	jsPlumb.ready(function() {
     
       jsPlumb.makeSource("root", {
@@ -262,16 +156,14 @@
                 alert("Maximum connections (" + info.maxConnections + ") reached");
             }
         });
-
 	  jsPlumb.on(add, "click", function (e) {
 		var newState = $('<div>').attr('id', 'state' + i).addClass('w');
-         var button = $('<button id="delete" style="margin-top:10px"><span class="glyphicon glyphicon-remove-circle"></span></button><a href="/editor" style="margin-left:100px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
+    var button = $('<button id="delete" style="margin-top:10px"><span class="glyphicon glyphicon-remove-circle"></span></button><a ng-click="editorService.openEditor()" href="" style="margin-left:100px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
 		var title = $('<div>').addClass('title');
 		var stateName = $('<input>').attr('type', 'text');
 		title.append(stateName);
 		newState.append(button);
-        //newState.append('<a href="/editor" style="margin-left:100px"><button id="editor"><span class="glyphicon glyphicon-new-window"></span></button></a></div>');
-		var connect = $('<div>').addClass('connect');
+    var connect = $('<div>').addClass('connect');
 		
         var top = 50, left = 50;
         
@@ -287,7 +179,7 @@
 		newState.append(connect);
 		connect.append("<div class=\"ep\"></div>");
           
-		$('#container').append(newState);
+    angularHelper.compile($('#container'), newState);
 		
 		jsPlumb.makeTarget(newState, {
 		  anchor: 'Continuous'
@@ -307,9 +199,9 @@
 					[ "Arrow", { location:0.5 } ],
 					[ "Label", { 
 						location:0.2,
-                        label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
+            label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
 						cssClass:"aLabel",
-                        id:"Label"
+            id:"Label"
 					}]
 				],
             maxConnections: 10,
@@ -317,7 +209,6 @@
                 alert("Maximum connections (" + info.maxConnections + ") reached");
             }
         });
-
 		
 		jsPlumb.draggable(newState, {
 		  containment: 'parent'
@@ -350,7 +241,6 @@
             });*/
             jsPlumb.detach(connection);
         });
-
 		stateName.keyup(function(e) {
 		  if (e.keyCode === 13) {
 		    //var state = $(this).closest('.item');
@@ -364,5 +254,4 @@
 		i++;    
 	  });  
 	});  
-
-    </script>
+</script>

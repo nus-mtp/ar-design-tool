@@ -65,31 +65,6 @@ var models = [
     }
 ];
 
-var modelEntities = [
-    {
-        "id": 1,
-        "projectId": 1,
-        "modelId": 1,
-        "name": "Orange",
-        "clickable": true
-    },
-    {
-        "id": 2,
-        "projectId": 1,
-        "modelId": 2,
-        "name": "Apple",
-        "clickable": false
-    },
-    {
-        "id": 3,
-        "projectId": 2,
-        "modelId": 1,
-        "name": "Orange",
-        "clickable": true
-    }
-];
-
 module.exports.users = users;
 module.exports.projects = projects;
 module.exports.models = models;
-module.exports.modelEntities = modelEntities;

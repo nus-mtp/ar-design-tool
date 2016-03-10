@@ -15,7 +15,6 @@
     "chai": "^3.5.0",
     "commander": "^2.9.0",
     "cookie-parser": "^1.4.1",
-    "documentjs": "^0.4.2",
     "express": "^4.13.4",
     "express-dot-engine": "^1.0.7",
     "express-session": "^1.13.0",

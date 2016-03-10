@@ -1,44 +1,47 @@
+/*jslint node: true */
 "use strict";
-
+// TODO: add vuforia package item
 module.exports = function(sequelize, DataTypes) {
 	var Project = sequelize.define("project", {
-		id:{
+		id: {
 			type: DataTypes.INTEGER,
 			primaryKey: true,
-			autoIncrement: true,
-			allowNull : false
+			autoIncrement: true
 		},
-		name: {
-			type: DataTypes.STRING
+		name: { 
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		company_name: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		},
 		marker_type: {
-			type: DataTypes.STRING
+			type: DataTypes.STRING,
+			allowNull: false
 		},
-		date_created: {
-			type : DataTypes.DATE
+		project_dat_file: {
+			type: DataTypes.STRING,
+			allowNull: false
 		},
-		last_modified: {
-			type : DataTypes.DATE
+		assetbundle_id: {
+			type: DataTypes.INTEGER,
+			allowNull: false
 		},
 		last_published: {
-			type: DataTypes.DATE
+			type: DataTypes.DATE,
+			allowNull: true
 		}
 	}, {
-		timestamps: false,
+		timestamps: true,
+		updatedAt: 'updateTimestamp',
 		freezeTableName: true,
 		classMethods: {
-			associate: function(models) {
-				Project.hasMany(models.model_instance);
-				Project.hasMany(models.state);
-			},
-			create: function(models) {
+			// create: function(models) {
 			//   Project.create({
-			//       username: 'stella'
+			//       username: 'stella'x
 			//   })
-			}
+			// }
 		}
 	});
 	return Project;

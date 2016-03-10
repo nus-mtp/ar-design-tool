@@ -1,101 +1,140 @@
-var express = require('express'),
-    stubApi = require('../config/stubApi');
+/**
+ * @module projectApi
+ * @parent VUMIX
+ * This is the api for user projects  
+ */
+var models  = require('../models'),
+    express = require('express');
 
 var router = express.Router({mergeParams: true});
 
-// fetchAll
-// GET
-// api: /api/users/{userId}/projects
+/**
+ * @module fetchAllProjects
+ * @parent projectApi
+ * Returns all projects of user with {userid}
+ * GET
+ * api: /api/users/{userId}/projects
+ */
 router.get('/', function(req, res) {
-    var projects = [];
-    stubApi.projects.forEach(function(e,i) {
-       if (e.userId.toString() === req.params.userId) {
-           projects.push(e);
-       } 
+    models.project.findAll({
+        where: {
+            uid: req.params.userId
+        }
+    }).then(function(projects){
+        res.json({status: "ok", length: projects.length, data: projects});            
     });
-    res.json({status: "ok", length: projects.length, data: projects});
 });
 
-// fetchOne
-// GET
-// api: /api/users/{userId}/projects/{id}
+/**
+ * @module fetchOneProject
+ * @parent projectApi
+ * Returns one project with {id} of user with {userid}
+ * GET
+ * api: /api/users/{userId}/projects/{id}
+ */
 router.get('/:id', function(req, res) {
-    var projects = [];
-    stubApi.projects.forEach(function(e,i) {
-       if (e.userId.toString() === req.params.userId) {
-           projects.push(e);
-       } 
+    models.project.find({
+        where: {
+            uid: req.params.userId,
+            id: req.params.id
+        }
+    }).then(function(project) {
+        if(project) {
+            res.json({status: "ok", length: 1, data: [project]});
+        } else {
+            res.json({status: "fail", message: "project not found", length: 0, data: []});
+        }
     });
-    var project = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id) {
-                index = i;
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-    })(projects);
-    if (project) {
-        res.json({status: "ok", length: 1, data: [project]});
-    } else {
-        res.json({status: "fail", message: "project is not found", length: 0, data: []});
-    }
 });
 
-// insert
-// POST
-// api: /api/users/{userId}/projects
-// required body param: name
+/**
+ * @module insertProject
+ * @parent projectApi
+ * @param req.body.userId, req.body.name, req.body.company_name, req.body.marker_type, req.body.project_dat_file, req.body.assetbundle_id
+ * create new project owned by user with {userId}
+ * POST
+ * api: /api/users/{userId}/projects
+ */
 router.post('/', function(req, res) {
-    var project = {
-        id: 99,
-        userId: req.params.userId,
-        name: req.body.name
+    // TODO: add vuforia package and remove project dat and asset bundle (these two only saved when saved)
+    var newProj = {
+        uid: req.params.userId,
+        name: req.body.name,
+        company_name: req.body.company_name,
+        marker_type: req.body.marker_type,
+        project_dat_file: req.body.project_dat_file,
+        assetbundle_id: req.body.assetbundle_id
     };
-    stubApi.projects.push(project);
-    res.json({status: "ok", length: 1, data: [project]});
+    models.project.find({
+        where: {
+            uid: newProj.uid,
+            name: newProj.name
+        }
+    }).then(function(project) {
+        if(project) {
+            res.json({status: "fail", message: "project already exists!", length: 0, data: []});
+        } else {
+            models.project.create(newProj).then(function() {
+                res.json({status: "ok", message: "new project created!", length: 1, data: [newProj]});
+            });            
+        }
+    });
 });
 
-// delete
-// DELETE
-// api: /api/users/{userId}/projects/{id}
+/**
+ * @module deleteProject
+ * @parent projectApi
+ * Delete project with {id} owned by user with {userId}
+ * DELETE
+ * api: /api/users/{userId}/projects/{id}
+ */
 router.delete('/:id', function(req, res) {
-    var project = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id && e.userId.toString() === req.params.userId) {
-                index = i;                
-            } 
-        });
-        return index < 0 ? undefined : el.splice(index,1)[0];
-    })(stubApi.projects);
-    if (project) {
-        res.json({status: "ok", length: 1, data: [project]});
-    } else {
-        res.json({status: "fail", message: "project is not found", length: 0, data: []});
-    }
+    models.project.findById(req.params.id).then(function(project) {
+        if(project) {
+            models.project.destroy({
+                where: {
+                    id: req.params.id
+                }
+            }).then(function(row_deleted) {
+                res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [project]});        
+            });
+        } else {
+            res.json({status: "fail", message: "project not found", length: 0, data: []});
+        }
+    });
 });
 
-// edit
-// PUT
-// api: /api/users/{userId}/projects/{id}
-// body param: name
+/**
+ * @module updateProject
+ * @parent projectApi
+ * @param req.body.name, req.body.company_name, req.body.marker_type, req.body.project_dat_file, req.body.assetbundle_id, req.body.last_published
+ * update project with {id} owned by user with {userId}
+ * PUT
+ * api: /api/users/{userId}/projects/{id}
+ */
 router.put('/:id', function(req, res) {
-    var project = (function(el) {
-        var index = -1;
-        el.forEach(function(e,i) {
-            if (e.id.toString() === req.params.id && e.userId.toString() === req.params.userId) {
-                index = i;                
-            } 
-        });
-        return index < 0 ? undefined : el[index];
-    })(stubApi.projects);
-    if (project) {
-        project.name = req.body.name || project.name;
-        res.json({status: "ok", length: 1, data: [project]});
-    } else {
-        res.json({status: "fail", message: "project is not found", length: 0, data: []});
-    }
+    models.project.findById(req.params.id).then(function(project) {
+        if(project) {
+            models.project.update({
+                name: req.body.name || project.name,
+                company_name: req.body.company_name || project.company_name,
+                marker_type: req.body.marker_type || project.marker_type,
+                project_dat_file: req.body.project_dat_file || project.project_dat_file,
+                assetbundle_id: req.body.assetbundle_id || project.assetbundle_id,
+                last_published: req.body.last_published || project.last_published    
+            }, { 
+                where: {
+                    id: req.params.id
+                }
+            }).then(function() {
+                models.project.findById(req.params.id).then(function(updatedProject) {
+                     res.json({status: "ok", message: "updated project", length: 1, data: [updatedProject]});
+                });
+            });
+        } else {
+            res.json({status: "fail", message: "project not found", length: 0, data: []});
+        }
+    });
 });
 
 module.exports = router;

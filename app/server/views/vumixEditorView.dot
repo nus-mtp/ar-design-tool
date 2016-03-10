@@ -2,12 +2,10 @@
 <html>
 	<head>
 		<meta charset='utf-8'>
-            <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
-            <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
-            <link rel="stylesheet" href="resources/css/editor.css" />
-            <link rel="stylesheet" href="resources/css/style.css" />
-            <link rel="stylesheet" href="resources/webgl/TemplateData/style.css">
-          	<title>Vumix Editor Application</title>
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="resources/css/editor.css" />
+    <title>Vumix Editor Application</title>
 	</head>
 	<body>
 		<div ng-app="vumixEditorApp">
@@ -18,12 +16,16 @@
     <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="vendors/angular/angular.js"></script>
     <script type="text/javascript" src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="vendors/jsPlumb/dist/js/jsPlumb-2.0.7.js"></script>
+    
     <script type="text/javascript" src="vumixEditorApp/app.js"></script>
+    
     <script type="text/javascript" src="vumixEditorApp/services/_services.js"></script>
     <script type="text/javascript" src="vumixEditorApp/services/unityMapperService.js"></script>
+    <script type="text/javascript" src="vumixEditorApp/services/editorService.js"></script>
+    
     <script type="text/javascript" src="vumixEditorApp/controllers/_controllers.js"></script>
     <script type="text/javascript" src="vumixEditorApp/controllers/editorController.js"></script>
-    <script type="text/javascript" src="vumixEditorApp/controllers/stateManagerController.js"></script>
-    <script type="text/javascript" src="vendors/jsPlumb/dist/js/jsPlumb-2.0.7.js"></script>
+    <script type="text/javascript" src="vumixEditorApp/controllers/managerController.js"></script>
 	</body>
 </html>
