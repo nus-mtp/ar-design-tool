@@ -1,6 +1,10 @@
+var unity_var = require('../config/unity');
+
 module.exports = function() {
 	const spawn 	= require('child_process').exec;
-	const ping 		= spawn('PING www.google.com');
+
+	// const unity		= spawn(unity_var.unity)
+	const ping 		= spawn('tracert www.google.com');
 	const git		= spawn('git branch', ['-l']);
 
 	git.stdout.on('data', (data) => {
