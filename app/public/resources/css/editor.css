@@ -6,7 +6,6 @@
 
 /* Jeffrey's */
 
-<<<<<<< HEAD
 .fullscreen-overlay {
   position: fixed;
   top: 0;
@@ -16,8 +15,6 @@
   z-index: 9999;
 }
 
-=======
->>>>>>> NEW_WENZHAO
 .resizable-panels { 
   position: absolute;
   top: 0;
