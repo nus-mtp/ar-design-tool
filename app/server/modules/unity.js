@@ -3,7 +3,7 @@ var fs 			= require('fs');
 
 module.exports = function(uid, pid) {
 	var project_path = unity_var.project_path + uid + '/' + pid + '/';
-	var unity_cmd = '"' + unity_var.unity + '" -createProject "' + project_path + '" -importPackage "' + unity_var.app_builder;
+	var unity_cmd = '"' + unity_var.unity + '" -createProject "' + project_path + '" -importPackage "' + unity_var.app_builder + '"';
 		
 	try {
 		console.log(fs.statSync(project_path))	
@@ -24,9 +24,9 @@ module.exports = function(uid, pid) {
 			}
 		}
 	}
-
+	console.log(unity_cmd)
 	const exec	= require('child_process').exec;
-	const unity	= exec(unity_cmd, (error, stdout, stderr) => {
+	const unity	= exec(unity_cmd, function(error, stdout, stderr) {
 			console.log(`stdout: ${stdout}`);
 			console.log(`stderr: ${stderr}`);		
 			if (error !== null) {
@@ -35,7 +35,7 @@ module.exports = function(uid, pid) {
 		}
 	);
 	
-	unity.on('close', (code) => {
+	unity.on('close', function(code) {
 		console.log(`child process exited with code ${code}`);
 	});
 };
