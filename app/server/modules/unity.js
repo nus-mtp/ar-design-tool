@@ -33,7 +33,6 @@ module.exports = function(uid, pid) {
 			}
 		}
 	);
-	
 	unity.on('close', function(code) {
 		console.log("child process exited with code " + code);
 	});
