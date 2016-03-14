@@ -21,4 +21,15 @@ var checkExistsIfNotCreate = function(dirpath) {
 	}
 }
 
+var saveFileToDest = function(file, dest) {
+	fs.writeFile(dest, file, function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('Saved file ' + dest);
+		}
+	});
+}
+
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
+module.exports.saveFileToDest = saveFileToDest;

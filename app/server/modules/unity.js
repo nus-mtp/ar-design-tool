@@ -39,5 +39,5 @@ var rebuildPackage = function(uid, pid) {
 	});
 }
 
-module.exports.createProj = createProj;
-module.exports.rebuildPackage = rebuildPackage;
+module.exports.createProj 		= createProj;
+module.exports.rebuildPackage 	= rebuildPackage;

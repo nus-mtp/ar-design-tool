@@ -3,10 +3,12 @@
  * @parent VUMIX
  * This is the api for user projects  
  */
-var unity   = require('../modules/unity'),
-    models  = require('../models'),
-    express = require('express'),
-    multer  = require('multer');
+var utils       = require('../modules/utils'),
+    unity       = require('../modules/unity'),
+    unity_var   = require('../config/unity'),
+    models      = require('../models'),
+    express     = require('express'),
+    multer      = require('multer');
 
 var router = express.Router({mergeParams: true});
 
@@ -59,13 +61,13 @@ router.get('/:id', function(req, res) {
  * api: /api/users/{userId}/projects
  */
 router.post('/', function(req, res) {
-    // TODO: add vuforia package 
     var newProj = {
         uid: req.params.userId,
         name: req.body.name,
         company_name: req.body.company_name,
         marker_type: req.body.marker_type
     };
+    var vuforia_pkg = req.file;
     models.project.find({
         where: {
             uid: newProj.uid,
@@ -76,8 +78,21 @@ router.post('/', function(req, res) {
             res.json({status: "fail", message: "project already exists!", length: 0, data: []});
         } else {
             models.project.create(newProj).then(function() {
-                res.json({status: "ok", message: "new project created!", length: 1, data: [newProj]});
-                // run reimport script function
+                models.project.find({
+                    where: {
+                        uid: newProj.uid,
+                        name: newProj.name
+                    }
+                }).then(function(newproject) {
+                    // unity.createProj(newproject.uid, newproject.id);
+                    var project_path = unity_var.project_path+newproject.uid+'/'+newproject.id+'/';
+                    utils.checkExistsIfNotCreate(project_path);
+                    // TODO: save vuforia package
+                    // utils.saveFileToDest(vuforia_pkg, project_path+unity_var.vuforia);
+                    res.json({status: "ok", message: "new project created!", length: 1, data: [newproject]});
+                    // TODO: run reimport script function
+                    // unity.rebuildPackage(newproject.uid, newproject.id);
+                });         
             });            
         }
     });
