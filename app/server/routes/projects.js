@@ -4,6 +4,7 @@
  * This is the api for user projects  
  */
 var models  = require('../models'),
+    unity   = require('../modules/unity'),
     express = require('express');
 
 var router = express.Router({mergeParams: true});
@@ -40,6 +41,7 @@ router.get('/:id', function(req, res) {
         }
     }).then(function(project) {
         if(project) {
+            unity(project.uid, project.id);
             res.json({status: "ok", length: 1, data: [project]});
         } else {
             res.json({status: "fail", message: "project not found", length: 0, data: []});
@@ -62,8 +64,8 @@ router.post('/', function(req, res) {
         name: req.body.name,
         company_name: req.body.company_name,
         marker_type: req.body.marker_type,
-        project_dat_file: req.body.project_dat_file,
-        assetbundle_id: req.body.assetbundle_id
+        // project_dat_file: req.body.project_dat_file,
+        // assetbundle_id: req.body.assetbundle_id
     };
     models.project.find({
         where: {

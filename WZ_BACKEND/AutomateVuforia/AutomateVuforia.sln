@@ -1,0 +1,29 @@
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2008
+
+Project("{89FE69C4-3B27-D819-D088-D1CA47C139B1}") = "AutomateVuforia", "Assembly-CSharp.csproj", "{7A085522-A8A2-9934-63B9-3895B8C2EEFD}"
+EndProject
+Project("{89FE69C4-3B27-D819-D088-D1CA47C139B1}") = "AutomateVuforia", "Assembly-CSharp-Editor.csproj", "{4E5A66B8-0746-2E59-A4D5-93720BAAC5DC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A085522-A8A2-9934-63B9-3895B8C2EEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A085522-A8A2-9934-63B9-3895B8C2EEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A085522-A8A2-9934-63B9-3895B8C2EEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A085522-A8A2-9934-63B9-3895B8C2EEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5A66B8-0746-2E59-A4D5-93720BAAC5DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5A66B8-0746-2E59-A4D5-93720BAAC5DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5A66B8-0746-2E59-A4D5-93720BAAC5DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5A66B8-0746-2E59-A4D5-93720BAAC5DC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Assembly-CSharp.csproj
+	EndGlobalSection
+EndGlobal

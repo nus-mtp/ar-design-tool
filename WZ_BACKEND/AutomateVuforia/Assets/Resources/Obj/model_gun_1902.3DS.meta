@@ -1,0 +1,182 @@
+fileFormatVersion: 2
+guid: 315290480765a0648ac651194c066e8b
+timeCreated: 1453394205
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: box_of_sh
+    100002: Camera01
+    100004: Camera01.target
+    100006: Camera02
+    100008: Camera02.target
+    100010: Camera03
+    100012: Camera03.target
+    100014: koleso_l
+    100016: koleso_r
+    100018: //RootNode
+    100020: Omni05
+    100022: Plane01
+    100024: pricel
+    100026: probka
+    100028: regul
+    100030: regul_
+    100032: richag
+    100034: richag_gun
+    100036: sheet
+    100038: sheet_litt
+    100040: sheet_up
+    100042: shell
+    100044: sit_l
+    100046: sit_r
+    100048: stanina
+    100050: stvol
+    100052: under_stvo
+    400000: box_of_sh
+    400002: Camera01
+    400004: Camera01.target
+    400006: Camera02
+    400008: Camera02.target
+    400010: Camera03
+    400012: Camera03.target
+    400014: koleso_l
+    400016: koleso_r
+    400018: //RootNode
+    400020: Omni05
+    400022: Plane01
+    400024: pricel
+    400026: probka
+    400028: regul
+    400030: regul_
+    400032: richag
+    400034: richag_gun
+    400036: sheet
+    400038: sheet_litt
+    400040: sheet_up
+    400042: shell
+    400044: sit_l
+    400046: sit_r
+    400048: stanina
+    400050: stvol
+    400052: under_stvo
+    2300000: box_of_sh
+    2300002: koleso_l
+    2300004: koleso_r
+    2300006: Plane01
+    2300008: pricel
+    2300010: probka
+    2300012: regul
+    2300014: regul_
+    2300016: richag
+    2300018: richag_gun
+    2300020: sheet
+    2300022: sheet_litt
+    2300024: sheet_up
+    2300026: shell
+    2300028: sit_l
+    2300030: sit_r
+    2300032: stanina
+    2300034: stvol
+    2300036: under_stvo
+    3300000: box_of_sh
+    3300002: koleso_l
+    3300004: koleso_r
+    3300006: Plane01
+    3300008: pricel
+    3300010: probka
+    3300012: regul
+    3300014: regul_
+    3300016: richag
+    3300018: richag_gun
+    3300020: sheet
+    3300022: sheet_litt
+    3300024: sheet_up
+    3300026: shell
+    3300028: sit_l
+    3300030: sit_r
+    3300032: stanina
+    3300034: stvol
+    3300036: under_stvo
+    4300000: box_of_sh
+    4300002: shell
+    4300004: stanina
+    4300006: koleso_r
+    4300008: koleso_l
+    4300010: regul_
+    4300012: sheet
+    4300014: sheet_up
+    4300016: sheet_litt
+    4300018: richag
+    4300020: sit_l
+    4300022: sit_r
+    4300024: stvol
+    4300026: richag_gun
+    4300028: probka
+    4300030: under_stvo
+    4300032: pricel
+    4300034: regul
+    4300036: Plane01
+  materials:
+    importMaterials: 0
+    materialName: 2
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

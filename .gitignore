@@ -7,6 +7,8 @@
 .log
 ehthumbs.db
 Thumbs.db
+.bin
+.log
 
 
 # Node modules 
@@ -29,3 +31,8 @@ npm-debug.log
 # Save File #
 #############
 app/public/state.dat
+
+
+# Unity Project #
+#################
+app/server/storage

@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 
-// testing
+//testing
 var istanbul  = require('gulp-istanbul');
 var codecov   = require('gulp-codecov');
 var mocha     = require('gulp-mocha');
@@ -24,7 +24,7 @@ gulp.task('sasslint', function(){
 });
 
 gulp.task('jslint', function(){
-    return gulp.src(['public/**/*.js', '!public/resources/**/*.js', 'server/**/*.js'])
+    return gulp.src(['public/**/*.js', '!public/resources/**/*.js', 'server/**/*.js', '!server/storage/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter(jshintStylish));
 });
@@ -45,7 +45,7 @@ gulp.task('open-frontend-coverage', ['frontend-test'], function() {
 });
 
 gulp.task('prepare-istanbul-reporter', function() {
-  return gulp.src(['server/*.js', 'server/**/*.js', '!server/modules/passport.js'])
+  return gulp.src(['server/*.js', 'server/**/*.js', '!server/routes/users.js', '!server/routes/models.js', '!server/routes/projects.js', '!server/config/*.js', '!server/modules/passport.js', '!server/modules/unity.js', '!server/modules/createTestDB.js', '!server/storage/**'])
     .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire());
 });
@@ -66,8 +66,7 @@ gulp.task('open-backend-coverage', ['backend-test'], function() {
 });
 
 gulp.task('test:local', ['open-frontend-coverage', 'open-backend-coverage', 'lint', 'sasslint'], function() {
-  
-})
+});
 
 gulp.task('test:ci', ['frontend-test', 'backend-test', 'lint', 'sasslint'], function() {
   return gulp.src(['./test/coverage/mocha/lcov/lcov.info', './test/coverage/jasmine/lcov/lcov.info'])

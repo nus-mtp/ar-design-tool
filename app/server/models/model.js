@@ -22,7 +22,7 @@ module.exports = function(sequelize, DataTypes) {
 		},
 		file_location: {
 			type: DataTypes.STRING,
-			allowNull: false
+			allowNull: true
 		}
 	}, {
 		timestamps: true,
