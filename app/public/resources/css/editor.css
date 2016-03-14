@@ -279,6 +279,10 @@ h1{
     text-align:center;
 }
 
+.task .button_editor{
+    float:left;
+}
+
 .task .button_remove{
     float:right;
 }
