@@ -42,35 +42,50 @@
         <div id="create_project" class="side-bar-padding">
             <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
             <span>
-              <form ng-controller="projectController">
+              <form ng-controller="managerController" ng-submit="addProject()">
                 <h2> Company Name</h2>
                 <input type="text" name="org_name" placeholder="Company Name" ng-model="project.company_name"><br>
                 <h2> Project Name</h2>
                 <input type="text" name="project_name" placeholder="Project Name" ng-model="project.project_name"><br>
-                <h2> License Key</h2>
-                <input type="text" name="license_key" placeholder="License Key" ng-model="project.license_key"><br>
+                <h2> Target Marker Type</h2>
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D Marker" checked="" ng-model="project.marker_type">
+                        2D 
+                    </label>
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D Marker" ng-model="project.marker_type">
+                        3D 
+                    </label>
                 <h2> Upload Your Vuforia Package</h2>
-                <form class="form-horizontal" id="add-product-form" action="#" method="post">
-                    <div id="dropzone_project" class="dropzone" style="color:#000000; min-height: 100px;"></div> <!-- This is the dropzone element -->
-                </form>
+                <input type ="file" ng-model="project.upload">
+                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                    <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
+                </form>-->
                 <a href="https://developer.vuforia.com/">Find out how to create a target</a>
-                <input type="submit" class="center" value="Create" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF" ng-click="createProject()">
+                <input type="submit" class="center" value="Create" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
               </form>
           </span>
         </div>
         <div id="upload_model" class="side-bar-padding">
-            <div class="search" style="margin-top:10px">
+            <!--<div class="search" style="margin-top:10px">
                 <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
-            </div>
+            </div>-->
             <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
             <span>
-              <form>
+              <form ng-controller="modelController" ng-submit="addModel()">
                 <h1> Model Name</h1>
-                <input type="text" name="model_name" placeholder="Model Name"><br>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="model_name"><br>
+                <h1> File Size</h1>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="file_size"><br>
+                <h1> File Extension</h1>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="file_extension"><br>
+                <h1> File Location</h1>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="file_location"><br>
                 <h1> File</h1>
-                <form class="form-horizontal" id="add-product-form" action="#" method="post">
-                    <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div> <!-- This is the dropzone element -->
-                </form>
+                <input type ="file" ng-model="upload_model">
+                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                    <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
+                <!--</form>-->
                 <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
               </form>
           </span>
@@ -83,7 +98,7 @@
             <div ng-controller="managerController" id="project_list" class="flex-container">
                 <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
 
-                <ul ng-repeat="pr in listProjects | filter:search">
+                <ul ng-repeat="pr in projects" | filter:search">
                     <a href="/state" class="">
                         <li class="flex-item">1
                             <p>{{pr.name}}</p>
@@ -97,7 +112,7 @@
             <div ng-controller="modelController" id="model_list" class="flex-container">
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
                 
-                <ul ng-repeat="model in listModels | filter:search">
+                <ul ng-repeat="model in viewmodel.models" | filter:search">
                     <a href="#" " class=" ">
                     <li class="flex-item ">2
                         <p>{{model.name}}</p>
@@ -117,12 +132,12 @@
 
 $(function() {
     $(document).ready(function(){
-        Dropzone.autoDiscover = false;
-        var createDropzone = new Dropzone ("div#dropzone_project ", { url: "# "});
-        var uploadDropzone = new Dropzone ("div#dropzone_model ", { url: "# "});
+        // Dropzone.autoDiscover = false;
+        // var createDropzone = new Dropzone ("div#dropzone_project ", { url: "# "});
+        // var uploadDropzone = new Dropzone ("div#dropzone_model ", { url: "# "});
         
         
-        var height = $(window).height();
+        var height = $(window).height() + 500;
         $('.sidebar').css("min-height", height);
         
         // when user resize their window
