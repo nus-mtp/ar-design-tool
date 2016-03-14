@@ -2,9 +2,15 @@
   "name": "angular",
   "version": "1.0.0",
   "description": "AR Design Tool",
+<<<<<<< HEAD
   "main": "vumix.js",
   "scripts": {
     "start": "nodemon vumix",
+=======
+  "main": "ardesign.js",
+  "scripts": {
+    "start": "nodemon ardesign",    
+>>>>>>> NEW_WENZHAO
     "test": "./node_modules/.bin/gulp test:local",
     "test-ci": "./node_modules/.bin/gulp test:ci"
   },

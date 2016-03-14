@@ -14,6 +14,7 @@ node_modules/
 bower_components/
 
 
+<<<<<<< HEAD
 # Test coverage 
 test/coverage
 coverage/
@@ -29,3 +30,8 @@ npm-debug.log
 # Save File #
 #############
 app/public/state.dat
+=======
+# Test coverage #
+#################
+test/coverage
+>>>>>>> NEW_WENZHAO
