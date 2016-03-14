@@ -56,12 +56,13 @@ router.get('/:id', function(req, res) {
  * api: /api/users/{userId}/models
  */
 router.post('/', function(req, res) {
+    // TODO: remove file_location
     var newModel = {
         uid: req.params.userId,
         name: req.body.name,
         file_size: req.body.file_size,
         file_extension: req.body.file_extension,
-        file_location: req.body.file_location
+        // file_location: req.body.file_location
     };
     models.model.find({
         where: {

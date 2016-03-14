@@ -7,6 +7,8 @@
 .log
 ehthumbs.db
 Thumbs.db
+.bin
+.log
 
 
 # Node modules 
@@ -14,7 +16,6 @@ node_modules/
 bower_components/
 
 
-<<<<<<< HEAD
 # Test coverage 
 test/coverage
 coverage/
@@ -30,8 +31,8 @@ npm-debug.log
 # Save File #
 #############
 app/public/state.dat
-=======
-# Test coverage #
+
+
+# Unity Project #
 #################
-test/coverage
->>>>>>> NEW_WENZHAO
+app/server/storage
