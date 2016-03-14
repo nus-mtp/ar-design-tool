@@ -3,12 +3,9 @@ node_js:
   - "5.4.0"
   - "0.12"
 
-<<<<<<< HEAD
 env:
   - NODE_ENV=test-travis
 
-=======
->>>>>>> NEW_WENZHAO
 services:
   - mysql
 
