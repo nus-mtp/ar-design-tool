@@ -7,15 +7,22 @@ public class StateManager : MonoBehaviour {
 
     private const string CURRENT_SELECTED_ITEM_TEXT = "Current Selected Item: ";
     private const string CURRENT_STATE_TEXT = "Current State:{0}";
+    private const string PREVIEW_MODE_TEXT = "In Preview Mode";
+    private const string EDIT_MODE_TEXT = "In Edit Mode";
+    public const string CONTROL_SCRIPT_TAG = "ControlScripts";
 
     private ObjectCollection objectCollection;
     private List<State> stateList;
     private State activeState;
     private int stateNumber;
     private int nextStateId;
+    private bool isPreview = false;
+    private float initialAspectRatio;
     
     public Text currentSelectedDisplay;
     public Text stateNumberDisplay;
+    public GameObject leftBlockOut;
+    public GameObject rightBlockOut;
 
     public void InitialzeStates(List<SerialState> serialStates)
     {
@@ -143,15 +150,67 @@ public class StateManager : MonoBehaviour {
         stateList.RemoveAt(i);
     }
     
-    public List<SerialState> ToSerial()
+    public ProjectState ToSerial()
     {
+        ProjectState project = new ProjectState();
         List<SerialState> serialStates = new List<SerialState>();
-        stateNumber = 0;
+       
         foreach (State s in stateList)
         {
             SerialState serialState = new SerialState(s);
             serialStates.Add(serialState);
         }
-        return serialStates;
+        project.serialStates = serialStates;
+        return project;
+    }
+
+    public void TogglePreview()
+    {
+        isPreview = !isPreview;
+        if (isPreview)
+        {
+            EnterPreview();
+        }
+        else
+        {
+            ExitPreview();
+        }
+    }
+
+    private void EnterPreview()
+    {
+        GameObject active = GetActiveGameObject();
+        leftBlockOut.SetActive(true);
+        rightBlockOut.SetActive(true);
+        RectTransform left = leftBlockOut.GetComponent<RectTransform>();
+        RectTransform right = rightBlockOut.GetComponent<RectTransform>();
+        currentSelectedDisplay.text = PREVIEW_MODE_TEXT;
+        float widthOfBLockOut = (Screen.width / 2) - (Screen.height * 9 / 32);
+        left.sizeDelta = new Vector2(widthOfBLockOut, Screen.height);
+        right.sizeDelta = new Vector2(widthOfBLockOut, Screen.height);
+        if (active != null)
+        {
+            active.GetComponent<Transformable>().destroyElements();
+        }
+        foreach (State s in stateList)
+        {
+            s.SetPreview();
+        }
+    }
+
+    private void ExitPreview()
+    {
+        GameObject active = GetActiveGameObject();
+        leftBlockOut.SetActive(false);
+        rightBlockOut.SetActive(false);
+        currentSelectedDisplay.text = EDIT_MODE_TEXT;
+        if (active != null)
+        {
+            active.GetComponent<Transformable>().initializeElements();
+        }
+        foreach (State s in stateList)
+        {
+            s.DisablePreview();
+        }
     }
 }

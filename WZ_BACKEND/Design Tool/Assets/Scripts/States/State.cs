@@ -77,7 +77,7 @@ public class State {
                 }
                 activeGameObject = s.gameObject;
                 activeStateObject = s;
-                activeGameObject.GetComponent<Transformable>().initializeObjects();
+                activeGameObject.GetComponent<Transformable>().initializeElements();
                 instanceName = s.instanceName;
                 break;
             }
@@ -95,7 +95,10 @@ public class State {
        if (activeGameObject != null)
        {
            Transformable t = activeGameObject.GetComponent<Transformable>();
-           t.destroyElements();
+           if (t != null)
+           {
+               t.destroyElements();
+           }
        }
     }
 
@@ -121,7 +124,12 @@ public class State {
         }
         if (activeGameObject != null)
         {
-            activeGameObject.GetComponent<Transformable>().initializeObjects();
+
+            Transformable t = activeGameObject.GetComponent<Transformable>();
+            if (t != null)
+            {
+                t.initializeElements();
+            }
         }
     }
 
@@ -129,6 +137,22 @@ public class State {
     {   
         stateObjects.Remove(activeStateObject);
         activeStateObject.Destroy();
+    }
+
+    public void SetPreview()
+    {
+        foreach (StateObject s in stateObjects)
+        {
+            s.SetPreview();
+        }
+    }
+
+    public void DisablePreview()
+    {
+        foreach (StateObject s in stateObjects)
+        {
+            s.DisablePreview();
+        }
     }
 
     

@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 public class StateObjectChanger : MonoBehaviour {
 
-    const string CONTROL_SCRIPT_TAG = "ControlScripts";
     const string SELECTOR_NAME = "Selector";
     const string TOGGLE_NAME = "StateChangeToggle";
     const string STATE_DROPDOWN_NAME = "StateDropDown";
@@ -19,26 +18,13 @@ public class StateObjectChanger : MonoBehaviour {
     private Text transitionStateText;
     private Toggle toggle;
     private Dropdown dropDown;
-    private bool initialized = false;
 
 	// Use this for initialization
 	void Awake () {
-        GameObject controlScripts = GameObject.FindGameObjectWithTag(CONTROL_SCRIPT_TAG);
+        GameObject controlScripts = GameObject.FindGameObjectWithTag(StateManager.CONTROL_SCRIPT_TAG);
         stateManager = controlScripts.GetComponent<StateManager>();
 	}
 	
-	// Update is called once per frame
-	void Update () 
-    {
-	    
-	}
-
-    void Start()
-    {
-
-       
-    }
-
     public void AddStateObject(StateObject so)
     {
         stateObject = so;
@@ -54,7 +40,6 @@ public class StateObjectChanger : MonoBehaviour {
             toggle.isOn = true;
             dropDown = GetComponentInChildren<Dropdown>();
             UpdateOptions();
-            dropDown.value = so.transitionStateId;
             transitionStateText.text = TRANSITION_STATE_DISPLAY + so.transitionStateId;
         }
         else
@@ -63,9 +48,6 @@ public class StateObjectChanger : MonoBehaviour {
         }
 
     }
-       
-
-      
 
     public void UpdateOptions()
     {
@@ -79,7 +61,6 @@ public class StateObjectChanger : MonoBehaviour {
 
     public void SetStateChange()
     {
-        Debug.Log(dropDown.value);
         if (dropDown == null)
         {
             dropDown = GetComponentInChildren<Dropdown>();

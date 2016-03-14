@@ -58,6 +58,7 @@ public class ObjectCollection : MonoBehaviour
     private void AttachScripts(GameObject go)
     {
         go.AddComponent<Transformable>();
+        go.AddComponent<Preview>();
     }
 
     public List<GameObject> GetUserObjects()
@@ -87,8 +88,8 @@ public class ObjectCollection : MonoBehaviour
     {
         userObjects = new List<GameObject>();
         stateManager = gameObject.GetComponent<StateManager>();
-        LoadAssetBundle lab = gameObject.GetComponent<LoadAssetBundle>();
-        lab.DownloadAndInstantiate();
+        //LoadAssetBundle lab = gameObject.GetComponent<LoadAssetBundle>();
+        //lab.DownloadAssetBundleTest();
     }
 
 }

@@ -10,16 +10,19 @@ public class LoadProgress : MonoBehaviour {
 	private const string SAVE_DATA_URL = "./state.dat";
     private byte[] saveData;
     private StateManager stateManager;
-    public void Load()
+
+    public void Load(string url)
     {
-        StartCoroutine(DownLoadData());
+        StartCoroutine(DownLoadData(url));
        
     }
-    
-    private IEnumerator DownLoadData()
+
+    private IEnumerator DownLoadData(string url)
     {
-        
-        WWW www = new WWW(SAVE_DATA_URL);
+        //prevent browser caching
+        string randomValue = "?random=" + Random.value;
+        url +=  randomValue;
+        WWW www = new WWW(url);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -33,7 +36,8 @@ public class LoadProgress : MonoBehaviour {
         www.Dispose();
         BinaryFormatter bf = new BinaryFormatter();
         Stream stream = new MemoryStream(saveData);
-        List<SerialState> states = (List<SerialState>)bf.Deserialize(stream);
+        ProjectState project = (ProjectState)bf.Deserialize(stream);
+        List<SerialState> states = project.serialStates;
         stateManager.InitialzeStates(states);
     }
     

@@ -15,17 +15,17 @@ public class SaveProgress : MonoBehaviour {
     public StateManager stateManager;
     public UnityEngine.UI.Text text;
 
-    public void Save()
+    public void Save(string url)
     {
         text.text = SAVE_START;
-        StartCoroutine(PostData());
+        StartCoroutine(PostData(url));
     }
 
-    private IEnumerator PostData()
+    private IEnumerator PostData(string url)
     {
         WWWForm form = new WWWForm();
         form.AddBinaryData(FIELD_NAME, SerializeData(),SAVE_FILE_NAME);
-        WWW www = new WWW(SAVE_URL,form);
+        WWW www = new WWW(url,form);
         yield return www;
 
         if (!string.IsNullOrEmpty(www.error))
@@ -44,7 +44,7 @@ public class SaveProgress : MonoBehaviour {
     private byte[] SerializeData()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        List<SerialState> toSerialize = stateManager.ToSerial();
+        ProjectState toSerialize = stateManager.ToSerial();
         MemoryStream s = new MemoryStream();
         bf.Serialize(s, toSerialize);
         return s.ToArray();

@@ -34,4 +34,18 @@ public class StateObject{
         MonoBehaviour.Destroy(gameObject);
     }
 
+    public void SetPreview()
+    {
+        Transformable t = gameObject.GetComponent<Transformable>();
+        t.SetPreview();
+        Preview p = gameObject.GetComponent<Preview>();
+        p.SetPreview(transitionStateId, isStateChanger);
+    }
+
+    public void DisablePreview()
+    {
+        Transformable t = gameObject.GetComponent<Transformable>();
+        t.DisablePreview();
+    }
+
 }

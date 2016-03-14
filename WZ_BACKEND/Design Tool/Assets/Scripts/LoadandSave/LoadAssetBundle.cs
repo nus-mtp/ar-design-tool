@@ -13,7 +13,6 @@ public class LoadAssetBundle : MonoBehaviour
     const string DOWNLOAD_FAIL_MESSAGE = "Download has failed, please reload the page";
     const string DOWNLOAD_PASS_MESSAGE = "Assets sucessfully loaded";
 
-    private string url = "";
     private WWW www;
     private AssetBundle bundle;
     private bool isDownloading = false;
@@ -21,12 +20,12 @@ public class LoadAssetBundle : MonoBehaviour
 
     public Text downloadStatus;
 
-    private IEnumerator Download()
+    private IEnumerator Download(string url)
     {
         // Start a download of the given URL
         //Random argument added to the back of the URL to prevent caching
         string randomValue = "?t=" + Random.value;
-        url = assetBundleName + randomValue;
+        url += randomValue;
         www = new WWW(url);
         isDownloading = true;
         downloadStatus.color = Color.black;
@@ -68,9 +67,14 @@ public class LoadAssetBundle : MonoBehaviour
 
     }
 
-    public void DownloadAndInstantiate()
+    public void DownloadAndInstantiate(string url)
     {
-        StartCoroutine(Download());
+        StartCoroutine(Download(url));
+    }
+
+    public void DownloadAssetBundleTest()
+    {
+        DownloadAndInstantiate(assetBundleName);
     }
 
     void Awake()

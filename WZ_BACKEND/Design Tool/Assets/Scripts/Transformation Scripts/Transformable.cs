@@ -16,6 +16,7 @@ public class Transformable : MonoBehaviour
     private Vector3 screenPoint;
     private Vector3 offset;
     private GameObject container;
+    private bool isPreview = false;
 
     public static void SetTransformMode(string val)
     {
@@ -33,7 +34,7 @@ public class Transformable : MonoBehaviour
 
         }
 
-        stateManager.GetActiveGameObject().GetComponent<Transformable>().initializeObjects();
+        stateManager.GetActiveGameObject().GetComponent<Transformable>().initializeElements();
     }
 
     public void destroyElements()
@@ -44,7 +45,7 @@ public class Transformable : MonoBehaviour
         }
     }
 
-    public void initializeObjects()
+    public void initializeElements()
     {
         GameObject x, y, z;
         float pad = 1.0f;
@@ -209,7 +210,11 @@ public class Transformable : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (EventSystem.current.IsPointerOverGameObject() == false)
+        if (isPreview)
+        {
+            return;
+        }
+        else if (EventSystem.current.IsPointerOverGameObject() == false)
         {
             stateManager.SetActiveGameObject(gameObject);
             screenPoint = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -221,6 +226,10 @@ public class Transformable : MonoBehaviour
 
     void OnMouseDrag()
     {
+        if (isPreview)
+        {
+            return;
+        }
         if (EventSystem.current.IsPointerOverGameObject() == false)
         {
             Vector3 curScreenPoint = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
@@ -233,9 +242,18 @@ public class Transformable : MonoBehaviour
 
     void Awake()
     {
-        GameObject controlScripts = GameObject.FindGameObjectWithTag("ControlScripts");
+        GameObject controlScripts = GameObject.FindGameObjectWithTag(StateManager.CONTROL_SCRIPT_TAG);
         stateManager = controlScripts.GetComponent<StateManager>();
     }
 
+    public void SetPreview()
+    {
+        isPreview = true;
+    }
+
+    public void DisablePreview()
+    {
+        isPreview = false;
+    }
 
 }

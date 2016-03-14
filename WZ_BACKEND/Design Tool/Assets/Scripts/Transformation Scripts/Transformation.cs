@@ -4,9 +4,9 @@ using System.Collections;
 public class Transformation : MonoBehaviour
 {
 
-    public float scalingSpeed = 0.03f;
+    public float scalingSpeed = 0.3f;
     public float rotationSpeed = 70.0f;
-    public float translationSpeed = 5.0f;
+    public float translationSpeed = 50.0f;
     public GameObject transformationTarget;
     public StateManager stateManager;
     bool repeatScaleUp = false;

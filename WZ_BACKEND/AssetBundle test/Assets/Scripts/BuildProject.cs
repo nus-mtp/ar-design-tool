@@ -20,6 +20,7 @@ public class BuildProject : MonoBehaviour {
     const string IMAGE_DATASET_PATH = "/Editor/QCAR/ImageTargetTextures";
     const string OBJECT_DATASET_PATH = "/Editor/QCAR/TargetSetData";
     const string MODELS_DATA_PATH = "/Resources/Obj";
+    const string IDENTIFIER_FILE_PATH = "/BundleIdentifier/bundleIdentifier.txt";
 
     const int INVALID_PACKAGE_ERROR_CODE = 2;
 
@@ -28,32 +29,25 @@ public class BuildProject : MonoBehaviour {
     private static GameObject marker2d;
     private static GameObject marker3d;
     private static GameObject ARCamera;
-    private static List<GameObject> userGameObjects = new List<GameObject>();
     private static string[] levels = { DEFAULT_SCENE_NAME };
-
-    static void PlaceObjects(List<string> objNames,GameObject marker)
-    {
-        foreach (string objName in objNames)
-        {
-            GameObject go = Instantiate(FileLoader.loadOBJ(objName)) as GameObject;
-            go.transform.SetParent(marker.transform,false);
-            userGameObjects.Add(go);
-        }
-    }
 
     public static void SetUpStates(GameObject marker)
     {
-        List<SerialState> states = LoadState.Load(); 
-        List<string> modelNames = new List<string>();
-      
+        ProjectState project = LoadState.Load();
+        List<SerialState> states = project.serialStates;
         Scene currentScene =  EditorSceneManager.GetActiveScene();
         GameObject stateManagerGO = new GameObject();
         stateManagerGO.name = "State Manager";
         AppStateManager stateManager = stateManagerGO.AddComponent<AppStateManager>();
         stateManager.SetUp(states,marker);
-        //PlaceObjects(modelNames, marker);
         EditorSceneManager.SaveScene(currentScene, DEFAULT_SCENE_NAME, false);
 
+    }
+
+    [MenuItem("File/Set Identifier")]
+    private static void SetIdentifier()
+    {
+        PlayerSettings.bundleIdentifier = System.IO.File.ReadAllText(Application.dataPath + IDENTIFIER_FILE_PATH);
     }
 
     private static string[] ReadDataSetTrackerName(MarkerType markerType)
@@ -135,6 +129,7 @@ public class BuildProject : MonoBehaviour {
     {
         SetupVuforiaTools(MarkerType.IMAGE);
         SetUpStates(marker2d);
+        SetIdentifier();
         BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.Android, BuildOptions.None);
         //CleanProject();
        
@@ -147,6 +142,7 @@ public class BuildProject : MonoBehaviour {
         
         SetupVuforiaTools(MarkerType.OBJECT);
         SetUpStates(marker3d);
+        SetIdentifier();
         BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.Android, BuildOptions.None);
     }
 
@@ -156,6 +152,7 @@ public class BuildProject : MonoBehaviour {
         
         SetupVuforiaTools(MarkerType.IMAGE);
         SetUpStates(marker2d);
+        SetIdentifier();
         BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.iOS, BuildOptions.None);
         
     }
@@ -166,6 +163,7 @@ public class BuildProject : MonoBehaviour {
         
         SetupVuforiaTools(MarkerType.OBJECT);
         SetUpStates(marker3d);
+        SetIdentifier();
         BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.iOS, BuildOptions.None);
         
     }
