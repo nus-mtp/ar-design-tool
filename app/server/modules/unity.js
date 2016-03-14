@@ -1,9 +1,8 @@
-var unity_var = require('../config/unity');
-var fs = require('fs');
+var unity_var 	= require('../config/unity');
+var fs 			= require('fs');
 
 module.exports = function(uid, pid) {
 	var project_path = unity_var.project_path + uid + '/' + pid + '/';
-	// var unity_cmd = unity_var.unity;
 	var unity_cmd = '"' + unity_var.unity + '" -createProject "' + project_path + '" -importPackage "' + unity_var.app_builder + '" -quit';
 		
 	try {
@@ -26,11 +25,9 @@ module.exports = function(uid, pid) {
 		}
 	}
 
-	const spawn 	= require('child_process').exec;
+	const spawn = require('child_process').exec;
+	const unity	= spawn(unity_cmd);
 
-	const unity		= spawn(unity_cmd);
-	// console.log(project_path)
-	// console.log(unity_cmd)
 	unity.stdout.on('dara', (data) => {
 		console.log(`stdout: ${data}`);
 	});
