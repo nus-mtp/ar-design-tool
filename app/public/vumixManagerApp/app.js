@@ -1,7 +1,9 @@
 (function() {
   angular
     .module('vumixManagerApp', [
-      'vumixManagerApp.controllers',  
+      'vumixManagerApp.controllers',
+      'vumixManagerApp.services',
+      'ngResource', 
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
@@ -12,7 +14,7 @@
           views: {
             "manager": {
               templateUrl: '/vumixManagerApp/partials/manager.html',
-              controller: 'managerController'
+              controller: 'managerController' 
             }
           }
         });
