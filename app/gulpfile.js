@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 
-// testing
+//testing
 var istanbul  = require('gulp-istanbul');
 var codecov   = require('gulp-codecov');
 var mocha     = require('gulp-mocha');
@@ -66,8 +66,7 @@ gulp.task('open-backend-coverage', ['backend-test'], function() {
 });
 
 gulp.task('test:local', ['open-frontend-coverage', 'open-backend-coverage', 'lint', 'sasslint'], function() {
-  
-})
+});
 
 gulp.task('test:ci', ['frontend-test', 'backend-test', 'lint', 'sasslint'], function() {
   return gulp.src(['./test/coverage/mocha/lcov/lcov.info', './test/coverage/jasmine/lcov/lcov.info'])
