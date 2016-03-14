@@ -1,39 +1,43 @@
-var unity_var 	= require('../config/unity');
-var fs 			= require('fs');
+var utils 		= require('../modules/utils'),
+	unity_var 	= require('../config/unity');
 
-module.exports = function(uid, pid) {
-	var project_path 	= unity_var.project_path + uid + '/' + pid + '/';
-	var unity_cmd 		= '"' + unity_var.unity + '" -createProject "' + project_path + '" -importPackage "' + unity_var.app_builder + '"';
-	var makePath 		= unity_var.project_path + uid + '/';
-	try {
-		console.log(fs.statSync(project_path));	
-	} catch (e) {
-		try {
-			fs.mkdirSync(makePath); 
-			makePath = makePath + pid + '/';
-			fs.mkdirSync(makePath);
-		} catch (e) {
-			if (e.code == 'EEXIST') {
-				try {
-					makePath = unity_var.project_path + uid + '/' + pid + '/';
-					fs.mkdirSync(makePath);
-				} catch (e) {
-					console.log(e);
-				}
-			}
-		}
-	}
-	console.log(unity_cmd);
-	const exec	= require('child_process').exec;
+const exec		= require('child_process').exec;
+
+var createProj = function(uid, pid) {
+	var project_path 	= unity_var.project_path+uid+'/'+pid+'/';
+	var unity_cmd 		= '"'+unity_var.unity+'" -createProject "'+project_path+'" -importPackage "'+unity_var.app_builder+'" -quit';
+	var makePath 		= unity_var.project_path+uid+'/';
+	
+	utils.checkExistsIfNotCreate(project_path);
+	
+	console.log('running: ' + unity_cmd);
 	const unity	= exec(unity_cmd, function(error, stdout, stderr) {
-			console.log("stdout: " + stdout);
-			console.log("stderr: " + stderr);	
-			if (error !== null) {
-				console.log("exec error: " + error);
-			}
+		console.log("stdout: " + stdout);
+		console.log("stderr: " + stderr);	
+		if (error !== null) {
+			console.log("exec error: " + error);
 		}
-	);
+	});
 	unity.on('close', function(code) {
 		console.log("child process exited with code " + code);
 	});
 };
+
+var rebuildPackage = function(uid, pid) {
+	var project_path 	= unity_var.project_path+uid+'/'+pid+'/';
+	var rebuild_cmd 	= '"'+unity_var.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.ImpotrtPackage';
+	
+	utiils.checkExistsIfNotCreate(project_path);
+
+	console.log('running: ' + rebuild_cmd);
+	const rebuild = exec(rebuild_cmd, function(error, stdout, stderr) {
+		console.log("stdout: " + stdout);
+		console.log("stderr: " + stderr);	
+		if (error !== null) {
+			console.log("exec error: " + error);
+		}
+	});
+}
+
+module.exports.createProj = createProj;
+module.exports.rebuildPackage = rebuildPackage;

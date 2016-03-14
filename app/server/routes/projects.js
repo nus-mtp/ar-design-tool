@@ -3,9 +3,10 @@
  * @parent VUMIX
  * This is the api for user projects  
  */
-var models  = require('../models'),
-    unity   = require('../modules/unity'),
-    express = require('express');
+var unity   = require('../modules/unity'),
+    models  = require('../models'),
+    express = require('express'),
+    multer  = require('multer');
 
 var router = express.Router({mergeParams: true});
 
@@ -41,7 +42,7 @@ router.get('/:id', function(req, res) {
         }
     }).then(function(project) {
         if(project) {
-            unity(project.uid, project.id);
+            unity.createProj(project.uid, project.id);
             res.json({status: "ok", length: 1, data: [project]});
         } else {
             res.json({status: "fail", message: "project not found", length: 0, data: []});
@@ -58,14 +59,12 @@ router.get('/:id', function(req, res) {
  * api: /api/users/{userId}/projects
  */
 router.post('/', function(req, res) {
-    // TODO: add vuforia package and remove project dat and asset bundle (these two only saved when saved)
+    // TODO: add vuforia package 
     var newProj = {
         uid: req.params.userId,
         name: req.body.name,
         company_name: req.body.company_name,
-        marker_type: req.body.marker_type,
-        // project_dat_file: req.body.project_dat_file,
-        // assetbundle_id: req.body.assetbundle_id
+        marker_type: req.body.marker_type
     };
     models.project.find({
         where: {
@@ -78,6 +77,7 @@ router.post('/', function(req, res) {
         } else {
             models.project.create(newProj).then(function() {
                 res.json({status: "ok", message: "new project created!", length: 1, data: [newProj]});
+                // run reimport script function
             });            
         }
     });
