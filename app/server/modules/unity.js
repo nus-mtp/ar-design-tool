@@ -26,15 +26,15 @@ module.exports = function(uid, pid) {
 	}
 
 	const exec	= require('child_process').exec;
-	const unity	= exec(unity_cmd, {
-		(error, stdout, stderr) => {
+	const unity	= exec(unity_cmd, (error, stdout, stderr) => {
 			console.log(`stdout: ${stdout}`);
 			console.log(`stderr: ${stderr}`);		
 			if (error !== null) {
 				console.log(`exec error: ${error}`);
 			}
 		}
-	});
+	);
+	
 	unity.on('close', (code) => {
 		console.log(`child process exited with code ${code}`);
 	});
