@@ -196,6 +196,10 @@ jsPlumb.ready(function () {
 		workflowConnectorEndpoint
 	);
 					
+    jsPlumb.bind('dblclick', function (connection, e) {
+            jsPlumb.detach(connection);
+    });
+		
 	$('#'+htmlBase).on("click", ".button_remove", function () {
 		var parentnode = $(this)[0].parentNode.parentNode;
 		jsPlumb.detachAllConnections(parentnode);
