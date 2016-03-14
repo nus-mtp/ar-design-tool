@@ -41,7 +41,7 @@ router.get('/:id', function(req, res) {
         }
     }).then(function(project) {
         if(project) {
-            unity();
+            // unity();
             res.json({status: "ok", length: 1, data: [project]});
         } else {
             res.json({status: "fail", message: "project not found", length: 0, data: []});

@@ -24,7 +24,7 @@ gulp.task('sasslint', function(){
 });
 
 gulp.task('jslint', function(){
-    return gulp.src(['public/**/*.js', '!public/resources/**/*.js', 'server/**/*.js'])
+    return gulp.src(['public/**/*.js', '!public/resources/**/*.js', 'server/**/*.js', '!server/unity/**/*.js'])
     .pipe(jshint())
     .pipe(jshint.reporter(jshintStylish));
 });
@@ -45,7 +45,7 @@ gulp.task('open-frontend-coverage', ['frontend-test'], function() {
 });
 
 gulp.task('prepare-istanbul-reporter', function() {
-  return gulp.src(['server/*.js', 'server/**/*.js', '!server/modules/passport.js'])
+  return gulp.src(['server/*.js', 'server/**/*.js', '!server/modules/passport.js', '!server/unity/**'])
     .pipe(istanbul({includeUntested: true}))
     .pipe(istanbul.hookRequire());
 });
