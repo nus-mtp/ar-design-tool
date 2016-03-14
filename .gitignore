@@ -7,7 +7,8 @@
 .log
 ehthumbs.db
 Thumbs.db
-
+.bin
+.log
 
 # Node modules 
 node_modules/
