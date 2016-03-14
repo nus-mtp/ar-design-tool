@@ -28,11 +28,11 @@ module.exports = function(uid, pid) {
 	const spawn = require('child_process').exec;
 	const unity	= spawn(unity_cmd);
 
-	unity.stdout.on('dara', (data) => {
+	unity.stdout.on('data', (data) => {
 		console.log(`stdout: ${data}`);
 	});
 
-	unity.stderr.on('dara', (data) => {
+	unity.stderr.on('data', (data) => {
 		console.log(`stderr: ${data}`);
 	});
 
