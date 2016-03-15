@@ -2,8 +2,11 @@
   angular.module('vumixEditorApp.controllers')
     .controller('managerController', function(
       $scope,
-      editorService
+      editorService,
+      unityMapperService
     ) {
       $scope.editorService = editorService;
+      
+      $scope.unityMapperService = unityMapperService
     }); 
 })();
