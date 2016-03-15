@@ -43,14 +43,14 @@
     //        });
     //    },
        
-       showAllModel: function(projects, userId){
-           return $http({
-               method: 'GET',
-               url: '/api/users/' + userId + '/models'
-           }).then (function(res){
-               console.log("Show all models" + res);
-           });
-       }
+    //    showAllModel: function(projects, userId){
+    //        return $http({
+    //            method: 'GET',
+    //            url: '/api/users/' + userId + '/models'
+    //        }).then (function(res){
+    //            console.log("Show all models" + res);
+    //        });
+    //    }
          
      };
     }); 
