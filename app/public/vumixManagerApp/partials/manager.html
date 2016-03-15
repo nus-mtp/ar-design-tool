@@ -49,15 +49,15 @@
                 <input type="text" name="project_name" placeholder="Project Name" ng-model="project.project_name"><br>
                 <h2> Target Marker Type</h2>
                     <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D Marker" checked="" ng-model="project.marker_type">
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="2DMarker" checked="" ng-model="project.marker_type">
                         2D 
                     </label>
                     <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D Marker" ng-model="project.marker_type">
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="3DMarker" ng-model="project.marker_type">
                         3D 
                     </label>
                 <h2> Upload Your Vuforia Package</h2>
-                <input type ="file" ng-model="project.upload">
+                <input type ="file" custom-on-change="uploadFile"/>
                 <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                     <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                 </form>-->
@@ -130,7 +130,7 @@
 
 <script type="text/javascript">
 
-$(function() {
+(function() {
     $(document).ready(function(){
         // Dropzone.autoDiscover = false;
         // var createDropzone = new Dropzone ("div#dropzone_project ", { url: "# "});
@@ -155,7 +155,7 @@ $(function() {
         $("#create_project").hide();
         $("#model_list ").hide();
         $('#upload_model').hide();
-         
+    
         $('#createProject').click(function(){
            $("#welcome_page ").hide();
            $("#create_project ").show(); 
@@ -187,6 +187,6 @@ $(function() {
         $('a[href="#model "]').addClass("active ");
         $('a[href="#project "]').removeClass("active ");
     }); 
-});
+})();
 
 </script>
