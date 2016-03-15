@@ -5,7 +5,11 @@
     </div>
     <ul class="nav navbar-nav navbar-right ">
       <li>
-        <a href="#">
+        <a href="" ng-click="unityMapperService.buildApk()">
+          <button type="button" class="btn btn-success btn-sm">Build APK</button>
+        </a>
+      <li>
+        <a href="" ng-click="unityMapperService.saveState()">
           <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#save">Save</button>
         </a>
       </li>
@@ -117,6 +121,10 @@
 
 <script type="text/javascript">
   var i = 1;
+  
+  var CreateState = function(id, name) {
+    console.log("called");
+  }
   
   var angularHelper = (function () {
     var angularHelper = function () { };
