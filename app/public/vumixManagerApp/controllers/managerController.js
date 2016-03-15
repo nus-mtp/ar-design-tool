@@ -20,7 +20,8 @@ angular.module('vumixManagerApp.controllers')
         $scope.deleteProject = function(id){
             projectService.deleteProject($scope.projects, $scope.userid, id)
                 .then(function(project) {
-                    $scope.projects.push(project);
+                    //$scope.projects.push(project);
+                    console.log($scope.projects);
             });
         };       
         

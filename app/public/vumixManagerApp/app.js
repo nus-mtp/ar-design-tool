@@ -5,7 +5,7 @@
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-      $urlRouterProvider.otherwise('/manager');
+      $urlRouterProvider.otherwise('/manager/model');
       $stateProvider
         .state('manager', {
           url: '/manager',

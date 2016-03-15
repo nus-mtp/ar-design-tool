@@ -3,7 +3,7 @@
     .factory('modelService', function($http) {
      return{
        
-       addModel: function(model_name, userId, file_size, file_extension){
+       addModel: function(model_name,file_size, file_extension, file_upload, userId){
            return $http({
               method: 'POST',
               url: '/api/users/' + userId + '/models',
@@ -17,8 +17,7 @@
            }, function errorCallback(res){
                console.log("error uploading file")
            });  
-       },
-       
+       },       
        deleteModel: function(models, userId, id){
            return $http({
                method: 'DELETE',
@@ -30,28 +29,10 @@
                    }
                }
                return models;
+           }, function errorCallback(res){
+               console.log("error deleting model");
            });
        },
-       
-    //    editModel: function(project_name, company_name, marker_type){
-    //        return $http({
-    //            method: '',
-    //            url: ''
-               
-    //        }).then(function(res){
-               
-    //        });
-    //    },
-       
-    //    showAllModel: function(projects, userId){
-    //        return $http({
-    //            method: 'GET',
-    //            url: '/api/users/' + userId + '/models'
-    //        }).then (function(res){
-    //            console.log("Show all models" + res);
-    //        });
-    //    }
-         
      };
     }); 
 })();

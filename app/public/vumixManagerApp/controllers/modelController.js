@@ -3,11 +3,11 @@ angular.module('vumixManagerApp.controllers')
     .controller('modelController', function (modelService, $http, $scope) {
         var filename;
      
-        $scope.projects = [];
-        $scope.project = {
-            project_name: "",
-            company_name: "",
-            marker_type: "",
+        $scope.models = [];
+        $scope.model = {
+            model_name: "",
+            file_size: "",
+            file_extension: "",
             upload: undefined
         };
         
@@ -15,28 +15,27 @@ angular.module('vumixManagerApp.controllers')
         
         $scope.uploadFile = function(){
             filename = event.target.files[0].name;
-            $scope.project.upload = filename;
+            $scope.model.upload = filename;
         };
         
-        $scope.deleteProject = function(id){
-            projectService.deleteProject($scope.projects, $scope.userid, id)
-                .then(function(project) {
-                    $scope.projects.push(project);
+        $scope.deleteModel = function(id){
+            modelService.deleteModel($scope.models, $scope.userid, id)
+                .then(function(model) {
             });
         };       
         
-        $scope.addProject = function(){
-            projectService.addProject($scope.project.company_name, $scope.project.project_name, $scope.project.marker_type, $scope.project.upload, $scope.userid)
-                .then(function(project) {
-                $scope.projects.push(project);
+        $scope.addModel = function(){
+           modelService.addModel($scope.model.model_name, $scope.model.file_size, $scope.model.file_extension, $scope.model.upload, $scope.userid)
+                .then(function(model) {
+                $scope.models.push(model);
             });
         };
         
         $http({
             method: 'GET',
-            url : '/api/users/1/projects'
+            url : '/api/users/1/models'
         }).success(function(res){
-            $scope.projects = res.data;
+            $scope.models = res.data;
         });
     })
 .directive('customOnChange', function() {
