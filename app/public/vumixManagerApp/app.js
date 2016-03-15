@@ -1,8 +1,7 @@
 (function() {
   angular
     .module('vumixManagerApp', [
-      'vumixManagerApp.controllers',
-      'vumixManagerApp.services',
+      'vumixManagerApp.controllers',  
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
@@ -10,12 +9,13 @@
       $stateProvider
         .state('manager', {
           url: '/manager',
-          views: {
-            "manager": {
-              templateUrl: '/vumixManagerApp/partials/manager.html',
-              controller: 'managerController' 
-            }
-          }
+          templateUrl: '/vumixManagerApp/partials/manager.html',
+          controller: 'managerController'
+        })
+        .state('model', {
+          url: '/model',
+          templateUrl: '/vumixManagerApp/partials/model.html',
+          controller: 'modelController'
         });
     }]);  
 })();

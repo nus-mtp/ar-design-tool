@@ -13,7 +13,37 @@
      </head>
      <body>
         <div ng-app="vumixManagerApp">
-			<div ui-view = "manager"></div>
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+                    <div class="container-fluid nav-bar">
+                        <div class="navbar-header">
+                            <a class="navbar-brand" href="#">Vumix File Manager</a>
+                        </div>
+
+                        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                            <ul class="nav navbar-nav">
+                                <li>
+                                    <ul class="center-align">
+                                        <span class="top-bar"><a href="#project" ui-sref="manager" class="btn btn-default top-bar">Project</a></span>
+                                        <span class="top-bar"><a href="#model" ui-sref="model" class="btn btn-default top-bar">Model</a></span>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, User!<span class="caret"></span></a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li><a href="/logout">Log Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                       </div>
+                  </div>
+             </nav>
+  
+             <div ui-view> </div>
+    
+           </div>
 		</div>
         <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
@@ -29,5 +59,6 @@
         
         <script type="text/javascript" src="vumixManagerApp/controllers/_controllers.js"></script>
         <script type="text/javascript" src="vumixManagerApp/controllers/managerController.js"></script>
+        <script type="text/javascript" src="vumixManagerApp/controllers/modelController.js"></script>
 	</body>
 </html>

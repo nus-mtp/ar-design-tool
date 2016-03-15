@@ -2,20 +2,20 @@
   angular.module('vumixManagerApp.services')
     .factory('modelService', function($http) {
      return{
-             
-       addModel: function(models,model_name, userId, file_size, file_extension, file_location){
+       
+       addModel: function(model_name, userId, file_size, file_extension){
            return $http({
               method: 'POST',
               url: '/api/users/' + userId + '/models',
               data: {
-                  model_name : model_name,
+                  name : model_name,
                   file_size : file_size,
-                  file_extension : file_extension,
-                  file_location : file_location
+                  file_extension : file_extension
               }
            }).then(function(res){
-               models.push(res.data.response[0]);
-               return models;
+               return res.data.data[0];
+           }, function errorCallback(res){
+               console.log("error uploading file")
            });  
        },
        

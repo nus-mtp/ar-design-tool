@@ -1,5 +1,6 @@
+// Handle model
 angular.module('vumixManagerApp.controllers')
-    .controller('managerController', function (projectService, $http, $scope) {
+    .controller('modelController', function (modelService, $http, $scope) {
         var filename;
      
         $scope.projects = [];

@@ -40,30 +40,21 @@
             });
        },
        
-    //    deleteProject: function(projects, userId, id){
-    //        return $http({
-    //            method: 'DELETE',
-    //            url: '/api/users/' + userId + '/projects/' + id      
-    //        }).then(function(res){
-    //            for(var i = 0; i < projects.length; i++){
-    //                if(id === projects[i].id){
-    //                    projects.splice(i, 1);
-    //                }
-    //            }
-    //            return projects;
-    //        });
-    //    },
-      
-       
-    //    showAllProject: function(projects, userId){
-    //        return $http({
-    //            method: 'GET',
-    //            url: '/api/users/' + userId + '/projects'
-    //        }).then (function(res){
-    //            console.log("Show all project" + res);
-    //        });
-    //    },
-         
-     };
+       deleteProject: function(projects, userId, id){
+           return $http({
+               method: 'DELETE',
+               url: '/api/users/' + userId + '/projects/' + id      
+           }).then(function(res){
+               for(var i = 0; i < projects.length; i++){
+                   if(id === projects[i].id){
+                       projects.splice(i, 1);
+                   }
+               }
+               return projects;
+           }, function errorCallback(res){
+               console.log("error deleting");
+           });
+        },   
+      };
     }); 
 })();
