@@ -29,7 +29,7 @@
     </div>
 </nav>
 
-<div class="wrapper">
+<div class="wrapper" ng-controller="managerController">
     <div class="sidebar">
         <div id="welcome_page" class="side-bar-padding">
             <div class="search" style="margin-top:10px">
@@ -42,18 +42,18 @@
         <div id="create_project" class="side-bar-padding">
             <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
             <span>
-              <form ng-controller="managerController" ng-submit="addProject()">
+              <form ng-submit="addProject()">
                 <h2> Company Name</h2>
                 <input type="text" name="org_name" placeholder="Company Name" ng-model="project.company_name"><br>
                 <h2> Project Name</h2>
                 <input type="text" name="project_name" placeholder="Project Name" ng-model="project.project_name"><br>
                 <h2> Target Marker Type</h2>
                     <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="2DMarker" checked="" ng-model="project.marker_type">
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D" checked="" ng-model="project.marker_type">
                         2D 
                     </label>
                     <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="3DMarker" ng-model="project.marker_type">
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D" ng-model="project.marker_type">
                         3D 
                     </label>
                 <h2> Upload Your Vuforia Package</h2>
@@ -72,7 +72,7 @@
             </div>-->
             <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
             <span>
-              <form ng-controller="modelController" ng-submit="addModel()">
+              <form ng-submit="addModel()">
                 <h1> Model Name</h1>
                 <input type="text" name="model_name" placeholder="Model Name" ng-model="model_name"><br>
                 <h1> File Size</h1>
@@ -95,7 +95,7 @@
     <div class="content">
         <div class="container section" style="width:auto;">
             <!--to display project-->
-            <div ng-controller="managerController" id="project_list" class="flex-container">
+            <div id="project_list" class="flex-container">
                 <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
 
                 <ul ng-repeat="pr in projects" | filter:search">
@@ -109,7 +109,7 @@
             </div>
 
             <!--to display model-->
-            <div ng-controller="modelController" id="model_list" class="flex-container">
+            <div id="model_list" class="flex-container">
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
                 
                 <ul ng-repeat="model in viewmodel.models" | filter:search">
