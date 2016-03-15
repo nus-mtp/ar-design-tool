@@ -20,7 +20,6 @@
         <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendors/angular/angular.js"></script>
         <script type="text/javascript" src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="vendors/angular-resource/angular-resource.js"></script>
         <script type="text/javascript" src="vendors/dropzone/dropzone.js"></script>
         <script type="text/javascript" src="vumixManagerApp/app.js"></script>
         
