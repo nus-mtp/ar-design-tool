@@ -21,18 +21,8 @@ angular.module('vumixManagerApp.controllers')
         $scope.addProject = function(){
             projectService.addProject($scope.project.company_name, $scope.project.project_name, $scope.project.marker_type, $scope.project.upload, $scope.userid)
                 .then(function(project) {
-                var fake = {
-                    project_name: 'hello',
-                    company_name: 'try'
-                    
-                }
                 $scope.projects.push(project);
             });
-
-            // projectService.addProject(viewproject.company_name, viewproject.project_name, viewproject.marker_type).then(function(projects) {
-            //     console.log("i am clicked");
-            //     viewproject.projects = projects;
-            // });
         }
         $http({
             method: 'GET',

@@ -10,14 +10,34 @@
               data: {
                 name: project_name,
                 company_name: company_name,
-                marker_type: marker_type,
-                upload_project: upload_project    //this supposed to be vuforia package        
+                marker_type: marker_type
               },
            }).then (function (res){
                return res.data.data[0];
            }, function errorCallback(res){
                console.log("error");
            });  
+       },
+       
+       // TO DO: To upload vuforia package
+       fileUpload: function(file, uploadURL, project, userId){
+            var fd = new FormData();
+            fd.append('file', file);
+            $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined},
+                data: {
+                    name: project_name,
+                    company_name: company_name,
+                    marker_type: marker_type
+                },
+            })
+            .success(function(res){
+                return res.data.data[0];
+            })
+            .error(function(){
+                console.log("error");
+            });
        },
        
     //    deleteProject: function(projects, userId, id){
