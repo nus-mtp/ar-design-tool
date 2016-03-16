@@ -10,6 +10,7 @@ public class SerialStateObject
     public SerialVector rotation;
     public SerialVector scale;
     public string modelName;
+    public int id;
     public string instanceName;
     public bool isStateChanger;
     public int transitionStateId;

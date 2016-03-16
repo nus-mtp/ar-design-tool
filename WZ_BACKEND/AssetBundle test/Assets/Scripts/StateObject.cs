@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class StateObject : MonoBehaviour {
+    public int id;
     public int transitionStateId;
     public bool isStateChanger;
 
@@ -32,6 +33,7 @@ public class StateObject : MonoBehaviour {
         transform.localScale = sso.scale.ToVector3();
         transitionStateId = sso.transitionStateId;
         isStateChanger = sso.isStateChanger;
+        id = sso.id;
     }
 #endif
 }
