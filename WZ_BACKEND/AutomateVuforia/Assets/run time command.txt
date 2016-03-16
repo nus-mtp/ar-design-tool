@@ -1,1 +1,0 @@
- "C:\Program Files\Unity\Editor\Unity.exe" -quit -username "wenzhaorocks@hotmail.com" -password "C7m8pn9@"  -projectPath "C:\Users\WenZhao\Documents\Dropbox\Uni\Yr4 Sem 1\CS3283\AutomateVuforia" -executeMethod BuildProject.BuildAndroid2D 
