@@ -33,7 +33,7 @@
                     <h4 class="modal-title"> Your model</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="updateModel()">
+                    <form ng-submit="updateModel(model.id)">
                         <h1> Model Name</h1>
                         <input type="text" name="model_name" placeholder="Model Name" ng-model="model.name"><br>
                         <h1> File Size</h1>

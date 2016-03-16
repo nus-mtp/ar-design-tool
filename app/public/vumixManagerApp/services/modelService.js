@@ -49,6 +49,22 @@
                console.log("error deleting model");
            });
        },
+       
+       updateModel: function(models, model, userId, id){
+           return $http({
+               method: 'PUT',
+               url: '/api/users/' + userId + '/models/' + id      
+           }).then(function(res){
+               for(var i = 0; i < models.length; i++){
+                   if(id === models[i].id){
+                       models[i] = model;
+                       return models[i];
+                   }
+               }
+           }, function errorCallback(res){
+               console.log("error getting the model");
+           }); 
+        },
      };
     }); 
 })();

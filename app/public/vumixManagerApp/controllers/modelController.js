@@ -25,6 +25,12 @@ angular.module('vumixManagerApp.controllers')
             });
         };
         
+        $scope.updateModel = function(id){
+            modelService.updateModel($scope.models,$scope.model, $scope.userid,id)
+            .then(function(model){
+                $scope.model = model;
+            });
+        };
         
         $scope.deleteModel = function(id){
             modelService.deleteModel($scope.models, $scope.userid, id)
