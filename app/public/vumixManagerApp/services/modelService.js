@@ -2,29 +2,12 @@
   angular.module('vumixManagerApp.services')
     .factory('modelService', function($http) {
      return{
-<<<<<<< HEAD
-             
-       addModel: function(models,model_name, userId, file_size, file_extension, file_location){
-=======
        
        addModel: function(model_name,file_size, file_extension, file_upload, userId){
->>>>>>> scss
            return $http({
               method: 'POST',
               url: '/api/users/' + userId + '/models',
               data: {
-<<<<<<< HEAD
-                  model_name : model_name,
-                  file_size : file_size,
-                  file_extension : file_extension,
-                  file_location : file_location
-              }
-           }).then(function(res){
-               models.push(res.data.response[0]);
-               return models;
-           });  
-       },
-=======
                   name : model_name,
                   file_size : file_size,
                   file_extension : file_extension
@@ -50,7 +33,6 @@
                console.log("error getting the model");
            }); 
        },     
->>>>>>> scss
        
        deleteModel: function(models, userId, id){
            return $http({
@@ -63,30 +45,6 @@
                    }
                }
                return models;
-<<<<<<< HEAD
-           });
-       },
-       
-    //    editModel: function(project_name, company_name, marker_type){
-    //        return $http({
-    //            method: '',
-    //            url: ''
-               
-    //        }).then(function(res){
-               
-    //        });
-    //    },
-       
-    //    showAllModel: function(projects, userId){
-    //        return $http({
-    //            method: 'GET',
-    //            url: '/api/users/' + userId + '/models'
-    //        }).then (function(res){
-    //            console.log("Show all models" + res);
-    //        });
-    //    }
-         
-=======
            }, function errorCallback(res){
                console.log("error deleting model");
            });
@@ -107,7 +65,7 @@
                console.log("error getting the model");
            }); 
         },
->>>>>>> scss
+
      };
     }); 
 })();
