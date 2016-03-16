@@ -40,6 +40,7 @@
             });
        },
        
+<<<<<<< HEAD
     //    deleteProject: function(projects, userId, id){
     //        return $http({
     //            method: 'DELETE',
@@ -65,5 +66,55 @@
     //    },
          
      };
+=======
+       deleteProject: function(projects, userId, id){
+           return $http({
+               method: 'DELETE',
+               url: '/api/users/' + userId + '/projects/' + id      
+           }).then(function(res){
+               for(var i = 0; i < projects.length; i++){
+                   if(id === projects[i].id){
+                       projects.splice(i, 1);
+                   }
+               }
+               return projects;
+           }, function errorCallback(res){
+               console.log("error deleting the model");
+           });
+        },  
+        
+        getProject: function(projects, userId, id){
+           return $http({
+               method: 'GET',
+               url: '/api/users/' + userId + '/projects/' + id      
+           }).then(function(res){
+               for(var i = 0; i < projects.length; i++){
+                   if(id === projects[i].id){
+                       return projects[i];
+                   }
+               }
+           }, function errorCallback(res){
+               console.log("error getting the model");
+           }); 
+        },
+        
+        updateProject: function(projects, project, userId, id){
+           return $http({
+               method: 'PUT',
+               url: '/api/users/' + userId + '/projects/' + id      
+           }).then(function(res){
+               for(var i = 0; i < projects.length; i++){
+                   if(id === projects[i].id){
+                       projects[i] = project;
+                       return projects[i];
+                   }
+               }
+           }, function errorCallback(res){
+               console.log("error getting the model");
+           }); 
+        },
+         
+      };
+>>>>>>> scss
     }); 
 })();

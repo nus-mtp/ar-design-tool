@@ -1,39 +1,8 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-    <div class="container-fluid nav-bar">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">Vumix File Manager</a>
-            <!--<ul class="breadcrumb">
-                <li class="active">Home</li>
-             </ul>-->
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
-            <ul class="nav navbar-nav">
-                <li>
-                    <ul class="center-align">
-                        <span class="top-bar"><a href="#project" class="btn btn-default top-bar" data-toggle="tab" >Project</a></span>
-                        <span class="top-bar"><a href="#model" class="btn btn-default top-bar" data-toggle="tab" >Model</a></span>
-                    </ul>
-                </li>
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, User!<span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/logout">Log Out</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-
 <div class="wrapper" ng-controller="managerController">
     <div class="sidebar">
         <div id="welcome_page" class="side-bar-padding">
             <div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+                <input type="text" name="q" placeholder="Search..." data-ng-model="searchText.name" />
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
@@ -57,7 +26,8 @@
                         3D 
                     </label>
                 <h2> Upload Your Vuforia Package</h2>
-                <input type ="file" custom-on-change="uploadFile"/>
+
+                <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile"/>
                 <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                     <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                 </form>-->
@@ -66,61 +36,58 @@
               </form>
           </span>
         </div>
-        <div id="upload_model" class="side-bar-padding">
-            <!--<div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
-            </div>-->
-            <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
-            <span>
-              <form ng-submit="addModel()">
-                <h1> Model Name</h1>
-                <input type="text" name="model_name" placeholder="Model Name" ng-model="model_name"><br>
-                <h1> File Size</h1>
-                <input type="text" name="model_name" placeholder="Model Name" ng-model="file_size"><br>
-                <h1> File Extension</h1>
-                <input type="text" name="model_name" placeholder="Model Name" ng-model="file_extension"><br>
-                <h1> File Location</h1>
-                <input type="text" name="model_name" placeholder="Model Name" ng-model="file_location"><br>
-                <h1> File</h1>
-                <input type ="file" ng-model="upload_model">
-                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
-                    <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
-                <!--</form>-->
-                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
-              </form>
-          </span>
+    </div>
+    <!--modal to update project-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                    <h4 class="modal-title"> Your project</h4>
+                </div>
+                <div class="modal-body">
+                    <form ng-click="updateProject(project.id)">
+                        <h2> Company Name</h2>
+                        <input type="text" name="org_name" ng-model="project.company_name" ><br>
+                        <h2> Project Name</h2>
+                        <input type="text" name="project_name"  ng-model="project.name" ><br>
+                        <h2> Target Marker Type</h2>
+                            <label>
+                                <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="project.marker_type">
+                                2D 
+                            </label>
+                            <label>
+                                <input type="radio" name="optionsRadios" value="3D" id="optionsRadios2" ng-model="project.marker_type">
+                                3D 
+                            </label>
+            
+                        <h2> Upload Your Vuforia Package</h2>
+                        <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile"/>
+                        <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                            <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
+                        </form>-->
+                        <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                    </form>
+                </div>           
+            </div>
         </div>
     </div>
 
     <div class="content">
         <div class="container section" style="width:auto;">
             <!--to display project-->
-            <div id="project_list" class="flex-container">
+            <div id="project_list" class="flex-container" >
                 <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
-
-                <ul ng-repeat="pr in projects" | filter:search">
+                <ul ng-repeat="pr in projects" | filter:searchText">
                     <a href="/state" class="">
-                        <li class="flex-item">1
+                        <li class="flex-item">2
                             <p>{{pr.name}}</p>
                         </li>
                     </a>
+                    <button class="btn btn-danger" ng-click="deleteProject(pr.id)">Delete</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="getProject(pr.id)">Update</button>
                 </ul>
-
             </div>
-
-            <!--to display model-->
-            <div id="model_list" class="flex-container">
-                <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
-                
-                <ul ng-repeat="model in viewmodel.models" | filter:search">
-                    <a href="#" " class=" ">
-                    <li class="flex-item ">2
-                        <p>{{model.name}}</p>
-                    </li>
-                </a>
-            </ul>
-        </div>
-        
     </div>
   </div>
 
@@ -128,21 +95,18 @@
   </div>
 </div>
 
+
+
 <script type="text/javascript">
 
 (function() {
     $(document).ready(function(){
-        // Dropzone.autoDiscover = false;
-        // var createDropzone = new Dropzone ("div#dropzone_project ", { url: "# "});
-        // var uploadDropzone = new Dropzone ("div#dropzone_model ", { url: "# "});
         
-        
-        var height = $(window).height() + 500;
+        var height = 1200;
         $('.sidebar').css("min-height", height);
         
         // when user resize their window
         $(window).resize(function(){
-            console.log("here");
             var curr_height = $(window).height();
             // if(curr_height < height){
             //     $('.sidebar').css("position ", "absolute ");  //current setup!
@@ -151,42 +115,16 @@
             // }
         });
         
-        $('a[href="#project"]').addClass("active ");
         $("#create_project").hide();
-        $("#model_list ").hide();
-        $('#upload_model').hide();
+
     
         $('#createProject').click(function(){
            $("#welcome_page ").hide();
            $("#create_project ").show(); 
-           $('#upload_model').hide();
         });
         
     });
-    
-    $('a[href="#project"]').click(function(){
-        $('#welcome_page').show();
-        $('#project_list').show();
-        $('#create_project').hide();
-        $('#upload_model').hide();
-        $('#model_list').hide();
-        $('#project_list').show();
-        $('#model_list').hide();
-        $('a[href="#project "]').addClass("active ");
-        $('a[href="#model "]').removeClass("active ");
-    }); 
-    
-    $('a[href="#model"]').click(function(){
-        $('#welcome_page').hide();
-        $('#create_project').hide();
-        $('#project_list').hide();
-        $('#project_list').hide();
-        $('#model_list').show();
-        $('#upload_model').show();
-        $('#model_list').show();
-        $('a[href="#model "]').addClass("active ");
-        $('a[href="#project "]').removeClass("active ");
-    }); 
+
 })();
 
 </script>

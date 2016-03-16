@@ -7,16 +7,17 @@
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-      $urlRouterProvider.otherwise('/manager');
+      $urlRouterProvider.otherwise('/');  //TODO: Doesn't allow user to re-route
       $stateProvider
         .state('manager', {
           url: '/manager',
-          views: {
-            "manager": {
-              templateUrl: '/vumixManagerApp/partials/manager.html',
-              controller: 'managerController' 
-            }
-          }
-        });
+          templateUrl: '/vumixManagerApp/partials/manager.html',
+          controller: 'managerController'
+        })
+        .state('model', {
+          url: '/model',
+          templateUrl: '/vumixManagerApp/partials/model.html',
+          controller: 'modelController'
+        })
     }]);  
-})();
+})(); 
