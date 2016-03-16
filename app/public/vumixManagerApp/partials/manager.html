@@ -36,6 +36,41 @@
           </span>
         </div>
     </div>
+    <!--modal to update project-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">        
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                <h4 class="modal-title"Your project</h4>
+            </div>
+            <div class="modal-body">
+                <form ng-submit="updateProject()">
+                    <h2> Company Name</h2>
+                    <input type="text" name="org_name" ng-model="project.company_name" ><br>
+                    <h2> Project Name</h2>
+                    <input type="text" name="project_name"  ng-model="project.name" ><br>
+                    <h2> Target Marker Type</h2>
+                        <label>
+                            <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="project.marker_type">
+                            2D 
+                        </label>
+                        <label>
+                            <input type="radio" name="optionsRadios" value="3D" id="optionsRadios2" ng-model="project.marker_type">
+                            3D 
+                        </label>
+        
+                    <h2> Upload Your Vuforia Package</h2>
+                    <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile"/>
+                    <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                        <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
+                    </form>-->
+                    <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                </form>
+            </div>           
+        </div>
+        </div>
+    </div>
 
     <div class="content">
         <div class="container section" style="width:auto;">
@@ -44,11 +79,12 @@
                 <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
                 <ul ng-repeat="pr in projects" | filter:searchText">
                     <a href="/state" class="">
-                        <li class="flex-item">
+                        <li class="flex-item">2
                             <p>{{pr.name}}</p>
                         </li>
                     </a>
                     <button class="btn btn-danger" ng-click="deleteProject(pr.id)">Delete</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="getProject(pr.id)">Update</button>
                 </ul>
             </div>
     </div>
@@ -57,6 +93,8 @@
   <div class="cleared">
   </div>
 </div>
+
+
 
 <script type="text/javascript">
 

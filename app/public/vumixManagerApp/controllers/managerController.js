@@ -21,9 +21,20 @@ angular.module('vumixManagerApp.controllers')
             projectService.deleteProject($scope.projects, $scope.userid, id)
                 .then(function(project) {
                     //$scope.projects.push(project);
-                    console.log($scope.projects);
+                    // console.log($scope.projects);
             });
         };       
+        
+        $scope.getProject = function(id){
+          projectService.getProject($scope.projects, $scope.userid,id)
+            .then(function(project){
+                $scope.project = project;
+                console.log($scope.project);
+                 console.log($scope.project.name);
+                 console.log($scope.project.company_name);
+                 console.log($scope.project.marker_type);
+            });
+        };
         
         $scope.addProject = function(){
             projectService.addProject($scope.project.company_name, $scope.project.project_name, $scope.project.marker_type, $scope.project.upload, $scope.userid)
