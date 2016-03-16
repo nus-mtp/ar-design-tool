@@ -1,9 +1,14 @@
 <div class="wrapper" ng-controller="modelController">
     <div class="sidebar">
-        <div id="upload_model" class="side-bar-padding">
-            <!--<div class="search" style="margin-top:10px">
+        <div id="welcome_page" class="side-bar-padding">
+            <div class="search" style="margin-top:10px">
                 <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
-            </div>-->
+            </div>
+            <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
+            <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your model </h2>
+            <button type="button" class="center btn-large" id="uploadModel">Start</button>
+        </div>
+        <div id="upload_model" class="side-bar-padding">
             <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
             <span>
               <form ng-submit="addModel()">
@@ -59,7 +64,7 @@
             <div id="model_list" class="flex-container">
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
                 
-                <ul ng-repeat="model in models" | filter:search_model">
+                <ul ng-repeat="model in models" | filter:search">
                     <a href="#" " class=" ">
                     <li class="flex-item ">2
                         <p>{{model.name}}</p>
@@ -78,7 +83,6 @@
 </div>
 
 <script type="text/javascript">
-
 (function() {
     $(document).ready(function(){
         
@@ -95,8 +99,15 @@
             // }
         });
         
+        $("#upload_model").hide();
+
+    
+        $('#uploadModel').click(function(){
+           $("#welcome_page").hide();
+           $("#upload_model").show(); 
+        });
+        
     });
 
 })();
-
 </script>
