@@ -23,6 +23,35 @@
           </span>
         </div>
     </div>
+    
+    <!--modal to update model-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                    <h4 class="modal-title"> Your model</h4>
+                </div>
+                <div class="modal-body">
+                    <form ng-submit="updateModel()">
+                        <h1> Model Name</h1>
+                        <input type="text" name="model_name" placeholder="Model Name" ng-model="model.name"><br>
+                        <h1> File Size</h1>
+                        <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_size"><br>
+                        <h1> File Extension</h1>
+                        <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_extension"><br>
+                        <h1> File</h1>
+                        <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
+                        <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                            <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
+                        </form>-->
+                        <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                    </form>
+                </div>           
+            </div>
+        </div>
+    </div>
+
 
     <div class="content">
         <div class="container section" style="width:auto;">
@@ -36,7 +65,7 @@
                         <p>{{model.name}}</p>
                     </li>
                     <button class="btn btn-danger" ng-click="deleteModel(model.id)">Delete</button>
-                    <button class="btn btn-info" ng-click="updateModel(model.id)">Update</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="getModel(model.id)">Update</button>
                 </a>
             </ul>
         </div>

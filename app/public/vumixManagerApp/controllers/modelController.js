@@ -18,6 +18,14 @@ angular.module('vumixManagerApp.controllers')
             $scope.model.upload = filename;
         };
         
+        $scope.getModel = function(id){
+          modelService.getModel($scope.models, $scope.userid,id)
+            .then(function(model){
+                $scope.model = model;
+            });
+        };
+        
+        
         $scope.deleteModel = function(id){
             modelService.deleteModel($scope.models, $scope.userid, id)
                 .then(function(model) {

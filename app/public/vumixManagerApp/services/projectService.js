@@ -70,6 +70,23 @@
                console.log("error getting the model");
            }); 
         },
+        
+        updateProject: function(projects, userId, id){
+           return $http({
+               method: 'PUT',
+               url: '/api/users/' + userId + '/projects/' + id      
+           }).then(function(res){
+               for(var i = 0; i < projects.length; i++){
+                   if(id === projects[i].id){
+                      console.log(projects[i]);
+                      projects[i] = projects;
+                      return projects[i];
+                   }
+               }
+           }, function errorCallback(res){
+               console.log("error getting the model");
+           }); 
+        },
          
       };
     }); 

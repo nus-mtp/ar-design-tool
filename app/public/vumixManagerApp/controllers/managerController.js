@@ -29,12 +29,20 @@ angular.module('vumixManagerApp.controllers')
           projectService.getProject($scope.projects, $scope.userid,id)
             .then(function(project){
                 $scope.project = project;
+            });
+        };
+        
+        $scope.updateProject = function(id){
+            projectService.updateProject($scope.projects, $scope.userid,id)
+            .then(function(project){
+                // $scope.projects = project;
+                $scope.project = project;
                 console.log($scope.project);
                  console.log($scope.project.name);
                  console.log($scope.project.company_name);
                  console.log($scope.project.marker_type);
             });
-        };
+        }
         
         $scope.addProject = function(){
             projectService.addProject($scope.project.company_name, $scope.project.project_name, $scope.project.marker_type, $scope.project.upload, $scope.userid)

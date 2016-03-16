@@ -17,7 +17,23 @@
            }, function errorCallback(res){
                console.log("error uploading file")
            });  
-       },       
+       }, 
+       
+       getModel: function(models, userId, id){
+           return $http({
+               method: 'GET',
+               url: '/api/users/' + userId + '/models/' + id      
+           }).then(function(res){
+               for(var i = 0; i < models.length; i++){
+                   if(id === models[i].id){
+                       return models[i];
+                   }
+               }
+           }, function errorCallback(res){
+               console.log("error getting the model");
+           }); 
+       },     
+       
        deleteModel: function(models, userId, id){
            return $http({
                method: 'DELETE',
