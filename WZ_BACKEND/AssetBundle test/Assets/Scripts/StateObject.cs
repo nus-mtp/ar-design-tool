@@ -20,7 +20,7 @@ public class StateObject : MonoBehaviour {
     {
         if (isStateChanger)
         {
-            AppStateManager.GetReference().changeStateId(transitionStateId);
+            AppStateManager.GetReference().changeState(transitionStateId);
         }
     }
 
