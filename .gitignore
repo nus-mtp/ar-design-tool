@@ -10,11 +10,9 @@ Thumbs.db
 .bin
 .log
 
-
 # Node modules 
 node_modules/
 bower_components/
-
 
 # Test coverage 
 test/coverage
