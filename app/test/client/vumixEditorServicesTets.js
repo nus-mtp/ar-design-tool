@@ -14,7 +14,7 @@ describe("vumixEditorApp.services", function() {
       window.SendMessage = function(gameObject, method, args){};
       spyOn(window, 'SendMessage');
       mockService.setTransformMode("translate");
-      expect(window.SendMessage).toHaveBeenCalledWith("Control Scripts", "SetTransformMode", "translate");
+      expect(window.SendMessage).toHaveBeenCalledWith("Facade", "SetTransformMode", "translate");
     });
   
   });

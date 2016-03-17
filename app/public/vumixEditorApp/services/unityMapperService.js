@@ -7,10 +7,6 @@
         SendMessage("Facade", "SetTransformMode", val);
       };
       
-      service.buildApk = function() {
-        $http.post('/buildproject.php');
-      };
-      
       service.saveState = function(url) {
         SendMessage('Facade', 'SaveProgress', './uploadstate.php');
       };
