@@ -23,15 +23,15 @@
                             <ul class="nav navbar-nav">
                                 <li>
                                     <ul class="center-align">
-                                        <span class="top-bar"><a href="#project" ui-sref="manager" class="btn btn-default top-bar">Project</a></span>
-                                        <span class="top-bar"><a href="#model" ui-sref="model" class="btn btn-default top-bar">Model</a></span>
+                                        <span class="top-bar"><a href="" ui-sref="manager" class="btn btn-default top-bar">Project</a></span>
+                                        <span class="top-bar"><a href="" ui-sref="model" class="btn btn-default top-bar">Model</a></span>
                                     </ul>
                                 </li>
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.title]]<span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.name]]<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="/logout">Log Out</a></li>
                                     </ul>

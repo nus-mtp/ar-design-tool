@@ -4,8 +4,7 @@ var passport 		= require('passport'),
 var router 	= express.Router();
 
 router.get('/', isLoggedIn, function (req, res) {
-	req.mySession = req.user;
-	res.render('vumixManagerView',{title: req.mySession.name});
+	res.render('vumixManagerView',{name: req.user.name, id:req.user.id});
 });
 
 router.get('/state', function(req, res) {

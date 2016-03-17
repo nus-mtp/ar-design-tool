@@ -11,7 +11,7 @@
         <div id="create_project" class="side-bar-padding">
             <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
             <span>
-              <form ng-submit="addProject()">
+              <form ng-submit="addProject()" enctype="multipart/form-data">
                 <h2> Company Name</h2>
                 <input type="text" name="org_name" placeholder="Company Name" ng-model="project.company_name"><br>
                 <h2> Project Name</h2>
@@ -46,7 +46,7 @@
                     <h4 class="modal-title"> Your project</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-click="updateProject(project.id)">
+                    <form ng-click="updateProject(project.id)" enctype="multipart/form-data">
                         <h2> Company Name</h2>
                         <input type="text" name="org_name" ng-model="project.company_name" ><br>
                         <h2> Project Name</h2>
