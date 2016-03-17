@@ -6,8 +6,10 @@ public class StateObject{
     public GameObject gameObject;
     public GameObject button;
     public string instanceName;
+    public int id;
     public bool isStateChanger;
     public int transitionStateId;
+    
 
     public StateObject(GameObject g)
     {
@@ -48,4 +50,9 @@ public class StateObject{
         t.DisablePreview();
     }
 
+
+    public void SetName(string newName)
+    {
+        instanceName = newName;
+    }
 }

@@ -15,8 +15,11 @@ public class SerialState
     {
         name = s.name;
         stateObjects = new List<SerialStateObject>();
-        foreach (StateObject so in s.stateObjects)
+        Dictionary<int, StateObject>.Enumerator enumerator = s.stateObjects.GetEnumerator();
+        
+        while(enumerator.MoveNext())
         {
+            StateObject so = enumerator.Current.Value;
             SerialStateObject sso = new SerialStateObject(so);
             stateObjects.Add(sso);
         }
