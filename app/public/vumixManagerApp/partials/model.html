@@ -1,0 +1,102 @@
+<div class="wrapper" ng-controller="modelController">
+    <div class="sidebar">
+        <div id="upload_model" class="side-bar-padding">
+            <!--<div class="search" style="margin-top:10px">
+                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+            </div>-->
+            <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
+            <span>
+              <form ng-submit="addModel()">
+                <h1> Model Name</h1>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="model.model_name"><br>
+                <h1> File Size</h1>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_size"><br>
+                <h1> File Extension</h1>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_extension"><br>
+                <h1> File</h1>
+                <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
+                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                    <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
+                <!--</form>-->
+                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+              </form>
+          </span>
+        </div>
+    </div>
+    
+    <!--modal to update model-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                    <h4 class="modal-title"> Your model</h4>
+                </div>
+                <div class="modal-body">
+                    <form ng-submit="updateModel(model.id)">
+                        <h1> Model Name</h1>
+                        <input type="text" name="model_name" placeholder="Model Name" ng-model="model.name"><br>
+                        <h1> File Size</h1>
+                        <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_size"><br>
+                        <h1> File Extension</h1>
+                        <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_extension"><br>
+                        <h1> File</h1>
+                        <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
+                        <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                            <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
+                        </form>-->
+                        <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                    </form>
+                </div>           
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="container section" style="width:auto;">
+            <!--to display model-->
+            <div id="model_list" class="flex-container">
+                <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
+                
+                <ul ng-repeat="model in models" | filter:search_model">
+                    <a href="#" " class=" ">
+                    <li class="flex-item ">2
+                        <p>{{model.name}}</p>
+                    </li>
+                    <button class="btn btn-danger" ng-click="deleteModel(model.id)">Delete</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="getModel(model.id)">Update</button>
+                </a>
+            </ul>
+        </div>
+        
+    </div>
+  </div>
+
+  <div class="cleared">
+  </div>
+</div>
+
+<script type="text/javascript">
+
+(function() {
+    $(document).ready(function(){
+        
+        var height = 1200;
+        $('.sidebar').css("min-height", height);
+        
+        // when user resize their window
+        $(window).resize(function(){
+            var curr_height = $(window).height();
+            // if(curr_height < height){
+            //     $('.sidebar').css("position ", "absolute ");  //current setup!
+            // }else if(curr_height == height){
+            //     $('.sidebar').css("position ", "fixed ");
+            // }
+        });
+        
+    });
+
+})();
+
+</script>
