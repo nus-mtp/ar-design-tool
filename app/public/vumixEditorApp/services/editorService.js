@@ -12,7 +12,7 @@
       service.closeEditor = function() {
           service.open = false;
       };
-      
+    
       return service;
     }); 
 })();

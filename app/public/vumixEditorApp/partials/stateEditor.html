@@ -18,27 +18,11 @@
   <nav class="navbar navbar-inverse">
     <ul class="nav navbar-nav navbar-cursor">
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Selection Cursor"><i class="fa fa-mouse-pointer"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Translation Cursor" ng-click="setTransformMode('translate')"><i class="fa fa-arrows"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotation Cursor" ng-click="setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Cursor" ng-click="setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-font">
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Create Text"><i class="fa fa-text-height"></i></a></li>
-      <li>
-        <select class="form-control" id="font-size-select">
-          <option>8px</option>
-          <option>10px</option>
-          <option>12px</option>
-          <option>14px</option>
-          <option>16px</option>
-        </select>
-      </li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Bold"><i class="fa fa-bold"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Italic"><i class="fa fa-italic"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Underline"><i class="fa fa-underline"></i></a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">      
-      
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Translation Cursor" ng-click="unityMapperService.setTransformMode('translate')"><i class="fa fa-arrows"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotation Cursor" ng-click="unityMapperService.setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Cursor" ng-click="unityMapperService.setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
+      <li><a href="" ng-click="unityMapperService.loadAllModels()">Load All Models (Test)</a></li>
+      <li><a href="" ng-click="fetchAllModels()">Fetch All Models (Test)</a></li>
     </ul>
   </nav>
   <canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="627px" width="1000px"></canvas>
@@ -54,12 +38,15 @@
       <table class="table table-striped table-hover table-condensed">
         <thead>
           <tr class="warning">
-            <th class="col-xs-1">#</th>
-            <th class="col-xs-9">Object Name</th>
+            <th class="col-xs-10">Object Name</th>
             <th class="col-xs-2">Clickable</th>
           </tr>
         </thead>
         <tbody>
+          <tr ng-repeat="object in objectsOnScreen">
+            <td>{{ object.name }}</td>
+            <td><input type="checkbox" ng-model="object.clickable" /></td>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -71,8 +58,20 @@
       <span class="panel-button equalise"><i class="fa fa-server"></i></span>
     </div>
     <div class="panel-body">
-      <div class="row">       
-      </div>
+      <table class="table table-striped table-hover table-condensed">
+        <thead>
+          <tr class="warning">
+            <th class="col-xs-10">Object Name</th>
+            <th class="col-xs-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="object in objectsAvailable">
+            <td>{{ object.name }}</td>
+            <td><button type="button" class="btn btn-default" ng-click="addObjectToScreen(object)">Add</button></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
@@ -152,3 +151,30 @@
   };
 </script>    
 <script type="text/javascript" src="resources/webgl/Release/UnityLoader.js"></script>
+<script type="text/javascript">
+  
+  var downloadUserStuff = function(assetBundleName, stateName) {
+    assetBundleName = assetBundleName || './assetbundles/webglbundles.unity3d';
+    stateName = stateName || '/state.dat';
+    //assetBundleName += ":done";
+    var combinedName = assetBundleName + ":" + stateName;
+    SendMessage ("Facade", 'DownLoadUserStuff', combinedName);
+  }
+  
+  var addModelButton = function(name) {
+    var model = {
+      id: angular.injector(['ng', 'vumixEditorApp']).get('unityMapperService').counter,
+      name: name,
+      clickable: false
+    }
+    angular.injector(['ng', 'vumixEditorApp']).get('unityMapperService').objects.push(model);
+    angular.injector(['ng', 'vumixEditorApp']).get('unityMapperService').counter++;
+  }
+  
+  var globalFunc = {
+    unityHasLoaded: function() {
+      downloadUserStuff();
+    }
+  };
+  
+</script>

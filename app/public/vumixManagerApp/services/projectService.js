@@ -3,34 +3,16 @@
     .factory('projectService', function($http) {
      return{
        
-       addProject: function(company_name, project_name, marker_type, upload_project, userId){
-           return $http({
-              method: 'POST',
-              url: '/api/users/' + userId + '/projects',
-              data: {
-                name: project_name,
-                company_name: company_name,
-                marker_type: marker_type
-              },
-           }).then (function (res){
-               return res.data.data[0];
-           }, function errorCallback(res){
-               console.log("error");
-           });  
-       },
-       
        // TO DO: To upload vuforia package
-       fileUpload: function(file, uploadURL, project, userId){
+       addProject: function(project, userid){
             var fd = new FormData();
-            fd.append('file', file);
-            $http.post(uploadUrl, fd, {
-                transformRequest: angular.identity,
-                headers: {'Content-Type': undefined},
-                data: {
-                    name: project_name,
-                    company_name: company_name,
-                    marker_type: marker_type
-                },
+            fd.append('file', project.upload);
+            fd.append('uid', userid);
+            fd.append('name', project.project_name);
+            fd.append('company_name', project.company_name);
+            fd.append('marker_type', project.marker_type);
+            $http.post("/api/users/" + userid + "/projects", fd, {
+                headers: {'Content-Type': undefined}
             })
             .success(function(res){
                 return res.data.data[0];
@@ -39,6 +21,7 @@
                 console.log("error");
             });
        },
+       
        deleteProject: function(projects, userId, id){
            return $http({
                method: 'DELETE',

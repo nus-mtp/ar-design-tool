@@ -6,7 +6,6 @@
         <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="vendors/bootswatch/superhero/bootstrap.min.css" />
         <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="vendors/dropzone/dropzone.css" />
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <link rel="stylesheet" href="resources/css/style.css" />  
         <title> Vumix Manager Application</title>
@@ -50,7 +49,6 @@
         <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendors/angular/angular.js"></script>
         <script type="text/javascript" src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="vendors/dropzone/dropzone.js"></script>
         <script type="text/javascript" src="vumixManagerApp/app.js"></script>
         
         <script type="text/javascript" src="vumixManagerApp/services/_services.js"></script>

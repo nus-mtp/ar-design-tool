@@ -40,7 +40,7 @@ angular.module('vumixManagerApp.controllers')
         };
         
         $scope.addProject = function(){
-            projectService.addProject($scope.project.company_name, $scope.project.project_name, $scope.project.marker_type, $scope.project.upload, $scope.userid)
+            projectService.addProject($scope.project, $scope.userid)
                 .then(function(project) {
                 $scope.projects.push(project);
             });
