@@ -49,8 +49,10 @@
      <Compile Include="Assets\Scripts\Facade.cs" />
      <Compile Include="Assets\Scripts\LoadandSave\LoadAssetBundle.cs" />
      <Compile Include="Assets\Scripts\LoadandSave\LoadProgress.cs" />
-     <Compile Include="Assets\Scripts\LoadandSave\ObjectCollection.cs" />
      <Compile Include="Assets\Scripts\LoadandSave\SaveProgress.cs" />
+     <Compile Include="Assets\Scripts\Spawning\ModelCreator.cs" />
+     <Compile Include="Assets\Scripts\Spawning\TextCreator.cs" />
+     <Compile Include="Assets\Scripts\States\ModelStateObject.cs" />
      <Compile Include="Assets\Scripts\States\Preview.cs" />
      <Compile Include="Assets\Scripts\States\ProjectState.cs" />
      <Compile Include="Assets\Scripts\States\SerialState.cs" />

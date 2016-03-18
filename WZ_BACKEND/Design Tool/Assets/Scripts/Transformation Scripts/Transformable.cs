@@ -2,8 +2,6 @@
 using UnityEngine.EventSystems;
 using System.Collections;
 
-[RequireComponent(typeof(MeshCollider))]
-
 public class Transformable : MonoBehaviour
 {
     public static TransformMode MODE = TransformMode.Translate;

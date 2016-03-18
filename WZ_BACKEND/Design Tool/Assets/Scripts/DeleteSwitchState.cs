@@ -17,16 +17,18 @@ public class DeleteSwitchState : MonoBehaviour {
         facade = facadeGO.GetComponent<Facade>();
 	}
 
-    public void DeleteSelectedScene()
+    public void DeleteSelectedState()
     {
         int toDelete = GetIndex();
-        facade.DeleteState(toDelete);
+        facade.SetTargetState(toDelete);
+        facade.DeleteState();
     }
 
     public void SwitchSelectedScene()
     {
         int toSwitch = GetIndex();
-        facade.DisplayState(toSwitch);
+        facade.SetTargetState(toSwitch);
+        facade.DisplayState();
     }
 
     private int GetIndex()

@@ -1,38 +1,22 @@
-﻿using UnityEngine;
-using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
-public class Facade : MonoBehaviour {
+public class Facade : MonoBehaviour
+{
     public const string FACADE_TAG = "Facade";
 
-    private LoadAssetBundle loadAssetBundle;
-    private SaveProgress saveProgress;
-    private LoadProgress loadProgress;
-    private GameObject controlScript;
-    private StateManager stateManager;
     private string assetBundleUrl;
-    private string saveStateURL;
+    private GameObject controlScript;
+    private LoadAssetBundle loadAssetBundle;
+    private LoadProgress loadProgress;
     private string loadStateURL;
-	
-    // Use this for initialization
-	void Start () {
-       controlScript =  GameObject.FindGameObjectWithTag(StateManager.CONTROL_SCRIPT_TAG);
-       loadAssetBundle = controlScript.GetComponent<LoadAssetBundle>();
-       saveProgress = controlScript.GetComponent<SaveProgress>();
-       loadProgress = controlScript.GetComponent<LoadProgress>();
-       stateManager = controlScript.GetComponent<StateManager>();
-	}
-
-    public void SendStateInfo()
-    {
-        List<int> ids = stateManager.GetStateIDs();
-        List<string> names = stateManager.GetStateNames();
-        for (int i = 0; i < ids.Count; i++)
-        {
-            Application.ExternalCall("createState",ids[i],names[i]);
-        }
-    }
+    private ModelCreator objectCollection;
+    private SaveProgress saveProgress;
+    private string saveStateURL;
+    private StateManager stateManager;
+    private int targetStateId;
+    private int targetStateObjectId;
+    private TextCreator textCreator;
 
     public void AddNewState()
     {
@@ -40,24 +24,19 @@ public class Facade : MonoBehaviour {
         Application.ExternalCall("createState", newState.id, newState.name);
     }
 
-    public void DeleteState(int i)
+    public void ChangeStateName(string newName)
     {
-        stateManager.DeleteState(i);
+        stateManager.ChangeStateName(targetStateId, newName);
     }
 
-    public void DisplayState(int id)
+    public void DeleteState()
     {
-        stateManager.SwitchState(id);
+        stateManager.DeleteState(targetStateId);
     }
 
-    public void ChangeStateName(string arg)
+    public void DisplayState()
     {
-        string[] arr = arg.Split(",".ToCharArray());
-        int id = Int32.Parse(arr[0]);
-        string newName = arr[1];
-        Debug.Log(id);
-        Debug.Log(newName);
-        stateManager.ChangeStateName(id, newName);
+        stateManager.SwitchState(targetStateId);
     }
 
     public void DownloadAssetBundle(string url)
@@ -71,14 +50,83 @@ public class Facade : MonoBehaviour {
         loadProgress.Load(url);
     }
 
+    public void RequestClickable()
+    {
+        List<StateObject> clickables = stateManager.RequestClickable(targetStateId);
+        foreach (StateObject so in clickables)
+        {
+            Application.ExternalCall("AddClickable", so.instanceName, so.id, targetStateId);
+        }
+    }
+
+    public void RequestModelInfo()
+    {
+        List<string> names = objectCollection.GetNames();
+        foreach (string name in names)
+        {
+            Application.ExternalCall("addModelButton", name);
+        }
+    }
+
     public void SaveProgress(string url)
     {
         saveProgress.Save(url);
     }
 
+    public void SendStateInfo()
+    {
+        List<int> ids = stateManager.GetStateIDs();
+        List<string> names = stateManager.GetStateNames();
+        for (int i = 0; i < ids.Count; i++)
+        {
+            Application.ExternalCall("createState", ids[i], names[i]);
+        }
+    }
+
+    public void SetTargetState(int id)
+    {
+        targetStateId = id;
+    }
+
+    public void SetTargetStateObject(int id)
+    {
+        targetStateObjectId = id;
+    }
 
     public void SetTransformMode(string val)
     {
         Transformable.SetTransformMode(val);
+    }
+
+    public void SetTransitionId(int transitionStateId)
+    {
+        stateManager.SetTransitionId(targetStateId, targetStateObjectId, transitionStateId);
+    }
+
+    public void SpawnObject(int i)
+    {
+        objectCollection.SpawnObject(i);
+    }
+
+    public void SpawnText(string input)
+    {
+        textCreator.CreateNewText(input);
+    }
+
+    public void UnSetTransitionId()
+    {
+        stateManager.UnSetTransitionId(targetStateId, targetStateObjectId);
+    }
+
+    // Use this for initialization
+    private void Start()
+    {
+        controlScript = GameObject.FindGameObjectWithTag(StateManager.CONTROL_SCRIPT_TAG);
+        loadAssetBundle = controlScript.GetComponent<LoadAssetBundle>();
+        objectCollection = controlScript.GetComponent<ModelCreator>();
+        saveProgress = controlScript.GetComponent<SaveProgress>();
+        loadProgress = controlScript.GetComponent<LoadProgress>();
+        stateManager = controlScript.GetComponent<StateManager>();
+        textCreator = controlScript.GetComponent<TextCreator>();
     }
 }

@@ -28,7 +28,7 @@ public class State
         nextStateObjectId = 0;
     }
 
-    public State(SerialState ss, ObjectCollection objectCollection)
+    public State(SerialState ss, ModelCreator objectCollection)
     {
         stateObjects = new Dictionary<int, StateObject>();
         grid = GameObject.FindGameObjectWithTag(GRID_TAG);
@@ -38,21 +38,24 @@ public class State
         InitializeStateObjects(ss, objectCollection);
     }
 
-    private void InitializeStateObjects(SerialState serialState, ObjectCollection objectCollection)
+    private void InitializeStateObjects(SerialState serialState, ModelCreator objectCollection)
     {
         foreach (SerialStateObject s in serialState.stateObjects)
         {
-            foreach (GameObject g in objectCollection.GetUserObjects())
+            if (s.type == StateObjectType.Model)
             {
-                if (g.name.Equals(s.modelName))
+                foreach (GameObject g in objectCollection.GetUserObjects())
                 {
-                    GameObject toSpawn = MonoBehaviour.Instantiate(g);
-                    StateObject stateObject = new StateObject(toSpawn);
-                    s.InitializeStateObject(stateObject);
-                    AddToState(stateObject);
-                    nextStateObjectId = Mathf.Max(s.id, nextStateObjectId);
-                    Debug.Log(id + ", "  +s.id);
-                    break;
+                    if (g.name.Equals(s.modelName))
+                    {
+                        GameObject toSpawn = MonoBehaviour.Instantiate(g);
+                        StateObject stateObject = new StateObject(toSpawn);
+                        s.InitializeStateObject(stateObject);
+                        AddToState(stateObject);
+                        nextStateObjectId = Mathf.Max(s.id, nextStateObjectId);
+                        Debug.Log(id + ", " + s.id);
+                        break;
+                    }
                 }
             }
         }
@@ -74,7 +77,7 @@ public class State
         stateObjects[id].SetName(newName);
     }
 
-    public void AddToState(GameObject g)
+    public void AddToState(GameObject g, StateObjectType type)
     {
         StateObject so = new StateObject(g);
         so.id = nextStateObjectId; 
@@ -95,6 +98,7 @@ public class State
         button.transform.SetParent(grid.transform);
         so.button = button;
         StateObjectChanger objectChanger = button.GetComponent<StateObjectChanger>();
+        so.stateObjectChanger = objectChanger;
         objectChanger.AddStateObject(so);
     }
 
@@ -198,6 +202,36 @@ public class State
 
     public void RemoveLinks(int stateId)
     {
-        throw new System.NotImplementedException();
+         Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+         while (enumerator.MoveNext())
+         {
+             StateObject s = enumerator.Current.Value;
+             s.RemoveLink(stateId);
+         }
+    }
+
+    public List<StateObject> RequestClickable()
+    {
+        List<StateObject> clickables = new List<StateObject>();
+        Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+        while (enumerator.MoveNext())
+        {
+            StateObject s = enumerator.Current.Value;
+            if (s.isStateChanger)
+            {
+                clickables.Add(s);
+            }
+        }
+        return clickables;
+    }
+
+    public void UnSetTransitionId(int targetStateObjectId)
+    {
+        stateObjects[targetStateObjectId].UnSetTransition();
+    }
+
+    public void SetTransitionId(int targetStateObjectId, int transitionStateId)
+    {
+        stateObjects[targetStateObjectId].SetTransition(transitionStateId);
     }
 }

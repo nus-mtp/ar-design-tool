@@ -5,11 +5,12 @@ public class StateObject{
     
     public GameObject gameObject;
     public GameObject button;
+    public StateObjectChanger stateObjectChanger;
     public string instanceName;
     public int id;
     public bool isStateChanger;
     public int transitionStateId;
-    
+    public StateObjectType type;
 
     public StateObject(GameObject g)
     {
@@ -55,4 +56,26 @@ public class StateObject{
     {
         instanceName = newName;
     }
+
+    public void RemoveLink(int stateId)
+    {
+        if (isStateChanger && transitionStateId == stateId)
+        {
+            UnSetTransition();
+        }
+    }
+
+    public void UnSetTransition()
+    {
+        isStateChanger = false;
+        stateObjectChanger.UnSetIsStateChanger();
+    }
+
+    public void SetTransition(int transitionStateId)
+    {
+        isStateChanger = true;
+        this.transitionStateId = transitionStateId;
+    }
 }
+
+

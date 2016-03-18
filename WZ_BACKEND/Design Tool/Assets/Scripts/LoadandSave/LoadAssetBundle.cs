@@ -16,12 +16,13 @@ public class LoadAssetBundle : MonoBehaviour
     private WWW www;
     private AssetBundle bundle;
     private bool isDownloading = false;
-    private ObjectCollection objectCollection;
+    private ModelCreator objectCollection;
 
     public Text downloadStatus;
 
     private IEnumerator Download(string url)
     {
+        objectCollection.Init();
         // Start a download of the given URL
         //Random argument added to the back of the URL to prevent caching
         string randomValue = "?t=" + Random.value;
@@ -79,7 +80,7 @@ public class LoadAssetBundle : MonoBehaviour
 
     void Awake()
     {
-        objectCollection = gameObject.GetComponent<ObjectCollection>();
+        objectCollection = gameObject.GetComponent<ModelCreator>();
     }
 
     void Update()

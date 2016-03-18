@@ -104,6 +104,16 @@ public class StateObjectChanger : MonoBehaviour
         }
     }
 
+    public void UnSetIsStateChanger()
+    {
+        if (toggle == null)
+        {
+            toggle = GetComponentInChildren<Toggle>();
+        }
+        toggle.isOn = false;
+        transitionStateText.text = NOT_TRANSITION;
+    }
+
     public void SetActiveGameObject()
     {
         stateManager.SetActiveGameObject(stateObject.gameObject);

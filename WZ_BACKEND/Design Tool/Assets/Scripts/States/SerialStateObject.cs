@@ -3,16 +3,23 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
+public enum StateObjectType
+{
+    Model, Image, Text
+}
+
+[Serializable]
 public class SerialStateObject
 {
+    public int id;
+    public string instanceName;
+    public bool isStateChanger;
+    public string modelName;
     public SerialVector position;
     public SerialVector rotation;
     public SerialVector scale;
-    public string modelName;
-    public string instanceName;
-    public int id;
-    public bool isStateChanger;
     public int transitionStateId;
+    public StateObjectType type;
 
     public SerialStateObject(StateObject s)
     {
@@ -25,6 +32,7 @@ public class SerialStateObject
         isStateChanger = s.isStateChanger;
         transitionStateId = s.transitionStateId;
         id = s.id;
+        type = s.type;
     }
 
     public void InitializeStateObject(StateObject s)
@@ -38,17 +46,17 @@ public class SerialStateObject
         s.isStateChanger = isStateChanger;
         s.transitionStateId = transitionStateId;
         s.id = id;
+        s.type = type;
     }
 }
 
 [Serializable]
 public class SerialVector
 {
+    public float w;
     public float x;
     public float y;
     public float z;
-    public float w;
-
     public SerialVector(Quaternion q)
     {
         x = q.x;
