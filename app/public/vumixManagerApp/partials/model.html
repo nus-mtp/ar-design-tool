@@ -6,31 +6,29 @@
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your model </h2>
-            <button type="button" class="center btn-large" id="uploadModel">Start</button>
+            <button type="button" class="center btn-large" id="uploadModel">Add New Model</button>
         </div>
         <div id="upload_model" class="side-bar-padding">
             <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
             <span>
-              <form ng-submit="addModel()" enctype="multipart/form-data">
-                <h1> Model Name</h1>
-                <input type="text" name="model_name" placeholder="Model Name" ng-model="model.model_name"><br>
-                <h1> File Size</h1>
-                <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_size"><br>
-                <h1> File Extension</h1>
-                <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_extension"><br>
+              <form ng-submit="addModel()" name="modelForm" enctype="multipart/form-data" novalidate>
+                <label> Model Name</label>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="model.model_name" required>
+                <span class="text-danger" ng-show="modelForm.$error.required">The file name cannot be empty</span>
                 <h1> File</h1>
                 <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
+                <span class="text-info" ng-show="modelForm.$error.required">Max upload 8 mb file</span>
                 <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                     <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
                 <!--</form>-->
-                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF" ng-disabled="modelForm.$invalid">
               </form>
           </span>
         </div>
     </div>
     
     <!--modal to update model-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal fade" id="myModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">        
                 <div class="modal-header">
@@ -41,10 +39,6 @@
                     <form ng-submit="updateModel(model.id)" enctype="multipart/form-data">
                         <h1> Model Name</h1>
                         <input type="text" name="model_name" placeholder="Model Name" ng-model="model.name"><br>
-                        <h1> File Size</h1>
-                        <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_size"><br>
-                        <h1> File Extension</h1>
-                        <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_extension"><br>
                         <h1> File</h1>
                         <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
@@ -65,12 +59,11 @@
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
                 
                 <ul ng-repeat="model in models" | filter:search">
-                    <a href="#" " class=" ">
                     <li class="flex-item ">2
                         <p>{{model.name}}</p>
                     </li>
                     <button class="btn btn-danger" ng-click="deleteModel(model.id)">Delete</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="getModel(model.id)">Update</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModel" ng-click="getModel(model.id)">Update</button>
                 </a>
             </ul>
         </div>
