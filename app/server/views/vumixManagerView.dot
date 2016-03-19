@@ -25,6 +25,7 @@
                                     <ul class="center-align">
                                         <span class="top-bar"><a href="" ui-sref="manager" class="btn btn-default top-bar">Project</a></span>
                                         <span class="top-bar"><a href="" ui-sref="model" class="btn btn-default top-bar">Model</a></span>
+                                        <span class="top-bar"><a href="" ui-sref="image" class="btn btn-default top-bar">Image</a></span>
                                     </ul>
                                 </li>
                             </ul>

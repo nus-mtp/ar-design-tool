@@ -18,5 +18,10 @@
           templateUrl: '/vumixManagerApp/partials/model.html',
           controller: 'modelController'
         })
+        .state('image',{
+          url: '/image',
+          templateUrl: '/vumixManagerApp/partials/image.html',
+          controller: 'imageController'
+        })
     }]);  
 })(); 

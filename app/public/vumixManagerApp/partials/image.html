@@ -1,0 +1,107 @@
+<div class="wrapper" ng-controller="imageController">
+    <div class="sidebar">
+        <div id="welcome_page" class="side-bar-padding">
+            <div class="search" style="margin-top:10px">
+                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+            </div>
+            <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
+            <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your image </h2>
+            <button type="button" class="center btn-large" id="uploadImage">Add New Image</button>
+        </div>
+        <div id="upload_image" class="side-bar-padding">
+            <h1 class="center" style="margin-top: 20%;"> Upload Your New Image Here</h1>
+            <span>
+              <form ng-submit="addImage()" name="imageForm" enctype="multipart/form-data" novalidate>
+                <label> Model Name</label>
+                <input type="text" name="imageName" placeholder="Image Name" ng-model="image.image_name" required>
+                <span class="text-danger" ng-show="imageForm.imageName.$error.required">The image name cannot be empty</span>
+                <h1> File</h1>
+                <input type ="file" ng-model="image.upload" name="imageUpload" style="color:#FFFFFF" onchange="angular.element(this).scope().uploadFile()" />
+                <div class="text-danger" ng-show="imageForm.imageUpload.$error.required">Image file cannot be empty</div>
+                <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .jpg or .png</div>
+                <span class="text-info">Max upload 8 mb file</span>
+                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                    <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
+                <!--</form>-->
+                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF" ng-disabled="imageForm.$invalid">
+              </form>
+          </span>
+        </div>
+    </div>
+    
+    <!--modal to update model-->
+    <div class="modal fade" id="myImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">        
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
+                    <h4 class="modal-title"> Your image/h4>
+                </div>
+                <div class="modal-body">
+                    <form ng-submit="updateImage(image.id)" enctype="multipart/form-data">
+                        <h1> Image Name</h1>
+                        <input type="text" name="image_name" placeholder="Image Name" ng-model="image.name"><br>
+                        <h1> File</h1>
+                        <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
+                        <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                            <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
+                        </form>-->
+                        <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                    </form>
+                </div>           
+            </div>
+        </div>
+    </div>
+
+
+    <div class="content">
+        <div class="container section" style="width:auto;">
+            <!--to display model-->
+            <div id="image_list" class="flex-container">
+                <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
+                <ul ng-repeat="image in images" | filter:search">
+                    <li class="flex-item ">2
+                        <p>{{image.name}}</p>
+                    </li>
+                    <button class="btn btn-danger" ng-click="deleteModel(image.id)">Delete</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModel" ng-click="getModel(image.id)">Update</button>
+                </a>
+            </ul>
+        </div>
+        
+    </div>
+  </div>
+
+  <div class="cleared">
+  </div>
+</div>
+
+<script type="text/javascript">
+(function() {
+    $(document).ready(function(){
+        
+        var height = 1200;
+        $('.sidebar').css("min-height", height);
+        
+        // when user resize their window
+        $(window).resize(function(){
+            var curr_height = $(window).height();
+            // if(curr_height < height){
+            //     $('.sidebar').css("position ", "absolute ");  //current setup!
+            // }else if(curr_height == height){
+            //     $('.sidebar').css("position ", "fixed ");
+            // }
+        });
+        
+        $("#upload_image").hide();
+
+    
+        $('#uploadImage').click(function(){
+           $("#welcome_page").hide();
+           $("#upload_image").show(); 
+        });
+        
+    });
+
+})();
+</script>
