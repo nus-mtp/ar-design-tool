@@ -9,6 +9,9 @@ angular.module('vumixManagerApp.controllers')
             marker_type: "3D",
             upload: undefined
         };
+                  
+        var cookie = document.cookie.split(';')[2];
+        $scope.userid = cookie.substring(5);
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -16,7 +19,7 @@ angular.module('vumixManagerApp.controllers')
           }
           
           var extensionCheck = function() {
-            var tokenised = $scope.project.upload.split('.');
+            var tokenised = $scope.project.upload.name.split('.');
             if (tokenised.length < 1) {
               return false;
             }
@@ -40,9 +43,6 @@ angular.module('vumixManagerApp.controllers')
             onFormLoaded();
           }
         });        
-       
-        //var cookie = document.cookie.split(';')[2];
-        //$scope.userid = cookie.substring(5);
         
         $scope.uploadFile = function(){
             file = event.target.files[0];
