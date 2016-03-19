@@ -3,24 +3,25 @@
     .controller('editorController', function(
       $scope,
       editorService,
-      unityMapperService 
+      unityMapperService,
+      stateModelService
     ) {
-      $scope.objectsOnScreen = [];
+      $scope.modelsOnScreen = [];
       
-      $scope.objectsAvailable = [];
+      $scope.modelsAvailable = [];
       
       $scope.unityMapperService = unityMapperService;
       
       $scope.editorService = editorService;
       
-      $scope.addObjectToScreen = function(object) {
+      $scope.addModelToScreen = function(object) {
         var _obj = angular.copy(object);
         _obj.clickable = false;
-        $scope.objectsOnScreen.push(_obj);
+        $scope.modelsOnScreen.push(_obj);
       }
       
-      $scope.fetchAllModels = function() {
-        $scope.objectsAvailable = unityMapperService.fetchAllObjects();
+      $scope.getAllModels = function() {
+        $scope.modelsAvailable = stateModelService.getAllModels();
       }
     }); 
 })();
