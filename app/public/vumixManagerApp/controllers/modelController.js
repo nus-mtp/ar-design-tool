@@ -18,9 +18,8 @@ angular.module('vumixManagerApp.controllers')
             filename = event.target.files[0];
             $scope.model.upload = filename;
             $scope.model.file_size = filename.size;
-            console.log($scope.model.file_size);
             $scope.model.file_extension = filename.type;
-            console.log($scope.model.file_extension);
+            $scope.$apply();
         };
         
         $scope.getModel = function(id){
@@ -46,6 +45,11 @@ angular.module('vumixManagerApp.controllers')
         };       
         
         $scope.addModel = function(){
+            //to check the file type
+        //    if(!$scope.isValidFileType()){
+           console.log(modelForm.fileType);
+           modelForm.fileType.$setValidity("modelForm.file.$error.filetype", false);
+            //}
            modelService.addModel($scope.model, $scope.model.upload, $scope.userid)
                 .then(function(model) {
                 console.log(model);
@@ -59,13 +63,4 @@ angular.module('vumixManagerApp.controllers')
         }).success(function(res){
             $scope.models = res.data;
         });
-    })
-.directive('customOnChange', function() {
-  return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-      var onChangeFunc = scope.$eval(attrs.customOnChange);
-      element.bind('change', onChangeFunc);
-    }
-  };
-});
+    });
