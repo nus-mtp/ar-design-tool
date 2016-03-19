@@ -11,8 +11,9 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
-        $scope.userid = 6;
-        
+        var cookie = document.cookie.split(';')[2];
+        $scope.userid = cookie.substring(5);
+       
         $scope.uploadFile = function(){
             filename = event.target.files[0];
             $scope.model.upload = filename;
@@ -54,7 +55,7 @@ angular.module('vumixManagerApp.controllers')
         
         $http({
             method: 'GET',
-            url : '/api/users/6/models'
+            url : '/api/users/' + $scope.userid +'/models'
         }).success(function(res){
             $scope.models = res.data;
         });
