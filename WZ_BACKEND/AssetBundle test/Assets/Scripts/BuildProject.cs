@@ -21,7 +21,8 @@ public class BuildProject : MonoBehaviour {
     const string OBJECT_DATASET_PATH = "/Editor/QCAR/TargetSetData";
     const string MODELS_DATA_PATH = "/Resources/Obj";
     const string IDENTIFIER_FILE_PATH = "/BundleIdentifier/bundleIdentifier.txt";
-
+    const string TEMPLATE_SCENE_NAME = "Assets/Scenes/template.unity";
+    const string MARKER_TAG = "Marker";
     const int INVALID_PACKAGE_ERROR_CODE = 2;
 
     enum MarkerType {IMAGE, OBJECT};
@@ -94,6 +95,14 @@ public class BuildProject : MonoBehaviour {
         return result;
     }
 
+    [MenuItem("File/Copy")]
+    private static void CopyScene()
+    {
+        Scene template = EditorSceneManager.GetSceneByPath(TEMPLATE_SCENE_NAME);
+        EditorSceneManager.SaveScene(template, DEFAULT_SCENE_NAME);
+        marker2d = GameObject.FindGameObjectWithTag(MARKER_TAG);
+    }
+
     [MenuItem("File/Setup vuforia")]
     private static void SetupVuforiaTools(MarkerType markerType)
     {
@@ -127,7 +136,8 @@ public class BuildProject : MonoBehaviour {
     [MenuItem("File/Build Android 2D")]
     public static void BuildAndroid2D()
     {
-        SetupVuforiaTools(MarkerType.IMAGE);
+       // SetupVuforiaTools(MarkerType.IMAGE);
+        CopyScene();
         SetUpStates(marker2d);
         SetIdentifier();
         BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.Android, BuildOptions.None);

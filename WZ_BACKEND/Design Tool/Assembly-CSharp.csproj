@@ -64,6 +64,7 @@
      <Compile Include="Assets\Scripts\States\StateObject.cs" />
      <Compile Include="Assets\Scripts\States\StateObjectChanger.cs" />
      <Compile Include="Assets\Scripts\States\TextStateObject.cs" />
+     <Compile Include="Assets\Scripts\TextureChange.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\AbstractTransformHandler.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\DragHandler.cs" />

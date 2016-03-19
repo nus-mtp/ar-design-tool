@@ -60,13 +60,13 @@ public class CreateAssetBundles
         {
             GameObject go = GameObject.CreatePrimitive(PrimitiveType.Plane);
             Texture2D texture = FileLoader.readImage(imageName);
-            go.transform.localScale = new Vector3(10, texture.height / texture.width * 10, 10);
-            Renderer rend = go.GetComponent<Renderer>();
-            rend.sharedMaterial.mainTexture = texture;
+            go.transform.localScale = new Vector3(10, 10, (float)texture.height/texture.width * 10.0f);
+            TextureChange tc = go.AddComponent<TextureChange>();
+            tc.myTexture = texture;
             string outputPath = ASSET_PATH + ASSET_BUNDLE_OBJECTS_PATH + imageName + PREFAB_EXTENSION;
             PrefabUtility.CreatePrefab(outputPath, go, ReplacePrefabOptions.ReplaceNameBased);
             prefabPaths.Add(outputPath);
-            MonoBehaviour.DestroyImmediate(go);
+            //MonoBehaviour.DestroyImmediate(go);
         }
     }
 

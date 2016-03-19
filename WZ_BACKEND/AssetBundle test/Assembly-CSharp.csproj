@@ -53,6 +53,8 @@
      <Compile Include="Assets\Scripts\Serial Stuff\SerialStateObject.cs" />
      <Compile Include="Assets\Scripts\State.cs" />
      <Compile Include="Assets\Scripts\StateObject.cs" />
+     <Compile Include="Assets\Scripts\TextureChange.cs" />
+     <Compile Include="Assets\Scripts\TextureDebug.cs" />
      <Compile Include="Assets\Scripts\Utility\AddKey.cs" />
      <Compile Include="Assets\Scripts\Utility\AutoFocus.cs" />
      <Compile Include="Assets\Scripts\Utility\FileLoader.cs" />

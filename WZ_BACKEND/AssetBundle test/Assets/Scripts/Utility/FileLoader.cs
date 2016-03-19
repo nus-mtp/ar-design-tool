@@ -11,6 +11,7 @@ public class FileLoader
     private const string OBJ_PATH = "OBJ/";
     private const string VUFORIA_PATH = "VUFORIA/";
     private const string MODELS_PATH = "UserModels/";
+    private const string PLANE_PATH = "Plane/plane";
 
     public static string readJSON(string objectName)
     {
@@ -53,5 +54,11 @@ public class FileLoader
     {
         GameObject go = Resources.Load(MODELS_PATH + objName, typeof(GameObject)) as GameObject;
         return go;
+    }
+
+    public static GameObject LoadPlane()
+    {
+       GameObject go = Resources.Load(PLANE_PATH,typeof(GameObject)) as  GameObject;
+       return go;
     }
 }

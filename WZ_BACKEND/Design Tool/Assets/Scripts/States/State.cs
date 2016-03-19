@@ -15,6 +15,7 @@ public class State
     public GameObject stateObjectButtonTemplate;
     public StateObject activeStateObject;
     public GameObject grid;
+    public bool isPreview;
 
     private int nextStateObjectId;
 
@@ -170,7 +171,7 @@ public class State
         {
 
             Transformable t = activeGameObject.GetComponent<Transformable>();
-            if (t != null)
+            if (t != null && !isPreview)
             {
                 t.initializeElements();
             }
@@ -188,6 +189,7 @@ public class State
 
     public void SetPreview()
     {
+        isPreview = true;
         Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
         while (enumerator.MoveNext())
         {
@@ -197,6 +199,7 @@ public class State
 
     public void DisablePreview()
     {
+        isPreview = false;
         Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
         while (enumerator.MoveNext())
         {
