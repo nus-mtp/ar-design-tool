@@ -10,26 +10,43 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
-        /*
-        $scope.$watch('newProjectForm', function(newVal, oldVal) {
-          if (newVal) {
-            $scope.newProjectForm.projectUpload.$setValidity('required', false);
+        var onFormLoaded = function() {          
+          var requiredCheck = function() {
+            return $scope.project.upload;
           }
-        });
-        */
+          
+          var extensionCheck = function() {
+            var tokenised = $scope.project.upload.split('.');
+            if (tokenised.length < 1) {
+              return false;
+            }
+            return tokenised[tokenised.length - 1] === 'unitypackage';
+          }
+          
+          $scope.$watch('project.upload', function(newVal, oldVal) {   
+            $scope.addProjectForm.projectUpload.$setValidity('required', false); 
+            $scope.addProjectForm.projectUpload.$setValidity('fileType', false); 
+            if (requiredCheck()) {      
+              $scope.addProjectForm.projectUpload.$setValidity('required', true);
+              if (extensionCheck()) {
+                $scope.addProjectForm.projectUpload.$setValidity('fileType', true); 
+              }                            
+            }
+          });
+        };
         
-        $scope.$watch('project.upload', function(newVal, oldVal) {   
-          if ($scope.project.upload) {      
-            
+        $scope.$watch('addProjectForm', function(newVal, oldVal) {
+          if (newVal) {
+            onFormLoaded();
           }
-        });
+        });        
        
-        var cookie = document.cookie.split(';')[2];
-        $scope.userid = cookie.substring(5);
+        //var cookie = document.cookie.split(';')[2];
+        //$scope.userid = cookie.substring(5);
         
         $scope.uploadFile = function(){
-            filename = event.target.files[0];
-            $scope.project.upload = filename;
+            file = event.target.files[0];
+            $scope.project.upload = file;
             $scope.$apply();
         };
         
