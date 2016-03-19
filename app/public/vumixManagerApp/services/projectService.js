@@ -56,21 +56,6 @@
            });
         },  
         
-        getProject: function(projects, userId, id){
-           return $http({
-               method: 'GET',
-               url: '/api/users/' + userId + '/projects/' + id      
-           }).then(function(res){
-               for(var i = 0; i < projects.length; i++){
-                   if(id === projects[i].id){
-                       return projects[i];
-                   }
-               }
-           }, function errorCallback(res){
-               console.log("error getting the model");
-           }); 
-        },
-        
         updateProject: function(projects, project, userId, id){
            return $http({
                method: 'PUT',
@@ -86,9 +71,7 @@
                console.log("error getting the model");
            }); 
         },
-         
       };
-
     })
     .service('fileUpload', ['$http', function ($http) {
         this.uploadFileToUrl = function(file, uploadUrl){

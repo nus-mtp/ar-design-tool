@@ -14,15 +14,20 @@ angular.module('vumixManagerApp.controllers')
         $scope.userid = 6;
         
         $scope.uploadFile = function(){
-            filename = event.target.files[0].name;
+            filename = event.target.files[0];
             $scope.model.upload = filename;
+            $scope.model.file_size = filename.size;
+            console.log($scope.model.file_size);
+            $scope.model.file_extension = filename.type;
+            console.log($scope.model.file_extension);
         };
         
         $scope.getModel = function(id){
-          modelService.getModel($scope.models, $scope.userid,id)
-            .then(function(model){
-                $scope.model = model;
-            });
+            for(var i = 0; i < $scope.models.length; i++){
+                if(id === $scope.models[i].id){
+                    $scope.model = $scope.models[i];
+                }
+            }
         };
         
         $scope.updateModel = function(id){

@@ -14,10 +14,9 @@ angular.module('vumixManagerApp.controllers')
         console.log($scope.userid);
         
         $scope.uploadFile = function(){
-            filename = event.target.files[0].name;
+            filename = event.target.files[0];
             $scope.project.upload = filename;
-        };
-        
+        };    
         
         $scope.deleteProject = function(id){
             projectService.deleteProject($scope.projects, $scope.userid, id)
@@ -28,10 +27,11 @@ angular.module('vumixManagerApp.controllers')
         };       
         
         $scope.getProject = function(id){
-          projectService.getProject($scope.projects, $scope.userid,id)
-            .then(function(project){
-                $scope.project = project;
-            });
+            for(var i = 0; i < $scope.projects.length; i++){
+                if(id === $scope.projects[i].id){
+                    $scope.project = $scope.projects[i];
+                }
+            }
         };
         
         $scope.updateProject = function(id){
@@ -44,7 +44,6 @@ angular.module('vumixManagerApp.controllers')
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
                 .then(function(project) {
-                console.log($scope.project.upload);
                 $scope.projects.push(project);
             });
         };
