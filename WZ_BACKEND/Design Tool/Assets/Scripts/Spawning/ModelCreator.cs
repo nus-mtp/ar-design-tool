@@ -7,17 +7,20 @@ using System.Collections.Generic;
 public class ModelCreator : MonoBehaviour
 {
 
-    private List<GameObject> userObjects;
+    public GameObject activeGameobject;
+    public GameObject spawnButtonList;
+    public GameObject spawnButtonPrefab;
     private List<SpawnObjectWrapper> spawnButtons;
     private StateManager stateManager;
-
-    public GameObject activeGameobject;
-    public GameObject spawnButtonPrefab;
-    public GameObject spawnButtonList;
-
+    private List<GameObject> userObjects;
     private ModelCreator()
     {
 
+    }
+
+    public void AddGameObjects(GameObject o)
+    {
+        userObjects.Add(o);
     }
 
     public List<string> GetNames()
@@ -35,13 +38,24 @@ public class ModelCreator : MonoBehaviour
         return userObjects.Count;
     }
 
+    public List<GameObject> GetUserObjects()
+    {
+        List<GameObject> clone = new List<GameObject>();
+        foreach (GameObject g in userObjects)
+        {
+            clone.Add(g);
+        }
+
+        return clone;
+    }
+
     public void PrepareUserObjects()
     {
         int i=0;
         foreach (GameObject g in userObjects)
         {
             //AddMeshCollider(g);
-            AttachScripts(g);
+            //AttachScripts(g);
             GameObject modelButton = Instantiate(spawnButtonPrefab);
             modelButton.transform.SetParent(spawnButtonList.transform);
             Text buttonName = modelButton.GetComponentInChildren<Text>();
@@ -51,6 +65,35 @@ public class ModelCreator : MonoBehaviour
             spawn.indexToSpawn = i;
             i++;
         }
+    }
+
+    public void SpawnObject(int i)
+    {
+        GameObject inScene = Instantiate(userObjects[i]);
+        inScene.name = userObjects[i].name;
+        stateManager.AddToState(inScene, StateObjectType.Model);
+    }
+
+    public GameObject GetModel(string name){
+        GameObject result = null;
+        foreach(GameObject g in userObjects){
+            if (g.name.Equals(name))
+            {
+                return g;
+            }
+        }
+        return result;
+    }
+
+
+    internal void Init()
+    {
+        foreach (SpawnObjectWrapper s in spawnButtons)
+        {
+            Destroy(s.gameObject);
+        }
+        spawnButtons = new List<SpawnObjectWrapper>();
+        userObjects = new List<GameObject>();
     }
 
     private void AddMeshCollider(GameObject go)
@@ -72,30 +115,6 @@ public class ModelCreator : MonoBehaviour
         go.AddComponent<Transformable>();
         go.AddComponent<Preview>();
     }
-
-    public List<GameObject> GetUserObjects()
-    {
-        List<GameObject> clone = new List<GameObject>();
-        foreach (GameObject g in userObjects)
-        {
-            clone.Add(g);
-        }
-
-        return clone;
-    }
-
-    public void SpawnObject(int i)
-    {
-        GameObject inScene = Instantiate(userObjects[i]);
-        inScene.name = userObjects[i].name;
-        stateManager.AddToState(inScene,StateObjectType.Model);
-    }
-
-    public void AddGameObjects(GameObject o)
-    {
-        userObjects.Add(o);
-    }
-
     void Awake()
     {
         //userObjects = new List<GameObject>();
@@ -103,16 +122,5 @@ public class ModelCreator : MonoBehaviour
         spawnButtons = new List<SpawnObjectWrapper>();
         //LoadAssetBundle lab = gameObject.GetComponent<LoadAssetBundle>();
         //lab.DownloadAssetBundleTest();
-    }
-
-
-    internal void Init()
-    {
-        foreach (SpawnObjectWrapper s in spawnButtons)
-        {
-            Destroy(s.gameObject);
-        }
-        spawnButtons = new List<SpawnObjectWrapper>();
-        userObjects = new List<GameObject>();
     }
 }

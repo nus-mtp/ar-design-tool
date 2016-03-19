@@ -10,6 +10,8 @@ public class StateManager : MonoBehaviour {
     public GameObject leftBlockOut;
     public GameObject rightBlockOut;
     public Text stateNumberDisplay;
+    public bool isAssetBundleLoaded;
+
     private const string CURRENT_SELECTED_ITEM_TEXT = "Current Selected Item: ";
     private const string CURRENT_STATE_TEXT = "Current State:{0}";
     private const string EDIT_MODE_TEXT = "In Edit Mode";
@@ -149,7 +151,7 @@ public class StateManager : MonoBehaviour {
         stateList = new Dictionary<int, State>();
         foreach (SerialState serialState in serialStates)
         {
-            State newState = new State(serialState, modelCreator);
+            State newState = new State(serialState, modelCreator,textCreator);
             stateList.Add(newState.id, newState);
             activeState = newState;
             nextStateId = Mathf.Max(newState.id, nextStateId);
@@ -163,6 +165,7 @@ public class StateManager : MonoBehaviour {
 
     public void RemoveActiveObject()
     {
+
         activeState.RemoveActiveObject();
         currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT;
     }
@@ -243,4 +246,6 @@ public class StateManager : MonoBehaviour {
         activeState = stateList[0];
         stateNumberDisplay.text = string.Format(CURRENT_STATE_TEXT, 0);
     }
+
+
 }

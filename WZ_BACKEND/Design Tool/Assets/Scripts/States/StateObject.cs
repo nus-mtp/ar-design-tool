@@ -12,10 +12,13 @@ public class StateObject{
     public int transitionStateId;
     public StateObjectType type;
 
-    public StateObject(GameObject g)
+    public StateObject(GameObject g, StateObjectType type)
     {
         gameObject = g;
         instanceName = g.name;
+        g.AddComponent<Transformable>();
+        g.AddComponent<Preview>();
+        this.type = type;
     }
 
     public void Hide()
@@ -49,6 +52,8 @@ public class StateObject{
     {
         Transformable t = gameObject.GetComponent<Transformable>();
         t.DisablePreview();
+        Preview p = gameObject.GetComponent<Preview>();
+        p.DisablePreview();
     }
 
 

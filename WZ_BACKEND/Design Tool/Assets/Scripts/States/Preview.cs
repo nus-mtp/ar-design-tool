@@ -4,14 +4,12 @@ using System.Collections;
 public class Preview : MonoBehaviour {
 
     private bool isPreview = false;
+    private bool isStateChanger = false;
     private StateManager stateManager;
     private int transitionStateId;
-    private bool isStateChanger = false;
-
-    void Start()
+    public void DisablePreview()
     {
-        GameObject controlScripts = GameObject.FindGameObjectWithTag(StateManager.CONTROL_SCRIPT_TAG);
-        stateManager = controlScripts.GetComponent<StateManager>();
+        isPreview = false;
     }
 
     public void SetPreview(int transitionStateId, bool isStateChanger)
@@ -19,11 +17,6 @@ public class Preview : MonoBehaviour {
         isPreview = true;
         this.transitionStateId = transitionStateId;
         this.isStateChanger = isStateChanger;
-    }
-
-    public void DisablePreview()
-    {
-        isPreview = false;
     }
 
     void OnMouseDown()
@@ -40,5 +33,11 @@ public class Preview : MonoBehaviour {
             }
         }
 
+    }
+
+    void Start()
+    {
+        GameObject controlScripts = GameObject.FindGameObjectWithTag(StateManager.CONTROL_SCRIPT_TAG);
+        stateManager = controlScripts.GetComponent<StateManager>();
     }
 }

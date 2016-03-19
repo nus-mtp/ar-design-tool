@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\LoadandSave\SaveProgress.cs" />
      <Compile Include="Assets\Scripts\Spawning\ModelCreator.cs" />
      <Compile Include="Assets\Scripts\Spawning\TextCreator.cs" />
+     <Compile Include="Assets\Scripts\States\AbstractStateObject.cs" />
      <Compile Include="Assets\Scripts\States\ModelStateObject.cs" />
      <Compile Include="Assets\Scripts\States\Preview.cs" />
      <Compile Include="Assets\Scripts\States\ProjectState.cs" />
@@ -62,6 +63,7 @@
      <Compile Include="Assets\Scripts\States\StateManager.cs" />
      <Compile Include="Assets\Scripts\States\StateObject.cs" />
      <Compile Include="Assets\Scripts\States\StateObjectChanger.cs" />
+     <Compile Include="Assets\Scripts\States\TextStateObject.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\AbstractTransformHandler.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\DragHandler.cs" />

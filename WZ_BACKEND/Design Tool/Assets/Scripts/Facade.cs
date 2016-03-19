@@ -4,7 +4,7 @@ using UnityEngine;
 public class Facade : MonoBehaviour
 {
     public const string FACADE_TAG = "Facade";
-
+    public const string JAVASCRIPT_PREFIX = "globalFunc.";
     private string assetBundleUrl;
     private GameObject controlScript;
     private LoadAssetBundle loadAssetBundle;
@@ -17,6 +17,11 @@ public class Facade : MonoBehaviour
     private int targetStateId;
     private int targetStateObjectId;
     private TextCreator textCreator;
+
+    private string[] seperate(string s)
+    {
+        return s.Split(":".ToCharArray());
+    }
 
     public void AddNewState()
     {
@@ -39,10 +44,13 @@ public class Facade : MonoBehaviour
         stateManager.SwitchState(targetStateId);
     }
 
-    public void DownloadAssetBundle(string url)
+    public void DownLoadUserStuff(string param)
     {
-        assetBundleUrl = url;
-        loadAssetBundle.DownloadAndInstantiate(url);
+        string[] arguments = seperate(param);
+        string assetBundleUrl = arguments[0];
+        string stateUrl = arguments[1];
+        string callBack = arguments[2];
+        loadAssetBundle.DownloadAndInstantiate(assetBundleUrl,stateUrl,callBack);
     }
 
     public void LoadProgress(string url)
@@ -110,7 +118,7 @@ public class Facade : MonoBehaviour
 
     public void SpawnText(string input)
     {
-        textCreator.CreateNewText(input);
+        textCreator.AddNewText(input);
     }
 
     public void UnSetTransitionId()
@@ -128,5 +136,6 @@ public class Facade : MonoBehaviour
         loadProgress = controlScript.GetComponent<LoadProgress>();
         stateManager = controlScript.GetComponent<StateManager>();
         textCreator = controlScript.GetComponent<TextCreator>();
+        Application.ExternalCall(JAVASCRIPT_PREFIX+"unityHasLoaded");
     }
 }

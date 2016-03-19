@@ -6,7 +6,7 @@ public class FileLoader
 
     private const string JSON_PATH = "JSON/";
     private const string PREFAB_PATH = "AssetBundlesObjects/";
-    private const string IMAGERESOURCE_PATH = "ImageResources/";
+    private const string IMAGERESOURCE_PATH = "UserImages/";
     private const string SPRITERESOURCE_PATH = "SpriteResources/";
     private const string OBJ_PATH = "OBJ/";
     private const string VUFORIA_PATH = "VUFORIA/";

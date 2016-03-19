@@ -28,36 +28,37 @@ public class State
         nextStateObjectId = 0;
     }
 
-    public State(SerialState ss, ModelCreator objectCollection)
+    public State(SerialState ss, ModelCreator objectCollection, TextCreator textCreator)
     {
         stateObjects = new Dictionary<int, StateObject>();
         grid = GameObject.FindGameObjectWithTag(GRID_TAG);
         stateObjectButtonTemplate = (GameObject)Resources.Load(STATE_OBJECT_BUTTON_NAME);
         name = ss.name;
         id = ss.id;
-        InitializeStateObjects(ss, objectCollection);
+        InitializeStateObjects(ss, objectCollection, textCreator);
     }
 
-    private void InitializeStateObjects(SerialState serialState, ModelCreator objectCollection)
+    private void InitializeStateObjects(SerialState serialState, ModelCreator modelCreator, TextCreator textCreator)
     {
         foreach (SerialStateObject s in serialState.stateObjects)
         {
+            GameObject toSpawn;
             if (s.type == StateObjectType.Model)
             {
-                foreach (GameObject g in objectCollection.GetUserObjects())
-                {
-                    if (g.name.Equals(s.modelName))
-                    {
-                        GameObject toSpawn = MonoBehaviour.Instantiate(g);
-                        StateObject stateObject = new StateObject(toSpawn);
-                        s.InitializeStateObject(stateObject);
-                        AddToState(stateObject);
-                        nextStateObjectId = Mathf.Max(s.id, nextStateObjectId);
-                        Debug.Log(id + ", " + s.id);
-                        break;
-                    }
-                }
+                GameObject template = modelCreator.GetModel(s.modelName);
+                toSpawn = MonoBehaviour.Instantiate(template);
+
+
             }
+            else
+            {
+                toSpawn = textCreator.LoadText(s.modelName);
+            }
+
+            StateObject stateObject = new StateObject(toSpawn, s.type);
+            s.InitializeStateObject(stateObject);
+            AddToState(stateObject);
+            nextStateObjectId = Mathf.Max(s.id, nextStateObjectId);
         }
         nextStateObjectId++;
     }
@@ -79,8 +80,8 @@ public class State
 
     public void AddToState(GameObject g, StateObjectType type)
     {
-        StateObject so = new StateObject(g);
-        so.id = nextStateObjectId; 
+        StateObject so = new StateObject(g, type);
+        so.id = nextStateObjectId;
         stateObjects.Add(so.id, so);
         nextStateObjectId++;
         CreateStateObjectButton(so);
@@ -178,8 +179,11 @@ public class State
 
     public void RemoveActiveObject()
     {
-        stateObjects.Remove(activeStateObject.id);
-        activeStateObject.Destroy();
+        if (activeGameObject != null)
+        {
+            stateObjects.Remove(activeStateObject.id);
+            activeStateObject.Destroy();
+        }
     }
 
     public void SetPreview()
@@ -202,12 +206,12 @@ public class State
 
     public void RemoveLinks(int stateId)
     {
-         Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
-         while (enumerator.MoveNext())
-         {
-             StateObject s = enumerator.Current.Value;
-             s.RemoveLink(stateId);
-         }
+        Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+        while (enumerator.MoveNext())
+        {
+            StateObject s = enumerator.Current.Value;
+            s.RemoveLink(stateId);
+        }
     }
 
     public List<StateObject> RequestClickable()

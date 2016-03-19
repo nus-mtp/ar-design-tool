@@ -14,7 +14,6 @@ public class LoadProgress : MonoBehaviour {
     public void Load(string url)
     {
         StartCoroutine(DownLoadData(url));
-       
     }
 
     private IEnumerator DownLoadData(string url)

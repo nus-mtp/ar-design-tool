@@ -16,13 +16,13 @@ public class LoadAssetBundle : MonoBehaviour
     private WWW www;
     private AssetBundle bundle;
     private bool isDownloading = false;
-    private ModelCreator objectCollection;
-
+    private ModelCreator modelCreator;
+    private LoadProgress loadProgress;
     public Text downloadStatus;
 
-    private IEnumerator Download(string url)
+    private IEnumerator Download(string url,string stateUrl)
     {
-        objectCollection.Init();
+        modelCreator.Init();
         // Start a download of the given URL
         //Random argument added to the back of the URL to prevent caching
         string randomValue = "?t=" + Random.value;
@@ -33,7 +33,6 @@ public class LoadAssetBundle : MonoBehaviour
         
         // Wait for download to complete
         yield return www;
-        isDownloading = false;
         if (www.error != null)
         {
             Debug.Log(www.error);
@@ -52,10 +51,10 @@ public class LoadAssetBundle : MonoBehaviour
 
         foreach (Object o in assetbundlesObject)
         {
-            objectCollection.AddGameObjects((GameObject)o);
+            modelCreator.AddGameObjects((GameObject)o);
         }
 
-        objectCollection.PrepareUserObjects();
+        modelCreator.PrepareUserObjects();
 
         // Unload the AssetBundles compressed contents to conserve memory
         bundle.Unload(false);
@@ -64,23 +63,24 @@ public class LoadAssetBundle : MonoBehaviour
         www.Dispose();
         downloadStatus.color = Color.blue;
         downloadStatus.text = DOWNLOAD_PASS_MESSAGE;
-
-
+        isDownloading = false;
+        loadProgress.Load(stateUrl);
     }
 
-    public void DownloadAndInstantiate(string url)
+    public void DownloadAndInstantiate(string url, string stateURL,string callback)
     {
-        StartCoroutine(Download(url));
+        StartCoroutine(Download(url,stateURL));
     }
 
     public void DownloadAssetBundleTest()
     {
-        DownloadAndInstantiate(assetBundleName);
+        DownloadAndInstantiate(assetBundleName,"./state.dat","callback");
     }
 
     void Awake()
     {
-        objectCollection = gameObject.GetComponent<ModelCreator>();
+        modelCreator = gameObject.GetComponent<ModelCreator>();
+        loadProgress = gameObject.GetComponent<LoadProgress>();
     }
 
     void Update()
