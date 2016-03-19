@@ -67,6 +67,7 @@ models.sequelize.sync().then(function() {
 		// var create 	= require('./server/modules/createTestDB.js');
 		// create.createTestDB();
 	// }
+	// TODO: make sure storage folder exists
 	app.listen(port, function() {
 	    console.log('listening on *: ' + port);
 	});

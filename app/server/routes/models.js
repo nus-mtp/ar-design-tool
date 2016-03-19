@@ -3,7 +3,8 @@
  * @parent VUMIX
  * This is the api for user models  
  */
-var models  = require('../models'),
+var utils   = require('../modules/utils'),
+    models  = require('../models'),
     express = require('express');
 
 var router = express.Router({mergeParams: true});
@@ -64,6 +65,7 @@ router.post('/', function(req, res) {
         file_extension: req.body.file_extension,
         // file_location: req.body.file_location
     };
+    var physical_model = req.file;
     models.model.find({
         where: {
             uid: newModel.uid,
@@ -74,6 +76,8 @@ router.post('/', function(req, res) {
             res.json({status: "fail", message: "model already exists!", length: 0, data: []});
         } else {
             models.model.create(newModel).then(function() {
+                // TODO: save model in backend
+                // utils.saveFileToDest(vuforia_pkg, project_path+unity_var.vuforia);
                 res.json({status: "ok", message: "new model created!", length: 1, data: [newModel]});
             });            
         }
@@ -88,13 +92,18 @@ router.post('/', function(req, res) {
  * api: /api/users/{userId}/models/{id}
  */
 router.delete('/:id', function(req, res) {
-    models.model.findById(req.params.id).then(function(model) {
+    var uid = req.params.id;
+    models.model.findById(req.body.id).then(function(model) {
         if(model) {
             models.model.destroy({
                 where: {
-                    id: req.params.id
+                    id: req.body.id
                 }
             }).then(function(row_deleted) {
+                // TODO: delete model files
+
+                var model_path = unity_var.storage_path+updatedModel.uid+'/'+newproject.id+'/';
+                // utils.deleteFile()
                 res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [model]});        
             });
         } else {
@@ -125,7 +134,7 @@ router.put('/:id', function(req, res) {
                 }
             }).then(function() {
                 models.model.findById(req.params.id).then(function(updatedModel) {
-                     res.json({status: "ok", message: "updated model", length: 1, data: [updatedModel]});
+                    res.json({status: "ok", message: "updated model", length: 1, data: [updatedModel]});
                 });
             });
         } else {

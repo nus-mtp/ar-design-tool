@@ -19,7 +19,7 @@ var checkExistsIfNotCreate = function(dirpath) {
 			}
 		}
 	}
-}
+};
 
 var saveFileToDest = function(file, dest) {
 	fs.writeFile(dest, file, function(err) {
@@ -29,7 +29,18 @@ var saveFileToDest = function(file, dest) {
 			console.log('Saved file ' + dest);
 		}
 	});
-}
+};
+
+var deleteFile = function(deleteDest) {
+	fs.unlink(deleteDest, function(err) {
+		if (err) {
+			console.log(err);
+		} else {
+			console.log('Successfully deleted ' + deleteDest);
+		}
+	});
+};
 
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
 module.exports.saveFileToDest = saveFileToDest;
+module.exports.deleteFile = deleteFile;

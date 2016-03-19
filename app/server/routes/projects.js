@@ -3,14 +3,24 @@
  * @parent VUMIX
  * This is the api for user projects  
  */
-var utils       = require('../modules/utils'),
+var file_paths   = require('../config/file_path'),
+    utils       = require('../modules/utils'),
     unity       = require('../modules/unity'),
-    unity_var   = require('../config/unity'),
     models      = require('../models'),
     express     = require('express'),
     multer      = require('multer');
 
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, file_paths.storage_path);
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    } 
+});
+
 var router = express.Router({mergeParams: true});
+var upload = multer({ storage: storage });
 
 /**
  * @module fetchAllProjects
@@ -44,7 +54,6 @@ router.get('/:id', function(req, res) {
         }
     }).then(function(project) {
         if(project) {
-            unity.createProj(project.uid, project.id);
             res.json({status: "ok", length: 1, data: [project]});
         } else {
             res.json({status: "fail", message: "project not found", length: 0, data: []});
@@ -60,7 +69,7 @@ router.get('/:id', function(req, res) {
  * POST
  * api: /api/users/{userId}/projects
  */
-router.post('/', function(req, res) {
+router.post('/', upload.single('file'), function(req, res) {
     var newProj = {
         uid: req.params.userId,
         name: req.body.name,
@@ -75,7 +84,7 @@ router.post('/', function(req, res) {
         }
     }).then(function(project) {
         if(project) {
-            res.json({status: "fail", message: "project already exists!", length: 0, data: []});
+            res.json({status: "fail", message: "project already exists!", length: 0, data: [project]});
         } else {
             models.project.create(newProj).then(function() {
                 models.project.find({
@@ -85,10 +94,10 @@ router.post('/', function(req, res) {
                     }
                 }).then(function(newproject) {
                     // unity.createProj(newproject.uid, newproject.id);
-                    var project_path = unity_var.project_path+newproject.uid+'/'+newproject.id+'/';
+                    var project_path = file_paths.storage_path+newproject.uid+'/'+newproject.id+'/';
                     utils.checkExistsIfNotCreate(project_path);
                     // TODO: save vuforia package
-                    // utils.saveFileToDest(vuforia_pkg, project_path+unity_var.vuforia);
+                    // utils.saveFileToDest(vuforia_pkg, project_path+file_paths.vuforia);
                     res.json({status: "ok", message: "new project created!", length: 1, data: [newproject]});
                     // TODO: run reimport script function
                     // unity.rebuildPackage(newproject.uid, newproject.id);
@@ -106,13 +115,16 @@ router.post('/', function(req, res) {
  * api: /api/users/{userId}/projects/{id}
  */
 router.delete('/:id', function(req, res) {
-    models.project.findById(req.params.id).then(function(project) {
+    var uid = req.params.userId;
+    var id  = req.params.id;
+    models.project.findById(id).then(function(project) {
         if(project) {
             models.project.destroy({
                 where: {
-                    id: req.params.id
+                    id: id
                 }
             }).then(function(row_deleted) {
+                // TODO: delete project files
                 res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [project]});        
             });
         } else {
@@ -130,7 +142,9 @@ router.delete('/:id', function(req, res) {
  * api: /api/users/{userId}/projects/{id}
  */
 router.put('/:id', function(req, res) {
-    models.project.findById(req.params.id).then(function(project) {
+    var uid = req.params.userId;
+    var id  = req.params.id;
+    models.project.findById(uid).then(function(project) {
         if(project) {
             models.project.update({
                 name: req.body.name || project.name,
@@ -141,10 +155,11 @@ router.put('/:id', function(req, res) {
                 last_published: req.body.last_published || project.last_published    
             }, { 
                 where: {
-                    id: req.params.id
+                    id: id,
+                    uid: uid
                 }
             }).then(function() {
-                models.project.findById(req.params.id).then(function(updatedProject) {
+                models.project.findById(id).then(function(updatedProject) {
                      res.json({status: "ok", message: "updated project", length: 1, data: [updatedProject]});
                 });
             });

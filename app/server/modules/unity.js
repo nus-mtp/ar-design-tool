@@ -1,12 +1,12 @@
-var utils 		= require('../modules/utils'),
-	unity_var 	= require('../config/unity');
+var file_paths 	= require('../config/file_path'),
+	utils 		= require('../modules/utils');
 
 const exec		= require('child_process').exec;
 
 var createProj = function(uid, pid) {
-	var project_path 	= unity_var.project_path+uid+'/'+pid+'/';
-	var unity_cmd 		= '"'+unity_var.unity+'" -createProject "'+project_path+'" -importPackage "'+unity_var.app_builder+'" -quit';
-	var makePath 		= unity_var.project_path+uid+'/';
+	var project_path 	= file_paths.storage_path+uid+'/'+pid+'/';
+	var unity_cmd 		= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+file_paths.app_builder+'" -quit';
+	var makePath 		= file_paths.storage_path+uid+'/';
 	
 	utils.checkExistsIfNotCreate(project_path);
 	
@@ -24,11 +24,11 @@ var createProj = function(uid, pid) {
 };
 
 var rebuildPackage = function(uid, pid) {
-	var project_path 	= unity_var.project_path+uid+'/'+pid+'/';
-	var rebuild_cmd 	= '"'+unity_var.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.ImpotrtPackage';
+	var project_path 	= file_paths.storage_path+uid+'/'+pid+'/';
+	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.ImpotrtPackage';
 	
 	utiils.checkExistsIfNotCreate(project_path);
-
+	
 	console.log('running: ' + rebuild_cmd);
 	const rebuild = exec(rebuild_cmd, function(error, stdout, stderr) {
 		console.log("stdout: " + stdout);
@@ -37,7 +37,7 @@ var rebuildPackage = function(uid, pid) {
 			console.log("exec error: " + error);
 		}
 	});
-}
+};
 
-module.exports.createProj 		= createProj;
 module.exports.rebuildPackage 	= rebuildPackage;
+module.exports.createProj 		= createProj;
