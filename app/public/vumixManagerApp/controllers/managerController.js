@@ -1,21 +1,33 @@
 angular.module('vumixManagerApp.controllers')
-    .controller('managerController', function (projectService, $http, $scope) {
+    .controller('managerController', function (projectService, $http, $scope, $timeout) {
         var filename;
 
         $scope.projects = [];
         $scope.project = {
             project_name: "",
             company_name: "",
-            marker_type: "",
+            marker_type: "3D",
             upload: undefined
         };
         
-        $scope.userid = 1;
-        console.log($scope.userid);
+        /*
+        $scope.$watch('newProjectForm', function(newVal, oldVal) {
+          if (newVal) {
+            $scope.newProjectForm.projectUpload.$setValidity('required', false);
+          }
+        });
+        */
+        
+        $scope.$watch('project.upload', function(newVal, oldVal) {   
+          if ($scope.project.upload) {      
+            
+          }
+        });
         
         $scope.uploadFile = function(){
             filename = event.target.files[0].name;
             $scope.project.upload = filename;
+            $scope.$apply();
         };
         
         
@@ -55,13 +67,4 @@ angular.module('vumixManagerApp.controllers')
         }).success(function(res){
             $scope.projects = res.data;
         });
-    })
-.directive('customOnChange', function() {
-  return {
-    restrict: 'A',
-    link: function (scope, element, attrs) {
-      var onChangeFunc = scope.$eval(attrs.customOnChange);
-      element.bind('change', onChangeFunc);
-    }
-  };
-});
+    });

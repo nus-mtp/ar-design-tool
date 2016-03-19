@@ -6,7 +6,7 @@
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-      $urlRouterProvider.otherwise('/');  //TODO: Doesn't allow user to re-route
+      $urlRouterProvider.otherwise('/manager');  //TODO: Doesn't allow user to re-route
       $stateProvider
         .state('manager', {
           url: '/manager',
