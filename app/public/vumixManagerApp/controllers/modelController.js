@@ -20,10 +20,8 @@ angular.module('vumixManagerApp.controllers')
         };
         
         var cookie = document.cookie.split(';')[2];
-        // $scope.userid = cookie.substring(5);
-        
-        $scope.userid = 1;
-        $scope.model.image_url = "/resources/images/open_book.png";
+        $scope.userid = cookie.substring(5);
+        $scope.model.image_url = "/resources/images/open_book.png";  //supposed to read from database
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
