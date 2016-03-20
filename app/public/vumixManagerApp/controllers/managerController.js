@@ -9,10 +9,17 @@ angular.module('vumixManagerApp.controllers')
             marker_type: "3D",
             upload: undefined
         };
+        
+        $scope.update = {
+            project_name: "",
+            company_name: "",
+            marker_type: "3D",
+            upload: undefined
+        };
                   
         var cookie = document.cookie.split(';')[2];
         $scope.userid = cookie.substring(5);
-        
+
         var onFormLoaded = function() {          
           var requiredCheck = function() {
             return $scope.project.upload;
@@ -61,7 +68,7 @@ angular.module('vumixManagerApp.controllers')
         $scope.getProject = function(id){
             for(var i = 0; i < $scope.projects.length; i++){
                 if(id === $scope.projects[i].id){
-                    $scope.project = $scope.projects[i];
+                    $scope.update = $scope.projects[i];
                 }
             }
         };

@@ -9,7 +9,7 @@
             <button type="button" class="center btn-large" id="createProject">Start</button>
         </div>
         <div id="create_project" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
+            <h1 class="center" style="margin-top: 5%;"> Create Your New Project</h1>
             <form name="addProjectForm" ng-submit="addProject()" enctype="multipart/form-data" novalidate>
               <div class="form-group">
                 <h2>Project Name</h2>
@@ -50,16 +50,16 @@
                 <div class="modal-body">
                     <form name="updateProjectForm" ng-click="updateProject(project.id)" enctype="multipart/form-data">
                         <h2>Project Name</h2>
-                        <input type="text" name="org_name" ng-model="project.company_name" ><br>
+                        <input type="text" name="org_name" ng-model="update.company_name" ><br>
                         <h2> Project Name</h2>
-                        <input type="text" name="project_name"  ng-model="project.name" ><br>
+                        <input type="text" name="project_name"  ng-model="update.name" ><br>
                         <h2> Target Marker Type</h2>
                         <label>
-                            <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="project.marker_type">
+                            <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="update.marker_type">
                             2D 
                         </label>
                         <label>
-                            <input type="radio" name="optionsRadios" value="3D" id="optionsRadios2" ng-model="project.marker_type">
+                            <input type="radio" name="optionsRadios" value="3D" id="optionsRadios2" ng-model="update.marker_type">
                             3D 
                         </label>            
                         <h2> Upload Your Vuforia Package</h2>

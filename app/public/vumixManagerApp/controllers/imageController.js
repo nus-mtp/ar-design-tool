@@ -11,6 +11,13 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
+        $scope.update = {
+            image_name: "",
+            file_size: "",
+            file_extension: "",
+            upload: undefined
+        };
+        
         var cookie = document.cookie.split(';')[2];
         $scope.userid = cookie.substring(5);
         
@@ -56,13 +63,13 @@ angular.module('vumixManagerApp.controllers')
         $scope.getImage = function(id){
             for(var i = 0; i < $scope.images.length; i++){
                 if(id === $scope.images[i].id){
-                    $scope.image = $scope.images[i];
+                    $scope.update = $scope.images[i];
                 }
             }
         };
         
         $scope.updateImage = function(id){
-            imageService.updateImage($scope.images,$scope.image, $scope.userid,id)
+            imageService.updateImage($scope.images,$scope.update, $scope.userid,id)
             .then(function(image){
                 $scope.image = image;
             });
@@ -78,7 +85,6 @@ angular.module('vumixManagerApp.controllers')
         $scope.addImage = function(){
            imageService.addImage($scope.image, $scope.image.upload, $scope.userid)
                 .then(function(image) {
-                console.log(image);
                 $scope.images.push(image);
             });
         };

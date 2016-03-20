@@ -11,6 +11,13 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
+        $scope.update = {
+            model_name: "",
+            file_size: "",
+            file_extension: "",
+            upload: undefined
+        };
+        
         var cookie = document.cookie.split(';')[2];
         $scope.userid = cookie.substring(5);
         
@@ -56,13 +63,13 @@ angular.module('vumixManagerApp.controllers')
         $scope.getModel = function(id){
             for(var i = 0; i < $scope.models.length; i++){
                 if(id === $scope.models[i].id){
-                    $scope.model = $scope.models[i];
+                    $scope.update = $scope.models[i];
                 }
             }
         };
         
         $scope.updateModel = function(id){
-            modelService.updateModel($scope.models,$scope.model, $scope.userid,id)
+            modelService.updateModel($scope.models,$scope.update, $scope.userid,id)
             .then(function(model){
                 $scope.model = model;
             });
