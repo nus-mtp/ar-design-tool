@@ -81,9 +81,13 @@
                 <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
                 <ul ng-repeat="pr in projects" | filter:searchText">
                     <a href="/state">
-                        <li class="flex-item">2
-                            <!--<img src="/resources/images/open_book.png" />       -->
-                            <p>{{pr.name}}</p>
+                        <li class="flex-item">
+                            <div class="card">
+                                <img class="card-img-top" ng-src="{{project.image_url}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center;">{{pr.name}}</p>
+                                </div>
+                            </div>
                         </li>
                     </a>
                     <button class="btn btn-danger" ng-click="deleteProject(pr.id)">Delete</button>

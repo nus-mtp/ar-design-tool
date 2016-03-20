@@ -8,6 +8,7 @@ angular.module('vumixManagerApp.controllers')
             image_name: "",
             file_size: "",
             file_extension: "",
+            image_url: "",
             upload: undefined
         };
         
@@ -20,7 +21,8 @@ angular.module('vumixManagerApp.controllers')
         
         var cookie = document.cookie.split(';')[2];
         $scope.userid = cookie.substring(5);
-        
+   
+        $scope.image.image_url = "/resources/images/open_book.png";
         var onFormLoaded = function() {          
           var requiredCheck = function() {
             return $scope.image.upload;

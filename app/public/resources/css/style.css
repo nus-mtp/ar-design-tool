@@ -223,23 +223,12 @@ input {
   margin: 0;
   padding: 0; }
 
-.flex-item {
-  background: #FF9640;
-  color: #FFFFFF;
-  font-size: 3em;
-  font-weight: bold;
-  height: 170px;
-  line-height: 150px;
-  margin-top: 10px;
-  padding: 5px;
-  text-align: center;
-  width: 200px; }
-  .flex-item p {
-    background-color: #87CEFA;
-    font-size: 13px;
-    margin-left: -5px;
-    margin-top: -4px;
-    width: inherit; }
+.flex-item .card img {
+  height: 120px;
+  width: 120px; }
+
+ul {
+  list-style: none; }
 
 body {
   background-color: #FFFFFF; }

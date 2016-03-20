@@ -7,6 +7,7 @@ angular.module('vumixManagerApp.controllers')
             project_name: "",
             company_name: "",
             marker_type: "3D",
+            image_url: "",
             upload: undefined
         };
         
@@ -18,7 +19,9 @@ angular.module('vumixManagerApp.controllers')
         };
                   
         var cookie = document.cookie.split(';')[2];
-        $scope.userid = cookie.substring(5);
+        // $scope.userid = cookie.substring(5);
+        $scope.userid = 1;
+        $scope.project.image_url = "/resources/images/open_book.png";
 
         var onFormLoaded = function() {          
           var requiredCheck = function() {

@@ -58,12 +58,17 @@
             <!--to display image-->
             <div id="image_list" class="flex-container">
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
-                <ul ng-repeat="image in images" | filter:search">
-                    <li class="flex-item ">2
-                        <p>{{image.name}}</p>
+                <ul ng-repeat="img in images" | filter:search">
+                    <li class="flex-item">
+                        <div class="card">
+                            <img class="card-img-top" ng-src="{{image.image_url}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center;">{{img.name}}</p>
+                                </div>
+                        </div>
                     </li>
-                    <button class="btn btn-danger" ng-click="deleteImage(image.id)">Delete</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#myImage" ng-click="getImage(image.id)">Update</button>
+                    <button class="btn btn-danger" ng-click="deleteImage(img.id)">Delete</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myImage" ng-click="getImage(img.id)">Update</button>
                 </a>
             </ul>
         </div>

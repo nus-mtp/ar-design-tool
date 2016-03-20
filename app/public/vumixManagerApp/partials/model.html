@@ -59,12 +59,17 @@
             <!--to display model-->
             <div id="model_list" class="flex-container">
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
-                <ul ng-repeat="model in models" | filter:search">
-                    <li class="flex-item ">2
-                        <p>{{model.name}}</p>
+                <ul ng-repeat="md in models" | filter:search">
+                   <li class="flex-item">
+                        <div class="card">
+                            <img class="card-img-top" ng-src="{{model.image_url}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center;">{{md.name}}</p>
+                                </div>
+                        </div>
                     </li>
-                    <button class="btn btn-danger" ng-click="deleteModel(model.id)">Delete</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#myModel" ng-click="getModel(model.id)">Update</button>
+                    <button class="btn btn-danger" ng-click="deleteModel(md.id)">Delete</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myModel" ng-click="getModel(md.id)">Update</button>
                 </a>
             </ul>
         </div>

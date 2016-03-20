@@ -8,6 +8,7 @@ angular.module('vumixManagerApp.controllers')
             model_name: "",
             file_size: "",
             file_extension: "",
+            image_url: "",
             upload: undefined
         };
         
@@ -19,7 +20,10 @@ angular.module('vumixManagerApp.controllers')
         };
         
         var cookie = document.cookie.split(';')[2];
-        $scope.userid = cookie.substring(5);
+        // $scope.userid = cookie.substring(5);
+        
+        $scope.userid = 1;
+        $scope.model.image_url = "/resources/images/open_book.png";
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
