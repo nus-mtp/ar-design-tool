@@ -12,13 +12,13 @@
             <h1 class="center" style="margin-top: 20%;"> Upload Your New Image Here</h1>
             <span>
               <form ng-submit="addImage()" name="imageForm" enctype="multipart/form-data" novalidate>
-                <label> Model Name</label>
+                <label> Image Name</label>
                 <input type="text" name="imageName" placeholder="Image Name" ng-model="image.image_name" required>
-                <span class="text-danger" ng-show="imageForm.imageName.$error.required">The image name cannot be empty</span>
+                <span class="text-danger" ng-show="imageForm.imageName.$error.required">The file name cannot be empty</span>
                 <h1> File</h1>
                 <input type ="file" ng-model="image.upload" name="imageUpload" style="color:#FFFFFF" onchange="angular.element(this).scope().uploadFile()" />
                 <div class="text-danger" ng-show="imageForm.imageUpload.$error.required">Image file cannot be empty</div>
-                <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .jpg or .png</div>
+                <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
                 <span class="text-info">Max upload 8 mb file</span>
                 <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                     <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
@@ -29,13 +29,13 @@
         </div>
     </div>
     
-    <!--modal to update model-->
+    <!--modal to update Image-->
     <div class="modal fade" id="myImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">        
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
-                    <h4 class="modal-title"> Your image/h4>
+                    <h4 class="modal-title"> Your Image</h4>
                 </div>
                 <div class="modal-body">
                     <form ng-submit="updateImage(image.id)" enctype="multipart/form-data">
@@ -56,15 +56,15 @@
 
     <div class="content">
         <div class="container section" style="width:auto;">
-            <!--to display model-->
+            <!--to display image-->
             <div id="image_list" class="flex-container">
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
                 <ul ng-repeat="image in images" | filter:search">
                     <li class="flex-item ">2
                         <p>{{image.name}}</p>
                     </li>
-                    <button class="btn btn-danger" ng-click="deleteModel(image.id)">Delete</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#myModel" ng-click="getModel(image.id)">Update</button>
+                    <button class="btn btn-danger" ng-click="deleteImage(image.id)">Delete</button>
+                    <button class="btn btn-info" data-toggle="modal" data-target="#myImage" ng-click="getImage(image.id)">Update</button>
                 </a>
             </ul>
         </div>

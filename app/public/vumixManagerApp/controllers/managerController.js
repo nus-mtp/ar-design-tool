@@ -1,6 +1,6 @@
 angular.module('vumixManagerApp.controllers')
     .controller('managerController', function (projectService, $http, $scope, $timeout) {
-        var filename;
+        var file;
 
         $scope.projects = [];
         $scope.project = {

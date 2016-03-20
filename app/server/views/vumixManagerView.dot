@@ -57,9 +57,11 @@
         <script type="text/javascript" src="vumixManagerApp/services/_services.js"></script>
         <script type="text/javascript" src="vumixManagerApp/services/modelService.js"></script>
         <script type="text/javascript" src="vumixManagerApp/services/projectService.js"></script>
+        <script type="text/javascript" src="vumixManagerApp/services/imageService.js"></script>
         
         <script type="text/javascript" src="vumixManagerApp/controllers/_controllers.js"></script>
         <script type="text/javascript" src="vumixManagerApp/controllers/managerController.js"></script>
         <script type="text/javascript" src="vumixManagerApp/controllers/modelController.js"></script>
+        <script type="text/javascript" src="vumixManagerApp/controllers/imageController.js"></script>
 	</body>
 </html>

@@ -1,7 +1,7 @@
 // Handle model
 angular.module('vumixManagerApp.controllers')
     .controller('modelController', function (modelService, $http, $scope) {
-        var filename;
+        var file;
      
         $scope.models = [];
         $scope.model = {
@@ -16,7 +16,6 @@ angular.module('vumixManagerApp.controllers')
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
-             console.log($scope.model.upload);
             return $scope.model.upload;
           }
           
@@ -47,10 +46,10 @@ angular.module('vumixManagerApp.controllers')
         });     
        
         $scope.uploadFile = function(){
-            filename = event.target.files[0];
-            $scope.model.upload = filename;
-            $scope.model.file_size = filename.size;
-            $scope.model.file_extension = filename.type;
+            file = event.target.files[0];
+            $scope.model.upload = file;
+            $scope.model.file_size = file.size;
+            $scope.model.file_extension = file.type;
             $scope.$apply();
         };
         
@@ -77,11 +76,6 @@ angular.module('vumixManagerApp.controllers')
         };       
         
         $scope.addModel = function(){
-            //to check the file type
-        //    if(!$scope.isValidFileType()){
-           console.log(modelForm.fileType);
-           modelForm.fileType.$setValidity("modelForm.file.$error.filetype", false);
-            //}
            modelService.addModel($scope.model, $scope.model.upload, $scope.userid)
                 .then(function(model) {
                 console.log(model);
