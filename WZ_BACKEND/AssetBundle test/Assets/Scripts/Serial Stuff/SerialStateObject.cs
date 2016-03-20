@@ -4,26 +4,33 @@ using System;
 using System.Collections.Generic;
 
 [Serializable]
+public enum StateObjectType
+{
+    Model, Image, Text
+}
+
+[Serializable]
 public class SerialStateObject
 {
-    public SerialVector position;
-    public SerialVector rotation;
-    public SerialVector scale;
-    public string modelName;
     public int id;
     public string instanceName;
     public bool isStateChanger;
+    public string modelName;
+    public SerialVector position;
+    public SerialVector rotation;
+    public SerialVector scale;
     public int transitionStateId;
+    public StateObjectType type;
+
 }
 
 [Serializable]
 public class SerialVector
 {
+    public float w;
     public float x;
     public float y;
     public float z;
-    public float w;
-
     public SerialVector(Quaternion q)
     {
         x = q.x;

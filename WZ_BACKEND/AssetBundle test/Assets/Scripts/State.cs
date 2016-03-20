@@ -24,8 +24,20 @@ public class State : MonoBehaviour {
         id = s.id;
         foreach (SerialStateObject sso in s.stateObjects)
         {
-            GameObject currentStateObjectGO = FileLoader.loadPrefab(sso.modelName);
-            currentStateObjectGO = Instantiate(currentStateObjectGO);
+            GameObject currentStateObjectGO;
+            if (sso.type == StateObjectType.Model)
+            {
+                currentStateObjectGO = FileLoader.loadPrefab(sso.modelName);
+                currentStateObjectGO = Instantiate(currentStateObjectGO);
+            }
+            else
+            {
+                currentStateObjectGO = FileLoader.loadText();
+                currentStateObjectGO = Instantiate(currentStateObjectGO);
+                TextMesh tm = currentStateObjectGO.GetComponent<TextMesh>();
+                tm.text = sso.modelName;
+                currentStateObjectGO.AddComponent<BoxCollider>();
+            }
             StateObject currentStateObject = currentStateObjectGO.AddComponent<StateObject>();
             currentStateObjectGO.transform.SetParent(transform);
             currentStateObject.SetUp(sso);

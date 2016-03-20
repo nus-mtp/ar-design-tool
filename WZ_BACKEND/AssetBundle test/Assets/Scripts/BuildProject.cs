@@ -17,12 +17,14 @@ public class BuildProject : MonoBehaviour {
     const string IMAGE_TARGET_PREFAB_NAME = "ImageTarget";
     const string OBJECT_TARGET_PREFAB_NAME = "ObjectTarget";
     const string APK_PATH = "/AndroidBuilds.apk";
+    const string APP_PATH = "/ios.app";
     const string IMAGE_DATASET_PATH = "/Editor/QCAR/ImageTargetTextures";
     const string OBJECT_DATASET_PATH = "/Editor/QCAR/TargetSetData";
     const string MODELS_DATA_PATH = "/Resources/Obj";
     const string IDENTIFIER_FILE_PATH = "/BundleIdentifier/bundleIdentifier.txt";
     const string TEMPLATE_SCENE_NAME = "Assets/Scenes/template.unity";
     const string MARKER_TAG = "Marker";
+    const string AR_CAMERA_TAG = "AR Camera";
     const int INVALID_PACKAGE_ERROR_CODE = 2;
 
     enum MarkerType {IMAGE, OBJECT};
@@ -98,21 +100,23 @@ public class BuildProject : MonoBehaviour {
     [MenuItem("File/Copy")]
     private static void CopyScene()
     {
-        Scene template = EditorSceneManager.GetSceneByPath(TEMPLATE_SCENE_NAME);
+        Scene template = EditorSceneManager.OpenScene(TEMPLATE_SCENE_NAME);
         EditorSceneManager.SaveScene(template, DEFAULT_SCENE_NAME);
+        Scene activeScene = EditorSceneManager.GetSceneByPath(DEFAULT_SCENE_NAME);
+        EditorSceneManager.SetActiveScene(activeScene);
         marker2d = GameObject.FindGameObjectWithTag(MARKER_TAG);
+
+
     }
 
     [MenuItem("File/Setup vuforia")]
     private static void SetupVuforiaTools(MarkerType markerType)
     {
-        Scene currentScene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene);
-        ARCamera = Instantiate(FileLoader.LoadVuforia(AR_CAMERA_PREFAB_NAME));
+        ARCamera = GameObject.FindGameObjectWithTag(AR_CAMERA_TAG);
         string[] dataSetTrackerName = ReadDataSetTrackerName(markerType);
         Vuforia.DatabaseLoadBehaviour vuforiaTrackerPackage = ARCamera.GetComponent<Vuforia.DatabaseLoadBehaviour>();
         vuforiaTrackerPackage.SetupDataSets(dataSetTrackerName[0]);
         if(markerType == MarkerType.IMAGE){
-            marker2d = Instantiate(FileLoader.LoadVuforia(IMAGE_TARGET_PREFAB_NAME));
             Vuforia.ImageTargetBehaviour imageTargetBehaviour = marker2d.GetComponent<Vuforia.ImageTargetBehaviour>();
             imageTargetBehaviour.ChangeImageTarget(dataSetTrackerName[0],dataSetTrackerName[1]);
         }
@@ -136,8 +140,8 @@ public class BuildProject : MonoBehaviour {
     [MenuItem("File/Build Android 2D")]
     public static void BuildAndroid2D()
     {
-       // SetupVuforiaTools(MarkerType.IMAGE);
         CopyScene();
+        SetupVuforiaTools(MarkerType.IMAGE);
         SetUpStates(marker2d);
         SetIdentifier();
         BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.Android, BuildOptions.None);
@@ -149,7 +153,7 @@ public class BuildProject : MonoBehaviour {
       [MenuItem("File/Build Android 3D")]
     static void BuildAndroid3D()
     {
-        
+        CopyScene();
         SetupVuforiaTools(MarkerType.OBJECT);
         SetUpStates(marker3d);
         SetIdentifier();
@@ -159,22 +163,22 @@ public class BuildProject : MonoBehaviour {
       [MenuItem("File/Build IOS 2D")]
     static void BuildIOS2D()
     {
-        
+        CopyScene();
         SetupVuforiaTools(MarkerType.IMAGE);
         SetUpStates(marker2d);
         SetIdentifier();
-        BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.iOS, BuildOptions.None);
+        BuildPipeline.BuildPlayer(levels, Application.dataPath + APP_PATH, BuildTarget.iOS, BuildOptions.None);
         
     }
 
      [MenuItem("File/Build IOS 3D")]
     static void BuildIOS3D()
     {
-        
+        CopyScene();
         SetupVuforiaTools(MarkerType.OBJECT);
         SetUpStates(marker3d);
         SetIdentifier();
-        BuildPipeline.BuildPlayer(levels, Application.dataPath + APK_PATH, BuildTarget.iOS, BuildOptions.None);
+        BuildPipeline.BuildPlayer(levels, Application.dataPath + APP_PATH, BuildTarget.iOS, BuildOptions.None);
         
     }
 
