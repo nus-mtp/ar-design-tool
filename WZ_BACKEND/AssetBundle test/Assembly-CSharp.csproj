@@ -45,19 +45,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\AppStateManager.cs" />
+     <Compile Include="Assets\Scripts\App State\AppStateManager.cs" />
+     <Compile Include="Assets\Scripts\App State\State.cs" />
+     <Compile Include="Assets\Scripts\App State\StateObject.cs" />
      <Compile Include="Assets\Scripts\BuildProject.cs" />
      <Compile Include="Assets\Scripts\Serial Stuff\LoadState.cs" />
      <Compile Include="Assets\Scripts\Serial Stuff\ProjectState.cs" />
      <Compile Include="Assets\Scripts\Serial Stuff\SerialState.cs" />
      <Compile Include="Assets\Scripts\Serial Stuff\SerialStateObject.cs" />
-     <Compile Include="Assets\Scripts\State.cs" />
-     <Compile Include="Assets\Scripts\StateObject.cs" />
-     <Compile Include="Assets\Scripts\TextureChange.cs" />
-     <Compile Include="Assets\Scripts\TextureDebug.cs" />
      <Compile Include="Assets\Scripts\Utility\AddKey.cs" />
      <Compile Include="Assets\Scripts\Utility\AutoFocus.cs" />
+     <Compile Include="Assets\Scripts\Utility\BackButton.cs" />
      <Compile Include="Assets\Scripts\Utility\FileLoader.cs" />
+     <Compile Include="Assets\Scripts\Utility\StatusBar.cs" />
+     <Compile Include="Assets\Scripts\Utility\TextureChange.cs" />
      <Compile Include="Assets\Vuforia\Scripts\BackgroundPlaneBehaviour.cs" />
      <Compile Include="Assets\Vuforia\Scripts\CloudRecoBehaviour.cs" />
      <Compile Include="Assets\Vuforia\Scripts\CylinderTargetBehaviour.cs" />

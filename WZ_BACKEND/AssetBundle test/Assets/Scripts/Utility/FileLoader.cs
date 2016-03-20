@@ -12,7 +12,7 @@ public class FileLoader
     private const string VUFORIA_PATH = "VUFORIA/";
     private const string MODELS_PATH = "UserModels/";
     private const string PLANE_PATH = "Plane/plane";
-    private const string TEXT_PATH = "TextPrefabs/new text";
+    private const string TEXT_PATH = "Templates/new text";
 
     public static string readJSON(string objectName)
     {
