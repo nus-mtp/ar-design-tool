@@ -1,6 +1,6 @@
 <div class="wrapper" ng-controller="modelController">
     <div class="sidebar">
-        <div id="welcome_page" class="side-bar-padding">
+        <div id="welcome_model" class="side-bar-padding">
             <div class="search" style="margin-top:10px">
                 <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
             </div>
@@ -58,13 +58,12 @@
         <div class="container section" style="width:auto;">
             <!--to display model-->
             <div id="model_list" class="flex-container">
-                <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
-                <ul ng-repeat="md in models" | filter:search">
+                <ul ng-repeat="md in models">
                    <li class="flex-item">
                         <div class="card">
                             <img class="card-img-top" ng-src="{{model.image_url}}" alt="Card image cap">
                                 <div class="card-block">
-                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center;">{{md.name}}</p>
+                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{md.name}}</p>
                                 </div>
                         </div>
                     </li>
@@ -102,7 +101,7 @@
 
     
         $('#uploadModel').click(function(){
-           $("#welcome_page").hide();
+           $("#welcome_model").hide();
            $("#upload_model").show(); 
         });
         

@@ -21,6 +21,8 @@ angular.module('vumixManagerApp.controllers')
         var cookie = document.cookie.split(';')[2];
         $scope.userid = cookie.substring(5);
         $scope.project.image_url = "/resources/images/open_book.png";
+        
+        // $scope.userid = 1;
 
         var onFormLoaded = function() {          
           var requiredCheck = function() {

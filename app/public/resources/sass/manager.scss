@@ -15,9 +15,9 @@
   margin-top: 2px;
 }
 
-.btn-default.active {
-  background-color: $bg-color;
-  color: $light-blue;
+.active{
+    background-color: $bg-color;
+    color: $light-blue;
 }
 
 // Container fluid
@@ -93,33 +93,6 @@ input {
       outline: none;
     }
   }
-
-  .results {
-    background-color: $bg-color;
-    border-color: $light-brown;
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;
-    display: none;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    top: 35px;
-    z-index: 10;
-
-    a {
-      border: 1px solid transparent;
-      border-radius: 3px; 
-      color: $input-color;
-      display: block;
-      font-weight: 500;
-      margin: 0 -1px;
-      padding: 6px 40px 6px 10px;
-      position: relative;
-    }
-  }
 }
 
 
@@ -137,13 +110,21 @@ input {
 }
 
 .flex-item {
-    
+
     .card img{
         height: 120px;
         width: 120px;
     }
+    
+    :hover{
+        opacity: 0.8;
+    }
 }
 
-ul{
+ul {
   list-style:none;
+}
+
+a:hover {
+  text-decoration: none;
 }

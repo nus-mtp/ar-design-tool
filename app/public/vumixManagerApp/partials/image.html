@@ -1,8 +1,8 @@
 <div class="wrapper" ng-controller="imageController">
     <div class="sidebar">
-        <div id="welcome_page" class="side-bar-padding">
+        <div id="welcome_image" class="side-bar-padding">
             <div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+                <input type="text" name="q" placeholder="Search..." ng-model="searchText" />
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your image </h2>
@@ -57,13 +57,12 @@
         <div class="container section" style="width:auto;">
             <!--to display image-->
             <div id="image_list" class="flex-container">
-                <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
-                <ul ng-repeat="img in images" | filter:search">
+                <ul ng-repeat="img in images"">
                     <li class="flex-item">
                         <div class="card">
                             <img class="card-img-top" ng-src="{{image.image_url}}" alt="Card image cap">
                                 <div class="card-block">
-                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center;">{{img.name}}</p>
+                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{img.name}}</p>
                                 </div>
                         </div>
                     </li>
@@ -101,7 +100,7 @@
 
     
         $('#uploadImage').click(function(){
-           $("#welcome_page").hide();
+           $("#welcome_image").hide();
            $("#upload_image").show(); 
         });
         
