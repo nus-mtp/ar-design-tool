@@ -68,8 +68,9 @@ var models = require('./server/models/');
 
 models.sequelize.sync().then(function() {
 	// if(process.env.NODE_ENV == 'test-travis') {
-		// var create 	= require('./server/modules/createTestDB.js');
-		// create.createTestDB();
+		// models.googleUser.insertTestUsers();
+		// models.project.insertTestProjects();
+		// models.model.insertTestModels();
 	// }
 	// TODO: make sure storage folder exists
 	utils.checkExistsIfNotCreate(path.join(__dirname, file_path.storage_path));
