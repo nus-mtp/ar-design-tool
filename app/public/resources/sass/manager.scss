@@ -15,9 +15,9 @@
   margin-top: 2px;
 }
 
-.active{
-    background-color: $bg-color;
-    color: $light-blue;
+.active {
+  background-color: $bg-color;
+  color: $light-blue;
 }
 
 // Container fluid
@@ -50,7 +50,7 @@
   padding-right: 32px;
 }
 
-.panel-body{
+.panel-body {
   background-color: $light-blue;
 }
 
@@ -97,12 +97,8 @@ input {
 
 
 .flex-container {
-  -webkit-flex-flow: row wrap;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   list-style: none;
   margin: 0;
@@ -111,20 +107,20 @@ input {
 
 .flex-item {
 
-    .card img{
-        height: 120px;
-        width: 120px;
+  .card {
+    img {
+      height: 120px;
+      width: 164px;
     }
-    
-    :hover{
-        opacity: 0.8;
-    }
+  }
+
+  :hover {
+    opacity: .8;
+    text-decoration: none;
+  }
 }
 
 ul {
-  list-style:none;
+  list-style: none;
 }
 
-a:hover {
-  text-decoration: none;
-}

@@ -133,12 +133,8 @@ input {
       outline: none; }
 
 .flex-container {
-  -webkit-flex-flow: row wrap;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   list-style: none;
   margin: 0;
@@ -146,13 +142,11 @@ input {
 
 .flex-item .card img {
   height: 120px;
-  width: 120px; }
+  width: 164px; }
 
 .flex-item :hover {
-  opacity: 0.8; }
+  opacity: .8;
+  text-decoration: none; }
 
 ul {
   list-style: none; }
-
-a:hover {
-  text-decoration: none; }
