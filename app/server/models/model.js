@@ -16,11 +16,15 @@ module.exports = function(sequelize, DataTypes) {
 			type : DataTypes.DECIMAL,
 			allowNull: false
 		},
+		file_name: {
+			type: DataTypes.STRING,
+			allowNull: false
+		},
 		file_extension: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
-		file_location: {
+		thumbnail_loc: {
 			type: DataTypes.STRING,
 			allowNull: true
 		}

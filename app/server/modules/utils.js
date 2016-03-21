@@ -54,7 +54,18 @@ var deleteDir = function(deleteDest) {
 	});
 };
 
+var deleteFile = function(deleteFile) {
+	fs.unlink(deleteFile, function(err) {
+		if(err) {
+			console.log(err);
+		} else {
+			console.log('Successfully deleted: ' + deleteFile);
+		}
+	})
+};
+
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
 module.exports.saveFileToDest = saveFileToDest;
 module.exports.moveFileToDest = moveFileToDest;
+module.exports.deleteFile = deleteFile;
 module.exports.deleteDir = deleteDir;

@@ -5,11 +5,12 @@ var file_paths 	= require('../config/file_path'),
 const exec		= require('child_process').exec;
 
 var unity_path = '/unity/';
+var model_path = '/models/';
 
 var rebuildPackage = function(uid, pid) {
 	console.log('rebuilding assetbundle...');
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
-	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.ImpotrtPackage';
+	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.ImpotrtPackage -quit';
 	
 	utils.checkExistsIfNotCreate(project_path);
 	
@@ -46,7 +47,7 @@ var createProj = function(uid, pid, vuforia_pkg) {
 		}
 	});
 	unity.on('exit', function(code) {
-		// change original filename to marker vuforia
+		// change original filename to marker.unitypackage
 		moveVuforia(vuforia_pkg.path, uid, pid, vuforia_pkg.originalname);
 		console.log("child process exited with code " + code);
 	});
@@ -58,7 +59,19 @@ var deleteProj = function(uid, pid) {
 	utils.deleteDir(project_path);
 }
 
-module.exports.rebuildPackage 	= rebuildPackage;
-module.exports.moveVuforia 		= moveVuforia;
-module.exports.createProj 		= createProj;
-module.exports.deleteProj		= deleteProj;
+var moveModel = function(uid, fileName) {
+	var dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path+'/');
+	var tmp_path 	= path.join(__dirname, '../../'+file_paths.storage_path+'/'+fileName);
+	utils.checkExistsIfNotCreate(dest_path);
+	utils.moveFileToDest(tmp_path, dest_path+fileName);
+};
+
+var deleteModel = function(uid, fileName) {
+	var modelFile_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path+'/'+fileName);
+	utils.deleteFile(modelFile_path);
+};
+
+module.exports.deleteModel 	= deleteModel;
+module.exports.createProj 	= createProj;
+module.exports.deleteProj 	= deleteProj;
+module.exports.moveModel 	= moveModel;

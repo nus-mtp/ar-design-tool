@@ -31,6 +31,10 @@ module.exports = function(sequelize, DataTypes) {
 		last_published: {
 			type: DataTypes.DATE,
 			allowNull: true
+		},
+		thumbnail_loc: {
+			type: DataTypes.STRING,
+			allowNull: true
 		}
 	}, {
 		timestamps: true,

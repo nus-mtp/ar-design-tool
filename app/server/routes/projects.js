@@ -131,7 +131,7 @@ router.delete('/:id', function(req, res) {
 /**
  * @module updateProject
  * @parent projectApi
- * @param req.body.name, req.body.company_name, req.body.marker_type, req.body.project_dat_file, req.body.assetbundle_id, req.body.last_published
+ * @param req.body.name, req.body.company_name, req.body.marker_type, req.body.project_dat_file, req.body.assetbundle_id, req.body.last_published, req.body.thumbnail_loc
  * update project with {id} owned by user with {userId}
  * PUT
  * api: /api/users/{userId}/projects/{id}
@@ -143,11 +143,12 @@ router.put('/:id', function(req, res) {
         if(project) {
             models.project.update({
                 name: req.body.name || project.name,
-                company_name: req.body.company_name || project.company_name,
                 marker_type: req.body.marker_type || project.marker_type,
-                project_dat_file: req.body.project_dat_file || project.project_dat_file,
+                company_name: req.body.company_name || project.company_name,
+                thumbnail_loc: req.body.thumbnail_loc || project.thumbnail_loc,    
                 assetbundle_id: req.body.assetbundle_id || project.assetbundle_id,
-                last_published: req.body.last_published || project.last_published    
+                last_published: req.body.last_published || project.last_published,
+                project_dat_file: req.body.project_dat_file || project.project_dat_file
             }, { 
                 where: {
                     id: id,
