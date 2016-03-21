@@ -3,8 +3,10 @@ var file_paths 	= require('../config/file_path'),
 
 const exec		= require('child_process').exec;
 
+var unity_path = '/unity/';
+
 var createProj = function(uid, pid) {
-	var project_path 	= file_paths.storage_path+uid+'/'+pid+'/';
+	var project_path 	= file_paths.storage_path+uid+unity_path+pid+'/';
 	var unity_cmd 		= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+file_paths.app_builder+'" -quit';
 	var makePath 		= file_paths.storage_path+uid+'/';
 	
@@ -24,7 +26,7 @@ var createProj = function(uid, pid) {
 };
 
 var rebuildPackage = function(uid, pid) {
-	var project_path 	= file_paths.storage_path+uid+'/'+pid+'/';
+	var project_path 	= file_paths.storage_path+uid+unity_path+pid+'/';
 	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.ImpotrtPackage';
 	
 	utiils.checkExistsIfNotCreate(project_path);

@@ -93,11 +93,11 @@ router.post('/', upload.single('file'), function(req, res) {
                         name: newProj.name
                     }
                 }).then(function(newproject) {
-                    // unity.createProj(newproject.uid, newproject.id);
-                    var project_path = file_paths.storage_path+newproject.uid+'/'+newproject.id+'/';
+                    var project_path = file_paths.storage_path+newproject.uid+'/unity/'+newproject.id+'/';
                     utils.checkExistsIfNotCreate(project_path);
-                    // TODO: save vuforia package
-                    // utils.saveFileToDest(vuforia_pkg, project_path+file_paths.vuforia);
+                    // unity.createProj(newproject.uid, newproject.id);
+                    // TODO: move vuforia package
+                    // utils.moveFileToDest(vuforia_pkg, project_path+file_paths.vuforia);
                     res.json({status: "ok", message: "new project created!", length: 1, data: [newproject]});
                     // TODO: run reimport script function
                     // unity.rebuildPackage(newproject.uid, newproject.id);

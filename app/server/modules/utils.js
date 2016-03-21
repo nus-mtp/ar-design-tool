@@ -2,8 +2,7 @@ var fs = require('fs');
 
 var checkExistsIfNotCreate = function(dirpath) {
 	var dirs 	= dirpath.split('/');	
-	var newdir 	="";
-	
+	var newdir 	= "";
 	for(var i=0; i<dirs.length; i++) {
 		newdir += dirs[i]+'/';
 		try {
@@ -19,6 +18,16 @@ var checkExistsIfNotCreate = function(dirpath) {
 			}
 		}
 	}
+};
+
+var moveFileToDest = function(location, destination) {
+	fs.rename(location, destination, function(err) {
+		if(err) {
+			console.log(err);
+		} else {
+			console.log('Successfully moved file from ' + location + ' to ' + destination);
+		}
+	});
 };
 
 var saveFileToDest = function(file, dest) {
@@ -43,4 +52,5 @@ var deleteFile = function(deleteDest) {
 
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
 module.exports.saveFileToDest = saveFileToDest;
+module.exports.moveFileToDest = moveFileToDest;
 module.exports.deleteFile = deleteFile;

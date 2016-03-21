@@ -8,6 +8,10 @@ var engine			= require('express-dot-engine'),
 	glob			= require('glob'),
 	path			= require('path');
 
+var	file_path 	= require(path.join(__dirname, '/server/config/file_path')),	
+	utils		= require(path.join(__dirname, '/server/modules/utils'));
+
+
 var parse = require('./server/modules/parser.js');
 parse.processArg();
 
@@ -68,6 +72,7 @@ models.sequelize.sync().then(function() {
 		// create.createTestDB();
 	// }
 	// TODO: make sure storage folder exists
+	utils.checkExistsIfNotCreate(path.join(__dirname, file_path.storage_path));
 	app.listen(port, function() {
 	    console.log('listening on *: ' + port);
 	});
