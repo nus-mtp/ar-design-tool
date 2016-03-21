@@ -11,6 +11,8 @@ public class LoadProgress : MonoBehaviour {
     private byte[] saveData;
     private StateManager stateManager;
 
+    public ProjectState projectState; 
+  
     public void Load(string url)
     {
         StartCoroutine(DownLoadData(url));
@@ -35,8 +37,8 @@ public class LoadProgress : MonoBehaviour {
         www.Dispose();
         BinaryFormatter bf = new BinaryFormatter();
         Stream stream = new MemoryStream(saveData);
-        ProjectState project = (ProjectState)bf.Deserialize(stream);
-        List<SerialState> states = project.serialStates;
+        projectState = (ProjectState)bf.Deserialize(stream);
+        List<SerialState> states = projectState.serialStates;
         stateManager.InitialzeStates(states);
     }
     

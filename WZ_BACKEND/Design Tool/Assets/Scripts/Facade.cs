@@ -76,6 +76,14 @@ public class Facade : MonoBehaviour
         }
     }
 
+    public void RequestProjectInfo()
+    {
+        ProjectState projectState = loadProgress.projectState;
+        string jsonString = JsonUtility.ToJson(projectState);
+        Debug.Log(jsonString);
+        Application.ExternalCall("makeProject", jsonString);
+    }
+
     public void SaveProgress(string url)
     {
         saveProgress.Save(url);

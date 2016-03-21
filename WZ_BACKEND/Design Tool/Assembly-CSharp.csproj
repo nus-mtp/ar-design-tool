@@ -45,7 +45,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\DeleteSwitchState.cs" />
      <Compile Include="Assets\Scripts\Facade.cs" />
      <Compile Include="Assets\Scripts\LoadandSave\LoadAssetBundle.cs" />
      <Compile Include="Assets\Scripts\LoadandSave\LoadProgress.cs" />
@@ -64,7 +63,6 @@
      <Compile Include="Assets\Scripts\States\StateObject.cs" />
      <Compile Include="Assets\Scripts\States\StateObjectChanger.cs" />
      <Compile Include="Assets\Scripts\States\TextStateObject.cs" />
-     <Compile Include="Assets\Scripts\TextureChange.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\AbstractTransformHandler.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\CameraControl.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\DragHandler.cs" />
@@ -77,11 +75,16 @@
      <Compile Include="Assets\Scripts\Transformation Scripts\Transformation.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\TranslateHandler.cs" />
      <Compile Include="Assets\Scripts\Transformation Scripts\UserInterfaceButtons.cs" />
+     <Compile Include="Assets\Scripts\Utility\DeleteSwitchState.cs" />
+     <Compile Include="Assets\Scripts\Utility\TextureChange.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="Newtonsoft.Json">
+ <HintPath>C:/Users/WenZhao/Documents/Dropbox/Uni/Yr4 Sem 2/CS3284/AR DESIGN TOOL/WZ_BACKEND/Design Tool/Assets/Scripts/Utility/Newtonsoft.Json.dll</HintPath>
  </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
