@@ -11,6 +11,9 @@ public class BackButton : MonoBehaviour {
 
     public void Back()
     {
-        theOne.GoBack();
+        if (theOne.isMarkerFound)
+        {
+            theOne.GoBack();
+        }
     }
 }
