@@ -5,36 +5,38 @@
                 <input type="text" name="q" placeholder="Search..." data-ng-model="searchText.name" />
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
-            <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
+            <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
             <button type="button" class="center btn-large" id="createProject">Start</button>
         </div>
         <div id="create_project" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
-            <span>
-              <form ng-submit="addProject()">
-                <h2> Company Name</h2>
-                <input type="text" name="org_name" placeholder="Company Name" ng-model="project.company_name"><br>
+            <h1 class="center" style="margin-top: 5%;"> Create Your New Project</h1>
+            <form name="addProjectForm" ng-submit="addProject()" enctype="multipart/form-data" novalidate>
+              <div class="form-group">
+                <h2>Project Name</h2>
+                <input class="form-control" type="text" name="comName" placeholder="Company Name" ng-model="project.company_name" required />
+                <span class="text-danger" ng-show="addProjectForm.comName.$error.required">Company name cannot be empty</span>
+              </div>
+              <div class="form-group">
                 <h2> Project Name</h2>
-                <input type="text" name="project_name" placeholder="Project Name" ng-model="project.project_name"><br>
-                <h2> Target Marker Type</h2>
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D" checked="" ng-model="project.marker_type">
-                        2D 
-                    </label>
-                    <label>
-                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D" ng-model="project.marker_type">
-                        3D 
-                    </label>
-                <h2> Upload Your Vuforia Package</h2>
-
-                <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile"/>
-                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
-                    <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
-                </form>-->
-                <a href="https://developer.vuforia.com/">Find out how to create a target</a>
-                <input type="submit" class="center" value="Create" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
-              </form>
-          </span>
+                <input class="form-control" type="text" name="projectName" placeholder="Project Name" ng-model="project.project_name" required />
+                <span class="text-danger" ng-show="addProjectForm.projectName.$error.required">Project name cannot be empty</span>
+              </div>
+              <h2> Target Marker Type</h2>
+              <label for="">
+                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D" checked="" ng-model="project.marker_type">
+                  2D 
+              </label>
+              <label>
+                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D" ng-model="project.marker_type">
+                  3D 
+              </label>              
+              <h2> Upload Your Vuforia Package</h2>
+              <a target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
+              <input type ="file" ng-model="project.upload" name="projectUpload" style="color:#FFFFFF" onchange="angular.element(this).scope().uploadFile()" />
+              <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
+              <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
+              <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+            </form>
         </div>
     </div>
     <!--modal to update project-->
@@ -46,21 +48,20 @@
                     <h4 class="modal-title"> Your project</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-click="updateProject(project.id)">
-                        <h2> Company Name</h2>
-                        <input type="text" name="org_name" ng-model="project.company_name" ><br>
+                    <form name="updateProjectForm" ng-click="updateProject(project.id)" enctype="multipart/form-data">
+                        <h2>Project Name</h2>
+                        <input type="text" name="org_name" ng-model="update.company_name" ><br>
                         <h2> Project Name</h2>
-                        <input type="text" name="project_name"  ng-model="project.name" ><br>
+                        <input type="text" name="project_name"  ng-model="update.name" ><br>
                         <h2> Target Marker Type</h2>
-                            <label>
-                                <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="project.marker_type">
-                                2D 
-                            </label>
-                            <label>
-                                <input type="radio" name="optionsRadios" value="3D" id="optionsRadios2" ng-model="project.marker_type">
-                                3D 
-                            </label>
-            
+                        <label>
+                            <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="update.marker_type">
+                            2D 
+                        </label>
+                        <label>
+                            <input type="radio" name="optionsRadios" value="3D" id="optionsRadios2" ng-model="update.marker_type">
+                            3D 
+                        </label>            
                         <h2> Upload Your Vuforia Package</h2>
                         <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile"/>
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
@@ -77,11 +78,15 @@
         <div class="container section" style="width:auto;">
             <!--to display project-->
             <div id="project_list" class="flex-container" >
-                <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
                 <ul ng-repeat="pr in projects" | filter:searchText">
-                    <a href="/state" class="">
-                        <li class="flex-item">2
-                            <p>{{pr.name}}</p>
+                    <a href="/state">
+                        <li class="flex-item">
+                            <div class="card">
+                                <img class="card-img-top" ng-src="{{project.image_url}}" alt="Card image cap">
+                                <div class="card-block">
+                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{pr.name}}</p>
+                                </div>
+                            </div>
                         </li>
                     </a>
                     <button class="btn btn-danger" ng-click="deleteProject(pr.id)">Delete</button>
@@ -98,7 +103,6 @@
 
 
 <script type="text/javascript">
-
 (function() {
     $(document).ready(function(){
         
@@ -126,5 +130,4 @@
     });
 
 })();
-
 </script>

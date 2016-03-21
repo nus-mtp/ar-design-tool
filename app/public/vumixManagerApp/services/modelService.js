@@ -3,37 +3,22 @@
     .factory('modelService', function($http) {
      return{
        
-       addModel: function(model_name,file_size, file_extension, file_upload, userId){
-           return $http({
-              method: 'POST',
-              url: '/api/users/' + userId + '/models',
-              data: {
-                  name : model_name,
-                  file_size : file_size,
-                  file_extension : file_extension
-              }
-           }).then(function(res){
-               return res.data.data[0];
-           }, function errorCallback(res){
-               console.log("error uploading file")
-           });  
+       addModel: function(model, upload_model, userId){
+            var fd = new FormData();
+            var uploadUrl = '/api/users/' + userId + '/models';
+            fd.append('file', upload_model);
+            fd.append('uid', userId);
+            fd.append('model_name', model.model_name);
+            fd.append('file_size',model.file_size);
+            fd.append('file_extension', model.file_extension);
+                  
+            $http.post(uploadUrl, fd, {
+                headers: {'Content-Type': undefined}
+            },function errorCallback(res){
+               console.log("error deleting the model");
+           });
        }, 
-       
-       getModel: function(models, userId, id){
-           return $http({
-               method: 'GET',
-               url: '/api/users/' + userId + '/models/' + id      
-           }).then(function(res){
-               for(var i = 0; i < models.length; i++){
-                   if(id === models[i].id){
-                       return models[i];
-                   }
-               }
-           }, function errorCallback(res){
-               console.log("error getting the model");
-           }); 
-       },     
-       
+        
        deleteModel: function(models, userId, id){
            return $http({
                method: 'DELETE',
