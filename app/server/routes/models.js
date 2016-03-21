@@ -13,7 +13,7 @@ var file_paths  = require('../config/file_path'),
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, path.join(__dirname, '../../' + file_paths.storage_path));
+        cb(null, path.join(__dirname, '../../'+file_paths.storage_path));
     },
     filename: function(req, file, cb) {
         cb(null, file.originalname);
