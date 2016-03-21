@@ -8,11 +8,12 @@ var file_paths   = require('../config/file_path'),
     unity       = require('../modules/unity'),
     models      = require('../models'),
     express     = require('express'),
-    multer      = require('multer');
+    multer      = require('multer'),
+    path        = require('path');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
-        cb(null, file_paths.storage_path);
+        cb(null, path.join(__dirname, '../../' + file_paths.storage_path));
     },
     filename: function(req, file, cb) {
         cb(null, file.originalname);
@@ -93,14 +94,8 @@ router.post('/', upload.single('file'), function(req, res) {
                         name: newProj.name
                     }
                 }).then(function(newproject) {
-                    var project_path = file_paths.storage_path+newproject.uid+'/unity/'+newproject.id+'/';
-                    utils.checkExistsIfNotCreate(project_path);
-                    // unity.createProj(newproject.uid, newproject.id);
-                    // TODO: move vuforia package
-                    // utils.moveFileToDest(vuforia_pkg, project_path+file_paths.vuforia);
+                    unity.createProj(newproject.uid, newproject.id, vuforia_pkg);
                     res.json({status: "ok", message: "new project created!", length: 1, data: [newproject]});
-                    // TODO: run reimport script function
-                    // unity.rebuildPackage(newproject.uid, newproject.id);
                 });         
             });            
         }
@@ -124,7 +119,7 @@ router.delete('/:id', function(req, res) {
                     id: id
                 }
             }).then(function(row_deleted) {
-                // TODO: delete project files
+                unity.deleteProj(project.uid, project.id);
                 res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [project]});        
             });
         } else {

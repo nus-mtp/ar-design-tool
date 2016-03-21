@@ -1,7 +1,8 @@
-var fs = require('fs');
+var rimraf 	= require('rimraf'),
+	fs 		= require('fs');
 
 var checkExistsIfNotCreate = function(dirpath) {
-	var dirs 	= dirpath.split('/');	
+	var dirs 	= dirpath.split('\\');	
 	var newdir 	= "";
 	for(var i=0; i<dirs.length; i++) {
 		newdir += dirs[i]+'/';
@@ -21,6 +22,8 @@ var checkExistsIfNotCreate = function(dirpath) {
 };
 
 var moveFileToDest = function(location, destination) {
+	console.log('location: ' + location)
+	console.log('destination: ' + destination)
 	fs.rename(location, destination, function(err) {
 		if(err) {
 			console.log(err);
@@ -40,12 +43,13 @@ var saveFileToDest = function(file, dest) {
 	});
 };
 
-var deleteFile = function(deleteDest) {
-	fs.unlink(deleteDest, function(err) {
-		if (err) {
+var deleteDir = function(deleteDest) {
+	rimraf(deleteDest, function(err) {
+		if(err) {
 			console.log(err);
-		} else {
-			console.log('Successfully deleted ' + deleteDest);
+		}
+		else {
+			console.log('Successfully deleted: ' + deleteDest);
 		}
 	});
 };
@@ -53,4 +57,4 @@ var deleteFile = function(deleteDest) {
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
 module.exports.saveFileToDest = saveFileToDest;
 module.exports.moveFileToDest = moveFileToDest;
-module.exports.deleteFile = deleteFile;
+module.exports.deleteDir = deleteDir;
