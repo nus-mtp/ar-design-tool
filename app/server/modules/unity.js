@@ -71,7 +71,12 @@ var deleteModel = function(uid, fileName) {
 	utils.deleteFile(modelFile_path);
 };
 
-module.exports.deleteModel 	= deleteModel;
-module.exports.createProj 	= createProj;
-module.exports.deleteProj 	= deleteProj;
-module.exports.moveModel 	= moveModel;
+var rebuildAssetBundle = function() {
+
+};
+
+module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
+module.exports.deleteModel 			= deleteModel;
+module.exports.createProj 			= createProj;
+module.exports.deleteProj 			= deleteProj;
+module.exports.moveModel 			= moveModel;
