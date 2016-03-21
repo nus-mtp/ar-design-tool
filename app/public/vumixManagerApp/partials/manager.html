@@ -2,7 +2,7 @@
     <div class="sidebar">
         <div id="welcome_page" class="side-bar-padding">
             <div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." data-ng-model="searchText.name" />
+                <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
@@ -78,7 +78,7 @@
         <div class="container section" style="width:auto;">
             <!--to display project-->
             <div id="project_list" class="flex-container" >
-                <ul ng-repeat="pr in projects" | filter:searchText">
+                <ul ng-repeat="pr in projects | filter:searchText">
                     <a href="/state">
                         <li class="flex-item">
                             <div class="card">

@@ -2,7 +2,7 @@
     <div class="sidebar">
         <div id="welcome_image" class="side-bar-padding">
             <div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." ng-model="searchText" />
+                <input type="text" name="q" placeholder="Search..." ng-model="searchImage.name" />
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your image </h2>
@@ -57,7 +57,7 @@
         <div class="container section" style="width:auto;">
             <!--to display image-->
             <div id="image_list" class="flex-container">
-                <ul ng-repeat="img in images"">
+                <ul ng-repeat="img in images | filter:searchImage">
                     <li class="flex-item">
                         <div class="card">
                             <img class="card-img-top" ng-src="{{image.image_url}}" alt="Card image cap">
