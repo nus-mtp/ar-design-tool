@@ -11,7 +11,7 @@
         </a>
       <li>
         <a href="" ng-click="unityMapperService.saveState()">
-          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#save">Save</button>
+          <button type="button" class="button_save_task btn btn-success btn-sm" data-toggle="modal" data-target="#save">Save</button>
         </a>
       </li>
     </ul>
@@ -24,13 +24,13 @@
     <p style="text-align:center">Choose your clickable object.</p>
     <div class="radio">
       <!-- check on how to use label in html -->
-      <label><input type="radio" name="optradio">Object 1</label>
+      <label><input type="radio" name="optradio1">Object 1</label>
     </div>
     <div class="radio">
-      <label><input type="radio" name="optradio">Object 2</label>
+      <label><input type="radio" name="optradio2">Object 2</label>
     </div>
     <div class="radio disabled">
-      <label><input type="radio" name="optradio">Object 3</label>
+      <label><input type="radio" name="optradio3">Object 3</label>
     </div>
   </modal-body>
   <modal-footer>
@@ -123,20 +123,11 @@
 </div>
 
 
-<<<<<<< HEAD
+
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
 
 <script type="text/javascript"> 
-=======
-<script type="text/javascript">  
-  var SendMessage = function(a,b,c) {
-    return 0;
-  }
->>>>>>> parent of 685de48... Edited angular js function
-  var CreateState = function(id, name) {
-    console.log("called");
-  }
-  
+
   var angularHelper = (function () {
     var angularHelper = function () { };
     var defaultApplicationName = "vumixEditorApp";
@@ -231,11 +222,6 @@ jsPlumb.ready(function () {
 	});
 });
 
-function DeleteState(id){
-    SendMessage('Facade', 'setTargetState', id);
-    SendMessage('Facade', 'Delete');
-}
-    
 function addTask(id){
 	if(typeof id === "undefined"){
 		numberOfElements++;
@@ -338,28 +324,4 @@ function repositionElement(id, posX, posY){
 	jsPlumb.repaint(id);
 }
 
-// Following functions communicates with editor page
-    
-function RequestClickable(id){
-    SendMessageendMessage('Facade', 'setTargetState', 'id');
-    SendMessage('Facade', 'RequestClickable');
-}
-    
-function AddClickable(modelName, modelId, id){
-//write this function to update the clickable objects modal 
-    populateList();
-}
-
-function setTransitionId (sourceStateId, targetStateId, stateObjectId){
-    SendMessage('Facade', 'setTargetState', sourceStateID);
-    SendMessage('Facade', 'setTargetStateObject', stateObjectId);
-    SendMessage('Facade', 'setTransitionID', targetStateId);
-}
-    
-function unsetTransitionId (sourceStateId, targetStateId, stateObjectId){
-    SendMessage('Facade', 'setTargetState', sourceStateId);
-    SendMessage('Facade', 'setTargetStateObject', stateObjectId);
-    SendMessage('Facade', 'unsetTransitionID');
-}
-    
 </script>
