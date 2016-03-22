@@ -5,6 +5,7 @@
  */
 var models  = require('../models'),
     unity   = require('../modules/unity'),
+    multer  = require('multer'),
     express = require('express');
 
 var router = express.Router({mergeParams: true});

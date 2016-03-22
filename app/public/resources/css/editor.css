@@ -17,8 +17,9 @@
 
 .resizable-panels { 
   position: absolute;
-  top: 0;
-  right: 0;
+  top: 50px;
+  bottom: 0;
+  left: 0;
   width: 300px;
 }
 
@@ -50,11 +51,10 @@
 }
 
 .content {
-  width: calc(100% - 300px);  
+  padding-left: 300px;  
 }
 
 .content nav {
-  min-height: 40px;
   margin: 0;
 }
 
@@ -62,48 +62,12 @@
   font-size: 14px;
 }
 
-a.navbar-brand {
+.content a.navbar-brand {
   font-size: 16px;
 }
 
-.nav.navbar-nav.navbar-cursor {
+.content .nav.navbar-nav {
   border-right: 2px solid #ebebeb;
-}
-
-form.compressed .form-group {
-  margin-bottom: 0;
-}
-
-form.compressed input[type="text"] {
-  height: 20px;
-  padding: 0;
-  text-align: center;
-}
-
-form.compressed div {
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.frame .thumbnail {
-  margin-bottom: 0;
-}
-
-.frame .thumbnail img {
-  height: 40px;
-}
-
-.frame .caption {
-  text-align: center;
-  white-space: normal;
-}
-
-.form-label {
-  margin: 10px 0;
-}
-
-.form-label + input {
-  margin-bottom: 20px;
 }
 
 /* Michelle's */

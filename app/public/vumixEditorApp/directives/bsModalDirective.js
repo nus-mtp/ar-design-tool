@@ -25,7 +25,7 @@
           footer: "modalFooter"
         },
         template: tmpl,
-        compile: function($tEl, $tAttrs, $transclude) {
+        compile: function($tEl, $tAttrs) {
           return {
             post: function($scope, $el, $attrs, $ctrl) {
               var modalBody = $el.find('modal-body').children();

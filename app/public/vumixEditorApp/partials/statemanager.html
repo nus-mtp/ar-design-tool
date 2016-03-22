@@ -4,6 +4,7 @@
       <a class="navbar-brand" href="#">Back</a>
     </div>
     <ul class="nav navbar-nav navbar-right ">
+      <li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>
       <li>
         <a target="_self" href="/buildproject.php">
           <button type="button" class="btn btn-success btn-sm">Build APK</button>
@@ -20,7 +21,7 @@
 <!-- Modal for model options button -->
 <bs-modal modal-id="myModal">
   <modal-body>
-    <p><center>Choose your clickable object.</p></center>
+    <p style="text-align:center">Choose your clickable object.</p>
     <div class="radio">
       <!-- check on how to use label in html -->
       <label><input type="radio" name="optradio">Object 1</label>
@@ -121,6 +122,7 @@
   </div>
 </div>
 
+<<<<<<< HEAD
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open()"></div>
 
 
@@ -129,6 +131,11 @@
   var SendMessage = function(a,b,c) {
     return 0;
   }
+=======
+<div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
+
+<script type="text/javascript">    
+>>>>>>> jeff
   var CreateState = function(id, name) {
     console.log("called");
   }
