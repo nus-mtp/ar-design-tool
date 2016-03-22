@@ -122,12 +122,17 @@
   </div>
 </div>
 
-<div ui-view class="fullscreen-overlay" ng-show="editorService.open()"></div>
 
-
+<<<<<<< HEAD
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
 
 <script type="text/javascript"> 
+=======
+<script type="text/javascript">  
+  var SendMessage = function(a,b,c) {
+    return 0;
+  }
+>>>>>>> parent of 685de48... Edited angular js function
   var CreateState = function(id, name) {
     console.log("called");
   }
@@ -147,8 +152,8 @@
   })();
   
 	var numberOfElements = 0;
-    var htmlBase = 'drawingArea';
-    jsPlumb.ready(function () {
+var htmlBase = 'drawingArea';
+jsPlumb.ready(function () {
         
 	//FIX DOM:
 	$(("#taskcontainer0"))[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
