@@ -205,6 +205,7 @@ jsPlumb.ready(function () {
 		
 	$('#'+htmlBase).on("click", ".button_remove", function () {
 		var parentnode = $(this)[0].parentNode.parentNode;
+        DeleteState(parentnode.blockId);
 		jsPlumb.detachAllConnections(parentnode);
 		jsPlumb.removeAllEndpoints(parentnode);
 		$(parentnode).remove(); 
@@ -222,6 +223,12 @@ jsPlumb.ready(function () {
 		loadFlowchart();
 	});
 });
+
+function DeleteState(id){
+    SendMessage('Facade', 'setTargetState', id);
+    SendMessage('Facade', 'Delete');
+}
+    
 function addTask(id){
 	if(typeof id === "undefined"){
 		numberOfElements++;
@@ -284,6 +291,7 @@ function saveFlowchart(){
 	
 	$('#jsonOutput').val(flowChartJson);
 }
+    
 function loadFlowchart(){
 	var flowChartJson = $('#jsonOutput').val();
 	var flowChart = JSON.parse(flowChartJson);
@@ -316,9 +324,35 @@ function loadFlowchart(){
 	
 	numberOfElements = flowChart.numberOfElements;
 }
+    
 function repositionElement(id, posX, posY){
 	$('#'+id).css('left', posX);
 	$('#'+id).css('top', posY);
 	jsPlumb.repaint(id);
 }
+
+// Following functions communicates with editor page
+    
+function RequestClickable(id){
+    SendMessageendMessage('Facade', 'setTargetState', 'id');
+    SendMessage('Facade', 'RequestClickable');
+}
+    
+function AddClickable(modelName, modelId, id){
+//write this function to update the clickable objects modal 
+    populateList();
+}
+
+function setTransitionId (sourceStateId, targetStateId, stateObjectId){
+    SendMessage('Facade', 'setTargetState', sourceStateID);
+    SendMessage('Facade', 'setTargetStateObject', stateObjectId);
+    SendMessage('Facade', 'setTransitionID', targetStateId);
+}
+    
+function unsetTransitionId (sourceStateId, targetStateId, stateObjectId){
+    SendMessage('Facade', 'setTargetState', sourceStateId);
+    SendMessage('Facade', 'setTargetStateObject', stateObjectId);
+    SendMessage('Facade', 'unsetTransitionID');
+}
+    
 </script>
