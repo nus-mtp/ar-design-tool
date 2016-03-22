@@ -121,8 +121,11 @@
   </div>
 </div>
 
+<div ui-view class="fullscreen-overlay" ng-show="editorService.open()"></div>
+
 
 <script type="text/javascript">  
+    
   var SendMessage = function(a,b,c) {
     return 0;
   }
@@ -145,8 +148,8 @@
   })();
   
 	var numberOfElements = 0;
-var htmlBase = 'drawingArea';
-jsPlumb.ready(function () {
+    var htmlBase = 'drawingArea';
+    jsPlumb.ready(function () {
         
 	//FIX DOM:
 	$(("#taskcontainer0"))[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
