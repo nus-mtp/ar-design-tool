@@ -26,7 +26,7 @@ angular.module('vumixManagerApp.controllers')
         var onFormLoaded = function() {          
           var requiredCheck = function() {
             return $scope.model.upload;
-          }
+          };
           
         var extensionCheck = function() {
           var tokenised = $scope.model.upload.name.split('.');
@@ -34,7 +34,7 @@ angular.module('vumixManagerApp.controllers')
               return false;
             }
             return tokenised[tokenised.length - 1] === 'obj' || tokenised[tokenised.length - 1] === 'fbx' || tokenised[tokenised.length - 1] === '3ds';
-         }
+         };
           
          $scope.$watch('model.upload', function(newVal, oldVal) {   
             $scope.modelForm.modelUpload.$setValidity('required', false); 

@@ -27,7 +27,7 @@ angular.module('vumixManagerApp.controllers')
         var onFormLoaded = function() {          
           var requiredCheck = function() {
             return $scope.project.upload;
-          }
+          };
           
           var extensionCheck = function() {
             var tokenised = $scope.project.upload.name.split('.');
@@ -35,7 +35,7 @@ angular.module('vumixManagerApp.controllers')
               return false;
             }
             return tokenised[tokenised.length - 1] === 'unitypackage';
-          }
+          };
           
           $scope.$watch('project.upload', function(newVal, oldVal) {   
             $scope.addProjectForm.projectUpload.$setValidity('required', false); 

@@ -7,6 +7,6 @@
     ) {
       $scope.editorService = editorService;
       
-      $scope.unityMapperService = unityMapperService
+      $scope.unityMapperService = unityMapperService;
     }); 
 })();

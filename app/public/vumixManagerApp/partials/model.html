@@ -2,7 +2,7 @@
     <div class="sidebar">
         <div id="welcome_model" class="side-bar-padding">
             <div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
+                <input type="text" name="q" placeholder="Search..." ng-model="searchModel.name" />
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your model </h2>
@@ -58,7 +58,7 @@
         <div class="container section" style="width:auto;">
             <!--to display model-->
             <div id="model_list" class="flex-container">
-                <ul ng-repeat="md in models">
+                <ul ng-repeat="md in models | filter:searchModel">
                    <li class="flex-item">
                         <div class="card">
                             <img class="card-img-top" ng-src="{{model.image_url}}" alt="Card image cap">

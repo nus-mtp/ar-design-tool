@@ -22,6 +22,6 @@
           url: '/image',
           templateUrl: '/vumixManagerApp/partials/image.html',
           controller: 'imageController'
-        })
+        });
     }]);  
 })(); 
