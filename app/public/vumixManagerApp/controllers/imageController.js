@@ -35,13 +35,21 @@ angular.module('vumixManagerApp.controllers')
             }
             return tokenised[tokenised.length - 1] === 'png' || tokenised[tokenised.length - 1] === 'jpg';
          };
-          
+         
+         var extensionSizeCheck = function(){
+          var tokenised = $scope.image.upload.size;
+           if(tokenised > 2000000){
+               return false;
+           }
+           return true;
+         };
+         
          $scope.$watch('image.upload', function(newVal, oldVal) {   
             $scope.imageForm.imageUpload.$setValidity('required', false); 
             $scope.imageForm.imageUpload.$setValidity('fileType', false); 
             if (requiredCheck()) {      
               $scope.imageForm.imageUpload.$setValidity('required', true);
-              if (extensionCheck()) {
+              if (extensionCheck() && extensionSizeCheck()) {
                 $scope.imageForm.imageUpload.$setValidity('fileType', true); 
               }                            
             }

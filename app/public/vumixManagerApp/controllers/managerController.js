@@ -19,10 +19,10 @@ angular.module('vumixManagerApp.controllers')
         };
                   
         var cookie = document.cookie.split(';')[2];
-        $scope.userid = cookie.substring(5);
+        // $scope.userid = cookie.substring(5);
         $scope.project.image_url = "/resources/images/open_book.png";
         
-        // $scope.userid = 1;
+        $scope.userid = 1;
 
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -86,7 +86,7 @@ angular.module('vumixManagerApp.controllers')
         
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
-                .then(function(project) {
+                .success(function(project) {
                 $scope.projects.push(project);
             });
         };

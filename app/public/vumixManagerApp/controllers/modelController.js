@@ -20,8 +20,10 @@ angular.module('vumixManagerApp.controllers')
         };
         
         var cookie = document.cookie.split(';')[2];
-        $scope.userid = cookie.substring(5);
+        // $scope.userid = cookie.substring(5);
         $scope.model.image_url = "/resources/images/open_book.png";  //supposed to read from database
+        
+        $scope.userid = 1;
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -35,13 +37,22 @@ angular.module('vumixManagerApp.controllers')
             }
             return tokenised[tokenised.length - 1] === 'obj' || tokenised[tokenised.length - 1] === 'fbx' || tokenised[tokenised.length - 1] === '3ds';
          };
+         
+         var extensionSizeCheck = function(){
+           var tokenised = $scope.model.upload.size;
+           if(tokenised > 8000000){
+               return false;
+           }
+           return true;
+         };
+         
           
          $scope.$watch('model.upload', function(newVal, oldVal) {   
             $scope.modelForm.modelUpload.$setValidity('required', false); 
             $scope.modelForm.modelUpload.$setValidity('fileType', false); 
             if (requiredCheck()) {      
               $scope.modelForm.modelUpload.$setValidity('required', true);
-              if (extensionCheck()) {
+              if (extensionCheck() && extensionSizeCheck()) {
                 $scope.modelForm.modelUpload.$setValidity('fileType', true); 
               }                            
             }

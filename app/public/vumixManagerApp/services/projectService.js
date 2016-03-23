@@ -24,7 +24,6 @@
        addProject: function(project, upload_project, userId){
             var fd = new FormData();
             var uploadUrl = '/api/users/' + userId + '/projects';
-            console.log("here");
             fd.append('file', upload_project);
             fd.append('uid', userId);
             fd.append('name', project.project_name);
