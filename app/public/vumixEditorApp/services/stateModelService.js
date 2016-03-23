@@ -41,6 +41,13 @@
         return _stateModel.states;
       }
       
+      // get single state given id
+      service.getState = function(id) {
+        return $.grep(_stateModel.states, function(state) {
+          state.id === id;
+        });
+      }
+      
       // create state, given name
       service.createState = function(name) {
         // create state on localdb
@@ -54,6 +61,8 @@
         
         unityMapperService.createState();
         unityMapperService.setTargetState(_stateModel.stateIndex - 1);
+        unityMapperService.createState();
+        
         // notify changes
         notifyStateChange();
         
@@ -77,16 +86,25 @@
         // notify changes
         notifyStateChange();
         
-        return state;
+        return removedState;
       }
       
 // STATE APIS END HERE
 
-// STATE MODEL APIS START HERE
+// STATE OBJECT APIS START HERE
 
+      // get all clickable state models
+      service.getClickableStateObjects = function(id)
+      {
+        var state = $.grep(_stateModel.states, function(state) {
+          return state.id == id;
+        });
+        return $.grep(state[0].models, function(objectState) {
+          return objectState.isClickable;
+        });
+      }
       
-      
-// STATE MODEL APIS END HERE
+// STATE OBJECT APIS END HERE
 
       // NOT SAFE TO CALL
       // add model to existing class, given name
