@@ -80,6 +80,9 @@ router.post('/', upload.single("file"), function(req, res) {
         file_size: physical_model.size,
         file_extension: physical_model.filename.split('.')[1]
     };
+    console.log('uploading file:')
+    // TODO: remove this
+    // unity.moveModel(newModel.uid, physical_model.filename);    
     models.model.find({
         where: {
             uid: newModel.uid,

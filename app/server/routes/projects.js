@@ -86,20 +86,21 @@ router.post('/', upload.single('file'), function(req, res) {
     }).then(function(project) {
         if(project) {
             res.json({status: "fail", message: "project already exists!", length: 0, data: [project]});
-        } else {
-            models.project.create(newProj).then(function() {
-                models.project.find({
-                    where: {
-                        uid: newProj.uid,
-                        name: newProj.name
-                    }
-                }).then(function(newproject) {
-                    unity.createProj(newproject.uid, newproject.id, vuforia_pkg);
-                    res.json({status: "ok", message: "new project created!", length: 1, data: [newproject]});
-                });         
-            });            
-        }
-    });
+        } 
+        return models.project.create(newProj)
+    }).then(function() {
+        return models.project.find({
+            where: {
+                uid: newProj.uid,
+                name: newProj.name
+            }
+        });
+    }).then(function(newproject) {
+        unity.createProj(newproject.uid, newproject.id, vuforia_pkg);
+        res.json({status: "ok", message: "new project created!", length: 1, data: [newproject]});
+    }).catch(function(err) {
+        res.json({status: "fail", message: err.message, length: 0, data: []});
+    });            
 });
 
 /**

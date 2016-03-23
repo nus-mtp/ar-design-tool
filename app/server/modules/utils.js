@@ -1,7 +1,7 @@
 var rimraf 	= require('rimraf'),
 	fs 		= require('fs');
 
-var checkExistsIfNotCreate = function(dirpath) {
+var checkExistsIfNotCreate = function(dirpath, callback) {
 	var dirs 	= dirpath.split('\\');	
 	var newdir 	= "";
 	for(var i=0; i<dirs.length; i++) {
@@ -19,9 +19,11 @@ var checkExistsIfNotCreate = function(dirpath) {
 			}
 		}
 	}
+	if(callback)
+		callback();
 };
 
-var moveFileToDest = function(location, destination) {
+var moveFileToDest = function(location, destination, callback) {
 	console.log('location: ' + location)
 	console.log('destination: ' + destination)
 	fs.rename(location, destination, function(err) {
@@ -31,6 +33,8 @@ var moveFileToDest = function(location, destination) {
 			console.log('Successfully moved file from ' + location + ' to ' + destination);
 		}
 	});
+	if(callback)
+		callback();
 };
 
 var saveFileToDest = function(file, dest) {
