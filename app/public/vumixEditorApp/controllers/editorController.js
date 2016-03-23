@@ -6,8 +6,11 @@
       unityMapperService,
       stateModelService
     ) {
+      $scope.currentStateId = 0;
+      
       $scope.modelsOnScreen = [];      
       $scope.modelsAvailable = [];
+      
       stateModelService.subscribeToModelChange($scope, function() {
         $scope.modelsAvailable = angular.copy(stateModelService.getAllModels());
       });

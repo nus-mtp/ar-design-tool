@@ -44,8 +44,8 @@
       // get single state given id
       service.getState = function(id) {
         return $.grep(_stateModel.states, function(state) {
-          state.id === id;
-        });
+          return state.id === id;
+        })[0];
       }
       
       // create state, given name
@@ -93,13 +93,19 @@
 
 // STATE OBJECT APIS START HERE
 
+      // get all state models given id of state
+      service.getStateObjects = function(id) {
+        return this.getState(id).models;  
+      }
+      
       // get all clickable state models
       service.getClickableStateObjects = function(id)
       {
-        var state = $.grep(_stateModel.states, function(state) {
-          return state.id == id;
-        });
-        return $.grep(state[0].models, function(objectState) {
+        var state = this.getState(id);
+        if (!state) {
+          return [];
+        }
+        return $.grep(state.models, function(objectState) {
           return objectState.isClickable;
         });
       }
