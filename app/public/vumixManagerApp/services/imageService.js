@@ -8,7 +8,7 @@
             var uploadUrl = '/api/users/' + userId + '/models';
             fd.append('file', upload_image);
             fd.append('uid', userId);
-            fd.append('image_name', image.image_name);
+            fd.append('model_name', image.model_name);
             fd.append('file_size',image.file_size);
             fd.append('file_extension', image.file_extension);
             
