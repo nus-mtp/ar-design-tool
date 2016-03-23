@@ -216,6 +216,7 @@ function addTask(id){
 	if(typeof id === "undefined"){
 		numberOfElements++;
 		id = "taskcontainer" + numberOfElements;
+        attachClickable(id);
 	}
 	
 	$('<div class="window task node" id="' + id + '" data-nodetype="task" style="left:30px; top:30px;">').appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
@@ -314,6 +315,11 @@ function repositionElement(id, posX, posY){
 	jsPlumb.repaint(id);
 }
 
+    function attachClickable(id){
+    var el = $('[ng-app=vumixEditorApp]')[0];
+    angular.element(el).injector().get('stateModelService').getClickableStateObjects(id+1);
+        alert(el);
+}
 </script>
 <script>
 </script>
