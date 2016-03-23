@@ -1,5 +1,4 @@
-var unity   = require('../server/modules/unity'),
-    expect  = require('chai').expect;
+var   expect  = require('chai').expect;
     
 // Unity APIs
 describe('Unity module functions', function() {
