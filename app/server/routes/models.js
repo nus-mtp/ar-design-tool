@@ -72,10 +72,12 @@ router.get('/:id', function(req, res) {
  */
 router.post('/', upload.single("file"), function(req, res) {
     // TODO: remove file_location
+    console.log('uploading model...')
+    console.log(req)
     var physical_model = req.file;
     var newModel = {
         uid: req.params.userId,
-        name: req.body.name,
+        name: req.body.model_name,
         file_name: physical_model.filename,
         file_size: physical_model.size,
         file_extension: physical_model.filename.split('.')[1]
@@ -91,21 +93,23 @@ router.post('/', upload.single("file"), function(req, res) {
     }).then(function(model) {
         if(model) {
             res.json({status: "fail", message: "model already exists!", length: 0, data: []});
-        } else {
-            models.model.create(newModel).then(function() {
-                models.model.find({
-                    where: {
-                        uid: newModel.uid,
-                        name: newModel.name,
-                        file_name: physical_model.filename 
-                    }
-                }).then(function(model){
-                    unity.moveModel(model.uid, physical_model.filename);
-                    res.json({status: "ok", message: "new model created!", length: 1, data: [model]});
-                });
-            });            
         }
-    });
+        return models.model.create(newModel)
+    }).then(function() {
+        models.model.find({
+            where: {
+                uid: newModel.uid,
+                name: newModel.name,
+                file_name: physical_model.filename 
+            }
+        }).then(function(model){
+            unity.moveModel(model.uid, physical_model.filename);
+            res.json({status: "ok", message: "new model created!", length: 1, data: [model]});
+        });
+    }).catch(function(err) {
+        console.log(err);
+        res.json({status: "fail", message: err.message, length: 0, data: []});
+    });            
 });
 
 /**
