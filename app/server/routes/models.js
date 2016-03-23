@@ -3,10 +3,25 @@
  * @parent VUMIX
  * This is the api for user models  
  */
-var models  = require('../models'),
-    express = require('express');
+var file_paths  = require('../config/file_path'),
+    utils       = require('../modules/utils'),
+    unity       = require('../modules/unity'),
+    models      = require('../models'),
+    express     = require('express'),
+    multer      = require('multer'),
+    path        = require('path');
+
+var storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(__dirname, '../../'+file_paths.storage_path));
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname);
+    } 
+});
 
 var router = express.Router({mergeParams: true});
+var upload = multer({ storage: storage });
 
 /**
  * @module fetchAllModels
@@ -55,15 +70,21 @@ router.get('/:id', function(req, res) {
  * POST
  * api: /api/users/{userId}/models
  */
-router.post('/', function(req, res) {
+router.post('/', upload.single("file"), function(req, res) {
     // TODO: remove file_location
+    console.log('uploading model...')
+    console.log(req)
+    var physical_model = req.file;
     var newModel = {
         uid: req.params.userId,
-        name: req.body.name,
-        file_size: req.body.file_size,
-        file_extension: req.body.file_extension,
-        // file_location: req.body.file_location
+        name: req.body.model_name,
+        file_name: physical_model.filename,
+        file_size: physical_model.size,
+        file_extension: physical_model.filename.split('.')[1]
     };
+    console.log('uploading file:')
+    // TODO: remove this
+    // unity.moveModel(newModel.uid, physical_model.filename);    
     models.model.find({
         where: {
             uid: newModel.uid,
@@ -72,12 +93,23 @@ router.post('/', function(req, res) {
     }).then(function(model) {
         if(model) {
             res.json({status: "fail", message: "model already exists!", length: 0, data: []});
-        } else {
-            models.model.create(newModel).then(function() {
-                res.json({status: "ok", message: "new model created!", length: 1, data: [newModel]});
-            });            
         }
-    });
+        return models.model.create(newModel)
+    }).then(function() {
+        models.model.find({
+            where: {
+                uid: newModel.uid,
+                name: newModel.name,
+                file_name: physical_model.filename 
+            }
+        }).then(function(model){
+            unity.moveModel(model.uid, physical_model.filename);
+            res.json({status: "ok", message: "new model created!", length: 1, data: [model]});
+        });
+    }).catch(function(err) {
+        console.log(err);
+        res.json({status: "fail", message: err.message, length: 0, data: []});
+    });            
 });
 
 /**
@@ -88,13 +120,17 @@ router.post('/', function(req, res) {
  * api: /api/users/{userId}/models/{id}
  */
 router.delete('/:id', function(req, res) {
+    var uid = req.params.userId;
+    var modelName = '';
     models.model.findById(req.params.id).then(function(model) {
         if(model) {
+            modelName = model.file_name;
             models.model.destroy({
                 where: {
                     id: req.params.id
                 }
             }).then(function(row_deleted) {
+                unity.deleteModel(model.uid, modelName);
                 res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [model]});        
             });
         } else {
@@ -106,7 +142,7 @@ router.delete('/:id', function(req, res) {
 /**
  * @module updateModel
  * @parent modelApi
- * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location
+ * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location, req.body.thumbnail_loc 
  * update model with {id} owned by user with {userId}
  * PUT
  * api: /api/users/{userId}/models/{id}
@@ -117,15 +153,17 @@ router.put('/:id', function(req, res) {
             models.model.update({
                 name: req.body.name || model.name,
                 file_size: req.body.file_size || model.file_size,
-                file_extension: req.body.file_extension || model.file_extension,
-                file_location: req.body.file_location || model.file_location
+                // file_name: physical_model.filename || model.file_name,
+                file_location: req.body.file_location || model.file_location,
+                thumbnail_loc: req.body.thumbnail_loc || model.thumbnail_loc,
+                file_extension: req.body.file_extension || model.file_extension
             }, { 
                 where: {
                     id: req.params.id
                 }
             }).then(function() {
                 models.model.findById(req.params.id).then(function(updatedModel) {
-                     res.json({status: "ok", message: "updated model", length: 1, data: [updatedModel]});
+                    res.json({status: "ok", message: "updated model", length: 1, data: [updatedModel]});
                 });
             });
         } else {

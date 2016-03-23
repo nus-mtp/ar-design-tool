@@ -18,8 +18,13 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
                   
+
         var cookie = document.cookie.split(';')[2];
         // $scope.userid = cookie.substring(5);
+
+        // var cookie = document.cookie.split(';')[0];
+        $scope.userid = cookie.substring(5);
+
         $scope.project.image_url = "/resources/images/open_book.png";
         
         $scope.userid = 1;

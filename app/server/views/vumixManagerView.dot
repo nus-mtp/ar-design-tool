@@ -10,9 +10,10 @@
         <link rel="stylesheet" href="resources/css/style.css" />  
         <title> Vumix Manager Application</title>
      </head>
-     <style>
-     </style>
      <body>
+        <script>
+        document.cookie="uid=[[= model.id]];";
+        </script>
         <div ng-app="vumixManagerApp">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                     <div class="container-fluid nav-bar">
@@ -35,7 +36,7 @@
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.name]]<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="/logout">Log Out</a></li>
+                                        <li><a href='/logout' onclick="destroyCookies()">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -47,6 +48,16 @@
     
             </div>
 		</div>
+        <script>
+            var destroyCookies = function() {
+                var expires = "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                console.log('i am destroying cookies')
+                var cookies = document.cookie.split(";");
+                for (var i = 0; i < cookies.length; i++)
+                    console.log(cookies[i]+expires);
+                    document.cookies+=cookies[i]+expires;
+            }
+        </script>
         <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
         <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>

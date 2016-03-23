@@ -1,5 +1,5 @@
-var passport 		= require('passport'),
-	express 		= require('express');
+var passport 	= require('passport'),
+	express 	= require('express');
 
 var router 	= express.Router();
 
