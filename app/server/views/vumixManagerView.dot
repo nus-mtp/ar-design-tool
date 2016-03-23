@@ -51,11 +51,10 @@
         <script>
             var destroyCookies = function() {
                 var expires = "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                console.log('i am destroying cookies')
                 var cookies = document.cookie.split(";");
-                for (var i = 0; i < cookies.length; i++)
-                    console.log(cookies[i]+expires);
-                    document.cookies+=cookies[i]+expires;
+                for (var i = 0; i < cookies.length; i++){
+                    document.cookie +=cookies[i]+expires;
+                }
             }
         </script>
         <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
