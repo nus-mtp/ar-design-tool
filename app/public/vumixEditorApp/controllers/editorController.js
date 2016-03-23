@@ -6,22 +6,17 @@
       unityMapperService,
       stateModelService
     ) {
-      $scope.modelsOnScreen = [];
-      
+      $scope.modelsOnScreen = [];      
       $scope.modelsAvailable = [];
+      stateModelService.subscribeToModelChange($scope, function() {
+        $scope.modelsAvailable = angular.copy(stateModelService.getAllModels());
+      });
       
-      $scope.unityMapperService = unityMapperService;
-      
+      $scope.unityMapperService = unityMapperService;      
       $scope.editorService = editorService;
       
       $scope.addModelToScreen = function(object) {
-        var _obj = angular.copy(object);
-        _obj.clickable = false;
-        $scope.modelsOnScreen.push(_obj);
-      }
-      
-      $scope.getAllModels = function() {
-        $scope.modelsAvailable = stateModelService.getAllModels();
+        
       }
     }); 
 })();

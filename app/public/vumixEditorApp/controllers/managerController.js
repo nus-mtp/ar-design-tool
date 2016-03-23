@@ -9,7 +9,5 @@
       $scope.editorService = editorService;
       
       $scope.unityMapperService = unityMapperService;      
-      
-      console.log(stateModelService.counter++);
     }); 
 })();

@@ -21,10 +21,6 @@
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotation Cursor" ng-click="unityMapperService.setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Cursor" ng-click="unityMapperService.setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
     </ul>
-    <ul class="nav navbar-nav">
-      <li><a href="" ng-click="unityMapperService.loadAllModels()">Load All Models (Test)</a></li>
-      <li><a href="" ng-click="getAllModels()">Get All Models (Test)</a></li>
-    </ul>
   </nav>
   <unity-editor></unity-editor>
 </div>
@@ -46,9 +42,9 @@
     SendMessage ("Facade", 'DownLoadUserStuff', combinedName);
   }
   
-  var addModelButton = function(name) {
+  var makeProject = function(stateModels) {
     var el = $('[ng-app=vumixEditorApp]')[0];
-    angular.element(el).injector().get('stateModelService').addModel(name);
+    angular.element(el).injector().get('stateModelService').addStateModel(JSON.parse(stateModels));
   }
   
   var globalFunc = {
