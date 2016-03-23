@@ -127,7 +127,7 @@ router.delete('/:id', function(req, res) {
             modelName = model.file_name;
             models.model.destroy({
                 where: {
-                    id: req.body.id
+                    id: req.params.id
                 }
             }).then(function(row_deleted) {
                 unity.deleteModel(model.uid, modelName);
