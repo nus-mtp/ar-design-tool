@@ -71,6 +71,7 @@ router.get('/:id', function(req, res) {
  * api: /api/users/{userId}/projects
  */
 router.post('/', upload.single('file'), function(req, res) {
+    console.log('inserting project:::')
     var newProj = {
         uid: req.params.userId,
         name: req.body.name,
@@ -97,6 +98,7 @@ router.post('/', upload.single('file'), function(req, res) {
         });
     }).then(function(newproject) {
         unity.createProj(newproject.uid, newproject.id, vuforia_pkg);
+        console.log('created project!')
         res.json({status: "ok", message: "new project created!", length: 1, data: [newproject]});
     }).catch(function(err) {
         res.json({status: "fail", message: err.message, length: 0, data: []});
