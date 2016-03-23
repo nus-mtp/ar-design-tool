@@ -19,8 +19,11 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
-        var cookie = document.cookie.split(';')[2];
-        $scope.userid = cookie.substring(5);  
+        var cookie = document.cookie.split(';')[0];
+        // $scope.userid = cookie.substring(5);
+
+        // var cookie = document.cookie.split(';')[0];
+        $scope.userid = cookie.substring(4);
         $scope.image.image_url = "/resources/images/open_book.png";
         
         var onFormLoaded = function() {          
@@ -30,6 +33,7 @@ angular.module('vumixManagerApp.controllers')
           
         var extensionCheck = function() {
           var tokenised = $scope.image.upload.name.split('.');
+          $scope.image.file_extension = tokenised[tokenised.length-1];
             if (tokenised.length < 1) {
               return false;
             }
@@ -66,7 +70,6 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.image.upload = file;
             $scope.image.file_size = file.size;
-            $scope.image.file_extension = file.type;
             $scope.$apply();
         };
         
@@ -101,7 +104,7 @@ angular.module('vumixManagerApp.controllers')
         
         $http({
             method: 'GET',
-            url : '/api/users/' + $scope.userid +'/images'
+            url : '/api/users/' + $scope.userid +'/models'
         }).success(function(res){
             $scope.images = res.data;
         });

@@ -19,11 +19,11 @@ angular.module('vumixManagerApp.controllers')
         };
                   
 
-        var cookie = document.cookie.split(';')[2];
+        var cookie = document.cookie.split(';')[0];
         // $scope.userid = cookie.substring(5);
 
         // var cookie = document.cookie.split(';')[0];
-        $scope.userid = cookie.substring(5);
+        $scope.userid = cookie.substring(4);
 
         $scope.project.image_url = "/resources/images/open_book.png";
         
@@ -91,7 +91,7 @@ angular.module('vumixManagerApp.controllers')
         
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
-                .success(function(project) {
+                .then(function(project) {
                 $scope.projects.push(project);
             });
         };

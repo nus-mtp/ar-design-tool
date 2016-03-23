@@ -5,24 +5,27 @@
        
        addImage: function(image, upload_image, userId){
             var fd = new FormData();
-            var uploadUrl = '/api/users/' + userId + '/images';
+            var uploadUrl = '/api/users/' + userId + '/models';
             fd.append('file', upload_image);
             fd.append('uid', userId);
             fd.append('image_name', image.image_name);
             fd.append('file_size',image.file_size);
             fd.append('file_extension', image.file_extension);
-                  
-            $http.post(uploadUrl, fd, {
+            
+            return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
-            },function errorCallback(res){
-               console.log("error deleting the image");
+            })
+            .then(function(res){
+                return res.data.data[0];
+            }, function errorCallback(res){
+               console.log("error adding the image");
            });
        }, 
         
        deleteImage: function(images, userId, id){
            return $http({
                method: 'DELETE',
-               url: '/api/users/' + userId + '/images/' + id 
+               url: '/api/users/' + userId + '/models/' + id 
            }).then(function(res){
                for(var i =0; i < images.length; i++){
                    if(id === images[i].id){
@@ -38,7 +41,7 @@
        updateImage: function(images, image, userId, id){
            return $http({
                method: 'PUT',
-               url: '/api/users/' + userId + '/images/' + id      
+               url: '/api/users/' + userId + '/models/' + id      
            }).then(function(res){
                for(var i = 0; i < images.length; i++){
                    if(id === images[i].id){

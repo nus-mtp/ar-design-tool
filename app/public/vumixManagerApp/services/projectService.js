@@ -30,13 +30,13 @@
             fd.append('company_name',project.company_name);
             fd.append('marker_type', project.marker_type);
 
-            $http.post(uploadUrl, fd, {
+            return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })
             .then(function(res){
                 return res.data.data[0];
             }, function errorCallback(res){
-               console.log("error deleting the model");
+               console.log("error adding the project");
            });
        },
        deleteProject: function(projects, userId, id){

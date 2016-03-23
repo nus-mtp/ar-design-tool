@@ -20,11 +20,11 @@ angular.module('vumixManagerApp.controllers')
         };
         
 
-        var cookie = document.cookie.split(';')[2];
+        var cookie = document.cookie.split(';')[0];
         // $scope.userid = cookie.substring(5);
 
         // var cookie = document.cookie.split(';')[0];
-        $scope.userid = cookie.substring(5);
+        $scope.userid = cookie.substring(4);
 
         $scope.model.image_url = "/resources/images/open_book.png";  //supposed to read from database
         
@@ -37,6 +37,7 @@ angular.module('vumixManagerApp.controllers')
           
         var extensionCheck = function() {
           var tokenised = $scope.model.upload.name.split('.');
+          $scope.model.file_extension = tokenised[tokenised.length-1];
             if (tokenised.length < 1) {
               return false;
             }
@@ -74,7 +75,6 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.model.upload = file;
             $scope.model.file_size = file.size;
-            $scope.model.file_extension = file.type;
             $scope.$apply();
         };
         
@@ -103,7 +103,6 @@ angular.module('vumixManagerApp.controllers')
         $scope.addModel = function(){
            modelService.addModel($scope.model, $scope.model.upload, $scope.userid)
                 .then(function(model) {
-                console.log(model);
                 $scope.models.push(model);
             });
         };
