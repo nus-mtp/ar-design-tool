@@ -19,19 +19,9 @@
 </nav>
 
 <!-- Modal for model options button -->
-<bs-modal modal-id="myModal">
+<bs-modal modal-id="clickableModal">
   <modal-body>
     <p style="text-align:center">Choose your clickable object.</p>
-    <div class="radio">
-      <!-- check on how to use label in html -->
-      <label><input type="radio" name="optradio1">Object 1</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio2">Object 2</label>
-    </div>
-    <div class="radio disabled">
-      <label><input type="radio" name="optradio3">Object 3</label>
-    </div>
   </modal-body>
   <modal-footer>
     <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
@@ -165,7 +155,7 @@ jsPlumb.ready(function () {
 			} ],
             [ "Label", { 
 						location:[ 2, 2],
-                        label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
+                        label:"<button type='button' class='btn btn-default btn-xs' id='clickable' data-toggle='modal' data-target='#clickableModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
 						cssClass:"aLabel",
 					}]
 		]
@@ -324,4 +314,6 @@ function repositionElement(id, posX, posY){
 	jsPlumb.repaint(id);
 }
 
+</script>
+<script>
 </script>
