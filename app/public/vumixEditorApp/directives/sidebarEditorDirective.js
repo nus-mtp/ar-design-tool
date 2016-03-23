@@ -33,6 +33,7 @@
       tmpl += '   <div class="panel panel-default" id="panel-browser">';      
       tmpl += '     <div class="panel-heading">';
       tmpl += '       <span class="panel-title">Browser</span>';
+      tmpl += '       <span class="panel-button addModel" data-toggle="modal" data-target="#addAsset"><i class="fa fa-plus-square"></i></span>';
       tmpl += '       <span class="panel-button maximise"><i class="fa fa-square-o"></i></span>';
       tmpl += '       <span class="panel-button equalise"><i class="fa fa-server"></i></span>';
       tmpl += '     </div>';

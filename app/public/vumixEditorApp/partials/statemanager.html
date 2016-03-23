@@ -85,7 +85,7 @@
       <div class="startpoint point window node" style="left: 150px; top:20px" data-nodetype="startpoint" id="startpoint">
         <div class="editor_container">
           <div class="button_editor">
-            <a ng-click="editorService.openEditor()" href="">
+            <a ng-click="editorService.openEditor(0)" href="">
               <span class="glyphicon glyphicon-new-window"></span>
             </a>
           </div>
@@ -116,8 +116,25 @@
 
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
 
+<<<<<<< HEAD
 <script type="text/javascript"> 
 
+=======
+<bs-modal modal-id="addAsset">
+  <modal-body>
+    <p style="text-align:center">Adding Page</p>
+  </modal-body>
+  <modal-footer>
+    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
+  </modal-footer>
+</bs-modal>
+
+<script type="text/javascript">    
+  var CreateState = function(id, name) {
+    console.log("called");
+  }
+  
+>>>>>>> b321e7feb1960e9ad7ec102027cd9e9c1ce1334e
   var angularHelper = (function () {
     var angularHelper = function () { };
     var defaultApplicationName = "vumixEditorApp";

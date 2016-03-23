@@ -1,16 +1,29 @@
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('editorService', function() {
+    .factory('editorService', function(unityMapperService) {
       var service = {};
       
       service.open = false;
+      service.id = -1;
       
-      service.openEditor = function() {
-          service.open = true;
+      var notifyDisplayStateIdChange = function() {
+        $rootScope.$emit('_$displayStateIdChange');
+      }
+      
+      service.subscribeToDisplayStateIdChange = function($scope, callback) {
+        var handler = $rootScope.$on('_$displayStateIdChange', callback);
+        $scope.$on('$destroy', handler);
+      }
+      
+      service.openEditor = function(id) {
+          this.id = id;
+          unityMapperService.setTargetState(id);
+          unityMapperService.displayState();
+          this.open = true;
       };
       
       service.closeEditor = function() {
-          service.open = false;
+          this.open = false;
       };
     
       return service;
