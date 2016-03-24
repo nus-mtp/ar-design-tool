@@ -15,6 +15,9 @@ var	file_path 	= require(path.join(__dirname, '/server/config/file_path')),
 var parse = require('./server/modules/parser.js');
 parse.processArg();
 
+// Make sure storage folder exists
+utils.checkExistsIfNotCreate(path.join(__dirname, file_path.storage_path));
+
 var app = express(),
 	port = process.env.PORT || 3000;
 
@@ -72,8 +75,6 @@ models.sequelize.sync().then(function() {
 		// models.project.insertTestProjects();
 		// models.model.insertTestModels();
 	// }
-	// TODO: make sure storage folder exists
-	utils.checkExistsIfNotCreate(path.join(__dirname, file_path.storage_path));
 	app.listen(port, function() {
 	    console.log('listening on *: ' + port);
 	});

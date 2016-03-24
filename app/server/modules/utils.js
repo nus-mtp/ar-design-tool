@@ -24,8 +24,8 @@ var checkExistsIfNotCreate = function(dirpath, callback) {
 };
 
 var moveFileToDest = function(location, destination, callback) {
-	console.log('location: ' + location)
-	console.log('destination: ' + destination)
+	console.log('location: ' + location);
+	console.log('destination: ' + destination);
 	fs.rename(location, destination, function(err) {
 		if(err) {
 			console.log(err);
@@ -65,7 +65,7 @@ var deleteFile = function(deleteFile) {
 		} else {
 			console.log('Successfully deleted: ' + deleteFile);
 		}
-	})
+	});
 };
 
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;

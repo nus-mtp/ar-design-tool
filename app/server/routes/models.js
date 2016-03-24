@@ -71,9 +71,7 @@ router.get('/:id', function(req, res) {
  * api: /api/users/{userId}/models
  */
 router.post('/', upload.single("file"), function(req, res) {
-    // TODO: remove file_location
-    console.log('uploading model...')
-    console.log(req)
+    console.log('uploading model...');
     var physical_model = req.file;
     var newModel = {
         uid: req.params.userId,
@@ -82,7 +80,7 @@ router.post('/', upload.single("file"), function(req, res) {
         file_size: physical_model.size,
         file_extension: physical_model.filename.split('.')[1]
     };
-    console.log('uploading file:')
+    console.log('uploading file:');
     // TODO: remove this
     // unity.moveModel(newModel.uid, physical_model.filename);    
     models.model.find({
@@ -94,18 +92,18 @@ router.post('/', upload.single("file"), function(req, res) {
         if(model) {
             res.json({status: "fail", message: "model already exists!", length: 0, data: []});
         }
-        return models.model.create(newModel)
+        return models.model.create(newModel);
     }).then(function() {
-        models.model.find({
+        return models.model.find({
             where: {
                 uid: newModel.uid,
                 name: newModel.name,
                 file_name: physical_model.filename 
             }
-        }).then(function(model){
+        });
+    }).then(function(model){
             unity.moveModel(model.uid, physical_model.filename);
             res.json({status: "ok", message: "new model created!", length: 1, data: [model]});
-        });
     }).catch(function(err) {
         console.log(err);
         res.json({status: "fail", message: err.message, length: 0, data: []});
@@ -133,16 +131,15 @@ router.delete('/:id', function(req, res) {
                 unity.deleteModel(model.uid, modelName);
                 res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [model]});        
             });
-        } else {
-            res.json({status: "fail", message: "model not found", length: 0, data: []});
         }
+        res.json({status: "fail", message: "model not found", length: 0, data: []});
     });
 });
 
 /**
  * @module updateModel
  * @parent modelApi
- * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location, req.body.thumbnail_loc 
+ * @param req.body.name, req.body.file_size, req.body.file_extension
  * update model with {id} owned by user with {userId}
  * PUT
  * api: /api/users/{userId}/models/{id}
@@ -154,8 +151,6 @@ router.put('/:id', function(req, res) {
                 name: req.body.name || model.name,
                 file_size: req.body.file_size || model.file_size,
                 // file_name: physical_model.filename || model.file_name,
-                file_location: req.body.file_location || model.file_location,
-                thumbnail_loc: req.body.thumbnail_loc || model.thumbnail_loc,
                 file_extension: req.body.file_extension || model.file_extension
             }, { 
                 where: {
