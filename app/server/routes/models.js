@@ -94,6 +94,8 @@ router.post('/', upload.single("file"), function(req, res) {
     }).then(function(model) {
         if(model) {
             res.json({status: "fail", message: "model already exists!", length: 0, data: []});
+        } else {
+
         }
         return models.model.create(newModel);
     }).then(function() {
@@ -112,6 +114,10 @@ router.post('/', upload.single("file"), function(req, res) {
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });            
 });
+
+var insertModelDB = function() {
+
+};
 
 /**
  * @module deleteModel
