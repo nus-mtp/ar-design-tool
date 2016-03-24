@@ -21,6 +21,9 @@ var rebuildVuforiaPackage = function(uid, pid) {
 			console.log("exec error: " + error);
 		}
 	});
+	rebuild.on('exit', function(code) {
+		console.log('Rebuild Vuforia pkg child process exited with code ' + code);
+	});
 };
 
 var moveVuforia = function(location, uid, pid, fileName) {
@@ -47,7 +50,7 @@ var createProj = function(uid, pid, vuforia_pkg) {
 		moveVuforia(vuforia_pkg.path, uid, pid, "marker.unitypackage");
 		//TODO: remove this after testing
 		// moveVuforia(vuforia_pkg.path, uid, pid, vuforia_pkg.originalname);
-		console.log("child process exited with code " + code);
+		console.log("Creating new project child process exited with code " + code);
 	});
 };
 
@@ -87,11 +90,7 @@ var copyModel = function(uid, pid, fileName) {
 	try {
 		var readModel = fs.createReadStream(modelFile_path);
 		var writeModel = fs.createWriteStream(destination);
-	} catch(e) {
-		console.log(e)
-	}
 
-	try {
 		readModel.pipe(writeModel, {end: false});
 		readModel.on('end', function() {
 			console.log('Finished copying model to '+destination);
@@ -99,7 +98,7 @@ var copyModel = function(uid, pid, fileName) {
 			rebuildAssetBundle(uid, pid);
 		});
 	} catch(e) {
-		console.log(e)
+		console.log(e);
 	}
 };
 
@@ -117,7 +116,30 @@ var rebuildAssetBundle = function(uid, pid) {
 		}
 	});
 	rebuild.on('exit', function(code) {
-		console.log("child process exited with code " + code);
+		console.log("Rebuilding Assetbundle child process exited with code " + code);
+	});
+};
+
+var buildApk = function(uid, pid){
+	console.log('building apk for projectid: ' + pid);
+	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
+	var down_path 	 = project_path+file_paths.download;
+
+	project_path += '/';
+	
+	var buildApkCmd	 = '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.BuildAndroid2D -quit -batchmode';
+
+	console.log('running: ' + buildApkCmd);
+	const buildAPK = exec(buildApkCmd, function(error, stdout, stderr) {
+		console.log("stdout: " + stdout);
+		console.log("stderr: " + stderr);	
+		if (error !== null) {
+			console.log("exec error: " + error);
+		}
+	});
+	buildAPK.on('exit', function(code) {
+		console.log("buildAPK child process exited with code " + code);
+		return down_path;
 	});
 };
 
@@ -127,3 +149,4 @@ module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
 module.exports.moveModel 			= moveModel;
 module.exports.copyModel 			= copyModel;
+module.exports.buildApk				= buildApk;
