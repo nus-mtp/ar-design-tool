@@ -6,10 +6,10 @@
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-      $urlRouterProvider.otherwise('/manager/editor');
+      $urlRouterProvider.otherwise('/state/editor');
       $stateProvider
         .state('stateManager', {
-          url: '/project/:id',
+          url: '/state',
           templateUrl: '/vumixEditorApp/partials/stateManager.html',
           controller: 'managerController'
         })
