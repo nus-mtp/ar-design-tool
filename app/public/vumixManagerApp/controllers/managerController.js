@@ -59,6 +59,7 @@ angular.module('vumixManagerApp.controllers')
         $scope.uploadFile = function(){
             file = event.target.files[0];
             $scope.project.upload = file;
+            $scope.update.upload = file;
             $scope.$apply();
         };
         
@@ -81,10 +82,10 @@ angular.module('vumixManagerApp.controllers')
         $scope.updateProject = function(id){
             projectService.updateProject($scope.projects,$scope.update, $scope.userid,id)
             .then(function(update){
+                console.log(update);
                 $scope.project.project_name = update.name;
                 $scope.project.company_name = update.company_name;
                 $scope.project.marker_type = update.marker_type;
-                $scope.project.image_url = update.image_url;
                 $scope.project.upload = update.upload;
             });
         };

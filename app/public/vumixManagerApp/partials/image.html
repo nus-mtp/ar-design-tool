@@ -19,7 +19,7 @@
                 <input type ="file" ng-model="image.upload" name="imageUpload" style="color:#FFFFFF" onchange="angular.element(this).scope().uploadFile()" />
                 <div class="text-danger" ng-show="imageForm.imageUpload.$error.required">Image file cannot be empty</div>
                 <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
-                <span class="text-info">Max upload 2 MB file</span>
+                <span class="text-info">Max upload 4 MB file</span>
                 <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                     <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
                 <!--</form>-->
@@ -42,11 +42,11 @@
                         <h1> Image Name</h1>
                         <input type="text" name="image_name" placeholder="Image Name" ng-model="update.name"><br>
                         <h1> File</h1>
-                        <input type ="file" ng-model="update.upload" name="modelUpload" style="color:#000000" onchange="angular.element(this).scope().uploadFile()">
+                        <input type ="file" ng-model="model.upload" name="modelUpload" style="color:#000000" onchange="angular.element(this).scope().uploadFile()">
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                             <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                         </form>-->
-                        <input type="submit" ng-click="updateImage(image.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                        <input type="submit" ng-click="updateImage(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
                     </form>
                 </div>           
             </div>

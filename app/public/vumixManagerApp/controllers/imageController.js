@@ -40,7 +40,7 @@ angular.module('vumixManagerApp.controllers')
          
          var extensionSizeCheck = function(){
           var tokenised = $scope.image.upload.size;
-           if(tokenised > 2000000){
+           if(tokenised > 4000000){
                return false;
            }
            return true;
@@ -68,6 +68,8 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.image.upload = file;
             $scope.image.file_size = file.size;
+            $scope.update.upload = file;
+            $scope.update.file_size = file.size;
             $scope.$apply();
         };
         
@@ -85,7 +87,6 @@ angular.module('vumixManagerApp.controllers')
                 $scope.image.image_name = update.name;
                 $scope.image.file_size = update.file_size;
                 $scope.image.file_extension = update.file_extension;
-                $scope.image.image_url = update.image_url;
                 $scope.image.upload = update.upload;
             });
         };
