@@ -37,6 +37,9 @@ router.get('/', function(req, res) {
         }
     }).then(function(models){
         res.json({status: "ok", length: models.length, data: models});            
+    }).catch(function(err) {
+        console.log('caught error in fetch all models');
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
@@ -59,6 +62,9 @@ router.get('/:id', function(req, res) {
         } else {
             res.json({status: "fail", message: "model not found", length: 0, data: []});
         }
+    }).catch(function(err) {
+        console.log('caught error in fetch model');
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
@@ -80,9 +86,6 @@ router.post('/', upload.single("file"), function(req, res) {
         file_size: physical_model.size,
         file_extension: physical_model.filename.split('.')[1]
     };
-    console.log('uploading file:');
-    // TODO: remove this
-    // unity.moveModel(newModel.uid, physical_model.filename);    
     models.model.find({
         where: {
             uid: newModel.uid,
@@ -120,20 +123,25 @@ router.post('/', upload.single("file"), function(req, res) {
 router.delete('/:id', function(req, res) {
     var uid = req.params.userId;
     var modelName = '';
-    models.model.findById(req.params.id).then(function(model) {
-        if(model) {
-            modelName = model.file_name;
-            models.model.destroy({
-                where: {
-                    id: req.params.id
-                }
-            }).then(function(row_deleted) {
-                unity.deleteModel(model.uid, modelName);
-                res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [model]});        
-            });
+    var model;
+    models.model.findById(req.params.id).then(function(_model) {
+        if(!_model) {
+            res.json({status: "fail", message: "model not found", length: 0, data: []});    
         }
-        res.json({status: "fail", message: "model not found", length: 0, data: []});
-    });
+        model = _model;
+        modelName = _model.file_name;
+        return models.model.destroy({
+            where: {
+                id: req.params.id
+            }
+        });
+    }).then(function(row_deleted) {
+        unity.deleteModel(uid, modelName);
+        res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [model]});        
+    }).catch(function(err) {
+        console.log('caught error in delete model');
+        res.json({status: "fail", message: err.message, length: 0, data: []});
+    })
 });
 
 /**

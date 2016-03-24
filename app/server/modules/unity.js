@@ -38,7 +38,7 @@ var updateVuforia = function(uid, pid, vuforia_pkg) {
 	moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
 }
 
-var createProj = function(uid, pid, vuforia_pkg, callback) {
+var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var unity_cmd 		= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit';
 	
@@ -50,14 +50,15 @@ var createProj = function(uid, pid, vuforia_pkg, callback) {
 		console.log("stderr: " + stderr);	
 		if (error !== null) {
 			console.log("exec error: " + error);
+			failCallback(error);
 		}
 	});
 	unity.on('exit', function(code) {
 		moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
+		console.log("Creating new project child process exited with code " + code);
+		callback();
 		//TODO: remove this after testing
 		// moveVuforia(vuforia_pkg.path, uid, pid, vuforia_pkg.originalname);
-		callback();
-		console.log("Creating new project child process exited with code " + code);
 	});
 };
 
