@@ -82,7 +82,11 @@ angular.module('vumixManagerApp.controllers')
         $scope.updateImage = function(id){
             imageService.updateImage($scope.images,$scope.update, $scope.userid,id)
             .then(function(image){
-                $scope.image = image;
+                $scope.image.image_name = update.name;
+                $scope.image.file_size = update.file_size;
+                $scope.image.file_extension = update.file_extension;
+                $scope.image.image_url = update.image_url;
+                $scope.image.upload = update.upload;
             });
         };
         

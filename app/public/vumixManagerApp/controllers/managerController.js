@@ -15,6 +15,7 @@ angular.module('vumixManagerApp.controllers')
             project_name: "",
             company_name: "",
             marker_type: "3D",
+            image_url: "",
             upload: undefined
         };
                   
@@ -78,9 +79,13 @@ angular.module('vumixManagerApp.controllers')
         };
         
         $scope.updateProject = function(id){
-            projectService.updateProject($scope.projects,$scope.project, $scope.userid,id)
-            .then(function(project){
-                $scope.project = project;
+            projectService.updateProject($scope.projects,$scope.update, $scope.userid,id)
+            .then(function(update){
+                $scope.project.project_name = update.name;
+                $scope.project.company_name = update.company_name;
+                $scope.project.marker_type = update.marker_type;
+                $scope.project.image_url = update.image_url;
+                $scope.project.upload = update.upload;
             });
         };
         

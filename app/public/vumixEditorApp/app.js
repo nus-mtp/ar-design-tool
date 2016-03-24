@@ -9,7 +9,7 @@
       $urlRouterProvider.otherwise('/manager/editor');
       $stateProvider
         .state('stateManager', {
-          url: '/manager',
+          url: '/project/:id',
           templateUrl: '/vumixEditorApp/partials/stateManager.html',
           controller: 'managerController'
         })

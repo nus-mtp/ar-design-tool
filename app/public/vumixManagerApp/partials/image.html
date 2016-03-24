@@ -38,15 +38,15 @@
                     <h4 class="modal-title"> Your Image</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="updateImage(image.id)" enctype="multipart/form-data">
+                    <form enctype="multipart/form-data">
                         <h1> Image Name</h1>
                         <input type="text" name="image_name" placeholder="Image Name" ng-model="update.name"><br>
                         <h1> File</h1>
-                        <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
+                        <input type ="file" ng-model="update.upload" name="modelUpload" style="color:#000000" onchange="angular.element(this).scope().uploadFile()">
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                             <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                         </form>-->
-                        <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                        <input type="submit" ng-click="updateImage(image.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
                     </form>
                 </div>           
             </div>
