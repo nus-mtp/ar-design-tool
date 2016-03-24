@@ -18,6 +18,7 @@
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                     <div class="container-fluid nav-bar">
                         <div class="navbar-header">
+                            <img ng-src="/resources/images/logo.png" height=50" width="50">
                             <a class="navbar-brand" href="#">Vumix File Manager</a>
                         </div>
 
