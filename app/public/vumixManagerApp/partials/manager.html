@@ -80,7 +80,7 @@
             <div id="project_list" class="flex-container" >
                 <ul ng-repeat="pr in projects | filter:searchText">
                     {{pr.id}}
-                    <a ui-sref="stateManager({id:pr.id})">
+                    <a href="/state">
                         <li class="flex-item">
                             <div class="card">
                                 <img class="card-img-top" ng-src="{{project.image_url}}" alt="Card image cap">
