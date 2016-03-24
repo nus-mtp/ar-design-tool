@@ -1,7 +1,8 @@
 (function() {
   angular
     .module('vumixEditorApp', [
-      'vumixEditorApp.controllers',  
+      'vumixEditorApp.controllers', 
+      'vumixEditorApp.directives', 
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {

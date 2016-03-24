@@ -47,7 +47,7 @@ public class BuildProject : MonoBehaviour {
     [MenuItem("File/Set Identifier")]
     private static void SetIdentifier()
     {
-        PlayerSettings.bundleIdentifier = System.IO.File.ReadAllText(Application.dataPath + IDENTIFIER_FILE_PATH);
+        PlayerSettings.bundleIdentifier = File.ReadAllLines(Application.dataPath + IDENTIFIER_FILE_PATH)[0];
     }
 
     private static string[] ReadDataSetTrackerName(MarkerType markerType)

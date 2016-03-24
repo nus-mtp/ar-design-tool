@@ -1,15 +1,19 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 
 public class Facade : MonoBehaviour {
-    LoadAssetBundle loadAssetBundle;
-    SaveProgress saveProgress;
-    LoadProgress loadProgress;
-    GameObject controlScript;
-    StateManager stateManager;
-    string assetBundleUrl;
-    string saveStateURL;
-    string loadStateURL;
+    public const string FACADE_TAG = "Facade";
+
+    private LoadAssetBundle loadAssetBundle;
+    private SaveProgress saveProgress;
+    private LoadProgress loadProgress;
+    private GameObject controlScript;
+    private StateManager stateManager;
+    private string assetBundleUrl;
+    private string saveStateURL;
+    private string loadStateURL;
 	
     // Use this for initialization
 	void Start () {
@@ -19,6 +23,42 @@ public class Facade : MonoBehaviour {
        loadProgress = controlScript.GetComponent<LoadProgress>();
        stateManager = controlScript.GetComponent<StateManager>();
 	}
+
+    public void SendStateInfo()
+    {
+        List<int> ids = stateManager.GetStateIDs();
+        List<string> names = stateManager.GetStateNames();
+        for (int i = 0; i < ids.Count; i++)
+        {
+            Application.ExternalCall("createState",ids[i],names[i]);
+        }
+    }
+
+    public void AddNewState()
+    {
+        State newState = stateManager.AddNewState();
+        Application.ExternalCall("createState", newState.id, newState.name);
+    }
+
+    public void DeleteState(int i)
+    {
+        stateManager.DeleteState(i);
+    }
+
+    public void DisplayState(int id)
+    {
+        stateManager.SwitchState(id);
+    }
+
+    public void ChangeStateName(string arg)
+    {
+        string[] arr = arg.Split(",".ToCharArray());
+        int id = Int32.Parse(arr[0]);
+        string newName = arr[1];
+        Debug.Log(id);
+        Debug.Log(newName);
+        stateManager.ChangeStateName(id, newName);
+    }
 
     public void DownloadAssetBundle(string url)
     {

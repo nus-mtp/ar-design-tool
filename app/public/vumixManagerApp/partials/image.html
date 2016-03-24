@@ -19,6 +19,7 @@
                 <input type ="file" ng-model="image.upload" name="imageUpload" style="color:#FFFFFF" onchange="angular.element(this).scope().uploadFile()" />
                 <div class="text-danger" ng-show="imageForm.imageUpload.$error.required">Image file cannot be empty</div>
                 <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
+                <span class="text-info">Max upload 2 MB file</span>
                 <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                     <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
                 <!--</form>-->

@@ -10,6 +10,7 @@ public class SerialStateObject
     public SerialVector scale;
     public string modelName;
     public string instanceName;
+    public int id;
     public bool isStateChanger;
     public int transitionStateId;
 
@@ -23,6 +24,7 @@ public class SerialStateObject
         scale = new SerialVector(g.transform.localScale);
         isStateChanger = s.isStateChanger;
         transitionStateId = s.transitionStateId;
+        id = s.id;
     }
 
     public void InitializeStateObject(StateObject s)
@@ -35,6 +37,7 @@ public class SerialStateObject
         s.instanceName = instanceName;
         s.isStateChanger = isStateChanger;
         s.transitionStateId = transitionStateId;
+        s.id = id;
     }
 }
 

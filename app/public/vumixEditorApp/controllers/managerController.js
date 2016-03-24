@@ -3,10 +3,11 @@
     .controller('managerController', function(
       $scope,
       editorService,
-      unityMapperService
+      unityMapperService,
+      stateModelService
     ) {
       $scope.editorService = editorService;
-      
-      $scope.unityMapperService = unityMapperService;
+     
+      $scope.unityMapperService = unityMapperService;   
     }); 
 })();

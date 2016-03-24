@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class StateObjectChanger : MonoBehaviour {
+public class StateObjectChanger : MonoBehaviour
+{
 
     const string SELECTOR_NAME = "Selector";
     const string TOGGLE_NAME = "StateChangeToggle";
@@ -19,19 +21,20 @@ public class StateObjectChanger : MonoBehaviour {
     private Toggle toggle;
     private Dropdown dropDown;
 
-	// Use this for initialization
-	void Awake () {
+    // Use this for initialization
+    void Awake()
+    {
         GameObject controlScripts = GameObject.FindGameObjectWithTag(StateManager.CONTROL_SCRIPT_TAG);
         stateManager = controlScripts.GetComponent<StateManager>();
-	}
-	
+    }
+
     public void AddStateObject(StateObject so)
     {
         stateObject = so;
         selector = transform.FindChild(SELECTOR_NAME).gameObject;
         Text name = selector.GetComponentInChildren<Text>();
         name.text = so.instanceName;
-        transitionStateText = transform.FindChild(TRANSITION_STATE_NAME).gameObject.GetComponentInChildren<Text>();;
+        transitionStateText = transform.FindChild(TRANSITION_STATE_NAME).gameObject.GetComponentInChildren<Text>(); ;
 
 
         if (stateObject.isStateChanger)
@@ -55,8 +58,18 @@ public class StateObjectChanger : MonoBehaviour {
         {
             dropDown = GetComponentInChildren<Dropdown>();
         }
+        if (toggle == null)
+        {
+            toggle = GetComponentInChildren<Toggle>();
+        }
         dropDown.ClearOptions();
-        dropDown.AddOptions(stateManager.GetStateNames());
+        List<int> ids = stateManager.GetStateIDs();
+        List<string> names = new List<string>();
+        foreach (int i in ids)
+        {
+            names.Add(i.ToString());
+        }
+        dropDown.AddOptions(names);
     }
 
     public void SetStateChange()
@@ -65,11 +78,13 @@ public class StateObjectChanger : MonoBehaviour {
         {
             dropDown = GetComponentInChildren<Dropdown>();
         }
-         stateObject.transitionStateId = dropDown.value;
-         if (toggle.isOn)
-         {
-             transitionStateText.text = TRANSITION_STATE_DISPLAY + stateObject.transitionStateId;
-         }
+
+        int index = dropDown.value;
+        stateObject.transitionStateId = Int32.Parse(dropDown.options[index].text);
+        if (toggle.isOn)
+        {
+            transitionStateText.text = TRANSITION_STATE_DISPLAY + stateObject.transitionStateId;
+        }
     }
 
     public void SetIsStateChanger()

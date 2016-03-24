@@ -6,15 +6,14 @@
         <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
         <link rel="stylesheet" href="vendors/bootswatch/superhero/bootstrap.min.css" />
         <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="vendors/dropzone/dropzone.css" />
         <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
         <link rel="stylesheet" href="resources/css/style.css" />  
         <title> Vumix Manager Application</title>
      </head>
-     <script>
-        document.cookie="uid=[[= model.id]];";
-     </script>
      <body>
+        <script>
+        document.cookie="uid=[[= model.id]];";
+        </script>
         <div ng-app="vumixManagerApp">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                     <div class="container-fluid nav-bar">
@@ -45,18 +44,17 @@
                   </div>
              </nav>
   
-             <div ui-view> </div>
+            <div ui-view> </div>
     
-           </div>
+            </div>
 		</div>
         <script>
             var destroyCookies = function() {
                 var expires = "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
-                console.log('i am destroying cookies')
                 var cookies = document.cookie.split(";");
-                for (var i = 0; i < cookies.length; i++)
-                    console.log(cookies[i]+expires);
-                    document.cookies+=cookies[i]+expires;
+                for (var i = 0; i < cookies.length; i++){
+                    document.cookie +=cookies[i]+expires;
+                }
             }
         </script>
         <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
@@ -64,7 +62,6 @@
         <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="vendors/angular/angular.js"></script>
         <script type="text/javascript" src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="vendors/dropzone/dropzone.js"></script>
         <script type="text/javascript" src="vumixManagerApp/app.js"></script>
         
         <script type="text/javascript" src="vumixManagerApp/services/_services.js"></script>

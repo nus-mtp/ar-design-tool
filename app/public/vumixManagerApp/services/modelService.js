@@ -11,12 +11,16 @@
             fd.append('model_name', model.model_name);
             fd.append('file_size',model.file_size);
             fd.append('file_extension', model.file_extension);
-                  
-            $http.post(uploadUrl, fd, {
+            
+            return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
-            },function errorCallback(res){
-               console.log("error deleting the model");
+            })
+            .then(function(res){
+                return res.data.data[0];
+            }, function errorCallback(res){
+               console.log("error adding the model");
            });
+            
        }, 
         
        deleteModel: function(models, userId, id){

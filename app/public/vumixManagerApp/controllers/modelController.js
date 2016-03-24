@@ -19,9 +19,12 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
+
         var cookie = document.cookie.split(';')[0];
-        $scope.userid = cookie.substring(4);
+        var uid = cookie.split('=');
+        $scope.userid = uid[1];
         $scope.model.image_url = "/resources/images/open_book.png";  //supposed to read from database
+        
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -30,18 +33,28 @@ angular.module('vumixManagerApp.controllers')
           
         var extensionCheck = function() {
           var tokenised = $scope.model.upload.name.split('.');
+          $scope.model.file_extension = tokenised[tokenised.length-1];
             if (tokenised.length < 1) {
               return false;
             }
             return tokenised[tokenised.length - 1] === 'obj' || tokenised[tokenised.length - 1] === 'fbx' || tokenised[tokenised.length - 1] === '3ds';
          };
+         
+         var extensionSizeCheck = function(){
+           var tokenised = $scope.model.upload.size;
+           if(tokenised > 8000000){
+               return false;
+           }
+           return true;
+         };
+         
           
          $scope.$watch('model.upload', function(newVal, oldVal) {   
             $scope.modelForm.modelUpload.$setValidity('required', false); 
             $scope.modelForm.modelUpload.$setValidity('fileType', false); 
             if (requiredCheck()) {      
               $scope.modelForm.modelUpload.$setValidity('required', true);
-              if (extensionCheck()) {
+              if (extensionCheck() && extensionSizeCheck()) {
                 $scope.modelForm.modelUpload.$setValidity('fileType', true); 
               }                            
             }
@@ -58,7 +71,6 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.model.upload = file;
             $scope.model.file_size = file.size;
-            $scope.model.file_extension = file.type;
             $scope.$apply();
         };
         
@@ -87,7 +99,6 @@ angular.module('vumixManagerApp.controllers')
         $scope.addModel = function(){
            modelService.addModel($scope.model, $scope.model.upload, $scope.userid)
                 .then(function(model) {
-                console.log(model);
                 $scope.models.push(model);
             });
         };
@@ -96,6 +107,14 @@ angular.module('vumixManagerApp.controllers')
             method: 'GET',
             url : '/api/users/' + $scope.userid +'/models'
         }).success(function(res){
-            $scope.models = res.data;
+            $scope.all = res.data;
+ 
+            var length = $scope.all.length;
+  
+            for(i=0; i<length; i++){
+                if($scope.all[i].file_extension == "obj" || $scope.all[i].file_extension == "fbx"){
+                    $scope.models.push($scope.all[i]);
+                }
+            }
         });
     });

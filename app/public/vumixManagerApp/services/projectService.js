@@ -2,44 +2,26 @@
   angular.module('vumixManagerApp.services')
     .factory('projectService', function($http) {
      return{
-       
-    //    addProject: function(project, upload_project, userId){
-    //        return $http({
-    //           method: 'POST',
-    //           url: '/api/users/' + userId + '/projects',
-    //           data: {
-    //             name: project.project_name,
-    //             company_name: project.company_name,
-    //             marker_type: project.marker_type,
-    //             upload_project: upload_project
-    //           },
-    //        }).then (function (res){
-    //            return res.data.data[0];
-    //        }, function errorCallback(res){
-    //            console.log("error");
-    //        });  
-    //    },
-  
-       // TO DO: To upload vuforia package
+
        addProject: function(project, upload_project, userId){
             var fd = new FormData();
             var uploadUrl = '/api/users/' + userId + '/projects';
-            console.log("here");
             fd.append('file', upload_project);
             fd.append('uid', userId);
             fd.append('name', project.project_name);
             fd.append('company_name',project.company_name);
             fd.append('marker_type', project.marker_type);
 
-            $http.post(uploadUrl, fd, {
+            return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })
             .then(function(res){
                 return res.data.data[0];
             }, function errorCallback(res){
-               console.log("error deleting the model");
+               console.log("error adding the project");
            });
        },
+       
        deleteProject: function(projects, userId, id){
            return $http({
                method: 'DELETE',

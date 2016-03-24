@@ -2,39 +2,66 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class State {
+public class State
+{
     const string GRID_TAG = "InSceneGrid";
     const string STATE_OBJECT_BUTTON_NAME = "StateObjectButton";
     const string DEFAULT_NAME = "NewState";
-    
+
     public string name;
     public int id;
-    public List<StateObject> stateObjects;
+    public Dictionary<int, StateObject> stateObjects;
     public GameObject activeGameObject;
     public GameObject stateObjectButtonTemplate;
     public StateObject activeStateObject;
     public GameObject grid;
 
+    private int nextStateObjectId;
+
     public State(int id)
     {
-        stateObjects = new List<StateObject>();
+        stateObjects = new Dictionary<int, StateObject>();
         grid = GameObject.FindGameObjectWithTag(GRID_TAG);
         stateObjectButtonTemplate = (GameObject)Resources.Load(STATE_OBJECT_BUTTON_NAME);
         this.id = id;
+        SetName(id);
+        nextStateObjectId = 0;
     }
 
-    public State(SerialState ss)
+    public State(SerialState ss, ObjectCollection objectCollection)
     {
-        stateObjects = new List<StateObject>();
+        stateObjects = new Dictionary<int, StateObject>();
         grid = GameObject.FindGameObjectWithTag(GRID_TAG);
         stateObjectButtonTemplate = (GameObject)Resources.Load(STATE_OBJECT_BUTTON_NAME);
         name = ss.name;
         id = ss.id;
+        InitializeStateObjects(ss, objectCollection);
     }
 
-    public void SetName(string s)
+    private void InitializeStateObjects(SerialState serialState, ObjectCollection objectCollection)
     {
-        name = s;
+        foreach (SerialStateObject s in serialState.stateObjects)
+        {
+            foreach (GameObject g in objectCollection.GetUserObjects())
+            {
+                if (g.name.Equals(s.modelName))
+                {
+                    GameObject toSpawn = MonoBehaviour.Instantiate(g);
+                    StateObject stateObject = new StateObject(toSpawn);
+                    s.InitializeStateObject(stateObject);
+                    AddToState(stateObject);
+                    nextStateObjectId = Mathf.Max(s.id, nextStateObjectId);
+                    Debug.Log(id + ", "  +s.id);
+                    break;
+                }
+            }
+        }
+        nextStateObjectId++;
+    }
+
+    public void SetName(string newName)
+    {
+        name = newName;
     }
 
     public void SetName(int n)
@@ -42,16 +69,23 @@ public class State {
         name = DEFAULT_NAME + n;
     }
 
+    public void SetStateObjectName(string newName, int id)
+    {
+        stateObjects[id].SetName(newName);
+    }
+
     public void AddToState(GameObject g)
     {
         StateObject so = new StateObject(g);
-        stateObjects.Add(so);
+        so.id = nextStateObjectId; 
+        stateObjects.Add(so.id, so);
+        nextStateObjectId++;
         CreateStateObjectButton(so);
     }
 
-    public  void AddToState(StateObject so)
+    public void AddToState(StateObject so)
     {
-        stateObjects.Add(so);
+        stateObjects.Add(so.id, so);
         CreateStateObjectButton(so);
     }
 
@@ -66,9 +100,11 @@ public class State {
 
     public string SetActiveGameObject(GameObject o)
     {
-       string instanceName = null;
-       foreach(StateObject s in stateObjects)
+        string instanceName = null;
+        Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+        while (enumerator.MoveNext())
         {
+            StateObject s = enumerator.Current.Value;
             if (o == s.gameObject)
             {
                 if (activeGameObject != null)
@@ -88,18 +124,19 @@ public class State {
 
     public void Hide()
     {
-       foreach(StateObject s in stateObjects)
-       {
-           s.Hide();
-       }
-       if (activeGameObject != null)
-       {
-           Transformable t = activeGameObject.GetComponent<Transformable>();
-           if (t != null)
-           {
-               t.destroyElements();
-           }
-       }
+        Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+        while (enumerator.MoveNext())
+        {
+            enumerator.Current.Value.Hide();
+        }
+        if (activeGameObject != null)
+        {
+            Transformable t = activeGameObject.GetComponent<Transformable>();
+            if (t != null)
+            {
+                t.destroyElements();
+            }
+        }
     }
 
     public void DestroyState()
@@ -109,18 +146,20 @@ public class State {
             Transformable t = activeGameObject.GetComponent<Transformable>();
             t.destroyElements();
         }
-        foreach (StateObject s in stateObjects)
+        Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+        while (enumerator.MoveNext())
         {
-            s.Destroy();
+            enumerator.Current.Value.Destroy();
         }
 
     }
 
     public void Show()
     {
-        foreach (StateObject s in stateObjects)
+        Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+        while (enumerator.MoveNext())
         {
-            s.Show();
+            enumerator.Current.Value.Show();
         }
         if (activeGameObject != null)
         {
@@ -134,26 +173,31 @@ public class State {
     }
 
     public void RemoveActiveObject()
-    {   
-        stateObjects.Remove(activeStateObject);
+    {
+        stateObjects.Remove(activeStateObject.id);
         activeStateObject.Destroy();
     }
 
     public void SetPreview()
     {
-        foreach (StateObject s in stateObjects)
+        Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+        while (enumerator.MoveNext())
         {
-            s.SetPreview();
+            enumerator.Current.Value.SetPreview();
         }
     }
 
     public void DisablePreview()
     {
-        foreach (StateObject s in stateObjects)
+        Dictionary<int, StateObject>.Enumerator enumerator = stateObjects.GetEnumerator();
+        while (enumerator.MoveNext())
         {
-            s.DisablePreview();
+            enumerator.Current.Value.DisablePreview();
         }
     }
 
-    
+    public void RemoveLinks(int stateId)
+    {
+        throw new System.NotImplementedException();
+    }
 }
