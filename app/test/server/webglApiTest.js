@@ -12,8 +12,8 @@ describe('uploadstate.php', function () {
   
   var testFieldName = "binary";
   var testFileName = "state_test.dat";
-  var pathToCreatedTestData = path.join(__dirname, '../../server/storage/' + testFileName);
-  var pathToTestData = path.join(__dirname, '../../test/server/' + testFileName);
+  var pathToCreatedTestData = path.join(__dirname, '../../server/storage/'+testFileName);
+  var pathToTestData = path.join(__dirname, '../../test/server/'+testFileName);
   
   it('should return 200 and save with originalname', function(done) {
     api

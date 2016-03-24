@@ -24,7 +24,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage:storage });
 
 router.post('/uploadstate.php', upload.single('binary'), function(req, res, next) {
-	res.json({ status:"ok", data:req.file });
+    res.json({ status:"ok", data:req.file });
 });
 
 router.post('/saveproject', function(req, res) {
