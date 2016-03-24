@@ -139,7 +139,7 @@ router.delete('/:id', function(req, res) {
 /**
  * @module updateModel
  * @parent modelApi
- * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location, req.body.thumbnail_loc 
+ * @param req.body.name, req.body.file_size, req.body.file_extension
  * update model with {id} owned by user with {userId}
  * PUT
  * api: /api/users/{userId}/models/{id}
@@ -151,8 +151,6 @@ router.put('/:id', function(req, res) {
                 name: req.body.name || model.name,
                 file_size: req.body.file_size || model.file_size,
                 // file_name: physical_model.filename || model.file_name,
-                file_location: req.body.file_location || model.file_location,
-                thumbnail_loc: req.body.thumbnail_loc || model.thumbnail_loc,
                 file_extension: req.body.file_extension || model.file_extension
             }, { 
                 where: {

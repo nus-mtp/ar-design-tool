@@ -7,6 +7,7 @@ const exec		= require('child_process').exec;
 
 var unity_path = '/unity/';
 var model_path = '/models/';
+var vuforia_name = "marker.unitypackage";
 
 var rebuildVuforiaPackage = function(uid, pid) {
 	console.log('rebuilding vuforia package...');
@@ -32,7 +33,12 @@ var moveVuforia = function(location, uid, pid, fileName) {
 	utils.moveFileToDest(location, project_path+file_paths.vuforia+fileName, rebuildVuforiaPackage(uid, pid));
 };
 
-var createProj = function(uid, pid, vuforia_pkg) {
+var updateVuforia = function(uid, pid, vuforia_pkg) {
+	console.log('Updating Vuforia pkg');
+	moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
+}
+
+var createProj = function(uid, pid, vuforia_pkg, callback) {
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var unity_cmd 		= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit';
 	
@@ -47,9 +53,10 @@ var createProj = function(uid, pid, vuforia_pkg) {
 		}
 	});
 	unity.on('exit', function(code) {
-		moveVuforia(vuforia_pkg.path, uid, pid, "marker.unitypackage");
+		moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
 		//TODO: remove this after testing
 		// moveVuforia(vuforia_pkg.path, uid, pid, vuforia_pkg.originalname);
+		callback();
 		console.log("Creating new project child process exited with code " + code);
 	});
 };
@@ -144,6 +151,7 @@ var buildApk = function(uid, pid){
 };
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
+module.exports.updateVuforia 		= updateVuforia;
 module.exports.deleteModel 			= deleteModel;
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
