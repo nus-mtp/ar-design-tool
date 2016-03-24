@@ -1,9 +1,6 @@
 <div class="wrapper" ng-controller="managerController">
     <div class="sidebar">
         <div id="welcome_page" class="side-bar-padding">
-            <div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
-            </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
             <button type="button" class="center btn-large" id="createProject">Start</button>
@@ -76,6 +73,9 @@
 
     <div class="content">
         <div class="container section" style="width:auto;">
+            <div class="search" style="margin-bottom: 20px; margin-left: 20px;">
+                <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
+            </div>
             <!--to display project-->
             <div id="project_list" class="flex-container" >
                 <ul ng-repeat="pr in projects | filter:searchText">
