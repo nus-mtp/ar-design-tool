@@ -39,7 +39,7 @@ router.get('/', function(req, res) {
     }).then(function(projects){
         res.json({status: "ok", length: projects.length, data: projects});            
     }).catch(function(err) {
-        console.log('caught error in fetch all projects');
+        console.log('caught error in fetch all projects API');
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
@@ -64,7 +64,7 @@ router.get('/:id', function(req, res) {
             res.json({status: "fail", message: "project not found", length: 0, data: []});
         }
     }).catch(function(err) {
-        console.log('caught error in fetch project');
+        console.log('caught error in fetch project API');
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
@@ -102,7 +102,7 @@ router.post('/', upload.single('file'), function(req, res) {
             });            
         }
     }).catch(function(err) {
-        console.log('Caught error in insert project');
+        console.log('Caught error in insert project API');
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });            
 });
@@ -122,7 +122,7 @@ var createProjectInDB = function(newProj, vuforia_pkg, goodCallback, badCallback
             badCallback(err);
         });
     }).catch(function() {
-        console.log('caught error in createProjectInDB');
+        console.log('caught error in createProjectInDB API');
         badCallback(err);
     });
     console.log('created project!');
@@ -151,7 +151,7 @@ router.delete('/:id', function(req, res) {
             });
         }
     }).catch(function(err) {
-        console.log('Caught error in delete project');
+        console.log('Caught error in delete project API');
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
@@ -165,7 +165,7 @@ var deleteProjectDB = function(uid, id, _project, goodCallback, badCallback) {
         unity.deleteProj(uid, id);
         goodCallback(row_deleted, _project);
     }).catch(function(err) {
-        console.log('Caught error in deleteProjectDB');
+        console.log('Caught error in deleteProjectDB API');
         badCallback(err);
     });
 };
@@ -204,7 +204,7 @@ router.put('/:id', upload.single('file'), function(req, res) {
             });
         }
     }).catch(function(err) {
-        console.log('error caught in update project');
+        console.log('error caught in update project API');
     });
 
     // models.project.findById(uid).then(function(project) {
@@ -248,7 +248,7 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
     }).then(function(updatedProject) {
         goodCallback(updatedProject);
     }).catch(function(err) {
-        console.log('caught error in updateProjectDB');
+        console.log('caught error in updateProjectDB API');
         badCallback(err);
     });
 };
