@@ -21,6 +21,7 @@
                console.log("error adding the project");
            });
        },
+       
        deleteProject: function(projects, userId, id){
            return $http({
                method: 'DELETE',

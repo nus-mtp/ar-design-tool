@@ -2,16 +2,20 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class AppStateManager : MonoBehaviour {
+public class AppStateManager : MonoBehaviour
+{
 
     public List<GameObject> states;
     public List<State> stateComponents;
     public int currentStateId;
     public bool isMarkerFound = false;
 
-    public static AppStateManager theOne; 
-	// Use this for initialization
-	void Awake () {
+    public static AppStateManager theOne;
+    // Use this for initialization
+    void Awake()
+    {
+        currentStateId = stateComponents[0].id;
+        Debug.Log(currentStateId);
         if (theOne == null)
         {
             theOne = this;
@@ -20,25 +24,27 @@ public class AppStateManager : MonoBehaviour {
         {
             DestroyImmediate(this);
         }
-        changeStateId(currentStateId);
-	}
+        changeState(currentStateId);
+    }
 
-    public static AppStateManager GetReference(){
+    public static AppStateManager GetReference()
+    {
         return theOne;
     }
-	
-    public void changeStateId (int toChange){
 
-        foreach(State s in stateComponents){
-            if (s.id == toChange)
+    public void changeState(int toChange)
+    {
+        foreach (State s in stateComponents)
+        {
+            if (s.id != toChange)
+            {
+                s.gameObject.SetActive(false);
+            }
+            else
             {
                 s.gameObject.SetActive(true);
             }
-            else{
-                s.gameObject.SetActive(false);
-            }
         }
-        currentStateId = toChange;
     }
 
     public void hideOthers()
@@ -65,10 +71,10 @@ public class AppStateManager : MonoBehaviour {
             states.Add(currentStateGO);
             stateComponents.Add(currentState);
             currentStateGO.transform.SetParent(marker.transform);
-            
+
         }
     }
 #endif
 
- 
+
 }
