@@ -107,6 +107,14 @@ angular.module('vumixManagerApp.controllers')
             method: 'GET',
             url : '/api/users/' + $scope.userid +'/models'
         }).success(function(res){
-            $scope.models = res.data;
+            $scope.all = res.data;
+ 
+            var length = $scope.all.length;
+  
+            for(i=0; i<length; i++){
+                if($scope.all[i].file_extension == "obj" || $scope.all[i].file_extension == "fbx"){
+                    $scope.models.push($scope.all[i]);
+                }
+            }
         });
     });

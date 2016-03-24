@@ -22,7 +22,7 @@ angular.module('vumixManagerApp.controllers')
         var cookie = document.cookie.split(';')[0];
         var uid = cookie.split('=');
         $scope.userid = uid[1];
-        $scope.image.image_url = "/resources/images/open_book.png";
+        $scope.image.image_url = "/resources/images/charger.png";
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -96,6 +96,7 @@ angular.module('vumixManagerApp.controllers')
         $scope.addImage = function(){
            imageService.addImage($scope.image, $scope.image.upload, $scope.userid)
                 .then(function(image) {
+                    console.log(image);
                 $scope.images.push(image);
             });
         };
@@ -104,6 +105,14 @@ angular.module('vumixManagerApp.controllers')
             method: 'GET',
             url : '/api/users/' + $scope.userid +'/models'
         }).success(function(res){
-            $scope.images = res.data;
+            $scope.all = res.data;
+ 
+            var length = $scope.all.length;
+  
+            for(i=0; i<length; i++){
+                if($scope.all[i].file_extension == "png" || $scope.all[i].file_extension == "jpg"){
+                    $scope.images.push($scope.all[i]);
+                }
+            }
         });
     });
