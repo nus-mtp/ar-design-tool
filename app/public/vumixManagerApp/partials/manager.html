@@ -1,9 +1,6 @@
 <div class="wrapper" ng-controller="managerController">
     <div class="sidebar">
         <div id="welcome_page" class="side-bar-padding">
-            <div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
-            </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
             <button type="button" class="center btn-large" id="createProject">Start</button>
@@ -48,8 +45,8 @@
                     <h4 class="modal-title"> Your project</h4>
                 </div>
                 <div class="modal-body">
-                    <form name="updateProjectForm" ng-click="updateProject(project.id)" enctype="multipart/form-data">
-                        <h2>Project Name</h2>
+                    <form name="updateProjectForm" enctype="multipart/form-data">
+                        <h2>Company Name</h2>
                         <input type="text" name="org_name" ng-model="update.company_name" ><br>
                         <h2> Project Name</h2>
                         <input type="text" name="project_name"  ng-model="update.name" ><br>
@@ -63,11 +60,11 @@
                             3D 
                         </label>            
                         <h2> Upload Your Vuforia Package</h2>
-                        <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile"/>
+                        <input type ="file" ng-model="project.upload" name="projectUpload" style="color:#000000" onchange="angular.element(this).scope().uploadFile()""/>
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                             <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                         </form>-->
-                        <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                        <input type="submit" ng-click="updateProject(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
                     </form>
                 </div>           
             </div>
@@ -76,6 +73,9 @@
 
     <div class="content">
         <div class="container section" style="width:auto;">
+            <div class="search" style="margin-bottom: 20px; margin-left: 20px;">
+                <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
+            </div>
             <!--to display project-->
             <div id="project_list" class="flex-container" >
                 <ul ng-repeat="pr in projects | filter:searchText">
@@ -93,7 +93,7 @@
                     <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="getProject(pr.id)">Update</button>
                 </ul>
             </div>
-    </div>
+        </div>
   </div>
 
   <div class="cleared">

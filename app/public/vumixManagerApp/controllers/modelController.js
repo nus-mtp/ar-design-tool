@@ -71,6 +71,9 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.model.upload = file;
             $scope.model.file_size = file.size;
+            
+            $scope.update.upload = file;
+            $scope.update.file_size = file.size;
             $scope.$apply();
         };
         
@@ -84,8 +87,11 @@ angular.module('vumixManagerApp.controllers')
         
         $scope.updateModel = function(id){
             modelService.updateModel($scope.models,$scope.update, $scope.userid,id)
-            .then(function(model){
-                $scope.model = model;
+            .then(function(update){
+                $scope.model.model_name = update.name;
+                $scope.model.file_size = update.file_size;
+                $scope.model.file_extension = update.file_extension;
+                $scope.model.upload = update.upload;
             });
         };
         

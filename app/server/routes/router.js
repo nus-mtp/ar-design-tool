@@ -9,7 +9,7 @@ router.get('/', isLoggedIn, function (req, res) {
 
 router.get('/project/:id', function(req, res) {
 	res.render('vumixEditorView');
-}); 
+});
 
 router.get('/login', function (req, res) {
 	res.render('loginView');

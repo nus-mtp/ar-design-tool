@@ -1,9 +1,6 @@
 <div class="wrapper" ng-controller="modelController">
     <div class="sidebar">
         <div id="welcome_model" class="side-bar-padding">
-            <div class="search" style="margin-top:10px">
-                <input type="text" name="q" placeholder="Search..." ng-model="searchModel.name" />
-            </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your model </h2>
             <button type="button" class="center btn-large" id="uploadModel">Add New Model</button>
@@ -38,15 +35,15 @@
                     <h4 class="modal-title"> Your model</h4>
                 </div>
                 <div class="modal-body">
-                    <form ng-submit="updateModel(model.id)" enctype="multipart/form-data">
+                    <form name="updateModelForm" enctype="multipart/form-data">
                         <h1> Model Name</h1>
                         <input type="text" name="model_name" placeholder="Model Name" ng-model="update.name"><br>
                         <h1> File</h1>
-                        <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
+                        <input type ="file" ng-model="model.upload" name="modelUpload" style="color:#000000" onchange="angular.element(this).scope().uploadFile()">
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                             <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                         </form>-->
-                        <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                        <input type="submit" ng-click= "updateModel(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
                     </form>
                 </div>           
             </div>
@@ -57,6 +54,9 @@
     <div class="content">
         <div class="container section" style="width:auto;">
             <!--to display model-->
+            <div class="search" style="margin-bottom: 20px; margin-left: 20px;">
+                    <input type="text" name="q" placeholder="Search..." ng-model="searchModel.name" />
+            </div>
             <div id="model_list" class="flex-container">
                 <ul ng-repeat="md in models | filter:searchModel">
                    <li class="flex-item">
