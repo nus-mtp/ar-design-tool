@@ -30,7 +30,7 @@ var moveVuforia = function(location, uid, pid, fileName) {
 	console.log('in moveVuforia');
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
 	utils.moveFileToDest(location, project_path+file_paths.vuforia+fileName, rebuildVuforiaPackage(uid, pid));
-}
+};
 
 var createProj = function(uid, pid, vuforia_pkg) {
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
@@ -58,7 +58,7 @@ var deleteProj = function(uid, pid) {
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	console.log('Deleting project dir: ' + project_path);
 	utils.deleteDir(project_path);
-}
+};
 
 var moveModel = function(uid, fileName) {
 	console.log('moving model into model library');
@@ -66,7 +66,7 @@ var moveModel = function(uid, fileName) {
 	var tmp_path 	= path.join(__dirname, '../../'+file_paths.storage_path+'/'+fileName);
 	utils.checkExistsIfNotCreate(dest_path, function() {
 		console.log('completed dir check');
-		console.log('moving model to model library')
+		console.log('moving model to model library');
 		utils.moveFileToDest(tmp_path, dest_path+fileName);
 		// utils.moveFileToDest(tmp_path, dest_path+fileName, function() {
 			// console.log('completed moving model to model library')

@@ -15,7 +15,7 @@ var	file_path 	= require(path.join(__dirname, '/server/config/file_path')),
 var parse = require('./server/modules/parser.js');
 parse.processArg();
 
-// TODO: make sure storage folder exists
+// Make sure storage folder exists
 utils.checkExistsIfNotCreate(path.join(__dirname, file_path.storage_path));
 
 var app = express(),
