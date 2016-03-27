@@ -54,8 +54,10 @@
     <div class="content">
         <div class="container section" style="width:auto;">
             <!--to display model-->
-            <div class="search" style="margin-bottom: 20px; margin-left: 20px;">
-                    <input type="text" name="q" placeholder="Search..." ng-model="searchModel.name" />
+            <div class="search-bg">
+                <div class="search" style="margin-bottom: 20px; margin-left: 20px; margin-top:12px;">
+                        <input type="text" name="q" placeholder="Search..." ng-model="searchModel.name" />
+                </div>
             </div>
             <div id="model_list" class="flex-container">
                 <ul ng-repeat="md in models | filter:searchModel">
