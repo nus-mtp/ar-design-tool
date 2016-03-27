@@ -117,7 +117,7 @@ angular.module('vumixManagerApp.controllers')
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
                 .then(function(project) {
-                $(".navbar").css( "zIndex" , 0 );
+                $(".navbar").css( "zIndex" , 100 );
                 $scope.projects.push(project);
                 $scope.reset();
             });
