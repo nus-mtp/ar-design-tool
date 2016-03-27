@@ -11,7 +11,7 @@
             fd.append('model_name', model.model_name);
             fd.append('file_size',model.file_size);
             fd.append('file_extension', model.file_extension);
-            
+    
             return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })

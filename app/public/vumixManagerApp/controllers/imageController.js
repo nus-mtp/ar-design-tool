@@ -2,8 +2,17 @@
 angular.module('vumixManagerApp.controllers')
     .controller('imageController', function (imageService, $http, $scope) {
         var file;
-     
+        
+        $scope.empty = {
+            image_name: "",
+            file_size: "",
+            file_extension: "",
+            image_url: "",
+            upload: undefined
+        };
+        
         $scope.images = [];
+        
         $scope.image = {
             image_name: "",
             file_size: "",
@@ -101,9 +110,15 @@ angular.module('vumixManagerApp.controllers')
         $scope.addImage = function(){
            imageService.addImage($scope.image, $scope.image.upload, $scope.userid)
                 .then(function(image) {
-                    console.log(image);
                 $scope.images.push(image);
+                $scope.reset();
             });
+        };
+        
+        $scope.reset = function(){
+            $("#upload_file").val("");
+            $scope.empty.image_url = $scope.image.image_url;
+            $scope.image = angular.copy($scope.empty);
         };
         
         $http({

@@ -11,11 +11,13 @@
             fd.append('name', project.project_name);
             fd.append('company_name',project.company_name);
             fd.append('marker_type', project.marker_type);
-
+            
             return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })
             .then(function(res){
+                $("#floatingCirclesG").show().delay(13000).fadeOut();
+                $(".navbar").css( "zIndex" , -10 );
                 return res.data.data[0];
             }, function errorCallback(res){
                console.log("error adding the project");
@@ -43,6 +45,7 @@
                method: 'PUT',
                url: '/api/users/' + userId + '/projects/' + id      
            }).then(function(res){
+               console.log(project);
                for(var i = 0; i < projects.length; i++){
                    if(id === projects[i].id){
                        projects[i] = project;
