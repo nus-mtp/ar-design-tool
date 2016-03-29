@@ -116,10 +116,6 @@
 
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
 
-<<<<<<< HEAD
-<script type="text/javascript"> 
-
-=======
 <bs-modal modal-id="addAsset">
   <modal-body>
     <p style="text-align:center">Adding Page</p>
@@ -130,11 +126,7 @@
 </bs-modal>
 
 <script type="text/javascript">    
-  var CreateState = function(id, name) {
-    console.log("called");
-  }
   
->>>>>>> b321e7feb1960e9ad7ec102027cd9e9c1ce1334e
   var angularHelper = (function () {
     var angularHelper = function () { };
     var defaultApplicationName = "vumixEditorApp";
@@ -149,7 +141,7 @@
     return angularHelper;
   })();
   
-	var numberOfElements = 0;
+    var numberOfElements = 0;
 var htmlBase = 'drawingArea';
 jsPlumb.ready(function () {
         
@@ -232,8 +224,8 @@ jsPlumb.ready(function () {
 function addTask(id){
 	if(typeof id === "undefined"){
 		numberOfElements++;
-		id = "taskcontainer" + numberOfElements;
-        attachClickable(id);
+		//id = "taskcontainer" + numberOfElements;
+        id = numberOfElements;
 	}
 	
 	$('<div class="window task node" id="' + id + '" data-nodetype="task" style="left:30px; top:30px;">').appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
@@ -264,6 +256,7 @@ function saveFlowchart(){
 	$(".node").each(function (idx, elem) {
 	var $elem = $(elem);
 	var endpoints = jsPlumb.getEndpoints($elem.attr('id'));
+    attachClickable($elem.attr('id'));
 	console.log('endpoints of '+$elem.attr('id'));
 	console.log(endpoints);
 		nodes.push({
@@ -332,11 +325,11 @@ function repositionElement(id, posX, posY){
 	jsPlumb.repaint(id);
 }
 
-    function attachClickable(id){
+function attachClickable(id){
+    var clickableObjects = [];
     var el = $('[ng-app=vumixEditorApp]')[0];
-    angular.element(el).injector().get('stateModelService').getClickableStateObjects(id+1);
-        alert(el);
+    clickableObjects = angular.element(el).injector().get('stateModelService').getClickableStateObjects(id);
+    //console.log(clickableObjects);
+       
 }
-</script>
-<script>
 </script>
