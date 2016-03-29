@@ -71,7 +71,7 @@
       <h1>Step Four:</h1>
       <p>Drag and drop lines from the blue circle to connect your states.</p>
       <h1>Step Five:</h1>
-      <p>Choose your clickable object by clicking <span class='glyphicon glyphicon-resize-horizontal'></span></p>
+      <button type = "button" class="button_add_model btn btn-primary btn-md">Click here to create transitions!</button><p></p>
       <br>
       <p>Made a mistake? Double click on your connection line to delete it. 
         Click <span class="glyphicon glyphicon-remove-circle"></span> to delete your entire state.
@@ -82,7 +82,7 @@
     
   <div class="col-sm-8">
     <div id="drawingArea" style="width:100%;min-height:500px;">
-      <div class="window task startpoint" style="left: 150px; top:20px" data-nodetype="startpoint" id="startpoint">
+      <div class="window task startpoint endpoint" style="left: 150px; top:20px" data-nodetype="startpoint" id="startpoint">
         <div class="ctrl_container">
             <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
           <div class="button_editor">
@@ -150,7 +150,7 @@ jsPlumb.ready(function () {
 	//FIX DOM:
 	$(("#taskcontainer0"))[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
 
-	jsPlumb.draggable($(".window"));
+	//jsPlumb.draggable($(".window"));
 	
 	jsPlumb.importDefaults({
 		Endpoint : ["Dot", {radius:15}],
@@ -177,10 +177,10 @@ jsPlumb.ready(function () {
 	var workflowConnectorEndpoint = {
 		isSource: false,
 		isTarget: true,
-		maxConnections: -1,				 
-		anchor:"TopCenter",
-		paintStyle: { fillStyle: 'red' },
-		endpoint: ["Rectangle", {width:12, height:12}]
+		maxConnections: 10,				 
+		anchor: 'TopCenter',
+		paintStyle: { fillStyle: 'gray' },
+		endpoint: ["Dot", {radius:15}]
 	};
 	
 	jsPlumb.addEndpoint(
@@ -188,10 +188,14 @@ jsPlumb.ready(function () {
 		workflowConnectorStartpoint
 	);
 	
-	jsPlumb.addEndpoint(
-		$('.endpoint'),
-		workflowConnectorEndpoint
-	);
+    var makeTarget = {
+        anchor: 'Continuous'
+    };
+    
+    jsPlumb.makeTarget(
+        $('.endpoint'), 
+        makeTarget
+    );
 					
     jsPlumb.bind('dblclick', function (connection, e) {
             jsPlumb.detach(connection);
@@ -207,6 +211,10 @@ jsPlumb.ready(function () {
 	$(".button_add_task").click(function () {
 		addTask();
 	});
+    
+    $(".button_add_model").click(function () {
+        addModel();
+    });
 					
 	$('.button_save_task').click(function(){
 		saveFlowchart();
@@ -249,6 +257,9 @@ function addTask(id){
 	return id;
 }
 
+function addModel(){
+    
+}
 function saveFlowchart(){
 	var nodes = []
 	$(".node").each(function (idx, elem) {
