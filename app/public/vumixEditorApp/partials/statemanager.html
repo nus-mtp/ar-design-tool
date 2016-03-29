@@ -71,7 +71,7 @@
       <h1>Step Four:</h1>
       <p>Drag and drop lines from the blue circle to connect your states.</p>
       <h1>Step Five:</h1>
-      <button type = "button" class="button_add_model btn btn-primary btn-md">Click here to create transitions!</button><p></p>
+      <p>Choose your transition models.</p>
       <br>
       <p>Made a mistake? Double click on your connection line to delete it. 
         Click <span class="glyphicon glyphicon-remove-circle"></span> to delete your entire state.
@@ -151,7 +151,7 @@ jsPlumb.ready(function () {
 	$(("#taskcontainer0"))[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
 
 	//jsPlumb.draggable($(".window"));
-	
+    
 	jsPlumb.importDefaults({
 		Endpoint : ["Dot", {radius:15}],
 		EndpointStyle : { fillStyle : "gray" },
@@ -161,9 +161,16 @@ jsPlumb.ready(function () {
 				location:0.5,
 				id:"arrow",
 				length:10,
-			} ]
+			} ],
+            [ "Label", { 
+						location:[ 2, 2],
+                        label:"<button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
+						cssClass:"aLabel",
+					}]
 		]
-	});
+    });
+        
+    
 
 	var workflowConnectorStartpoint = {
 		isSource: true,
@@ -211,10 +218,6 @@ jsPlumb.ready(function () {
 	$(".button_add_task").click(function () {
 		addTask();
 	});
-    
-    $(".button_add_model").click(function () {
-        addModel();
-    });
 					
 	$('.button_save_task').click(function(){
 		saveFlowchart();
@@ -257,9 +260,7 @@ function addTask(id){
 	return id;
 }
 
-function addModel(){
     
-}
 function saveFlowchart(){
 	var nodes = []
 	$(".node").each(function (idx, elem) {
