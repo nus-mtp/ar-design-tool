@@ -237,9 +237,9 @@ h1{
     color:darkgrey;
     border-radius: 30%;
     box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
-    padding:5px;
+    padding:10px;
     min-width:20px;
-    max-width:20px;
+    max-width: 30px;
     text-align:center;
 }
 
@@ -251,7 +251,7 @@ h1{
     float:right;
 }
 
-.decision .button_remove{
+.decision .button_remove,.button_editor{
     margin: auto auto;
 }
 
@@ -265,6 +265,7 @@ h1{
 }
 
 .ctrl_container{
+    width:200px;
     margin:5px;
     height:40px;
 }
@@ -279,9 +280,15 @@ h1{
     color:grey;
 }
 
+.title {
+	  padding: 10px;
+	  cursor: move;
+}
+
 .detail_text{
     width:80px;
     font-size: 10pt;
+    z-index: 1;
 }
 
 ._jsPlumb_connector, ._jsPlumb_startpoint{

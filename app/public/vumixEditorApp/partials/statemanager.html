@@ -82,30 +82,32 @@
     
   <div class="col-sm-8">
     <div id="drawingArea" style="width:100%;min-height:500px;">
-      <div class="startpoint point window node" style="left: 150px; top:20px" data-nodetype="startpoint" id="startpoint">
-        <div class="editor_container">
-          <div class="button_editor">
-            <a ng-click="editorService.openEditor(0)" href="">
-              <span class="glyphicon glyphicon-new-window"></span>
-            </a>
-          </div>
-        </div>
-        Root State
-      </div>    
-      <div class="window task" style="left: 120px; top:200px; display:none;" data-nodetype="task" id="taskcontainer0">
+      <div class="window task startpoint" style="left: 150px; top:20px" data-nodetype="startpoint" id="startpoint">
         <div class="ctrl_container">
-          <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
+            <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
           <div class="button_editor">
             <a ng-click="editorService.openEditor()" href="">
               <span class="glyphicon glyphicon-new-window"></span>
             </a>
           </div>
+             
         </div>
-        <div class="details_container">
-            <!--<label class="detail_label">Name</label>-->
-            <input value="" placeholder="State Name" class="detail_text"/>
-        </div>
-      </div>
+          <div class="well well-sm" align="center">Root State</div>
+      </div>   
+        
+         <div class="window task" style="left: 200px; top:200px; display:none;" data-nodetype="task" id="taskcontainer0">
+        <div class="ctrl_container">
+            <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
+          <div class="button_editor">
+            <a ng-click="editorService.openEditor()" href="">
+              <span class="glyphicon glyphicon-new-window"></span>
+            </a>
+          </div></div>
+
+             <div class="well well-sm" align="center"><div class="input-group">
+  <input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1">
+                 </div></div>
+    </div>
       <!--For debugging purposes-->
       <!--<textarea id="jsonOutput" style="width:10px;height:10px;"></textarea>-->
     </div>
@@ -151,16 +153,14 @@ jsPlumb.ready(function () {
 	jsPlumb.draggable($(".window"));
 	
 	jsPlumb.importDefaults({
-		Endpoint : ["Dot", {radius:8}],
-		EndpointStyle : { fillStyle : "#4A6" },
-		HoverPaintStyle : {strokeStyle:"#42a62c", lineWidth:8 },
-		Connector:[ "Flowchart" ],
+		Endpoint : ["Dot", {radius:20}],
+		EndpointStyle : { fillStyle : "lightblue" },
+		HoverPaintStyle : {strokeStyle:"gray", lineWidth:10 },
 		ConnectionOverlays : [
 			[ "Arrow", { 
-				location:1,
+				location:0.5,
 				id:"arrow",
-				length:20,
-				foldback:0.4
+				length:10,
 			} ],
             [ "Label", { 
 						location:[ 2, 2],
@@ -202,7 +202,6 @@ jsPlumb.ready(function () {
 		
 	$('#'+htmlBase).on("click", ".button_remove", function () {
 		var parentnode = $(this)[0].parentNode.parentNode;
-        DeleteState(parentnode.blockId);
 		jsPlumb.detachAllConnections(parentnode);
 		jsPlumb.removeAllEndpoints(parentnode);
 		$(parentnode).remove(); 
@@ -228,9 +227,9 @@ function addTask(id){
         id = numberOfElements;
 	}
 	
-	$('<div class="window task node" id="' + id + '" data-nodetype="task" style="left:30px; top:30px;">').appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
-						
-	var taskSourceConnectorEndpoint = {
+    $('<div class="window task node" id="' + id + '" data-nodetype="task" style="left:30px; top:30px;">').appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
+
+    var taskSourceConnectorEndpoint = {
 		isSource: true,
 		isTarget: false,
 		maxConnections: 10,
