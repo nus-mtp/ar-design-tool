@@ -22,16 +22,20 @@ angular.module('vumixManagerApp.controllers')
         };
         
         $scope.update = {
-            image_name: "",
+            id: "",
+            name: "",
             file_size: "",
             file_extension: "",
+            image_url: "",
             upload: undefined
         };
         
         var cookie = document.cookie.split(';')[0];
         var uid = cookie.split('=');
         $scope.userid = uid[1];
+        
         $scope.image.image_url = "/resources/images/charger.png";
+        $scope.update.image_url = "/resources/images/charger.png";
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -77,33 +81,39 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.image.upload = file;
             $scope.image.file_size = file.size;
+            $scope.$apply();
+        };
+        
+        $scope.updateFile = function(){
+            file = event.target.files[0];
             $scope.update.upload = file;
             $scope.update.file_size = file.size;
             $scope.$apply();
         };
         
         $scope.getImage = function(id){
+            console.log($scope.images);
             for(var i = 0; i < $scope.images.length; i++){
-                if(id === $scope.images[i].id){
-                    $scope.update = $scope.images[i];
+               if(id === $scope.images[i].id){
+                    $scope.update.id = id;
+                    $scope.update.name = $scope.images[i].name;
+                    $scope.update.file_size = $scope.images[i].file_size;
+                    $scope.update.file_extension = $scope.images[i].file_extension;
+                    $scope.update.upload = $scope.images[i].upload;
                 }
             }
         };
         
         $scope.updateImage = function(id){
-            imageService.updateImage($scope.images,$scope.update, $scope.userid,id)
-            .then(function(image){
-                $scope.image.image_name = update.name;
-                $scope.image.file_size = update.file_size;
-                $scope.image.file_extension = update.file_extension;
-                $scope.image.upload = update.upload;
+            imageService.updateImage($scope.images, $scope.update, $scope.update.upload, $scope.userid,id)
+            .then(function(update){
+                $scope.image = update;
             });
         };
         
         $scope.deleteImage = function(id){
             imageService.deleteImage($scope.images, $scope.userid, id)
                 .then(function(image) {
-                //  console.log($scope.models);
             });
         };       
         

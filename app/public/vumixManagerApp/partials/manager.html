@@ -41,7 +41,7 @@
               </label>              
               <h2> Upload Your Vuforia Package</h2>
               <a target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
-              <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" style="color:#FFFFFF" onchange="angular.element(this).scope().uploadFile()" />
+              <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
               <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
               <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
               <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
@@ -60,9 +60,9 @@
                 <div class="modal-body">
                     <form name="updateProjectForm" enctype="multipart/form-data">
                         <h2>Company Name</h2>
-                        <input type="text" name="org_name" ng-model="update.company_name" ><br>
+                        <input type="text" name="comName" ng-model="update.com_name" ><br>
                         <h2> Project Name</h2>
-                        <input type="text" name="project_name"  ng-model="update.name" ><br>
+                        <input type="text" name="projectName"  ng-model="update.name" ><br>
                         <h2> Target Marker Type</h2>
                         <label>
                             <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="update.marker_type">
@@ -73,7 +73,7 @@
                             3D 
                         </label>            
                         <h2> Upload Your Vuforia Package</h2>
-                        <input type ="file" ng-model="update.upload" name="projectUpload" style="color:#000000" onchange="angular.element(this).scope().updateFile()""/>
+                        <input type ="file" ng-model="update.upload" name="projectUpload" onchange="angular.element(this).scope().updateFile()"/>
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                             <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                         </form>-->

@@ -11,6 +11,7 @@ angular.module('vumixManagerApp.controllers')
         };
         
         $scope.projects = [];
+       
         $scope.project = {
             project_name: "",
             company_name: "",
@@ -22,9 +23,9 @@ angular.module('vumixManagerApp.controllers')
         $scope.update = {
             id: "",
             name: "",
-            company_name: "",
+            com_name: "",
             marker_type: "3D",
-            image_url: "",    //handle later
+            image_url: "",    
             upload: undefined
         };
                   
@@ -33,7 +34,8 @@ angular.module('vumixManagerApp.controllers')
         var uid = cookie.split('=');
         $scope.userid = uid[1];
         $scope.project.image_url = "/resources/images/open_book.png";
-
+        $scope.update.image_url = "/resources/images/open_book.png";
+        
         var onFormLoaded = function() {          
           var requiredCheck = function() {
             return $scope.project.upload;
@@ -68,7 +70,6 @@ angular.module('vumixManagerApp.controllers')
         $scope.uploadFile = function(){
             file = event.target.files[0];
             $scope.project.upload = file;
-            $scope.update.upload = file;
             $scope.$apply();
         };
         
@@ -81,8 +82,6 @@ angular.module('vumixManagerApp.controllers')
         $scope.deleteProject = function(id){
             projectService.deleteProject($scope.projects, $scope.userid, id)
                 .then(function(project) {
-                    //$scope.projects.push(project);
-                    // console.log($scope.projects);
             });
         };       
         
@@ -90,8 +89,9 @@ angular.module('vumixManagerApp.controllers')
             for(var i = 0; i < $scope.projects.length; i++){
                 if(id === $scope.projects[i].id){
                     $scope.update.id = id;
-                    $scope.update.name = $scope.projects[i].project_name;
-                    $scope.update.company_name = $scope.projects[i].company_name;
+                    $scope.update = $scope.projects[i];
+                    $scope.update.name = $scope.projects[i].name;
+                    $scope.update.com_name = $scope.projects[i].company_name;
                     $scope.update.marker_type = $scope.projects[i].marker_type;
                     $scope.update.upload = $scope.projects[i].upload;
                 }
@@ -99,25 +99,16 @@ angular.module('vumixManagerApp.controllers')
         };
         
         $scope.updateProject = function(id){
-            projectService.updateProject($scope.projects,$scope.update, $scope.userid,id)
+            projectService.updateProject($scope.projects, $scope.update, $scope.update.upload, $scope.userid,id)
             .then(function(update){
-                console.log(update);
-                console.log(id);
-                if(id === $scope.update.id){
-                    $scope.project.project_name = update.name;
-                    $scope.project.company_name = update.company_name;
-                    $scope.project.marker_type = update.marker_type;
-                    $scope.project.upload = update.upload;
-                }
-              
-                console.log($scope.project);
+                $scope.project = update;
             });
         };
         
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
                 .then(function(project) {
-                $(".navbar").css( "zIndex" , 100 );
+                $(".navbar").css( "zIndex" , 10 );
                 $scope.projects.push(project);
                 $scope.reset();
             });

@@ -13,7 +13,7 @@
                 <input type="text" name="modelName" placeholder="Model Name" ng-model="model.model_name" required>
                 <span class="text-danger" ng-show="modelForm.modelName.$error.required">The file name cannot be empty</span>
                 <h1> File</h1>
-                <input type ="file" id="upload_file" ng-model="model.upload" name="modelUpload" style="color:#FFFFFF" onchange="angular.element(this).scope().uploadFile()" />
+                <input type ="file" id="upload_file" ng-model="model.upload" name="modelUpload" onchange="angular.element(this).scope().uploadFile()" />
                 <div class="text-danger" ng-show="modelForm.modelUpload.$error.required">Model file cannot be empty</div>
                 <div class="text-danger" ng-show="modelForm.modelUpload.$error.fileType">File extension is not valid, must be either .3ds .fbx or .obj</div>
                 <span class="text-info">Max upload 8 MB file</span>
@@ -39,10 +39,7 @@
                         <h1> Model Name</h1>
                         <input type="text" name="model_name" placeholder="Model Name" ng-model="update.name"><br>
                         <h1> File</h1>
-                        <input type ="file" ng-model="model.upload" name="modelUpload" style="color:#000000" onchange="angular.element(this).scope().uploadFile()">
-                        <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
-                            <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
-                        </form>-->
+                        <input type ="file" ng-model="model.upload" name="modelUpload" onchange="angular.element(this).scope().updateFile()">
                         <input type="submit" ng-click= "updateModel(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
                     </form>
                 </div>           

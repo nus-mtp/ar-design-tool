@@ -20,19 +20,22 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
+             
         $scope.update = {
-            model_name: "",
+            id: "",
+            name: "",
             file_size: "",
             file_extension: "",
+            image_url: "",
             upload: undefined
-        };
-        
+        }; 
 
         var cookie = document.cookie.split(';')[0];
         var uid = cookie.split('=');
         $scope.userid = uid[1];
-        $scope.model.image_url = "/resources/images/open_book.png";  //supposed to read from database
         
+        $scope.model.image_url = "/resources/images/open_book.png";  //supposed to read from database
+        $scope.update.image_url = "/resources/images/open_book.png";
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -79,6 +82,11 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.model.upload = file;
             $scope.model.file_size = file.size;
+            $scope.$apply();
+        };
+        
+        $scope.updateFile = function(){
+            file = event.target.files[0];
             $scope.update.upload = file;
             $scope.update.file_size = file.size;
             $scope.$apply();
@@ -87,18 +95,19 @@ angular.module('vumixManagerApp.controllers')
         $scope.getModel = function(id){
             for(var i = 0; i < $scope.models.length; i++){
                 if(id === $scope.models[i].id){
-                    $scope.update = $scope.models[i];
+                   $scope.update.id = id;
+                   $scope.update.name = $scope.models[i].name;
+                   $scope.update.file_size = $scope.models[i].file_size;
+                   $scope.update.file_extension = $scope.models[i].file_extension;
+                   $scope.update.upload = $scope.models[i].upload;
                 }
             }
         };
         
         $scope.updateModel = function(id){
-            modelService.updateModel($scope.models,$scope.update, $scope.userid,id)
+            modelService.updateModel($scope.models,$scope.update, $scope.update.upload,$scope.userid,id)
             .then(function(update){
-                $scope.model.model_name = update.name;
-                $scope.model.file_size = update.file_size;
-                $scope.model.file_extension = update.file_extension;
-                $scope.model.upload = update.upload;
+                 $scope.model = update;
             });
         };
         
