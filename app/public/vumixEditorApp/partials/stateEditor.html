@@ -25,6 +25,28 @@
   <unity-editor></unity-editor>
 </div>
 <sidebar-editor></sidebar-editor>
+
+<bs-modal modal-id="add-asset" modal-size="md">
+  <modal-body>
+    <h5>Browse Assets</h5>
+    <div class="row">
+      <div ng-repeat="model in modelsOnServer" class="col-xs-3">
+        <div class="frame">
+          <div class="thumbnail">
+            <img src="/resources/images/open_book.png" placeholder="some image" />
+          </div>
+          <div class="caption">
+            <p>{{model.name}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </modal-body>
+  <modal-footer>
+    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
+  </modal-footer>
+</bs-modal>
+
 <script type="text/javascript">      
   var Module = {
     TOTAL_MEMORY: 268435456,
@@ -44,7 +66,7 @@
   
   var makeProject = function(stateModels) {
     var el = $('[ng-app=vumixEditorApp]')[0];
-    angular.element(el).injector().get('stateModelService').addStateModel(JSON.parse(stateModels));
+    angular.element(el).injector().get('stateService').addStateModel(JSON.parse(stateModels));
   }
   
   var globalFunc = {

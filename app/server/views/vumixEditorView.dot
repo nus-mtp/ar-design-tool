@@ -21,7 +21,8 @@
     <script type="text/javascript" src="vumixEditorApp/services/_services.js"></script>
     <script type="text/javascript" src="vumixEditorApp/services/unityMapperService.js"></script>
     <script type="text/javascript" src="vumixEditorApp/services/editorService.js"></script>
-    <script type="text/javascript" src="vumixEditorApp/services/stateModelService.js"></script>
+    <script type="text/javascript" src="vumixEditorApp/services/stateService.js"></script>
+    <script type="text/javascript" src="vumixEditorApp/services/modelService.js"></script>
     
     <script type="text/javascript" src="vumixEditorApp/directives/_directives.js"></script>
     <script type="text/javascript" src="vumixEditorApp/directives/bsModalDirective.js"></script>

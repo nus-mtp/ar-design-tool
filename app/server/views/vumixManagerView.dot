@@ -44,6 +44,9 @@
     
            </div>
 		</div>
+        <script>
+            document.cookie="uid=[[= model.id]];";
+        </script>  
         <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
         <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>

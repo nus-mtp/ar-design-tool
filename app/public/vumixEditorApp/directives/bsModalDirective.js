@@ -3,7 +3,7 @@
     .directive('bsModal', function() {
       var tmpl = "";
       tmpl += '<div class="modal fade" id="{{id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">';
-      tmpl +=   '<div class="modal-dialog modal-sm" role="document">';
+      tmpl +=   '<div class="modal-dialog modal-{{size}}" role="document">';
       tmpl +=     '<div class="modal-content">';
       tmpl +=       '<div class="modal-body">';
       tmpl +=         '<ng-transclude ng-transclude-slot="body">';
@@ -17,7 +17,8 @@
       return {
         restrict: 'E',
         scope: {
-          id: "@modalId"
+          id: "@modalId",
+          size: "@modalSize"
         },
         replace: true,
         transclude: {

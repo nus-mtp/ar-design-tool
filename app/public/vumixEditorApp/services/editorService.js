@@ -1,6 +1,6 @@
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('editorService', function(unityMapperService) {
+    .factory('editorService', function($rootScope, unityMapperService) {
       var service = {};
       
       service.open = false;
@@ -19,6 +19,7 @@
           this.id = id;
           unityMapperService.setTargetState(id);
           unityMapperService.displayState();
+          notifyDisplayStateIdChange();
           this.open = true;
       };
       
