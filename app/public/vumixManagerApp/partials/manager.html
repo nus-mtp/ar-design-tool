@@ -40,7 +40,7 @@
                   3D 
               </label>              
               <h2> Upload Your Vuforia Package</h2>
-              <a target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
+              <a style="text-decoration: underline" target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
               <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
               <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
               <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
