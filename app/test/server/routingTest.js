@@ -45,7 +45,7 @@ describe('App Routing', function() {
     describe('call editor', function() {
         it('should return the editor view', function(done) {
             api
-                .get('/project/1')
+                .get('/state')
                 .expect(200)
                 .end(function(err, res) {
                     expect(res.statusCode).to.equal(200);

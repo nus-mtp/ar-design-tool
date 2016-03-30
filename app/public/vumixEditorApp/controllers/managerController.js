@@ -7,7 +7,7 @@
       stateModelService
     ) {
       $scope.editorService = editorService;
-     
+      
       $scope.unityMapperService = unityMapperService;   
     }); 
 })();

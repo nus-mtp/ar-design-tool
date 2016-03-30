@@ -1,13 +1,15 @@
-var passport 	= require('passport'),
-	express 	= require('express');
+var passport 		= require('passport'),
+	express 		= require('express');
 
 var router 	= express.Router();
 
 router.get('/', isLoggedIn, function (req, res) {
-	res.render('vumixManagerView',{name: req.user.name, id:req.user.id});
+	// req.mySession.user = req.user;
+	// can send the user data through accessing req.user
+	res.render('vumixManagerView');
 });
 
-router.get('/project/:id', function(req, res) {
+router.get('/state', function(req, res) {
 	res.render('vumixEditorView');
 });
 

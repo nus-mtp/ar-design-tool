@@ -119,113 +119,115 @@ var api = supertest(app);
 
 
 // // Project API Test
-describe('projects APi', function () {
-    // describe('fetchAll', function() {
-    //     it('should return with ok status', function(done) {
-    //         api
-    //         .get('/api/users/1/projects')
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //             expect(res.body.status).to.equal('ok');
-    //             done();
-    //         });
-    //     }); 
-    // });
+// describe('projects APi', function () {
+//     describe('fetchAll', function() {
+//         it('should return with ok status', function(done) {
+//             api
+//             .get('/api/users/1/projects')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//     });
     
-    // describe('fetchOne', function() {
-    //     it('should return with ok status', function(done) {
-    //         api
-    //         .get('/api/users/1/projects/1')
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //             expect(res.body.status).to.equal('ok');
-    //             done();
-    //         });
-    //     });
-    //     it('should return with fail status', function(done) {
-    //         api
-    //         .get('/api/users/1/projects/10')
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //             expect(res.body.status).to.equal('fail');
-    //             done();
-    //         });
-    //     }); 
-    // });
+//     describe('fetchOne', function() {
+//         it('should return with ok status', function(done) {
+//             api
+//             .get('/api/users/1/projects/1')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         });
+//         it('should return with fail status', function(done) {
+//             api
+//             .get('/api/users/1/projects/10')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('fail');
+//                 done();
+//             });
+//         }); 
+//     });
     
-    // describe('insert', function() {
-    //     it('should return with ok status', function(done) {
-    //         api
-    //         .post('/api/users/1/projects')
-    //         .send({ 
-    //         	name:'newakakaka',
-    //         	company_name: 'comp name',
-    //         	marker_type: '2D'
-    //         })
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //         	console.log(res.body)
-    //             expect(res.body.status).to.equal('ok');
-    //             done();
-    //         });
-    //     }); 
-    // });
+//     describe('insert', function() {
+//         it('should return with ok status', function(done) {
+//             api
+//             .post('/api/users/1/projects')
+//             .send({ 
+//             	name:'newakakaka',
+//             	com: 'comp name',
+//             	marker: '2D',
+//             	dat: 'location_1',
+//             	assetid: 0123 
+//             })
+//             .expect(200)
+//             .end(function(err, res) {
+//             	console.log(res.body)
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//     });
     
-    // describe('delete', function() {
-    //     it('should return with ok status', function(done) {
-    //         api
-    //         .delete('/api/users/1/projects/5')
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //             expect(res.body.status).to.equal('ok');
-    //             done();
-    //         });
-    //     }); 
-    //     it('should return with fail status', function(done) {
-    //         api
-    //         .delete('/api/users/1/projects/5')
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //             expect(res.body.status).to.equal('fail');
-    //             done();
-    //         });
-    //     }); 
-    // });
+//     describe('delete', function() {
+//         it('should return with ok status', function(done) {
+//             api
+//             .delete('/api/users/1/projects/5')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//         it('should return with fail status', function(done) {
+//             api
+//             .delete('/api/users/1/projects/5')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('fail');
+//                 done();
+//             });
+//         }); 
+//     });
     
-    // describe('edit', function() {
-    //     it('should return with ok status with new value', function(done) {
-    //         api
-    //         .put('/api/users/1/projects/1')
-    //         .send({ name:'Old Project' })
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //             expect(res.body.data[0].name).to.equal('Old Project');
-    //             expect(res.body.status).to.equal('ok');
-    //             done();
-    //         });
-    //     }); 
-    //     it('should return with ok status with old value', function(done) {
-    //         api
-    //         .put('/api/users/1/projects/1')
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //             expect(res.body.data[0].name).to.equal('Old Project');
-    //             expect(res.body.status).to.equal('ok');
-    //             done();
-    //         });
-    //     }); 
-    //     it('should return with fail status', function(done) {
-    //         api
-    //         .put('/api/users/1/projects/200000')
-    //         .send({ name:'Old Project' })
-    //         .expect(200)
-    //         .end(function(err, res) {
-    //             expect(res.body.status).to.equal('fail');
-    //             done();
-    //         });
-    //     }); 
-    // });
-});
+//     describe('edit', function() {
+//         it('should return with ok status with new value', function(done) {
+//             api
+//             .put('/api/users/1/projects/1')
+//             .send({ name:'Old Project' })
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.data[0].name).to.equal('Old Project');
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//         it('should return with ok status with old value', function(done) {
+//             api
+//             .put('/api/users/1/projects/1')
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.data[0].name).to.equal('Old Project');
+//                 expect(res.body.status).to.equal('ok');
+//                 done();
+//             });
+//         }); 
+//         it('should return with fail status', function(done) {
+//             api
+//             .put('/api/users/1/projects/200000')
+//             .send({ name:'Old Project' })
+//             .expect(200)
+//             .end(function(err, res) {
+//                 expect(res.body.status).to.equal('fail');
+//                 done();
+//             });
+//         }); 
+//     });
+// });
 
 
 // Model API Test

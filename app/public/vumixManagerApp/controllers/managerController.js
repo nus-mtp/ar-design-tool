@@ -1,66 +1,20 @@
 angular.module('vumixManagerApp.controllers')
-    .controller('managerController', function (projectService, $http, $scope, $timeout) {
-        var file;
+    .controller('managerController', function (projectService, $http, $scope) {
+        var filename;
 
         $scope.projects = [];
         $scope.project = {
             project_name: "",
             company_name: "",
-            marker_type: "3D",
-            image_url: "",
+            marker_type: "",
             upload: undefined
         };
         
-        $scope.update = {
-            project_name: "",
-            company_name: "",
-            marker_type: "3D",
-            image_url: "",
-            upload: undefined
-        };
-                  
-
-        var cookie = document.cookie.split(';')[0];
-        var uid = cookie.split('=');
-        $scope.userid = uid[1];
-        $scope.project.image_url = "/resources/images/open_book.png";
-
-        var onFormLoaded = function() {          
-          var requiredCheck = function() {
-            return $scope.project.upload;
-          };
-          
-          var extensionCheck = function() {
-            var tokenised = $scope.project.upload.name.split('.');
-            if (tokenised.length < 1) {
-              return false;
-            }
-            return tokenised[tokenised.length - 1] === 'unitypackage';
-          };
-          
-          $scope.$watch('project.upload', function(newVal, oldVal) {   
-            $scope.addProjectForm.projectUpload.$setValidity('required', false); 
-            $scope.addProjectForm.projectUpload.$setValidity('fileType', false); 
-            if (requiredCheck()) {      
-              $scope.addProjectForm.projectUpload.$setValidity('required', true);
-              if (extensionCheck()) {
-                $scope.addProjectForm.projectUpload.$setValidity('fileType', true); 
-              }                            
-            }
-          });
-        };
-        
-        $scope.$watch('addProjectForm', function(newVal, oldVal) {
-          if (newVal) {
-            onFormLoaded();
-          }
-        });        
+        $scope.userid = 1;
         
         $scope.uploadFile = function(){
-            file = event.target.files[0];
-            $scope.project.upload = file;
-            $scope.update.upload = file;
-            $scope.$apply();
+            filename = event.target.files[0].name;
+            $scope.project.upload = filename;
         };
         
         $scope.deleteProject = function(id){
@@ -72,26 +26,21 @@ angular.module('vumixManagerApp.controllers')
         };       
         
         $scope.getProject = function(id){
-            for(var i = 0; i < $scope.projects.length; i++){
-                if(id === $scope.projects[i].id){
-                    $scope.update = $scope.projects[i];
-                }
-            }
+          projectService.getProject($scope.projects, $scope.userid,id)
+            .then(function(project){
+                $scope.project = project;
+            });
         };
         
         $scope.updateProject = function(id){
-            projectService.updateProject($scope.projects,$scope.update, $scope.userid,id)
-            .then(function(update){
-                console.log(update);
-                $scope.project.project_name = update.name;
-                $scope.project.company_name = update.company_name;
-                $scope.project.marker_type = update.marker_type;
-                $scope.project.upload = update.upload;
+            projectService.updateProject($scope.projects,$scope.project, $scope.userid,id)
+            .then(function(project){
+                $scope.project = project;
             });
         };
         
         $scope.addProject = function(){
-            projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
+            projectService.addProject($scope.project, $scope.userid)
                 .then(function(project) {
                 $scope.projects.push(project);
             });
@@ -99,8 +48,18 @@ angular.module('vumixManagerApp.controllers')
         
         $http({
             method: 'GET',
-            url : '/api/users/' + $scope.userid + '/projects'
+            url : '/api/users/1/projects'
         }).success(function(res){
             $scope.projects = res.data;
         });
-    });
+    })
+
+.directive('customOnChange', function() {
+  return {
+    restrict: 'A',
+    link: function (scope, element, attrs) {
+      var onChangeFunc = scope.$eval(attrs.customOnChange);
+      element.bind('change', onChangeFunc);
+    }
+  };
+});
