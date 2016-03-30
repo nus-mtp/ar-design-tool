@@ -63,7 +63,7 @@
   <div class="scrollbar" id="style-default">
     <div id="items">
       <h1>Step One:</h1>
-      <button type = "button" class="button_add_task btn btn-primary btn-md">Click here to create a new state!</button><p></p>
+      <p>Double click in an empty space to create your new state.</p>
       <h1>Step Two:</h1>
       <p>Give your state a name and feel free to drag your new state around.</p>
       <h1>Step Three:</h1>
@@ -82,7 +82,7 @@
     
   <div class="col-sm-8">
     <div id="drawingArea" style="width:100%;min-height:500px;">
-      <div class="window task startpoint endpoint" style="left: 150px; top:20px" data-nodetype="startpoint" id="startpoint">
+      <div class="window task startpoint endpoint" style="left: 100px; top:50px" data-nodetype="startpoint" id="startpoint">
         <div class="ctrl_container">
           <div class="button_editor">
             <a ng-click="editorService.openEditor()" href="">
@@ -94,7 +94,7 @@
           <div class="well well-sm" align="center">Root State</div>
       </div>   
         
-         <div class="window task" style="left: 200px; top:200px; display:none;" data-nodetype="task" id="taskcontainer0">
+    <div class="task" style="left:1000px;top:800px" data-nodetype="task" id="taskcontainer0">
         <div class="ctrl_container">
             <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
           <div class="button_editor">
@@ -220,11 +220,11 @@ jsPlumb.ready(function () {
 		jsPlumb.removeAllEndpoints(parentnode);
 		$(parentnode).remove(); 
 	});
-	
-	$(".button_add_task").click(function () {
-		addTask();
-	});
-					
+						
+     $('#'+htmlBase).dblclick(function(e) {
+         addTask(undefined,e);
+     });
+    
 	$('.button_save_task').click(function(){
 		saveFlowchart();
 	});
@@ -234,14 +234,22 @@ jsPlumb.ready(function () {
 	});
 });
 
-function addTask(id){
+function addTask(id, e){
 	if(typeof id === "undefined"){
 		numberOfElements++;
 		//id = "taskcontainer" + numberOfElements;
         id = numberOfElements;
 	}
 	
-    $('<div class="window task node" id="' + id + '" data-nodetype="task" style="left:30px; top:30px;">').appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
+    var newState = $('<div class="task" id="' + id + '" data-nodetype="task">');
+    
+    //double click anywhere to create new state
+    newState.css({
+		  'top': e.pageY-150,
+		  'left': e.pageX-300
+		});
+    
+    newState.appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
 
     var taskSourceConnectorEndpoint = {
 		isSource: true,
