@@ -1,7 +1,8 @@
 var expect      = require('chai').expect,
     app         = require('../../vumix'),
-    fs          = require('fs'),
-    supertest   = require('supertest');
+    supertest   = require('supertest'),
+    path        = require('path'),
+    fs          = require('fs');
     
 var api = supertest(app);
 
@@ -11,8 +12,8 @@ describe('uploadstate.php', function () {
   
   var testFieldName = "binary";
   var testFileName = "state_test.dat";
-  var pathToCreatedTestData = 'public/' + testFileName;
-  var pathToTestData = 'test/server/' + testFileName;
+  var pathToCreatedTestData = path.join(__dirname, '../../server/storage/'+testFileName);
+  var pathToTestData = path.join(__dirname, '../../test/server/'+testFileName);
   
   it('should return 200 and save with originalname', function(done) {
     api

@@ -2,24 +2,24 @@
   angular.module('vumixManagerApp.services')
     .factory('projectService', function($http) {
      return{
-       
-       // TO DO: To upload vuforia package
-       addProject: function(project, userid){
+
+       addProject: function(project, upload_project, userId){
             var fd = new FormData();
-            fd.append('file', project.upload);
-            fd.append('uid', userid);
+            var uploadUrl = '/api/users/' + userId + '/projects';
+            fd.append('file', upload_project);
+            fd.append('uid', userId);
             fd.append('name', project.project_name);
-            fd.append('company_name', project.company_name);
+            fd.append('company_name',project.company_name);
             fd.append('marker_type', project.marker_type);
-            $http.post("/api/users/" + userid + "/projects", fd, {
+
+            return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })
-            .success(function(res){
+            .then(function(res){
                 return res.data.data[0];
-            })
-            .error(function(){
-                console.log("error");
-            });
+            }, function errorCallback(res){
+               console.log("error adding the project");
+           });
        },
        
        deleteProject: function(projects, userId, id){
@@ -38,21 +38,6 @@
            });
         },  
         
-        getProject: function(projects, userId, id){
-           return $http({
-               method: 'GET',
-               url: '/api/users/' + userId + '/projects/' + id      
-           }).then(function(res){
-               for(var i = 0; i < projects.length; i++){
-                   if(id === projects[i].id){
-                       return projects[i];
-                   }
-               }
-           }, function errorCallback(res){
-               console.log("error getting the model");
-           }); 
-        },
-        
         updateProject: function(projects, project, userId, id){
            return $http({
                method: 'PUT',
@@ -68,8 +53,6 @@
                console.log("error getting the model");
            }); 
         },
-         
       };
-
-    }); 
+    });
 })();
