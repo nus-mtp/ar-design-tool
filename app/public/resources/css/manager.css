@@ -67,7 +67,7 @@ p {
   background-color: #0097FF;
   margin-top: 2px; }
 
-.btn-default.active {
+.active {
   background-color: #FFFFFF;
   color: #0097FF; }
 
@@ -131,56 +131,22 @@ input {
     .search input:focus {
       border-color: #0097FF;
       outline: none; }
-  .search .results {
-    background-color: #FFFFFF;
-    border-color: #CC8262;
-    border-radius: 3px;
-    border-style: solid;
-    border-width: 1px;
-    display: none;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    position: absolute;
-    right: 0;
-    top: 35px;
-    z-index: 10; }
-    .search .results a {
-      border: 1px solid transparent;
-      border-radius: 3px;
-      color: #555860;
-      display: block;
-      font-weight: 500;
-      margin: 0 -1px;
-      padding: 6px 40px 6px 10px;
-      position: relative; }
 
 .flex-container {
-  -webkit-flex-flow: row wrap;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
   display: flex;
+  flex-wrap: wrap;
   justify-content: flex-start;
   list-style: none;
   margin: 0;
   padding: 0; }
 
-.flex-item {
-  background: #FF9640;
-  color: #FFFFFF;
-  font-size: 3em;
-  font-weight: bold;
-  height: 170px;
-  line-height: 150px;
-  margin-top: 10px;
-  padding: 5px;
-  text-align: center;
-  width: 200px; }
-  .flex-item p {
-    background-color: #87CEFA;
-    font-size: 13px;
-    margin-left: -5px;
-    margin-top: -4px;
-    width: inherit; }
+.flex-item .card img {
+  height: 120px;
+  width: 164px; }
+
+.flex-item :hover {
+  opacity: .8;
+  text-decoration: none; }
+
+ul {
+  list-style: none; }

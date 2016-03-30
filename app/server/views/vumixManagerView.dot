@@ -11,10 +11,14 @@
         <title> Vumix Manager Application</title>
      </head>
      <body>
+        <script>
+        document.cookie="uid=[[= model.id]];";
+        </script>
         <div ng-app="vumixManagerApp">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
                     <div class="container-fluid nav-bar">
                         <div class="navbar-header">
+                            <img ng-src="/resources/images/logo.png" height=50" width="50">
                             <a class="navbar-brand" href="#">Vumix File Manager</a>
                         </div>
 
@@ -22,17 +26,18 @@
                             <ul class="nav navbar-nav">
                                 <li>
                                     <ul class="center-align">
-                                        <span class="top-bar"><a href="#project" ui-sref="manager" class="btn btn-default top-bar">Project</a></span>
-                                        <span class="top-bar"><a href="#model" ui-sref="model" class="btn btn-default top-bar">Model</a></span>
+                                        <span class="top-bar"><a href="" ui-sref="manager" class="btn btn-default top-bar">Project</a></span>
+                                        <span class="top-bar"><a href="" ui-sref="model" class="btn btn-default top-bar">Model</a></span>
+                                        <span class="top-bar"><a href="" ui-sref="image" class="btn btn-default top-bar">Image</a></span>
                                     </ul>
                                 </li>
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, User!<span class="caret"></span></a>
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.name]]<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href="/logout">Log Out</a></li>
+                                        <li><a href='/logout' onclick="destroyCookies()">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -40,13 +45,19 @@
                   </div>
              </nav>
   
-             <div ui-view> </div>
+            <div ui-view> </div>
     
-           </div>
+            </div>
 		</div>
         <script>
-            document.cookie="uid=[[= model.id]];";
-        </script>  
+            var destroyCookies = function() {
+                var expires = "; expires=Thu, 01 Jan 1970 00:00:00 UTC;";
+                var cookies = document.cookie.split(";");
+                for (var i = 0; i < cookies.length; i++){
+                    document.cookie +=cookies[i]+expires;
+                }
+            }
+        </script>
         <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
         <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -57,9 +68,11 @@
         <script type="text/javascript" src="vumixManagerApp/services/_services.js"></script>
         <script type="text/javascript" src="vumixManagerApp/services/modelService.js"></script>
         <script type="text/javascript" src="vumixManagerApp/services/projectService.js"></script>
+        <script type="text/javascript" src="vumixManagerApp/services/imageService.js"></script>
         
         <script type="text/javascript" src="vumixManagerApp/controllers/_controllers.js"></script>
         <script type="text/javascript" src="vumixManagerApp/controllers/managerController.js"></script>
         <script type="text/javascript" src="vumixManagerApp/controllers/modelController.js"></script>
+        <script type="text/javascript" src="vumixManagerApp/controllers/imageController.js"></script>
 	</body>
 </html>
