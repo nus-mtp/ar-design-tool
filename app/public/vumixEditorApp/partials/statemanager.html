@@ -84,7 +84,6 @@
     <div id="drawingArea" style="width:100%;min-height:500px;">
       <div class="window task startpoint endpoint" style="left: 150px; top:20px" data-nodetype="startpoint" id="startpoint">
         <div class="ctrl_container">
-            <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
           <div class="button_editor">
             <a ng-click="editorService.openEditor()" href="">
               <span class="glyphicon glyphicon-new-window"></span>
@@ -190,6 +189,13 @@ jsPlumb.ready(function () {
 		endpoint: ["Dot", {radius:15}]
 	};
 	
+    //the code below allows source without circle but dragging has to be disabled first. 
+    //jsPlumb.makeSource(
+    //    $('.startpoint'), {
+    //        anchor: 'Continuous'
+    //});
+    
+    
 	jsPlumb.addEndpoint(
 		$('.startpoint'),
 		workflowConnectorStartpoint
@@ -251,6 +257,12 @@ function addTask(id){
 		taskSourceConnectorEndpoint
 	);
 	
+    //the code below allows source without circle but dragging has to be disabled first. 
+    //jsPlumb.makeSource(
+    //    $('#'+id), {
+    //        anchor: 'Continuous'
+    //    });
+    
 	jsPlumb.makeTarget(
         $('#'+id), {
 		  anchor: 'Continuous'
