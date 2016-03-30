@@ -108,7 +108,7 @@ angular.module('vumixManagerApp.controllers')
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
                 .then(function(project) {
-                $(".navbar").css( "zIndex" , 10 );
+                $(".navbar").css( "zIndex" , 0 );
                 $scope.projects.push(project);
                 $scope.reset();
             });
@@ -118,6 +118,7 @@ angular.module('vumixManagerApp.controllers')
             $("#upload_file").val("");
             $scope.empty.image_url = $scope.project.image_url;
             $scope.project = angular.copy($scope.empty); 
+      
         };
         
         $http({

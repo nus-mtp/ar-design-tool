@@ -139,7 +139,7 @@ input {
   height: 10%;
   position: fixed;
   top: 7%;
-  width: 100%; }
+  width: auto; }
 
 .flex-container {
   display: flex;
