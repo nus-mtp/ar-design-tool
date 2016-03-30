@@ -193,16 +193,19 @@ jsPlumb.ready(function () {
 	};
 	
     //the code below allows source without circle but dragging has to be disabled first. 
-    //jsPlumb.makeSource(
-    //    $('.startpoint'), {
-    //        anchor: 'Continuous'
-    //});
+    jsPlumb.makeSource(
+        $('.startpoint'), {
+        anchor: 'Continuous',
+        beforeDetach: function (conn) {
+        return confirm("Detach connection?");
+        }
+    });
     
-    
-	jsPlumb.addEndpoint(
+    //blue circle to drag connections out of
+	/*jsPlumb.addEndpoint(
 		$('.startpoint'),
 		workflowConnectorStartpoint
-	);
+	);*/
 	
     var makeTarget = {
         anchor: 'Continuous',
@@ -266,23 +269,27 @@ function addTask(id, e){
 		endpoint : ["Dot", {radius:15}]
 	};
 	
-	jsPlumb.addEndpoint(
-		$('#'+id),
-		taskSourceConnectorEndpoint
-	);
+    //blue circle to drag connections out of. 
+	//jsPlumb.addEndpoint(
+	//	$('#'+id),
+	//	taskSourceConnectorEndpoint
+	//);
 	
     //the code below allows source without circle but dragging has to be disabled first. 
-    //jsPlumb.makeSource(
-    //    $('#'+id), {
-    //        anchor: 'Continuous'
-    //    });
+    jsPlumb.makeSource(
+        $('#'+id), {
+        anchor: 'Continuous',
+        beforeDetach: function (conn) {
+        return confirm("Detach connection?");
+        }
+    });
     
 	jsPlumb.makeTarget(
         $('#'+id), {
 		  anchor: 'Continuous'
 		});
     
-	jsPlumb.draggable($('#' + id));
+	//jsPlumb.draggable($('#' + id));
 	return id;
 }
 
