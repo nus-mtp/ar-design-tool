@@ -8,7 +8,8 @@
   justify-content: flex-end; }
 
 .modal-body {
-  background-color: #FFFFFF; }
+  background-color: #FFFFFF;
+  color: #CC8262; }
 
 .modal-header, .modal-title {
   background-color: #CC8262; }
@@ -110,7 +111,8 @@ p {
   padding-top: 24px; }
 
 .modal-body {
-  background-color: #FFFFFF; }
+  background-color: #FFFFFF;
+  color: #CC8262; }
 
 .modal-header, .modal-title {
   background-color: #CC8262; }

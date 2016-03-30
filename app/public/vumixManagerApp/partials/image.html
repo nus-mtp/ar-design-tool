@@ -9,7 +9,7 @@
             <h1 class="center" style="margin-top: 20%;"> Upload Your New Image Here</h1>
             <span>
               <form ng-submit="addImage()" name="imageForm" enctype="multipart/form-data" novalidate>
-                <label> Image Name</label>
+                <h1> Image Name</h1>
                 <input type="text" name="imageName" placeholder="Image Name" ng-model="image.image_name" required>
                 <span class="text-danger" ng-show="imageForm.imageName.$error.required">The file name cannot be empty</span>
                 <h1> File</h1>
