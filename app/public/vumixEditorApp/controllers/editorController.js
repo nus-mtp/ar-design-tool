@@ -9,7 +9,7 @@
     ) {
       $scope.currentStateId = -1;
       $scope.currentSelected;
-      $scope.textModel = "test";
+      $scope.textModel = "";
         
       $scope.modelsAvailable = [];
       $scope.modelsOnServer = [];
