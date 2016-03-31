@@ -185,11 +185,16 @@ var copyStateDat = function(stateDat, callback) {
 };
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
-module.exports.moveStateFile		= moveStateFile;
 module.exports.updateVuforia 		= updateVuforia;
-module.exports.deleteModel 			= deleteModel;
+
+module.exports.moveStateFile		= moveStateFile;
+module.exports.moveCopyFile			= moveCopyFile;
+module.exports.copyStateDat			= moveStateDat;
+
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
+
+module.exports.deleteModel 			= deleteModel;
 module.exports.moveModel 			= moveModel;
 module.exports.copyModel 			= copyModel;
 module.exports.buildApk				= buildApk;
