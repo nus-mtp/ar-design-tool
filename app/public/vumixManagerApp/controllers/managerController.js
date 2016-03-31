@@ -1,5 +1,5 @@
 angular.module('vumixManagerApp.controllers')
-    .controller('managerController', function (projectService, $http, $scope, $timeout) {
+    .controller('managerController', function (projectService, $http, $scope, $timeout, $window) {
         var file;
         
         $scope.empty = {
@@ -72,6 +72,10 @@ angular.module('vumixManagerApp.controllers')
             $scope.project.upload = file;
             $scope.$apply();
         };
+        
+        $scope.goToState = function(id){
+            window.location.href=  "/project/" + id;
+        }
         
         $scope.updateFile = function(){
             file = event.target.files[0];
