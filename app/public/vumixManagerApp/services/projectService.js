@@ -11,10 +11,20 @@
             fd.append('name', project.project_name);
             fd.append('company_name', project.company_name);
             fd.append('marker_type', project.marker_type);
+<<<<<<< HEAD
             $http.post("/api/users/" + userid + "/projects", fd, {
                 headers: {'Content-Type': undefined}
             })
             .success(function(res){
+=======
+            
+            return $http.post(uploadUrl, fd, {
+                headers: {'Content-Type': undefined}
+            })
+            .then(function(res){
+                $("#floatingCirclesG").show().delay(13000).fadeOut();
+                $(".navbar").css( "zIndex" , -10 );
+>>>>>>> scss
                 return res.data.data[0];
             })
             .error(function(){
@@ -37,6 +47,7 @@
                console.log("error deleting the model");
            });
         },  
+<<<<<<< HEAD
         
         getProject: function(projects, userId, id){
            return $http({
@@ -57,10 +68,23 @@
            return $http({
                method: 'PUT',
                url: '/api/users/' + userId + '/projects/' + id      
+=======
+
+        updateProject: function(projects, update, update_file, userId, id){
+           var fd = new FormData();
+           var uploadUrl = '/api/users/' + userId + '/projects/' + id ;
+           fd.append('file', update_file);
+           fd.append('uid', userId);
+           fd.append('name', update.name);
+           fd.append('company_name',update.com_name);
+           fd.append('marker_type',update.marker_type);
+           return $http.put(uploadUrl, fd, {
+               headers: {'Content-Type': undefined}
+>>>>>>> scss
            }).then(function(res){
                for(var i = 0; i < projects.length; i++){
                    if(id === projects[i].id){
-                       projects[i] = project;
+                       projects[i] = update;
                        return projects[i];
                    }
                }

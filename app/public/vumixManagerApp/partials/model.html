@@ -1,11 +1,20 @@
 <div class="wrapper" ng-controller="modelController">
     <div class="sidebar">
+<<<<<<< HEAD
+=======
+        <div id="welcome_model" class="side-bar-padding">
+            <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
+            <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your model </h2>
+            <button type="button" class="center btn-large" id="uploadModel">Add Your New Model</button>
+        </div>
+>>>>>>> scss
         <div id="upload_model" class="side-bar-padding">
             <!--<div class="search" style="margin-top:10px">
                 <input type="text" name="q" placeholder="Search..." data-ng-model="search.name" />
             </div>-->
             <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
             <span>
+<<<<<<< HEAD
               <form ng-submit="addModel()">
                 <h1> Model Name</h1>
                 <input type="text" name="model_name" placeholder="Model Name" ng-model="model.model_name"><br>
@@ -15,6 +24,18 @@
                 <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_extension"><br>
                 <h1> File</h1>
                 <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
+=======
+              <form ng-submit="addModel()" name="modelForm" enctype="multipart/form-data" novalidate>
+                <h1> Model Name</h1>
+                <input type="text" name="modelName" placeholder="Model Name" ng-model="model.model_name" required>
+                <span class="text-danger" ng-show="modelForm.modelName.$error.required">The file name cannot be empty</span>
+                <h1> File</h1>
+                <input type ="file" id="upload_file" ng-model="model.upload" name="modelUpload" onchange="angular.element(this).scope().uploadFile()" />
+                <div class="text-danger" ng-show="modelForm.modelUpload.$error.required">Model file cannot be empty</div>
+                <div class="text-danger" ng-show="modelForm.modelUpload.$error.fileType">File extension is not valid, must be either .3ds .fbx or .obj</div>
+                <div class="text-danger" ng-show="modelForm.modelUpload.$error.fileSize">File size is larger than 8 MB</div>
+                <span class="text-info">Max upload 8 MB file</span>
+>>>>>>> scss
                 <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                     <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
                 <!--</form>-->
@@ -41,11 +62,16 @@
                         <h1> File Extension</h1>
                         <input type="text" name="model_name" placeholder="Model Name" ng-model="model.file_extension"><br>
                         <h1> File</h1>
+<<<<<<< HEAD
                         <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile">
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                             <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                         </form>-->
                         <input type="submit" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+=======
+                        <input type ="file" ng-model="model.upload" name="modelUpload" onchange="angular.element(this).scope().updateFile()">
+                        <input type="submit" ng-click= "updateModel(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+>>>>>>> scss
                     </form>
                 </div>           
             </div>
@@ -56,6 +82,14 @@
     <div class="content">
         <div class="container section" style="width:auto;">
             <!--to display model-->
+<<<<<<< HEAD
+=======
+            <div class="search-bg">
+                <div class="search" style="margin-bottom: 20px; margin-left: 20px; margin-top:12px;">
+                        <input type="text" name="q" placeholder="Search..." ng-model="searchModel.name" />
+                </div>
+            </div>
+>>>>>>> scss
             <div id="model_list" class="flex-container">
                 <!--<p ng-repeat="model in listModels">The data {{model.name}}</p>-->
                 

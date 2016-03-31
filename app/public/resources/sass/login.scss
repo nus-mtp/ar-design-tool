@@ -1,0 +1,51 @@
+@import 'partials/alignment';
+@import 'partials/button';
+@import 'partials/color';
+
+.top-bar {
+  background: $bg-color;
+  background-image: url();
+  height: 80px;
+  width: 100%;
+}
+
+.below-top-bar {
+  background: $light-blue;
+  height: 30px;
+  width: 100%;
+}
+
+.title {
+  color: $light-blue;
+  font-size: 52px;
+  text-align: center;
+  
+  img {
+    height: 60px;
+    margin-top: -10px;
+    width: 60px;
+  }
+}
+
+.container {
+  background: $purple;
+  height: 600px;
+  width: 100%;
+}
+
+.content {
+  margin: 50px;  
+}
+
+.flexbox-container {
+  display: -ms-flex;
+  display: -webkit-flex;
+  display: flex;
+  > div {
+    padding: 10px;
+    width: 50%;
+    &:first-child {
+      margin-right: 20px;
+    }
+  }
+}

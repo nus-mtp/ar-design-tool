@@ -12,10 +12,15 @@
      </head>
      <body>
         <div ng-app="vumixManagerApp">
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="z-index: 100;">
                     <div class="container-fluid nav-bar">
                         <div class="navbar-header">
+<<<<<<< HEAD
                             <a class="navbar-brand" href="#">Vumix File Manager</a>
+=======
+                           <img ng-src="/resources/images/logo.png" height=50" width="50">
+                           <span style="font-size: 16px">Vumix File Manager</span>
+>>>>>>> scss
                         </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -30,7 +35,11 @@
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
+<<<<<<< HEAD
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, User!<span class="caret"></span></a>
+=======
+                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.name]]<span class="caret"></span></a>
+>>>>>>> scss
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href="/logout">Log Out</a></li>
                                     </ul>
@@ -40,9 +49,14 @@
                   </div>
              </nav>
   
+<<<<<<< HEAD
              <div ui-view> </div>
     
            </div>
+=======
+            <div ui-view> </div>
+            </div>
+>>>>>>> scss
 		</div>
         <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
