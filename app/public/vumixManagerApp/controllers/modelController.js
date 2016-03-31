@@ -48,12 +48,20 @@ angular.module('vumixManagerApp.controllers')
             if (tokenised.length < 1) {
               return false;
             }
+            if ($scope.model.file_extension !== 'obj'){
+                $scope.modelForm.modelUpload.$setValidity('fileType', false);
+            }else if ($scope.model.file_extension !== 'fbx'){
+                $scope.modelForm.modelUpload.$setValidity('fileType', false);
+            }else if ($scope.model.file_extension !== '3ds'){
+                $scope.modelForm.modelUpload.$setValidity('fileType', false);
+            }
             return tokenised[tokenised.length - 1].toLowerCase() === 'obj' || tokenised[tokenised.length - 1].toLowerCase() === 'fbx' || tokenised[tokenised.length - 1].toLowerCase() === '3ds';
          };
          
          var extensionSizeCheck = function(){
            var tokenised = $scope.model.upload.size;
            if(tokenised > 8000000){
+               $scope.modelForm.modelUpload.$setValidity('fileSize', false);  
                return false;
            }
            return true;
@@ -62,11 +70,13 @@ angular.module('vumixManagerApp.controllers')
           
          $scope.$watch('model.upload', function(newVal, oldVal) {   
             $scope.modelForm.modelUpload.$setValidity('required', false); 
-            $scope.modelForm.modelUpload.$setValidity('fileType', false); 
             if (requiredCheck()) {      
               $scope.modelForm.modelUpload.$setValidity('required', true);
-              if (extensionCheck() && extensionSizeCheck()) {
-                $scope.modelForm.modelUpload.$setValidity('fileType', true); 
+              if (extensionCheck()) {
+                $scope.modelForm.modelUpload.$setValidity('fileType', true);   
+              }
+              if ( extensionSizeCheck()){
+                $scope.modelForm.modelUpload.$setValidity('fileSize', true);
               }                            
             }
           });

@@ -46,7 +46,15 @@ angular.module('vumixManagerApp.controllers')
           var tokenised = $scope.image.upload.name.split('.');
           $scope.image.file_extension = tokenised[tokenised.length-1].toLowerCase();
             if (tokenised.length < 1) {
+              $scope.imageForm.imageUpload.$setValidity('fileType', false); 
               return false;
+            }
+            if ($scope.image.file_extension !== 'png'){
+                $scope.imageForm.imageUpload.$setValidity('fileType', false); 
+            } else if ($scope.image.file_extension !== 'jpg'){
+                $scope.imageForm.imageUpload.$setValidity('fileType', false); 
+            } else if ($scope.image.file_extension !== 'jpeg'){
+                $scope.imageForm.imageUpload.$setValidity('fileType', false); 
             }
             return tokenised[tokenised.length - 1].toLowerCase() === 'png' || tokenised[tokenised.length - 1].toLowerCase() === 'jpg' || tokenised[tokenised.length - 1].toLowerCase() === 'jpeg';
          };
@@ -54,6 +62,7 @@ angular.module('vumixManagerApp.controllers')
          var extensionSizeCheck = function(){
           var tokenised = $scope.image.upload.size;
            if(tokenised > 4000000){
+               $scope.imageForm.imageUpload.$setValidity('fileSize', false);
                return false;
            }
            return true;
@@ -61,11 +70,14 @@ angular.module('vumixManagerApp.controllers')
          
          $scope.$watch('image.upload', function(newVal, oldVal) {   
             $scope.imageForm.imageUpload.$setValidity('required', false); 
-            $scope.imageForm.imageUpload.$setValidity('fileType', false); 
             if (requiredCheck()) {      
               $scope.imageForm.imageUpload.$setValidity('required', true);
-              if (extensionCheck() && extensionSizeCheck()) {
+              if (extensionCheck()) {
                 $scope.imageForm.imageUpload.$setValidity('fileType', true); 
+               
+              }
+              if (extensionSizeCheck()){
+                $scope.imageForm.imageUpload.$setValidity('fileSize', true);
               }                            
             }
           });
