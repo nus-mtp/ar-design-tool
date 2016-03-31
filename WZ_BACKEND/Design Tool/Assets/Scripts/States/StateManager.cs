@@ -25,6 +25,7 @@ public class StateManager : MonoBehaviour
     private Dictionary<int, State> stateList;
     private int stateNumber;
     private TextCreator textCreator;
+    private int beforePreviewStateNumber;
 
     public State AddNewState()
     {
@@ -65,6 +66,7 @@ public class StateManager : MonoBehaviour
         }
         else
         {
+            beforePreviewStateNumber = activeState.id;
             isPreview = true;
             GameObject active = GetActiveGameObject();
             leftBlockOut.SetActive(true);
@@ -105,7 +107,7 @@ public class StateManager : MonoBehaviour
             {
                 active.GetComponent<Transformable>().initializeElements();
             }
-
+            SwitchState(beforePreviewStateNumber);
             Dictionary<int, State>.Enumerator enumerator = stateList.GetEnumerator();
             while (enumerator.MoveNext())
             {

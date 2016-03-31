@@ -109,10 +109,37 @@ public class Facade : MonoBehaviour
         stateManager.UnSetTransitionId(targetStateId, targetStateObjectId);
     }
 
+    public void TurnOffKeyboard()
+    {
+
+        #if !UNITY_EDITOR && UNITY_WEBGL
+            WebGLInput.captureAllKeyboardInput = false;
+        #endif
+    }
+
+    public void TurnOnPreview()
+    {
+        stateManager.EnterPreview();
+    }
+
+    public void TurnOffPreview()
+    {
+        stateManager.ExitPreview();
+    }
+
+    public void TurnOnKeyboard()
+    {
+
+        #if !UNITY_EDITOR && UNITY_WEBGL
+             WebGLInput.captureAllKeyboardInput = true;
+        #endif
+    }
     private string[] seperate(string s)
     {
         return s.Split(":".ToCharArray());
     }
+
+    
     // Use this for initialization
     private void Start()
     {
@@ -124,8 +151,6 @@ public class Facade : MonoBehaviour
         stateManager = controlScript.GetComponent<StateManager>();
         textCreator = controlScript.GetComponent<TextCreator>();
         Application.ExternalCall(JAVASCRIPT_PREFIX+"unityHasLoaded");
-        #if !UNITY_EDITOR && UNITY_WEBGL
-            WebGLInput.captureAllKeyboardInput = false;
-        #endif
+       
     }
 }
