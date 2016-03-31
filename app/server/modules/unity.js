@@ -168,7 +168,7 @@ var buildApk = function(uid, pid) {
 
 var moveStateFile = function(uid, pid, stateFile) {
 	console.log('saving state file');
-	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateFile.originalname);
+	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
 	utils.moveFileToDest(stateFile.path, dest_path);	
 };
 
