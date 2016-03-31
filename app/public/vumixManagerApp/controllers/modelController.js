@@ -1,10 +1,7 @@
 // Handle model
 angular.module('vumixManagerApp.controllers')
     .controller('modelController', function (modelService, $http, $scope) {
-<<<<<<< HEAD
-        var filename;
-     
-=======
+
         var file;
         
         $scope.empty = {
@@ -15,7 +12,7 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
 
->>>>>>> scss
+
         $scope.models = [];
         $scope.model = {
             model_name: "",
@@ -23,27 +20,6 @@ angular.module('vumixManagerApp.controllers')
             file_extension: "",
             upload: undefined
         };
-        
-<<<<<<< HEAD
-        $scope.userid = 1;
-        
-        $scope.uploadFile = function(){
-            filename = event.target.files[0].name;
-            $scope.model.upload = filename;
-        };
-        
-        $scope.getModel = function(id){
-          modelService.getModel($scope.models, $scope.userid,id)
-            .then(function(model){
-                $scope.model = model;
-            });
-        };
-        
-        $scope.updateModel = function(id){
-            modelService.updateModel($scope.models,$scope.model, $scope.userid,id)
-            .then(function(model){
-                $scope.model = model;
-=======
              
         $scope.update = {
             id: "",
@@ -142,7 +118,6 @@ angular.module('vumixManagerApp.controllers')
             modelService.updateModel($scope.models,$scope.update, $scope.update.upload,$scope.userid,id)
             .then(function(update){
                  $scope.model = update;
->>>>>>> scss
             });
         };
         

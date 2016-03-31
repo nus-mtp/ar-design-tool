@@ -3,22 +3,6 @@
     .factory('modelService', function($http) {
      return{
        
-<<<<<<< HEAD
-       addModel: function(model_name,file_size, file_extension, file_upload, userId){
-           return $http({
-              method: 'POST',
-              url: '/api/users/' + userId + '/models',
-              data: {
-                  name : model_name,
-                  file_size : file_size,
-                  file_extension : file_extension
-              }
-           }).then(function(res){
-               return res.data.data[0];
-           }, function errorCallback(res){
-               console.log("error uploading file")
-           });  
-=======
        addModel: function(model, upload_model, userId){
             var fd = new FormData();
             var uploadUrl = '/api/users/' + userId + '/models';
@@ -37,7 +21,6 @@
                console.log("error adding the model");
            });
             
->>>>>>> scss
        }, 
        
        getModel: function(models, userId, id){

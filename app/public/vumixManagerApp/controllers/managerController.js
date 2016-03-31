@@ -1,9 +1,4 @@
 angular.module('vumixManagerApp.controllers')
-<<<<<<< HEAD
-    .controller('managerController', function (projectService, $http, $scope) {
-        var filename;
-
-=======
     .controller('managerController', function (projectService, $http, $scope, $timeout, $window) {
         var file;
         
@@ -15,23 +10,11 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
->>>>>>> scss
         $scope.projects = [];
        
         $scope.project = {
             project_name: "",
             company_name: "",
-<<<<<<< HEAD
-            marker_type: "",
-            upload: undefined
-        };
-        
-        $scope.userid = 1;
-        
-        $scope.uploadFile = function(){
-            filename = event.target.files[0].name;
-            $scope.project.upload = filename;
-=======
             marker_type: "3D",
             image_url: "",  
             upload: undefined
@@ -88,7 +71,6 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.project.upload = file;
             $scope.$apply();
->>>>>>> scss
         };
         
         $scope.goToState = function(id){
@@ -108,18 +90,6 @@ angular.module('vumixManagerApp.controllers')
         };       
         
         $scope.getProject = function(id){
-<<<<<<< HEAD
-          projectService.getProject($scope.projects, $scope.userid,id)
-            .then(function(project){
-                $scope.project = project;
-            });
-        };
-        
-        $scope.updateProject = function(id){
-            projectService.updateProject($scope.projects,$scope.project, $scope.userid,id)
-            .then(function(project){
-                $scope.project = project;
-=======
             for(var i = 0; i < $scope.projects.length; i++){
                 if(id === $scope.projects[i].id){
                     $scope.update.id = id;
@@ -136,7 +106,6 @@ angular.module('vumixManagerApp.controllers')
             projectService.updateProject($scope.projects, $scope.update, $scope.update.upload, $scope.userid,id)
             .then(function(update){
                 $scope.project = update;
->>>>>>> scss
             });
         };
         
