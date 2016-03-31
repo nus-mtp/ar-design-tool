@@ -8,6 +8,7 @@ const exec		= require('child_process').exec;
 var unity_path 		= '/unity/';
 var model_path 		= '/models/';
 var state_dat_file 	= 'state.dat';
+var copy_state_name = 'copyState.dat';
 var vuforia_name 	= "marker.unitypackage";
 
 var rebuildVuforiaPackage = function(uid, pid) {
@@ -169,6 +170,11 @@ var moveStateFile = function(uid, pid, stateFile) {
 	console.log('saving state file');
 	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateFile.originalname);
 	utils.moveFileToDest(stateFile.path, dest_path);	
+};
+
+var copyStateDat = function(stateDat, callback) {
+	console.log('copying state dat');
+	utils.saveFileToDest(stateDat.path, stateDat.destination+copy_state_name, callback);
 };
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;

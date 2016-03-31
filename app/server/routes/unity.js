@@ -24,8 +24,12 @@ var storage = multer.diskStorage({
 var upload = multer({ storage:storage });
 
 router.post('/uploadstate.php', upload.single('binary'), function(req, res, next) {
+    var uid = req.params.uid;
+    var pid = req.params.pid;
     var stateDat = req.binary;
-    unity.moveStateFile(req.params.uid, req.params.pid, stateDat);
+    unity.copyStateDat(uid, pid, stateDat, function() {
+
+    });
     res.json({ status:"ok", message: "saved state dat file", data: req.binary});
 });
 
