@@ -1,4 +1,5 @@
 angular.module('vumixManagerApp.controllers')
+<<<<<<< HEAD
     .controller('managerController', function (projectService, $http, $scope, $timeout, $window) {
         var file;
         
@@ -10,11 +11,16 @@ angular.module('vumixManagerApp.controllers')
             upload: undefined
         };
         
+=======
+    .controller('managerController', function (projectService, $http, $scope) {
+        var filename;
+
+>>>>>>> parent of 607ee49... Merge branch 'scss' into mich
         $scope.projects = [];
-       
         $scope.project = {
             project_name: "",
             company_name: "",
+<<<<<<< HEAD
             marker_type: "3D",
             image_url: "",  
             upload: undefined
@@ -71,25 +77,29 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.project.upload = file;
             $scope.$apply();
+=======
+            marker_type: "",
+            upload: undefined
         };
         
-        $scope.goToState = function(id){
-            window.location.href=  "/project/" + id;
-        }
+        $scope.userid = 1;
         
-        $scope.updateFile = function(){
-            file = event.target.files[0];
-            $scope.update.upload = file;
-            $scope.$apply();
-        }
+        $scope.uploadFile = function(){
+            filename = event.target.files[0].name;
+            $scope.project.upload = filename;
+>>>>>>> parent of 607ee49... Merge branch 'scss' into mich
+        };
         
         $scope.deleteProject = function(id){
             projectService.deleteProject($scope.projects, $scope.userid, id)
                 .then(function(project) {
+                    //$scope.projects.push(project);
+                    // console.log($scope.projects);
             });
         };       
         
         $scope.getProject = function(id){
+<<<<<<< HEAD
             for(var i = 0; i < $scope.projects.length; i++){
                 if(id === $scope.projects[i].id){
                     $scope.update.id = id;
@@ -106,23 +116,26 @@ angular.module('vumixManagerApp.controllers')
             projectService.updateProject($scope.projects, $scope.update, $scope.update.upload, $scope.userid,id)
             .then(function(update){
                 $scope.project = update;
+=======
+          projectService.getProject($scope.projects, $scope.userid,id)
+            .then(function(project){
+                $scope.project = project;
+            });
+        };
+        
+        $scope.updateProject = function(id){
+            projectService.updateProject($scope.projects,$scope.project, $scope.userid,id)
+            .then(function(project){
+                $scope.project = project;
+>>>>>>> parent of 607ee49... Merge branch 'scss' into mich
             });
         };
         
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.userid)
                 .then(function(project) {
-                $(".navbar").css( "zIndex" , 0 );
                 $scope.projects.push(project);
-                $scope.reset();
             });
-        };
-        
-        $scope.reset = function(){
-            $("#upload_file").val("");
-            $scope.empty.image_url = $scope.project.image_url;
-            $scope.project = angular.copy($scope.empty); 
-      
         };
         
         $http({

@@ -6,7 +6,11 @@
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
+<<<<<<< HEAD
       $urlRouterProvider.otherwise('/manager'); 
+=======
+      $urlRouterProvider.otherwise('/');  //TODO: Doesn't allow user to re-route
+>>>>>>> parent of 607ee49... Merge branch 'scss' into mich
       $stateProvider
         .state('manager', {
           url: '/manager',

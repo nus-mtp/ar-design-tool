@@ -15,8 +15,8 @@
           $scope.width = '1000px';
           
           $timeout(function() {
-            $.getScript("/resources/webgl/TemplateData/UnityProgress.js");
-            $.getScript("/resources/webgl/Release/UnityLoader.js");
+            $.getScript("resources/webgl/TemplateData/UnityProgress.js");
+            $.getScript("resources/webgl/Release/UnityLoader.js");
           }, 0);          
         }
       }

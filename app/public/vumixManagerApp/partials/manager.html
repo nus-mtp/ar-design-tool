@@ -1,22 +1,11 @@
-<div class="wrapper" ng-controller="managerController" >
-     <div id="floatingCirclesG" style="top:40%; left:50%;">
-         <img src="/resources/images/loading_bg.png" style="opacity:0.5;margin-left: -2900%; margin-top: -1000%;width: 8002px;">
-         <div class="f_circleG" id="frotateG_01"></div>
-         <div class="f_circleG" id="frotateG_02"></div>
-         <div class="f_circleG" id="frotateG_03"></div>
-         <div class="f_circleG" id="frotateG_04"></div>
-         <div class="f_circleG" id="frotateG_05"></div>
-         <div class="f_circleG" id="frotateG_06"></div>
-         <div class="f_circleG" id="frotateG_07"></div>
-         <div class="f_circleG" id="frotateG_08"></div>
-    </div>
-
+<div class="wrapper" ng-controller="managerController">
     <div class="sidebar">
         <div id="welcome_page" class="side-bar-padding">
             <div class="search" style="margin-top:10px">
                 <input type="text" name="q" placeholder="Search..." data-ng-model="searchText.name" />
             </div>
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
+<<<<<<< HEAD
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
             <button type="button" class="center btn-large" id="createProject">Create Your New Project</button>
         </div>
@@ -49,9 +38,40 @@
               <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
               <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
             </form>
+=======
+            <h2 class="center" style="margin-bottom: 24%"> Click on the create button below to start a new project </h2>
+            <button type="button" class="center btn-large" id="createProject">Start</button>
+        </div>
+        <div id="create_project" class="side-bar-padding">
+            <h1 class="center" style="margin-top: 20%;"> Create Your New Project</h1>
+            <span>
+              <form ng-submit="addProject()">
+                <h2> Company Name</h2>
+                <input type="text" name="org_name" placeholder="Company Name" ng-model="project.company_name"><br>
+                <h2> Project Name</h2>
+                <input type="text" name="project_name" placeholder="Project Name" ng-model="project.project_name"><br>
+                <h2> Target Marker Type</h2>
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D" checked="" ng-model="project.marker_type">
+                        2D 
+                    </label>
+                    <label>
+                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D" ng-model="project.marker_type">
+                        3D 
+                    </label>
+                <h2> Upload Your Vuforia Package</h2>
+
+                <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile"/>
+                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
+                    <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
+                </form>-->
+                <a href="https://developer.vuforia.com/">Find out how to create a target</a>
+                <input type="submit" class="center" value="Create" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+              </form>
+          </span>
+>>>>>>> parent of 607ee49... Merge branch 'scss' into mich
         </div>
     </div>
-
     <!--modal to update project-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -61,11 +81,19 @@
                     <h4 class="modal-title"> Your project</h4>
                 </div>
                 <div class="modal-body">
+<<<<<<< HEAD
                     <form name="updateProjectForm" enctype="multipart/form-data">
                         <h2>Company Name</h2>
                         <input type="text" name="comName" ng-model="update.com_name" ><br>
                         <h2> Project Name</h2>
                         <input type="text" name="projectName"  ng-model="update.name" ><br>
+=======
+                    <form ng-click="updateProject(project.id)">
+                        <h2> Company Name</h2>
+                        <input type="text" name="org_name" ng-model="project.company_name" ><br>
+                        <h2> Project Name</h2>
+                        <input type="text" name="project_name"  ng-model="project.name" ><br>
+>>>>>>> parent of 607ee49... Merge branch 'scss' into mich
                         <h2> Target Marker Type</h2>
                             <label>
                                 <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="project.marker_type">
@@ -77,7 +105,11 @@
                             </label>
             
                         <h2> Upload Your Vuforia Package</h2>
+<<<<<<< HEAD
                         <input type ="file" ng-model="update.upload" name="projectUpload" onchange="angular.element(this).scope().updateFile()"/>
+=======
+                        <input type ="file" style="color:#FFFFFF" custom-on-change="uploadFile"/>
+>>>>>>> parent of 607ee49... Merge branch 'scss' into mich
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                             <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                         </form>-->
@@ -87,11 +119,10 @@
             </div>
         </div>
     </div>
-    
-    
 
     <div class="content">
         <div class="container section" style="width:auto;">
+<<<<<<< HEAD
             <div class="search-bg">  
                 <div class="search" style="margin-bottom: 20px; margin-left: 20px; margin-top: 12px;">
                     <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
@@ -108,6 +139,15 @@
                                     <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{pr.name}}</p>
                                 </div>
                             </div>
+=======
+            <!--to display project-->
+            <div id="project_list" class="flex-container" >
+                <!--<p ng-repeat="pr in listProjects">The data {{pr.name}}</p>-->
+                <ul ng-repeat="pr in projects" | filter:searchText">
+                    <a href="/state" class="">
+                        <li class="flex-item">2
+                            <p>{{pr.name}}</p>
+>>>>>>> parent of 607ee49... Merge branch 'scss' into mich
                         </li>
                     </a>
                     <button class="btn btn-danger" ng-click="deleteProject(pr.id)">Delete</button>
@@ -141,12 +181,11 @@
             // }
         });
         
-        
         $("#create_project").hide();
-        $("#floatingCirclesG").hide();
+
     
         $('#createProject').click(function(){
-           $("#welcome_page").hide();
+           $("#welcome_page ").hide();
            $("#create_project ").show(); 
         });
         

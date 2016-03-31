@@ -30,13 +30,13 @@
     TOTAL_MEMORY: 268435456,
     errorhandler: null,
     compatibilitycheck: null,
-    dataUrl: "/resources/webgl/Release/webgl.data",
-    codeUrl: "/resources/webgl/Release/webgl.js",
-    memUrl: "/resources/webgl/Release/webgl.mem",
+    dataUrl: "resources/webgl/Release/webgl.data",
+    codeUrl: "resources/webgl/Release/webgl.js",
+    memUrl: "resources/webgl/Release/webgl.mem",
   };
   
   var downloadUserStuff = function(assetBundleName, stateName) {
-    assetBundleName = assetBundleName || '/assetbundles/webglbundles.unity3d';
+    assetBundleName = assetBundleName || './assetbundles/webglbundles.unity3d';
     stateName = stateName || '/state.dat';
     var combinedName = assetBundleName + ":" + stateName;
     SendMessage ("Facade", 'DownLoadUserStuff', combinedName);

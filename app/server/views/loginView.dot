@@ -6,25 +6,13 @@
 	    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css" />
 	    <link rel="stylesheet" href="vendors/bootswatch/superhero/bootstrap.min.css" />
 	    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="resources/css/login.css" />  
 	</head>
 	<body>
-        <div class="top-bar">
-            <div class="title"><img src="/resources/images/logo.png">Vumix</div>
-            <a href="https://github.com/nus-mtp/ar-design-tool"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
-        </div>
-        <div class="below-top-bar"></div>
-		<div class="container">  
-             <div class="content"> 
-                <div style="height:300px; margin-top: 18px;" class="jumbotron text-center">
-                    <h1><span class="fa fa-lock"></span> Login with Google</h1>
-                    <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
-                </div>
-                <div class="flexbox-container">
-                    <h3 style="width:50%">Create a splendid Augmented Reality (AR) prototype with only a single click and viewed it through your device immediately</h3>
-                    <div><a href="/auth/google" class="btn btn-danger" style="margin-top: 10%;margin-left: 30%;><span class="fa fa-google-plus"></span> Login with Google</a></div>
-                </div>
-            </div>
+		<div class="container">
+			<div style="margin-top: 100px" class="jumbotron text-center">
+				<h1><span class="fa fa-lock"></span> Login with Google</h1>
+				<a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Google</a>
+			</div>
 		</div>
 		<script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
     	<script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
