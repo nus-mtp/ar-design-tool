@@ -96,13 +96,29 @@
         });
       }
       
+      service.addTextStateObject = function(stateId, text) {
+        _state.states.forEach(function(state) {
+          if (state.id === stateId) {
+            var newStateObject = {
+              instanceName: text,
+              id: state.modelIndex++,
+              isClickable: true,
+              stateTransitionId: -1
+            }
+            state.models.push(newStateObject);
+          }
+        });
+        unityMapperService.createText(text);
+        notifyStateChange();
+      }
+      
       service.addStateObject = function(stateId, object) {
         _state.states.forEach(function(state) {
           if (state.id === stateId) {
             var newStateObject = {
               instanceName: object.name,
               id: state.modelIndex++,
-              isClickable: false,
+              isClickable: true,
               stateTransitionId: -1
             }
             state.models.push(newStateObject);

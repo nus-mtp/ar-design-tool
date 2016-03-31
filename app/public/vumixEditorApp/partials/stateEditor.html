@@ -21,6 +21,16 @@
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotation Cursor" ng-click="unityMapperService.setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Cursor" ng-click="unityMapperService.setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
     </ul>
+    <div class="col-sm-3 col-md-3">
+      <form class="navbar-form">
+        <div class="input-group">
+          <input ng-model="textModel" type="text" class="form-control" placeholder="Enter text">
+          <div class="input-group-btn">
+            <button class="btn btn-default" type="button" ng-click="addText('just test')">Add</button>
+          </div>
+        </div>
+      </form>
+		</div>
   </nav>
   <unity-editor></unity-editor>
 </div>
@@ -28,26 +38,33 @@
 
 <bs-modal modal-id="add-asset" modal-size="md">
   <modal-body>
-    <h5>Browse Assets</h5>
     <div class="row">
-      <div ng-repeat="model in modelsOnServer" class="col-xs-3">
-        <div class="frame">
-          <div class="thumbnail">
-            <img src="/resources/images/open_book.png" placeholder="some image" />
-          </div>
-          <div class="caption">
-            <p>{{model.name}}</p>
-          </div>
-        </div>
-      </div>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr class="warning">
+            <th class="col-xs-10">Model Name</th>
+            <th class="col-xs-2">Include</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="model in modelsOnServer">
+            <td>{{ model.name }}</td>
+            <td><input type="checkbox" name="selectedModels[]" value="{{ model.name }}" ng-model="model.included" /></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </modal-body>
   <modal-footer>
+    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Apply</a>
     <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
   </modal-footer>
 </bs-modal>
 
-<script type="text/javascript">      
+<script type="text/javascript">     
+  var el = $('[ng-app=vumixEditorApp]')[0];
+  angular.element(el).injector().get('loaderService').showLoader("WebGL is loading");
+   
   var Module = {
     TOTAL_MEMORY: 268435456,
     errorhandler: null,
@@ -65,12 +82,13 @@
   }
   
   var makeProject = function(stateModels) {
-    var el = $('[ng-app=vumixEditorApp]')[0];
     angular.element(el).injector().get('stateService').addStateModel(JSON.parse(stateModels));
+    angular.element(el).injector().get('loaderService').hideLoader();
   }
   
   var globalFunc = {
     unityHasLoaded: function() {
+      angular.element(el).injector().get('loaderService').showLoader("Importing all models");
       downloadUserStuff();
     }
   };

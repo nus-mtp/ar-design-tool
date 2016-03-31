@@ -9,6 +9,7 @@
     ) {
       $scope.currentStateId = -1;
       $scope.currentSelected;
+      $scope.textModel = "test";
         
       $scope.modelsAvailable = [];
       $scope.modelsOnServer = [];
@@ -44,6 +45,10 @@
       $scope.removeModelFromScreen = function(object) {
         stateService.removeStateObject($scope.currentStateId, object);
       };
+      
+      $scope.addText = function(text) {
+        stateService.addTextStateObject($scope.currentStateId, text);
+      }
       
       $scope.selectModelOnScreen = function(object) {
         unityMapperService.setTargetStateObject(object.id);

@@ -48,8 +48,20 @@
 
 // SERVER OBJECT APIS END HERE   
       
-      $http.get('/api/users/1/models').then(function(res) {
-        var models = res.data.data;
+      var uid = "0";
+      
+      document.cookie.split(';').forEach(function(el, index) {
+        var _el = el.split('=');
+        if(_el[0] === "uid") {
+          uid = _el[1];
+        }
+      });
+      
+      $http.get('/api/users/'+ uid + '/models').then(function(res) {
+        var models = angular.copy(res.data.data);
+        models.forEach(function(el, index) {
+          el.included = false;
+        });
         _models.onServer = models;
         notifyServerModelChange();
       }).catch(function(err) {

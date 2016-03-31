@@ -4,6 +4,7 @@
 		<meta charset='utf-8'>
     <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/resources/css/loader.css" />
     <link rel="stylesheet" href="/resources/css/editor.css" />
     <title>Vumix Editor Application</title>
 	</head>
@@ -23,11 +24,13 @@
     <script type="text/javascript" src="/vumixEditorApp/services/editorService.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/services/stateService.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/services/modelService.js"></script>
+    <script type="text/javascript" src="/vumixEditorApp/services/loaderService.js"></script>
     
     <script type="text/javascript" src="/vumixEditorApp/directives/_directives.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/directives/bsModalDirective.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/directives/unityEditorDirective.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/directives/sidebarEditorDirective.js"></script>
+    <script type="text/javascript" src="/vumixEditorApp/directives/loaderDirective.js"></script>
     
     <script type="text/javascript" src="/vumixEditorApp/controllers/_controllers.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/controllers/editorController.js"></script>
