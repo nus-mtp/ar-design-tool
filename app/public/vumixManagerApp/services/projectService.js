@@ -11,11 +11,13 @@
             fd.append('name', project.project_name);
             fd.append('company_name',project.company_name);
             fd.append('marker_type', project.marker_type);
-
+            
             return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })
             .then(function(res){
+                $("#floatingCirclesG").show().delay(13000).fadeOut();
+                $(".navbar").css( "zIndex" , -10 );
                 return res.data.data[0];
             }, function errorCallback(res){
                console.log("error adding the project");
@@ -37,15 +39,21 @@
                console.log("error deleting the model");
            });
         },  
-        
-        updateProject: function(projects, project, userId, id){
-           return $http({
-               method: 'PUT',
-               url: '/api/users/' + userId + '/projects/' + id      
+
+        updateProject: function(projects, update, update_file, userId, id){
+           var fd = new FormData();
+           var uploadUrl = '/api/users/' + userId + '/projects/' + id ;
+           fd.append('file', update_file);
+           fd.append('uid', userId);
+           fd.append('name', update.name);
+           fd.append('company_name',update.com_name);
+           fd.append('marker_type',update.marker_type);
+           return $http.put(uploadUrl, fd, {
+               headers: {'Content-Type': undefined}
            }).then(function(res){
                for(var i = 0; i < projects.length; i++){
                    if(id === projects[i].id){
-                       projects[i] = project;
+                       projects[i] = update;
                        return projects[i];
                    }
                }
