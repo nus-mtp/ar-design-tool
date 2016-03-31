@@ -188,8 +188,8 @@ module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
 module.exports.updateVuforia 		= updateVuforia;
 
 module.exports.moveStateFile		= moveStateFile;
-module.exports.moveCopyFile			= moveCopyFile;
-module.exports.copyStateDat			= moveStateDat;
+module.exports.moveCopyState		= moveCopyState;
+module.exports.copyStateDat			= copyStateDat;
 
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
