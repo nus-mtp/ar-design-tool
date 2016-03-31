@@ -11,7 +11,6 @@
             fd.append('name', project.project_name);
             fd.append('company_name',project.company_name);
             fd.append('marker_type', project.marker_type);
-            
             return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })
