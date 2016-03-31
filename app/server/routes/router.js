@@ -42,6 +42,6 @@ function isLoggedIn(req, res, next) {
 	}
 	console.log('not logged in, redirecting to login!');
 	res.redirect('/login');
-}
+};
 
 module.exports = router;
