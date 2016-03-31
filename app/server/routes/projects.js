@@ -38,6 +38,9 @@ router.get('/', function(req, res) {
         }
     }).then(function(projects){
         res.json({status: "ok", length: projects.length, data: projects});            
+    }).catch(function(err) {
+        console.log('caught error in fetch all projects API');
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
@@ -60,6 +63,9 @@ router.get('/:id', function(req, res) {
         } else {
             res.json({status: "fail", message: "project not found", length: 0, data: []});
         }
+    }).catch(function(err) {
+        console.log('caught error in fetch project API');
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
@@ -88,9 +94,21 @@ router.post('/', upload.single('file'), function(req, res) {
     }).then(function(project) {
         if(project) {
             res.json({status: "fail", message: "project already exists!", length: 0, data: [project]});
-        } 
-        return models.project.create(newProj);
-    }).then(function() {
+        } else {
+            createProjectInDB(newProj, vuforia_pkg, function(data) {
+                res.json({status: "ok", message: "new project created!", length: 1, data: [data]});
+            }, function(err) {
+                res.json({status: "fail", message: err.message, length: 0, data: []});
+            });            
+        }
+    }).catch(function(err) {
+        console.log('Caught error in insert project API');
+        res.json({status: "fail", message: err.message, length: 0, data: []});
+    });            
+});
+
+var createProjectInDB = function(newProj, vuforia_pkg, goodCallback, badCallback) {
+    models.project.create(newProj).then(function() {
         return models.project.find({
             where: {
                 uid: newProj.uid,
@@ -99,14 +117,16 @@ router.post('/', upload.single('file'), function(req, res) {
         });
     }).then(function(newproject) {
         unity.createProj(newproject.uid, newproject.id, vuforia_pkg, function() {
-            res.json({status: "ok", message: "new project created!", length: 1, data: [newproject]});
+            goodCallback(newproject);
+        }, function(err) {
+            badCallback(err);
         });
-        console.log('created project!');
-    }).catch(function(err) {
-        console.log('Caught error in insert project');
-        res.json({status: "fail", message: err.message, length: 0, data: []});
-    });            
-});
+    }).catch(function() {
+        console.log('caught error in createProjectInDB API');
+        badCallback(err);
+    });
+    console.log('created project!');
+};
 
 /**
  * @module deleteProject
@@ -122,22 +142,33 @@ router.delete('/:id', function(req, res) {
     models.project.findById(id).then(function(project) {
         if(!project) {
             res.json({status: "fail", message: "project not found", length: 0, data: []});
+        } else {
+            _project = project;
+            deleteProjectDB(uid, id, _project, function(row_deleted, _project) {
+                res.json({status: "ok", message: "deleted "+row_deleted+" row(s)", length: 1, data: [_project]});
+            }, function(err) {
+                res.json({status: "fail", message: err.message, length: 0, data: []});
+            });
         }
-        _project = project;
-        return models.project.destroy({
-            where: {
-                id: id
-            }
-        });
-    }).then(function(row_deleted) {
-        unity.deleteProj(uid, id);
-        res.json({status: "ok", message: "deleted " + row_deleted + " row(s)", length: 1, data: [_project]});        
     }).catch(function(err) {
-        console.log('Caught error in delete project');
+        console.log('Caught error in delete project API');
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
+var deleteProjectDB = function(uid, id, _project, goodCallback, badCallback) {
+    models.project.destroy({
+        where: {
+            id: id
+        }
+    }).then(function(row_deleted) {
+        unity.deleteProj(uid, id);
+        goodCallback(row_deleted, _project);
+    }).catch(function(err) {
+        console.log('Caught error in deleteProjectDB API');
+        badCallback(err);
+    });
+};
 /**
  * @module updateProject
  * @parent projectApi
@@ -165,29 +196,15 @@ router.put('/:id', upload.single('file'), function(req, res) {
         console.log(project)
         if(!project) {
             res.json({status: "fail", message: "project not found", length: 0, data: []});
+        } else {
+            updateProjectDB(req, project, id, uid, function(updatedProject) {
+                res.json({status: "ok", message: "updated project", length: 1, data: [updatedProject]});
+            }, function(err) {
+                res.json({status: "fail", message: err.message, length: 0, data: []});
+            });
         }
-        return models.project.update({
-            name: req.body.name || project.name,
-            marker_type: req.body.marker_type || project.marker_type,
-            company_name: req.body.company_name || project.company_name,
-            thumbnail_loc: req.body.thumbnail_loc || project.thumbnail_loc,    
-            assetbundle_id: req.body.assetbundle_id || project.assetbundle_id,
-            last_published: req.body.last_published || project.last_published,
-            project_dat_file: req.body.project_dat_file || project.project_dat_file
-        }, {
-            where: {
-                id: id,
-                uid: uid
-            }
-        });
-    }).then(function() {
-        return models.project.findById(id);
-    }).then(function(updatedProject) {
-        res.json({status: "ok", message: "updated project", length: 1, data: [updatedProject]});
     }).catch(function(err) {
-        console.log('error caught in update project');
-        console.log(err);
-        res.json({status: "fail", message: err.message, length: 0, data: []});
+        console.log('error caught in update project API');
     });
 
     // models.project.findById(uid).then(function(project) {
@@ -213,6 +230,31 @@ router.put('/:id', upload.single('file'), function(req, res) {
     //     }
     //     res.json({status: "fail", message: "project not found", length: 0, data: []});
     // });
+});
+
+var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback) {
+    modes.project.update({
+        name: req.body.name || project.name,
+        marker_type: req.body.marker_type || project.marker_type,
+        company_name: req.body.company_name || project.company_name,
+        last_published: req.body.last_published || project.last_published
+    }, {
+        where: {
+            id: id,
+            uid: uid
+        }
+    }).then(function() {
+        return models.project.findById(id);
+    }).then(function(updatedProject) {
+        goodCallback(updatedProject);
+    }).catch(function(err) {
+        console.log('caught error in updateProjectDB API');
+        badCallback(err);
+    });
+};
+
+router.post('/addModel', function(req, res) {
+
 });
 
 module.exports = router;
