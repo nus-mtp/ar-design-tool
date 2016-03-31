@@ -178,16 +178,14 @@ var deleteModelDB = function(id, uid, modelName, model, goodCallback, badCallbac
  * api: /api/users/{userId}/models/{id}
  */
 router.put('/:id', upload.single("file"), function(req, res) {
-    id = req.params.id;
-    physical_model = req.file;
+    console.log("uploading model");
+    var id = req.params.id;
+    var uid = req.params.userId;
+    var physical_model = req.file;
 
     models.model.findById(id).then(function(model) {
         if(model) {
             if(physical_model) {
-                console.log('reading:')
-                console.log(physical_model)
-                //TODO: move model to library
-                //TODO: delete old model
                 unity.moveModel(model.uid, physical_model.filename);
                 unity.deleteModel(uid, model.file_name);
             }
@@ -199,6 +197,10 @@ router.put('/:id', upload.single("file"), function(req, res) {
         } else {
             res.json({status: "fail", message: "model not found", length: 0, data: []});
         }
+    }).catch(function(err) {
+        console.log('caught error in updateModelDB API');
+        console.log(err.message);
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
@@ -218,7 +220,7 @@ var updateModelDB = function(req, physical_model, id, model, goodCallback, badCa
             goodCallback(updatedModel);
         });
     }).catch(function(err) {
-        console.log('caught error in updateModelDB API');
+        console.log('caught error in updateModelDB API function');
         badCallback(err);
     });
 }
