@@ -36,7 +36,7 @@ var moveVuforia = function(location, uid, pid, fileName) {
 var updateVuforia = function(uid, pid, vuforia_pkg) {
 	console.log('Updating Vuforia pkg');
 	moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
-}
+};
 
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
@@ -65,7 +65,10 @@ var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 };
 
 var deleteProj = function(uid, pid) {
-	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
+	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
+	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
+	console.log('Deleting public project dir: ' + public_project_path);
+	utils.deleteDir(public_project_path);
 	console.log('Deleting project dir: ' + project_path);
 	utils.deleteDir(project_path);
 };
@@ -153,13 +156,14 @@ var buildApk = function(uid, pid) {
 	});
 };
 
-var moveStateDat = function(uid, pid, stateFile) {
+var moveStateFile = function(uid, pid, stateFile) {
 	console.log('saving state.dat');
-	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateFile.name);
-	utils.moveFileToDest(stateFile.path, dest_path+fileName);	
-}
+	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateFile.originalname);
+	utils.moveFileToDest(stateFile.path, dest_path);	
+};
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
+module.exports.moveStateFile		= moveStateFile;
 module.exports.updateVuforia 		= updateVuforia;
 module.exports.deleteModel 			= deleteModel;
 module.exports.createProj 			= createProj;
