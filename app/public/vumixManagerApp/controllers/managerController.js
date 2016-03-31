@@ -43,15 +43,20 @@ angular.module('vumixManagerApp.controllers')
           
           var extensionCheck = function() {
             var tokenised = $scope.project.upload.name.split('.');
+            
             if (tokenised.length < 1) {
               return false;
             }
+            if( tokenised[1] !== 'unitypackage'){
+                $scope.addProjectForm.projectUpload.$setValidity('fileType', false); 
+            }
+            
             return tokenised[tokenised.length - 1] === 'unitypackage';
           };
           
           $scope.$watch('project.upload', function(newVal, oldVal) {   
             $scope.addProjectForm.projectUpload.$setValidity('required', false); 
-            $scope.addProjectForm.projectUpload.$setValidity('fileType', false); 
+            
             if (requiredCheck()) {      
               $scope.addProjectForm.projectUpload.$setValidity('required', true);
               if (extensionCheck()) {
