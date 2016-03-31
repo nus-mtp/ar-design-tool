@@ -14,7 +14,7 @@ var router = express.Router();
 //settings for storing the saved file
 var storage = multer.diskStorage({
 	destination: function(req, file, cb) {
-		cb(null, path.join(__dirname, '../../'+file_paths.storage_path));
+		cb(null, path.join(__dirname, '../../'+file_paths.public_path));
 	},
 	filename: function(req, file, cb) {
 		cb(null, file.originalname);

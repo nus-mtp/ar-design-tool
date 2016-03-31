@@ -39,10 +39,12 @@ var updateVuforia = function(uid, pid, vuforia_pkg) {
 }
 
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
-	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
-	var unity_cmd 		= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit';
-	
+	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
+	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
+	var unity_cmd 			= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit';
+
 	utils.checkExistsIfNotCreate(project_path);
+	utils.checkExistsIfNotCreate(public_project_path);
 	
 	console.log('running: ' + unity_cmd);
 	const unity	= exec(unity_cmd, function(error, stdout, stderr) {
@@ -128,7 +130,7 @@ var rebuildAssetBundle = function(uid, pid) {
 	});
 };
 
-var buildApk = function(uid, pid){
+var buildApk = function(uid, pid) {
 	console.log('building apk for projectid: ' + pid);
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
 	var down_path 	 = project_path+file_paths.download;
@@ -150,6 +152,12 @@ var buildApk = function(uid, pid){
 		return down_path;
 	});
 };
+
+var moveStateDat = function(uid, pid, stateFile) {
+	console.log('saving state.dat');
+	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateFile.name);
+	utils.moveFileToDest(stateFile.path, dest_path+fileName);	
+}
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
 module.exports.updateVuforia 		= updateVuforia;

@@ -17,6 +17,7 @@ parse.processArg();
 
 // Make sure storage folder exists
 utils.checkExistsIfNotCreate(path.join(__dirname, file_path.storage_path));
+utils.checkExistsIfNotCreate(path.join(__dirname, file_path.public_path));
 
 var app = express(),
 	port = process.env.PORT || 3000;
