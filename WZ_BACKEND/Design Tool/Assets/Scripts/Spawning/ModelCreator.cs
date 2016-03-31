@@ -71,7 +71,7 @@ public class ModelCreator : MonoBehaviour
     {
         GameObject inScene = Instantiate(userObjects[i]);
         inScene.name = userObjects[i].name;
-        stateManager.AddToState(inScene, StateObjectType.Model);
+        stateManager.AddToActiveState(inScene, StateObjectType.Model);
     }
 
     public GameObject GetModel(string name){

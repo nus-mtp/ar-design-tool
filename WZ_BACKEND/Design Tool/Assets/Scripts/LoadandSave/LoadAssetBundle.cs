@@ -67,14 +67,14 @@ public class LoadAssetBundle : MonoBehaviour
         loadProgress.Load(stateUrl);
     }
 
-    public void DownloadAndInstantiate(string url, string stateURL,string callback)
+    public void DownloadAndInstantiate(string url, string stateURL)
     {
         StartCoroutine(Download(url,stateURL));
     }
 
     public void DownloadAssetBundleTest()
     {
-        DownloadAndInstantiate(assetBundleName,"./state.dat","callback");
+        DownloadAndInstantiate(assetBundleName,"./state.dat");
     }
 
     void Awake()

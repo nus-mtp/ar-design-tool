@@ -29,7 +29,7 @@ public class SerialStateObject
         position = new SerialVector(g.transform.position);
         rotation = new SerialVector(g.transform.rotation);
         scale = new SerialVector(g.transform.localScale);
-        isStateChanger = s.isStateChanger;
+        isStateChanger = s.isClickable;
         transitionStateId = s.transitionStateId;
         id = s.id;
         type = s.type;
@@ -43,7 +43,7 @@ public class SerialStateObject
         g.transform.rotation = rotation.ToQuaternion();
         g.transform.localScale = scale.ToVector3();
         s.instanceName = instanceName;
-        s.isStateChanger = isStateChanger;
+        s.isClickable = isStateChanger;
         s.transitionStateId = transitionStateId;
         s.id = id;
         s.type = type;

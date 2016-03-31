@@ -31,7 +31,6 @@ public class DragHandler : MonoBehaviour
         }
         if (Mouse.isMouseDown && chosenObj)
         {
-            Camera.main.GetComponent<OrbitCamera>().pause();
             AbstractTransformHandler interactable = chosenObj.GetComponent<AbstractTransformHandler>();
             if (interactable)
             {
@@ -40,7 +39,6 @@ public class DragHandler : MonoBehaviour
         }
         else
         {
-            Camera.main.GetComponent<OrbitCamera>().resume();
             chosenObj = null;
         }
         mouseOrigin = Mouse.mousePosition;

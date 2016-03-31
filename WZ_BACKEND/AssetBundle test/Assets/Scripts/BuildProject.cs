@@ -132,6 +132,7 @@ public class BuildProject : MonoBehaviour {
     [MenuItem("File/ImportPackage")]
     public static void ImportPackage()
     {
+        CleanProject();
         AssetDatabase.ImportPackage(Application.dataPath + VUFORIA_PACKAGE_PATH, false);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);

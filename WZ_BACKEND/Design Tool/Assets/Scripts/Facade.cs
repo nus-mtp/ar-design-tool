@@ -18,20 +18,20 @@ public class Facade : MonoBehaviour
     private int targetStateObjectId;
     private TextCreator textCreator;
 
-    private string[] seperate(string s)
-    {
-        return s.Split(":".ToCharArray());
-    }
-
     public void AddNewState()
     {
         State newState = stateManager.AddNewState();
-        Application.ExternalCall("createState", newState.id, newState.name);
+        //Application.ExternalCall("createState", newState.id, newState.name);
     }
 
     public void ChangeStateName(string newName)
     {
         stateManager.ChangeStateName(targetStateId, newName);
+    }
+
+    public void DeleteGameObject()
+    {
+        stateManager.DeleteGameObject(targetStateObjectId);
     }
 
     public void DeleteState()
@@ -49,39 +49,13 @@ public class Facade : MonoBehaviour
         string[] arguments = seperate(param);
         string assetBundleUrl = arguments[0];
         string stateUrl = arguments[1];
-        string callBack = arguments[2];
-        loadAssetBundle.DownloadAndInstantiate(assetBundleUrl,stateUrl,callBack);
+        loadAssetBundle.DownloadAndInstantiate(assetBundleUrl, stateUrl);
     }
+
 
     public void LoadProgress(string url)
     {
         loadProgress.Load(url);
-    }
-
-    public void RequestClickable()
-    {
-        List<StateObject> clickables = stateManager.RequestClickable(targetStateId);
-        foreach (StateObject so in clickables)
-        {
-            Application.ExternalCall("AddClickable", so.instanceName, so.id, targetStateId);
-        }
-    }
-
-    public void RequestModelInfo()
-    {
-        List<string> names = objectCollection.GetNames();
-        foreach (string name in names)
-        {
-            Application.ExternalCall("addModelButton", name);
-        }
-    }
-
-    public void RequestProjectInfo()
-    {
-        ProjectState projectState = loadProgress.projectState;
-        string jsonString = JsonUtility.ToJson(projectState);
-        Debug.Log(jsonString);
-        Application.ExternalCall("makeProject", jsonString);
     }
 
     public void SaveProgress(string url)
@@ -89,16 +63,17 @@ public class Facade : MonoBehaviour
         saveProgress.Save(url);
     }
 
-    public void SendStateInfo()
+    public void SendProjectInfo()
     {
-        List<int> ids = stateManager.GetStateIDs();
-        List<string> names = stateManager.GetStateNames();
-        for (int i = 0; i < ids.Count; i++)
-        {
-            Application.ExternalCall("createState", ids[i], names[i]);
-        }
+        string jsonString = stateManager.CreateJavaScriptJson();
+        Debug.Log(jsonString);
+        Application.ExternalCall("makeProject", jsonString);
     }
 
+    public void SetActiveGameObject()
+    {
+        stateManager.SetActiveGameObject(targetStateObjectId);
+    }
     public void SetTargetState(int id)
     {
         targetStateId = id;
@@ -134,7 +109,10 @@ public class Facade : MonoBehaviour
         stateManager.UnSetTransitionId(targetStateId, targetStateObjectId);
     }
 
-
+    private string[] seperate(string s)
+    {
+        return s.Split(":".ToCharArray());
+    }
     // Use this for initialization
     private void Start()
     {
@@ -146,5 +124,8 @@ public class Facade : MonoBehaviour
         stateManager = controlScript.GetComponent<StateManager>();
         textCreator = controlScript.GetComponent<TextCreator>();
         Application.ExternalCall(JAVASCRIPT_PREFIX+"unityHasLoaded");
+        #if !UNITY_EDITOR && UNITY_WEBGL
+            WebGLInput.captureAllKeyboardInput = false;
+        #endif
     }
 }

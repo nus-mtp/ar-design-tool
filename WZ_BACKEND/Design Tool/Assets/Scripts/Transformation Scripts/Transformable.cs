@@ -45,7 +45,6 @@ public class Transformable : MonoBehaviour
 
     public void initializeElements()
     {
-        Debug.Log(UnityEngine.StackTraceUtility.ExtractStackTrace());
         GameObject x, y, z;
         float pad = 1.0f;
         Vector3[] bounds = calculateBound();

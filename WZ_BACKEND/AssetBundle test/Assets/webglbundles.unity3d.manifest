@@ -1,0 +1,42 @@
+ManifestFileVersion: 0
+CRC: 2644681412
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 430a6f0a55f48dacdaa2e0cec3f99032
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: fa94412e78acec553cc976e8aeb37443
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 64
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: eda7753f719b61842b0e5757f22b71ea, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+Assets:
+- Assets/Resources/AssetBundlesObjects/bb82.prefab
+- Assets/Resources/AssetBundlesObjects/DSC02552.prefab
+- Assets/Resources/AssetBundlesObjects/DSC01225.prefab
+- Assets/Resources/AssetBundlesObjects/Cow.prefab
+- Assets/Resources/AssetBundlesObjects/cow-158552_1280.prefab
+- Assets/Resources/AssetBundlesObjects/dead 123456.prefab
+- Assets/Resources/AssetBundlesObjects/IronMan.prefab
+Dependencies: []

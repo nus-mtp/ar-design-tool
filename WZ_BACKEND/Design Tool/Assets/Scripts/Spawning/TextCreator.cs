@@ -17,7 +17,7 @@ public class TextCreator : MonoBehaviour {
         textComponent.text = input;
         newText.AddComponent<BoxCollider>();
         newText.name = input;
-        stateManager.AddToState(newText, StateObjectType.Text);
+        stateManager.AddToActiveState(newText, StateObjectType.Text);
     }
 
     public GameObject LoadText(string input)

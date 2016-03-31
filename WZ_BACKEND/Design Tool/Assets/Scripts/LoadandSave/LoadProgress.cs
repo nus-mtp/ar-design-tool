@@ -10,6 +10,7 @@ public class LoadProgress : MonoBehaviour {
 	private const string SAVE_DATA_URL = "./state.dat";
     private byte[] saveData;
     private StateManager stateManager;
+    private Facade facade;
 
     public ProjectState projectState; 
   
@@ -40,11 +41,14 @@ public class LoadProgress : MonoBehaviour {
         projectState = (ProjectState)bf.Deserialize(stream);
         List<SerialState> states = projectState.serialStates;
         stateManager.InitialzeStates(states);
+        facade.SendProjectInfo();
     }
     
     void Awake()
     {
         stateManager = gameObject.GetComponent<StateManager>();
+        GameObject facadeGO = GameObject.FindGameObjectWithTag(Facade.FACADE_TAG);
+        facade = facadeGO.GetComponent<Facade>();
     }
 
 }

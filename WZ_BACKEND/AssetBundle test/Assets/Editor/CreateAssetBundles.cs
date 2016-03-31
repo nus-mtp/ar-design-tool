@@ -51,7 +51,8 @@ public class CreateAssetBundles
             assetBundleName = ASSET_BUNDLE_NAME,
             assetNames = prefabPaths.ToArray()
         };
-        BuildPipeline.BuildAssetBundles(ASSET_BUNDLE_OUTPUT_PATH, buildInfo, BuildAssetBundleOptions.None, BuildTarget.WebGL);
+        //BuildPipeline.BuildAssetBundles(ASSET_BUNDLE_OUTPUT_PATH, buildInfo, BuildAssetBundleOptions.None, BuildTarget.WebGL);
+        BuildPipeline.BuildAssetBundles(Application.dataPath, buildInfo, BuildAssetBundleOptions.None, BuildTarget.WebGL);
     }
 
     private static void CreateImagePrefabs(List<string> imageNames, List<string> prefabPaths)
@@ -66,7 +67,7 @@ public class CreateAssetBundles
             string outputPath = ASSET_PATH + ASSET_BUNDLE_OBJECTS_PATH + imageName + PREFAB_EXTENSION;
             PrefabUtility.CreatePrefab(outputPath, go, ReplacePrefabOptions.ReplaceNameBased);
             prefabPaths.Add(outputPath);
-            //MonoBehaviour.DestroyImmediate(go);
+            MonoBehaviour.DestroyImmediate(go);
         }
     }
 

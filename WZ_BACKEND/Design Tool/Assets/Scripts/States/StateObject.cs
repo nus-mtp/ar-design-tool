@@ -8,7 +8,7 @@ public class StateObject{
     public StateObjectChanger stateObjectChanger;
     public string instanceName;
     public int id;
-    public bool isStateChanger;
+    public bool isClickable;
     public int transitionStateId;
     public StateObjectType type;
 
@@ -45,7 +45,7 @@ public class StateObject{
         Transformable t = gameObject.GetComponent<Transformable>();
         t.SetPreview();
         Preview p = gameObject.GetComponent<Preview>();
-        p.SetPreview(transitionStateId, isStateChanger);
+        p.SetPreview(transitionStateId, isClickable);
     }
 
     public void DisablePreview()
@@ -64,7 +64,7 @@ public class StateObject{
 
     public void RemoveLink(int stateId)
     {
-        if (isStateChanger && transitionStateId == stateId)
+        if (isClickable && transitionStateId == stateId)
         {
             UnSetTransition();
         }
@@ -72,13 +72,13 @@ public class StateObject{
 
     public void UnSetTransition()
     {
-        isStateChanger = false;
+        isClickable = false;
         stateObjectChanger.UnSetIsStateChanger();
     }
 
     public void SetTransition(int transitionStateId)
     {
-        isStateChanger = true;
+        isClickable = true;
         this.transitionStateId = transitionStateId;
     }
 }

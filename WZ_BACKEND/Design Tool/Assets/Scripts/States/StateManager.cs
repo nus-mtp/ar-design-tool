@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class StateManager : MonoBehaviour {
+public class StateManager : MonoBehaviour
+{
 
     public const string CONTROL_SCRIPT_TAG = "ControlScripts";
     public Text currentSelectedDisplay;
@@ -21,10 +22,10 @@ public class StateManager : MonoBehaviour {
     private bool isPreview = false;
     private int nextStateId;
     private ModelCreator modelCreator;
-    private Dictionary<int,State> stateList;
+    private Dictionary<int, State> stateList;
     private int stateNumber;
     private TextCreator textCreator;
-    
+
     public State AddNewState()
     {
         State newState = new State(nextStateId);
@@ -34,7 +35,7 @@ public class StateManager : MonoBehaviour {
         return newState;
     }
 
-    public void AddToState(GameObject g, StateObjectType type)
+    public void AddToActiveState(GameObject g, StateObjectType type)
     {
         activeState.AddToState(g, type);
         SetActiveGameObject(g);
@@ -151,7 +152,7 @@ public class StateManager : MonoBehaviour {
         stateList = new Dictionary<int, State>();
         foreach (SerialState serialState in serialStates)
         {
-            State newState = new State(serialState, modelCreator,textCreator);
+            State newState = new State(serialState, modelCreator, textCreator);
             stateList.Add(newState.id, newState);
             activeState = newState;
             nextStateId = Mathf.Max(newState.id, nextStateId);
@@ -196,6 +197,24 @@ public class StateManager : MonoBehaviour {
                     currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT + instanceName;
                 }
             }
+        }
+    }
+
+    public void SetActiveGameObject(int i)
+    {
+        if (isPreview)
+        {
+            return;
+        }
+        else
+        {
+            string instanceName = activeState.SetActiveGameObject(i);
+            if (instanceName != null)
+            {
+                currentSelectedDisplay.color = Color.black;
+                currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT + instanceName;
+            }
+
         }
     }
 
@@ -248,4 +267,16 @@ public class StateManager : MonoBehaviour {
     }
 
 
+
+    public string CreateJavaScriptJson()
+    {
+        JavaScriptProjectState jps = new JavaScriptProjectState(stateList, modelCreator.GetNames());
+        return jps.toJson();
+    }
+
+    public void DeleteGameObject(int targetStateObjectId)
+    {
+        activeState.DeleteGameObject(targetStateObjectId);
+        currentSelectedDisplay.text = CURRENT_SELECTED_ITEM_TEXT; 
+    }
 }
