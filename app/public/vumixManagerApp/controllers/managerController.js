@@ -1,21 +1,31 @@
 angular.module('vumixManagerApp.controllers')
-    .controller('managerController', function (projectService, $http, $scope, $timeout) {
+    .controller('managerController', function (projectService, $http, $scope, $timeout, $window) {
         var file;
-
+        
+        $scope.empty = {
+            project_name: "",
+            company_name: "",
+            marker_type: "3D",
+            image_url: "",  
+            upload: undefined
+        };
+        
         $scope.projects = [];
+       
         $scope.project = {
             project_name: "",
             company_name: "",
             marker_type: "3D",
-            image_url: "",
+            image_url: "",  
             upload: undefined
         };
         
         $scope.update = {
-            project_name: "",
-            company_name: "",
+            id: "",
+            name: "",
+            com_name: "",
             marker_type: "3D",
-            image_url: "",
+            image_url: "",    
             upload: undefined
         };
                   
@@ -24,7 +34,8 @@ angular.module('vumixManagerApp.controllers')
         var uid = cookie.split('=');
         $scope.userid = uid[1];
         $scope.project.image_url = "/resources/images/open_book.png";
-
+        $scope.update.image_url = "/resources/images/open_book.png";
+        
         var onFormLoaded = function() {          
           var requiredCheck = function() {
             return $scope.project.upload;
@@ -59,42 +70,59 @@ angular.module('vumixManagerApp.controllers')
         $scope.uploadFile = function(){
             file = event.target.files[0];
             $scope.project.upload = file;
-            $scope.update.upload = file;
             $scope.$apply();
         };
+        
+        $scope.goToState = function(id){
+            window.location.href=  "/project/" + id;
+        }
+        
+        $scope.updateFile = function(){
+            file = event.target.files[0];
+            $scope.update.upload = file;
+            $scope.$apply();
+        }
         
         $scope.deleteProject = function(id){
             projectService.deleteProject($scope.projects, $scope.userid, id)
                 .then(function(project) {
-                    //$scope.projects.push(project);
-                    // console.log($scope.projects);
             });
         };       
         
         $scope.getProject = function(id){
             for(var i = 0; i < $scope.projects.length; i++){
                 if(id === $scope.projects[i].id){
+                    $scope.update.id = id;
                     $scope.update = $scope.projects[i];
+                    $scope.update.name = $scope.projects[i].name;
+                    $scope.update.com_name = $scope.projects[i].company_name;
+                    $scope.update.marker_type = $scope.projects[i].marker_type;
+                    $scope.update.upload = $scope.projects[i].upload;
                 }
             }
         };
         
         $scope.updateProject = function(id){
-            projectService.updateProject($scope.projects,$scope.update, $scope.userid,id)
+            projectService.updateProject($scope.projects, $scope.update, $scope.update.upload, $scope.userid,id)
             .then(function(update){
-                console.log(update);
-                $scope.project.project_name = update.name;
-                $scope.project.company_name = update.company_name;
-                $scope.project.marker_type = update.marker_type;
-                $scope.project.upload = update.upload;
+                $scope.project = update;
             });
         };
         
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
                 .then(function(project) {
+                $(".navbar").css( "zIndex" , 0 );
                 $scope.projects.push(project);
+                $scope.reset();
             });
+        };
+        
+        $scope.reset = function(){
+            $("#upload_file").val("");
+            $scope.empty.image_url = $scope.project.image_url;
+            $scope.project = angular.copy($scope.empty); 
+      
         };
         
         $http({

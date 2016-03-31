@@ -11,7 +11,7 @@
             fd.append('model_name', model.model_name);
             fd.append('file_size',model.file_size);
             fd.append('file_extension', model.file_extension);
-            
+    
             return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })
@@ -38,15 +38,23 @@
                console.log("error deleting model");
            });
        },
-       
-       updateModel: function(models, model, userId, id){
+              
+       updateModel: function(models, update, update_file , userId, id){
+           var fd = new FormData();
+           var uploadUrl = '/api/users/' + userId + '/models/ '+ id;
+           fd.append('file', update_file);
+           fd.append('uid', userId);
+           fd.append('model_name', update.name);
+           fd.append('file_size', update.file_size);
+           fd.append('file_extension', update.file_extension);
+           
            return $http({
                method: 'PUT',
                url: '/api/users/' + userId + '/models/' + id      
            }).then(function(res){
                for(var i = 0; i < models.length; i++){
                    if(id === models[i].id){
-                       models[i] = model;
+                       models[i] = update;
                        return models[i];
                    }
                }

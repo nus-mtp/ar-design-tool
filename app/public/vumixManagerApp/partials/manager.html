@@ -1,5 +1,5 @@
-<div class="wrapper" ng-controller="managerController">
-    <div id="floatingCirclesG" style="top:40%; left:50%;">
+<div class="wrapper" ng-controller="managerController" >
+     <div id="floatingCirclesG" style="top:40%; left:50%;">
          <img src="/resources/images/loading_bg.png" style="opacity:0.5;margin-left: -2900%; margin-top: -1000%;width: 8002px;">
          <div class="f_circleG" id="frotateG_01"></div>
          <div class="f_circleG" id="frotateG_02"></div>
@@ -14,13 +14,13 @@
         <div id="welcome_page" class="side-bar-padding">
             <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
-            <button type="button" class="center btn-large" id="createProject">Start</button>
+            <button type="button" class="center btn-large" id="createProject">Create Your New Project</button>
         </div>
         <div id="create_project" class="side-bar-padding">
             <h1 class="center" style="margin-top: 5%;"> Create Your New Project</h1>
             <form name="addProjectForm" ng-submit="addProject()" enctype="multipart/form-data" novalidate>
               <div class="form-group">
-                <h2>Project Name</h2>
+                <h2>Company Name</h2>
                 <input class="form-control" type="text" name="comName" placeholder="Company Name" ng-model="project.company_name" required />
                 <span class="text-danger" ng-show="addProjectForm.comName.$error.required">Company name cannot be empty</span>
               </div>
@@ -39,14 +39,15 @@
                   3D 
               </label>              
               <h2> Upload Your Vuforia Package</h2>
-              <a target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
-              <input type ="file" ng-model="project.upload" name="projectUpload" style="color:#FFFFFF" onchange="angular.element(this).scope().uploadFile()" />
+              <a style="text-decoration: underline" target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
+              <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
               <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
               <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
               <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
             </form>
         </div>
     </div>
+
     <!--modal to update project-->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -58,9 +59,9 @@
                 <div class="modal-body">
                     <form name="updateProjectForm" enctype="multipart/form-data">
                         <h2>Company Name</h2>
-                        <input type="text" name="org_name" ng-model="update.company_name" ><br>
+                        <input type="text" name="comName" ng-model="update.com_name" ><br>
                         <h2> Project Name</h2>
-                        <input type="text" name="project_name"  ng-model="update.name" ><br>
+                        <input type="text" name="projectName"  ng-model="update.name" ><br>
                         <h2> Target Marker Type</h2>
                         <label>
                             <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="update.marker_type">
@@ -71,7 +72,7 @@
                             3D 
                         </label>            
                         <h2> Upload Your Vuforia Package</h2>
-                        <input type ="file" ng-model="project.upload" name="projectUpload" style="color:#000000" onchange="angular.element(this).scope().uploadFile()""/>
+                        <input type ="file" ng-model="update.upload" name="projectUpload" onchange="angular.element(this).scope().updateFile()"/>
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
                             <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
                         </form>-->
@@ -81,16 +82,20 @@
             </div>
         </div>
     </div>
+    
+    
 
     <div class="content">
         <div class="container section" style="width:auto;">
-            <div class="search" style="margin-bottom: 20px; margin-left: 20px;">
-                <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
+            <div class="search-bg">  
+                <div class="search" style="margin-bottom: 20px; margin-left: 20px; margin-top: 12px;">
+                    <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
+                </div>
             </div>
             <!--to display project-->
-            <div id="project_list" class="flex-container" >
+            <div id="project_list" class="flex-container">
                 <ul ng-repeat="pr in projects | filter:searchText">
-                    <a href="/state">
+                    <a ng-click="goToState(pr.id)">
                         <li class="flex-item">
                             <div class="card">
                                 <img class="card-img-top" ng-src="{{project.image_url}}" alt="Card image cap">
@@ -130,11 +135,16 @@
             // }
         });
         
+        
         $("#create_project").hide();
+<<<<<<< HEAD
         $("#floatingCircleG").hide();
+=======
+        $("#floatingCirclesG").hide();
+>>>>>>> master
     
         $('#createProject').click(function(){
-           $("#welcome_page ").hide();
+           $("#welcome_page").hide();
            $("#create_project ").show(); 
         });
         

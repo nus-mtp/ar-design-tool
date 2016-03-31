@@ -2,8 +2,17 @@
 angular.module('vumixManagerApp.controllers')
     .controller('imageController', function (imageService, $http, $scope) {
         var file;
-     
+        
+        $scope.empty = {
+            image_name: "",
+            file_size: "",
+            file_extension: "",
+            image_url: "",
+            upload: undefined
+        };
+        
         $scope.images = [];
+        
         $scope.image = {
             image_name: "",
             file_size: "",
@@ -13,16 +22,20 @@ angular.module('vumixManagerApp.controllers')
         };
         
         $scope.update = {
-            image_name: "",
+            id: "",
+            name: "",
             file_size: "",
             file_extension: "",
+            image_url: "",
             upload: undefined
         };
         
         var cookie = document.cookie.split(';')[0];
         var uid = cookie.split('=');
         $scope.userid = uid[1];
+        
         $scope.image.image_url = "/resources/images/charger.png";
+        $scope.update.image_url = "/resources/images/charger.png";
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -31,16 +44,25 @@ angular.module('vumixManagerApp.controllers')
           
         var extensionCheck = function() {
           var tokenised = $scope.image.upload.name.split('.');
-          $scope.image.file_extension = tokenised[tokenised.length-1];
+          $scope.image.file_extension = tokenised[tokenised.length-1].toLowerCase();
             if (tokenised.length < 1) {
+              $scope.imageForm.imageUpload.$setValidity('fileType', false); 
               return false;
             }
-            return tokenised[tokenised.length - 1] === 'png' || tokenised[tokenised.length - 1] === 'jpg';
+            if ($scope.image.file_extension !== 'png'){
+                $scope.imageForm.imageUpload.$setValidity('fileType', false); 
+            } else if ($scope.image.file_extension !== 'jpg'){
+                $scope.imageForm.imageUpload.$setValidity('fileType', false); 
+            } else if ($scope.image.file_extension !== 'jpeg'){
+                $scope.imageForm.imageUpload.$setValidity('fileType', false); 
+            }
+            return tokenised[tokenised.length - 1].toLowerCase() === 'png' || tokenised[tokenised.length - 1].toLowerCase() === 'jpg' || tokenised[tokenised.length - 1].toLowerCase() === 'jpeg';
          };
          
          var extensionSizeCheck = function(){
           var tokenised = $scope.image.upload.size;
            if(tokenised > 4000000){
+               $scope.imageForm.imageUpload.$setValidity('fileSize', false);
                return false;
            }
            return true;
@@ -48,11 +70,14 @@ angular.module('vumixManagerApp.controllers')
          
          $scope.$watch('image.upload', function(newVal, oldVal) {   
             $scope.imageForm.imageUpload.$setValidity('required', false); 
-            $scope.imageForm.imageUpload.$setValidity('fileType', false); 
             if (requiredCheck()) {      
               $scope.imageForm.imageUpload.$setValidity('required', true);
-              if (extensionCheck() && extensionSizeCheck()) {
+              if (extensionCheck()) {
                 $scope.imageForm.imageUpload.$setValidity('fileType', true); 
+               
+              }
+              if (extensionSizeCheck()){
+                $scope.imageForm.imageUpload.$setValidity('fileSize', true);
               }                            
             }
           });
@@ -68,42 +93,54 @@ angular.module('vumixManagerApp.controllers')
             file = event.target.files[0];
             $scope.image.upload = file;
             $scope.image.file_size = file.size;
+            $scope.$apply();
+        };
+        
+        $scope.updateFile = function(){
+            file = event.target.files[0];
             $scope.update.upload = file;
             $scope.update.file_size = file.size;
             $scope.$apply();
         };
         
         $scope.getImage = function(id){
+            console.log($scope.images);
             for(var i = 0; i < $scope.images.length; i++){
-                if(id === $scope.images[i].id){
-                    $scope.update = $scope.images[i];
+               if(id === $scope.images[i].id){
+                    $scope.update.id = id;
+                    $scope.update.name = $scope.images[i].name;
+                    $scope.update.file_size = $scope.images[i].file_size;
+                    $scope.update.file_extension = $scope.images[i].file_extension;
+                    $scope.update.upload = $scope.images[i].upload;
                 }
             }
         };
         
         $scope.updateImage = function(id){
-            imageService.updateImage($scope.images,$scope.update, $scope.userid,id)
-            .then(function(image){
-                $scope.image.image_name = update.name;
-                $scope.image.file_size = update.file_size;
-                $scope.image.file_extension = update.file_extension;
-                $scope.image.upload = update.upload;
+            imageService.updateImage($scope.images, $scope.update, $scope.update.upload, $scope.userid,id)
+            .then(function(update){
+                $scope.image = update;
             });
         };
         
         $scope.deleteImage = function(id){
             imageService.deleteImage($scope.images, $scope.userid, id)
                 .then(function(image) {
-                //  console.log($scope.models);
             });
         };       
         
         $scope.addImage = function(){
            imageService.addImage($scope.image, $scope.image.upload, $scope.userid)
                 .then(function(image) {
-                    console.log(image);
                 $scope.images.push(image);
+                $scope.reset();
             });
+        };
+        
+        $scope.reset = function(){
+            $("#upload_file").val("");
+            $scope.empty.image_url = $scope.image.image_url;
+            $scope.image = angular.copy($scope.empty);
         };
         
         $http({

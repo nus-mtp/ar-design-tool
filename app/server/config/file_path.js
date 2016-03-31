@@ -1,4 +1,5 @@
 module.exports = {
+	'public_path': '/public/storage/',
 	'storage_path': '/server/storage/',
 	'download': '/Assets/AndroidBuilds.apk',
 	'vuforia': '/Assets/Resources/Vuforia/',
