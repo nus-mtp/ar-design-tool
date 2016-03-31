@@ -181,12 +181,16 @@ router.put('/:id', upload.single("file"), function(req, res) {
     id = req.params.id;
     physical_model = req.file;
 
-    if(physical_model) {
-        //TODO: move model to library
-    }
-
     models.model.findById(id).then(function(model) {
         if(model) {
+            if(physical_model) {
+                console.log('reading:')
+                console.log(physical_model)
+                //TODO: move model to library
+                //TODO: delete old model
+                unity.moveModel(model.uid, physical_model.filename);
+                unity.deleteModel(uid, model.file_name);
+            }
             updateModelDB(req, physical_model, id, model, function(updatedModel) {
                 res.json({status: "ok", message: "updated model", length: 1, data: [updatedModel]});
             }, function(err) {
