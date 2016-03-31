@@ -14,7 +14,7 @@ var router = express.Router();
 //settings for storing the saved file
 var storage = multer.diskStorage({
 	destination: function(req, file, cb) {
-		cb(null, path.join(__dirname, '../../'+file_paths.public_path));
+		cb(null, path.join(__dirname, '../../'+file_paths.storage_path));
 	},
 	filename: function(req, file, cb) {
 		cb(null, file.originalname);
@@ -30,14 +30,14 @@ router.post('/uploadstate.php', upload.single('binary'), function(req, res, next
     unity.copyStateDat(uid, pid, stateDat, function() {
         unity.moveStateFile(uid, pid, stateDat);
         unity.moveCopyState(uid, pid);
-        res.json({ status:"ok", message: "saved state dat file", data: req.binary});
+        res.json({ status:"ok", message: "saved state dat file", data: [stateDat]});
     });
 });
 
 router.post('/saveproject', upload.single('json'), function(req, res) {
     var stateJson = req.json;
     unity.moveStateFile(req.body.uid, req.body.pid, stateJson);
-    res.json({ status: "ok", message: "saved state json", data: req.json});
+    res.json({ status: "ok", message: "saved state json", data: [req.json]});
 });
 
 router.get('/buildproject.php', function(req, res, next) {

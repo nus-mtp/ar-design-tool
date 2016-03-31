@@ -174,8 +174,9 @@ var moveStateFile = function(uid, pid, stateFile) {
 
 var moveCopyState = function(uid, pid) {
 	console.log('saving state file');
-	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateFile.originalname);
-	utils.moveFileToDest(stateFile.path, dest_path);		
+	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
+	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	utils.moveFileToDest(tmp, dest_path);		
 }
 
 var copyStateDat = function(stateDat, callback) {
