@@ -1,7 +1,6 @@
 // Handle model
 angular.module('vumixManagerApp.controllers')
     .controller('modelController', function (modelService, $http, $scope) {
-<<<<<<< HEAD
 
         var file;
         
@@ -14,10 +13,6 @@ angular.module('vumixManagerApp.controllers')
         };
 
 
-=======
-        var filename;
-     
->>>>>>> parent of 607ee49... Merge branch 'scss' into mich
         $scope.models = [];
         $scope.model = {
             model_name: "",
@@ -25,7 +20,6 @@ angular.module('vumixManagerApp.controllers')
             file_extension: "",
             upload: undefined
         };
-<<<<<<< HEAD
              
         $scope.update = {
             id: "",
@@ -124,27 +118,6 @@ angular.module('vumixManagerApp.controllers')
             modelService.updateModel($scope.models,$scope.update, $scope.update.upload,$scope.userid,id)
             .then(function(update){
                  $scope.model = update;
-=======
-        
-        $scope.userid = 1;
-        
-        $scope.uploadFile = function(){
-            filename = event.target.files[0].name;
-            $scope.model.upload = filename;
-        };
-        
-        $scope.getModel = function(id){
-          modelService.getModel($scope.models, $scope.userid,id)
-            .then(function(model){
-                $scope.model = model;
-            });
-        };
-        
-        $scope.updateModel = function(id){
-            modelService.updateModel($scope.models,$scope.model, $scope.userid,id)
-            .then(function(model){
-                $scope.model = model;
->>>>>>> parent of 607ee49... Merge branch 'scss' into mich
             });
         };
         
@@ -159,7 +132,14 @@ angular.module('vumixManagerApp.controllers')
            modelService.addModel($scope.model.model_name, $scope.model.file_size, $scope.model.file_extension, $scope.model.upload, $scope.userid)
                 .then(function(model) {
                 $scope.models.push(model);
+                $scope.reset();
             });
+        };
+        
+        $scope.reset = function(){
+            $("#upload_file").val("");
+            $scope.empty.image_url = $scope.model.image_url;
+            $scope.model = angular.copy($scope.empty);
         };
         
         $http({

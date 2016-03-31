@@ -12,15 +12,11 @@
      </head>
      <body>
         <div ng-app="vumixManagerApp">
-            <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="z-index: 100;">
                     <div class="container-fluid nav-bar">
                         <div class="navbar-header">
-<<<<<<< HEAD
                            <img ng-src="/resources/images/logo.png" height=50" width="50">
                            <span style="font-size: 16px">Vumix File Manager</span>
-=======
-                            <a class="navbar-brand" href="#">Vumix File Manager</a>
->>>>>>> parent of 607ee49... Merge branch 'scss' into mich
                         </div>
 
                         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
@@ -35,13 +31,8 @@
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-<<<<<<< HEAD
                           <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.name]]<span class="caret"></span></a>
                       <ul class="dropdown-menu" role="menu">
-=======
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, User!<span class="caret"></span></a>
-                                    <ul class="dropdown-menu" role="menu">
->>>>>>> parent of 607ee49... Merge branch 'scss' into mich
                                         <li><a href="/logout">Log Out</a></li>
                                     </ul>
                                 </li>
@@ -49,17 +40,10 @@
                        </div>
                   </div>
              </nav>
-<<<<<<< HEAD
 
             <div ui-view> </div>
             </div>
 
-=======
-  
-             <div ui-view> </div>
-    
-           </div>
->>>>>>> parent of 607ee49... Merge branch 'scss' into mich
 		</div>
         <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
