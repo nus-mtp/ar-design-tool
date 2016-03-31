@@ -44,11 +44,11 @@ angular.module('vumixManagerApp.controllers')
           
         var extensionCheck = function() {
           var tokenised = $scope.image.upload.name.split('.');
-          $scope.image.file_extension = tokenised[tokenised.length-1];
+          $scope.image.file_extension = tokenised[tokenised.length-1].toLowerCase();
             if (tokenised.length < 1) {
               return false;
             }
-            return tokenised[tokenised.length - 1] === 'png' || tokenised[tokenised.length - 1] === 'jpg';
+            return tokenised[tokenised.length - 1].toLowerCase() === 'png' || tokenised[tokenised.length - 1].toLowerCase() === 'jpg' || tokenised[tokenised.length - 1].toLowerCase() === 'jpeg';
          };
          
          var extensionSizeCheck = function(){
