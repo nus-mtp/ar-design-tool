@@ -28,9 +28,10 @@ router.post('/uploadstate.php', upload.single('binary'), function(req, res, next
     var pid = req.params.pid;
     var stateDat = req.binary;
     unity.copyStateDat(uid, pid, stateDat, function() {
-
+        unity.moveStateFile(uid, pid, stateDat);
+        unity.moveCopyState(uid, pid);
+        res.json({ status:"ok", message: "saved state dat file", data: req.binary});
     });
-    res.json({ status:"ok", message: "saved state dat file", data: req.binary});
 });
 
 router.post('/saveproject', upload.single('json'), function(req, res) {
