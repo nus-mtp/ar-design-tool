@@ -8,6 +8,7 @@ const exec		= require('child_process').exec;
 var unity_path 		= '/unity/';
 var model_path 		= '/models/';
 var state_dat_file 	= 'state.dat';
+var copy_state_name = 'copyState.dat';
 var vuforia_name 	= "marker.unitypackage";
 
 var rebuildVuforiaPackage = function(uid, pid) {
@@ -167,16 +168,33 @@ var buildApk = function(uid, pid) {
 
 var moveStateFile = function(uid, pid, stateFile) {
 	console.log('saving state file');
-	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateFile.originalname);
+	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
 	utils.moveFileToDest(stateFile.path, dest_path);	
 };
 
+var moveCopyState = function(uid, pid) {
+	console.log('saving state file');
+	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
+	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	utils.moveFileToDest(tmp, dest_path);		
+}
+
+var copyStateDat = function(stateDat, callback) {
+	console.log('copying state dat');
+	utils.saveFileToDest(stateDat.path, stateDat.destination+copy_state_name, callback);
+};
+
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
-module.exports.moveStateFile		= moveStateFile;
 module.exports.updateVuforia 		= updateVuforia;
-module.exports.deleteModel 			= deleteModel;
+
+module.exports.moveStateFile		= moveStateFile;
+module.exports.moveCopyState		= moveCopyState;
+module.exports.copyStateDat			= copyStateDat;
+
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
+
+module.exports.deleteModel 			= deleteModel;
 module.exports.moveModel 			= moveModel;
 module.exports.copyModel 			= copyModel;
 module.exports.buildApk				= buildApk;
