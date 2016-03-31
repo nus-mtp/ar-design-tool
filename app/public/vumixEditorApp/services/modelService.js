@@ -47,15 +47,18 @@
       }
 
 // SERVER OBJECT APIS END HERE   
-      
+
       var uid = "0";
       
-      document.cookie.split(';').forEach(function(el, index) {
-        var _el = el.split('=');
-        if(_el[0] === "uid") {
-          uid = _el[1];
-        }
-      });
+      var getUid = function() {    
+        document.cookie.split(';').forEach(function(el, index) {
+          var _el = el.split('=');
+          if(_el[0] === "uid") {
+            uid = _el[1];
+          }
+        });
+      };
+      
       
       $http.get('/api/users/'+ uid + '/models').then(function(res) {
         var models = angular.copy(res.data.data);
