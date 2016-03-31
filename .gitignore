@@ -32,6 +32,7 @@ npm-debug.log
 app/public/state.dat
 
 
-# Unity Project #
+# Storage Paths #
 #################
 app/server/storage
+app/public/storage
