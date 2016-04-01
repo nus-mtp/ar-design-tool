@@ -29,8 +29,9 @@
                 <h2> Project Name</h2>
                 <input class="form-control" type="text" name="projectName" placeholder="Project Name" ng-model="project.project_name" required />
                 <span class="text-danger" ng-show="addProjectForm.projectName.$error.required">Project name cannot be empty</span>
+                <span class="text-danger" ng-show="addProjectForm.projectName.$error.fileName">Project name is already exist</span>
               </div>
-              <h2> Target Marker Type</h2>
+              <!--<h2> Target Marker Type</h2>
               <label for="">
                   <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D" checked="" ng-model="project.marker_type">
                   2D 
@@ -38,7 +39,7 @@
               <label>
                   <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D" ng-model="project.marker_type">
                   3D 
-              </label>              
+              </label>              -->
               <h2> Upload Your Vuforia Package</h2>
               <a style="text-decoration: underline" target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
               <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
@@ -63,7 +64,7 @@
                         <input type="text" name="comName" ng-model="update.com_name" ><br>
                         <h2> Project Name</h2>
                         <input type="text" name="projectName"  ng-model="update.name" ><br>
-                        <h2> Target Marker Type</h2>
+                        <!--<h2> Target Marker Type</h2>
                         <label>
                             <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="update.marker_type">
                             2D 
@@ -71,7 +72,7 @@
                         <label>
                             <input type="radio" name="optionsRadios" value="3D" id="optionsRadios2" ng-model="update.marker_type">
                             3D 
-                        </label>            
+                        </label>            -->
                         <h2> Upload Your Vuforia Package</h2>
                         <input type ="file" ng-model="update.upload" name="projectUpload" onchange="angular.element(this).scope().updateFile()"/>
                         <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
