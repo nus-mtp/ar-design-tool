@@ -46,8 +46,8 @@ angular.module('vumixManagerApp.controllers')
           };
           
         var extensionCheck = function() {
-          var formData = requiredCheck();
-          var tokenised = formData.file.name.split('.');
+          var Data = requiredCheck();
+          var tokenised = Data.file.name.split('.');
           $scope.model.file_extension = tokenised[tokenised.length-1].toLowerCase();
             if (tokenised.length < 1) {
               return false;
@@ -72,9 +72,9 @@ angular.module('vumixManagerApp.controllers')
          };
          
          var checkSimilarity = function() {
-            var formData = requiredCheck();
+            var Data = requiredCheck();
             
-            if(checkSimilarModelName(formData.model_name)){
+            if(checkSimilarModelName(Data.model_name)){
                 $scope.modelForm.modelName.$setValidity('fileName', false);
                 return true;
             }
@@ -114,7 +114,8 @@ angular.module('vumixManagerApp.controllers')
                   $scope.modelForm.modelName.$setValidity('fileName', true);
               }
             }
-          })
+          });
+          
         };
         
        $scope.$watch('modelForm', function(newVal, oldVal) {
@@ -186,7 +187,11 @@ angular.module('vumixManagerApp.controllers')
             var length = $scope.all.length;
   
             for(i=0; i<length; i++){
-                if($scope.all[i].file_extension == "obj" || $scope.all[i].file_extension == "fbx"){
+                if($scope.all[i].file_extension == "obj"){
+                    $scope.models.push($scope.all[i]);
+                } else if ($scope.all[i].file_extension == "3ds"){
+                    $scope.models.push($scope.all[i]);
+                } else if ($scope.all[i].file_extension == "fbx"){
                     $scope.models.push($scope.all[i]);
                 }
             }

@@ -45,8 +45,8 @@ angular.module('vumixManagerApp.controllers')
           };
           
           var extensionCheck = function() {
-            var formData = requiredCheck();
-            var tokenised = formData.file.name.split('.');
+            var Data = requiredCheck();
+            var tokenised = Data.file.name.split('.');
             if (tokenised.length < 1) {
               return false;
             }
@@ -57,9 +57,9 @@ angular.module('vumixManagerApp.controllers')
           };
           
           var checkSimilarity = function() {
-            var formData = requiredCheck();
+            var Data = requiredCheck();
             
-            if(checkSimilarProjectName(formData.project_name)){
+            if(checkSimilarProjectName(Data.project_name)){
                 $scope.addProjectForm.projectName.$setValidity('fileName', false);
                 return true;
             }
@@ -96,7 +96,8 @@ angular.module('vumixManagerApp.controllers')
                   $scope.addProjectForm.projectName.$setValidity('fileName', true);
               }
             }
-          })
+          });
+          
         };
         
         $scope.$watch('addProjectForm', function(newVal, oldVal) {

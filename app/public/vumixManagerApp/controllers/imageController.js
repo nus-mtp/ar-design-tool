@@ -39,26 +39,30 @@ angular.module('vumixManagerApp.controllers')
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
-            return $scope.image.upload;
+            return {
+                file : $scope.image.upload,
+                image_name : $scope.image.image_name
+            };
           };
           
-        var extensionCheck = function() {
-          var tokenised = $scope.image.upload.name.split('.');
-          $scope.image.file_extension = tokenised[tokenised.length-1].toLowerCase();
-            if (tokenised.length < 1) {
-              $scope.imageForm.imageUpload.$setValidity('fileType', false); 
-              return false;
-            }
-            if ($scope.image.file_extension !== 'png'){
+          var extensionCheck = function() {
+            var Data = requiredCheck();
+            var tokenised = Data.file.name.split('.');
+            $scope.image.file_extension = tokenised[tokenised.length-1].toLowerCase();
+                if (tokenised.length < 1) {
                 $scope.imageForm.imageUpload.$setValidity('fileType', false); 
-            } else if ($scope.image.file_extension !== 'jpg'){
-                $scope.imageForm.imageUpload.$setValidity('fileType', false); 
-            } else if ($scope.image.file_extension !== 'jpeg'){
-                $scope.imageForm.imageUpload.$setValidity('fileType', false); 
-            }
-            return tokenised[tokenised.length - 1].toLowerCase() === 'png' || tokenised[tokenised.length - 1].toLowerCase() === 'jpg' || tokenised[tokenised.length - 1].toLowerCase() === 'jpeg';
+                return false;
+                }
+                if ($scope.image.file_extension !== 'png'){
+                    $scope.imageForm.imageUpload.$setValidity('fileType', false); 
+                } else if ($scope.image.file_extension !== 'jpg'){
+                    $scope.imageForm.imageUpload.$setValidity('fileType', false); 
+                } else if ($scope.image.file_extension !== 'jpeg'){
+                    $scope.imageForm.imageUpload.$setValidity('fileType', false); 
+                }
+                return tokenised[tokenised.length - 1].toLowerCase() === 'png' || tokenised[tokenised.length - 1].toLowerCase() === 'jpg' || tokenised[tokenised.length - 1].toLowerCase() === 'jpeg';
          };
-         
+            
          var extensionSizeCheck = function(){
           var tokenised = $scope.image.upload.size;
            if(tokenised > 4000000){
@@ -68,9 +72,30 @@ angular.module('vumixManagerApp.controllers')
            return true;
          };
          
+         var checkSimilarity = function() {
+            var Data = requiredCheck();
+            
+            if(checkSimilarImageName(Data.image_name)){
+                $scope.imageForm.imageName.$setValidity('fileName', false);
+                return true;
+            }
+            return false;
+         };
+          
+         var checkSimilarImageName = function(val){
+            for(var i = 0; i < $scope.images.length; i++){
+                if(val === $scope.images[i].name){
+                    return true;
+                } 
+            }
+            return false;
+         };
+         
          $scope.$watch('image.upload', function(newVal, oldVal) {   
-            $scope.imageForm.imageUpload.$setValidity('required', false); 
-            if (requiredCheck()) {      
+            $scope.imageForm.imageUpload.$setValidity('required', false);
+            var Data = requiredCheck();
+             
+            if (Data.file) {      
               $scope.imageForm.imageUpload.$setValidity('required', true);
               if (extensionCheck()) {
                 $scope.imageForm.imageUpload.$setValidity('fileType', true); 
@@ -81,9 +106,19 @@ angular.module('vumixManagerApp.controllers')
               }                            
             }
           });
+          
+          $scope.$watch('image.image_name', function(newVal, oldVal){
+            var Data = requiredCheck();
+            if(Data.image_name){
+                if(!checkSimilarity()){
+                    $scope.imageForm.imageName.$setValidity('fileName', true);
+                }
+            }
+          });
+          
         };
-        
-       $scope.$watch('imageForm', function(newVal, oldVal) {
+
+        $scope.$watch('imageForm', function(newVal, oldVal) {
           if (newVal) {
             onFormLoaded();
           }
@@ -152,7 +187,11 @@ angular.module('vumixManagerApp.controllers')
             var length = $scope.all.length;
   
             for(i=0; i<length; i++){
-                if($scope.all[i].file_extension == "png" || $scope.all[i].file_extension == "jpg"){
+                if($scope.all[i].file_extension == "jpeg"){
+                    $scope.images.push($scope.all[i]);
+                } else if($scope.all[i].file_extension == "png"){
+                    $scope.images.push($scope.all[i]);
+                } else if ($scope.all[i].file_extension == "jpg"){
                     $scope.images.push($scope.all[i]);
                 }
             }

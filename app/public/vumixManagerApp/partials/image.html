@@ -11,7 +11,8 @@
               <form ng-submit="addImage()" name="imageForm" enctype="multipart/form-data" novalidate>
                 <h1> Image Name</h1>
                 <input type="text" name="imageName" placeholder="Image Name" ng-model="image.image_name" required>
-                <span class="text-danger" ng-show="imageForm.imageName.$error.required">The file name cannot be empty</span>
+                <span class="text-danger" ng-show="imageForm.imageName.$error.required">Image name cannot be empty</span>
+                <span class="text-danger" ng-show="imageForm.imageName.$error.fileName">Image name is already exist</span>
                 <h1> File</h1>
                 <input type ="file" ng-model="image.upload"  id="upload_file" name="imageUpload" onchange="angular.element(this).scope().uploadFile()" />
                 <div class="text-danger" ng-show="imageForm.imageUpload.$error.required">Image file cannot be empty</div>
