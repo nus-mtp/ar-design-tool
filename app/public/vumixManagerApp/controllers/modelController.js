@@ -39,11 +39,15 @@ angular.module('vumixManagerApp.controllers')
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
-            return $scope.model.upload;
+            return {
+                file : $scope.model.upload,
+                model_name : $scope.model.model_name
+            };
           };
           
         var extensionCheck = function() {
-          var tokenised = $scope.model.upload.name.split('.');
+          var formData = requiredCheck();
+          var tokenised = formData.file.name.split('.');
           $scope.model.file_extension = tokenised[tokenised.length-1].toLowerCase();
             if (tokenised.length < 1) {
               return false;
@@ -67,10 +71,31 @@ angular.module('vumixManagerApp.controllers')
            return true;
          };
          
+         var checkSimilarity = function() {
+            var formData = requiredCheck();
+            
+            if(checkSimilarModelName(formData.model_name)){
+                $scope.modelForm.modelName.$setValidity('fileName', false);
+                return true;
+            }
+            return false;
+         };
+          
+         var checkSimilarModelName = function(val){
+            for(var i = 0; i < $scope.models.length; i++){
+                if(val === $scope.models[i].name){
+                    return true;
+                } 
+            }
+            return false;
+         };
+         
           
          $scope.$watch('model.upload', function(newVal, oldVal) {   
             $scope.modelForm.modelUpload.$setValidity('required', false); 
-            if (requiredCheck()) {      
+            var Data = requiredCheck();
+            
+            if (Data.file) {      
               $scope.modelForm.modelUpload.$setValidity('required', true);
               if (extensionCheck()) {
                 $scope.modelForm.modelUpload.$setValidity('fileType', true);   
@@ -80,6 +105,16 @@ angular.module('vumixManagerApp.controllers')
               }                            
             }
           });
+          
+          $scope.$watch('model.model_name', function(newVal, oldVal){
+            var Data = requiredCheck();
+            
+            if(Data.model_name){
+              if(!checkSimilarity()){
+                  $scope.modelForm.modelName.$setValidity('fileName', true);
+              }
+            }
+          })
         };
         
        $scope.$watch('modelForm', function(newVal, oldVal) {
