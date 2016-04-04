@@ -193,7 +193,6 @@ router.put('/:id', upload.single('file'), function(req, res) {
         }
     }).then(function(project) {
         console.log('found project: ')
-        console.log(project)
         if(!project) {
             res.json({status: "fail", message: "project not found", length: 0, data: []});
         } else {
@@ -205,6 +204,8 @@ router.put('/:id', upload.single('file'), function(req, res) {
         }
     }).catch(function(err) {
         console.log('error caught in update project API');
+        console.log(err.message);
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 
     // models.project.findById(uid).then(function(project) {
@@ -233,7 +234,7 @@ router.put('/:id', upload.single('file'), function(req, res) {
 });
 
 var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback) {
-    modes.project.update({
+    models.project.update({
         name: req.body.name || project.name,
         marker_type: req.body.marker_type || project.marker_type,
         company_name: req.body.company_name || project.company_name,
@@ -248,7 +249,7 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
     }).then(function(updatedProject) {
         goodCallback(updatedProject);
     }).catch(function(err) {
-        console.log('caught error in updateProjectDB API');
+        console.log('caught error in updateProjectDB API function');
         badCallback(err);
     });
 };

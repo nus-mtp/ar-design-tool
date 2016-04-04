@@ -4,7 +4,7 @@
       $scope,
       editorService,
       unityMapperService,
-      stateModelService
+      stateService
     ) {
       $scope.editorService = editorService;
      

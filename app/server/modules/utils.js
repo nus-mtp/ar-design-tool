@@ -37,7 +37,7 @@ var moveFileToDest = function(location, destination, callback) {
 		callback();
 };
 
-var saveFileToDest = function(file, dest) {
+var saveFileToDest = function(file, dest, callback) {
 	fs.writeFile(dest, file, function(err) {
 		if (err) {
 			console.log(err);
@@ -45,6 +45,8 @@ var saveFileToDest = function(file, dest) {
 			console.log('Saved file ' + dest);
 		}
 	});
+	if(callback) 
+		callback();
 };
 
 var deleteDir = function(deleteDest) {

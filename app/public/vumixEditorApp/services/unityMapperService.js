@@ -9,7 +9,7 @@
       
       // TODO: change name
       service.saveState = function(url) {
-        SendMessage('Facade', 'SaveProgress', './uploadstate.php');
+        SendMessage('Facade', 'SaveProgress', '/uploadstate.php');
       };
       
       // subsequent functions will operate on the specified state id
@@ -38,6 +38,9 @@
         SendMessage('Facade', 'SpawnObject', modelId);  
       };
       
+      service.removeInstanceObject = function() {
+        SendMessage('Facade', 'DeleteGameObject');
+      }
       service.createText = function(input) {
         SendMessage('Facade', 'SpawnText', input);  
       };
@@ -46,8 +49,12 @@
         SendMessage('Facade', 'SetTransitionId', stateId);
       };
       
-      service.setTransitionId = function() {
+      service.unsetTransitionId = function() {
         SendMessage('Facade', 'UnSetTransitionId');
+      };
+      
+      service.setActiveGameObject = function() {
+        SendMessage('Facade', 'SetActiveGameObject');
       };
       
       return service;

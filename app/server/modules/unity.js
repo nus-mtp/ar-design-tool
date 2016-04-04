@@ -5,9 +5,11 @@ var file_paths 	= require('../config/file_path'),
 
 const exec		= require('child_process').exec;
 
-var unity_path = '/unity/';
-var model_path = '/models/';
-var vuforia_name = "marker.unitypackage";
+var unity_path 		= '/unity/';
+var model_path 		= '/models/';
+var state_dat_file 	= 'state.dat';
+var copy_state_name = 'copyState.dat';
+var vuforia_name 	= "marker.unitypackage";
 
 var rebuildVuforiaPackage = function(uid, pid) {
 	console.log('rebuilding vuforia package...');
@@ -38,6 +40,13 @@ var updateVuforia = function(uid, pid, vuforia_pkg) {
 	moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
 };
 
+var copyStateDat = function(uid, pid) {
+	console.log('copying state dat...');
+	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	var state_dest 		= path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
+	utils.saveFileToDest(state_dat_loc, state_dest);
+}
+
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
 	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
@@ -57,6 +66,7 @@ var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	});
 	unity.on('exit', function(code) {
 		moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
+		copyStateDat(uid, pid);
 		console.log("Creating new project child process exited with code " + code);
 		callback();
 		//TODO: remove this after testing
@@ -157,17 +167,34 @@ var buildApk = function(uid, pid) {
 };
 
 var moveStateFile = function(uid, pid, stateFile) {
-	console.log('saving state.dat');
-	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateFile.originalname);
+	console.log('saving state file');
+	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
 	utils.moveFileToDest(stateFile.path, dest_path);	
 };
 
+var moveCopyState = function(uid, pid) {
+	console.log('saving state file');
+	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
+	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	utils.moveFileToDest(tmp, dest_path);		
+}
+
+var copyStateDat = function(stateDat, callback) {
+	console.log('copying state dat');
+	utils.saveFileToDest(stateDat.path, stateDat.destination+copy_state_name, callback);
+};
+
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
-module.exports.moveStateFile		= moveStateFile;
 module.exports.updateVuforia 		= updateVuforia;
-module.exports.deleteModel 			= deleteModel;
+
+module.exports.moveStateFile		= moveStateFile;
+module.exports.moveCopyState		= moveCopyState;
+module.exports.copyStateDat			= copyStateDat;
+
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
+
+module.exports.deleteModel 			= deleteModel;
 module.exports.moveModel 			= moveModel;
 module.exports.copyModel 			= copyModel;
 module.exports.buildApk				= buildApk;

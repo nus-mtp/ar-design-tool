@@ -70,11 +70,8 @@
 	To run back end test only
 	> gulp open-backend-coverage
 	
-	To check Javascript linter
+	To check Javascript and SASS lint
 	> gulp lint
-	
-	To check SASS lint
-	> gulp sasslint
 	
 	Guidelines:
 		- Make sure code is inside the coverage

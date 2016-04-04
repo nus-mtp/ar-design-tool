@@ -19,7 +19,7 @@
 </nav>
 
 <!-- Modal for model options button -->
-<bs-modal modal-id="myModal">
+<bs-modal modal-id="myModal" modal-size="sm">
   <modal-body>
     <p style="text-align:center">Choose your clickable object.</p>
     <div class="radio">
@@ -38,7 +38,7 @@
   </modal-footer>
 </bs-modal>
 
-<bs-modal modal-id="save">
+<bs-modal modal-id="save" modal-size="sm">
   <modal-body>
     <p style="text-align:center">Work has been saved.</p>
   </modal-body>
@@ -48,7 +48,7 @@
 </bs-modal>
 
 <!-- Modal warning for delete state button -->
-<bs-modal modal-id="deleteState">
+<bs-modal modal-id="deleteState" modal-size="sm">
   <modal-body>
     <p style="text-align:center">Are you sure you want to delete this state?</p>
   </modal-body>
@@ -59,7 +59,7 @@
 </bs-modal>
 
 <!-- Modal warning for delete connection -->
-<bs-modal modal-id="deleteConn">
+<bs-modal modal-id="deleteConn" modal-size="sm">
   <modal-body>
     <p style="text-align:center">Are you sure you want to delete this connection?</p>
   </modal-body>
@@ -124,14 +124,7 @@
 
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
 
-<bs-modal modal-id="addAsset">
-  <modal-body>
-    <p style="text-align:center">Adding Page</p>
-  </modal-body>
-  <modal-footer>
-    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
-  </modal-footer>
-</bs-modal>
+<loader></loader>
 
 <script type="text/javascript">    
   var CreateState = function(id, name) {

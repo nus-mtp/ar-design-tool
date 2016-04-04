@@ -12,7 +12,7 @@
   bottom: 0;
   right: 0;
   left: 0;
-  z-index: 10;
+  z-index: 9999;
 }
 
 .resizable-panels { 
@@ -71,9 +71,6 @@
 }
 
 /* Michelle's */
-.window { 
-    
-}
 
 .window:hover{ 
     cursor: pointer;

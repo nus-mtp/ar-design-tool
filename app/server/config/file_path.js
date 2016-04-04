@@ -1,4 +1,5 @@
 module.exports = {
+	'state': '/Assets/StateData/',
 	'public_path': '/public/storage/',
 	'storage_path': '/server/storage/',
 	'download': '/Assets/AndroidBuilds.apk',
