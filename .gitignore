@@ -27,11 +27,6 @@ app/server/config/db.js
 npm-debug.log
 
 
-# Save File #
-#############
-app/public/state.dat
-
-
 # Storage Paths #
 #################
 app/server/storage
