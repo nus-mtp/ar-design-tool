@@ -104,22 +104,12 @@ public class Facade : MonoBehaviour
         textCreator.AddNewText(input);
     }
 
-    public void UnSetTransitionId()
-    {
-        stateManager.UnSetTransitionId(targetStateId, targetStateObjectId);
-    }
-
     public void TurnOffKeyboard()
     {
 
-        #if !UNITY_EDITOR && UNITY_WEBGL
+#if !UNITY_EDITOR && UNITY_WEBGL
             WebGLInput.captureAllKeyboardInput = false;
-        #endif
-    }
-
-    public void TurnOnPreview()
-    {
-        stateManager.EnterPreview();
+#endif
     }
 
     public void TurnOffPreview()
@@ -130,9 +120,19 @@ public class Facade : MonoBehaviour
     public void TurnOnKeyboard()
     {
 
-        #if !UNITY_EDITOR && UNITY_WEBGL
+#if !UNITY_EDITOR && UNITY_WEBGL
              WebGLInput.captureAllKeyboardInput = true;
-        #endif
+#endif
+    }
+
+    public void TurnOnPreview()
+    {
+        stateManager.EnterPreview();
+    }
+
+    public void UnSetTransitionId()
+    {
+        stateManager.UnSetTransitionId(targetStateId, targetStateObjectId);
     }
     private string[] seperate(string s)
     {
