@@ -239,7 +239,8 @@ router.post('/:id/:pid', upload.single("file"), function(req, res) {
     var uid = req.params.userId;
     var pid = req.params.pid;
     var physical_model = req.file;
-    if(physical_model)
+    // if(physical_model)
+        
 });
 
 module.exports = router;
