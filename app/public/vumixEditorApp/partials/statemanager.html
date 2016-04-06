@@ -1,17 +1,17 @@
 <nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="/manager">Back</a>
+      <a class="navbar-brand" href="/manager"><navfont>Back</navfont></a>
     </div>
     <ul class="nav navbar-nav navbar-right ">
       <!--<li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>-->
       <li>
         <a target="_self" href="/buildproject.php">
-          <button type="button" class="btn btn-success btn-sm">Build APK</button>
+         <navfont>Build APK</navfont>
         </a>
       <li>
         <a href="" ng-click="unityMapperService.saveState()">
-          <button type="button" class="button_save_task btn btn-success btn-sm" data-toggle="modal" data-target="#save">Save</button>
+          <div class="button_save_task" data-toggle="modal" data-target="#save"><navfont>Save</navfont></div>
         </a>
       </li>
     </ul>
