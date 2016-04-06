@@ -190,7 +190,6 @@ span.glyphicon-remove-circle {
     float:right;
 }
 
-
 .button_remove:hover{
     background-color: darkred;
     color:white;
@@ -198,7 +197,7 @@ span.glyphicon-remove-circle {
 
 .ctrl_container{
     margin:5px;
-    height:40px;
+    height:20px;
 }
 
 ._jsPlumb_connector, ._jsPlumb_startpoint{
