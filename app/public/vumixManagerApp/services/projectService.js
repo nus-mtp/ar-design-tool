@@ -16,8 +16,6 @@
                 headers: {'Content-Type': undefined}
             })
             .then(function(res){
-                $("#floatingCirclesG").show().delay(13000).fadeOut();
-                $(".navbar").css( "zIndex" , -10 );
                 return res.data.data[0];
             }, function errorCallback(res){
                console.log("error adding the project");

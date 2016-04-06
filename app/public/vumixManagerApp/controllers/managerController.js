@@ -139,11 +139,19 @@ angular.module('vumixManagerApp.controllers')
                     $scope.update.upload = $scope.projects[i].upload;
                 }
             }
+            
+            $("#welcome_page").hide();
+            $("#create_project ").hide(); 
+            $("#update_page").show();
         };
         
         $scope.updateProject = function(id){
+            $("#update_page").hide();
+            $("#welcome_page").show();
             projectService.updateProject($scope.projects, $scope.update, $scope.update.upload, $scope.userid,id)
             .then(function(update){
+                console.log(update);
+           
                 $scope.project = update;
             });
         };
@@ -151,7 +159,6 @@ angular.module('vumixManagerApp.controllers')
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
                 .then(function(project) {
-                $(".navbar").css( "zIndex" , 0 );
                 $scope.projects.push(project);
                 $scope.reset();
             });
