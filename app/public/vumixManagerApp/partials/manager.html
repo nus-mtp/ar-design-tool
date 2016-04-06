@@ -65,7 +65,7 @@
             <!--to display project-->
             <div id="project_list" class="flex-container">
                 <ul ng-repeat="pr in projects | filter:searchText">
-                    <a style="cursor:pointer;" ng-click="goToState(pr.id)">
+                    <div class="clickable" ng-click="goToState(pr.id)">
                         <li class="flex-item">
                             <div class="card">
                                 <img class="card-img-top" ng-src="{{project.image_url}}" alt="Card image cap">
@@ -74,7 +74,7 @@
                                 </div>
                             </div>
                         </li>
-                    </a>
+                    </div>
                     <button class="btn btn-danger" ng-click="deleteProject(pr.id)">Delete</button>
                     <button class="button btn btn-info" id="update_btn" ng-click="getProject(pr.id)">Update</button>
                 </ul>
