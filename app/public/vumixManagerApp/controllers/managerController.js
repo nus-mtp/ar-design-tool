@@ -100,11 +100,52 @@ angular.module('vumixManagerApp.controllers')
           
         };
         
+        var updateFormLoaded = function (){
+          var requiredCheck = function() {
+            return {
+                file : $scope.update.upload,
+                project_name : $scope.update.name
+            };
+          };
+          
+          var extensionCheck = function() {
+            var Data = requiredCheck();
+            var tokenised = Data.file.name.split('.');
+            if (tokenised.length < 1) {
+              return false;
+            }
+            if( tokenised[1] !== 'unitypackage'){
+                $scope.updateProjectForm.updateUpload.$setValidity('fileType', false); 
+            }
+            return tokenised[tokenised.length - 1] === 'unitypackage';
+          };
+          
+          $scope.$watch('update.upload', function(newVal, oldVal) {   
+            $scope.updateProjectForm.updateUpload.$setValidity('required', false);
+            var Data = requiredCheck();
+    
+            if (Data.file) {      
+              $scope.updateProjectForm.updateUpload.$setValidity('required', true);
+              if (extensionCheck()) {
+                $scope.updateProjectForm.updateUpload.$setValidity('fileType', true); 
+              }                            
+            }
+
+          });
+          
+        };
+        
         $scope.$watch('addProjectForm', function(newVal, oldVal) {
           if (newVal) {
             onFormLoaded();
           }
         }); 
+        
+        $scope.$watch('updateProjectForm', function(newVal, oldVal){
+          if (newVal){
+            updateFormLoaded();   
+          } 
+        });
         
         $scope.uploadFile = function(){
             file = event.target.files[0];

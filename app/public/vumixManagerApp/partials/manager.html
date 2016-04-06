@@ -41,14 +41,16 @@
         <div id="update_page" class="side-bar-padding update_side">
              <span class="clickable" id="cancel_update">&#10006;Cancel</span>
              <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Project Here!</h1>
-             <form name="updateProjectForm" ng-submit="updateProject(update.id)" enctype="multipart/form-data">
+             <form name="updateProjectForm" ng-submit="updateProject(update.id)" enctype="multipart/form-data" novalidate>
                 <h2>Company Name</h2>
                 <input type="text" name="comName" ng-model="update.com_name" ><br>
                 <h2> Project Name</h2>
                 <input type="text" name="projectName"  ng-model="update.name" ><br>
-                <h2> Upload Your New Vuforia Package</h2>
-                <input type ="file" ng-model="update.upload" name="projectUpload" onchange="angular.element(this).scope().updateFile()"/> 
-                <input type="submit" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                <h2> Upload New Vuforia Package</h2>
+                <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()"/> 
+                <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.required">Project file cannot be empty</div>
+                <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
+                <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
             </form>
         </div>
     </div>    
