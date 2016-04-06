@@ -71,7 +71,11 @@
 }
 
 /* Michelle's */
-
+.navbar {
+  background-color: #0097FF;
+  height: 50px; 
+}
+  
 .window:hover{ 
     cursor: pointer;
 }
