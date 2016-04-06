@@ -225,4 +225,21 @@ var updateModelDB = function(req, physical_model, id, model, goodCallback, badCa
     });
 }
 
+/**
+ * @module useModelForProject
+ * @parent modelApi
+ * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.pid
+ * post model with {id} owned by user with {userId} and to project with {pid}
+ * PUT
+ * api: /api/users/{userId}/models/{id}/{pid}
+ */
+router.post('/:id/:pid', upload.single("file"), function(req, res) {
+    console.log("using model for project");
+    var id = req.params.id;
+    var uid = req.params.userId;
+    var pid = req.params.pid;
+    var physical_model = req.file;
+    if(physical_model)
+});
+
 module.exports = router;
