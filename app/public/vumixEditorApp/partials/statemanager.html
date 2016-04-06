@@ -277,7 +277,7 @@ function addTask(id, e){
 		  anchor: 'Continuous'
 		});
     
-	jsPlumb.draggable($('#' + id));
+	jsPlumb.draggable($('#' + id),{containment:"parent"});
 	return id;
 }
     

@@ -200,6 +200,12 @@ span.glyphicon-remove-circle {
     height:20px;
 }
 
+#drawingArea {
+    padding: 20px;
+    width:100%; height: 200px;
+    border: 1px solid gray;
+ }
+        
 ._jsPlumb_connector, ._jsPlumb_startpoint{
     cursor: pointer;
 }
