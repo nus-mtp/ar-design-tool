@@ -142,31 +142,30 @@
   })();
   
     var numberOfElements = 0;
-var htmlBase = 'drawingArea';
-jsPlumb.ready(function () {
-        
+    var sourceId = 0;
+    var htmlBase = 'drawingArea';
+    
+    jsPlumb.ready(function () {
+    var id = 0;
+    var options = [];
+    var stateName = $('<select>');
+    stateName.append($('<option></option>').attr('value', '#').text('Select an option'));
 	//FIX DOM:
 	$(("#taskcontainer0"))[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
+    
+   
 	//jsPlumb.draggable($(".window"));
     
 	jsPlumb.importDefaults({
 		Endpoint : ["Dot", {radius:15}],
 		EndpointStyle : { fillStyle : "gray" },
 		HoverPaintStyle : {strokeStyle:"gray", lineWidth:10 },
-		ConnectionOverlays : [
-			[ "Arrow", { 
-				location:0.5,
-				id:"arrow",
-				length:10,
-			} ],
-            [ "Label", { 
-						location:[ 2, 2],
-                        label:"<button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
-						cssClass:"aLabel",
-					}]
-		]
+		ConnectionOverlays:[
+            [ "Arrow", { location: 0.7 } ], 
+            [ "Custom", { create:function(component) {
+                    return $(stateName);}, 
+                    location: 0.4}]]
     });
-        
     
 	var workflowConnectorStartpoint = {
 		isSource: true,
@@ -212,9 +211,28 @@ jsPlumb.ready(function () {
         $('.endpoint'), 
         makeTarget
     );
-					
+    
+    
     jsPlumb.bind('click', function (connection, e) {
-            jsPlumb.detach(connection);
+        var options = [];
+        
+        while(options.length > 0) {
+        options.pop();
+        }
+        
+        if (connection.sourceId === "startpoint"){
+            connection.sourceId = "0";
+        }
+        
+        sourceId = parseInt(connection.sourceId);
+        
+        options = getModelNames(sourceId);
+        console.log("clicked options " + options);
+        $.each(options, function(key, value) {
+        stateName.append($('<option></option>')
+        .attr('value', key)
+        .text(value));
+        });
     });
 		
 	$('#'+htmlBase).on("click", ".button_remove", function () {
@@ -236,7 +254,9 @@ jsPlumb.ready(function () {
 		loadFlowchart();
 	});
 });
+
 function addTask(id, e){
+
 	if(typeof id === "undefined"){
 		numberOfElements++;
 		//id = "taskcontainer" + numberOfElements;
@@ -281,6 +301,8 @@ function addTask(id, e){
 		endpoint : ["Dot", {radius:15}]
 	};
 	
+    
+    
 	jsPlumb.addEndpoint(
 		$('#'+id),
 		taskSourceConnectorEndpoint
@@ -306,7 +328,6 @@ function saveFlowchart(){
 	$(".node").each(function (idx, elem) {
 	var $elem = $(elem);
 	var endpoints = jsPlumb.getEndpoints($elem.attr('id'));
-    attachClickable($elem.attr('id'));
 	console.log('endpoints of '+$elem.attr('id'));
 	console.log(endpoints);
 		nodes.push({
@@ -335,7 +356,7 @@ function saveFlowchart(){
 	
 	$('#jsonOutput').val(flowChartJson);
 }
-    
+
 function loadFlowchart(){
 	var flowChartJson = $('#jsonOutput').val();
 	var flowChart = JSON.parse(flowChartJson);
@@ -368,17 +389,65 @@ function loadFlowchart(){
 	
 	numberOfElements = flowChart.numberOfElements;
 }
-    
+
+function logModels(numberOfElements){
+var options = [];
+	$.each(jsPlumb.getConnections(), function (idx, connection) {
+            numberOfElements = parseInt(connection.sourceId);
+            options = getModelNames(numberOfElements);
+            console.log("This is the model options " + options);
+            console.log("This is sourceId " + numberOfElements);
+	});
+}
+
 function repositionElement(id, posX, posY){
 	$('#'+id).css('left', posX);
 	$('#'+id).css('top', posY);
 	jsPlumb.repaint(id);
 }
+
 function attachClickable(id){
-    var clickableObjects = [];
-    var el = $('[ng-app=vumixEditorApp]')[0];
-    clickableObjects = angular.element(el).injector().get('stateModelService').getClickableStateObjects(id);
-    //console.log(clickableObjects);
-       
+        var clickableObjects = [];
+        var item = 0;
+        item = id;
+        
+        var el = $('[ng-app=vumixEditorApp]')[0];
+        clickableObjects = angular.element(el).injector().get('stateService').getStateObjects(item);
+        console.log("this function attachClickable was called" + " " + item + " " + clickableObjects);
+
+        return clickableObjects;
 }
+
+function getModelNames(item){
+    var modelsInState = [];
+    var nameofModels = [];
+    var i, id=0;
+    id = item;
+    
+    modelsInState = attachClickable(id);
+    
+    console.log("length of models in state" + modelsInState.length);
+    
+    for (i=0; i< modelsInState.length; i++){
+        nameofModels = modelsInState[i].instanceName;
+    };
+        console.log("this function getModelNames was called" + " " + id + " " + nameofModels);
+
+    return nameofModels;
+}
+
+
+function changeContent(options){
+var data = [];
+data = options;
+console.log("This is the model options " + data);
+
+var modal = $('#clickableModal').data('popover');
+$('#choose').attr('data-content', data);
+    var popover = $('#choose').data('popover');
+    popover.setContent();
+    popover.$tip.addClass(popover.options.placement);
+
+}
+
 </script>
