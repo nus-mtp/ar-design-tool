@@ -69,7 +69,7 @@
       <h1>Step Three:</h1>
       <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
       <h1>Step Four:</h1>
-      <p>Click on a state and drag the line to another state to connect them.</p>
+      <p>Create connections between states by dragging lines from the blue circles.</p>
       <h1>Step Five:</h1>
       <p>Choose your transition models.</p>
       <br>
@@ -171,7 +171,7 @@ jsPlumb.ready(function () {
     
 	var workflowConnectorStartpoint = {
 		isSource: true,
-		isTarget: false,
+		isTarget: true,
 		maxConnections: 10,					 
 		anchor:"BottomCenter",
         paintStyle: { fillStyle: 'lightblue' },
@@ -255,7 +255,7 @@ function addTask(id, e){
     newState.appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
     var taskSourceConnectorEndpoint = {
 		isSource: true,
-		isTarget: false,
+		isTarget: true,
 		maxConnections: 10,
         anchor:"BottomCenter",
         paintStyle: { fillStyle: 'lightblue' },
