@@ -257,13 +257,21 @@ function addTask(id, e){
         left = 320;
     }
     
+    if (top <= 150) {
+        top = 150;
+    }
+    
+    else if (top >=530){
+        top = 530;
+    }
+    
     //double click anywhere to create new state
     newState.css({
 		  'top': top-150,
 		  'left': left-300
 		});
     
-    console.log("this is left" + left);
+    console.log("this is top" + top);
     
     newState.appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
     var taskSourceConnectorEndpoint = {
