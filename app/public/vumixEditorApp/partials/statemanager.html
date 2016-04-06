@@ -245,11 +245,25 @@ function addTask(id, e){
 	
     var newState = $('<div class="task" id="' + id + '" data-nodetype="task">');
     
+    var top = e.pageY;
+    var left = e.pageX;
+    var width = $(window).width();
+    
+    if (left >= (0.8*width)){
+        left = 0.75*width;
+    }
+    
+    else if (left <= 320){
+        left = 320;
+    }
+    
     //double click anywhere to create new state
     newState.css({
-		  'top': e.pageY-150,
-		  'left': e.pageX-300
+		  'top': top-150,
+		  'left': left-300
 		});
+    
+    console.log("this is left" + left);
     
     newState.appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
     var taskSourceConnectorEndpoint = {
