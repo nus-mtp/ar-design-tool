@@ -1,6 +1,6 @@
 (function() {
   angular.module('vumixManagerApp.services')
-    .factory('projectService', function($http) {
+    .factory('projectService', function($http, loaderService) {
      return{
 
        addProject: function(project, upload_project, userId){
@@ -11,14 +11,17 @@
             fd.append('name', project.project_name);
             fd.append('company_name',project.company_name);
             fd.append('marker_type', project.marker_type);
+            loaderService.showLoader("Building the Project");
             return $http.post(uploadUrl, fd, {
                 headers: {'Content-Type': undefined}
             })
             .then(function(res){
+                loaderService.hideLoader();              
                 $("#floatingCirclesG").show().delay(13000).fadeOut();
                 $(".navbar").css( "zIndex" , -10 );
                 return res.data.data[0];
             }, function errorCallback(res){
+                loaderService.hideLoader();              
                console.log("error adding the project");
            });
        },

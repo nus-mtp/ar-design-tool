@@ -3,6 +3,8 @@
     .module('vumixManagerApp', [
       'vumixManagerApp.controllers',
       'vumixManagerApp.services',
+      'vumixEditorApp.directives',
+      'vumixEditorApp.services',
       'ui.router'
     ])
     .config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {

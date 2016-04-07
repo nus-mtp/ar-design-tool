@@ -1,6 +1,6 @@
 (function() {
   angular.module('vumixEditorApp.directives')
-    .directive('unityEditor', function($timeout) {
+    .directive('unityEditor', function($timeout, $window) {
       var tmpl = "";
       
       tmpl += '<canvas class="emscripten" id="canvas" oncontextmenu="event.preventDefault()" height="{{ height }}" width="{{ width }}"></canvas>';
@@ -11,8 +11,15 @@
         replace: true,
         template: tmpl,
         link: function($scope, $el, $attr, $ctrl) {
-          $scope.height = '627px';          
-          $scope.width = '1000px';
+          $scope.height = $window.outerHeight - 100;          
+          $scope.width = $window.innerWidth - 300;
+          
+          angular.element($window).bind('resize', function(evt) {
+            if (this === evt) {              
+              $scope.height = $window.outerHeight - 100;          
+              $scope.width = $window.innerWidth - 300;
+            }
+          });
           
           $timeout(function() {
             $.getScript("/resources/webgl/TemplateData/UnityProgress.js");

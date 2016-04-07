@@ -1,8 +1,8 @@
 (function() {
   angular.module('vumixEditorApp.directives')
-    .directive('sidebarEditor', function($timeout) {
+    .directive('sidebarEditor', function($window) {
       var minHeight = 25;
-      var totalHeight = $(window).height() - 50;
+      var totalHeight = $window.outerHeight - 50;
       var tmpl = "";
       tmpl += ' <div class="resizable-panels">';
       tmpl += '   <div class="panel panel-default" id="panel-selector">';      
@@ -63,38 +63,45 @@
         link: function($scope, $el, $attr, $ctrl) {
 
           var equalise = function() {
-            $("#panel-selector").outerHeight(totalHeight / 2.0);
-            $("#panel-browser").outerHeight(totalHeight / 2.0);
+            $el.find("#panel-selector").outerHeight(totalHeight / 2.0);
+            $el.find("#panel-browser").outerHeight(totalHeight / 2.0);
           }
+          
+          angular.element($window).bind('resize', function(evt) {
+            if (this === evt.target) {
+              totalHeight = $window.outerHeight - 50;
+              equalise();
+            }
+          });          
 
-          $("#panel-selector").resizable({
+          $el.find("#panel-selector").resizable({
             handles: 's',
             minHeight: minHeight,
             maxHeight: totalHeight - minHeight,
-          resize: function(evt, ui) {
-          $("#panel-browser").outerHeight(totalHeight - $("#panel-selector").outerHeight());
-          }
+            resize: function(evt, ui) {
+              $el.find("#panel-browser").outerHeight(totalHeight - $("#panel-selector").outerHeight());
+            }
           });
 
-          $("#panel-browser").resizable({
+          $el.find("#panel-browser").resizable({
             handles: 'n',
             minHeight: minHeight,
-            maxHeight: $(window).height() - minHeight,
-          resize: function(evt, ui) {		
-          $("#panel-selector").outerHeight(totalHeight - $("#panel-browser").outerHeight());
-          $(this).css("top", 0);
-          }
+            maxHeight: $window.outerHeight - minHeight,
+            resize: function(evt, ui) {		
+              $el.find("#panel-selector").outerHeight(totalHeight - $("#panel-browser").outerHeight());
+              $(this).css("top", 0);
+            }
           });
 
-          $(".panel-button.equalise").on("click", equalise);
+          $el.find(".panel-button.equalise").on("click", equalise);
 
-          $(".panel-button.maximise").on("click", function() {
+          $el.find(".panel-button.maximise").on("click", function() {
             $(this).parent().parent().siblings().outerHeight(minHeight);
             $(this).parent().parent().outerHeight(totalHeight - minHeight);
           });
 
-          $(".resizable-panels").height(totalHeight);
-          $('[data-toggle="tooltip"]').tooltip();
+          $el.find(".resizable-panels").height(totalHeight);
+          $el.find('[data-toggle="tooltip"]').tooltip();
           equalise();
         }
       }

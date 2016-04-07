@@ -42,12 +42,14 @@
       <table class="table table-striped table-hover">
         <thead>
           <tr class="warning">
-            <th class="col-xs-10">Model Name</th>
+            <th class="col-xs-1"></th>
+            <th class="col-xs-8">Model Name</th>
             <th class="col-xs-2">Include</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="model in modelsOnServer">
+            <td></td>
             <td>{{ model.name }}</td>
             <td><input type="checkbox" name="selectedModels[]" value="{{ model.name }}" ng-model="model.included" /></td>
           </tr>
@@ -56,7 +58,9 @@
     </div>
   </modal-body>
   <modal-footer>
-    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Apply</a>
+    <input id="addModelInput" type="file" style="position:absolute; top:-1000px" />
+    <a href="#" aria-hidden="true" class="btn secondary" onclick="document.getElementById('addModelInput').click()" style="float:left">Add Model To Server</a>
+    <a href="#" aria-hidden="true" class="btn secondary">Apply</a>
     <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
   </modal-footer>
 </bs-modal>

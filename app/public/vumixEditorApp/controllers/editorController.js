@@ -1,7 +1,9 @@
 (function() {
   angular.module('vumixEditorApp.controllers')
     .controller('editorController', function(
+      $rootScope,
       $scope,
+      $timeout,
       editorService,
       unityMapperService,
       stateService,
@@ -54,5 +56,9 @@
         unityMapperService.setTargetStateObject(object.id);
         unityMapperService.setActiveGameObject();
       };
+      
+      $rootScope.triggerAddModelInput = function() {
+        console.log("test");      
+      }
     }); 
 })();
