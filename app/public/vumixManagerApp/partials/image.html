@@ -1,26 +1,25 @@
 <div class="wrapper" ng-controller="imageController">
     <div class="sidebar">
-        <div id="welcome_image" class="side-bar-padding welcome_side" style="padding-top: 50px;">
+        <div id="welcome_image" class="side-bar-padding welcome_side" style="padding-top: 50px; color:#FFFFFF;">
             <h1 class="center" style="margin-top: 0%; text-decoration:underline"> Upload Your Image Here! </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your image </h2>
             <button type="button" class="center btn-large" id="uploadImage">Add Your New Image</button>
         </div>
         <div id="upload_image" class="side-bar-padding create_side">
-            <span class="clickable" id="go_welcome">&#60;	&lt;Go Back</span>
             <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Upload Your New Image Here!</h1>
             <span>
               <form ng-submit="addImage()" name="imageForm" enctype="multipart/form-data" novalidate>
                 <h1> Image Name</h1>
                 <input type="text" name="imageName" placeholder="Image Name" ng-model="image.image_name" required>
-                <span class="text-danger" ng-show="imageForm.imageName.$error.required">Image name cannot be empty</span>
-                <span class="text-danger" ng-show="imageForm.imageName.$error.fileName">Image name is already exist</span>
+                <span class="text-warning" ng-show="imageForm.imageName.$error.required">Image name cannot be empty</span>
+                <span class="text-warning" ng-show="imageForm.imageName.$error.fileName">Image name is already exist</span>
                 <h1> File</h1>
                 <input type ="file" ng-model="image.upload"  id="upload_file" name="imageUpload" onchange="angular.element(this).scope().uploadFile()" />
-                <div class="text-danger" ng-show="imageForm.imageUpload.$error.required">Image file cannot be empty</div>
-                <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
-                <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileSize">File size is bigger than 4 MB</div>
+                <div class="text-warning" ng-show="imageForm.imageUpload.$error.required">Image file cannot be empty</div>
+                <div class="text-warning" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
+                <div class="text-warning" ng-show="imageForm.imageUpload.$error.fileSize">File size is bigger than 4 MB</div>
                 <span class="text-info">Max upload 4 MB file</span>
-                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF" ng-disabled="imageForm.$invalid">
+                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FFFFFF; color:#0daf83" ng-disabled="imageForm.$invalid">
               </form>
           </span>
         </div>
@@ -33,37 +32,15 @@
                 <input type="text" name="image_name" placeholder="Image Name" ng-model="update.name"><br>
                 <h1> File</h1>
                 <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()">
-                <div class="text-danger" ng-show="updateImageForm.updateUpload.$error.required">Image file cannot be empty</div>
-                <div class="text-danger" ng-show="updateImageForm.updateUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
-                <div class="text-danger" ng-show="updateImageForm.updateUpload.$error.fileSize">File size is bigger than 4 MB</div>
+                <div class="text-warning" ng-show="updateImageForm.updateUpload.$error.required">Image file cannot be empty</div>
+                <div class="text-warning" ng-show="updateImageForm.updateUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
+                <div class="text-warning" ng-show="updateImageForm.updateUpload.$error.fileSize">File size is bigger than 4 MB</div>
                 <span class="text-muted">Max upload 8 MB file</span>
-                <input type="submit" class="center" value="Update" ng-disabled="updateImageForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                <input type="submit" class="center" value="Update" ng-disabled="updateImageForm.$invalid" style="margin-top:20px; background-color:#FFFFFF; color:#5bc0de">
             </form>
         </div>
     </div>
     
-    <!--modal to update Image-->
-    <!--<div class="modal fade" id="myImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">        
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
-                    <h4 class="modal-title"> Your Image</h4>
-                </div>
-                <div class="modal-body">
-                    <form name="updateImageForm" enctype="multipart/form-data">
-                        <h1> Image Name</h1>
-                        <input type="text" name="image_name" placeholder="Image Name" ng-model="update.name"><br>
-                        <h1> File</h1>
-                        <input type ="file" ng-model="model.upload" name="modelUpload" onchange="angular.element(this).scope().updateFile()">
-                        <input type="submit" ng-click="updateImage(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
-                    </form>
-                </div>           
-            </div>
-        </div>
-    </div>-->
-
-
     <div class="content">
         <div class="container section" style="width:auto;">
             <!--to display image-->
@@ -127,11 +104,7 @@
            $("#welcome_image").show();
            $("#update_page").hide();
         });
-        
-        $('#go_welcome').click(function(){
-           $("#welcome_image").show();
-           $("#update_image ").hide(); 
-        });
+       
     });
 
 })();
