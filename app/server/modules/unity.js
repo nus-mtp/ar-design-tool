@@ -45,7 +45,7 @@ var copyStateDat = function(uid, pid) {
 	console.log('copying state dat...');
 	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
 	var state_dest 		= path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
-	utils.saveFileToDest(state_dat_loc, state_dest);
+	utils.copyFile(state_dat_loc, state_dest);
 }
 
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
