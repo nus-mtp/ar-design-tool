@@ -25,7 +25,6 @@
         </div>
         
         <div id="update_page" class="side-bar-padding update_side">
-            <span class="clickable" id="cancel_update">&#10006;Cancel</span>
             <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Image Here!</h1>
             <form name="updateImageForm" ng-submit="updateImage(update.id)" enctype="multipart/form-data" novalidate>
                 <h1> Image Name</h1>
@@ -36,7 +35,8 @@
                 <div class="text-warning" ng-show="updateImageForm.updateUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
                 <div class="text-warning" ng-show="updateImageForm.updateUpload.$error.fileSize">File size is bigger than 4 MB</div>
                 <span class="text-muted">Max upload 8 MB file</span>
-                <input type="submit" class="center" value="Update" ng-disabled="updateImageForm.$invalid" style="margin-top:20px; background-color:#FFFFFF; color:#5bc0de">
+                <input type="submit" class="center" value="Update" ng-disabled="updateImageForm.$invalid" style="margin-top:20px; margin-bottom:8px; background-color:#FFFFFF; color:#5bc0de">
+                <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
         </div>
     </div>

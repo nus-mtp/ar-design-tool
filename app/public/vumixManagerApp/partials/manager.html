@@ -29,7 +29,6 @@
         </div>
         
         <div id="update_page" class="side-bar-padding update_side">
-             <span class="clickable" id="cancel_update">&#10006;Cancel</span>
              <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Project Here!</h1>
              <form name="updateProjectForm" ng-submit="updateProject(update.id)" enctype="multipart/form-data" novalidate>
                 <h2>Company Name</h2>
@@ -40,7 +39,8 @@
                 <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()"/> 
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.required">Project file cannot be empty</div>
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
-                <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="margin-top:20px; margin-bottom:8px;  background-color:#FF9640; color:#FFFFFF">
+                <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
         </div>
     </div>    

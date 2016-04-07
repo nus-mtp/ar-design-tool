@@ -25,7 +25,6 @@
         </div>
         
         <div id="update_page" class="side-bar-padding update_side">
-            <span class="clickable" id="cancel_update">&#10006;Cancel</span>
             <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Model Here!</h1>
             <form name="updateModelForm" ng-submit="updateModel(update.id)" enctype="multipart/form-data" novalidate>
                 <h1> Model Name</h1>
@@ -36,7 +35,8 @@
                 <div class="text-danger" ng-show="updateModelForm.updateUpload.$error.fileType">File extension is not valid, must be either .3ds .fbx or .obj</div>
                 <div class="text-danger" ng-show="updateModelForm.updateUpload.$error.fileSize">File size is larger than 8 MB</div>
                 <span class="text-muted">Max upload 8 MB file</span>
-                <input type="submit" class="center" value="Update" ng-disabled="updateModelForm.$invalid" style="margin-top:20px; background-color:#FFFFFF; color:#0daf83">
+                <input type="submit" class="center" value="Update" ng-disabled="updateModelForm.$invalid" style="margin-top:20px; margin-bottom:8px; background-color:#FFFFFF; color:#0daf83">
+                <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
         </div>
     </div>

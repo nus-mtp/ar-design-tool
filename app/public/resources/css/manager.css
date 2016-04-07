@@ -13,6 +13,12 @@
   height: 41px;
   width: 100%; }
 
+.btn-cancel {
+  background-color: #FFFFFF;
+  color: #cc0000;
+  height: 41px;
+  width: 100%; }
+
 h1 {
   font-size: 18px;
   font-style: normal;
