@@ -32,8 +32,7 @@
                   
 
         var cookie = document.cookie.split(';')[0];
-        var uid = cookie.split('=');
-        $scope.userid = uid[1];
+        $scope.userid = uid;
         $scope.project.image_url = "/resources/images/open_book.png";
         $scope.update.image_url = "/resources/images/open_book.png";
         

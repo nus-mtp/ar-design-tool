@@ -121,8 +121,9 @@ var createProjectInDB = function(newProj, vuforia_pkg, goodCallback, badCallback
         }, function(err) {
             badCallback(err);
         });
-    }).catch(function() {
+    }).catch(function(err) {
         console.log('caught error in createProjectInDB API');
+        console.log(err);
         badCallback(err);
     });
     console.log('created project!');

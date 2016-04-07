@@ -12,7 +12,8 @@
      </head>
      <body>
         <script>
-        document.cookie="uid=[[= model.id]];";
+            var model = [[= JSON.stringify(model) ]];
+            var uid = model.id;
         </script>
         <div ng-app="vumixManagerApp">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="z-index: 100;">
