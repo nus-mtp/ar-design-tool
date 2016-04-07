@@ -18,7 +18,7 @@
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="z-index: 100;">
                     <div class="container-fluid nav-bar">
                         <div class="navbar-header">
-                           <img ng-src="/resources/images/logo.png" height=50" width="50">
+                           <img ng-src="/resources/images/logo_white.png" height=50" width="50">
                            <span style="font-size: 16px">Vumix File Manager</span>
                         </div>
 
@@ -57,21 +57,21 @@
                 }
             }
         </script>
-        <script type="text/javascript" src="vendors/jquery/dist/jquery.min.js"></script>
-        <script type="text/javascript" src="vendors/jquery-ui/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="vendors/angular/angular.js"></script>
-        <script type="text/javascript" src="vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
-        <script type="text/javascript" src="vumixManagerApp/app.js"></script>
+        <script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="/vendors/jquery-ui/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/vendors/angular/angular.js"></script>
+        <script type="text/javascript" src="/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/app.js"></script>
         
-        <script type="text/javascript" src="vumixManagerApp/services/_services.js"></script>
-        <script type="text/javascript" src="vumixManagerApp/services/modelService.js"></script>
-        <script type="text/javascript" src="vumixManagerApp/services/projectService.js"></script>
-        <script type="text/javascript" src="vumixManagerApp/services/imageService.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/services/_services.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/services/modelService.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/services/projectService.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/services/imageService.js"></script>
         
-        <script type="text/javascript" src="vumixManagerApp/controllers/_controllers.js"></script>
-        <script type="text/javascript" src="vumixManagerApp/controllers/managerController.js"></script>
-        <script type="text/javascript" src="vumixManagerApp/controllers/modelController.js"></script>
-        <script type="text/javascript" src="vumixManagerApp/controllers/imageController.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/controllers/_controllers.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/controllers/managerController.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/controllers/modelController.js"></script>
+        <script type="text/javascript" src="/vumixManagerApp/controllers/imageController.js"></script>
 	</body>
 </html>

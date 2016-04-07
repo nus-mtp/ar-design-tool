@@ -1,11 +1,12 @@
-angular.module('vumixManagerApp.controllers')
-    .controller('managerController', function (projectService, $http, $scope, $timeout, $window) {
+(function() {
+    angular.module('vumixManagerApp.controllers')
+      .controller('managerController', function (projectService, $http, $scope, $timeout, $window) {
         var file;
         
         $scope.empty = {
             project_name: "",
             company_name: "",
-            marker_type: "3D",
+            marker_type: "2D",
             image_url: "",  
             upload: undefined
         };
@@ -15,7 +16,7 @@ angular.module('vumixManagerApp.controllers')
         $scope.project = {
             project_name: "",
             company_name: "",
-            marker_type: "3D",
+            marker_type: "2D",
             image_url: "",  
             upload: undefined
         };
@@ -24,7 +25,7 @@ angular.module('vumixManagerApp.controllers')
             id: "",
             name: "",
             com_name: "",
-            marker_type: "3D",
+            marker_type: "2D",
             image_url: "",    
             upload: undefined
         };
@@ -38,34 +39,114 @@ angular.module('vumixManagerApp.controllers')
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
-            return $scope.project.upload;
+            return {
+                file : $scope.project.upload,
+                project_name : $scope.project.project_name
+            };
           };
           
           var extensionCheck = function() {
-            var tokenised = $scope.project.upload.name.split('.');
+            var Data = requiredCheck();
+            var tokenised = Data.file.name.split('.');
             if (tokenised.length < 1) {
               return false;
+            }
+            if( tokenised[1] !== 'unitypackage'){
+                $scope.addProjectForm.projectUpload.$setValidity('fileType', false); 
             }
             return tokenised[tokenised.length - 1] === 'unitypackage';
           };
           
+          var checkSimilarity = function() {
+            var Data = requiredCheck();
+            
+            if(checkSimilarProjectName(Data.project_name)){
+                $scope.addProjectForm.projectName.$setValidity('fileName', false);
+                return true;
+            }
+            return false;
+          };
+          
+          var checkSimilarProjectName = function(val){
+            for(var i = 0; i < $scope.projects.length; i++){
+                if(val === $scope.projects[i].name){
+                    return true;
+                } 
+            }
+            return false;
+          };
+          
           $scope.$watch('project.upload', function(newVal, oldVal) {   
-            $scope.addProjectForm.projectUpload.$setValidity('required', false); 
-            $scope.addProjectForm.projectUpload.$setValidity('fileType', false); 
-            if (requiredCheck()) {      
+            $scope.addProjectForm.projectUpload.$setValidity('required', false);
+            var Data = requiredCheck();
+    
+            if (Data.file) {      
               $scope.addProjectForm.projectUpload.$setValidity('required', true);
               if (extensionCheck()) {
                 $scope.addProjectForm.projectUpload.$setValidity('fileType', true); 
               }                            
             }
+            
           });
+          
+          $scope.$watch('project.project_name', function(newVal, oldVal){
+            var Data = requiredCheck();
+            
+            if(Data.project_name){
+              if(!checkSimilarity()){
+                  $scope.addProjectForm.projectName.$setValidity('fileName', true);
+              }
+            }
+          });
+          
+        };
+        
+        var updateFormLoaded = function (){
+          var requiredCheck = function() {
+            return {
+                file : $scope.update.upload,
+                project_name : $scope.update.name
+            };
+          };
+          
+          var extensionCheck = function() {
+            var Data = requiredCheck();
+            var tokenised = Data.file.name.split('.');
+            if (tokenised.length < 1) {
+              return false;
+            }
+            if( tokenised[1] !== 'unitypackage'){
+                $scope.updateProjectForm.updateUpload.$setValidity('fileType', false); 
+            }
+            return tokenised[tokenised.length - 1] === 'unitypackage';
+          };
+          
+          $scope.$watch('update.upload', function(newVal, oldVal) {   
+            $scope.updateProjectForm.updateUpload.$setValidity('required', false);
+            var Data = requiredCheck();
+    
+            if (Data.file) {      
+              $scope.updateProjectForm.updateUpload.$setValidity('required', true);
+              if (extensionCheck()) {
+                $scope.updateProjectForm.updateUpload.$setValidity('fileType', true); 
+              }                            
+            }
+
+          });
+          
         };
         
         $scope.$watch('addProjectForm', function(newVal, oldVal) {
           if (newVal) {
             onFormLoaded();
           }
-        });        
+        }); 
+        
+        $scope.$watch('updateProjectForm', function(newVal, oldVal){
+          if (newVal){
+            updateFormLoaded();   
+          } 
+        });
         
         $scope.uploadFile = function(){
             file = event.target.files[0];
@@ -100,11 +181,19 @@ angular.module('vumixManagerApp.controllers')
                     $scope.update.upload = $scope.projects[i].upload;
                 }
             }
+            
+            $("#welcome_page").hide();
+            $("#create_project ").hide(); 
+            $("#update_page").show();
         };
         
         $scope.updateProject = function(id){
+            $("#update_page").hide();
+            $("#welcome_page").show();
             projectService.updateProject($scope.projects, $scope.update, $scope.update.upload, $scope.userid,id)
             .then(function(update){
+                console.log(update);
+           
                 $scope.project = update;
             });
         };
@@ -112,7 +201,6 @@ angular.module('vumixManagerApp.controllers')
         $scope.addProject = function(){
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
                 .then(function(project) {
-                $(".navbar").css( "zIndex" , 0 );
                 $scope.projects.push(project);
                 $scope.reset();
             });
@@ -132,3 +220,4 @@ angular.module('vumixManagerApp.controllers')
             $scope.projects = res.data;
         });
     });
+ })();   

@@ -1,6 +1,6 @@
-// Handle model
-angular.module('vumixManagerApp.controllers')
-    .controller('modelController', function (modelService, $http, $scope) {
+(function() {
+    angular.module('vumixManagerApp.controllers')
+      .controller('modelController', function (modelService, $http, $scope) {
         var file;
         
         $scope.empty = {
@@ -39,11 +39,15 @@ angular.module('vumixManagerApp.controllers')
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
-            return $scope.model.upload;
+            return {
+                file : $scope.model.upload,
+                model_name : $scope.model.model_name
+            };
           };
           
         var extensionCheck = function() {
-          var tokenised = $scope.model.upload.name.split('.');
+          var Data = requiredCheck();
+          var tokenised = Data.file.name.split('.');
           $scope.model.file_extension = tokenised[tokenised.length-1].toLowerCase();
             if (tokenised.length < 1) {
               return false;
@@ -67,10 +71,31 @@ angular.module('vumixManagerApp.controllers')
            return true;
          };
          
+         var checkSimilarity = function() {
+            var Data = requiredCheck();
+            
+            if(checkSimilarModelName(Data.model_name)){
+                $scope.modelForm.modelName.$setValidity('fileName', false);
+                return true;
+            }
+            return false;
+         };
+          
+         var checkSimilarModelName = function(val){
+            for(var i = 0; i < $scope.models.length; i++){
+                if(val === $scope.models[i].name){
+                    return true;
+                } 
+            }
+            return false;
+         };
+         
           
          $scope.$watch('model.upload', function(newVal, oldVal) {   
             $scope.modelForm.modelUpload.$setValidity('required', false); 
-            if (requiredCheck()) {      
+            var Data = requiredCheck();
+            
+            if (Data.file) {      
               $scope.modelForm.modelUpload.$setValidity('required', true);
               if (extensionCheck()) {
                 $scope.modelForm.modelUpload.$setValidity('fileType', true);   
@@ -80,12 +105,81 @@ angular.module('vumixManagerApp.controllers')
               }                            
             }
           });
+          
+          $scope.$watch('model.model_name', function(newVal, oldVal){
+            var Data = requiredCheck();
+            
+            if(Data.model_name){
+              if(!checkSimilarity()){
+                  $scope.modelForm.modelName.$setValidity('fileName', true);
+              }
+            }
+          });
+          
         };
         
-       $scope.$watch('modelForm', function(newVal, oldVal) {
+        var updateFormLoaded = function (){
+          var requiredCheck = function() {
+            return {
+                file : $scope.update.upload,
+                project_name : $scope.update.name
+            };
+          };
+          
+          var extensionSizeCheck = function(){
+            var tokenised = $scope.update.upload.size;
+            if(tokenised > 8000000){
+                $scope.updateModelForm.updateUpload.$setValidity('fileSize', false);  
+                return false;
+            }
+            return true;
+          };
+          
+          var extensionCheck = function() {
+            var Data = requiredCheck();
+            var tokenised = Data.file.name.split('.');
+            $scope.update.file_extension = tokenised[tokenised.length-1].toLowerCase();
+            if (tokenised.length < 1) {
+              return false;
+            }
+           
+            if ($scope.update.file_extension !== 'obj'){
+                $scope.updateModelForm.updateUpload.$setValidity('fileType', false);
+            }else if ($scope.update.file_extension !== 'fbx'){
+                $scope.updateModelForm.updateUpload.$setValidity('fileType', false);
+            }else if ($scope.update.file_extension !== '3ds'){
+                $scope.updateModelForm.updateUpload.$setValidity('fileType', false);
+            }
+            return tokenised[tokenised.length - 1].toLowerCase() === 'obj' || tokenised[tokenised.length - 1].toLowerCase() === 'fbx' || tokenised[tokenised.length - 1].toLowerCase() === '3ds';
+            
+          };
+          
+          $scope.$watch('update.upload', function(newVal, oldVal) {
+            $scope.updateModelForm.updateUpload.$setValidity('required', false);
+            var Data = requiredCheck();
+    
+            if (Data.file) {      
+              $scope.updateModelForm.updateUpload.$setValidity('required', true);
+              if (extensionCheck()) {
+                $scope.updateModelForm.updateUpload.$setValidity('fileType', true); 
+              }
+              if (extensionSizeCheck()){
+                $scope.updateModelForm.updateUpload.$setValidity('fileSize', true);
+              }                            
+            }
+          });
+        };
+        
+        $scope.$watch('modelForm', function(newVal, oldVal) {
           if (newVal) {
             onFormLoaded();
           }
+        });
+        
+        $scope.$watch('updateModelForm', function(newVal, oldVal){
+          if (newVal){
+            updateFormLoaded();   
+          } 
         });     
        
         $scope.uploadFile = function(){
@@ -112,9 +206,15 @@ angular.module('vumixManagerApp.controllers')
                    $scope.update.upload = $scope.models[i].upload;
                 }
             }
+             
+            $("#welcome_model").hide();
+            $("#upload_model").hide(); 
+            $("#update_page").show();
         };
         
         $scope.updateModel = function(id){
+            $("#update_page").hide();
+            $("#welcome_model").show();
             modelService.updateModel($scope.models,$scope.update, $scope.update.upload,$scope.userid,id)
             .then(function(update){
                  $scope.model = update;
@@ -151,9 +251,14 @@ angular.module('vumixManagerApp.controllers')
             var length = $scope.all.length;
   
             for(i=0; i<length; i++){
-                if($scope.all[i].file_extension == "obj" || $scope.all[i].file_extension == "fbx"){
+                if($scope.all[i].file_extension == "obj"){
+                    $scope.models.push($scope.all[i]);
+                } else if ($scope.all[i].file_extension == "3ds"){
+                    $scope.models.push($scope.all[i]);
+                } else if ($scope.all[i].file_extension == "fbx"){
                     $scope.models.push($scope.all[i]);
                 }
             }
         });
     });
+ })();   
