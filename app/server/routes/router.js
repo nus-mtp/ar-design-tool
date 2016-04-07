@@ -7,7 +7,8 @@ router.get('/', isLoggedIn, function (req, res) {
 	res.render('vumixManagerView',{name: req.user.name, id:req.user.id});
 });
 
-router.get('/project/:id', function(req, res) {
+router.get('/project/:id', isLoggedIn, function(req, res) {
+	console.log(req)
 	res.render('vumixEditorView', {name: req.user.name, id:req.user.id, pid: req.params.id});
 });
 
