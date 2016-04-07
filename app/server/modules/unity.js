@@ -115,7 +115,7 @@ var copyModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	utils.copyFile(file, dest, function() {
 		rebuildAssetBundle(uid, pid);
 		goodcallback();
-	}, function() {
+	}, function(err) {
 		console.log("error found in copyModel");
 		badcallback(err);
 	});
