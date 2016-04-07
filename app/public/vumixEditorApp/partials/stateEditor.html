@@ -94,7 +94,8 @@
     unityHasLoaded: function() {
       angular.element(el).injector().get('loaderService').showLoader("Importing all models");
       downloadUserStuff(
-        
+        '/storage/' + uid + '/' + pid + '/webglbundles.unity3d',
+        '/storage/' + uid + '/' + pid + '/state.dat'
       );
     }
   };
