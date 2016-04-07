@@ -8,6 +8,10 @@
     ) {
       $scope.editorService = editorService;
      
-      $scope.unityMapperService = unityMapperService;   
+      $scope.unityMapperService = unityMapperService;  
+      
+      $scope.goToManager = function(){
+          window.location.href=  "/#/manager";
+      } 
     }); 
 })();

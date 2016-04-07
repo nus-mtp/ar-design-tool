@@ -84,7 +84,7 @@ router.post('/', upload.single("file"), function(req, res) {
         name: req.body.model_name,
         file_name: physical_model.filename,
         file_size: physical_model.size,
-        file_extension: physical_model.filename.split('.')[1]
+        file_extension: physical_model.filename.split('.')[1].toLowerCase()
     };
     models.model.find({
         where: {
@@ -207,9 +207,9 @@ router.put('/:id', upload.single("file"), function(req, res) {
 var updateModelDB = function(req, physical_model, id, model, goodCallback, badCallback) {
     models.model.update({
         name: req.body.name || model.name,
-        file_size: req.body.file_size || model.file_size,
+        file_size: physical_model.size || model.file_size,
         file_name: physical_model.filename || model.file_name,
-        file_extension: req.body.file_extension || model.file_extension
+        file_extension: physical_model.filename.split('.')[1].toLowerCase() || model.file_extension
     }, { 
         where: {
             id: id

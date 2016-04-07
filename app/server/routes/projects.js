@@ -121,8 +121,9 @@ var createProjectInDB = function(newProj, vuforia_pkg, goodCallback, badCallback
         }, function(err) {
             badCallback(err);
         });
-    }).catch(function() {
+    }).catch(function(err) {
         console.log('caught error in createProjectInDB API');
+        console.log(err);
         badCallback(err);
     });
     console.log('created project!');
@@ -254,8 +255,26 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
     });
 };
 
-router.post('/addModel', function(req, res) {
+/**
+ * @module useModelForProject
+ * @parent projectApi
+ * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.pid
+ * copies models with ids submitted in body owned by user with {userId} to project folder with {pid} and rebuilds assetbundle for that project
+ * POST
+ * api: /api/users/{userId}/projects/addModels
+ */
+router.post('/addModels', function(req, res) {
+    console.log("using model for project");
+    var uid = req.params.userId;
+    var ids  = req.body.ids;
+    var pid = req.body.pid;
+ 
 
+        // function(err) {
+        //     console.log("error caught in adding model for project");
+        //     res.json({status: "fail", message: err.message, length: 0, data: []});
+        // };        
 });
+
 
 module.exports = router;

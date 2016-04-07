@@ -10,6 +10,7 @@ var model_path 		= '/models/';
 var state_dat_file 	= 'state.dat';
 var copy_state_name = 'copyState.dat';
 var vuforia_name 	= "marker.unitypackage";
+var assetbundle_name = '/webglbundles.unity3d';
 
 var rebuildVuforiaPackage = function(uid, pid) {
 	console.log('rebuilding vuforia package...');
@@ -67,6 +68,7 @@ var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	unity.on('exit', function(code) {
 		moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
 		copyStateDat(uid, pid);
+		copyDefaultAssetBundle(uid, pid);
 		console.log("Creating new project child process exited with code " + code);
 		callback();
 		//TODO: remove this after testing
@@ -105,25 +107,41 @@ var deleteModel = function(uid, fileName) {
 	utils.deleteFile(modelFile_path);
 };
 
-var copyModel = function(uid, pid, fileName) {
+var copyModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	console.log('copying model into project '+pid+' dir');
 	var modelFile_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path+fileName);
 	var destination = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
 
-	try {
-		var readModel = fs.createReadStream(modelFile_path);
-		var writeModel = fs.createWriteStream(destination);
+	utils.copyFile(file, dest, function() {
+		rebuildAssetBundle(uid, pid);
+		goodcallback();
+	}, function(err) {
+		console.log("error found in copyModel");
+		badcallback(err);
+	});
 
-		readModel.pipe(writeModel, {end: false});
-		readModel.on('end', function() {
-			console.log('Finished copying model to '+destination);
-			writeModel.end();
-			rebuildAssetBundle(uid, pid);
-		});
-	} catch(e) {
-		console.log(e);
-	}
+	// try {
+	// 	var readModel = fs.createReadStream(modelFile_path);
+	// 	var writeModel = fs.createWriteStream(destination);
+
+	// 	readModel.pipe(writeModel, {end: false});
+	// 	readModel.on('end', function() {
+	// 		console.log('Finished copying model to '+destination);
+	// 		writeModel.end();
+	// 		rebuildAssetBundle(uid, pid);
+	// 	});
+	// } catch(e) {
+	// 	console.log(e);
+	// }
 };
+
+var copyDefaultAssetBundle = function(uid, pid) {
+	console.log("copying default asset bundle");
+	var defaultAssetPath = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.assetbundle);
+	var dest = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+assetbundle_name);
+
+	utils.copyFile(defaultAssetPath, dest);
+}
 
 var rebuildAssetBundle = function(uid, pid) {
 	console.log('rebuilding assetbundle...');

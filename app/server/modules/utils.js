@@ -70,8 +70,29 @@ var deleteFile = function(deleteFile) {
 	});
 };
 
+var copyFile = function(file, dest, goodcallback, badcallback) {
+	try {
+		var readModel = fs.createReadStream(file);
+		var writeModel = fs.createWriteStream(dest);
+
+		readModel.pipe(writeModel, {end: false});
+		readModel.on('end', function() {
+			console.log('Finished copying model to '+dest);
+			writeModel.end();
+			if(goodcallback)
+				goodcallback();
+		});
+	} catch(e) {
+		console.log("error while copying files: " + file + " to dest: " + dest);
+		console.log(e);
+		if(badcallback)
+			badcallback(e);
+	}
+}
+
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
 module.exports.saveFileToDest = saveFileToDest;
 module.exports.moveFileToDest = moveFileToDest;
 module.exports.deleteFile = deleteFile;
 module.exports.deleteDir = deleteDir;
+module.exports.copyFile = copyFile;

@@ -16,7 +16,7 @@
                 headers: {'Content-Type': undefined}
             })
             .then(function(res){
-                loaderService.hideLoader();             
+                loaderService.hideLoader(); 
                 return res.data.data[0];
             }, function errorCallback(res){
                 loaderService.hideLoader();              

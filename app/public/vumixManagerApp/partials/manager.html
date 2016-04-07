@@ -1,13 +1,13 @@
 <div class="wrapper" ng-controller="managerController" >
-     
     <div class="sidebar">
-        <div id="welcome_page" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
+        <div id="welcome_page" class="side-bar-padding welcome_side" style="padding-top: 50px;">
+            <h1 class="center" style="margin-top: 0%; text-decoration:underline"> Welcome to Vumix !</h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
             <button type="button" class="center btn-large" id="createProject">Create Your New Project</button>
         </div>
-        <div id="create_project" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 5%;"> Create Your New Project</h1>
+        <div id="create_project" class="side-bar-padding create_side">
+            <span class="clickable" id="go_welcome">&#60;	&lt;Go Back</span>
+            <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Create Your New Project!</h1>
             <form name="addProjectForm" ng-submit="addProject()" enctype="multipart/form-data" novalidate>
               <div class="form-group">
                 <h2>Company Name</h2>
@@ -18,8 +18,9 @@
                 <h2> Project Name</h2>
                 <input class="form-control" type="text" name="projectName" placeholder="Project Name" ng-model="project.project_name" required />
                 <span class="text-danger" ng-show="addProjectForm.projectName.$error.required">Project name cannot be empty</span>
+                <span class="text-danger" ng-show="addProjectForm.projectName.$error.fileName">Project name is already exist</span>
               </div>
-              <h2> Target Marker Type</h2>
+              <!--<h2> Target Marker Type</h2>
               <label for="">
                   <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D" checked="" ng-model="project.marker_type">
                   2D 
@@ -27,7 +28,7 @@
               <label>
                   <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D" ng-model="project.marker_type">
                   3D 
-              </label>              
+              </label>              -->
               <h2> Upload Your Vuforia Package</h2>
               <a style="text-decoration: underline" target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
               <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
@@ -36,44 +37,23 @@
               <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
             </form>
         </div>
-    </div>
-
-    <!--modal to update project-->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">        
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
-                    <h4 class="modal-title"> Your project</h4>
-                </div>
-                <div class="modal-body">
-                    <form name="updateProjectForm" enctype="multipart/form-data">
-                        <h2>Company Name</h2>
-                        <input type="text" name="comName" ng-model="update.com_name" ><br>
-                        <h2> Project Name</h2>
-                        <input type="text" name="projectName"  ng-model="update.name" ><br>
-                        <h2> Target Marker Type</h2>
-                        <label>
-                            <input type="radio" name="optionsRadios" value="2D" id="optionsRadios1" ng-model="update.marker_type">
-                            2D 
-                        </label>
-                        <label>
-                            <input type="radio" name="optionsRadios" value="3D" id="optionsRadios2" ng-model="update.marker_type">
-                            3D 
-                        </label>            
-                        <h2> Upload Your Vuforia Package</h2>
-                        <input type ="file" ng-model="update.upload" name="projectUpload" onchange="angular.element(this).scope().updateFile()"/>
-                        <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
-                            <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
-                        </form>-->
-                        <input type="submit" ng-click="updateProject(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
-                    </form>
-                </div>           
-            </div>
+        
+        <div id="update_page" class="side-bar-padding update_side">
+             <span class="clickable" id="cancel_update">&#10006;Cancel</span>
+             <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Project Here!</h1>
+             <form name="updateProjectForm" ng-submit="updateProject(update.id)" enctype="multipart/form-data" novalidate>
+                <h2>Company Name</h2>
+                <input type="text" name="comName" ng-model="update.com_name" ><br>
+                <h2> Project Name</h2>
+                <input type="text" name="projectName"  ng-model="update.name" ><br>
+                <h2> Upload New Vuforia Package</h2>
+                <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()"/> 
+                <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.required">Project file cannot be empty</div>
+                <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
+                <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+            </form>
         </div>
-    </div>
-    
-    
+    </div>    
 
     <div class="content">
         <div class="container section" style="width:auto;">
@@ -82,21 +62,22 @@
                     <input type="text" name="q" placeholder="Search..." ng-model="searchText.name" />
                 </div>
             </div>
+            
             <!--to display project-->
             <div id="project_list" class="flex-container">
                 <ul ng-repeat="pr in projects | filter:searchText">
-                    <a ng-click="goToState(pr.id)">
+                    <div class="clickable" ng-click="goToState(pr.id)">
                         <li class="flex-item">
                             <div class="card">
                                 <img class="card-img-top" ng-src="{{project.image_url}}" alt="Card image cap">
                                 <div class="card-block">
-                                    <p class="card-text" style="background-color: #0097FF; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{pr.name}}</p>
+                                    <p class="card-text" style="background-color: #0daf83; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{pr.name}}</p>
                                 </div>
                             </div>
                         </li>
-                    </a>
+                    </div>
                     <button class="btn btn-danger" ng-click="deleteProject(pr.id)">Delete</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#myModal" ng-click="getProject(pr.id)">Update</button>
+                    <button class="button btn btn-info" id="update_btn" ng-click="getProject(pr.id)">Update</button>
                 </ul>
             </div>
         </div>
@@ -114,6 +95,9 @@
         
         var height = 1200;
         $('.sidebar').css("min-height", height);
+        $('.welcome_side').css("min-height", height);
+        $('.create_side').css("min-height", height);
+        $('.update_side').css("min-height", height);
         
         // when user resize their window
         $(window).resize(function(){
@@ -127,11 +111,21 @@
         
         
         $("#create_project").hide();
-        $("#floatingCirclesG").hide();
+        $("#update_page").hide();
     
         $('#createProject').click(function(){
            $("#welcome_page").hide();
            $("#create_project ").show(); 
+        });
+        
+        $('#cancel_update').click(function(){
+           $("#welcome_page").show();
+           $("#update_page").hide();
+        });
+        
+        $('#go_welcome').click(function(){
+           $("#welcome_page").show();
+           $("#create_project ").hide(); 
         });
         
     });

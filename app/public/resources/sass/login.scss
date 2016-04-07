@@ -4,22 +4,32 @@
 
 .top-bar {
   background: $bg-color;
-  background-image: url();
-  height: 80px;
+  height: 100px;
   width: 100%;
+}
+
+.img-banner {
+  background: url('../images/img_banner_transparent.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70%;
 }
 
 .below-top-bar {
-  background: $light-blue;
-  height: 30px;
+  background: $light-green;
+  height: 100px;
   width: 100%;
 }
 
+body {
+  background: $dark-green;
+}
+
 .title {
-  color: $light-blue;
+  color: $light-green;
   font-size: 52px;
+  font-weight: bold;
   text-align: center;
-  
   img {
     height: 60px;
     margin-top: -10px;
@@ -28,8 +38,8 @@
 }
 
 .container {
-  background: $purple;
-  height: 600px;
+  background: $light-green;
+  height: 400px;
   width: 100%;
 }
 
@@ -38,14 +48,33 @@
 }
 
 .flexbox-container {
-  display: -ms-flex;
-  display: -webkit-flex;
   display: flex;
   > div {
-    padding: 10px;
     width: 50%;
-    &:first-child {
-      margin-right: 20px;
-    }
   }
+}
+
+.subtitle {
+  font-size: 20px;
+  margin-left: 30%;
+  margin-top: -13px;
+  width:50%; 
+}
+
+.sub-content {
+  font-size: 20px;
+  margin-top: 130px;
+  text-align: right;
+}
+
+.vertical-line {
+  border-left: thick solid $bg-color;
+  margin-left: 100px;
+  margin-top: 70px;  
+  text-align: left;
+}
+
+.btn-danger {
+  margin-left: -122px;
+  margin-top: 76px;
 }
