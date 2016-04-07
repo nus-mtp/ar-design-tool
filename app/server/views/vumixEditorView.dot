@@ -42,5 +42,6 @@
     <script type="text/javascript" src="/vumixEditorApp/controllers/managerController.js"></script>
     
     <script type="text/javascript" src="/vumixEditorApp/app.js"></script>
+    <script type="text/javascript" src="/vumixEditorApp/JS/JsPlumbWrapper.js"></script>
 	</body>
 </html>

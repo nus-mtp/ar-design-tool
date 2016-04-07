@@ -118,23 +118,7 @@
 .point:hover { 
     box-shadow: 2px 2px 19px #AAAAAA;
 }
-        
-.aLabel {
- 	background-color:white; 
-	padding:0.4em; 
-	font:12px sans-serif; 
-	color:#444;
-	z-index:21;
-	border:1px dotted gray;
-	opacity:1;
-	filter:alpha(opacity=80);
-    }
-        
-    .aLabel._jsPlumb_hover, ._jsPlumb_source_hover, ._jsPlumb_target_hover {
-    background-color: #1e8151;
-    color: white;
-    }
-        
+           
 .button {
     text-align: center;
     border: 1px solid;
