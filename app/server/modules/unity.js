@@ -179,11 +179,6 @@ var moveCopyState = function(uid, pid) {
 	utils.moveFileToDest(tmp, dest_path);		
 }
 
-var copyStateDat = function(stateDat, callback) {
-	console.log('copying state dat');
-	utils.saveFileToDest(stateDat.path, stateDat.destination+copy_state_name, callback);
-};
-
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
 module.exports.updateVuforia 		= updateVuforia;
 
