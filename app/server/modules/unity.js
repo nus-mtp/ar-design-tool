@@ -41,13 +41,6 @@ var updateVuforia = function(uid, pid, vuforia_pkg) {
 	moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
 };
 
-var copyStateDat = function(uid, pid) {
-	console.log('copying state dat...');
-	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
-	var state_dest 		= path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
-	utils.copyFile(state_dat_loc, state_dest);
-}
-
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
 	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
@@ -93,12 +86,6 @@ var moveModel = function(uid, fileName) {
 		console.log('completed dir check');
 		console.log('moving model to model library');
 		utils.moveFileToDest(tmp_path, dest_path+fileName);
-		// utils.moveFileToDest(tmp_path, dest_path+fileName, function() {
-			// console.log('completed moving model to model library')
-			// console.log('going to copy model now')
-			// TODO: remove this
-			// copyModel(uid, '6', fileName);
-		// });	
 	});
 };
 
@@ -135,13 +122,17 @@ var copyModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	// }
 };
 
+var importDefaultModel = function() {
+
+};
+
 var copyDefaultAssetBundle = function(uid, pid) {
 	console.log("copying default asset bundle");
 	var defaultAssetPath = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.assetbundle);
 	var dest = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+assetbundle_name);
 
 	utils.copyFile(defaultAssetPath, dest);
-}
+};
 
 var rebuildAssetBundle = function(uid, pid) {
 	console.log('rebuilding assetbundle...');
@@ -161,7 +152,27 @@ var rebuildAssetBundle = function(uid, pid) {
 	});
 };
 
-var buildApk = function(uid, pid) {
+var moveStateFile = function(uid, pid, stateFile) {
+	console.log('saving state file');
+	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
+	utils.moveFileToDest(stateFile.path, dest_path);	
+};
+
+var moveCopyState = function(uid, pid) {
+	console.log('saving state file');
+	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
+	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	utils.moveFileToDest(tmp, dest_path);		
+};
+
+var copyStateDat = function(uid, pid) {
+	console.log('copying state dat...');
+	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	var state_dest 		= path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
+	utils.copyFile(state_dat_loc, state_dest);
+};
+
+var buildApk = function(uid, pid, goodcallback, badcallback) {
 	console.log('building apk for projectid: ' + pid);
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
 	var down_path 	 = project_path+file_paths.download;
@@ -176,26 +187,14 @@ var buildApk = function(uid, pid) {
 		console.log("stderr: " + stderr);	
 		if (error !== null) {
 			console.log("exec error: " + error);
+			badcallback(err);
 		}
 	});
 	buildAPK.on('exit', function(code) {
 		console.log("buildAPK child process exited with code " + code);
-		return down_path;
+		goodcallback(down_path);
 	});
 };
-
-var moveStateFile = function(uid, pid, stateFile) {
-	console.log('saving state file');
-	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
-	utils.moveFileToDest(stateFile.path, dest_path);	
-};
-
-var moveCopyState = function(uid, pid) {
-	console.log('saving state file');
-	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
-	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
-	utils.moveFileToDest(tmp, dest_path);		
-}
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
 module.exports.updateVuforia 		= updateVuforia;
@@ -207,7 +206,9 @@ module.exports.copyStateDat			= copyStateDat;
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
 
+module.exports.importDefaultModel	= importDefaultModel;
 module.exports.deleteModel 			= deleteModel;
 module.exports.moveModel 			= moveModel;
 module.exports.copyModel 			= copyModel;
+
 module.exports.buildApk				= buildApk;

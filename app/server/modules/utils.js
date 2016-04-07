@@ -37,19 +37,6 @@ var moveFileToDest = function(location, destination, callback) {
 		callback();
 };
 
-//TODO: Delete 
-var saveFileToDest = function(file, dest, callback) {
-	fs.writeFile(dest, file, function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('Saved file ' + dest);
-		}
-	});
-	if(callback) 
-		callback();
-};
-
 var deleteDir = function(deleteDest) {
 	rimraf(deleteDest, function(err) {
 		if(err) {
@@ -92,7 +79,6 @@ var copyFile = function(file, dest, goodcallback, badcallback) {
 }
 
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
-module.exports.saveFileToDest = saveFileToDest;
 module.exports.moveFileToDest = moveFileToDest;
 module.exports.deleteFile = deleteFile;
 module.exports.deleteDir = deleteDir;

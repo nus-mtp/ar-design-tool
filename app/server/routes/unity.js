@@ -44,6 +44,14 @@ router.post('/saveproject', upload.single('json'), function(req, res) {
 });
 
 router.get('/buildproject.php', function(req, res, next) {
+
+    // unity.buildApk(uid, pid, function(down_path) {
+    //     res.download(filePath);
+    // }, function(err) {
+    //     console.log("error on build apk");
+    //     res.json({status: "fail", message: err.message, length: 0, data: []});
+    // });
+
     var unityPath = '"' + process.env['UNITY_HOME'] + '\\Unity.exe"';
     var mode = " -quit ";
     var projectPath = ' -projectPath "D:/workspace/cs3284/ar-design-tool/WZ_BACKEND/AssetBundle test" ';
