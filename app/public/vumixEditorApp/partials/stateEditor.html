@@ -93,7 +93,9 @@
   var globalFunc = {
     unityHasLoaded: function() {
       angular.element(el).injector().get('loaderService').showLoader("Importing all models");
-      downloadUserStuff();
+      downloadUserStuff(
+        
+      );
     }
   };
 </script>    

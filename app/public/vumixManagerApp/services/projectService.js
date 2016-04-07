@@ -16,9 +16,7 @@
                 headers: {'Content-Type': undefined}
             })
             .then(function(res){
-                loaderService.hideLoader();              
-                $("#floatingCirclesG").show().delay(13000).fadeOut();
-                $(".navbar").css( "zIndex" , -10 );
+                loaderService.hideLoader();             
                 return res.data.data[0];
             }, function errorCallback(res){
                 loaderService.hideLoader();              

@@ -1,17 +1,17 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">Back</a>
+      <a class="navbar-brand" href="/manager"><navfont>Back</navfont></a>
     </div>
     <ul class="nav navbar-nav navbar-right ">
-      <li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>
+      <!--<li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>-->
       <li>
         <a target="_self" href="/buildproject.php">
-          <button type="button" class="btn btn-success btn-sm">Build APK</button>
+         <navfont>Build APK</navfont>
         </a>
       <li>
         <a href="" ng-click="unityMapperService.saveState()">
-          <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#save">Save</button>
+          <div class="button_save_task" data-toggle="modal" data-target="#save"><navfont>Save</navfont></div>
         </a>
       </li>
     </ul>
@@ -19,26 +19,16 @@
 </nav>
 
 <!-- Modal for model options button -->
-<bs-modal modal-id="myModal" modal-size="sm">
+<bs-modal modal-id="clickableModal">
   <modal-body>
     <p style="text-align:center">Choose your clickable object.</p>
-    <div class="radio">
-      <!-- check on how to use label in html -->
-      <label><input type="radio" name="optradio">Object 1</label>
-    </div>
-    <div class="radio">
-      <label><input type="radio" name="optradio">Object 2</label>
-    </div>
-    <div class="radio disabled">
-      <label><input type="radio" name="optradio">Object 3</label>
-    </div>
   </modal-body>
   <modal-footer>
     <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
   </modal-footer>
 </bs-modal>
 
-<bs-modal modal-id="save" modal-size="sm">
+<bs-modal modal-id="save">
   <modal-body>
     <p style="text-align:center">Work has been saved.</p>
   </modal-body>
@@ -48,7 +38,7 @@
 </bs-modal>
 
 <!-- Modal warning for delete state button -->
-<bs-modal modal-id="deleteState" modal-size="sm">
+<bs-modal modal-id="deleteState">
   <modal-body>
     <p style="text-align:center">Are you sure you want to delete this state?</p>
   </modal-body>
@@ -59,7 +49,7 @@
 </bs-modal>
 
 <!-- Modal warning for delete connection -->
-<bs-modal modal-id="deleteConn" modal-size="sm">
+<bs-modal modal-id="deleteConn">
   <modal-body>
     <p style="text-align:center">Are you sure you want to delete this connection?</p>
   </modal-body>
@@ -73,17 +63,17 @@
   <div class="scrollbar" id="style-default">
     <div id="items">
       <h1>Step One:</h1>
-      <button type = "button" class="button_add_task btn btn-primary btn-md">Click here to create a new state!</button><p></p>
+      <p>Double click in an empty space to create your new state.</p>
       <h1>Step Two:</h1>
       <p>Give your state a name.</p>
       <h1>Step Three:</h1>
       <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
       <h1>Step Four:</h1>
-      <p>Drag and drop lines from the blue circle to connect your states.</p>
+      <p>Create connections between states by dragging lines from the blue circles.</p>
       <h1>Step Five:</h1>
-      <p>Choose your clickable object by clicking <span class='glyphicon glyphicon-resize-horizontal'></span></p>
+      <p>Choose your transition models.</p>
       <br>
-      <p>Made a mistake? Double click on your connection line to delete it. 
+      <p>Made a mistake? Click on your connection line to delete it. 
         Click <span class="glyphicon glyphicon-remove-circle"></span> to delete your entire state.
       </p>
   </div>
@@ -92,44 +82,52 @@
     
   <div class="col-sm-8">
     <div id="drawingArea" style="width:100%;min-height:500px;">
-      <div class="startpoint point window node" style="left: 150px; top:20px" data-nodetype="startpoint" id="startpoint">
-        <div class="editor_container">
+      <div class="window task startpoint endpoint" style="left: 100px; top:50px" data-nodetype="startpoint" id="startpoint">
+        <div class="ctrl_container">
           <div class="button_editor">
             <a ng-click="editorService.openEditor(0)" href="">
               <span class="glyphicon glyphicon-new-window"></span>
             </a>
           </div>
+             
         </div>
-        Root State
-      </div>    
-      <div class="window task" style="left: 120px; top:200px; display:none;" data-nodetype="task" id="taskcontainer0">
+          <div class="well well-sm" align="center">Root State</div>
+      </div>   
+        
+    <div class="task" style="left:1000px;top:800px" data-nodetype="task" id="taskcontainer0">
         <div class="ctrl_container">
-          <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
+            <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
           <div class="button_editor">
-            <a ng-click="editorService.openEditor()" href="">
+            <a ng-click="editorService.openEditor(0)" href="">
               <span class="glyphicon glyphicon-new-window"></span>
             </a>
-          </div>
-        </div>
-        <div class="details_container">
-            <!--<label class="detail_label">Name</label>-->
-            <input value="" placeholder="State Name" class="detail_text"/>
-        </div>
-      </div>
+          </div></div>
+
+             <div class="well well-sm" align="center"><div class="input-group">
+  <input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1">
+                 </div></div>
+    </div>
       <!--For debugging purposes-->
-      <textarea id="jsonOutput" style="width:10px;height:10px;"></textarea>
+      <!--<textarea id="jsonOutput" style="width:10px;height:10px;"></textarea>-->
     </div>
   </div>
 </div>
 
+
+
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
 
-<loader></loader>
+<bs-modal modal-id="addAsset">
+  <modal-body>
+    <p style="text-align:center">Adding Page</p>
+  </modal-body>
+  <modal-footer>
+    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
+  </modal-footer>
+</bs-modal>
 
+<loader></loader>
 <script type="text/javascript">    
-  var CreateState = function(id, name) {
-    console.log("called");
-  }
   
   var angularHelper = (function () {
     var angularHelper = function () { };
@@ -145,62 +143,79 @@
     return angularHelper;
   })();
   
-	var numberOfElements = 0;
+    var numberOfElements = 0;
 var htmlBase = 'drawingArea';
 jsPlumb.ready(function () {
         
 	//FIX DOM:
 	$(("#taskcontainer0"))[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
-
-	jsPlumb.draggable($(".window"));
-	
+	//jsPlumb.draggable($(".window"));
+    
 	jsPlumb.importDefaults({
-		Endpoint : ["Dot", {radius:8}],
-		EndpointStyle : { fillStyle : "#4A6" },
-		HoverPaintStyle : {strokeStyle:"#42a62c", lineWidth:8 },
-		Connector:[ "Flowchart" ],
+		Endpoint : ["Dot", {radius:15}],
+		EndpointStyle : { fillStyle : "gray" },
+		HoverPaintStyle : {strokeStyle:"gray", lineWidth:10 },
 		ConnectionOverlays : [
 			[ "Arrow", { 
-				location:1,
+				location:0.5,
 				id:"arrow",
-				length:20,
-				foldback:0.4
+				length:10,
 			} ],
             [ "Label", { 
 						location:[ 2, 2],
-                        label:"<button type='button' class='btn btn-default btn-xs' data-toggle='modal' data-target='#myModal'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
+                        label:"<button type='button' class='btn btn-default btn-xs'><span class='glyphicon glyphicon-resize-horizontal'></span></button>",
 						cssClass:"aLabel",
 					}]
 		]
-	});
-
+    });
+        
+    
 	var workflowConnectorStartpoint = {
 		isSource: true,
-		isTarget: false,
+		isTarget: true,
 		maxConnections: 10,					 
-		anchor:"BottomCenter"
+		anchor:"BottomCenter",
+        paintStyle: { fillStyle: 'lightblue' },
+		endpoint : ["Dot", {radius:15}],
+        /*beforeDetach: function (conn) {
+        return confirm("Detach connection?");
+        }*/
 	};
 	
 	var workflowConnectorEndpoint = {
 		isSource: false,
 		isTarget: true,
-		maxConnections: -1,				 
-		anchor:"TopCenter",
-		paintStyle: { fillStyle: 'red' },
-		endpoint: ["Rectangle", {width:12, height:12}]
+		maxConnections: 10,				 
+		anchor: 'TopCenter',
+		paintStyle: { fillStyle: 'gray' },
+		endpoint: ["Dot", {radius:15}]
 	};
 	
+    //the code below allows source without circle but dragging has to be disabled first. 
+    //jsPlumb.makeSource(
+    //    $('.startpoint'), {
+    //        anchor: 'Continuous'
+    //});
+    
+    
 	jsPlumb.addEndpoint(
 		$('.startpoint'),
 		workflowConnectorStartpoint
 	);
 	
-	jsPlumb.addEndpoint(
-		$('.endpoint'),
-		workflowConnectorEndpoint
-	);
+    var makeTarget = {
+        anchor: 'Continuous',
+        beforeDetach: function (conn) {
+        return confirm("Detach connection?");
+        }
+    };
+    
+    jsPlumb.makeTarget(
+        $('.endpoint'), 
+        makeTarget
+    );
 					
-    jsPlumb.bind('dblclick', function (connection, e) {
+    jsPlumb.bind('click', function (connection, e) {
             jsPlumb.detach(connection);
     });
 		
@@ -210,11 +225,11 @@ jsPlumb.ready(function () {
 		jsPlumb.removeAllEndpoints(parentnode);
 		$(parentnode).remove(); 
 	});
-	
-	$(".button_add_task").click(function () {
-		addTask();
-	});
-					
+						
+     $('#'+htmlBase).dblclick(function(e) {
+         addTask(undefined,e);
+     });
+    
 	$('.button_save_task').click(function(){
 		saveFlowchart();
 	});
@@ -223,19 +238,29 @@ jsPlumb.ready(function () {
 		loadFlowchart();
 	});
 });
-function addTask(id){
+function addTask(id, e){
 	if(typeof id === "undefined"){
 		numberOfElements++;
-		id = "taskcontainer" + numberOfElements;
+		//id = "taskcontainer" + numberOfElements;
+        id = numberOfElements;
 	}
 	
-	$('<div class="window task node" id="' + id + '" data-nodetype="task" style="left:30px; top:30px;">').appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
-						
-	var taskSourceConnectorEndpoint = {
+    var newState = $('<div class="task" id="' + id + '" data-nodetype="task">');
+    
+    //double click anywhere to create new state
+    newState.css({
+		  'top': e.pageY-150,
+		  'left': e.pageX-300
+		});
+    
+    newState.appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
+    var taskSourceConnectorEndpoint = {
 		isSource: true,
-		isTarget: false,
+		isTarget: true,
 		maxConnections: 10,
-        anchor: "Continuous",
+        anchor:"BottomCenter",
+        paintStyle: { fillStyle: 'lightblue' },
+		endpoint : ["Dot", {radius:15}]
 	};
 	
 	jsPlumb.addEndpoint(
@@ -243,6 +268,12 @@ function addTask(id){
 		taskSourceConnectorEndpoint
 	);
 	
+    //the code below allows source without circle but dragging has to be disabled first. 
+    //jsPlumb.makeSource(
+    //    $('#'+id), {
+    //        anchor: 'Continuous'
+    //    });
+    
 	jsPlumb.makeTarget(
         $('#'+id), {
 		  anchor: 'Continuous'
@@ -251,12 +282,13 @@ function addTask(id){
 	jsPlumb.draggable($('#' + id));
 	return id;
 }
-
+    
 function saveFlowchart(){
 	var nodes = []
 	$(".node").each(function (idx, elem) {
 	var $elem = $(elem);
 	var endpoints = jsPlumb.getEndpoints($elem.attr('id'));
+    attachClickable($elem.attr('id'));
 	console.log('endpoints of '+$elem.attr('id'));
 	console.log(endpoints);
 		nodes.push({
@@ -285,6 +317,7 @@ function saveFlowchart(){
 	
 	$('#jsonOutput').val(flowChartJson);
 }
+    
 function loadFlowchart(){
 	var flowChartJson = $('#jsonOutput').val();
 	var flowChart = JSON.parse(flowChartJson);
@@ -317,9 +350,17 @@ function loadFlowchart(){
 	
 	numberOfElements = flowChart.numberOfElements;
 }
+    
 function repositionElement(id, posX, posY){
 	$('#'+id).css('left', posX);
 	$('#'+id).css('top', posY);
 	jsPlumb.repaint(id);
+}
+function attachClickable(id){
+    var clickableObjects = [];
+    var el = $('[ng-app=vumixEditorApp]')[0];
+    clickableObjects = angular.element(el).injector().get('stateModelService').getClickableStateObjects(id);
+    //console.log(clickableObjects);
+       
 }
 </script>

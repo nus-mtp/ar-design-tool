@@ -31,6 +31,9 @@ router.post('/uploadstate.php', upload.single('binary'), function(req, res, next
         unity.moveStateFile(uid, pid, stateDat);
         unity.moveCopyState(uid, pid);
         res.json({ status:"ok", message: "saved state dat file", data: [stateDat]});
+    }).catch(function (err) {
+        console.log("Caught error in uploadstate route");
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
