@@ -63,7 +63,7 @@
 
 <script type="text/javascript">     
   var el = $('[ng-app=vumixEditorApp]')[0];
-  angular.element(el).injector().get('loaderService').showLoader("WebGL is loading");
+  //angular.element(el).injector().get('loaderService').showLoader("WebGL is loading");
    
   var Module = {
     TOTAL_MEMORY: 268435456,
@@ -88,7 +88,7 @@
   
   var globalFunc = {
     unityHasLoaded: function() {
-      angular.element(el).injector().get('loaderService').showLoader("Importing all models");
+      //angular.element(el).injector().get('loaderService').showLoader("Importing all models");
       downloadUserStuff();
     }
   };

@@ -71,19 +71,13 @@
 }
 
 /* Michelle's */
-
+.navbar {
+  background-color: #0097FF;
+  height: 50px; 
+}
+  
 .window:hover{ 
     cursor: pointer;
-}
-
-.menu { 
-    background-color: #EFEFEF;
-    border: 1px solid #346789;
-    box-shadow: 2px 2px 5px #AAAAAA;
-    color: black;
-    min-height: 3em;
-    position: absolute;
-    min-width: 5em;
 }
 
 .task { 
@@ -94,7 +88,7 @@
     color: black;
     min-height: 3em;
     position: absolute;
-    min-width: 5em;
+    min-width: 10em;
 }
 
 .point{ 
@@ -141,34 +135,6 @@
     color: white;
     }
         
-.decision{
-    transform:rotate(-45deg);
-    overflow:hidden;
-    border: 1px solid #346789;
-    border-radius: 0.3em;
-    color: black;
-    backface-visibility: hidden;
-    background: none repeat scroll 0 0 #F4F4F4;
-    box-shadow: 0 0 0 1px #CCCCCC;
-    color: #000000;
-    display: block;
-    height: 80px;
-    overflow: hidden;
-    position: relative;
-    text-decoration: none;
-    width: 80px;
-}
-
-.decision .ctrl_container{
-    display: table-cell;
-    height: 80px;
-    padding: 0 10px;
-    text-align: center;
-    transform: rotate(45deg);
-    vertical-align: middle;
-    width: 80px;
-}
-
 .button {
     text-align: center;
     border: 1px solid;
@@ -193,15 +159,6 @@ margin-bottom: 25px;
 min-height: 1000px;
 }
 
-.menu_button{
-    padding:5px;
-}
-
-.menu_button:hover{
-    background-color:#AAAAAA;
-    color:black;
-}
-        
 p{
     font-family: 'Palanquin', sans-serif;
     font-size: 15px;
@@ -213,31 +170,16 @@ h1{
     font-size:20px;
 }
 
-.button_add{
-    background-color: #00CC00;
-    float:left;
-    border-radius: 50%;
-    box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
-    padding:2px;
-    height:25px;
-    width:25px;
-    color:grey;
+navfont{
+    color: white;
 }
 
-.button_add:hover{
-    background-color: #00AA00;
-    color:black;
+span.glyphicon-new-window{
+    font-size: 1.2em;
 }
 
-.button_editor,
-.button_remove{
-    color:darkgrey;
-    border-radius: 30%;
-    box-shadow: 0px 3px 8px #aaa, inset 0px 2px 3px #fff;
-    padding:5px;
-    min-width:20px;
-    max-width:20px;
-    text-align:center;
+span.glyphicon-remove-circle {
+    font-size: 1.5em;
 }
 
 .task .button_editor{
@@ -248,37 +190,15 @@ h1{
     float:right;
 }
 
-.decision .button_remove{
-    margin: auto auto;
-}
 
 .button_remove:hover{
     background-color: darkred;
     color:white;
 }
 
-.menu_button_container {
-    margin: 5px;
-}
-
 .ctrl_container{
     margin:5px;
     height:40px;
-}
-
-.details_container{
-    margin:5px;
-    min-height:40px;
-}
-
-.detail_label{
-    font-size: 9pt;
-    color:grey;
-}
-
-.detail_text{
-    width:80px;
-    font-size: 10pt;
 }
 
 ._jsPlumb_connector, ._jsPlumb_startpoint{
