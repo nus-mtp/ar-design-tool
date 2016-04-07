@@ -1,6 +1,6 @@
-// Handle model
-angular.module('vumixManagerApp.controllers')
-    .controller('imageController', function (imageService, $http, $scope) {
+(function() {
+    angular.module('vumixManagerApp.controllers')
+      .controller('imageController', function (imageService, $http, $scope) {
         var file;
         
         $scope.empty = {
@@ -197,3 +197,5 @@ angular.module('vumixManagerApp.controllers')
             }
         });
     });
+ })();   
+ 

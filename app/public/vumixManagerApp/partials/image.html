@@ -19,9 +19,6 @@
                 <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
                 <div class="text-danger" ng-show="imageForm.imageUpload.$error.fileSize">File size is bigger than 4 MB</div>
                 <span class="text-info">Max upload 4 MB file</span>
-                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
-                    <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
-                <!--</form>-->
                 <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF" ng-disabled="imageForm.$invalid">
               </form>
           </span>
@@ -42,9 +39,6 @@
                         <input type="text" name="image_name" placeholder="Image Name" ng-model="update.name"><br>
                         <h1> File</h1>
                         <input type ="file" ng-model="model.upload" name="modelUpload" onchange="angular.element(this).scope().updateFile()">
-                        <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
-                            <div id="dropzone_project" class="dropzone" style="color:#000000; min-height:50px;"></div>  This is the dropzone element 
-                        </form>-->
                         <input type="submit" ng-click="updateImage(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
                     </form>
                 </div>           

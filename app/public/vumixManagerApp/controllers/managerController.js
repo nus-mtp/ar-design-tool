@@ -1,5 +1,6 @@
-angular.module('vumixManagerApp.controllers')
-    .controller('managerController', function (projectService, $http, $scope, $timeout, $window) {
+(function() {
+    angular.module('vumixManagerApp.controllers')
+      .controller('managerController', function (projectService, $http, $scope, $timeout, $window) {
         var file;
         
         $scope.empty = {
@@ -219,3 +220,4 @@ angular.module('vumixManagerApp.controllers')
             $scope.projects = res.data;
         });
     });
+ })();   

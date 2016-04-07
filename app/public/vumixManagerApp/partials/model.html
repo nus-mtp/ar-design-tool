@@ -1,12 +1,13 @@
 <div class="wrapper" ng-controller="modelController">
     <div class="sidebar">
-        <div id="welcome_model" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
+        <div id="welcome_model" class="side-bar-padding welcome_side" style="padding-top: 50px;">
+            <h1 class="center" style="margin-top: 0%; text-decoration:underline">Upload Your Model Here!</h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your model </h2>
             <button type="button" class="center btn-large" id="uploadModel">Add Your New Model</button>
         </div>
-        <div id="upload_model" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 20%;"> Upload Your New Model Here</h1>
+        <div id="upload_model" class="side-bar-padding create_side">
+            <span class="clickable" id="go_welcome">&#60;	&lt;Go Back</span>
+            <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Upload Your New Model Here!</h1>
             <span>
               <form ng-submit="addModel()" name="modelForm" enctype="multipart/form-data" novalidate>
                 <h1> Model Name</h1>
@@ -19,16 +20,30 @@
                 <div class="text-danger" ng-show="modelForm.modelUpload.$error.fileType">File extension is not valid, must be either .3ds .fbx or .obj</div>
                 <div class="text-danger" ng-show="modelForm.modelUpload.$error.fileSize">File size is larger than 8 MB</div>
                 <span class="text-info">Max upload 8 MB file</span>
-                <!--<form class="form-horizontal" id="add-product-form" action="#" method="post">
-                    <div id="dropzone_model" class="dropzone" style="color:#000000;min-height: 100px;"></div>  This is the dropzone element -->
-                <!--</form>-->
                 <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF" ng-disabled="modelForm.$invalid">
               </form>
           </span>
         </div>
+        
+        <div id="update_page" class="side-bar-padding update_side">
+            <span class="clickable" id="cancel_update">&#10006;Cancel</span>
+            <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Model Here!</h1>
+            <form name="updateModelForm" ng-submit="updateModel(update.id)" enctype="multipart/form-data" novalidate>
+                <h1> Model Name</h1>
+                <input type="text" name="model_name" placeholder="Model Name" ng-model="update.name"><br>
+                <h1> File</h1>
+                <input type ="file" ng-model="model.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()">
+                <div class="text-danger" ng-show="updateModelForm.updateUpload.$error.required">Model file cannot be empty</div>
+                <div class="text-danger" ng-show="updateModelForm.updateUpload.$error.fileType">File extension is not valid, must be either .3ds .fbx or .obj</div>
+                <div class="text-danger" ng-show="updateModelForm.updateUpload.$error.fileSize">File size is larger than 8 MB</div>
+                <span class="text-muted">Max upload 8 MB file</span>
+                <input type="submit" class="center" value="Update" ng-disabled="updateModelForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+            </form>
+        </div>
     </div>
     
-    <!--modal to update model-->
+  
+    <!--modal to update model
     <div class="modal fade" id="myModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">        
@@ -47,7 +62,7 @@
                 </div>           
             </div>
         </div>
-    </div>
+    </div>-->
 
 
     <div class="content">
@@ -69,7 +84,7 @@
                         </div>
                     </li>
                     <button class="btn btn-danger" ng-click="deleteModel(md.id)">Delete</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#myModel" ng-click="getModel(md.id)">Update</button>
+                    <button class="btn btn-info" ng-click="getModel(md.id)">Update</button>
                 </a>
             </ul>
         </div>
@@ -87,6 +102,10 @@
         
         var height = 1200;
         $('.sidebar').css("min-height", height);
+        $('.welcome_side').css("min-height", height);
+        $('.create_side').css("min-height", height);
+        $('.update_side').css("min-height", height);
+        
         
         // when user resize their window
         $(window).resize(function(){
@@ -99,8 +118,18 @@
         });
         
         $("#upload_model").hide();
-
-    
+        $("#update_page").hide();
+        
+        $('#go_welcome').click(function(){
+           $("#welcome_model").show();
+           $("#upload_model").hide(); 
+        });
+        
+        $('#cancel_update').click(function(){
+           $("#welcome_model").show();
+           $("#update_page").hide();
+        });
+        
         $('#uploadModel').click(function(){
            $("#welcome_model").hide();
            $("#upload_model").show(); 
