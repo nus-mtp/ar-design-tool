@@ -1,12 +1,13 @@
 <div class="wrapper" ng-controller="imageController">
     <div class="sidebar">
-        <div id="welcome_image" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 20%;"> Welcome to Vumix </h1>
+        <div id="welcome_image" class="side-bar-padding welcome_side" style="padding-top: 50px;">
+            <h1 class="center" style="margin-top: 0%; text-decoration:underline"> Upload Your Image Here! </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your image </h2>
             <button type="button" class="center btn-large" id="uploadImage">Add Your New Image</button>
         </div>
-        <div id="upload_image" class="side-bar-padding">
-            <h1 class="center" style="margin-top: 20%;"> Upload Your New Image Here</h1>
+        <div id="upload_image" class="side-bar-padding create_side">
+            <span class="clickable" id="go_welcome">&#60;	&lt;Go Back</span>
+            <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Upload Your New Image Here!</h1>
             <span>
               <form ng-submit="addImage()" name="imageForm" enctype="multipart/form-data" novalidate>
                 <h1> Image Name</h1>
@@ -23,10 +24,26 @@
               </form>
           </span>
         </div>
+        
+        <div id="update_page" class="side-bar-padding update_side">
+            <span class="clickable" id="cancel_update">&#10006;Cancel</span>
+            <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Image Here!</h1>
+            <form name="updateImageForm" ng-submit="updateImage(update.id)" enctype="multipart/form-data" novalidate>
+                <h1> Image Name</h1>
+                <input type="text" name="image_name" placeholder="Image Name" ng-model="update.name"><br>
+                <h1> File</h1>
+                <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()">
+                <div class="text-danger" ng-show="updateImageForm.updateUpload.$error.required">Image file cannot be empty</div>
+                <div class="text-danger" ng-show="updateImageForm.updateUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
+                <div class="text-danger" ng-show="updateImageForm.updateUpload.$error.fileSize">File size is bigger than 4 MB</div>
+                <span class="text-muted">Max upload 8 MB file</span>
+                <input type="submit" class="center" value="Update" ng-disabled="updateImageForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+            </form>
+        </div>
     </div>
     
     <!--modal to update Image-->
-    <div class="modal fade" id="myImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <!--<div class="modal fade" id="myImage" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">        
                 <div class="modal-header">
@@ -44,7 +61,7 @@
                 </div>           
             </div>
         </div>
-    </div>
+    </div>-->
 
 
     <div class="content">
@@ -66,7 +83,7 @@
                         </div>
                     </li>
                     <button class="btn btn-danger" ng-click="deleteImage(img.id)">Delete</button>
-                    <button class="btn btn-info" data-toggle="modal" data-target="#myImage" ng-click="getImage(img.id)">Update</button>
+                    <button class="btn btn-info" ng-click="getImage(img.id)">Update</button>
                 </a>
             </ul>
         </div>
@@ -84,6 +101,9 @@
         
         var height = 1200;
         $('.sidebar').css("min-height", height);
+        $('.welcome_side').css("min-height", height);
+        $('.create_side').css("min-height", height);
+        $('.update_side').css("min-height", height);
         
         // when user resize their window
         $(window).resize(function(){
@@ -96,13 +116,22 @@
         });
         
         $("#upload_image").hide();
-
+        $("#update_page").hide();
     
         $('#uploadImage').click(function(){
            $("#welcome_image").hide();
            $("#upload_image").show(); 
         });
         
+        $('#cancel_update').click(function(){
+           $("#welcome_image").show();
+           $("#update_page").hide();
+        });
+        
+        $('#go_welcome').click(function(){
+           $("#welcome_image").show();
+           $("#update_image ").hide(); 
+        });
     });
 
 })();

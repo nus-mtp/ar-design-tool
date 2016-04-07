@@ -131,7 +131,6 @@
                 $scope.updateProjectForm.updateUpload.$setValidity('fileType', true); 
               }                            
             }
-
           });
           
         };
