@@ -247,14 +247,12 @@ router.post('/addModels', function(req, res) {
     var pid         = req.body.pid;
     var uid         = req.params.userId;
  
-    console.log(modelNames[0])
     var total   = modelNames.length;
     var failOps = 0;
     var passOps = 0;
     var errmsg  = [];
     
     for(x in modelNames) {
-        console.log(modelNames[x])
         unity.copyModel(uid, pid, modelNames[x], function() {
             passOps++;
             checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg, function(moveErrors) {
