@@ -40,6 +40,7 @@ router.get('/', function(req, res) {
         res.json({status: "ok", length: projects.length, data: projects});            
     }).catch(function(err) {
         console.log('caught error in fetch all projects API');
+        console.log(err);
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
@@ -65,6 +66,7 @@ router.get('/:id', function(req, res) {
         }
     }).catch(function(err) {
         console.log('caught error in fetch project API');
+        console.log(err);
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
@@ -103,6 +105,7 @@ router.post('/', upload.single('file'), function(req, res) {
         }
     }).catch(function(err) {
         console.log('Caught error in insert project API');
+        console.log(err);
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });            
 });
@@ -245,36 +248,50 @@ router.post('/addModels', function(req, res) {
     var pid         = req.body.pid;
     var uid         = req.params.userId;
  
+    console.log(modelNames[0])
     var total   = modelNames.length;
     var failOps = 0;
     var passOps = 0;
     var errmsg  = [];
     
-    for(modelName in modelNames) {
-        unity.copyModel(uid, pid, function() {
+    for(x in modelNames) {
+        console.log(modelNames[x])
+        unity.copyModel(uid, pid, modelNames[x], function() {
             passOps++;
-            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg);
+            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg, function(moveErrors) {
+                res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+            }, function() {
+                res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]});
+            }, function(err) {
+                res.json({status: "fail", message: err.message, length: 0, data: []});    
+            });
         }, function(modelName, err) {
             console.log('encounter error adding model: '+modelName+' to project: '+pid);
             console.log(err);
             failOps++;
-            errmsg.add(modelName, err);
-            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg);
+            errmsg.add(modelNames, err);
+            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg, function(moveErrors) {
+                res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+            }, function() {
+                res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]});
+            }, function(err) {
+                res.json({status: "fail", message: err.message, length: 0, data: []});     
+            });
         });
     }
 });
 
-var checkCompleteAddModelOps = function(uid, pid, passOps, failOps, total, moveErrors) {
-    if(passOps+failOps=total) {
+var checkCompleteAddModelOps = function(uid, pid, passOps, failOps, total, moveErrors, warningCall, goodCall, badCall) {
+    if(passOps+failOps==total) {
         unity.rebuildAssetBundle(uid, pid, function() {
-            if(failedOps>0) {
-                res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+            if(failOps>0) {
+                warningCall(moveErrors);
             } else {
-                res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]})
+                goodCall();
             }
         }, function(err) {
             console.log("caught error while rebuilding asset bundles for project: "+pid);
-            res.json({status: "fail", message: err.message, length: 0, data: []});
+            badCall(err);
         });
     }
 };
