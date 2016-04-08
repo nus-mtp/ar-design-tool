@@ -245,21 +245,38 @@ router.post('/addModels', function(req, res) {
     var pid         = req.body.pid;
     var uid         = req.params.userId;
  
-    for (modelName in modelNames) {
+    var total   = modelNames.length;
+    var failOps = 0;
+    var passOps = 0;
+    var errmsg  = [];
+    
+    for(modelName in modelNames) {
         unity.copyModel(uid, pid, function() {
-
-        }, function(err) {
-            console.log('encounter error adding model to project');
+            passOps++;
+            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg);
+        }, function(modelName, err) {
+            console.log('encounter error adding model: '+modelName+' to project: '+pid);
             console.log(err);
+            failOps++;
+            errmsg.add(modelName, err);
+            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg);
         });
     }
-
-    // unity.copyModel(uid, pid, )
-        // function(err) {
-        //     console.log("error caught in adding model for project");
-        //     res.json({status: "fail", message: err.message, length: 0, data: []});
-        // };        
 });
 
+var checkCompleteAddModelOps = function(uid, pid, passOps, failOps, total, moveErrors) {
+    if(passOps+failOps=total) {
+        unity.rebuildAssetBundle(uid, pid, function() {
+            if(failedOps>0) {
+                res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+            } else {
+                res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]})
+            }
+        }, function(err) {
+            console.log("caught error while rebuilding asset bundles for project: "+pid);
+            res.json({status: "fail", message: err.message, length: 0, data: []});
+        });
+    }
+};
 
 module.exports = router;
