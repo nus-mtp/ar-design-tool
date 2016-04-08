@@ -233,5 +233,13 @@ ul {
 .clickable {
   cursor: pointer; }
 
+.navbar-default .navbar-nav > .open > a {
+  background-color: #DBDBDB; }
+  .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+    background-color: #DBDBDB; }
+
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
+  background-color: #DBDBDB; }
+
 body {
   background-color: #FFFFFF; }
