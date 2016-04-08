@@ -6,6 +6,6 @@ module.exports = {
 	'vuforia': '/Assets/Resources/Vuforia/',
 	'models': '/Assets/Resources/UserModels/',
 	'assetbundle': '/Assets/webglbundles.unity3d',
-	'unity': 'D:/Program Files/Unity/Editor/Unity.exe',
+	'unity': 'C:/Program Files/Unity/Editor/Unity.exe',
 	'app_builder': '/server/modules/AppBuilder.unitypackage'
 };
