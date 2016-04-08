@@ -240,13 +240,18 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  * api: /api/users/{userId}/projects/addModels
  */
 router.post('/addModels', function(req, res) {
-    console.log("using model for project");
-    var uid = req.params.userId;
-    var ids  = req.body.ids;
-    var pid = req.body.pid;
+    console.log("adding model into project");
+    var modelNames  = req.body.ids;
+    var pid         = req.body.pid;
+    var uid         = req.params.userId;
  
-    for (id in ids) {
-        
+    for (modelName in modelNames) {
+        unity.copyModel(uid, pid, function() {
+
+        }, function(err) {
+            console.log('encounter error adding model to project');
+            console.log(err);
+        });
     }
 
     // unity.copyModel(uid, pid, )
