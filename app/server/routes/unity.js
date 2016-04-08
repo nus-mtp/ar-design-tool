@@ -35,8 +35,11 @@ router.post('/uploadstate.php', upload.single('binary'), function(req, res, next
 
 router.post('/saveproject', upload.single('json'), function(req, res) {
     var stateJson = req.json;
-    unity.moveStateFile(req.body.uid, req.body.pid, stateJson);
-    res.json({ status: "ok", message: "saved state json", data: [req.json]});
+    unity.moveStateFile(req.body.uid, req.body.pid, stateJson, function() {
+        res.json({ status: "ok", message: "saved state json", data: [stateJson]});    
+    }, function (err) {
+        res.json({status: "fail", message: err.message, length: 0, data: []});
+    });
 });
 
 router.post('/buildproject.php', function(req, res, next) {

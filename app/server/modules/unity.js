@@ -182,10 +182,14 @@ var buildApk = function(uid, pid, goodcallback, failcallback) {
 	});
 };
 
-var moveStateFile = function(uid, pid, stateFile) {
+var moveStateFile = function(uid, pid, stateFile, goodcall, badcall) {
 	console.log('saving state file');
 	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
-	utils.moveFileToDest(stateFile.path, dest_path);	
+	utils.moveFileToDest(stateFile.path, dest_path, function() {
+		goodcall();
+	}, function(err) {
+		badcall(err);
+	});	
 };
 
 var moveCopyState = function(uid, pid) {
@@ -193,7 +197,7 @@ var moveCopyState = function(uid, pid) {
 	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
 	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
 	utils.moveFileToDest(tmp, dest_path);		
-}
+};
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
 module.exports.updateVuforia 		= updateVuforia;

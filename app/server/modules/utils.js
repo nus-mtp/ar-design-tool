@@ -23,12 +23,14 @@ var checkExistsIfNotCreate = function(dirpath, callback) {
 		callback();
 };
 
-var moveFileToDest = function(location, destination, callback) {
+var moveFileToDest = function(location, destination, callback, badcall) {
 	console.log('location: ' + location);
 	console.log('destination: ' + destination);
 	fs.rename(location, destination, function(err) {
 		if(err) {
 			console.log(err);
+			if(badcall) 
+				badcall(err);
 		} else {
 			console.log('Successfully moved file from ' + location + ' to ' + destination);
 		}
