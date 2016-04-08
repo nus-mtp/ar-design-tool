@@ -1,7 +1,7 @@
 // this service serves as an API for models available on the server
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('modelService', function($rootScope, $http) {  
+    .factory('modelService', function($rootScope, $http, loaderService) {  
       var _models = {};
       _models.onAssetBundle = [];
       _models.onServer = [];
@@ -45,7 +45,59 @@
       service.getAllServerModels = function() {
         return _models.onServer;
       }
-
+      
+      service.insertServerModel = function(file) {
+        var uploadUrl = '/api/users/' + uid + '/models';
+        var fileSplit = file.name.split('.');
+        var tokenisedName = fileSplit.splice(0, fileSplit.length - 1).join('');
+        var tokenisedExt = fileSplit[0].toLowerCase();
+        if (
+          tokenisedExt !== 'fbx' &&
+          tokenisedExt !== 'obj' &&
+          tokenisedExt !== '3ds'
+        ) {
+          throw { message:"[ERROR] Invalid file extenstion" };
+        }
+        _models.onServer.forEach(function(model) {
+          if (model.name === tokenisedName) {
+            throw { message:"[ERROR] Model with same name exists" };
+          }
+        });
+        
+        // If pass all the check        
+        var fd = new FormData();
+        fd.append('file', file);
+        fd.append('uid', uid);
+        fd.append('model_name', tokenisedName);
+        fd.append('file_size', file.size);
+        fd.append('file_extension', tokenisedExt);
+        loaderService.showLoader("Adding Model to Database");
+        return $http.post(uploadUrl, fd, {
+          headers: {'Content-Type': undefined}
+        }).then(function(res) {
+          loaderService.hideLoader();
+          _models.onServer.push(res.data.data[0]);
+          notifyServerModelChange();
+        });
+      }
+      
+      service.deleteServerModel = function(model) {
+        loaderService.showLoader("Removing Model from Server")
+        return $http({
+          method: 'DELETE',
+          url: '/api/users/' + uid + '/models/' + model.id 
+        }).then(function(res) {
+          loaderService.hideLoader();
+          var _model = res.data.data[0];
+          _models.onServer.forEach(function(el, index) {
+            if (el.id === _model.id) {
+              _models.onServer.splice(index, 1);
+            }
+          });
+          notifyServerModelChange();
+        });
+      }
+      
 // SERVER OBJECT APIS END HERE         
       
       $http.get('/api/users/'+ uid + '/models').then(function(res) {

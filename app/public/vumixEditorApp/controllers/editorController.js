@@ -1,7 +1,6 @@
 (function() {
   angular.module('vumixEditorApp.controllers')
     .controller('editorController', function(
-      $rootScope,
       $scope,
       $timeout,
       editorService,
@@ -12,6 +11,7 @@
       $scope.currentStateId = -1;
       $scope.currentSelected;
       $scope.textModel = "";
+      $scope.uploadError = "";
         
       $scope.modelsAvailable = [];
       $scope.modelsOnServer = [];
@@ -57,8 +57,19 @@
         unityMapperService.setActiveGameObject();
       };
       
-      $rootScope.triggerAddModelInput = function() {
-        console.log("test");      
+      $scope.uploadNewModel = function() {
+        try {
+          modelService.insertServerModel(event.target.files[0]);
+          this.uploadError = "";
+        } catch(e) {
+          this.uploadError = e.message;
+        } finally {
+          this.$apply();
+        }
+      }
+      
+      $scope.deleteModelFromServer = function(model) {
+        modelService.deleteServerModel(model);
       }
     }); 
 })();
