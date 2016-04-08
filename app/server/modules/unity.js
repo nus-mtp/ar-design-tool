@@ -51,7 +51,7 @@ var copyStateDat = function(uid, pid) {
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
 	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
-	var unity_cmd 			= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit';
+	var unity_cmd 			= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit -batchmode';
 
 	utils.checkExistsIfNotCreate(project_path);
 	utils.checkExistsIfNotCreate(public_project_path);
@@ -66,13 +66,13 @@ var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 		}
 	});
 	unity.on('exit', function(code) {
-		moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
-		copyStateDat(uid, pid);
-		copyDefaultAssetBundle(uid, pid);
-		console.log("Creating new project child process exited with code " + code);
-		callback();
-		//TODO: remove this after testing
-		// moveVuforia(vuforia_pkg.path, uid, pid, vuforia_pkg.originalname);
+		if(code==0) {
+			moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
+			copyStateDat(uid, pid);
+			copyAssetBundle(uid, pid);
+			console.log("Creating new project child process exited with code " + code);
+			callback();
+		}
 	});
 };
 
@@ -93,12 +93,6 @@ var moveModel = function(uid, fileName) {
 		console.log('completed dir check');
 		console.log('moving model to model library');
 		utils.moveFileToDest(tmp_path, dest_path+fileName);
-		// utils.moveFileToDest(tmp_path, dest_path+fileName, function() {
-			// console.log('completed moving model to model library')
-			// console.log('going to copy model now')
-			// TODO: remove this
-			// copyModel(uid, '6', fileName);
-		// });	
 	});
 };
 
@@ -109,41 +103,34 @@ var deleteModel = function(uid, fileName) {
 
 var copyModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	console.log('copying model into project '+pid+' dir');
-	var modelFile_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path+fileName);
-	var destination = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
+	var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path+fileName);
+	var dest = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
 
 	utils.copyFile(file, dest, function() {
-		rebuildAssetBundle(uid, pid);
 		goodcallback();
 	}, function(err) {
 		console.log("error found in copyModel");
-		badcallback(err);
+		badcallback(fileName, err);
 	});
-
-	// try {
-	// 	var readModel = fs.createReadStream(modelFile_path);
-	// 	var writeModel = fs.createWriteStream(destination);
-
-	// 	readModel.pipe(writeModel, {end: false});
-	// 	readModel.on('end', function() {
-	// 		console.log('Finished copying model to '+destination);
-	// 		writeModel.end();
-	// 		rebuildAssetBundle(uid, pid);
-	// 	});
-	// } catch(e) {
-	// 	console.log(e);
-	// }
 };
 
-var copyDefaultAssetBundle = function(uid, pid) {
+var copyAssetBundle = function(uid, pid, goodcallback, badcallback) {
 	console.log("copying default asset bundle");
-	var defaultAssetPath = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.assetbundle);
+	var assetPath = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.assetbundle);
 	var dest = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+assetbundle_name);
 
-	utils.copyFile(defaultAssetPath, dest);
-}
+	utils.copyFile(assetPath, dest, function() {
+		console.log("completed copying assetbundle to public folders");
+		if(goodcallback)
+			goodcallback();
+	}, function(err) {
+		console.log("error copying assetbundle to public folders");
+		if(badcallback)
+			badcallback(err);
+	});
+};
 
-var rebuildAssetBundle = function(uid, pid) {
+var rebuildAssetBundle = function(uid, pid, goodcallback, badcallback) {
 	console.log('rebuilding assetbundle...');
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod CreateAssetBundles.BuildAllAssetBundles -quit -batchmode';
@@ -154,14 +141,22 @@ var rebuildAssetBundle = function(uid, pid) {
 		console.log("stderr: " + stderr);	
 		if (error !== null) {
 			console.log("exec error: " + error);
+			badcallback(error);			
 		}
 	});
-	rebuild.on('exit', function(code) {
-		console.log("Rebuilding Assetbundle child process exited with code " + code);
+	rebuild.on('exit', function(code, signal) {
+		if(code==0) {
+			console.log("Rebuilding Assetbundle child process exited with code " + code);
+			copyAssetBundle(uid, pid, function(){
+				goodcallback();
+			}, function(err) {
+				badcallback(err);
+			});	
+		}
 	});
 };
 
-var buildApk = function(uid, pid) {
+var buildApk = function(uid, pid, goodcallback, failcallback) {
 	console.log('building apk for projectid: ' + pid);
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
 	var down_path 	 = project_path+file_paths.download;
@@ -176,18 +171,25 @@ var buildApk = function(uid, pid) {
 		console.log("stderr: " + stderr);	
 		if (error !== null) {
 			console.log("exec error: " + error);
+			failcallback(error);
 		}
 	});
 	buildAPK.on('exit', function(code) {
-		console.log("buildAPK child process exited with code " + code);
-		return down_path;
+		if(code==0) {
+			console.log("buildAPK child process exited with code " + code);
+			goodcallback(down_path);	
+		}
 	});
 };
 
-var moveStateFile = function(uid, pid, stateFile) {
+var moveStateFile = function(uid, pid, stateFile, goodcall, badcall) {
 	console.log('saving state file');
 	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
-	utils.moveFileToDest(stateFile.path, dest_path);	
+	utils.moveFileToDest(stateFile.path, dest_path, function() {
+		goodcall();
+	}, function(err) {
+		badcall(err);
+	});	
 };
 
 var moveCopyState = function(uid, pid) {
@@ -195,7 +197,7 @@ var moveCopyState = function(uid, pid) {
 	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
 	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
 	utils.moveFileToDest(tmp, dest_path);		
-}
+};
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
 module.exports.updateVuforia 		= updateVuforia;
@@ -210,4 +212,5 @@ module.exports.deleteProj 			= deleteProj;
 module.exports.deleteModel 			= deleteModel;
 module.exports.moveModel 			= moveModel;
 module.exports.copyModel 			= copyModel;
+
 module.exports.buildApk				= buildApk;

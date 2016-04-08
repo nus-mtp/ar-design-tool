@@ -4,13 +4,14 @@
  * This is the api for user projects  
  */
 
-var file_paths   = require('../config/file_path'),
-    utils       = require('../modules/utils'),
+var file_paths  = require('../config/file_path'),
     unity       = require('../modules/unity'),
     models      = require('../models'),
     express     = require('express'),
     multer      = require('multer'),
     path        = require('path');
+
+var auth = require('./authentication');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -31,7 +32,7 @@ var upload = multer({ storage: storage });
  * GET
  * api: /api/users/{userId}/projects
  */
-router.get('/', function(req, res) {
+router.get('/', auth.isLoggedIn, function(req, res) {
     models.project.findAll({
         where: {
             uid: req.params.userId
@@ -40,6 +41,7 @@ router.get('/', function(req, res) {
         res.json({status: "ok", length: projects.length, data: projects});            
     }).catch(function(err) {
         console.log('caught error in fetch all projects API');
+        console.log(err);
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
@@ -65,6 +67,7 @@ router.get('/:id', function(req, res) {
         }
     }).catch(function(err) {
         console.log('caught error in fetch project API');
+        console.log(err);
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
@@ -103,6 +106,7 @@ router.post('/', upload.single('file'), function(req, res) {
         }
     }).catch(function(err) {
         console.log('Caught error in insert project API');
+        console.log(err);
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });            
 });
@@ -208,30 +212,6 @@ router.put('/:id', upload.single('file'), function(req, res) {
         console.log(err.message);
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
-
-    // models.project.findById(uid).then(function(project) {
-    //     if(project) {
-    //         models.project.update({
-    //             name: req.body.name || project.name,
-    //             marker_type: req.body.marker_type || project.marker_type,
-    //             company_name: req.body.company_name || project.company_name,
-    //             thumbnail_loc: req.body.thumbnail_loc || project.thumbnail_loc,    
-    //             assetbundle_id: req.body.assetbundle_id || project.assetbundle_id,
-    //             last_published: req.body.last_published || project.last_published,
-    //             project_dat_file: req.body.project_dat_file || project.project_dat_file
-    //         }, { 
-    //             where: {
-    //                 id: id,
-    //                 uid: uid
-    //             }
-    //         }).then(function() {
-    //             models.project.findById(id).then(function(updatedProject) {
-    //                  res.json({status: "ok", message: "updated project", length: 1, data: [updatedProject]});
-    //             });
-    //         });
-    //     }
-    //     res.json({status: "fail", message: "project not found", length: 0, data: []});
-    // });
 });
 
 var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback) {
@@ -264,17 +244,55 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  * api: /api/users/{userId}/projects/addModels
  */
 router.post('/addModels', function(req, res) {
-    console.log("using model for project");
-    var uid = req.params.userId;
-    var ids  = req.body.ids;
-    var pid = req.body.pid;
+    console.log("adding model into project");
+    var modelNames  = req.body.ids;
+    var pid         = req.body.pid;
+    var uid         = req.params.userId;
  
-
-        // function(err) {
-        //     console.log("error caught in adding model for project");
-        //     res.json({status: "fail", message: err.message, length: 0, data: []});
-        // };        
+    var total   = modelNames.length;
+    var failOps = 0;
+    var passOps = 0;
+    var errmsg  = [];
+    
+    for(x in modelNames) {
+        unity.copyModel(uid, pid, modelNames[x], function() {
+            passOps++;
+            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg, function(moveErrors) {
+                res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+            }, function() {
+                res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]});
+            }, function(err) {
+                res.json({status: "fail", message: err.message, length: 0, data: []});    
+            });
+        }, function(modelName, err) {
+            console.log('encounter error adding model: '+modelName+' to project: '+pid);
+            console.log(err);
+            failOps++;
+            errmsg.add(modelNames, err);
+            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg, function(moveErrors) {
+                res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+            }, function() {
+                res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]});
+            }, function(err) {
+                res.json({status: "fail", message: err.message, length: 0, data: []});     
+            });
+        });
+    }
 });
 
+var checkCompleteAddModelOps = function(uid, pid, passOps, failOps, total, moveErrors, warningCall, goodCall, badCall) {
+    if(passOps+failOps==total) {
+        unity.rebuildAssetBundle(uid, pid, function() {
+            if(failOps>0) {
+                warningCall(moveErrors);
+            } else {
+                goodCall();
+            }
+        }, function(err) {
+            console.log("caught error while rebuilding asset bundles for project: "+pid);
+            badCall(err);
+        });
+    }
+};
 
 module.exports = router;

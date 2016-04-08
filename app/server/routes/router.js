@@ -1,13 +1,14 @@
-var passport 	= require('passport'),
+var auth		= require('./authentication'),
+	passport 	= require('passport'),
 	express 	= require('express');
 
 var router 	= express.Router();
 
-router.get('/', isLoggedIn, function (req, res) {
+router.get('/', auth.isLoggedIn, function (req, res) {
 	res.render('vumixManagerView',{name: req.user.name, id:req.user.id});
 });
 
-router.get('/project/:id', isLoggedIn, function(req, res) {
+router.get('/project/:id', auth.isLoggedIn, function(req, res) {
 	res.render('vumixEditorView', {name: req.user.name, id:req.user.id, pid: req.params.id});
 });
 
@@ -32,14 +33,21 @@ router.get('/logout', function(req, res) {
 	res.redirect('/');
 });
 
-function isLoggedIn(req, res, next) {
-	console.log('checking whether logged in:');
-	if(req.isAuthenticated()) {
-		console.log('authenticated!');
-		return next();
-	}
-	console.log('not logged in, redirecting to login!');
-	res.redirect('/login');
-};
+router.use(function(req, res, next){
+  res.status(404);
+  // // respond with html page
+  // if (req.accepts('html')) {
+  //   res.render('404', { url: req.url });
+  //   return;
+  // }
+
+  // // respond with json
+  // if (req.accepts('json')) {
+  //   res.send({ error: 'Not found' });
+  //   return;
+  // }
+  // default to plain-text. send()
+  res.redirect('/');
+});
 
 module.exports = router;

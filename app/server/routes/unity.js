@@ -1,13 +1,9 @@
 var file_paths  = require('../config/file_path'),
-    utils       = require('../modules/utils'),
     unity       = require('../modules/unity');
     
 var express = require('express'),
     multer  = require('multer'),
-    path    = require('path'),
-    fs      = require('fs');
-
-var exec = require('child_process').exec;
+    path    = require('path');
 
 var router = express.Router();
 
@@ -39,20 +35,22 @@ router.post('/uploadstate.php', upload.single('binary'), function(req, res, next
 
 router.post('/saveproject', upload.single('json'), function(req, res) {
     var stateJson = req.json;
-    unity.moveStateFile(req.body.uid, req.body.pid, stateJson);
-    res.json({ status: "ok", message: "saved state json", data: [req.json]});
+    unity.moveStateFile(req.body.uid, req.body.pid, stateJson, function() {
+        res.json({ status: "ok", message: "saved state json", data: [stateJson]});    
+    }, function (err) {
+        res.json({status: "fail", message: err.message, length: 0, data: []});
+    });
 });
 
-router.get('/buildproject.php', function(req, res, next) {
-    var unityPath = '"' + process.env['UNITY_HOME'] + '\\Unity.exe"';
-    var mode = " -quit ";
-    var projectPath = ' -projectPath "D:/workspace/cs3284/ar-design-tool/WZ_BACKEND/AssetBundle test" ';
-    var buildMethod = ' -executeMethod  BuildProject.BuildAndroid2D ';
-    var command = unityPath + mode + projectPath + buildMethod;
-    exec(command, function(err, stdout, stderr) {  
-    }).on('close', function(code) {
-        var filePath = "../WZ_BACKEND/AssetBundle test/Assets/AndroidBuilds.apk";
-        res.download(filePath);
+router.post('/buildproject.php', function(req, res, next) {
+    var pid = req.body.pid;
+    var uid = req.body.uid;
+
+    unity.buildApk(uid, pid, function(down_path) {
+        res.download(down_path);
+    }, function (err) {
+        console.log("caught error in buildapk");
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
