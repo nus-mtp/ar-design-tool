@@ -51,7 +51,7 @@ var copyStateDat = function(uid, pid) {
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
 	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
-	var unity_cmd 			= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit';
+	var unity_cmd 			= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit -batchmode';
 
 	utils.checkExistsIfNotCreate(project_path);
 	utils.checkExistsIfNotCreate(public_project_path);
@@ -156,7 +156,7 @@ var rebuildAssetBundle = function(uid, pid, goodcallback, badcallback) {
 	});
 };
 
-var buildApk = function(uid, pid) {
+var buildApk = function(uid, pid, goodcallback, failcallback) {
 	console.log('building apk for projectid: ' + pid);
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
 	var down_path 	 = project_path+file_paths.download;
@@ -171,12 +171,13 @@ var buildApk = function(uid, pid) {
 		console.log("stderr: " + stderr);	
 		if (error !== null) {
 			console.log("exec error: " + error);
+			failcallback(error);
 		}
 	});
 	buildAPK.on('exit', function(code) {
 		if(code==0) {
 			console.log("buildAPK child process exited with code " + code);
-			return down_path;	
+			goodcallback(down_path);	
 		}
 	});
 };
