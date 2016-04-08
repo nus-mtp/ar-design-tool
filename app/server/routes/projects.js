@@ -4,12 +4,14 @@
  * This is the api for user projects  
  */
 
-var file_paths   = require('../config/file_path'),
+var file_paths  = require('../config/file_path'),
     unity       = require('../modules/unity'),
     models      = require('../models'),
     express     = require('express'),
     multer      = require('multer'),
     path        = require('path');
+
+var auth = require('./authentication');
 
 var storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -30,7 +32,7 @@ var upload = multer({ storage: storage });
  * GET
  * api: /api/users/{userId}/projects
  */
-router.get('/', function(req, res) {
+router.get('/', auth.isLoggedIn, function(req, res) {
     models.project.findAll({
         where: {
             uid: req.params.userId
