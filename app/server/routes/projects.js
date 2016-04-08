@@ -208,30 +208,6 @@ router.put('/:id', upload.single('file'), function(req, res) {
         console.log(err.message);
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
-
-    // models.project.findById(uid).then(function(project) {
-    //     if(project) {
-    //         models.project.update({
-    //             name: req.body.name || project.name,
-    //             marker_type: req.body.marker_type || project.marker_type,
-    //             company_name: req.body.company_name || project.company_name,
-    //             thumbnail_loc: req.body.thumbnail_loc || project.thumbnail_loc,    
-    //             assetbundle_id: req.body.assetbundle_id || project.assetbundle_id,
-    //             last_published: req.body.last_published || project.last_published,
-    //             project_dat_file: req.body.project_dat_file || project.project_dat_file
-    //         }, { 
-    //             where: {
-    //                 id: id,
-    //                 uid: uid
-    //             }
-    //         }).then(function() {
-    //             models.project.findById(id).then(function(updatedProject) {
-    //                  res.json({status: "ok", message: "updated project", length: 1, data: [updatedProject]});
-    //             });
-    //         });
-    //     }
-    //     res.json({status: "fail", message: "project not found", length: 0, data: []});
-    // });
 });
 
 var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback) {
@@ -269,7 +245,11 @@ router.post('/addModels', function(req, res) {
     var ids  = req.body.ids;
     var pid = req.body.pid;
  
+    for (id in ids) {
+        
+    }
 
+    // unity.copyModel(uid, pid, )
         // function(err) {
         //     console.log("error caught in adding model for project");
         //     res.json({status: "fail", message: err.message, length: 0, data: []});
