@@ -7,7 +7,7 @@
 // Nav bar style
 .nav-bar {
   background-color: $bg-color;
-  box-shadow: 0px 5px 5px $light-grey;
+  box-shadow: 0 5px 5px $light-grey;
   color: $light-green; 
   height: 50px;
 }
@@ -35,7 +35,6 @@
 }
 
 .sidebar {
-    //$text-color
   color: $text-color;
   float: left;
   margin-left: -300px;
@@ -54,19 +53,19 @@
   padding-right: 32px;
 }
 
-.welcome_side {
+.welcome-side {
   background-color: $light-green;
   border-right: thin solid $line-grey;
   color: $dim-grey;
 }
 
-.create_side {
+.create-side {
   background-color: $light-green;
   border-right: thin solid $line-grey;
   color: $bg-color;
 }
 
-.update_side {
+.update-side {
   background-color: $update-blue;
   border-right: thin solid $line-grey;
   color: $bg-color;
@@ -158,12 +157,16 @@ ul {
 .navbar-default .navbar-nav > {
   .open > a {
     background-color: $line-grey;
-    &:hover, &:focus {
+
+    &:hover, 
+    &:focus {
       background-color: $line-grey;
     }
   }
+
   li > a {
-    &:hover, &:focus {
+    &:hover, 
+    &:focus {
       background-color: $line-grey;
     }
   }

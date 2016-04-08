@@ -155,13 +155,13 @@
         
         $scope.goToState = function(id){
             window.location.href=  "/project/" + id;
-        }
+        };
         
         $scope.updateFile = function(){
             file = event.target.files[0];
             $scope.update.upload = file;
             $scope.$apply();
-        }
+        };
         
         $scope.deleteProject = function(id){
             projectService.deleteProject($scope.projects, $scope.userid, id)

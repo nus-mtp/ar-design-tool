@@ -1,11 +1,11 @@
 <div class="wrapper" ng-controller="managerController" >
     <div class="sidebar">
-        <div id="welcome_page" class="side-bar-padding welcome_side" style="padding-top: 50px; color:#FFFFFF;">
+        <div id="welcome_page" class="side-bar-padding welcome-side" style="padding-top: 50px; color:#FFFFFF;">
             <h1 class="center" style="margin-top: 0%; text-decoration:underline"> Welcome to Vumix !</h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
             <button type="button" class="center btn-large" id="createProject">Create Your New Project</button>
         </div>
-        <div id="create_project" class="side-bar-padding create_side">
+        <div id="create_project" class="side-bar-padding create-side">
             <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Create Your New Project!</h1>
             <form name="addProjectForm" ng-submit="addProject()" enctype="multipart/form-data" novalidate>
               <div class="form-group">
@@ -28,7 +28,7 @@
             </form>
         </div>
         
-        <div id="update_page" class="side-bar-padding update_side">
+        <div id="update_page" class="side-bar-padding update-side">
              <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Project Here!</h1>
              <form name="updateProjectForm" ng-submit="updateProject(update.id)" enctype="multipart/form-data" novalidate>
                 <h2>Company Name</h2>
@@ -85,9 +85,9 @@
         
         var height = 1200;
         $('.sidebar').css("min-height", height);
-        $('.welcome_side').css("min-height", height);
-        $('.create_side').css("min-height", height);
-        $('.update_side').css("min-height", height);
+        $('.welcome-side').css("min-height", height);
+        $('.create-side').css("min-height", height);
+        $('.update-side').css("min-height", height);
         
         // when user resize their window
         $(window).resize(function(){

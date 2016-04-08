@@ -1,11 +1,11 @@
 <div class="wrapper" ng-controller="modelController">
     <div class="sidebar">
-        <div id="welcome_model" class="side-bar-padding welcome_side" style="padding-top: 50px; color:#FFFFFF;">
+        <div id="welcome_model" class="side-bar-padding welcome-side" style="padding-top: 50px; color:#FFFFFF;">
             <h1 class="center" style="margin-top: 0%; text-decoration:underline">Upload Your Model Here!</h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your model </h2>
             <button type="button" class="center btn-large" id="uploadModel">Add Your New Model</button>
         </div>
-        <div id="upload_model" class="side-bar-padding create_side">
+        <div id="upload_model" class="side-bar-padding create-side">
             <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Upload Your New Model Here!</h1>
             <span>
               <form ng-submit="addModel()" name="modelForm" enctype="multipart/form-data" novalidate>
@@ -24,7 +24,7 @@
           </span>
         </div>
         
-        <div id="update_page" class="side-bar-padding update_side">
+        <div id="update_page" class="side-bar-padding update-side">
             <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Model Here!</h1>
             <form name="updateModelForm" ng-submit="updateModel(update.id)" enctype="multipart/form-data" novalidate>
                 <h1> Model Name</h1>
@@ -101,9 +101,9 @@
         
         var height = 1200;
         $('.sidebar').css("min-height", height);
-        $('.welcome_side').css("min-height", height);
-        $('.create_side').css("min-height", height);
-        $('.update_side').css("min-height", height);
+        $('.welcome-side').css("min-height", height);
+        $('.create-side').css("min-height", height);
+        $('.update-side').css("min-height", height);
         
         
         // when user resize their window

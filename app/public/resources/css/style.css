@@ -118,7 +118,7 @@ p {
 
 .nav-bar {
   background-color: #FFFFFF;
-  box-shadow: 0px 5px 5px #EEEEEE;
+  box-shadow: 0 5px 5px #EEEEEE;
   color: #0daf83;
   height: 50px; }
 
@@ -155,17 +155,17 @@ p {
   padding-left: 32px;
   padding-right: 32px; }
 
-.welcome_side {
+.welcome-side {
   background-color: #0daf83;
   border-right: thin solid #DBDBDB;
   color: #696969; }
 
-.create_side {
+.create-side {
   background-color: #0daf83;
   border-right: thin solid #DBDBDB;
   color: #FFFFFF; }
 
-.update_side {
+.update-side {
   background-color: #5bc0de;
   border-right: thin solid #DBDBDB;
   color: #FFFFFF; }
