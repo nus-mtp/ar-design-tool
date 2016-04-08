@@ -57,13 +57,13 @@
      <None Include="Assets\readme_SDK.txt" />
      <None Include="Assets\license_3rdpartynotice.txt" />
      <None Include="Assets\Vuforia\Shaders\RenderVideoBackground.shader" />
-     <None Include="Assets\StreamingAssets\QCAR\EdgarasArt.xml" />
      <None Include="Assets\Vuforia\Shaders\VideoBackground.shader" />
      <None Include="Assets\BundleIdentifier\bundleIdentifier.txt" />
      <None Include="Assets\Vuforia\Editor\WebcamProfiles\profiles.xml" />
      <None Include="Assets\Vuforia\Shaders\DepthMask.shader" />
      <None Include="Assets\Vuforia\Shaders\ClippingMask.shader" />
      <None Include="Assets\Vuforia\Shaders\BrightTexture.shader" />
+     <None Include="Assets\StreamingAssets\QCAR\Vumix-Test.xml" />
      <None Include="Assets\Vuforia\Shaders\Text3D.shader" />
  <Reference Include="Assembly-UnityScript-Editor-firstpass">
  <HintPath>C:/Users/WenZhao/Documents/Dropbox/Uni/Yr4 Sem 2/CS3284/AR DESIGN TOOL/WZ_BACKEND/AssetBundle test/Library/ScriptAssemblies/Assembly-UnityScript-Editor-firstpass.dll</HintPath>

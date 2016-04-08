@@ -13,7 +13,7 @@ public class ChangeImportSettings : AssetPostprocessor
     public void OnPostprocessTexture(Texture2D texture)
     {
         TextureImporter textureImporter = (TextureImporter)assetImporter;
-        textureImporter.maxTextureSize = 8192;
+        textureImporter.maxTextureSize = 2048;
     }
 
     
