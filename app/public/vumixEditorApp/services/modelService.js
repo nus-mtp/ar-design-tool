@@ -46,19 +46,7 @@
         return _models.onServer;
       }
 
-// SERVER OBJECT APIS END HERE   
-
-      var uid = "0";
-      
-      var getUid = function() {    
-        document.cookie.split(';').forEach(function(el, index) {
-          var _el = el.split('=');
-          if(_el[0] === "uid") {
-            uid = _el[1];
-          }
-        });
-      };
-      
+// SERVER OBJECT APIS END HERE         
       
       $http.get('/api/users/'+ uid + '/models').then(function(res) {
         var models = angular.copy(res.data.data);
