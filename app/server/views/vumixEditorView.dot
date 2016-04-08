@@ -4,12 +4,13 @@
 		<meta charset='utf-8' />
     <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/vendors/jquery-ui/themes/base/jquery-ui.min.css" />
     <link rel="stylesheet" href="/resources/css/loader.css" />
     <link rel="stylesheet" href="/resources/css/editor.css" />
     <title>Vumix Editor Application</title>
     
     <script>
-        var model = [[= JSON.stringify(model) ]];;
+        var model = [[= JSON.stringify(model) ]];
         var uid = model.id;
         var pid = model.pid;
     </script>

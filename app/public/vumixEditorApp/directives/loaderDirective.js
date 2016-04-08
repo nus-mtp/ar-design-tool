@@ -17,7 +17,9 @@
           loaderService.subscribeToLoaderChange($scope, function() {    
             $scope.loaderStatus = loaderService.getLoaderStatus();
             $scope.loaderText = loaderService.getLoaderText();
-            $scope.$apply();
+            if(!$scope.$$phase) {
+              $scope.$apply();
+            }
           });
         }
       };

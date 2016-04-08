@@ -85,7 +85,7 @@
       <div class="window task startpoint endpoint" style="left: 100px; top:50px" data-nodetype="startpoint" id="startpoint">
         <div class="ctrl_container">
           <div class="button_editor">
-            <a ng-click="editorService.openEditor()" href="">
+            <a ng-click="editorService.openEditor(0)" href="">
               <span class="glyphicon glyphicon-new-window"></span>
             </a>
           </div>
@@ -98,7 +98,7 @@
         <div class="ctrl_container">
             <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
           <div class="button_editor">
-            <a ng-click="editorService.openEditor()" href="">
+            <a ng-click="editorService.openEditor(0)" href="">
               <span class="glyphicon glyphicon-new-window"></span>
             </a>
           </div></div>
@@ -126,6 +126,7 @@
   </modal-footer>
 </bs-modal>
 
+<loader></loader>
 <script type="text/javascript">    
   
   var angularHelper = (function () {

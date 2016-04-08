@@ -1,3 +1,3 @@
 (function() {
-  angular.module('vumixManagerApp.controllers', ['vumixManagerApp.services']);
+  angular.module('vumixManagerApp.controllers', ['vumixManagerApp.services', 'vumixEditorApp.services']);
 })();
