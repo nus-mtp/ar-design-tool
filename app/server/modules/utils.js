@@ -70,12 +70,16 @@ var deleteDir = function(deleteDest) {
 	});
 };
 
-var deleteFile = function(deleteFile) {
+var deleteFile = function(deleteFile, goodCall, badCall) {
 	fs.unlink(deleteFile, function(err) {
 		if(err) {
 			console.log(err);
+			if (badCall) 
+				badCall(err);
 		} else {
 			console.log('Successfully deleted: ' + deleteFile);
+			if (goodCall)
+				goodCall();
 		}
 	});
 };
