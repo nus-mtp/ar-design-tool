@@ -114,6 +114,18 @@ var copyModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	});
 };
 
+var removeProjModel = function(uid, pid, fileName, goodcallback, badcallback) {
+	console.log('removing model from project '+pid+' dir');
+	var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
+
+	utils.deleteFile(file, function() {
+		goodcallback();
+	}, function(err) {
+		console.log("error found in removeProjModel");
+		badcallback(fileName, err);
+	});
+};
+
 var copyAssetBundle = function(uid, pid, goodcallback, badcallback) {
 	console.log("copying default asset bundle");
 	var assetPath = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.assetbundle);
@@ -209,6 +221,7 @@ module.exports.copyStateDat			= copyStateDat;
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
 
+module.exports.removeProjModel 		= removeProjModel;		
 module.exports.deleteModel 			= deleteModel;
 module.exports.moveModel 			= moveModel;
 module.exports.copyModel 			= copyModel;

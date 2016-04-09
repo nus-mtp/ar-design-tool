@@ -174,6 +174,7 @@ var deleteProjectDB = function(uid, id, _project, goodCallback, badCallback) {
         badCallback(err);
     });
 };
+
 /**
  * @module updateProject
  * @parent projectApi
@@ -236,59 +237,135 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
 };
 
 /**
- * @module useModelForProject
+ * @module addProjModels
  * @parent projectApi
- * @param req.body.name, req.body.file_size, req.body.file_extension, req.body.pid
+ * @param req.body.ids, req.body.pid, req.params.userId
  * copies models with ids submitted in body owned by user with {userId} to project folder with {pid} and rebuilds assetbundle for that project
  * POST
- * api: /api/users/{userId}/projects/addModels
+ * api: /api/users/{userId}/projects/addProjModels
  */
-router.post('/addModels', function(req, res) {
+router.post('/addProjModels', function(req, res) {
     console.log("adding model into project");
     var modelNames  = req.body.ids;
     var pid         = req.body.pid;
     var uid         = req.params.userId;
  
     var total   = modelNames.length;
-    var failOps = 0;
-    var passOps = 0;
+    var opCount = 0;
     var errmsg  = [];
     
     for(x in modelNames) {
         unity.copyModel(uid, pid, modelNames[x], function() {
-            passOps++;
-            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg, function(moveErrors) {
-                res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+            opCount++;
+            checkCompleteAddModelOps(uid, pid, opCount, total, errmsg, function(moveErrors) {
+                warnRes(moveErrors);
             }, function() {
-                res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]});
+                goodRes(modelNames);
             }, function(err) {
-                res.json({status: "fail", message: err.message, length: 0, data: []});    
+                failRes(err);
             });
         }, function(modelName, err) {
             console.log('encounter error adding model: '+modelName+' to project: '+pid);
             console.log(err);
-            failOps++;
-            errmsg.add(modelNames, err);
-            checkCompleteAddModelOps(uid, pid, passOps, failOps, total, errmsg, function(moveErrors) {
-                res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+            opCount++;
+            errmsg.push(modelNames, err);
+            checkCompleteAddModelOps(uid, pid, opCount, total, errmsg, function(moveErrors) {
+                warnRes(moveErrors);
             }, function() {
-                res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]});
+                goodRes(modelNames);
             }, function(err) {
-                res.json({status: "fail", message: err.message, length: 0, data: []});     
+                failRes(err);
             });
         });
     }
+    function warnRes(moveErrors) {
+        res.json({status: "warning", message: "some models were not copied...", length: moveErrors.length, data: [moveErrors]});
+    }
+    function goodRes(modelNames) {
+        res.json({status: "ok", message: "completed adding models to project and rebuild assetbundles", length: modelNames.length, data: [modelNames]});
+    }
+    function failRes(err) {
+        res.json({status: "fail", message: err.message, length: 0, data: []});    
+    }
 });
 
-var checkCompleteAddModelOps = function(uid, pid, passOps, failOps, total, moveErrors, warningCall, goodCall, badCall) {
-    if(passOps+failOps==total) {
+var checkCompleteAddModelOps = function(uid, pid, opCount, total, moveErrors, warningCall, goodCall, badCall) {
+    if(opCount==total) {
         unity.rebuildAssetBundle(uid, pid, function() {
-            if(failOps>0) {
+            if(moveErrors.length>0) {
                 warningCall(moveErrors);
             } else {
                 goodCall();
             }
         }, function(err) {
+            console.log("caught error while rebuilding asset bundles for project: "+pid);
+            badCall(err);
+        });
+    }
+};
+
+/**
+ * @module removeProjModels
+ * @parent projectApi
+ * @param req.body.ids, req.body.pid, req.params.userId
+ * removes models with ids owned by user with {userId} in project folder with {pid} and rebuilds assetbundle for that project
+ * POST
+ * api: /api/users/{userId}/projects/removeProjModels
+ */
+router.post('/removeProjModels', function(req, res) {
+    console.log("removing models from project");
+    var modelNames  = req.body.ids;
+    var pid         = req.body.pid;
+    var uid         = req.params.userId;
+
+    var total   = modelNames.length;
+    var opCount = 0;
+    var errMsg  = [];
+
+    for(i in modelNames) {
+        //TODO: unity remove models
+        unity.removeProjModel(uid, pid, modelNames[i], function() {
+            opCount++;
+            checkCompleteRemoveModelOps(uid, pid, opCount, total, errMsg, function(delErrors) {
+                warnRes(delErrors);
+            }, function() {
+                goodRes(modelNames);
+            }, function(err) {
+                failRes(err);
+            });
+        }, function(modelName, err) {
+            console.log("error in removing model from project");
+            opCount++;
+            errMsg.push(modelName, err);
+            checkCompleteRemoveModelOps(uid, pid, opCount, total, errMsg, function(delErrors) {
+                warnRes(delErrors);
+            }, function() {
+                goodRes(modelNames);
+            }, function(err) {
+                failRes(err);
+            });
+        });
+    }
+    function warnRes(delErrors) {
+        res.json({status: "warning", message: "some models were not removed...", length: delErrors.length, data: [delErrors]});
+    }
+    function goodRes(modelNames) {
+        res.json({status: "ok", message: "completed removing models from project and rebuild assetbundles", length: modelNames.length, data: [modelNames]});
+    }
+    function failRes(err) {
+        res.json({status: "fail", message: err.message, length: 0, data: []});    
+    }
+});
+
+var checkCompleteRemoveModelOps = function(uid, pid, opCount, total, delErrors, warningCall, goodCall, badCall) {
+    if(opCount==total) {
+        unity.rebuildAssetBundle(uid, pid, function() {
+            if(delErrors.length>0) {
+                warningCall(delErrors);
+            } else {
+                goodCall();
+            }
+        }, function (err) {
             console.log("caught error while rebuilding asset bundles for project: "+pid);
             badCall(err);
         });
