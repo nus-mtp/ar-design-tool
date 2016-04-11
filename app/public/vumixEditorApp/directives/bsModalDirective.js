@@ -30,9 +30,6 @@
               var modalFooter = $el.find('modal-footer').children();
               $scope.id = $attrs.modalId;
               $scope.size = $attrs.modalSize;
-              $el.find('ng-transclude').remove();
-              $el.find('.modal-body').append(modalBody);
-              $el.find('.modal-footer').append(modalFooter);
             }
           };
         }

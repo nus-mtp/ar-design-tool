@@ -242,9 +242,9 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  * @param req.body.ids, req.body.pid, req.params.userId
  * copies models with ids submitted in body owned by user with {userId} to project folder with {pid} and rebuilds assetbundle for that project
  * POST
- * api: /api/users/{userId}/projects/addProjModels
+ * api: /api/users/{userId}/projects/models
  */
-router.post('/addProjModels', function(req, res) {
+router.post('/models', function(req, res) {
     console.log("adding model into project");
     var modelNames  = req.body.ids;
     var pid         = req.body.pid;

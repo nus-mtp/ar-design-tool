@@ -158,6 +158,7 @@
         });
         
         modelService.setAssetBundleModels(models);
+        modelService.setModelsAvailability();
         
         stateModel.states.forEach(function(el, index) {
           var state = {

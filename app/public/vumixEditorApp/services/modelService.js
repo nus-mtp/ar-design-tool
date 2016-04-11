@@ -33,11 +33,27 @@
       }
       
       service.setAssetBundleModels = function(models) {
-        _models.onAssetBundleIndex = models.size;
+        _models.onAssetBundleIndex = models.length;
         _models.onAssetBundle = angular.copy(models);
         notifyAssetBundleModelChange();
       }
-           
+      
+      service.addAssetBundleModels = function(serverModels) {
+        var _modelIds = [];
+        var url = '/api/users/' + uid + '/projects/models';
+        serverModels.forEach(function(model) {
+          var _model = {
+            id: _models.onAssetBundleIndex++,
+            name: serverModels
+          }
+        });        
+        var data = {
+          pid: pid,
+          ids: _modelIds
+        }
+        return $http.post(url, data);
+      }
+      
 // ASSETBUNDLES OBJECT APIS END HERE
 
 // SERVER OBJECT APIS START HERE      
@@ -47,7 +63,7 @@
       }
       
       service.insertServerModel = function(file) {
-        var uploadUrl = '/api/users/' + uid + '/models';
+        var url = '/api/users/' + uid + '/models';
         var fileSplit = file.name.split('.');
         var tokenisedName = fileSplit.splice(0, fileSplit.length - 1).join('');
         var tokenisedExt = fileSplit[0].toLowerCase();
@@ -62,8 +78,7 @@
           if (model.name === tokenisedName) {
             throw { message:"[ERROR] Model with same name exists" };
           }
-        });
-        
+        });        
         // If pass all the check        
         var fd = new FormData();
         fd.append('file', file);
@@ -72,7 +87,7 @@
         fd.append('file_size', file.size);
         fd.append('file_extension', tokenisedExt);
         loaderService.showLoader("Adding Model to Database");
-        return $http.post(uploadUrl, fd, {
+        return $http.post(url, fd, {
           headers: {'Content-Type': undefined}
         }).then(function(res) {
           loaderService.hideLoader();
@@ -98,6 +113,19 @@
         });
       }
       
+      service.setModelsAvailability = function() {
+        var _availableModelNames = [];
+        _models.onAssetBundle.forEach(function(model) {
+          _availableModelNames.push(model.name);
+        });
+        _models.onServer.forEach(function(model) {
+          if (_availableModelNames.indexOf(model.name) >= 0) {
+            model.available = true;
+          }
+        });  
+        notifyServerModelChange();
+      }
+      
 // SERVER OBJECT APIS END HERE         
       
       $http.get('/api/users/'+ uid + '/models').then(function(res) {
@@ -106,6 +134,7 @@
           el.included = false;
         });
         _models.onServer = models;
+        service.setModelsAvailability();
         notifyServerModelChange();
       }).catch(function(err) {
         console.log(err);

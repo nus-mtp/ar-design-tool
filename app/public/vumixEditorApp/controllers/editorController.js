@@ -71,5 +71,15 @@
       $scope.deleteModelFromServer = function(model) {
         modelService.deleteServerModel(model);
       }
+      
+      $scope.addModelsToAssetBundle = function() {
+        var _models = [];
+        $scope.modelsOnServer.forEach(function(model){
+          if (model.included) {
+            _models.push(model);
+          }
+        });
+        modelService.addAssetBundleModels(_models);
+      }
     }); 
 })();
