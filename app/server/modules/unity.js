@@ -85,14 +85,14 @@ var deleteProj = function(uid, pid) {
 	utils.deleteDir(project_path);
 };
 
-var moveModel = function(uid, fileName) {
+var moveModel = function(uid, fileName, destName) {
 	console.log('moving model into model library');
 	var dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path);
 	var tmp_path 	= path.join(__dirname, '../../'+file_paths.storage_path+'/'+fileName);
 	utils.checkExistsIfNotCreate(dest_path, function() {
 		console.log('completed dir check');
 		console.log('moving model to model library');
-		utils.moveFileToDest(tmp_path, dest_path+fileName);
+		utils.moveFileToDest(tmp_path, dest_path+destName);
 	});
 };
 
