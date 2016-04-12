@@ -246,6 +246,7 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  */
 router.post('/models', function(req, res) {
     console.log("adding model into project");
+    console.log(modelNames)
     var modelNames  = req.body.ids;
     var pid         = req.body.pid;
     var uid         = req.params.userId;
@@ -254,6 +255,13 @@ router.post('/models', function(req, res) {
     var opCount = 0;
     var errmsg  = [];
     
+    if(modelNames.length<=0 || !modelNames) {
+        console.log("error, no model names");
+        var error = {};
+        error.message = "no model names sent";
+        failRes(error);
+    }
+
     for(x in modelNames) {
         unity.copyModel(uid, pid, modelNames[x], function() {
             opCount++;
