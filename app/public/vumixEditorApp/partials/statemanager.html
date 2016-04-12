@@ -1,102 +1,106 @@
 <nav class="navbar">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/manager"><navfont>Back</navfont></a>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/manager">
+                <navfont>Back</navfont>
+            </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right ">
+            <!--<li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>-->
+            <li>
+                <a target="_self" href="/buildproject.php">
+                    <navfont>Build APK</navfont>
+                </a>
+                <li>
+                    <a href="" ng-click="unityMapperService.saveState()">
+                        <div class="button_save_task" data-toggle="modal" data-target="#save">
+                            <navfont>Save</navfont>
+                        </div>
+                    </a>
+                </li>
+        </ul>
     </div>
-    <ul class="nav navbar-nav navbar-right ">
-      <!--<li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>-->
-      <li>
-        <a target="_self" href="/buildproject.php">
-         <navfont>Build APK</navfont>
-        </a>
-      <li>
-        <a href="" ng-click="unityMapperService.saveState()">
-          <div class="button_save_task" data-toggle="modal" data-target="#save"><navfont>Save</navfont></div>
-        </a>
-      </li>
-    </ul>
-  </div>
 </nav>
 
 <!-- Modal for model options button -->
 <bs-modal modal-id="clickableModal">
-  <modal-body>
-    <p style="text-align:center">Choose your clickable object.</p>
-  </modal-body>
-  <modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Choose your clickable object.</p>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
+    </modal-footer>
 </bs-modal>
 
 <bs-modal modal-id="save">
-  <modal-body>
-    <p style="text-align:center">Work has been saved.</p>
-  </modal-body>
-  <modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Work has been saved.</p>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
+    </modal-footer>
 </bs-modal>
 
 <!-- Modal warning for delete state button -->
 <bs-modal modal-id="deleteState">
-  <modal-body>
-    <p style="text-align:center">Are you sure you want to delete this state?</p>
-  </modal-body>
-  <modal-footer>
-    <a href="#" id="btnYes" class="btn danger">Yes</a>
-    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Are you sure you want to delete this state?</p>
+    </modal-body>
+    <modal-footer>
+        <a href="#" id="btnYes" class="btn danger">Yes</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </modal-footer>
 </bs-modal>
 
 <!-- Modal warning for delete connection -->
 <bs-modal modal-id="deleteConn">
-  <modal-body>
-    <p style="text-align:center">Are you sure you want to delete this connection?</p>
-  </modal-body>
-  <modal-footer>
-    <a href="#" id="btnYesConn" class="btn danger">Yes</a>
-    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Are you sure you want to delete this connection?</p>
+    </modal-body>
+    <modal-footer>
+        <a href="#" id="btnYesConn" class="btn danger">Yes</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </modal-footer>
 </bs-modal>
 
 <div class="row">
-  <div class="scrollbar" id="style-default">
-    <div id="items">
-      <h1>Step One:</h1>
-      <p>Double click in an empty space to create your new state.</p>
-      <h1>Step Two:</h1>
-      <p>Give your state a name.</p>
-      <h1>Step Three:</h1>
-      <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
-      <h1>Step Four:</h1>
-      <p>Create connections between states by dragging lines from the blue circles.</p>
-      <h1>Step Five:</h1>
-      <p>Choose your transition models.</p>
-      <br>
-      <p>Made a mistake? Click on your connection line to delete it. 
-        Click <span class="glyphicon glyphicon-remove-circle"></span> to delete your entire state.
-      </p>
-  </div>
-  </div>
-    
-  <div class="col-sm-8">
-    <div id="drawingArea" style="width:100%;min-height:500px;">
-      <div class="window task startpoint endpoint" style="left: 100px; top:50px" data-nodetype="startpoint" id="startpoint">
-        <div class="ctrl_container">
-          <div class="button_editor">
-            <a ng-click="editorService.openEditor()" href="">
-              <span class="glyphicon glyphicon-new-window"></span>
-            </a>
-          </div>  
+    <div class="scrollbar" id="style-default">
+        <div id="items">
+            <h1>Step One:</h1>
+            <p>Double click in an empty space to create your new state.</p>
+            <h1>Step Two:</h1>
+            <p>Give your state a name.</p>
+            <h1>Step Three:</h1>
+            <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
+            <h1>Step Four:</h1>
+            <p>Create connections between states by dragging lines from the blue circles.</p>
+            <h1>Step Five:</h1>
+            <p>Choose your transition models.</p>
+            <br>
+            <p>Made a mistake? Click on your connection line to delete it. Click <span class="glyphicon glyphicon-remove-circle"></span>                to delete your entire state.
+            </p>
         </div>
-          <div class="well well-sm" align="center">Root State</div>
-      </div>   
-        
-    
-      <!--For debugging purposes-->
-      <!--<textarea id="jsonOutput" style="width:10px;height:10px;"></textarea>-->
     </div>
-  </div>
+
+    <div class="col-sm-8">
+        <div id="drawingArea" style="width:100%;min-height:500px;">
+            <div class="window task startpoint endpoint" style="left: 100px; top:50px" data-nodetype="startpoint" id="startpoint">
+                <div class="ctrl_container">
+                    <div class="button_editor">
+                        <a ng-click="editorService.openEditor(0)" href="">
+                            <span class="glyphicon glyphicon-new-window"></span>
+                        </a>
+                    </div>
+                    <span class="glyphicon glyphicon-star" onclick="addTransition(0)"></span>
+                </div>
+                <div class="well well-sm" align="center">Root State</div>
+            </div>
+
+
+            <!--For debugging purposes-->
+            <!--<textarea id="jsonOutput" style="width:10px;height:10px;"></textarea>-->
+        </div>
+    </div>
 </div>
 
 
@@ -104,17 +108,16 @@
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
 
 <bs-modal modal-id="addAsset">
-  <modal-body>
-    <p style="text-align:center">Adding Page</p>
-  </modal-body>
-  <modal-footer>
-    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Adding Page</p>
+    </modal-body>
+    <modal-footer>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
+    </modal-footer>
 </bs-modal>
 
-<script type="text/javascript">    
-  
-  var angularHelper = (function () {
+<script type="text/javascript">
+    var angularHelper = (function () {
     var angularHelper = function () { };
     var defaultApplicationName = "vumixEditorApp";
     angularHelper.compile = function ($targetDom, htmlToCompile, applicationName) {
@@ -134,21 +137,7 @@
     
     jsPlumb.ready(function () {
     var id = 0;
-    var options = [];
-    var stateName = $('<select>');
-    stateName.append($('<option></option>').attr('value', '#').text('Select an option'));
-        
-	jsPlumb.importDefaults({
-		Endpoint : ["Dot", {radius:15}],
-		EndpointStyle : { fillStyle : "gray" },
-		HoverPaintStyle : {strokeStyle:"gray", lineWidth:10 },
-		ConnectionOverlays:[
-            [ "Arrow", { location: 0.7 } ], 
-            [ "Custom", { create:function(component) {
-                    return $(stateName);}, 
-                    location: 0.4}]]
-    });
-    
+   
 	var workflowConnectorStartpoint = {
 		isSource: true,
 		isTarget: true,
@@ -235,6 +224,10 @@
 	$('.button_load_task').click(function(){
 		loadFlowchart();
 	});
+    
+    /*$('.add_transition').click(function(){
+        addTransition(0);
+    })*/
 });
 
 function addTask(id, e){
@@ -244,7 +237,7 @@ function addTask(id, e){
         id = numberOfElements;
 	}
 	
-    var newState = $('<div class="task startpoint endpoint" id="'+id+'" data-nodetype="task"><div class="ctrl_container"><div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div><div class="button_editor"><a ng-click="editorService.openEditor('+id+')" href=""><span class="glyphicon glyphicon-new-window"></span></a></div></div><div class="well well-sm" align="center"><div class="input-group"><input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1"></div></div></div>');
+var newState = $('<div class="task startpoint endpoint" id="'+id+'" data-nodetype="task"><div class="ctrl_container"><div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div><div class="button_editor"><a ng-click="editorService.openEditor('+id+')" href=""><span class="glyphicon glyphicon-new-window"></span></a></div><span class="glyphicon glyphicon-star" onclick="addTransition('+id+')"></span></div><div class="well well-sm" align="center"><div class="input-group"><input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1"></div></div></div>');
     
     var top = e.pageY;
     var left = e.pageX;
@@ -402,13 +395,65 @@ function getModelNames(item){
     
     modelsInState = attachClickable(id);
     
-    console.log("length of models in state" + modelsInState.length);
+    console.log("number of models in state " + modelsInState.length);
     
     for (i=0; i< modelsInState.length; i++){
-        nameofModels = modelsInState[i].instanceName;
+        nameofModels[i] = modelsInState[i].instanceName;
     };
-        console.log("this function getModelNames was called" + " " + id + " " + nameofModels);
+        console.log("the name of the models are" + " " + id + " " + nameofModels);
     return nameofModels;
+}
+
+function addTransition(sourceId){
+        var options = getModelNames(sourceId);
+        var i = 0;
+        var newState = $('<div>').attr('id', 'transition' + i).addClass('item');
+		var title = $('<div>').addClass('title');
+		var stateName = $('<select>');
+		stateName.append($('<option></option>').attr('value', '#').text('Select an option'));
+		
+        $.each(options, function(key, value) {
+		  if ($('#drawingArea').find('#transition-' + key).length == 0) {
+		    stateName.append($('<option></option>')
+		      .attr('value', key)
+			  .text(value));
+		  }
+	    });
+		
+        
+		var connect = $('<div>').addClass('connect');
+		
+        title.append(stateName);
+		newState.append(title);
+		newState.append(connect);
+    
+		$('#drawingArea').append(newState);
+		
+		jsPlumb.makeTarget(newState, {
+          parent: newState,
+		  anchor: 'Continuous',
+          maxConnections: 1
+		});
+		
+		jsPlumb.makeSource(connect, {
+          parent: newState,
+		  anchor: 'Continuous',
+          maxConnections: 1
+		});		
+		
+		jsPlumb.draggable(newState, {
+		  containment: 'parent'
+		});
+
+		stateName.change(function(e) {
+            if (this.value !== '#') {
+            $(this).parent().text($(this).find(':selected').text());
+            }
+		});
+		
+		stateName.focus();
+		
+		i++; 
 }
 
 </script>
