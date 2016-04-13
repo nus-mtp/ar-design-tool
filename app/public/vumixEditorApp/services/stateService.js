@@ -72,12 +72,11 @@
       }
       
       service.sendGraph = function(graph) {
-          var uid = document.cookie.split('=');
-          var userid = uid[1];
+          var userid = uid;
           
-          var pid = window.location.href.split('/');
-          pid = pid[4]
-          pid = pid.slice(0, -1);
+          // var pid = window.location.href.split('/');
+          // pid = pid[4]
+          // pid = pid.slice(0, -1);
           var projectid = pid;
           
           var fd = new FormData();

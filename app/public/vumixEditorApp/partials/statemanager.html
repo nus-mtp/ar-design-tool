@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/manager">
+            <a class="navbar-brand" href="/">
                 <navfont>Back</navfont>
             </a>
         </div>
@@ -11,13 +11,14 @@
                 <a target="_self" href="/buildproject.php">
                     <navfont>Build APK</navfont>
                 </a>
-                <li>
-                    <a href="" ng-click="unityMapperService.saveState()">
-                        <div class="button_save_task" data-toggle="modal" data-target="#save">
-                            <navfont>Save</navfont>
-                        </div>
-                    </a>
-                </li>
+            </li>
+            <li>
+                <a href="" ng-click="unityMapperService.saveState()">
+                    <div class="button_save_task" data-toggle="modal" data-target="#save">
+                        <navfont>Save</navfont>
+                    </div>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -80,24 +81,6 @@
             <p>Made a mistake? Click on your connection line to delete it. Click <span class="glyphicon glyphicon-remove-circle"></span>                to delete your entire state.
             </p>
         </div>
-<<<<<<< HEAD
-          <div class="well well-sm" align="center">Root State</div>
-      </div>   
-        
-    <div class="task startpoint endpoint" style="left:300px;top:25px" data-nodetype="task" id="taskcontainer0">
-        <div class="ctrl_container">
-            <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
-          <div class="button_editor">
-            <a ng-click="editorService.openEditor(0)" href="">
-              <span class="glyphicon glyphicon-new-window"></span>
-            </a>
-          </div></div>
-
-             <div class="well well-sm" align="center"><div class="input-group">
-  <input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1">
-                 </div></div>
-=======
->>>>>>> cd4b31453a5778336ff528e32e24ef45cbf2f2a6
     </div>
 
     <div class="col-sm-8">
@@ -132,10 +115,7 @@ f
         <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
     </modal-footer>
 </bs-modal>
-
-<<<<<<< HEAD
 <loader></loader>
-=======
 <script type="text/javascript">
 
     var angularHelper = (function () {
@@ -461,4 +441,3 @@ function addTransition(sourceId, targetId){
 }
 
 </script>
->>>>>>> cd4b31453a5778336ff528e32e24ef45cbf2f2a6
