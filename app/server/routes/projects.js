@@ -246,7 +246,6 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  */
 router.post('/models', function(req, res) {
     console.log("adding model into project");
-    console.log(modelNames)
     var modelNames  = req.body.ids;
     var pid         = req.body.pid;
     var uid         = req.params.userId;
