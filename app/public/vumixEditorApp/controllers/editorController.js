@@ -8,6 +8,7 @@
       stateService,
       modelService
     ) {
+      $scope.modelsSelected = false;
       $scope.currentStateId = -1;
       $scope.currentSelected;
       $scope.textModel = "";
@@ -22,7 +23,7 @@
       });
       
       modelService.subscribeToServerModelChange($scope, function() {
-        $scope.modelsOnServer = angular.copy(modelService.getAllServerModels());  
+        $scope.modelsOnServer = angular.copy(modelService.getAllServerModels()); 
       });
       
       modelService.subscribeToAssetBundleModelChange($scope, function() {
@@ -36,6 +37,10 @@
       $scope.$watch('currentStateId', function(newVal, oldVal) {
         $scope.modelsOnScreen = angular.copy(stateService.getStateObjects(newVal));  
       });
+      
+      $scope.$watch('modelsOnServer', function() {
+        $scope.modelsSelected = $scope.anyModelSelected();
+      }, true);
       
       $scope.unityMapperService = unityMapperService;      
       $scope.editorService = editorService;
@@ -81,5 +86,15 @@
         });
         modelService.addAssetBundleModels(_models);
       }
+      
+      $scope.anyModelSelected = function() {
+        if ($scope.modelsOnServer.length === 0) {
+          return false;
+        }
+        return $scope.modelsOnServer.reduce(function(prev, next) {
+          return {included: prev.included || next.included};
+        }).included;  
+      };
+      
     }); 
 })();
