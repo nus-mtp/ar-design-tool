@@ -23,39 +23,20 @@ var checkExistsIfNotCreate = function(dirpath, callback) {
 		callback();
 };
 
-var moveFileToDest = function(location, destination, callback) {
+var moveFileToDest = function(location, destination, callback, badcall) {
 	console.log('location: ' + location);
 	console.log('destination: ' + destination);
 	fs.rename(location, destination, function(err) {
 		if(err) {
 			console.log(err);
+			if(badcall) 
+				badcall(err);
 		} else {
 			console.log('Successfully moved file from ' + location + ' to ' + destination);
 		}
 	});
 	if(callback)
 		callback();
-};
-
-var deleteDir = function(deleteDest) {
-	rimraf(deleteDest, function(err) {
-		if(err) {
-			console.log(err);
-		}
-		else {
-			console.log('Successfully deleted: ' + deleteDest);
-		}
-	});
-};
-
-var deleteFile = function(deleteFile) {
-	fs.unlink(deleteFile, function(err) {
-		if(err) {
-			console.log(err);
-		} else {
-			console.log('Successfully deleted: ' + deleteFile);
-		}
-	});
 };
 
 var copyFile = function(file, dest, goodcallback, badcallback) {
@@ -76,7 +57,32 @@ var copyFile = function(file, dest, goodcallback, badcallback) {
 		if(badcallback)
 			badcallback(e);
 	}
-}
+};
+
+var deleteDir = function(deleteDest) {
+	rimraf(deleteDest, function(err) {
+		if(err) {
+			console.log(err);
+		}
+		else {
+			console.log('Successfully deleted: ' + deleteDest);
+		}
+	});
+};
+
+var deleteFile = function(deleteFile, goodCall, badCall) {
+	fs.unlink(deleteFile, function(err) {
+		if(err) {
+			console.log(err);
+			if (badCall) 
+				badCall(err);
+		} else {
+			console.log('Successfully deleted: ' + deleteFile);
+			if (goodCall)
+				goodCall();
+		}
+	});
+};
 
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
 module.exports.moveFileToDest = moveFileToDest;

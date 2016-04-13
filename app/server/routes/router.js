@@ -1,14 +1,14 @@
-var passport 	= require('passport'),
+var auth		= require('./authentication'),
+	passport 	= require('passport'),
 	express 	= require('express');
 
 var router 	= express.Router();
 
-router.get('/', isLoggedIn, function (req, res) {
+router.get('/', auth.isLoggedIn, function (req, res) {
 	res.render('vumixManagerView',{name: req.user.name, id:req.user.id});
 });
 
-router.get('/project/:id', isLoggedIn, function(req, res) {
-	console.log(req)
+router.get('/project/:id', auth.isLoggedIn, function(req, res) {
 	res.render('vumixEditorView', {name: req.user.name, id:req.user.id, pid: req.params.id});
 });
 
@@ -32,15 +32,5 @@ router.get('/logout', function(req, res) {
 	req.session.destroy();
 	res.redirect('/');
 });
-
-function isLoggedIn(req, res, next) {
-	console.log('checking whether logged in:');
-	if(req.isAuthenticated()) {
-		console.log('authenticated!');
-		return next();
-	}
-	console.log('not logged in, redirecting to login!');
-	res.redirect('/login');
-};
 
 module.exports = router;
