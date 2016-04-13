@@ -39,19 +39,27 @@
       }
       
       service.addAssetBundleModels = function(serverModels) {
+        loaderService.showLoader("Adding Models to Asset Bundle");
         var _modelIds = [];
         var url = '/api/users/' + uid + '/projects/models';
         serverModels.forEach(function(model) {
-          var _model = {
-            id: _models.onAssetBundleIndex++,
-            name: serverModels
-          }
+          _modelIds.push(model.file_name);
         });        
         var data = {
           pid: pid,
           ids: _modelIds
         }
-        return $http.post(url, data);
+        return $http.post(url, data).then(function(res) {
+          serverModels.forEach(function(model) {
+            var _model = {
+              id: _models.onAssetBundleIndex++,
+              name: model.name
+            }
+            _models.onAssetBundle.push(_model);
+          });        
+          notifyAssetBundleModelChange();
+          loaderService.hideLoader();          
+        });
       }
       
 // ASSETBUNDLES OBJECT APIS END HERE
