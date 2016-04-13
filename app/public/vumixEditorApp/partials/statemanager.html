@@ -75,7 +75,7 @@
             <h1>Step Four:</h1>
             <p>Create connections between states by dragging lines from the blue circles.</p>
             <h1>Step Five:</h1>
-            <p>Choose your transition models.</p>
+            <p>Choose your transition models by clicking on the connection line that you just drew!</p>
             <br>
             <p>Made a mistake? Click on your connection line to delete it. Click <span class="glyphicon glyphicon-remove-circle"></span>                to delete your entire state.
             </p>
@@ -91,7 +91,6 @@
                             <span class="glyphicon glyphicon-new-window"></span>
                         </a>
                     </div>
-                    <span class="glyphicon glyphicon-star" onclick="addTransition(0)"></span>
                 </div>
                 <div class="well well-sm" align="center">Root State</div>
             </div>
@@ -102,7 +101,7 @@
         </div>
     </div>
 </div>
-
+f
 
 
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
@@ -117,12 +116,13 @@
 </bs-modal>
 
 <script type="text/javascript">
+
     var angularHelper = (function () {
     var angularHelper = function () { };
     var defaultApplicationName = "vumixEditorApp";
     angularHelper.compile = function ($targetDom, htmlToCompile, applicationName) {
       var $injector = angular.injector(["ng", applicationName || defaultApplicationName]);
-      $injector.invoke(["$compile", "$rootScope", function ($compile, $rootScope) {
+      $injector.invoke(["$compile", "$rootScope", "$http", function ($compile, $rootScope, $http) {
         var $scope = $targetDom.append(htmlToCompile).scope();
         $compile($targetDom)($scope || $rootScope);
         $rootScope.$digest();
@@ -185,25 +185,13 @@
     
     
     jsPlumb.bind('click', function (connection, e) {
-        var options = [];
-        
-        while(options.length > 0) {
-        options.pop();
+        if (connection.sourceId == "startpoint"){
+            connection.sourceId = 0;
         }
-        
-        if (connection.sourceId === "startpoint"){
-            connection.sourceId = "0";
-        }
-        
         sourceId = parseInt(connection.sourceId);
+        targetId = parseInt(connection.targetId);
+        addTransition(sourceId,targetId);
         
-        options = getModelNames(sourceId);
-        console.log("clicked options " + options);
-        $.each(options, function(key, value) {
-        stateName.append($('<option></option>')
-        .attr('value', key)
-        .text(value));
-        });
     });
 		
 	$('#'+htmlBase).on("click", ".button_remove", function () {
@@ -225,9 +213,6 @@
 		loadFlowchart();
 	});
     
-    /*$('.add_transition').click(function(){
-        addTransition(0);
-    })*/
 });
 
 function addTask(id, e){
@@ -237,7 +222,7 @@ function addTask(id, e){
         id = numberOfElements;
 	}
 	
-var newState = $('<div class="task startpoint endpoint" id="'+id+'" data-nodetype="task"><div class="ctrl_container"><div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div><div class="button_editor"><a ng-click="editorService.openEditor('+id+')" href=""><span class="glyphicon glyphicon-new-window"></span></a></div><span class="glyphicon glyphicon-star" onclick="addTransition('+id+')"></span></div><div class="well well-sm" align="center"><div class="input-group"><input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1"></div></div></div>');
+var newState = $('<div class="task startpoint endpoint" id="'+id+'" data-nodetype="task"><div class="ctrl_container"><div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div><div class="button_editor"><a ng-click="editorService.openEditor('+id+')" href=""><span class="glyphicon glyphicon-new-window"></span></a></div></div><div class="well well-sm" align="center"><div class="input-group"><input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1"></div></div></div>');
     
     var top = e.pageY;
     var left = e.pageX;
@@ -311,6 +296,7 @@ function saveFlowchart(){
 			positionY: parseInt($elem.css("top"), 10)
 		});
 	});
+    
 	var connections = [];
 	$.each(jsPlumb.getConnections(), function (idx, connection) {
 		connections.push({
@@ -327,9 +313,11 @@ function saveFlowchart(){
 	
 	var flowChartJson = JSON.stringify(flowChart);
 	console.log(flowChartJson);
-	
-	$('#jsonOutput').val(flowChartJson);
+    var el = $('[ng-app=vumixEditorApp]')[0];
+    angular.element(el).injector().get('stateService').sendGraph(flowChartJson);
+	//$('#jsonOutput').val(flowChartJson);
 }
+
 function loadFlowchart(){
 	var flowChartJson = $('#jsonOutput').val();
 	var flowChart = JSON.parse(flowChartJson);
@@ -363,20 +351,12 @@ function loadFlowchart(){
 	numberOfElements = flowChart.numberOfElements;
 }
 
-function logModels(numberOfElements){
-var options = [];
-	$.each(jsPlumb.getConnections(), function (idx, connection) {
-            numberOfElements = parseInt(connection.sourceId);
-            options = getModelNames(numberOfElements);
-            console.log("This is the model options " + options);
-            console.log("This is sourceId " + numberOfElements);
-	});
-}
 function repositionElement(id, posX, posY){
 	$('#'+id).css('left', posX);
 	$('#'+id).css('top', posY);
 	jsPlumb.repaint(id);
 }
+
 function attachClickable(id){
         var clickableObjects = [];
         var item = 0;
@@ -387,6 +367,7 @@ function attachClickable(id){
         console.log("this function attachClickable was called" + " " + item + " " + clickableObjects);
         return clickableObjects;
 }
+
 function getModelNames(item){
     var modelsInState = [];
     var nameofModels = [];
@@ -404,7 +385,7 @@ function getModelNames(item){
     return nameofModels;
 }
 
-function addTransition(sourceId){
+function addTransition(sourceId, targetId){
         var options = getModelNames(sourceId);
         var i = 0;
         var newState = $('<div>').attr('id', 'transition' + i).addClass('item');
@@ -424,6 +405,8 @@ function addTransition(sourceId){
 		var connect = $('<div>').addClass('connect');
 		
         title.append(stateName);
+        connect.append($('<text></text>').text("Connection to State " + targetId));
+        connect.append($('<text></text>').text(" from State " + sourceId));
 		newState.append(title);
 		newState.append(connect);
     
