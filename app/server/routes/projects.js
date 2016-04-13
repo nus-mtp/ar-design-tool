@@ -244,7 +244,6 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  * POST
  * api: /api/users/{userId}/projects/addModels
  */
-<<<<<<< HEAD
 router.post('/addModels', function(req, res) {
     console.log("adding model into project");
     var modelNames  = req.body.ids;
