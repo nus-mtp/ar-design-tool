@@ -240,7 +240,7 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  * @module addProjModels
  * @parent projectApi
  * @param req.body.ids, req.body.pid, req.params.userId
- * copies models with ids submitted in body owned by user with {userId} to project folder with {pid} and rebuilds assetbundle for that project
+ * copies models with model names submitted in body owned by user with {userId} to project folder with {pid} and rebuilds assetbundle for that project
  * POST
  * api: /api/users/{userId}/projects/models
  */
