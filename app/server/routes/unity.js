@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage:storage });
 
-router.post('/uploadstate.php', upload.single('binary'), function(req, res, next) {
+router.post('/uploadstate', upload.single('binary'), function(req, res, next) {
     var uid = req.params.uid;
     var pid = req.params.pid;
     var stateDat = req.binary;
@@ -42,7 +42,7 @@ router.post('/saveproject', upload.single('json'), function(req, res) {
     });
 });
 
-router.post('/buildproject.php', function(req, res, next) {
+router.post('/buildproject', function(req, res, next) {
     var pid = req.body.pid;
     var uid = req.body.uid;
 
