@@ -223,7 +223,6 @@
         $scope.deleteModel = function(id){
             modelService.deleteModel($scope.models, $scope.userid, id)
                 .then(function(model) {
-                //  console.log($scope.models);
             });
         };       
         

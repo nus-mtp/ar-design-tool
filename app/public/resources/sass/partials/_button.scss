@@ -2,8 +2,15 @@
 @import 'partials/color';
 
 .btn-large{
-  background-color: $light-orange;
-  color: $bg-color;
+  background-color: $bg-color;
+  color: $light-green;
   height: 41px;
   width: 100%;   
+}
+
+.btn-cancel{
+  background-color: $bg-color;
+  color: $red;
+  height: 41px;
+  width: 100%;
 }

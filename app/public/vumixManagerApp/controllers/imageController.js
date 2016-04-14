@@ -117,12 +117,71 @@
           });
           
         };
+        
+        var updateFormLoaded  = function(){
+          var requiredCheck = function() {
+            return {
+                file : $scope.update.upload,
+                image_name : $scope.update.name
+            };
+          };
+          
+          var extensionCheck = function() {
+            var Data = requiredCheck();
+            var tokenised = Data.file.name.split('.');
+            $scope.update.file_extension = tokenised[tokenised.length-1].toLowerCase();
+                if (tokenised.length < 1) {
+                $scope.updateImageForm.updateUpload.$setValidity('fileType', false); 
+                return false;
+                }
+                if ($scope.update.file_extension !== 'png'){
+                    $scope.updateImageForm.updateUpload.$setValidity('fileType', false); 
+                } else if ($scope.update.file_extension !== 'jpg'){
+                    $scope.updateImageForm.updateUpload.$setValidity('fileType', false); 
+                } else if ($scope.update.file_extension !== 'jpeg'){
+                    $scope.updateImageForm.updateUpload.$setValidity('fileType', false); 
+                }
+                return tokenised[tokenised.length - 1].toLowerCase() === 'png' || tokenised[tokenised.length - 1].toLowerCase() === 'jpg' || tokenised[tokenised.length - 1].toLowerCase() === 'jpeg';
+         };
+             
+         var extensionSizeCheck = function(){
+          var tokenised = $scope.update.upload.size;
+           if(tokenised > 4000000){
+               $scope.updateImageForm.updateUpload.$setValidity('fileSize', false);
+               return false;
+           }
+           return true;
+         };
+         
+         $scope.$watch('update.upload', function(newVal, oldVal) {
+            $scope.updateImageForm.updateUpload.$setValidity('required', false);
+            var Data = requiredCheck();
+    
+            if (Data.file) {      
+              $scope.updateImageForm.updateUpload.$setValidity('required', true);
+              if (extensionCheck()) {
+                $scope.updateImageForm.updateUpload.$setValidity('fileType', true); 
+              }
+              if (extensionSizeCheck()){
+                $scope.updateImageForm.updateUpload.$setValidity('fileSize', true);
+              }                            
+            }
+          });
+
+        };
 
         $scope.$watch('imageForm', function(newVal, oldVal) {
           if (newVal) {
             onFormLoaded();
           }
-        });     
+        });
+        
+            
+        $scope.$watch('updateImageForm', function(newVal, oldVal){
+          if (newVal){
+            updateFormLoaded();   
+          } 
+        });    
        
         $scope.uploadFile = function(){
             file = event.target.files[0];
@@ -139,7 +198,6 @@
         };
         
         $scope.getImage = function(id){
-            console.log($scope.images);
             for(var i = 0; i < $scope.images.length; i++){
                if(id === $scope.images[i].id){
                     $scope.update.id = id;
@@ -149,9 +207,14 @@
                     $scope.update.upload = $scope.images[i].upload;
                 }
             }
+            $("#welcome_image").hide();
+            $("#upload_image").hide(); 
+            $("#update_page").show();
         };
         
         $scope.updateImage = function(id){
+            $("#update_page").hide();
+            $("#welcome_image").show();
             imageService.updateImage($scope.images, $scope.update, $scope.update.upload, $scope.userid,id)
             .then(function(update){
                 $scope.image = update;

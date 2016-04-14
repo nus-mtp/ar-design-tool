@@ -130,7 +130,6 @@
                 $scope.updateProjectForm.updateUpload.$setValidity('fileType', true); 
               }                            
             }
-
           });
           
         };
@@ -155,13 +154,13 @@
         
         $scope.goToState = function(id){
             window.location.href=  "/project/" + id;
-        }
+        };
         
         $scope.updateFile = function(){
             file = event.target.files[0];
             $scope.update.upload = file;
             $scope.$apply();
-        }
+        };
         
         $scope.deleteProject = function(id){
             projectService.deleteProject($scope.projects, $scope.userid, id)
@@ -180,10 +179,10 @@
                     $scope.update.upload = $scope.projects[i].upload;
                 }
             }
-            
             $("#welcome_page").hide();
-            $("#create_project ").hide(); 
+            $("#create_project").hide();
             $("#update_page").show();
+       
         };
         
         $scope.updateProject = function(id){
@@ -191,8 +190,6 @@
             $("#welcome_page").show();
             projectService.updateProject($scope.projects, $scope.update, $scope.update.upload, $scope.userid,id)
             .then(function(update){
-                console.log(update);
-           
                 $scope.project = update;
             });
         };
@@ -202,6 +199,8 @@
                 .then(function(project) {
                 $scope.projects.push(project);
                 $scope.reset();
+            }).catch(function(res){
+                console.log(res); //handle error message
             });
         };
         

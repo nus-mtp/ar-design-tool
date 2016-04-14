@@ -1,45 +1,34 @@
 <div class="wrapper" ng-controller="managerController" >
     <div class="sidebar">
-        <div id="welcome_page" class="side-bar-padding welcome_side" style="padding-top: 50px;">
+        <div id="welcome_page" class="side-bar-padding welcome-side" style="padding-top: 50px; color:#FFFFFF;">
             <h1 class="center" style="margin-top: 0%; text-decoration:underline"> Welcome to Vumix !</h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
             <button type="button" class="center btn-large" id="createProject">Create Your New Project</button>
         </div>
-        <div id="create_project" class="side-bar-padding create_side">
-            <span class="clickable" id="go_welcome">&#60;	&lt;Go Back</span>
+        <div id="create_project" class="side-bar-padding create-side">
             <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Create Your New Project!</h1>
             <form name="addProjectForm" ng-submit="addProject()" enctype="multipart/form-data" novalidate>
               <div class="form-group">
                 <h2>Company Name</h2>
                 <input class="form-control" type="text" name="comName" placeholder="Company Name" ng-model="project.company_name" required />
-                <span class="text-danger" ng-show="addProjectForm.comName.$error.required">Company name cannot be empty</span>
+                <span class="text-warning" ng-show="addProjectForm.comName.$error.required">Company name cannot be empty</span>
               </div>
               <div class="form-group">
                 <h2> Project Name</h2>
                 <input class="form-control" type="text" name="projectName" placeholder="Project Name" ng-model="project.project_name" required />
-                <span class="text-danger" ng-show="addProjectForm.projectName.$error.required">Project name cannot be empty</span>
-                <span class="text-danger" ng-show="addProjectForm.projectName.$error.fileName">Project name is already exist</span>
+                <span class="text-warning" ng-show="addProjectForm.projectName.$error.required">Project name cannot be empty</span>
+                <span class="text-warning" ng-show="addProjectForm.projectName.$error.fileName">Project name is already exist</span>
               </div>
-              <!--<h2> Target Marker Type</h2>
-              <label for="">
-                  <input type="radio" name="optionsRadios" id="optionsRadios1" value="2D" checked="" ng-model="project.marker_type">
-                  2D 
-              </label>
-              <label>
-                  <input type="radio" name="optionsRadios" id="optionsRadios2" value="3D" ng-model="project.marker_type">
-                  3D 
-              </label>              -->
               <h2> Upload Your Vuforia Package</h2>
-              <a style="text-decoration: underline" target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
+              <a style="text-decoration: underline; color:#FFFFFF;" target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
               <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
-              <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
-              <div class="text-danger" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
-              <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+              <div class="text-warning" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
+              <div class="text-warning" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
+              <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="margin-top:20px; background-color:#FFFFFF; color:#0daf83">
             </form>
         </div>
         
-        <div id="update_page" class="side-bar-padding update_side">
-             <span class="clickable" id="cancel_update">&#10006;Cancel</span>
+        <div id="update_page" class="side-bar-padding update-side">
              <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Project Here!</h1>
              <form name="updateProjectForm" ng-submit="updateProject(update.id)" enctype="multipart/form-data" novalidate>
                 <h2>Company Name</h2>
@@ -50,7 +39,8 @@
                 <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()"/> 
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.required">Project file cannot be empty</div>
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
-                <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
+                <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="margin-top:20px; margin-bottom:8px;  background-color:#FF9640; color:#FFFFFF">
+                <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
         </div>
     </div>    
@@ -95,9 +85,9 @@
         
         var height = 1200;
         $('.sidebar').css("min-height", height);
-        $('.welcome_side').css("min-height", height);
-        $('.create_side').css("min-height", height);
-        $('.update_side').css("min-height", height);
+        $('.welcome-side').css("min-height", height);
+        $('.create-side').css("min-height", height);
+        $('.update-side').css("min-height", height);
         
         // when user resize their window
         $(window).resize(function(){
@@ -121,11 +111,6 @@
         $('#cancel_update').click(function(){
            $("#welcome_page").show();
            $("#update_page").hide();
-        });
-        
-        $('#go_welcome').click(function(){
-           $("#welcome_page").show();
-           $("#create_project ").hide(); 
         });
         
     });
