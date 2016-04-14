@@ -24,7 +24,7 @@
               <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
               <div class="text-warning" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
               <div class="text-warning" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
-              <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="margin-top:20px; background-color:#FFFFFF; color:#0daf83">
+              <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="border:0; margin-top:20px; background-color:#FFFFFF; color:#0daf83">
             </form>
         </div>
         
@@ -39,7 +39,7 @@
                 <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()"/> 
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.required">Project file cannot be empty</div>
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
-                <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="margin-top:20px; margin-bottom:8px;  background-color:#FF9640; color:#FFFFFF">
+                <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="border:0; margin-top:20px; margin-bottom:8px;  background-color:#FFFFFF; color:#5bc0de">
                 <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
         </div>
@@ -58,10 +58,10 @@
                 <ul ng-repeat="pr in projects | filter:searchText">
                     <div class="clickable" ng-click="goToState(pr.id)">
                         <li class="flex-item">
-                            <div class="card">
+                            <div class="card grey-bg">
                                 <img class="card-img-top" ng-src="{{project.image_url}}" alt="Card image cap">
                                 <div class="card-block">
-                                    <p class="card-text" style="background-color: #0daf83; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{pr.name}}</p>
+                                    <p class="card-text name-holder">{{pr.name}}</p>
                                 </div>
                             </div>
                         </li>

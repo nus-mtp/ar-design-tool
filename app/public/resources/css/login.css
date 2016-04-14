@@ -9,12 +9,14 @@
 
 .btn-large {
   background-color: #FFFFFF;
+  border: 0;
   color: #0daf83;
   height: 41px;
   width: 100%; }
 
 .btn-cancel {
   background-color: #FFFFFF;
+  border: 0;
   color: #cc0000;
   height: 41px;
   width: 100%; }
