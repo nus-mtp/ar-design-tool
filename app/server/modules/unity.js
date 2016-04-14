@@ -110,6 +110,21 @@ var copyModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	});
 };
 
+var addMediaToProject = function(uid, pid, modelName, goodcall, badcall) {
+	var reverse = modelName.split('').reverse().join('');
+	var ext = reverse.split('.')[0];
+	console.log("ext is: " + ext);
+	if(ext=='obj'||ext=='3ds'||ext=='fbx') {
+		copyModel(uid, pid, modelName, function() {
+			goodcall();
+		}, function(err) {
+			badcall(err);
+		});
+	} else {
+		console.log("object is an image");	
+	}
+};
+
 var removeProjModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	console.log('removing model from project '+pid+' dir');
 	var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
