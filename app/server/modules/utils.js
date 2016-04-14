@@ -1,4 +1,5 @@
-var rimraf 	= require('rimraf'),
+var jsonfile = require('jsonfile'),
+	rimraf 	= require('rimraf'),
 	fs 		= require('fs');
 
 var checkExistsIfNotCreate = function(dirpath, callback) {
@@ -84,8 +85,19 @@ var deleteFile = function(deleteFile, goodCall, badCall) {
 	});
 };
 
+var writeJson = function(dest, json, goodcall, badcall) {
+	jsonfile.writeFile(dest, json, function(err) {
+		if(err) {
+			badcall(err);
+		} else {
+			goodcall();
+		}
+	});
+};
+
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
 module.exports.moveFileToDest = moveFileToDest;
 module.exports.deleteFile = deleteFile;
 module.exports.deleteDir = deleteDir;
+module.exports.writeJson = writeJson;
 module.exports.copyFile = copyFile;

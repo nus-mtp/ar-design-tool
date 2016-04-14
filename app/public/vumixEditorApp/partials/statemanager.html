@@ -1,128 +1,443 @@
 <nav class="navbar">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" ng-click="goToManager()">Back</a>
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+                <navfont>Back</navfont>
+            </a>
+        </div>
+        <ul class="nav navbar-nav navbar-right ">
+            <!--<li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>-->
+            <li>
+                <a target="_self" href="/buildproject.php">
+                    <navfont>Build APK</navfont>
+                </a>
+            </li>
+            <li>
+                <a href="" ng-click="unityMapperService.saveState()">
+                    <div class="button_save_task" data-toggle="modal" data-target="#save">
+                        <navfont>Save</navfont>
+                    </div>
+                </a>
+            </li>
+        </ul>
     </div>
-    <ul class="nav navbar-nav navbar-right ">
-      <!--<li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>-->
-      <li>
-        <a target="_self" href="/buildproject.php">
-         <navfont>Build APK</navfont>
-        </a>
-      <li>
-        <a href="" ng-click="unityMapperService.saveState()">
-          <div class="button_save_task" data-toggle="modal" data-target="#save"><navfont>Save</navfont></div>
-        </a>
-      </li>
-    </ul>
-  </div>
 </nav>
 
 <!-- Modal for model options button -->
 <bs-modal modal-id="clickableModal">
-  <modal-body>
-    <p style="text-align:center">Choose your clickable object.</p>
-  </modal-body>
-  <modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Choose your clickable object.</p>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
+    </modal-footer>
 </bs-modal>
 
 <bs-modal modal-id="save">
-  <modal-body>
-    <p style="text-align:center">Work has been saved.</p>
-  </modal-body>
-  <modal-footer>
-    <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Work has been saved.</p>
+    </modal-body>
+    <modal-footer>
+        <button type="button" class="btn btn-default" data-dismiss="modal" style="display: block; margin: 0 auto;">Okay</button>
+    </modal-footer>
 </bs-modal>
 
 <!-- Modal warning for delete state button -->
 <bs-modal modal-id="deleteState">
-  <modal-body>
-    <p style="text-align:center">Are you sure you want to delete this state?</p>
-  </modal-body>
-  <modal-footer>
-    <a href="#" id="btnYes" class="btn danger">Yes</a>
-    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Are you sure you want to delete this state?</p>
+    </modal-body>
+    <modal-footer>
+        <a href="#" id="btnYes" class="btn danger">Yes</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </modal-footer>
 </bs-modal>
 
 <!-- Modal warning for delete connection -->
 <bs-modal modal-id="deleteConn">
-  <modal-body>
-    <p style="text-align:center">Are you sure you want to delete this connection?</p>
-  </modal-body>
-  <modal-footer>
-    <a href="#" id="btnYesConn" class="btn danger">Yes</a>
-    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Are you sure you want to delete this connection?</p>
+    </modal-body>
+    <modal-footer>
+        <a href="#" id="btnYesConn" class="btn danger">Yes</a>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">No</a>
+    </modal-footer>
 </bs-modal>
 
 <div class="row">
-  <div class="scrollbar" id="style-default">
-    <div id="items">
-      <h1>Step One:</h1>
-      <p>An example state has already been created for you. Or double click in an empty space to create your own new state.</p>
-      <h1>Step Two:</h1>
-      <p>Give your state a name.</p>
-      <h1>Step Three:</h1>
-      <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
-      <h1>Step Four:</h1>
-      <p>Create connections between states by dragging lines from the blue circles.</p>
-      <h1>Step Five:</h1>
-      <p>Choose your transition models.</p>
-      <br>
-      <p>Made a mistake? Remove your connection lines by dragging it away with the grey circle.
-        Click <span class="glyphicon glyphicon-remove-circle"></span> to delete your entire state.
-      </p>
-  </div>
-  <div class="force-overflow"></div>
-  </div>
-    
-  <div class="col-sm-8">
-    <div id="drawingArea" style="width:100%;min-height:500px;">
-      <div class="window task startpoint endpoint" style="left: 100px; top:50px" data-nodetype="startpoint" id="startpoint">
-        <div class="ctrl_container">
-          <div class="button_editor">
-            <a ng-click="editorService.openEditor(0)" href="">
-              <span class="glyphicon glyphicon-new-window"></span>
-            </a>
-          </div>  
+    <div class="scrollbar" id="style-default">
+        <div id="items">
+            <h1>Step One:</h1>
+            <p>Double click in an empty space to create your new state.</p>
+            <h1>Step Two:</h1>
+            <p>Give your state a name.</p>
+            <h1>Step Three:</h1>
+            <p>Edit your state by clicking <span class="glyphicon glyphicon-new-window"></span></p>
+            <h1>Step Four:</h1>
+            <p>Create connections between states by dragging lines from the blue circles.</p>
+            <h1>Step Five:</h1>
+            <p>Choose your transition models by clicking on the connection line that you just drew!</p>
+            <br>
+            <p>Made a mistake? Click on your connection line to delete it. Click <span class="glyphicon glyphicon-remove-circle"></span>                to delete your entire state.
+            </p>
         </div>
-          <div class="well well-sm" align="center">Root State</div>
-      </div>   
-        
-    <div class="task startpoint endpoint" style="left:300px;top:25px" data-nodetype="task" id="taskcontainer0">
-        <div class="ctrl_container">
-            <div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div>
-          <div class="button_editor">
-            <a ng-click="editorService.openEditor(0)" href="">
-              <span class="glyphicon glyphicon-new-window"></span>
-            </a>
-          </div></div>
+    </div>
 
-             <div class="well well-sm" align="center"><div class="input-group">
-  <input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1">
-                 </div></div>
+    <div class="col-sm-8">
+        <div id="drawingArea" style="width:100%;min-height:500px;">
+            <div class="window task startpoint endpoint" style="left: 100px; top:50px" data-nodetype="startpoint" id="startpoint">
+                <div class="ctrl_container">
+                    <div class="button_editor">
+                        <a ng-click="editorService.openEditor(0)" href="">
+                            <span class="glyphicon glyphicon-new-window"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="well well-sm" align="center">Root State</div>
+            </div>
+
+
+            <!--For debugging purposes-->
+            <!--<textarea id="jsonOutput" style="width:10px;height:10px;"></textarea>-->
+        </div>
     </div>
-      <!--For debugging purposes-->
-      <!--<textarea id="jsonOutput" style="width:10px;height:10px;"></textarea>-->
-    </div>
-  </div>
 </div>
-
+f
 
 
 <div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
 
 <bs-modal modal-id="addAsset">
-  <modal-body>
-    <p style="text-align:center">Adding Page</p>
-  </modal-body>
-  <modal-footer>
-    <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
-  </modal-footer>
+    <modal-body>
+        <p style="text-align:center">Adding Page</p>
+    </modal-body>
+    <modal-footer>
+        <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
+    </modal-footer>
 </bs-modal>
-
 <loader></loader>
+<script type="text/javascript">
+
+    var angularHelper = (function () {
+    var angularHelper = function () { };
+    var defaultApplicationName = "vumixEditorApp";
+    angularHelper.compile = function ($targetDom, htmlToCompile, applicationName) {
+      var $injector = angular.injector(["ng", applicationName || defaultApplicationName]);
+      $injector.invoke(["$compile", "$rootScope", "$http", function ($compile, $rootScope, $http) {
+        var $scope = $targetDom.append(htmlToCompile).scope();
+        $compile($targetDom)($scope || $rootScope);
+        $rootScope.$digest();
+      }]);
+    }
+    return angularHelper;
+  })();
+  
+    var numberOfElements = 0;
+    var sourceId = 0;
+    var htmlBase = 'drawingArea';
+    
+    jsPlumb.ready(function () {
+    var id = 0;
+   
+	var workflowConnectorStartpoint = {
+		isSource: true,
+		isTarget: true,
+		maxConnections: 10,					 
+		anchor:"BottomCenter",
+        paintStyle: { fillStyle: 'lightblue' },
+		endpoint : ["Dot", {radius:15}],
+        /*beforeDetach: function (conn) {
+        return confirm("Detach connection?");
+        }*/
+	};
+	
+	var workflowConnectorEndpoint = {
+		isSource: false,
+		isTarget: true,
+		maxConnections: 10,				 
+		anchor: 'TopCenter',
+		paintStyle: { fillStyle: 'gray' },
+		endpoint: ["Dot", {radius:15}]
+	};
+	
+    //the code below allows source without circle but dragging has to be disabled first. 
+    //jsPlumb.makeSource(
+    //    $('.startpoint'), {
+    //        anchor: 'Continuous'
+    //});
+    
+    
+	jsPlumb.addEndpoint(
+		$('.startpoint'),
+		workflowConnectorStartpoint
+	);
+	
+    var makeTarget = {
+        anchor: 'Continuous',
+        beforeDetach: function (conn) {
+        return confirm("Detach connection?");
+        }
+    };
+    
+    jsPlumb.makeTarget(
+        $('.endpoint'), 
+        makeTarget
+    );
+    
+    
+    jsPlumb.bind('click', function (connection, e) {
+        if (connection.sourceId == "startpoint"){
+            connection.sourceId = 0;
+        }
+        sourceId = parseInt(connection.sourceId);
+        targetId = parseInt(connection.targetId);
+        addTransition(sourceId,targetId);
+        
+    });
+		
+	$('#'+htmlBase).on("click", ".button_remove", function () {
+		var parentnode = $(this)[0].parentNode.parentNode;
+		jsPlumb.detachAllConnections(parentnode);
+		jsPlumb.removeAllEndpoints(parentnode);
+		$(parentnode).remove(); 
+	});
+						
+     $('#'+htmlBase).dblclick(function(e) {
+         addTask(undefined,e);
+     });
+    
+	$('.button_save_task').click(function(){
+		saveFlowchart();
+	});
+	
+	$('.button_load_task').click(function(){
+		loadFlowchart();
+	});
+    
+});
+
+function addTask(id, e){
+	if(typeof id === "undefined"){
+		numberOfElements++;
+		//id = "taskcontainer" + numberOfElements;
+        id = numberOfElements;
+	}
+	
+var newState = $('<div class="task startpoint endpoint" id="'+id+'" data-nodetype="task"><div class="ctrl_container"><div class="button_remove"><span class="glyphicon glyphicon-remove-circle"></span></div><div class="button_editor"><a ng-click="editorService.openEditor('+id+')" href=""><span class="glyphicon glyphicon-new-window"></span></a></div></div><div class="well well-sm" align="center"><div class="input-group"><input type="text" class="form-control" placeholder="State Name" aria-describedby="basic-addon1"></div></div></div>');
+    
+    var top = e.pageY;
+    var left = e.pageX;
+    var width = $(window).width();
+    
+    if (left >= (0.8*width)){
+        left = 0.75*width;
+    }
+    
+    else if (left <= 320){
+        left = 320;
+    }
+    
+    if (top <= 150) {
+        top = 150;
+    }
+    
+    else if (top >=530){
+        top = 530;
+    }
+    
+    //double click anywhere to create new state
+    newState.css({
+		  'top': top-150,
+		  'left': left-300
+		});
+        
+    newState.appendTo('#'+htmlBase);
+    var taskSourceConnectorEndpoint = {
+		isSource: true,
+		isTarget: true,
+		maxConnections: 10,
+        anchor:"BottomCenter",
+        paintStyle: { fillStyle: 'lightblue' },
+		endpoint : ["Dot", {radius:15}]
+	};
+	
+    
+    
+	jsPlumb.addEndpoint(
+		$('#'+id),
+		taskSourceConnectorEndpoint
+	);
+	
+    //the code below allows source without circle but dragging has to be disabled first. 
+    //jsPlumb.makeSource(
+    //    $('#'+id), {
+    //        anchor: 'Continuous'
+    //    });
+    
+	jsPlumb.makeTarget(
+        $('#'+id), {
+		  anchor: 'Continuous'
+		});
+    
+	jsPlumb.draggable($('#' + id),{containment:"parent"});
+	return id;
+}
+    
+function saveFlowchart(){
+	var nodes = []
+	$(".node").each(function (idx, elem) {
+	var $elem = $(elem);
+	var endpoints = jsPlumb.getEndpoints($elem.attr('id'));
+	console.log('endpoints of '+$elem.attr('id'));
+	console.log(endpoints);
+		nodes.push({
+			blockId: $elem.attr('id'),
+			nodetype: $elem.attr('data-nodetype'),
+			positionX: parseInt($elem.css("left"), 10),
+			positionY: parseInt($elem.css("top"), 10)
+		});
+	});
+    
+	var connections = [];
+	$.each(jsPlumb.getConnections(), function (idx, connection) {
+		connections.push({
+			connectionId: connection.id,
+			pageSourceId: connection.sourceId,
+			pageTargetId: connection.targetId
+		});
+	});
+	
+	var flowChart = {};
+	flowChart.nodes = nodes;
+	flowChart.connections = connections;
+	flowChart.numberOfElements = numberOfElements;
+	
+	var flowChartJson = JSON.stringify(flowChart);
+	console.log(flowChartJson);
+    var el = $('[ng-app=vumixEditorApp]')[0];
+    angular.element(el).injector().get('stateService').sendGraph(flowChartJson);
+	//$('#jsonOutput').val(flowChartJson);
+}
+
+function loadFlowchart(){
+	var flowChartJson = $('#jsonOutput').val();
+	var flowChart = JSON.parse(flowChartJson);
+	var nodes = flowChart.nodes;
+	$.each(nodes, function( index, elem ) {
+		if(elem.nodetype === 'startpoint'){
+			repositionElement('startpoint', elem.positionX, elem.positionY);
+		}else if(elem.nodetype === 'endpoint'){
+			repositionElement('endpoint', elem.positionX, elem.positionY);
+		}else if(elem.nodetype === 'task'){
+			var id = addTask(elem.blockId);
+			repositionElement(id, elem.positionX, elem.positionY);
+		}else if(elem.nodetype === 'decision'){
+			var id = addDecision(elem.blockId);
+			repositionElement(id, elem.positionX, elem.positionY);
+		}else{
+			
+		}
+	});
+							
+	var connections = flowChart.connections;
+	$.each(connections, function( index, elem ) {
+		 var connection1 = jsPlumb.connect({
+			source: elem.pageSourceId,
+			target: elem.pageTargetId,
+			anchors: ["BottomCenter", [0.75, 0, 0, -1]]
+			
+		});
+	});
+	
+	numberOfElements = flowChart.numberOfElements;
+}
+
+function repositionElement(id, posX, posY){
+	$('#'+id).css('left', posX);
+	$('#'+id).css('top', posY);
+	jsPlumb.repaint(id);
+}
+
+function attachClickable(id){
+        var clickableObjects = [];
+        var item = 0;
+        item = id;
+        
+        var el = $('[ng-app=vumixEditorApp]')[0];
+        clickableObjects = angular.element(el).injector().get('stateService').getStateObjects(item);
+        console.log("this function attachClickable was called" + " " + item + " " + clickableObjects);
+        return clickableObjects;
+}
+
+function getModelNames(item){
+    var modelsInState = [];
+    var nameofModels = [];
+    var i, id=0;
+    id = item;
+    
+    modelsInState = attachClickable(id);
+    
+    console.log("number of models in state " + modelsInState.length);
+    
+    for (i=0; i< modelsInState.length; i++){
+        nameofModels[i] = modelsInState[i].instanceName;
+    };
+        console.log("the name of the models are" + " " + id + " " + nameofModels);
+    return nameofModels;
+}
+
+function addTransition(sourceId, targetId){
+        var options = getModelNames(sourceId);
+        var i = 0;
+        var newState = $('<div>').attr('id', 'transition' + i).addClass('item');
+		var title = $('<div>').addClass('title');
+		var stateName = $('<select>');
+		stateName.append($('<option></option>').attr('value', '#').text('Select an option'));
+		
+        $.each(options, function(key, value) {
+		  if ($('#drawingArea').find('#transition-' + key).length == 0) {
+		    stateName.append($('<option></option>')
+		      .attr('value', key)
+			  .text(value));
+		  }
+	    });
+		
+        
+		var connect = $('<div>').addClass('connect');
+		
+        title.append(stateName);
+        connect.append($('<text></text>').text("Connection to State " + targetId));
+        connect.append($('<text></text>').text(" from State " + sourceId));
+		newState.append(title);
+		newState.append(connect);
+    
+		$('#drawingArea').append(newState);
+		
+		jsPlumb.makeTarget(newState, {
+          parent: newState,
+		  anchor: 'Continuous',
+          maxConnections: 1
+		});
+		
+		jsPlumb.makeSource(connect, {
+          parent: newState,
+		  anchor: 'Continuous',
+          maxConnections: 1
+		});		
+		
+		jsPlumb.draggable(newState, {
+		  containment: 'parent'
+		});
+
+		stateName.change(function(e) {
+            if (this.value !== '#') {
+            $(this).parent().text($(this).find(':selected').text());
+            }
+		});
+		
+		stateName.focus();
+		
+		i++; 
+}
+
+</script>

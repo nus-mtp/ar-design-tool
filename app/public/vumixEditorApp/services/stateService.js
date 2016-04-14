@@ -1,7 +1,7 @@
 // this service serves as an API for states and models in asset bundles
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('stateService', function($rootScope, modelService, unityMapperService) {  
+    .factory('stateService', function($rootScope, modelService, unityMapperService, $http) {  
       
       var service = {};
       var _state = {};
@@ -71,6 +71,29 @@
         return removedState;
       }
       
+      service.sendGraph = function(graph) {
+          var userid = uid;
+          
+          // var pid = window.location.href.split('/');
+          // pid = pid[4]
+          // pid = pid.slice(0, -1);
+          var projectid = pid;
+          
+          var fd = new FormData();
+          fd.append('uid' ,userid);
+          fd.append('pid' ,projectid);
+          fd.append('json', graph);
+          var uploadUrl = '/saveproject';
+    
+          return $http.post(uploadUrl,fd, {
+                headers: {'Content-Type': undefined}
+            })
+            .then(function(res){
+                return res.data.data[0];
+            }, function errorCallback(res){
+                console.log("error adding the image");
+            });
+      }
 // STATE APIS END HERE
 
 // STATE OBJECT APIS START HERE
