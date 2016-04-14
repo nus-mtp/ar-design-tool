@@ -10,13 +10,13 @@
       
       service.scaleUpModel = function() {
         q = $interval(function() {
-          console.log("up");
+          SendMessage('Facade', 'ScaleUp');
         });
       };
       
       service.scaleDownModel = function() {
         q = $interval(function() {
-          console.log("down");
+          SendMessage('Facade', 'ScaleDown');
         });
       };
       
@@ -25,15 +25,15 @@
       };
       
       service.openPreview = function() {
-        console.log("open preview");
+        SendMessage('Facade', 'TurnOnPreview');
       };
       
       service.closePreview = function() {
-        console.log("close preview");
+        SendMessage('Facade', 'TurnOffPreview');
       };
       
       // TODO: change name
-      service.saveState = function(url) {
+      service.saveState = function() {
         SendMessage('Facade', 'SaveProgress', '/'+uid+'/'+pid+'/uploadstate.php');
       };
       

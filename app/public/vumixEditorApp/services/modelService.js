@@ -1,7 +1,7 @@
 // this service serves as an API for models available on the server
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('modelService', function($rootScope, $http, loaderService) {  
+    .factory('modelService', function($rootScope, $http, loaderService, unityMapperService) {  
       var _models = {};
       _models.onAssetBundle = [];
       _models.onServer = [];
@@ -59,6 +59,7 @@
           });        
           notifyAssetBundleModelChange();
           loaderService.showLoader("Re-importing asset bundles");
+          unityMapperService.saveState();
           downloadUserStuff(
             '/storage/' + uid + '/' + pid + '/webglbundles.unity3d',
             '/storage/' + uid + '/' + pid + '/state.dat'
@@ -91,6 +92,7 @@
           notifyAssetBundleModelChange();
           notifyServerModelChange();
           loaderService.showLoader("Re-importing asset bundles");
+          unityMapperService.saveState();          
           downloadUserStuff(
             '/storage/' + uid + '/' + pid + '/webglbundles.unity3d',
             '/storage/' + uid + '/' + pid + '/state.dat'
