@@ -58,9 +58,45 @@
             _models.onAssetBundle.push(_model);
           });        
           notifyAssetBundleModelChange();
-          loaderService.hideLoader();          
+          loaderService.showLoader("Re-importing asset bundles");
+          downloadUserStuff(
+            '/storage/' + uid + '/' + pid + '/webglbundles.unity3d',
+            '/storage/' + uid + '/' + pid + '/state.dat'
+          );   
         });
       }
+      
+      service.deleteAssetBundleModel = function(model) { 
+        var _modelIds = $.map($.grep(_models.onServer, function(_model) {
+          return _model.name === model.name;  
+        }), function(_model) {
+          return _model.file_name;
+        });               
+        var url = '/api/users/' + uid + '/projects/removeProjModels';
+        var data = {
+          pid: pid,
+          ids: _modelIds
+        };
+        return $http.post(url, data).then(function(res) {
+          _models.onAssetBundle.forEach(function(_model, index) {
+            if (model.id === _model.id) {
+              _models.onAssetBundle.splice(index, 1);
+            }
+          });
+          _models.onServer.forEach(function(_model, index) {
+            if (model.name === _model.name) {
+              _model.available = false;
+            }
+          });
+          notifyAssetBundleModelChange();
+          notifyServerModelChange();
+          loaderService.showLoader("Re-importing asset bundles");
+          downloadUserStuff(
+            '/storage/' + uid + '/' + pid + '/webglbundles.unity3d',
+            '/storage/' + uid + '/' + pid + '/state.dat'
+          );   
+        });
+      };
       
 // ASSETBUNDLES OBJECT APIS END HERE
 

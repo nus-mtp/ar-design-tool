@@ -1,30 +1,31 @@
-<nav class="navbar navbar-default" style="margin:0">
+<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="" ng-click="editorService.closeEditor()"><i class="fa fa-angle-left fa-lg" style="padding-right: 10px"></i>Project Name - StateName</a>
     </div>
-    <ul class="nav navbar-nav navbar-right">
-      <li class="dropdown">
-        <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Preview <i class="fa fa-angle-down"></i></a>
-        <ul class="dropdown-menu" role="menu">
-          <li><a href="">Start Previewing</a></li>
-        </ul>
-      </li>        
-    </ul>
   </div>
 </nav>    
 <div class="content">
-  <nav class="navbar navbar-inverse">
+  <nav class="navbar">
     <ul class="nav navbar-nav">
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Selection Cursor"><i class="fa fa-mouse-pointer"></i></a></li>
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Translation Cursor" ng-click="unityMapperService.setTransformMode('translate')"><i class="fa fa-arrows"></i></a></li>
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotation Cursor" ng-click="unityMapperService.setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
       <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Cursor" ng-click="unityMapperService.setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
     </ul>
-    <div class="col-sm-3 col-md-3">
+    <ul class="nav navbar-nav">
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zoom In Selected" ng-mousedown="unityMapperService.scaleUpModel()" ng-mouseup="unityMapperService.cancelPromise()"><i class="fa fa-search-plus"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zoom Out Selected" ng-mousedown="unityMapperService.scaleDownModel()" ng-mouseup="unityMapperService.cancelPromise()"><i class="fa fa-search-minus"></i></a></li>
+    </ul>
+    <ul class="nav navbar-nav">
+      <li><a href="" class="btn btn-default" ng-click="editorService.togglePreview()" >
+        <span ng-show="!editorService.preview">Preview</span>
+        <span ng-show="editorService.preview">Exit Preview</span>
+      </a></li>
+    </ul>
+    <div class="col-sm-6 col-md-6">
       <form class="navbar-form">
         <div class="input-group">
-          <input ng-model="textModel" type="text" class="form-control" placeholder="Enter text">
+          <input ng-model="textModel" type="text" class="form-control custom-input" placeholder="Enter text">
           <div class="input-group-btn">
             <button class="btn btn-default" type="button" ng-click="addText(textModel)">Add</button>
           </div>
@@ -38,7 +39,7 @@
 
 <input id="addModelInput" type="file" style="position:absolute; top:-1000px" onchange="angular.element(this).scope().uploadNewModel()" />
 
-<bs-modal modal-id="add-asset" modal-size="md">
+<bs-modal modal-id="add-asset-to-local" modal-size="md">
   <modal-body>
     <div class="row">
       <table class="table table-striped table-hover">

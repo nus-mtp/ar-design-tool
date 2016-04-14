@@ -6,7 +6,8 @@
       editorService,
       unityMapperService,
       stateService,
-      modelService
+      modelService,
+      loaderService
     ) {
       $scope.modelsSelected = false;
       $scope.currentStateId = -1;
@@ -95,6 +96,19 @@
           return {included: prev.included || next.included};
         }).included;  
       };
+      
+      $scope.removeModelFromAssetBundle = function(model) {
+        loaderService.showLoader("Removing Model from Asset Bundle");
+        var _models = $.grep($scope.modelsOnScreen, function(_model) {
+          return _model.instanceName === model.name;
+        });
+        _models.forEach(function(_model) {
+          $scope.removeModelFromScreen(_model);
+        });
+        modelService.deleteAssetBundleModel(model);
+      };
+      
+      $('[data-toggle="tooltip"]').tooltip();
       
     }); 
 })();

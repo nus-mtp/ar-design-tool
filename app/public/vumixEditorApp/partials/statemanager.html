@@ -1,9 +1,9 @@
-<nav class="navbar">
+<nav class="navbar manager-navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" ng-click="goToManager()">Back</a>
     </div>
-    <ul class="nav navbar-nav navbar-right ">
+    <ul class="nav navbar-nav navbar-right">
       <!--<li><a href=""><button type="button" class="button_load_task btn btn-success btn-sm">Load</button></a></li>-->
       <li>
         <a target="_self" href="/buildproject.php">
@@ -114,7 +114,7 @@
 
 
 
-<div ui-view class="fullscreen-overlay" ng-show="editorService.open"></div>
+<div ui-view id="state-editor-page" ng-show="editorService.open"></div>
 
 <bs-modal modal-id="addAsset">
   <modal-body>
