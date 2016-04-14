@@ -21,6 +21,7 @@
       
       editorService.subscribeToDisplayStateIdChange($scope, function() {
         $scope.currentStateId = editorService.id;
+        $scope.modelsOnScreen = angular.copy(stateService.getStateObjects($scope.currentStateId)); 
       });
       
       modelService.subscribeToServerModelChange($scope, function() {
@@ -106,6 +107,19 @@
           $scope.removeModelFromScreen(_model);
         });
         modelService.deleteAssetBundleModel(model);
+      };
+      
+      $scope.goNextState = function() {
+        editorService.openEditor(($scope.currentStateId + 1) % stateService.getAllStates().length);        
+      };
+      
+      $scope.goPrevState = function() {
+        editorService.openEditor(($scope.currentStateId + stateService.getAllStates().length - 1) % stateService.getAllStates().length); 
+      }
+      
+      $scope.addState = function() {
+        stateService.createState("random state " + ($scope.currentStateId + 1).toString());  
+        editorService.openEditor($scope.currentStateId + 1); 
       };
       
       $('[data-toggle="tooltip"]').tooltip();

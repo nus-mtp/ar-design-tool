@@ -43,7 +43,7 @@
         
         unityMapperService.createState();
         unityMapperService.setTargetState(_state.stateIndex - 1);
-        unityMapperService.createState();
+        unityMapperService.setStateName(name);
         
         // notify changes
         notifyStateChange();
@@ -69,7 +69,7 @@
         notifyStateChange();
         
         return removedState;
-      }
+      };
       
       service.sendGraph = function(graph) {
           var userid = uid;

@@ -59,6 +59,10 @@
         SendMessage('Facade', 'AddNewState');
       };
       
+      service.setStateName = function(name) {
+        SendMessage('Facade', 'ChangeStateName', name);
+      };
+      
       service.createInstanceObject = function(modelId) {
         SendMessage('Facade', 'SpawnObject', modelId);  
       };
