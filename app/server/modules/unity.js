@@ -163,11 +163,9 @@ var rebuildAssetBundle = function(uid, pid, goodcallback, badcallback) {
 
 var buildApk = function(uid, pid, goodcallback, failcallback) {
 	console.log('building apk for projectid: ' + pid);
-	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
+	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var down_path 	 = project_path+file_paths.download;
 
-	project_path += '/';
-	
 	var buildApkCmd	 = '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.BuildAndroid2D -quit -batchmode';
 
 	console.log('running: ' + buildApkCmd);
