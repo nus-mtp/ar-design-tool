@@ -1,4 +1,5 @@
-var rimraf 	= require('rimraf'),
+var jsonfile = require('jsonfile'),
+	rimraf 	= require('rimraf'),
 	fs 		= require('fs');
 
 var checkExistsIfNotCreate = function(dirpath, callback) {
@@ -23,12 +24,14 @@ var checkExistsIfNotCreate = function(dirpath, callback) {
 		callback();
 };
 
-var moveFileToDest = function(location, destination, callback) {
+var moveFileToDest = function(location, destination, callback, badcall) {
 	console.log('location: ' + location);
 	console.log('destination: ' + destination);
 	fs.rename(location, destination, function(err) {
 		if(err) {
 			console.log(err);
+			if(badcall) 
+				badcall(err);
 		} else {
 			console.log('Successfully moved file from ' + location + ' to ' + destination);
 		}
@@ -37,16 +40,24 @@ var moveFileToDest = function(location, destination, callback) {
 		callback();
 };
 
-var saveFileToDest = function(file, dest, callback) {
-	fs.writeFile(dest, file, function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log('Saved file ' + dest);
-		}
-	});
-	if(callback) 
-		callback();
+var copyFile = function(file, dest, goodcallback, badcallback) {
+	try {
+		var readModel = fs.createReadStream(file);
+		var writeModel = fs.createWriteStream(dest);
+
+		readModel.pipe(writeModel, {end: false});
+		readModel.on('end', function() {
+			console.log('Finished copying model to '+dest);
+			writeModel.end();
+			if(goodcallback)
+				goodcallback();
+		});
+	} catch(e) {
+		console.log("error while copying files: " + file + " to dest: " + dest);
+		console.log(e);
+		if(badcallback)
+			badcallback(e);
+	}
 };
 
 var deleteDir = function(deleteDest) {
@@ -60,18 +71,33 @@ var deleteDir = function(deleteDest) {
 	});
 };
 
-var deleteFile = function(deleteFile) {
+var deleteFile = function(deleteFile, goodCall, badCall) {
 	fs.unlink(deleteFile, function(err) {
 		if(err) {
 			console.log(err);
+			if (badCall) 
+				badCall(err);
 		} else {
 			console.log('Successfully deleted: ' + deleteFile);
+			if (goodCall)
+				goodCall();
+		}
+	});
+};
+
+var writeJson = function(dest, json, goodcall, badcall) {
+	jsonfile.writeFile(dest, json, function(err) {
+		if(err) {
+			badcall(err);
+		} else {
+			goodcall();
 		}
 	});
 };
 
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
-module.exports.saveFileToDest = saveFileToDest;
 module.exports.moveFileToDest = moveFileToDest;
 module.exports.deleteFile = deleteFile;
 module.exports.deleteDir = deleteDir;
+module.exports.writeJson = writeJson;
+module.exports.copyFile = copyFile;

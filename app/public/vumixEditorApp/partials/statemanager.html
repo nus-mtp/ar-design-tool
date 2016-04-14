@@ -1,7 +1,7 @@
 <nav class="navbar">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="/manager">
+            <a class="navbar-brand" href="/">
                 <navfont>Back</navfont>
             </a>
         </div>
@@ -11,13 +11,14 @@
                 <a target="_self" href="/buildproject.php">
                     <navfont>Build APK</navfont>
                 </a>
-                <li>
-                    <a href="" ng-click="unityMapperService.saveState()">
-                        <div class="button_save_task" data-toggle="modal" data-target="#save">
-                            <navfont>Save</navfont>
-                        </div>
-                    </a>
-                </li>
+            </li>
+            <li>
+                <a href="" ng-click="unityMapperService.saveState()">
+                    <div class="button_save_task" data-toggle="modal" data-target="#save">
+                        <navfont>Save</navfont>
+                    </div>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -114,7 +115,7 @@ f
         <a href="#" data-dismiss="modal" aria-hidden="true" class="btn secondary">Close</a>
     </modal-footer>
 </bs-modal>
-
+<loader></loader>
 <script type="text/javascript">
 
     var angularHelper = (function () {

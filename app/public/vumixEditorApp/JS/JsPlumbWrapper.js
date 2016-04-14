@@ -23,7 +23,7 @@
     var stateName = $('<select>');
     stateName.append($('<option></option>').attr('value', '#').text('Select an option'));
 	//FIX DOM:
-	$(("#taskcontainer0"))[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
+	  $("#taskcontainer0")[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
     
    
 	jsPlumb.draggable($(".task"));

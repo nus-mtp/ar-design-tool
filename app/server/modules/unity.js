@@ -10,6 +10,7 @@ var model_path 		= '/models/';
 var state_dat_file 	= 'state.dat';
 var copy_state_name = 'copyState.dat';
 var vuforia_name 	= "marker.unitypackage";
+var assetbundle_name = '/webglbundles.unity3d';
 
 var rebuildVuforiaPackage = function(uid, pid) {
 	console.log('rebuilding vuforia package...');
@@ -40,17 +41,10 @@ var updateVuforia = function(uid, pid, vuforia_pkg) {
 	moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
 };
 
-var copyStateDat = function(uid, pid) {
-	console.log('copying state dat...');
-	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
-	var state_dest 		= path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
-	utils.saveFileToDest(state_dat_loc, state_dest);
-}
-
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
 	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
-	var unity_cmd 			= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit';
+	var unity_cmd 			= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit -batchmode';
 
 	utils.checkExistsIfNotCreate(project_path);
 	utils.checkExistsIfNotCreate(public_project_path);
@@ -65,12 +59,13 @@ var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 		}
 	});
 	unity.on('exit', function(code) {
-		moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
-		copyStateDat(uid, pid);
-		console.log("Creating new project child process exited with code " + code);
-		callback();
-		//TODO: remove this after testing
-		// moveVuforia(vuforia_pkg.path, uid, pid, vuforia_pkg.originalname);
+		if(code==0) {
+			moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
+			copyDefaultState(uid, pid);
+			copyAssetBundle(uid, pid);
+			console.log("Creating new project child process exited with code " + code);
+			callback();
+		}
 	});
 };
 
@@ -83,20 +78,14 @@ var deleteProj = function(uid, pid) {
 	utils.deleteDir(project_path);
 };
 
-var moveModel = function(uid, fileName) {
+var moveModel = function(uid, fileName, destName) {
 	console.log('moving model into model library');
 	var dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path);
 	var tmp_path 	= path.join(__dirname, '../../'+file_paths.storage_path+'/'+fileName);
 	utils.checkExistsIfNotCreate(dest_path, function() {
 		console.log('completed dir check');
 		console.log('moving model to model library');
-		utils.moveFileToDest(tmp_path, dest_path+fileName);
-		// utils.moveFileToDest(tmp_path, dest_path+fileName, function() {
-			// console.log('completed moving model to model library')
-			// console.log('going to copy model now')
-			// TODO: remove this
-			// copyModel(uid, '6', fileName);
-		// });	
+		utils.moveFileToDest(tmp_path, dest_path+destName);
 	});
 };
 
@@ -105,27 +94,48 @@ var deleteModel = function(uid, fileName) {
 	utils.deleteFile(modelFile_path);
 };
 
-var copyModel = function(uid, pid, fileName) {
+var copyModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	console.log('copying model into project '+pid+' dir');
-	var modelFile_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path+fileName);
-	var destination = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
+	var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path+fileName);
+	var dest = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
 
-	try {
-		var readModel = fs.createReadStream(modelFile_path);
-		var writeModel = fs.createWriteStream(destination);
-
-		readModel.pipe(writeModel, {end: false});
-		readModel.on('end', function() {
-			console.log('Finished copying model to '+destination);
-			writeModel.end();
-			rebuildAssetBundle(uid, pid);
-		});
-	} catch(e) {
-		console.log(e);
-	}
+	utils.copyFile(file, dest, function() {
+		goodcallback();
+	}, function(err) {
+		console.log("error found in copyModel");
+		badcallback(fileName, err);
+	});
 };
 
-var rebuildAssetBundle = function(uid, pid) {
+var removeProjModel = function(uid, pid, fileName, goodcallback, badcallback) {
+	console.log('removing model from project '+pid+' dir');
+	var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
+
+	utils.deleteFile(file, function() {
+		goodcallback();
+	}, function(err) {
+		console.log("error found in removeProjModel");
+		badcallback(fileName, err);
+	});
+};
+
+var copyAssetBundle = function(uid, pid, goodcallback, badcallback) {
+	console.log("copying default asset bundle");
+	var assetPath = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.assetbundle);
+	var dest = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+assetbundle_name);
+
+	utils.copyFile(assetPath, dest, function() {
+		console.log("completed copying assetbundle to public folders");
+		if(goodcallback)
+			goodcallback();
+	}, function(err) {
+		console.log("error copying assetbundle to public folders");
+		if(badcallback)
+			badcallback(err);
+	});
+};
+
+var rebuildAssetBundle = function(uid, pid, goodcallback, badcallback) {
 	console.log('rebuilding assetbundle...');
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod CreateAssetBundles.BuildAllAssetBundles -quit -batchmode';
@@ -136,14 +146,22 @@ var rebuildAssetBundle = function(uid, pid) {
 		console.log("stderr: " + stderr);	
 		if (error !== null) {
 			console.log("exec error: " + error);
+			badcallback(error);			
 		}
 	});
-	rebuild.on('exit', function(code) {
-		console.log("Rebuilding Assetbundle child process exited with code " + code);
+	rebuild.on('exit', function(code, signal) {
+		if(code==0) {
+			console.log("Rebuilding Assetbundle child process exited with code " + code);
+			copyAssetBundle(uid, pid, function(){
+				goodcallback();
+			}, function(err) {
+				badcallback(err);
+			});	
+		}
 	});
 };
 
-var buildApk = function(uid, pid) {
+var buildApk = function(uid, pid, goodcallback, failcallback) {
 	console.log('building apk for projectid: ' + pid);
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
 	var down_path 	 = project_path+file_paths.download;
@@ -158,38 +176,81 @@ var buildApk = function(uid, pid) {
 		console.log("stderr: " + stderr);	
 		if (error !== null) {
 			console.log("exec error: " + error);
+			failcallback(error);
 		}
 	});
 	buildAPK.on('exit', function(code) {
-		console.log("buildAPK child process exited with code " + code);
-		return down_path;
+		if(code==0) {
+			console.log("buildAPK child process exited with code " + code);
+			goodcallback(down_path);	
+		}
 	});
 };
 
-var moveStateFile = function(uid, pid, stateFile) {
+var moveStateFile = function(uid, pid, stateFile, goodcall, badcall) {
 	console.log('saving state file');
 	dest_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
-	utils.moveFileToDest(stateFile.path, dest_path);	
+	utils.moveFileToDest(stateFile.path, dest_path, function() {
+		goodcall();
+	}, function(err) {
+		badcall(err);
+	});	
 };
 
-var moveCopyState = function(uid, pid) {
+var moveCopyState = function(uid, pid, goodcall, badcall) {
 	console.log('saving state file');
 	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
 	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
-	utils.moveFileToDest(tmp, dest_path);		
-}
+	utils.moveFileToDest(tmp, dest_path, function() {
+		goodcall();
+	}, function(err) {
+		badcall(err);
+	});		
+};
+
+var copyDefaultState = function(uid, pid) {
+	console.log('copying default state dat...');
+	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	var state_dest 		= path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
+	utils.copyFile(state_dat_loc, state_dest);
+};
+
+var copyStateDat = function(uid, pid, callback, badcall) {
+	console.log('copying state dat to server...');
+	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+state_dat_file);
+	var state_dest 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	utils.copyFile(state_dat_loc, state_dest, function() {
+		callback();
+	}, function(err) {
+		badcall(err);
+	});	
+};
+
+var saveStateJson = function(uid, pid, json, goodcall, badcall) {
+	console.log('saving state json');
+	var stateJsonDir = 'state.json';
+	var dest = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateJsonDir);
+	utils.writeJson(dest, json, function() {
+		goodcall();
+	}, function(err) {
+		badcall(err);
+	});
+};
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
 module.exports.updateVuforia 		= updateVuforia;
 
 module.exports.moveStateFile		= moveStateFile;
 module.exports.moveCopyState		= moveCopyState;
+module.exports.saveStateJson 		= saveStateJson;
 module.exports.copyStateDat			= copyStateDat;
 
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
 
+module.exports.removeProjModel 		= removeProjModel;		
 module.exports.deleteModel 			= deleteModel;
 module.exports.moveModel 			= moveModel;
 module.exports.copyModel 			= copyModel;
+
 module.exports.buildApk				= buildApk;

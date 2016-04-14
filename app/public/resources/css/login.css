@@ -9,23 +9,33 @@
 
 .btn-large {
   background-color: #FF9640;
+  color: #FFFFFF;
   height: 41px;
   width: 100%; }
 
 .top-bar {
   background: #FFFFFF;
-  background-image: url(url();
-  height: 80px;
+  height: 100px;
   width: 100%; }
+
+.img-banner {
+  background: url("../images/img_banner_transparent.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 70%; }
 
 .below-top-bar {
-  background: #0097FF;
-  height: 30px;
+  background: #0daf83;
+  height: 100px;
   width: 100%; }
 
+body {
+  background: #0a8c69; }
+
 .title {
-  color: #0097FF;
+  color: #0daf83;
   font-size: 52px;
+  font-weight: bold;
   text-align: center; }
   .title img {
     height: 60px;
@@ -33,19 +43,35 @@
     width: 60px; }
 
 .container {
-  background: #4A5099;
-  height: 600px;
+  background: #0daf83;
+  height: 400px;
   width: 100%; }
 
 .content {
   margin: 50px; }
 
 .flexbox-container {
-  display: -ms-flex;
-  display: -webkit-flex;
   display: flex; }
   .flexbox-container > div {
-    padding: 10px;
     width: 50%; }
-    .flexbox-container > div:first-child {
-      margin-right: 20px; }
+
+.subtitle {
+  font-size: 20px;
+  margin-left: 30%;
+  margin-top: -13px;
+  width: 50%; }
+
+.sub-content {
+  font-size: 20px;
+  margin-top: 130px;
+  text-align: right; }
+
+.vertical-line {
+  border-left: thick solid #FFFFFF;
+  margin-left: 100px;
+  margin-top: 70px;
+  text-align: left; }
+
+.btn-danger {
+  margin-left: -122px;
+  margin-top: 76px; }
