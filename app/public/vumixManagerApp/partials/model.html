@@ -19,7 +19,7 @@
                 <div class="text-warning" ng-show="modelForm.modelUpload.$error.fileType">File extension is not valid, must be either .3ds .fbx or .obj</div>
                 <div class="text-warning" ng-show="modelForm.modelUpload.$error.fileSize">File size is larger than 8 MB</div>
                 <span class="text-info">Max upload 8 MB file</span>
-                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FFFFFF; color:#0daf83" ng-disabled="modelForm.$invalid">
+                <input type="submit" class="center" value="Upload" style="border:0;margin-top:20px; background-color:#FFFFFF; color:#0daf83" ng-disabled="modelForm.$invalid">
               </form>
           </span>
         </div>
@@ -35,7 +35,7 @@
                 <div class="text-danger" ng-show="updateModelForm.updateUpload.$error.fileType">File extension is not valid, must be either .3ds .fbx or .obj</div>
                 <div class="text-danger" ng-show="updateModelForm.updateUpload.$error.fileSize">File size is larger than 8 MB</div>
                 <span class="text-muted">Max upload 8 MB file</span>
-                <input type="submit" class="center" value="Update" ng-disabled="updateModelForm.$invalid" style="margin-top:20px; margin-bottom:8px; background-color:#FFFFFF; color:#0daf83">
+                <input type="submit" class="center" value="Update" ng-disabled="updateModelForm.$invalid" style="border:0; margin-top:20px; margin-bottom:8px; background-color:#FFFFFF; color:#0daf83">
                 <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
         </div>
@@ -75,10 +75,10 @@
             <div id="model_list" class="flex-container">
                 <ul ng-repeat="md in models | filter:searchModel">
                    <li class="flex-item">
-                        <div class="card">
+                        <div class="card grey-bg">
                             <img class="card-img-top" ng-src="{{model.image_url}}" alt="Card image cap">
                                 <div class="card-block">
-                                    <p class="card-text" style="background-color: #0daf83; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{md.name}}</p>
+                                    <p class="card-text name-holder">{{md.name}}</p>
                                 </div>
                         </div>
                     </li>

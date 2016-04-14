@@ -34,8 +34,8 @@
         var uid = cookie.split('=');
         $scope.userid = uid[1];
         
-        $scope.model.image_url = "/resources/images/open_book.png";  //supposed to read from database
-        $scope.update.image_url = "/resources/images/open_book.png";
+        $scope.model.image_url = "/resources/images/logo_white.png";  //supposed to read from database
+        $scope.update.image_url = "/resources/images/logo_white.png";
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {

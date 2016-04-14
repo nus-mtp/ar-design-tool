@@ -62,12 +62,14 @@ p {
 
 .btn-large {
   background-color: #FFFFFF;
+  border: 0;
   color: #0daf83;
   height: 41px;
   width: 100%; }
 
 .btn-cancel {
   background-color: #FFFFFF;
+  border: 0;
   color: #cc0000;
   height: 41px;
   width: 100%; }
@@ -118,7 +120,7 @@ p {
 
 .nav-bar {
   background-color: #FFFFFF;
-  box-shadow: 0 5px 5px #EEEEEE;
+  border-bottom: 1px solid;
   color: #0daf83;
   height: 50px; }
 
@@ -216,16 +218,30 @@ input {
   flex-wrap: wrap;
   justify-content: flex-start;
   list-style: none;
-  margin-top: 56px;
+  margin-top: 75px;
+  margin-left: -21px;
   padding: 0; }
 
 .flex-item .card img {
-  height: 120px;
   width: 164px; }
+
+.flex-item .card .name-holder {
+  background-color: #CCCCCC;
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  height: 28px;
+  padding-top: 5px;
+  margin-bottom: 0px;
+  text-align: center; }
 
 .flex-item :hover {
   opacity: .8;
   text-decoration: none; }
+
+.grey-bg {
+  background: #000000;
+  opacity: 0.2; }
 
 ul {
   list-style: none; }
@@ -240,6 +256,9 @@ ul {
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus {
   background-color: #DBDBDB; }
+
+.btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+  background-color: #0daf83; }
 
 body {
   background-color: #FFFFFF; }
