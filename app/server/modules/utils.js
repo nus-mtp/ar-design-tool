@@ -34,10 +34,10 @@ var moveFileToDest = function(location, destination, callback, badcall) {
 				badcall(err);
 		} else {
 			console.log('Successfully moved file from ' + location + ' to ' + destination);
+			if(callback)
+				callback();
 		}
 	});
-	if(callback)
-		callback();
 };
 
 var copyFile = function(file, dest, goodcallback, badcallback) {

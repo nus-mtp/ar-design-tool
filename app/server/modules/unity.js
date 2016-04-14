@@ -12,10 +12,10 @@ var copy_state_name = 'copyState.dat';
 var vuforia_name 	= "marker.unitypackage";
 var assetbundle_name = '/webglbundles.unity3d';
 
-var rebuildVuforiaPackage = function(uid, pid) {
+var rebuildVuforiaPackage = function(uid, pid, vuforia_path) {
 	console.log('rebuilding vuforia package...');
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
-	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.ImportPackage -quit -batchmode';
+	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -importPackage "'+vuforia_path+'" -quit -batchmode';
 		
 	console.log('running: ' + rebuild_cmd);
 	const rebuild = exec(rebuild_cmd, function(error, stdout, stderr) {
@@ -33,7 +33,10 @@ var rebuildVuforiaPackage = function(uid, pid) {
 var moveVuforia = function(location, uid, pid, fileName) {
 	console.log('in moveVuforia');
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
-	utils.moveFileToDest(location, project_path+file_paths.vuforia+fileName, rebuildVuforiaPackage(uid, pid));
+	var vuforia_path = project_path+file_paths.vuforia+fileName;
+	utils.moveFileToDest(location, vuforia_path, function() {
+		rebuildVuforiaPackage(uid, pid, vuforia_path);
+	});
 };
 
 var updateVuforia = function(uid, pid, vuforia_pkg) {
@@ -165,7 +168,6 @@ var buildApk = function(uid, pid, goodcallback, failcallback) {
 	console.log('building apk for projectid: ' + pid);
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var down_path 	 = project_path+file_paths.download;
-
 	var buildApkCmd	 = '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.BuildAndroid2D -quit -batchmode';
 
 	console.log('running: ' + buildApkCmd);
