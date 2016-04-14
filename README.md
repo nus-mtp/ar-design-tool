@@ -29,6 +29,17 @@
 	Step 7: Install dependencies 
 	> npm install 
 	> bower install
+	
+	Step 8: Install mysql
+	> Server http://dev.mysql.com/downloads/mysql/
+	> Command Line http://dev.mysql.com/downloads/utilities/ 
+	> Set password
+	> Set port (default is 3308)
+	> Create test mysql database:
+
+	Step 9: Open mysql command line utility
+	> Login with password
+	> create database test
 
 ##Folder Structure
 
