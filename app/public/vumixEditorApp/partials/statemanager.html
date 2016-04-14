@@ -77,7 +77,7 @@
             <h1>Step Five:</h1>
             <p>Choose your transition models by clicking on the connection line that you just drew!</p>
             <br>
-            <p>Made a mistake? Click on your connection line to delete it. Click <span class="glyphicon glyphicon-remove-circle"></span>                to delete your entire state.
+            <p>Made a mistake? Click <span class="glyphicon glyphicon-remove-circle"></span>                to delete your entire state.
             </p>
         </div>
     </div>
@@ -412,17 +412,17 @@ function addTransition(sourceId, targetId){
     
 		$('#drawingArea').append(newState);
 		
-		jsPlumb.makeTarget(newState, {
-          parent: newState,
-		  anchor: 'Continuous',
-          maxConnections: 1
-		});
+		// jsPlumb.makeTarget(newState, {
+        //   parent: newState,
+		//   anchor: 'Continuous',
+        //   maxConnections: 1
+		// });
 		
-		jsPlumb.makeSource(connect, {
-          parent: newState,
-		  anchor: 'Continuous',
-          maxConnections: 1
-		});		
+		// jsPlumb.makeSource(connect, {
+        //   parent: newState,
+		//   anchor: 'Continuous',
+        //   maxConnections: 1
+		// });		
 		
 		jsPlumb.draggable(newState, {
 		  containment: 'parent'
