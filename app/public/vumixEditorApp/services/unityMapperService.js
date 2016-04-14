@@ -1,15 +1,40 @@
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('unityMapperService', function($http) {      
+    .factory('unityMapperService', function($http, $interval) {      
       var service = {};
+      var q;
             
       service.setTransformMode = function(val) {
         SendMessage('Facade', 'SetTransformMode', val);
       };
       
+      service.scaleUpModel = function() {
+        q = $interval(function() {
+          SendMessage('Facade', 'ScaleUp');
+        });
+      };
+      
+      service.scaleDownModel = function() {
+        q = $interval(function() {
+          SendMessage('Facade', 'ScaleDown');
+        });
+      };
+      
+      service.cancelPromise = function() {
+        $interval.cancel(q);
+      };
+      
+      service.openPreview = function() {
+        SendMessage('Facade', 'TurnOnPreview');
+      };
+      
+      service.closePreview = function() {
+        SendMessage('Facade', 'TurnOffPreview');
+      };
+      
       // TODO: change name
       service.saveState = function(url) {
-        SendMessage('Facade', 'SaveProgress', './uploadstate.php');
+        SendMessage('Facade', 'SaveProgress', '/users/'+uid+'/projects/'+pid+'/uploadstate');
       };
       
       // subsequent functions will operate on the specified state id
@@ -34,10 +59,17 @@
         SendMessage('Facade', 'AddNewState');
       };
       
+      service.setStateName = function(name) {
+        SendMessage('Facade', 'ChangeStateName', name);
+      };
+      
       service.createInstanceObject = function(modelId) {
         SendMessage('Facade', 'SpawnObject', modelId);  
       };
       
+      service.removeInstanceObject = function() {
+        SendMessage('Facade', 'DeleteGameObject');
+      }
       service.createText = function(input) {
         SendMessage('Facade', 'SpawnText', input);  
       };
@@ -46,8 +78,12 @@
         SendMessage('Facade', 'SetTransitionId', stateId);
       };
       
-      service.setTransitionId = function() {
+      service.unsetTransitionId = function() {
         SendMessage('Facade', 'UnSetTransitionId');
+      };
+      
+      service.setActiveGameObject = function() {
+        SendMessage('Facade', 'SetActiveGameObject');
       };
       
       return service;

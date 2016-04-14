@@ -31,9 +31,8 @@
         };
                   
 
-        var cookie = document.cookie.split(';')[0];
-        var uid = cookie.split('=');
-        $scope.userid = uid[1];
+        
+        $scope.userid = uid;
         $scope.project.image_url = "/resources/images/logo_white.png";
         $scope.update.image_url = "/resources/images/logo_white.png";
         

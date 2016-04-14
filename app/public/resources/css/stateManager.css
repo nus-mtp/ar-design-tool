@@ -1,0 +1,149 @@
+/* Michelle's */
+.custom-navbar {
+  background-color: #0097FF;
+  height: 50px; 
+}
+  
+.window:hover{ 
+    cursor: pointer;
+}
+
+.task { 
+    background-color: #EEEEEF;
+    border: 1px solid #346789;
+    border-radius: 0.5em;
+    box-shadow: 2px 2px 5px #AAAAAA;
+    color: black;
+    min-height: 3em;
+    position: absolute;
+    min-width: 10em;
+}
+
+.point{ 
+    max-width: 180px;
+    margin-top: 1px;
+    padding-right: 10px;
+    padding-left: 5px;
+    position: absolute;
+    z-index: 4;
+    border: 1px solid #2e6f9a;
+    box-shadow: 2px 2px 19px #e0e0e0;
+    -o-box-shadow: 2px 2px 19px #e0e0e0;
+    -webkit-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-box-shadow: 2px 2px 19px #e0e0e0;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
+    cursor: move;
+    background-color: white;
+    font-size: 11px;
+    -webkit-transition: background-color 0.25s ease-in;
+    -moz-transition: background-color 0.25s ease-in;
+    transition: background-color 0.25s ease-in;
+}
+
+.point:hover { 
+    box-shadow: 2px 2px 19px #AAAAAA;
+}
+           
+.button {
+    text-align: center;
+    border: 1px solid;
+    margin: 5px;
+}
+
+.button:hover {
+    cursor: pointer;
+}
+
+.scrollbar {
+margin-left: 30px;
+float: left;
+height: 100%;
+width: 250px;
+background: #F5F5F5;
+overflow-y: scroll;
+margin-bottom: 25px;
+}
+
+p{
+    font-family: 'Palanquin', sans-serif;
+    font-size: 15px;
+    opacity: 0.7;
+}
+
+text{
+    font-family: 'Palanquin', sans-serif;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+h1{
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size:20px;
+}
+
+navfont{
+    color: white;
+}
+
+span.glyphicon-new-window{
+    font-size: 1.2em;
+}
+
+span.glyphicon-remove-circle {
+    font-size: 1.5em;
+}
+
+.task .button_editor{
+    float:left;
+}
+
+.task .button_remove{
+    float:right;
+}
+
+.button_remove:hover{
+    background-color: darkred;
+    color:white;
+}
+
+.ctrl_container{
+    margin:5px;
+    height:20px;
+}
+
+#drawingArea {
+    padding: 20px;
+    width:100%; height: 300px;
+    border: 1px solid gray;
+ }
+        
+._jsPlumb_connector, ._jsPlumb_startpoint{
+    cursor: pointer;
+}
+
+.item {
+    position: absolute;
+    background-color: #ddddff;
+    min-width: 10em;
+    border-radius: 0.5em;
+    border: 1px solid lightskyblue;
+    }
+
+.title {
+    padding: 10px;
+    cursor: move;
+    min-width: 10em;
+    border-radius: 0.5em;
+    background-color: lightskyblue;
+}
+
+.connect {
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    cursor: pointer;
+    
+}

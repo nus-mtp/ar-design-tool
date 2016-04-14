@@ -46,10 +46,9 @@
            fd.append('uid', userId);
            fd.append('model_name', update.name);
            fd.append('file_size', update.file_size);
-           fd.append('file_extension', update.file_extension);
-           
+           fd.append('file_extension', update.file_extension); 
            return $http.put(uploadUrl, fd, {
-               headers: {'Content-Type': undefined}    
+               headers: {'Content-Type': undefined} 
            }).then(function(res){
                for(var i = 0; i < models.length; i++){
                    if(id === models[i].id){

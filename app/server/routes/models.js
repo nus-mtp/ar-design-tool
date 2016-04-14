@@ -79,12 +79,15 @@ router.get('/:id', function(req, res) {
 router.post('/', upload.single("file"), function(req, res) {
     console.log('uploading model...');
     var physical_model = req.file;
+    var ext = req.body.file_extension;
+    var modelName = req.body.model_name 
+    var destName = modelName+'.'+ext;
     var newModel = {
         uid: req.params.userId,
-        name: req.body.model_name,
-        file_name: physical_model.filename,
+        name: modelName,
+        file_name: destName,
         file_size: physical_model.size,
-        file_extension: physical_model.filename.split('.')[1]
+        file_extension: ext
     };
     models.model.find({
         where: {
@@ -114,14 +117,15 @@ var insertModelDB = function(newModel, physical_model, goodCallback, badCallback
             where: {
                 uid: newModel.uid,
                 name: newModel.name,
-                file_name: physical_model.filename
+                file_name: newModel.file_name
             }
         });
     }).then(function(model) {
-        unity.moveModel(model.uid, physical_model.filename);
+        unity.moveModel(model.uid, physical_model.originalname, newModel.file_name);
         goodCallback(model);
     }).catch(function(err) {
         console.log('Caught error in insert model DB API');
+        console.log(err);
         badCallback(err);
     });
 };
@@ -178,15 +182,17 @@ var deleteModelDB = function(id, uid, modelName, model, goodCallback, badCallbac
  * api: /api/users/{userId}/models/{id}
  */
 router.put('/:id', upload.single("file"), function(req, res) {
-    id = req.params.id;
-    physical_model = req.file;
-
-    if(physical_model) {
-        //TODO: move model to library
-    }
+    console.log("uploading model");
+    var id = req.params.id;
+    var uid = req.params.userId;
+    var physical_model = req.file;
 
     models.model.findById(id).then(function(model) {
         if(model) {
+            if(physical_model) {
+                unity.moveModel(model.uid, physical_model.filename);
+                unity.deleteModel(uid, model.file_name);
+            }
             updateModelDB(req, physical_model, id, model, function(updatedModel) {
                 res.json({status: "ok", message: "updated model", length: 1, data: [updatedModel]});
             }, function(err) {
@@ -195,15 +201,19 @@ router.put('/:id', upload.single("file"), function(req, res) {
         } else {
             res.json({status: "fail", message: "model not found", length: 0, data: []});
         }
+    }).catch(function(err) {
+        console.log('caught error in updateModelDB API');
+        console.log(err.message);
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
 var updateModelDB = function(req, physical_model, id, model, goodCallback, badCallback) {
     models.model.update({
         name: req.body.name || model.name,
-        file_size: req.body.file_size || model.file_size,
+        file_size: physical_model.size || model.file_size,
         file_name: physical_model.filename || model.file_name,
-        file_extension: req.body.file_extension || model.file_extension
+        file_extension: physical_model.filename.split('.')[1].toLowerCase() || model.file_extension
     }, { 
         where: {
             id: id
@@ -214,7 +224,7 @@ var updateModelDB = function(req, physical_model, id, model, goodCallback, badCa
             goodCallback(updatedModel);
         });
     }).catch(function(err) {
-        console.log('caught error in updateModelDB API');
+        console.log('caught error in updateModelDB API function');
         badCallback(err);
     });
 }

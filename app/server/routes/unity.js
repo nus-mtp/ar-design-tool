@@ -1,13 +1,9 @@
 var file_paths  = require('../config/file_path'),
-    utils       = require('../modules/utils'),
     unity       = require('../modules/unity');
     
 var express = require('express'),
     multer  = require('multer'),
-    path    = require('path'),
-    fs      = require('fs');
-
-var exec = require('child_process').exec;
+    path    = require('path');
 
 var router = express.Router();
 
@@ -23,24 +19,43 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage:storage });
 
-router.post('/uploadstate.php', upload.single('binary'), function(req, res, next) {
-    res.json({ status:"ok", data:req.file });
+router.post('/users/:uid/projects/:pid/uploadstate', upload.single('binary'), function(req, res, next) {
+    console.log('saving state.dat file');
+    var uid = req.params.uid;
+    var pid = req.params.pid;
+    var stateDat = req.file;
+    unity.copyStateDat(uid, pid, function() {
+        unity.moveStateFile(uid, pid, stateDat, function() {
+            console.log("Save state.dat ok");
+            res.json({ status:"ok", message: "saved state dat file", data: [stateDat]});
+        }, function(err) {
+            console.log("Caught error in saving state dat..");
+            console.log(err.message);
+            res.json({ status:"fail", message: err.message, data: [err]});
+        });
+    }, function(err) {
+        res.json({ status:"fail", message: err.message, data: [err]});
+    });
 });
 
 router.post('/saveproject', function(req, res) {
-    res.json({ status: "ok", message: "saved state files"});
+    console.log('saving json state file');
+    unity.saveStateJson(req.body.uid, req.body.pid, req.body.json, function() {
+        console.log('save state json file ok');
+        res.json({ status: "ok", message: "saved state json", data: [stateJson]});    
+    }, function (err) {
+        console.log('Error while saving state json file');
+        res.json({status: "fail", message: err.message, length: 0, data: []});
+    });
 });
 
-router.get('/buildproject.php', function(req, res, next) {
-    var unityPath = '"' + process.env['UNITY_HOME'] + '\\Unity.exe"';
-    var mode = " -quit ";
-    var projectPath = ' -projectPath "D:/workspace/cs3284/ar-design-tool/WZ_BACKEND/AssetBundle test" ';
-    var buildMethod = ' -executeMethod  BuildProject.BuildAndroid2D ';
-    var command = unityPath + mode + projectPath + buildMethod;
-    exec(command, function(err, stdout, stderr) {  
-    }).on('close', function(code) {
-        var filePath = "../WZ_BACKEND/AssetBundle test/Assets/AndroidBuilds.apk";
-        res.download(filePath);
+router.get('/users/:uid/projects/:pid/buildproject', function(req, res, next) {
+    unity.buildApk(req.params.uid, req.params.pid, function(down_path) {
+        console.log("down path is: " + down_path);
+        res.download(down_path);
+    }, function (err) {
+        console.log("caught error in buildapk");
+        res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
