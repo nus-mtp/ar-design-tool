@@ -183,6 +183,7 @@
         modelService.setAssetBundleModels(models);
         modelService.setModelsAvailability();
         
+        var _states = [];
         stateModel.states.forEach(function(el, index) {
           var state = {
             id: index,
@@ -190,9 +191,10 @@
             modelIndex: el.stateObjects.length, 
             models: el.stateObjects
           };
-          _state.states.push(state);
+          _states.push(state);
         });
         
+        _state.states = angular.copy(_states);
         _state.stateIndex = _state.states.length;
         notifyStateChange();
       };
