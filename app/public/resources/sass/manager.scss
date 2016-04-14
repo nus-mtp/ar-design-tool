@@ -6,12 +6,15 @@
 
 // Nav bar style
 .nav-bar {
-  background-color: $light-green;
+  background-color: $bg-color;
+  box-shadow: 0 5px 5px $light-grey;
+  color: $light-green; 
   height: 50px;
 }
 
 .top-bar {
-  background-color: $light-green;  
+  background-color: $bg-color; 
+  color: $text-color; 
   margin-top: 2px;
 }
 
@@ -27,13 +30,11 @@
 }
 
 .content {
-  background-color: $bg-color;
   float: right;
   width: 100%; 
 }
 
 .sidebar {
-//   background-color: $light-grey;
   color: $text-color;
   float: left;
   margin-left: -300px;
@@ -52,18 +53,21 @@
   padding-right: 32px;
 }
 
-.welcome_side {
-  background-color: $light-grey;
+.welcome-side {
+  background-color: $light-green;
+  border-right: thin solid $line-grey;
   color: $dim-grey;
 }
 
-.create_side {
-  background-color: $bright-green;
-  color: $teal-green;
+.create-side {
+  background-color: $light-green;
+  border-right: thin solid $line-grey;
+  color: $bg-color;
 }
 
-.update_side {
-  background-color: $bright-blue;
+.update-side {
+  background-color: $update-blue;
+  border-right: thin solid $line-grey;
   color: $bg-color;
 }
 
@@ -112,10 +116,8 @@ input {
 }
 
 .search-bg {
-  background: url('../images/loading_bg.png');
   height: 10%;
   position: fixed;
-  top: 7%;
   width: auto;
 }
 
@@ -150,4 +152,22 @@ ul {
 
 .clickable {
   cursor: pointer;
+}
+
+.navbar-default .navbar-nav > {
+  .open > a {
+    background-color: $line-grey;
+
+    &:hover, 
+    &:focus {
+      background-color: $line-grey;
+    }
+  }
+
+  li > a {
+    &:hover, 
+    &:focus {
+      background-color: $line-grey;
+    }
+  }
 }

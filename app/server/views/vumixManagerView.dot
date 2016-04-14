@@ -20,7 +20,7 @@
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="z-index: 100;">
                     <div class="container-fluid nav-bar">
                         <div class="navbar-header">
-                           <img ng-src="/resources/images/logo_white.png" height=50" width="50">
+                           <img ng-src="/resources/images/logo.png" height=50" width="50">
                            <span style="font-size: 16px">Vumix File Manager</span>
                         </div>
 
@@ -28,16 +28,16 @@
                             <ul class="nav navbar-nav">
                                 <li>
                                     <ul class="center-align">
-                                        <span class="top-bar"><a href="" ui-sref="manager" class="btn btn-default top-bar">Project</a></span>
-                                        <span class="top-bar"><a href="" ui-sref="model" class="btn btn-default top-bar">Model</a></span>
-                                        <span class="top-bar"><a href="" ui-sref="image" class="btn btn-default top-bar">Image</a></span>
+                                        <span class="top-bar"><a id="project" ui-sref="manager" class="btn btn-default top-bar active">Project</a></span>
+                                        <span class="top-bar"><a id="model" ui-sref="model" class="btn btn-default top-bar">Model</a></span>
+                                        <span class="top-bar"><a id="image" ui-sref="image" class="btn btn-default top-bar">Image</a></span>
                                     </ul>
                                 </li>
                             </ul>
 
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
-                                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.name]]<span class="caret"></span></a>
+                                    <a style="color:#555555; font-size:15px; margin-top:4px;"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.name]]<span class="caret"></span></a>
                                     <ul class="dropdown-menu" role="menu">
                                         <li><a href='/logout' onclick="destroyCookies()">Log Out</a></li>
                                     </ul>
@@ -57,7 +57,7 @@
                 for (var i = 0; i < cookies.length; i++){
                     document.cookie +=cookies[i]+expires;
                 }
-            }
+           }
         </script>
         <script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
         <script type="text/javascript" src="/vendors/jquery-ui/jquery-ui.min.js"></script>
@@ -81,5 +81,26 @@
         <script type="text/javascript" src="/vumixManagerApp/controllers/managerController.js"></script>
         <script type="text/javascript" src="/vumixManagerApp/controllers/modelController.js"></script>
         <script type="text/javascript" src="/vumixManagerApp/controllers/imageController.js"></script>
+        
+        <script>
+         $('#project').click(function(){
+                $(this).addClass("active");
+                $('#model').removeClass("active");
+                $('#image').removeClass("active");
+           });
+           
+           $('#model').click(function(){
+                $(this).addClass("active");
+                $('#project').removeClass("active");
+                $('#image').removeClass("active");
+           });
+           
+           $('#image').click(function(){
+                $(this).addClass("active");
+                $('#project').removeClass("active");
+                $('#model').removeClass("active");
+           });
+            
+        </script>
 	</body>
 </html>

@@ -13,5 +13,7 @@
       $scope.goToManager = function(){
           window.location.href=  "/#/manager";
       } 
+
+      $scope.buildApkLink = "/users/"+uid+"/projects/"+pid+"/buildproject"
     }); 
 })();

@@ -79,7 +79,7 @@ router.get('/:id', function(req, res) {
 router.post('/', upload.single("file"), function(req, res) {
     console.log('uploading model...');
     var physical_model = req.file;
-    var ext = physical_model.filename.split('.')[1].toLowerCase();
+    var ext = req.body.file_extension;
     var modelName = req.body.model_name 
     var destName = modelName+'.'+ext;
     var newModel = {

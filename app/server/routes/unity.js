@@ -19,13 +19,11 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage:storage });
 
-router.post('/:uid/:pid/uploadstate.php', upload.single('binary'), function(req, res, next) {
+router.post('/users/:uid/projects/:pid/uploadstate', upload.single('binary'), function(req, res, next) {
     console.log('saving state.dat file');
     var uid = req.params.uid;
     var pid = req.params.pid;
     var stateDat = req.file;
-    console.log(stateDat)
-
     unity.copyStateDat(uid, pid, function() {
         unity.moveStateFile(uid, pid, stateDat, function() {
             console.log("Save state.dat ok");
@@ -43,14 +41,17 @@ router.post('/:uid/:pid/uploadstate.php', upload.single('binary'), function(req,
 router.post('/saveproject', function(req, res) {
     console.log('saving json state file');
     unity.saveStateJson(req.body.uid, req.body.pid, req.body.json, function() {
+        console.log('save state json file ok');
         res.json({ status: "ok", message: "saved state json", data: [stateJson]});    
     }, function (err) {
+        console.log('Error while saving state json file');
         res.json({status: "fail", message: err.message, length: 0, data: []});
     });
 });
 
-router.post('/buildproject.php', function(req, res, next) {
-    unity.buildApk(req.body.pid, req.body.uid, function(down_path) {
+router.get('/users/:uid/projects/:pid/buildproject', function(req, res, next) {
+    unity.buildApk(req.params.uid, req.params.pid, function(down_path) {
+        console.log("down path is: " + down_path);
         res.download(down_path);
     }, function (err) {
         console.log("caught error in buildapk");

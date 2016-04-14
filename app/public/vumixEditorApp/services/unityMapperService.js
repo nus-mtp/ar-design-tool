@@ -33,8 +33,8 @@
       };
       
       // TODO: change name
-      service.saveState = function() {
-        SendMessage('Facade', 'SaveProgress', '/'+uid+'/'+pid+'/uploadstate.php');
+      service.saveState = function(url) {
+        SendMessage('Facade', 'SaveProgress', '/users/'+uid+'/projects/'+pid+'/uploadstate');
       };
       
       // subsequent functions will operate on the specified state id
