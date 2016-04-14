@@ -75,6 +75,8 @@ p {
   background-color: #FFFFFF;
   color: #555555;
   margin-top: 2px; }
+  .top-bar :hover {
+    background-color: #0daf83; }
 
 .active {
   background-color: #FFFFFF;
@@ -182,10 +184,6 @@ input {
   margin-bottom: 0px;
   text-align: center; }
 
-.flex-item :hover {
-  opacity: .8;
-  text-decoration: none; }
-
 .grey-bg {
   background: #000000;
   opacity: 0.2; }
@@ -205,4 +203,9 @@ ul {
   background-color: #DBDBDB; }
 
 .btn-default:active, .btn-default.active, .open > .dropdown-toggle.btn-default {
+  background-color: #0daf83; }
+  .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover {
+    background-color: #0daf83; }
+
+.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus {
   background-color: #0daf83; }

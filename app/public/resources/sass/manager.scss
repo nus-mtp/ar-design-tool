@@ -16,6 +16,10 @@
   background-color: $bg-color; 
   color: $text-color; 
   margin-top: 2px;
+  
+  :hover {
+    background-color: $light-green;
+  }
 }
 
 .active {
@@ -149,11 +153,6 @@ input {
       text-align:center;
     }
   }
-
-  :hover {
-    opacity: .8;
-    text-decoration: none;
-  }
 }
 
 .grey-bg{
@@ -188,5 +187,13 @@ ul {
 }
 
 .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default{
+  background-color: $light-green;
+  
+  &:hover {
+      background-color: $light-green;
+  }
+}
+
+.btn-default:active:hover, .btn-default.active:hover, .open>.dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open>.dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open>.dropdown-toggle.btn-default.focus {
   background-color: $light-green;
 }
