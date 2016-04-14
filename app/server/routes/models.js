@@ -79,12 +79,15 @@ router.get('/:id', function(req, res) {
 router.post('/', upload.single("file"), function(req, res) {
     console.log('uploading model...');
     var physical_model = req.file;
+    var ext = physical_model.filename.split('.')[1].toLowerCase();
+    var modelName = req.body.model_name 
+    var destName = modelName+'.'+ext;
     var newModel = {
         uid: req.params.userId,
-        name: req.body.model_name,
-        file_name: physical_model.filename,
+        name: modelName,
+        file_name: destName,
         file_size: physical_model.size,
-        file_extension: physical_model.filename.split('.')[1].toLowerCase()
+        file_extension: ext
     };
     models.model.find({
         where: {
@@ -114,14 +117,15 @@ var insertModelDB = function(newModel, physical_model, goodCallback, badCallback
             where: {
                 uid: newModel.uid,
                 name: newModel.name,
-                file_name: physical_model.filename
+                file_name: newModel.file_name
             }
         });
     }).then(function(model) {
-        unity.moveModel(model.uid, physical_model.filename);
+        unity.moveModel(model.uid, physical_model.originalname, newModel.file_name);
         goodCallback(model);
     }).catch(function(err) {
         console.log('Caught error in insert model DB API');
+        console.log(err);
         badCallback(err);
     });
 };

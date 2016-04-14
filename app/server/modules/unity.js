@@ -41,13 +41,6 @@ var updateVuforia = function(uid, pid, vuforia_pkg) {
 	moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
 };
 
-var copyStateDat = function(uid, pid) {
-	console.log('copying state dat...');
-	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
-	var state_dest 		= path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
-	utils.copyFile(state_dat_loc, state_dest);
-}
-
 var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
 	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
@@ -68,7 +61,7 @@ var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	unity.on('exit', function(code) {
 		if(code==0) {
 			moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
-			copyStateDat(uid, pid);
+			copyDefaultState(uid, pid);
 			copyAssetBundle(uid, pid);
 			console.log("Creating new project child process exited with code " + code);
 			callback();
@@ -85,14 +78,14 @@ var deleteProj = function(uid, pid) {
 	utils.deleteDir(project_path);
 };
 
-var moveModel = function(uid, fileName) {
+var moveModel = function(uid, fileName, destName) {
 	console.log('moving model into model library');
 	var dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path);
 	var tmp_path 	= path.join(__dirname, '../../'+file_paths.storage_path+'/'+fileName);
 	utils.checkExistsIfNotCreate(dest_path, function() {
 		console.log('completed dir check');
 		console.log('moving model to model library');
-		utils.moveFileToDest(tmp_path, dest_path+fileName);
+		utils.moveFileToDest(tmp_path, dest_path+destName);
 	});
 };
 
@@ -204,11 +197,44 @@ var moveStateFile = function(uid, pid, stateFile, goodcall, badcall) {
 	});	
 };
 
-var moveCopyState = function(uid, pid) {
+var moveCopyState = function(uid, pid, goodcall, badcall) {
 	console.log('saving state file');
 	tmp 		= path.join(__dirname, '../../'+file_paths.storage_path+copy_state_name);
 	dest_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
-	utils.moveFileToDest(tmp, dest_path);		
+	utils.moveFileToDest(tmp, dest_path, function() {
+		goodcall();
+	}, function(err) {
+		badcall(err);
+	});		
+};
+
+var copyDefaultState = function(uid, pid) {
+	console.log('copying default state dat...');
+	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	var state_dest 		= path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+state_dat_file);
+	utils.copyFile(state_dat_loc, state_dest);
+};
+
+var copyStateDat = function(uid, pid, callback, badcall) {
+	console.log('copying state dat to server...');
+	var state_dat_loc 	= path.join(__dirname, '../../'+file_paths.storage_path+state_dat_file);
+	var state_dest 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.state+state_dat_file);
+	utils.copyFile(state_dat_loc, state_dest, function() {
+		callback();
+	}, function(err) {
+		badcall(err);
+	});	
+};
+
+var saveStateJson = function(uid, pid, json, goodcall, badcall) {
+	console.log('saving state json');
+	var stateJsonDir = 'state.json';
+	var dest = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/'+stateJsonDir);
+	utils.writeJson(dest, json, function() {
+		goodcall();
+	}, function(err) {
+		badcall(err);
+	});
 };
 
 module.exports.rebuildAssetBundle 	= rebuildAssetBundle;
@@ -216,6 +242,7 @@ module.exports.updateVuforia 		= updateVuforia;
 
 module.exports.moveStateFile		= moveStateFile;
 module.exports.moveCopyState		= moveCopyState;
+module.exports.saveStateJson 		= saveStateJson;
 module.exports.copyStateDat			= copyStateDat;
 
 module.exports.createProj 			= createProj;

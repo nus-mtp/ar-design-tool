@@ -41,7 +41,7 @@
       service.addAssetBundleModels = function(serverModels) {
         loaderService.showLoader("Adding Models to Asset Bundle");
         var _modelIds = [];
-        var url = '/api/users/' + uid + '/projects/models';
+        var url = '/api/users/' + uid + '/projects/addModels';
         serverModels.forEach(function(model) {
           _modelIds.push(model.file_name);
         });        

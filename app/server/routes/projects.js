@@ -240,11 +240,11 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  * @module addProjModels
  * @parent projectApi
  * @param req.body.ids, req.body.pid, req.params.userId
- * copies models with ids submitted in body owned by user with {userId} to project folder with {pid} and rebuilds assetbundle for that project
+ * copies models with model names submitted in body owned by user with {userId} to project folder with {pid} and rebuilds assetbundle for that project
  * POST
- * api: /api/users/{userId}/projects/models
+ * api: /api/users/{userId}/projects/addModels
  */
-router.post('/models', function(req, res) {
+router.post('/addModels', function(req, res) {
     console.log("adding model into project");
     var modelNames  = req.body.ids;
     var pid         = req.body.pid;
@@ -254,6 +254,13 @@ router.post('/models', function(req, res) {
     var opCount = 0;
     var errmsg  = [];
     
+    if(modelNames.length<=0 || !modelNames) {
+        console.log("error, no model names");
+        var error = {};
+        error.message = "no model names sent";
+        failRes(error);
+    }
+
     for(x in modelNames) {
         unity.copyModel(uid, pid, modelNames[x], function() {
             opCount++;
