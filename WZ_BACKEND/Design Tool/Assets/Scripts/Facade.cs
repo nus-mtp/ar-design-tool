@@ -17,6 +17,7 @@ public class Facade : MonoBehaviour
     private int targetStateId;
     private int targetStateObjectId;
     private TextCreator textCreator;
+    private Transformation transformation;
 
     public void AddNewState()
     {
@@ -134,6 +135,17 @@ public class Facade : MonoBehaviour
     {
         stateManager.UnSetTransitionId(targetStateId, targetStateObjectId);
     }
+
+    public void ScaleUp()
+    {
+        transformation.ScaleUpButton();
+    }
+
+    public void ScaleDown()
+    {
+        transformation.ScaleDownButton();
+    }
+
     private string[] seperate(string s)
     {
         return s.Split(":".ToCharArray());
@@ -150,6 +162,7 @@ public class Facade : MonoBehaviour
         loadProgress = controlScript.GetComponent<LoadProgress>();
         stateManager = controlScript.GetComponent<StateManager>();
         textCreator = controlScript.GetComponent<TextCreator>();
+        transformation = controlScript.GetComponent<Transformation>();
         Application.ExternalCall(JAVASCRIPT_PREFIX+"unityHasLoaded");
        
     }
