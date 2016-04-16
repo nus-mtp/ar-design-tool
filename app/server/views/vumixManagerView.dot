@@ -71,7 +71,7 @@
         <script type="text/javascript" src="/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
         <script type="text/javascript" src="/vumixManagerApp/app.js"></script>
         
-        <!-- Loader Service From Editor Applciation -->
+        <!-- Loader Service From Editor Application -->
         <script type="text/javascript" src="vumixEditorApp/directives/_directives.js"></script>
         <script type="text/javascript" src="vumixEditorApp/directives/loaderDirective.js"></script>
         <script type="text/javascript" src="vumixEditorApp/services/_services.js"></script>

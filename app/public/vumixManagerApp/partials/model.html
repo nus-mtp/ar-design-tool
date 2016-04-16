@@ -40,29 +40,6 @@
             </form>
         </div>
     </div>
-    
-  
-    <!--modal to update model
-    <div class="modal fade" id="myModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">        
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times</button>
-                    <h4 class="modal-title"> Your model</h4>
-                </div>
-                <div class="modal-body">
-                    <form name="updateModelForm" enctype="multipart/form-data">
-                        <h1> Model Name</h1>
-                        <input type="text" name="model_name" placeholder="Model Name" ng-model="update.name"><br>
-                        <h1> File</h1>
-                        <input type ="file" ng-model="model.upload" name="modelUpload" onchange="angular.element(this).scope().updateFile()">
-                        <input type="submit" ng-click= "updateModel(update.id)" data-dismiss="modal" class="center" value="Update" style="margin-top:20px; background-color:#FF9640; color:#FFFFFF">
-                    </form>
-                </div>           
-            </div>
-        </div>
-    </div>-->
-
 
     <div class="content">
         <div class="container section" style="width:auto;">
@@ -82,8 +59,8 @@
                                 </div>
                         </div>
                     </li>
-                    <button class="btn btn-danger" ng-click="deleteModel(md.id)">Delete</button>
-                    <button class="btn btn-info" ng-click="getModel(md.id)">Update</button>
+                    <button class="btn btn-danger glyphicon glyphicon-trash clickable icon-delete" ng-click="deleteModel(md.id)"></button>
+                    <button class="btn btn-info glyphicon glyphicon-pencil clickable icon-update" ng-click="getModel(md.id)"></button>
                 </a>
             </ul>
         </div>

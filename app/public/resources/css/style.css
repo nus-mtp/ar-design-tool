@@ -263,5 +263,22 @@ ul {
 .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus {
   background-color: #0daf83; }
 
+.icon-delete {
+  float: right;
+  font-size: 18px;
+  height: 40px;
+  margin-right: 40px;
+  margin-top: -193px;
+  padding-left: 10px;
+  width: 40px; }
+
+.icon-update {
+  float: right;
+  font-size: 18px;
+  height: 40px;
+  margin-top: -193px;
+  padding-left: 10px;
+  width: 40px; }
+
 body {
   background-color: #FFFFFF; }
