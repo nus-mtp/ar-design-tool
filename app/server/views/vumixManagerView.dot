@@ -38,9 +38,9 @@
                             <ul class="nav navbar-nav navbar-right">
                                 <li class="dropdown">
                                     <a style="color:#555555; font-size:15px; margin-top:4px;"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">[[= model.name]]
-                                    <span class="caret" style="margin-left: 12px;margin-top: -4px;"></span></a>
+                                    <span class="caret" style="margin-left: 13px;margin-top: -4px;"></span></a>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li><a href='/logout' onclick="destroyCookies()">Log Out</a></li>
+                                        <li><a href='/logout' style="height:32px; font-size:15px;" onclick="destroyCookies()">Log Out</a></li>
                                     </ul>
                                 </li>
                             </ul>
