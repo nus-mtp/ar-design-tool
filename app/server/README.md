@@ -1,7 +1,6 @@
 @property Models
 @parent VUMIX
 Database models are stored here.
-
 ##Folder Structure
 
     /server/config          (Config files go here)
