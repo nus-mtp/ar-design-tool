@@ -168,7 +168,7 @@ var buildApk = function(uid, pid, goodcallback, failcallback) {
 	console.log('building apk for projectid: ' + pid);
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var down_path 	 = project_path+file_paths.download;
-	var buildApkCmd	 = '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.BuildAndroid2D -quit -batchmode';
+	var buildApkCmd	 = '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod BuildProject.BuildAndroid2D';
 
 	console.log('running: ' + buildApkCmd);
 	const buildAPK = exec(buildApkCmd, function(error, stdout, stderr) {

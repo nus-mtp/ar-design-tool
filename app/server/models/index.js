@@ -1,4 +1,10 @@
 /*jslint node: true */
+/**
+ * @module sequelizeIndex
+ * @parent Models
+ * Index is the initial model that is required to initialize SequelizeJS. 
+ * It connects to the mysql server (by default it connects to the local server)
+ */
 "use strict";
 
 var Sequelize 	= require('sequelize'),

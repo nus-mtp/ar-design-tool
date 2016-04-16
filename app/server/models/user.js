@@ -1,4 +1,9 @@
 /*jslint node: true */
+/**
+ * @module User
+ * @parent Models
+ * User is the database model which stores the user's account metadata 
+ */
 "use strict";
 
 module.exports = function(sequelize, dataTypes) {

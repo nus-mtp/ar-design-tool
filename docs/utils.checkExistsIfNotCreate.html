@@ -3,8 +3,8 @@
 	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
 
 	INSTEAD CHANGE:
-	source: server\routes\users.js
-	@module userApi
+	source: server\modules\utils.js
+	@function utils.checkExistsIfNotCreate
 ######################################################################## -->
 
 <!--[if lt IE 7]>
@@ -24,7 +24,7 @@
 <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
-	<title>VUMIX  - userApi</title>
+	<title>VUMIX  - utils.checkExistsIfNotCreate</title>
 	<meta name="description" content="">
 	<meta name="author" content="">
 	
@@ -79,11 +79,18 @@
 			
 		</li>
 		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="Modules.html" data-search="Modules">
+				Modules
+			</a>
+			
+		</li>
+		
 		
 			
 			<li class="search-container active">
-			<a class="sidebar-title" href="userApi.html" data-search="userApi">
-				userApi
+			<a class="sidebar-title" href="utils.html" data-search="utils">
+				utils
 			</a>
 			
 	<ul>
@@ -91,9 +98,9 @@
 			
 				
 				
-				<li class="search-container">
-					<a class="module" href="deleteUser.html" data-search="deleteUser">
-						deleteUser
+				<li class="search-container active ">
+					<a class="function" href="utils.checkExistsIfNotCreate.html" data-search="utils.checkExistsIfNotCreate">
+						checkExistsIfNotCreate
 					</a>
 				</li>
 				
@@ -104,8 +111,8 @@
 				
 				
 				<li class="search-container">
-					<a class="module" href="fetchAllUsers.html" data-search="fetchAllUsers">
-						fetchAllUsers
+					<a class="function" href="utils.copyFile.html" data-search="utils.copyFile">
+						copyFile
 					</a>
 				</li>
 				
@@ -116,8 +123,8 @@
 				
 				
 				<li class="search-container">
-					<a class="module" href="fetchOneUser.html" data-search="fetchOneUser">
-						fetchOneUser
+					<a class="function" href="utils.deleteDir.html" data-search="utils.deleteDir">
+						deleteDir
 					</a>
 				</li>
 				
@@ -128,8 +135,8 @@
 				
 				
 				<li class="search-container">
-					<a class="module" href="insertUser.html" data-search="insertUser">
-						insertUser
+					<a class="function" href="utils.deleteFile.html" data-search="utils.deleteFile">
+						deleteFile
 					</a>
 				</li>
 				
@@ -140,8 +147,20 @@
 				
 				
 				<li class="search-container">
-					<a class="module" href="updateUser.html" data-search="updateUser">
-						updateUser
+					<a class="function" href="utils.moveFileToDest.html" data-search="utils.moveFileToDest">
+						moveFileToDest
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="function" href="utils.writeJson.html" data-search="utils.writeJson">
+						writeJson
 					</a>
 				</li>
 				
@@ -165,9 +184,9 @@
 		
 		<section class="title">
 			<div class="heading">
-<h1>userApi</h1>
+<h1>checkExistsIfNotCreate</h1>
 	<ul class="tags">
-		<li>module</li>
+		<li>function</li>
 	</ul>
 	
 	
@@ -197,22 +216,64 @@
 		
 
 		
-		<section class="description">
-			<p>This is the api for users</p>
-
-		</section>
-		
 
 		
 			
 		
 		
+		
+			<section class="signature">
+				<h2 id="sig_">utils.checkExistsIfNotCreate(dirpath, callback)
+</h2>
+<div class="signature-wrapper">
+
+
+	<h3>Parameters</h3>
+
+	<ol class="parameters">
+		
+		<li class="parameter">
+			<h4>dirpath
+				<code>{String}</code></h4>
+			<div class="description">
+				<p>dirpath is the path that you want to check and maybe created</p>
+
+			</div>
+			
+			
+			
+		</li>
+		
+		<li class="parameter">
+			<h4>callback
+				<code>{function()}</code></h4>
+			<div class="description">
+				<p>if callback() exists, it will be run at the end of the function.</p>
+
+			</div>
+			
+			
+			
+		</li>
+		
+	</ol>
+
+
+
+
+
+
+</div>
+
+			</section>
 		
 		
 
 		
 		<section class="comment">
-			
+			<p>Checks whether dirpath exists, if it does not, it will create the path
+Once operation is done, it will run callback();</p>
+
 		</section>
 		
 		
@@ -241,7 +302,7 @@
 	
 	
 	<script type="text/javascript">
-		var docObject = {"name":"userApi","type":"module","parent":"VUMIX","src":"server\\routes\\users.js","line":0,"codeLine":5,"description":"This is the api for users","title":"","ignore":"{node_modules,bower_components,test,public}/**/*, gulpfile.js","glob":{"pattern":"**/*.{md,js}","ignore":"{node_modules,bower_components}/**/*","cwd":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\app"},"dest":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\docs","generators":["html"],"docConfigDest":"../app/documentjs.json","project":{}};
+		var docObject = {"type":"function","name":"utils.checkExistsIfNotCreate","params":[{"types":[{"type":"String"}],"name":"dirpath","description":"dirpath is the path that you want to check and maybe created"},{"types":[{"type":"function","returns":{"types":[{"type":"undefined"}]},"params":[]}],"name":"callback","description":"if callback() exists, it will be run at the end of the function."}],"parent":"utils","src":"server\\modules\\utils.js","line":10,"codeLine":21,"description":"","title":"","comment":" ","ignore":"{node_modules,bower_components,test,public}/**/*, gulpfile.js","glob":{"pattern":"**/*.{md,js}","ignore":"{node_modules,bower_components}/**/*","cwd":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\app"},"dest":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\docs","generators":["html"],"docConfigDest":"../app/documentjs.json","project":{}};
 	</script>
 	
 	

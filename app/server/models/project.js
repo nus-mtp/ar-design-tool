@@ -1,6 +1,10 @@
 /*jslint node: true */
+/**
+ * @module project
+ * @parent Models
+ * Project is the database model which stores the user's project metadata 
+ */
 "use strict";
-// TODO: add vuforia package item
 module.exports = function(sequelize, DataTypes) {
 	var Project = sequelize.define("project", {
 		id: {

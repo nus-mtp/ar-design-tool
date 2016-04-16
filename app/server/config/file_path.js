@@ -1,4 +1,9 @@
-module.exports = {
+/**
+ * @module file_path
+ * @parent Config
+ * This file_path config file stores all the  main file path variables here. 
+ */
+ module.exports = {
 	'state': '/Assets/StateData/',
 	'public_path': '/public/storage/',
 	'storage_path': '/server/storage/',
