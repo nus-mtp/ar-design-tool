@@ -19,7 +19,7 @@
         <div ng-app="vumixManagerApp">
             <nav class="navbar navbar-default navbar-fixed-top" role="navigation"  style="z-index: 100;">
                     <div class="container-fluid nav-bar">
-                        <div class="navbar-header">
+                        <div class="navbar-header clickable" onclick="goToManager()">
                            <img ng-src="/resources/images/logo.png" height=50" width="50">
                            <span style="font-size: 16px">Vumix File Manager</span>
                         </div>
@@ -58,6 +58,10 @@
                 for (var i = 0; i < cookies.length; i++){
                     document.cookie +=cookies[i]+expires;
                 }
+           }
+           
+           var goToManager = function() {
+               window.location.href = "/#/manager";
            }
         </script>
         <script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
