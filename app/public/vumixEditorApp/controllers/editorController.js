@@ -6,7 +6,8 @@
       editorService,
       unityMapperService,
       stateService,
-      modelService
+      modelService,
+      loaderService
     ) {
       $scope.modelsSelected = false;
       $scope.currentStateId = -1;
@@ -20,6 +21,7 @@
       
       editorService.subscribeToDisplayStateIdChange($scope, function() {
         $scope.currentStateId = editorService.id;
+        $scope.modelsOnScreen = angular.copy(stateService.getStateObjects($scope.currentStateId)); 
       });
       
       modelService.subscribeToServerModelChange($scope, function() {
@@ -95,6 +97,32 @@
           return {included: prev.included || next.included};
         }).included;  
       };
+      
+      $scope.removeModelFromAssetBundle = function(model) {
+        loaderService.showLoader("Removing Model from Asset Bundle");
+        var _models = $.grep($scope.modelsOnScreen, function(_model) {
+          return _model.instanceName === model.name;
+        });
+        _models.forEach(function(_model) {
+          $scope.removeModelFromScreen(_model);
+        });
+        modelService.deleteAssetBundleModel(model);
+      };
+      
+      $scope.goNextState = function() {
+        editorService.openEditor(($scope.currentStateId + 1) % stateService.getAllStates().length);        
+      };
+      
+      $scope.goPrevState = function() {
+        editorService.openEditor(($scope.currentStateId + stateService.getAllStates().length - 1) % stateService.getAllStates().length); 
+      }
+      
+      $scope.addState = function() {
+        stateService.createState("random state " + ($scope.currentStateId + 1).toString());  
+        editorService.openEditor($scope.currentStateId + 1); 
+      };
+      
+      $('[data-toggle="tooltip"]').tooltip();
       
     }); 
 })();

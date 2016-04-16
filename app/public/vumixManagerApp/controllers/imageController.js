@@ -30,12 +30,9 @@
             upload: undefined
         };
         
-        var cookie = document.cookie.split(';')[0];
-        var uid = cookie.split('=');
-        $scope.userid = uid[1];
-        
-        $scope.image.image_url = "/resources/images/charger.png";
-        $scope.update.image_url = "/resources/images/charger.png";
+        $scope.userid = uid;
+        $scope.image.image_url = "/resources/images/logo_white.png";
+        $scope.update.image_url = "/resources/images/logo_white.png";
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -228,6 +225,7 @@
         };       
         
         $scope.addImage = function(){
+           $("#welcome_image").show();
            imageService.addImage($scope.image, $scope.image.upload, $scope.userid)
                 .then(function(image) {
                 $scope.images.push(image);

@@ -7,7 +7,7 @@
 // Nav bar style
 .nav-bar {
   background-color: $bg-color;
-  box-shadow: 0 5px 5px $light-grey;
+  border-bottom: 1px solid;
   color: $light-green; 
   height: 50px;
 }
@@ -16,6 +16,10 @@
   background-color: $bg-color; 
   color: $text-color; 
   margin-top: 2px;
+  
+  :hover {
+    background-color: $light-green;
+  }
 }
 
 .active {
@@ -127,7 +131,8 @@ input {
   flex-wrap: wrap;
   justify-content: flex-start;
   list-style: none;
-  margin-top: 56px;
+  margin-top: 75px;
+  margin-left: -21px;
   padding: 0;
 }
 
@@ -135,15 +140,24 @@ input {
 
   .card {
     img {
-      height: 120px;
       width: 164px;
     }
+    .name-holder {
+      background-color: $bg-grey; 
+      color: $black; 
+      font-size: 14px;
+      font-weight: bold;
+      height: 28px;
+      padding-top: 5px;
+      margin-bottom:0px;
+      text-align:center;
+    }
   }
+}
 
-  :hover {
-    opacity: .8;
-    text-decoration: none;
-  }
+.grey-bg{
+  background: $black;
+  opacity: 0.2;
 }
 
 ul {
@@ -170,4 +184,16 @@ ul {
       background-color: $line-grey;
     }
   }
+}
+
+.btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default{
+  background-color: $light-green;
+  
+  &:hover {
+      background-color: $light-green;
+  }
+}
+
+.btn-default:active:hover, .btn-default.active:hover, .open>.dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open>.dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open>.dropdown-toggle.btn-default.focus {
+  background-color: $light-green;
 }

@@ -6,7 +6,8 @@
     <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/vendors/jquery-ui/themes/base/jquery-ui.min.css" />
     <link rel="stylesheet" href="/resources/css/loader.css" />
-    <link rel="stylesheet" href="/resources/css/editor.css" />
+    <link rel="stylesheet" href="/resources/css/stateEditor.css" />
+    <link rel="stylesheet" href="/resources/css/stateManager.css" />
     <title>Vumix Editor Application</title>
     
     <script>
