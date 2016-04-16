@@ -193,8 +193,10 @@ router.put('/:id', upload.single("file"), function(req, res) {
                 res.json({status: "ok", message: "updated model", length: 1, data: [updatedModel]});
                 
                 if(physical_model) {
-                    unity.moveModel(model.uid, physical_model.filename);
-                    // unity.deleteModel(uid, model.file_name);
+                    unity.moveModel(uid, physical_model.filename, updatedModel.file_name);
+                    if (physical_model.filename!=updatedModel.file_name) {
+                        unity.deleteModel(uid, model.file_name);    
+                    }
                 }
             }, function(err) {
                 res.json({status: "fail", message: err.message, length: 0, data: []});                
@@ -211,7 +213,7 @@ router.put('/:id', upload.single("file"), function(req, res) {
 
 var updateModelDB = function(req, physical_model, id, model, goodCallback, badCallback) {
     var ext = req.body.file_extension;
-    var modelName = req.body.name;
+    var modelName = req.body.model_name;
     var destName = modelName+'.'+ext;
     models.model.update({
         name: modelName || model.name,
