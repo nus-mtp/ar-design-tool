@@ -195,6 +195,7 @@
         };
         
         $scope.addProject = function(){
+            $("#welcome_page").show();
             projectService.addProject($scope.project, $scope.project.upload, $scope.userid)
                 .then(function(project) {
                 $scope.projects.push(project);

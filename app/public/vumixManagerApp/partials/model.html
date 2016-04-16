@@ -1,12 +1,12 @@
 <div class="wrapper" ng-controller="modelController">
     <div class="sidebar">
         <div id="welcome_model" class="side-bar-padding welcome-side" style="padding-top: 50px; color:#FFFFFF;">
-            <h1 class="center" style="margin-top: 0%; text-decoration:underline">Upload Your Model Here!</h1>
+            <h1 class="center" style="margin-top: 0%;">Upload Your Model</h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your model </h2>
             <button type="button" class="center btn-large" id="uploadModel">Add Your New Model</button>
         </div>
         <div id="upload_model" class="side-bar-padding create-side">
-            <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Upload Your New Model Here!</h1>
+            <h1 class="center" style="margin-top: 0%; padding-top: 16%;"> Upload Your New Model</h1>
             <span>
               <form ng-submit="addModel()" name="modelForm" enctype="multipart/form-data" novalidate>
                 <h1> Model Name</h1>
@@ -25,7 +25,7 @@
         </div>
         
         <div id="update_page" class="side-bar-padding update-side">
-            <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Model Here!</h1>
+            <h1 class="center" style="margin-top: 0%; padding-top:16%;"> Update Your Model</h1>
             <form name="updateModelForm" ng-submit="updateModel(update.id)" enctype="multipart/form-data" novalidate>
                 <h1> Model Name</h1>
                 <input type="text" name="model_name" placeholder="Model Name" ng-model="update.name"><br>
