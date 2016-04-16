@@ -30,7 +30,8 @@
   background: url("../images/img_banner_transparent.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 70%; }
+  background-size: 70%;
+  position: inherit; }
 
 .below-top-bar {
   background: #0daf83;
@@ -64,20 +65,20 @@ body {
     width: 50%; }
 
 .subtitle {
-  font-size: 20px;
-  margin-left: 30%;
+  font-size: 12px;
+  margin-left: 27%;
   margin-top: -13px;
   width: 50%; }
 
 .sub-content {
   font-size: 20px;
-  margin-top: 130px;
   text-align: right; }
 
 .vertical-line {
   border-left: thick solid #FFFFFF;
+  border-width: 3px;
+  margin-bottom: -40px;
   margin-left: 100px;
-  margin-top: 70px;
   text-align: left; }
 
 .btn-danger {

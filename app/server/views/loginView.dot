@@ -16,12 +16,12 @@
         </div>
 		<div class="container">  
              <div class="content"> 
-                <div style="height:300px; margin-top: 18px;" class="img-banner">
+                <div style="height:369px; margin-top: 18px;" class="img-banner">
                 </div>
                 <div class="flexbox-container">
                     <div><h3 class="sub-content">Build Augmented Reality with your fingertips</h3></div>
                     <span class="vertical-line"></span>
-                    <div class="center-align"><h4>Get Started</h4>
+                    <div class="center-align" style="margin-top:-35px;"><h4>Get Started</h4>
                     <a href="/auth/google" class="btn btn-danger"><span class="fa fa-google-plus"></span> Login with Google</a></div>
                 </div>
             </div>
