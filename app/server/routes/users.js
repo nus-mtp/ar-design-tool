@@ -1,7 +1,8 @@
 /**
- * @module userApi
- * @parent VUMIX
- * This is the api for users 
+ * @module UserAPI
+ * @parent Routes
+ * All user apis goes here
+ * To use, require module from /server/routes/users
  */
 var models  = require('../models'),
     express = require('express');
@@ -9,11 +10,10 @@ var models  = require('../models'),
 var router = express.Router();
 
 /**
- * @module fetchAllUsers
- * @parent userApi
- * Returns all users registered with the system
- * GET
- * api: /api/users
+ * @module GET/api/users/
+ * @parent UserAPI
+ * @body
+ * GET Returns all users registered with the system
  */
 router.get('/', function(req, res) {
     models.googleUser.findAll().then(function(users){
@@ -22,11 +22,10 @@ router.get('/', function(req, res) {
 });
 
 /**
- * @module fetchOneUser
- * @parent userApi
- * Returns one user with {id} registered with the system
- * GET
- * api: /api/users/{id}
+ * @module GET/api/users/:id
+ * @parent UserAPI
+ * @body
+ * GET Returns one user with {id} registered with the system
  */
 router.get('/:id', function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {
@@ -39,12 +38,16 @@ router.get('/:id', function(req, res) {
 });
 
 /**
- * @module insertUser
- * @parent userApi
- * @param req.body.id, req.body.name, req.body.token, req.body.email
- * create new user
- * POST
- * api: /api/users
+ * @module POST/api/users/
+ * @parent UserAPI
+ * @param req.body.name
+ * Name of user
+ * @param req.body.email
+ * Email of user
+ * @param req.body.token
+ * Token of user
+ * @body
+ * POST create new user. Used mainly for testing.
  */
 router.post('/', function(req, res) {
     var newUser = {
@@ -69,11 +72,10 @@ router.post('/', function(req, res) {
 });
 
 /**
- * @module deleteUser
- * @parent userApi
- * Delete user with {id}
- * DELETE
- * api: /api/users/{id}
+ * @module DELETE/api/users/:id
+ * @parent UserAPI
+ * @body
+ * DELETE Delete user with {id}
  */
 router.delete('/:id', function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {
@@ -92,12 +94,14 @@ router.delete('/:id', function(req, res) {
 });
 
 /**
- * @module updateUser
- * @parent userApi
- * @param req.body.name, req.body.email
- * update user with {id}
- * PUT
- * api: /api/users/{id}
+ * @module PUT/api/users/:id
+ * @parent UserAPI
+ * @param req.body.name
+ * Name of user
+ * @param req.body.email
+ * Email of user
+ * @body
+ * PUT update user with {id}
  */
 router.put('/:id', function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {

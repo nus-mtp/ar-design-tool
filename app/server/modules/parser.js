@@ -3,6 +3,7 @@
  * @parent Modules
  * Use the parser module to add flags or options to the program. 
  * This module is runned first after requiring the file path and util configs.
+ * To use, require module from /server/modules/parser
  */
 var program		= require('commander');
 var remoteDB 	= false;

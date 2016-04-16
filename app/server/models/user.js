@@ -3,6 +3,7 @@
  * @module User
  * @parent Models
  * User is the database model which stores the user's account metadata 
+ * This module is auto loaded by SequelizeJS 
  */
 "use strict";
 

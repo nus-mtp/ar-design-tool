@@ -3,6 +3,7 @@
  * @parent Modules
  * @body
  * This module includes all the functions that are related to unity projects 
+ * To use, require module from /server/modules/unity
  */
 var file_paths 	= require('../config/file_path'),
 	utils 		= require('../modules/utils'),

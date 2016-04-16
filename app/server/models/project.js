@@ -3,6 +3,7 @@
  * @module project
  * @parent Models
  * Project is the database model which stores the user's project metadata 
+ * This module is auto loaded by SequelizeJS 
  */
 "use strict";
 module.exports = function(sequelize, DataTypes) {

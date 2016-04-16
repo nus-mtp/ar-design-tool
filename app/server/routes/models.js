@@ -1,9 +1,11 @@
 /**
- * @module modelApi
- * @parent VUMIX
- * This is the api for user models  
+ * @module ModelsAPI
+ * @parent Routes
+ * @body
+ * All model apis goes here
+ * To use, require module from /server/routes/models    
  */
-var file_paths  = require('../config/file_path'),
+ var file_paths  = require('../config/file_path'),
     utils       = require('../modules/utils'),
     unity       = require('../modules/unity'),
     models      = require('../models'),
@@ -24,11 +26,10 @@ var router = express.Router({mergeParams: true});
 var upload = multer({ storage: storage });
 
 /**
- * @module fetchAllModels
- * @parent modelApi
- * Returns all models of user with {userid}
- * GET
- * api: /api/users/{userId}/models
+ * @module GET/api/users/:userId/models
+ * @parent ModelsAPI
+ * @body
+ * GET Returns all models of user with {userid}
  */
 router.get('/', function(req, res) {
     models.model.findAll({
@@ -44,11 +45,10 @@ router.get('/', function(req, res) {
 });
 
 /**
- * @module fetchOneModel
- * @parent modelApi
- * Returns one model with {id} of user with {userid}
- * GET
- * api: /api/users/{userId}/models/{id}
+ * @module GET/api/users/:userId/models/:id
+ * @parent ModelsAPI
+ * @body
+ * GET Returns one model with {id} of user with {userid}
  */
 router.get('/:id', function(req, res) {
     models.model.find({
@@ -69,12 +69,16 @@ router.get('/:id', function(req, res) {
 });
 
 /**
- * @module insertModel
- * @parent modelApi
- * @param req.body.userId, req.body.name, req.body.file_size, req.body.file_extension, req.body.file_location
- * create new model owned by user with {userId}
- * POST
- * api: /api/users/{userId}/models
+ * @module POST/api/users/:userId/models
+ * @parent ModelsAPI
+ * @param req.body.model_name
+ * name of the mode
+ * @param req.file
+ * model file
+ * @param req.body.file_extension
+ * extension of the model
+ * @body
+ * POST create new model owned by user with {userId}
  */
 router.post('/', upload.single("file"), function(req, res) {
     console.log('uploading model...');
@@ -131,11 +135,10 @@ var insertModelDB = function(newModel, physical_model, goodCallback, badCallback
 };
 
 /**
- * @module deleteModel
- * @parent modelApi
- * Delete model with {id} owned by user with {userId}
- * DELETE
- * api: /api/users/{userId}/models/{id}
+ * @module DELETE/api/users/:userId/models/:id
+ * @parent ModelsAPI
+ * @body
+ * DELETE Delete model with {id} owned by user with {userId}
  */
 router.delete('/:id', function(req, res) {
     var uid = req.params.userId;
@@ -174,12 +177,16 @@ var deleteModelDB = function(id, uid, modelName, model, goodCallback, badCallbac
 };
 
 /**
- * @module updateModel
- * @parent modelApi
- * @param req.body.name, req.body.file_size, req.body.file_extension
- * update model with {id} owned by user with {userId}
- * PUT
- * api: /api/users/{userId}/models/{id}
+ * @module PUT/api/users/:userId/models
+ * @parent ModelsAPI
+ * @param req.body.model_name
+ * name of the mode
+ * @param req.file
+ * model file
+ * @param req.body.file_extension
+ * extension of the model
+ * @body
+ * PUT update model with {id} owned by user with {userId}
  */
 router.put('/:id', upload.single("file"), function(req, res) {
     console.log("uploading model");

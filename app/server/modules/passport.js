@@ -4,6 +4,7 @@
  * @body
  * This module sets the serializing and deserializing of user data as well as 
  * setting up the login strategy to use. 
+ * To use, require module from /server/modules/passport
  */
 var GoogleStrategy 	= require('passport-google-oauth').OAuth2Strategy;
 var models 			= require('../models');
