@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<!--####################################################################
+	THIS IS A GENERATED FILE -- ANY CHANGES MADE WILL BE OVERWRITTEN
+
+	INSTEAD CHANGE:
+	source: server\modules\utils.js
+	@module copyFile
+######################################################################## -->
+
+<!--[if lt IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8 lt-ie7" lang="en">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js ie lt-ie9 lt-ie8" lang="en">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js ie lt-ie9" lang="en">
+<![endif]-->
+<!--[if IE 9]>
+<html class="no-js ie ie9" lang="en">
+<![endif]-->
+<!--[if gt IE 9]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<title>VUMIX  - copyFile</title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<!--[if lt IE 9]>
+   <script type="text/javascript" src="static/html5shiv.js"></script>
+    <!--<![endif]-->
+</head>
+
+<body class="docs">
+	
+	<header>
+		<nav class="container">
+
+			<div class="logo-menu">
+				<a class="brand" href="./index.html">VUMIX</a>
+			</div>
+
+			<div class="pull-right">
+				<div class="bitovi-menu">
+					<a href="http://bitovi.com" class="bitovi icon-bits">Bitovi</a>
+					<ul class="dropdown-menu">
+						<li><a href="http://bitovi.com">Bitovi.com</a></li>
+						<li><a href="http://bitovi.com/blog/">Blog</a></li>
+						<li><a href="http://bitovi.com/design/">Design</a></li>
+						<li><a href="http://bitovi.com/development/">Development</a></li>
+						<li><a href="http://bitovi.com/training/">Training</a></li>
+						<li><a href="http://bitovi.com/open-source/">Open Source</a></li>
+						<li><a href="http://bitovi.com/people/">People</a></li>
+						<li><a href="http://bitovi.com/contact/">Contact Us</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+
+	
+<div class="container api">
+
+	
+	<nav class="sidebar">
+		
+		<ul class="api cascading primary-grouping"> 
+	
+		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="index.html" data-search="VUMIX">
+				VUMIX
+			</a>
+			
+		</li>
+		
+		
+			
+			<li class="search-container active">
+			<a class="sidebar-title" href="utils.html" data-search="utils">
+				utils
+			</a>
+			
+	<ul>
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="module" href="checkExistsIfNotCreate.html" data-search="checkExistsIfNotCreate">
+						checkExistsIfNotCreate
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container active ">
+					<a class="module" href="copyFile.html" data-search="copyFile">
+						copyFile
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="module" href="deleteDir.html" data-search="deleteDir">
+						deleteDir
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="module" href="deleteFile.html" data-search="deleteFile">
+						deleteFile
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="module" href="moveFileToDest.html" data-search="moveFileToDest">
+						moveFileToDest
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="module" href="writeJson.html" data-search="writeJson">
+						writeJson
+					</a>
+				</li>
+				
+			
+			
+		
+	</ul>
+
+		</li>
+			
+		
+	
+</ul>
+	</nav>
+	
+	
+	
+	<article class="content docs">
+	
+	
+		
+		<section class="title">
+			<div class="heading">
+<h1>copyFile</h1>
+	<ul class="tags">
+		<li>module</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+		
+		
+		<section class="contents">
+		</section>
+		
+		
+		
+
+		
+
+		
+			
+		
+		
+		
+			<section class="signature">
+				<h2 id="sig_">utils.copyFile(file, dest, goodcallback, badcallback)
+</h2>
+<div class="signature-wrapper">
+
+
+	<h3>Parameters</h3>
+
+	<ol class="parameters">
+		
+		<li class="parameter">
+			<h4>file
+				<code>{String}</code></h4>
+			<div class="description">
+				<p>file is the path to the file that is to be copied</p>
+
+			</div>
+			
+			
+			
+		</li>
+		
+		<li class="parameter">
+			<h4>dest
+				<code>{String}</code></h4>
+			<div class="description">
+				<p>dest is the destination path to copy the file to</p>
+
+			</div>
+			
+			
+			
+		</li>
+		
+		<li class="parameter">
+			<h4>goodcallback
+				<code>{function()}</code></h4>
+			<div class="description">
+				<p>goodcallback() is called if exits after moving is completed</p>
+
+			</div>
+			
+			
+			
+		</li>
+		
+		<li class="parameter">
+			<h4>badcallback
+				<code>{function()}</code></h4>
+			<div class="description">
+				<p>badcallback() is called if exists when an error occurs while moving file</p>
+
+			</div>
+			
+			
+			
+		</li>
+		
+	</ol>
+
+
+
+
+
+
+</div>
+
+			</section>
+		
+		
+
+		
+		<section class="comment">
+			<p>Copies a file from the location file to location dest.</p>
+
+		</section>
+		
+		
+
+		
+
+		
+	
+	
+	</article>
+	
+	
+
+</div>
+
+
+
+
+
+	
+	<footer>
+		<nav class="container">
+			<a class="brand javascriptmvc" href="index.html"></a>
+		</nav>
+	</footer>
+	
+	
+	<script type="text/javascript">
+		var docObject = {"type":"module","name":"copyFile","params":[{"types":[{"type":"String"}],"name":"file","description":"file is the path to the file that is to be copied"},{"types":[{"type":"String"}],"name":"dest","description":"dest is the destination path to copy the file to"},{"types":[{"type":"function","returns":{"types":[{"type":"undefined"}]},"params":[]}],"name":"goodcallback","description":"goodcallback() is called if exits after moving is completed"},{"types":[{"type":"function","returns":{"types":[{"type":"undefined"}]},"params":[]}],"name":"badcallback","description":"badcallback() is called if exists when an error occurs while moving file"}],"parent":"utils","src":"server\\modules\\utils.js","line":73,"codeLine":87,"description":"","title":"","comment":" ","ignore":"{node_modules,bower_components,test,public}/**/*, gulpfile.js","glob":{"pattern":"**/*.{md,js}","ignore":"{node_modules,bower_components}/**/*","cwd":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\app"},"dest":"C:\\Users\\john\\Documents\\repo\\ar-design-tool\\docs","generators":["html"],"docConfigDest":"../app/documentjs.json","project":{}};
+	</script>
+	
+	
+		<script>
+		  steal = {
+		    instantiated: {
+		      "bundles/static.css!$css" : null
+		    }
+		  }
+		</script>
+		<script type='text/javascript' 
+				data-main="static"
+				data-config="./static/config.js"
+				src="./static/steal.production.js"
+	    		bundles-path="bundles"></script>
+	
+</body>
+
+</html>
