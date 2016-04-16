@@ -1,11 +1,9 @@
 /**
- * @module passportgoogle
- * @parent Server_Modules
- * This module configures passportjs 
- *
- * @param {{}} passport 
- *	Requires passportjs
- * 
+ * @module PassportJS
+ * @parent Modules
+ * @body
+ * This module sets the serializing and deserializing of user data as well as 
+ * setting up the login strategy to use. 
  */
 var GoogleStrategy 	= require('passport-google-oauth').OAuth2Strategy;
 var models 			= require('../models');
@@ -24,11 +22,6 @@ module.exports = function(passport) {
 		});
 	});
 
-	/**
-	 * @function passport.use.GoogleStrategy
-	 * @parent passportgoogle
-	 * This function configures passportjs to use the Google strategy
-	 */
 	passport.use(new GoogleStrategy({
 		clientID: configAuth.googleAuth.clientID,
 		clientSecret: configAuth.googleAuth.clientSecret,

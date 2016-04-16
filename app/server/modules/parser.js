@@ -1,7 +1,18 @@
-var	program	= require('commander');
+/**
+ * @module Parser
+ * @parent Modules
+ * Use the parser module to add flags or options to the program. 
+ * This module is runned first after requiring the file path and util configs.
+ */
+var program		= require('commander');
+var remoteDB 	= false;
 
-var remoteDB = false;
-
+/**
+ * @function processArg
+ * @parent Parser
+ * This function is run on first run of the app. 
+ * It processes any flags that are set and runs the corresponding code called.
+ */
 var processArg = function() {
 	program
 		.option('-p, --production', 'set production environment')
