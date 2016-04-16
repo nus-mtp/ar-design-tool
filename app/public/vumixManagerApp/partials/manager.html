@@ -20,10 +20,11 @@
                 <span class="text-warning" ng-show="addProjectForm.projectName.$error.fileName">Project name is already exist</span>
               </div>
               <h2> Upload Your Vuforia Package</h2>
-              <a style="text-decoration: underline; color:#FFFFFF;" target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
+              <a style="text-decoration: underline; color:#FFFFFF;" target="_blank" href="https://developer.vuforia.com/support">Find out how to create a target</a>
               <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
               <div class="text-warning" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
               <div class="text-warning" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
+              <span class="text-muted">Valid file extension is .unitypackage</span>
               <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="border:0; margin-top:20px; background-color:#FFFFFF; color:#0daf83">
             </form>
         </div>
@@ -39,6 +40,7 @@
                 <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()"/> 
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.required">Project file cannot be empty</div>
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
+                <span class="text-muted">Valid file extension is .unitypackage</span>
                 <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="border:0; margin-top:20px; margin-bottom:8px;  background-color:#FFFFFF; color:#5bc0de">
                 <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
