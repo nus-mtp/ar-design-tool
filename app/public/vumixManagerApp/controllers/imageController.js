@@ -225,6 +225,7 @@
         };       
         
         $scope.addImage = function(){
+           $("#welcome_image").show();
            imageService.addImage($scope.image, $scope.image.upload, $scope.userid)
                 .then(function(image) {
                 $scope.images.push(image);

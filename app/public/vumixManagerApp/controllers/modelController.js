@@ -225,6 +225,7 @@
         };       
         
         $scope.addModel = function(){
+           $("#welcome_model").show();
            modelService.addModel($scope.model, $scope.model.upload, $scope.userid)
                 .then(function(model) {
                 $scope.models.push(model);
