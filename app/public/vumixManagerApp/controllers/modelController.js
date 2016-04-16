@@ -29,10 +29,8 @@
             image_url: "",
             upload: undefined
         }; 
-
-        var cookie = document.cookie.split(';')[0];
-        $scope.userid = uid;
         
+        $scope.userid = uid;
         $scope.model.image_url = "/resources/images/logo_white.png";  //supposed to read from database
         $scope.update.image_url = "/resources/images/logo_white.png";
         
