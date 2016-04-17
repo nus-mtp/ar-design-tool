@@ -1,0 +1,69 @@
+<form ng-submit="stateCreationSubmit()" name="stateCreationForm" class="form-horizontal bottom-divider">
+  <div class="form-group">
+    <div class="col-sm-12">
+      <h4 style="text-align:center;">Create State</h4>
+    </div>
+  </div>
+  <div class="form-group form-group-sm">
+    <label for="name-state-creation" class="col-sm-2 control-label">Name</label>
+    <div class="col-sm-10">
+      <input type="text" id="name-state-creation" ng-model="stateCreation.name" name="nameStateCreation" class="form-control input-sm" placeholder="type state name" ng-focus="unityMapperService.activateKeyboard()" ng-blur="unityMapperService.deactivateKeyboard()" required />
+      <span class="text-warning text-small" ng-show="stateCreationForm.nameStateCreation.$error.required">Name cannot be empty</span>
+      <span class="text-warning text-small" ng-show="stateCreationForm.nameStateCreation.$error.duplicate">Cannot duplicate name</span>
+      <div class="text-warning text-small" ng-show="stateCreationForm.nameStateCreation.$error.editmode">Edit Mode is open</div>
+      <div class="text-warning text-small" ng-show="stateCreationForm.nameStateCreation.$error.deletemode">Delete Mode is open</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-6 col-sm-6">
+      <button type="submit" ng-disabled="stateCreationForm.$invalid" class="btn btn-custom btn-sm btn-block">Add State</button>
+    </div>
+  </div>
+</form>
+<form ng-submit="connCreationSubmit()" name="connCreationForm" class="form-horizontal bottom-divider">
+  <div class="form-group">
+    <div class="col-sm-12">
+      <h4 style="text-align:center;">Create State Connector</h4>
+    </div>
+  </div>
+  <div class="form-group form-group-sm">
+    <label for="fromConnCreation" class="col-sm-2 control-label">From</label>
+    <div class="col-sm-10">
+      <select name="fromConnCreation" id="fromConnCreation" class="form-control" ng-options="state.name for state in states track by state.id" ng-model="stateCreation.from" required ></select>
+    </div>
+  </div>
+  <div class="form-group form-group-sm">
+    <label for="toConnCreation" class="col-sm-2 control-label">To</label>
+    <div class="col-sm-10">
+      <select name="toConnCreation" id="toConnCreation" class="form-control" ng-options="state.name for state in states track by state.id" ng-model="stateCreation.to" required ></select>
+      <span class="text-warning text-small" ng-show="connCreationForm.toConnCreation.$error.empty">Options must be filled</span>
+      <span class="text-warning text-small" ng-show="connCreationForm.toConnCreation.$error.duplicate">Connection already exist</span>
+      <span class="text-warning text-small" ng-show="connCreationForm.toConnCreation.$error.self">Self loop is not allowed</span>
+      <div class="text-warning text-small" ng-show="connCreationForm.toConnCreation.$error.editmode">Edit Mode is open</div>
+      <div class="text-warning text-small" ng-show="connCreationForm.toConnCreation.$error.deletemode">Delete Mode is open</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-offset-6 col-sm-6">
+      <button type="submit" ng-disabled="connCreationForm.$invalid" class="btn btn-custom btn-sm btn-block"><i class="fa fa-link fa-lg"></i> Add Connector</button>
+    </div>
+  </div>
+</form>
+<div class="grouper bottom-divider">
+  <div class="row">
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-success btn-sm btn-block" ng-disabled="deleteMode" ng-click="toggleEditMode()">
+        <span ng-show="!editMode"><i class="fa fa-edit fa-lg"></i> Edit Mode</span>
+        <span ng-show="editMode">Done Editing</span>
+      </button>    
+    </div>
+    <div class="col-xs-6">
+      <button type="button" class="btn btn-danger btn-sm btn-block" ng-disabled="editMode" ng-click="toggleDeleteMode()">
+        <span ng-show="!deleteMode"><i class="fa fa-remove fa-lg"></i> Delete Mode</span>
+        <span ng-show="deleteMode">Done Deleting</span>        
+      </button>
+    </div>
+  </div>
+</div>
+<p ng-show="editMode" style="margin-top: 10px">Edit Mode is enabled. Click any states or connectors to edit their properties. Click the "done ediiting" button once finishes</p>
+<p ng-show="deleteMode" style="margin-top: 10px" class="text-danger">Deleting Mode is enabled. Beware that double clicking any states or their connectors will remove them. Any neighbouring connectors will be removed</p>

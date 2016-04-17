@@ -6,6 +6,7 @@
       service.open = false;
       service.preview = false;
       service.id = -1;
+      service.name = "";
       
       var notifyDisplayStateIdChange = function() {
         $rootScope.$emit('_$displayStateIdChange');
@@ -16,9 +17,10 @@
         $scope.$on('$destroy', handler);
       }
       
-      service.openEditor = function(id) {
+      service.openEditor = function(id, name) {
           this.id = id;
-          unityMapperService.setTargetState(id);
+          this.name = name;
+          unityMapperService.setTargetState(parseInt(id));
           unityMapperService.displayState();
           notifyDisplayStateIdChange();
           this.open = true;

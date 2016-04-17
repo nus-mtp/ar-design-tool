@@ -9,12 +9,12 @@
       
       var notifyStateChange = function() {
         $rootScope.$emit('_$stateChange');
-      }
+      };
       
       service.subscribeToStateChange = function($scope, callback) {
         var handler = $rootScope.$on('_$stateChange', callback);
         $scope.$on('$destroy', handler);
-      }
+      };
       
 // STATE APIS START HERE
 
@@ -24,9 +24,16 @@
       }
       
       // get single state given id
-      service.getState = function(id) {
+      service.getStateById = function(id) {
         return $.grep(_state.states, function(state) {
           return state.id === id;
+        })[0];
+      }
+      
+      // get single state given name
+      service.getStateByName = function(name) {
+        return $.grep(_state.states, function(state) {
+          return state.name === name;
         })[0];
       }
       
@@ -100,7 +107,7 @@
 
       // get all state models given id of state
       service.getStateObjects = function(id) {
-        var state = this.getState(id);
+        var state = this.getStateById(id);
         if (!state) {
           return [];
         }  
@@ -110,7 +117,7 @@
       // get all clickable state models
       service.getClickableStateObjects = function(id)
       {
-        var state = this.getState(id);
+        var state = this.getStateById(id);
         if (!state) {
           return [];
         }
@@ -166,6 +173,39 @@
       
 // STATE OBJECT APIS END HERE
 
+// STATE CONNECTION APIS START HERE
+
+      _state.stateConn = [];
+      
+      var notifyStateConnectionChange = function() {
+        $rootScope.$emit('_$stateConnChange');
+      };
+      
+      service.subscribeToStateConnectionChange = function($scope, callback) {
+        var handler = $rootScope.$on('_$stateConnChange', callback);
+        $scope.$on('$destroy', handler);
+      };
+      
+      service.getAllStateConnection = function() {
+        return _state.stateConn;
+      };
+      
+      service.stateExist = function(fromId, toId) {
+        var _conn = $.grep(_state.stateConn, function(conn) {
+          return conn.from === fromId && conn.to === toId;
+        });
+        return _conn.length > 0;
+      };
+      
+      service.addStateConnection = function(fromId, toId) {
+        if(!this.stateExist(fromId, toId)) {
+          _state.stateConn.push({ from:fromId, to:toId });
+          notifyStateConnectionChange();
+        }
+      };
+      
+// STATE CONNECTION APIS ENDS HERE
+
       // NOT SAFE TO CALL
       // add model to existing class, given name
       // id is auto generated, called by Unity
@@ -191,12 +231,24 @@
             models: el.stateObjects
           };
           _state.states.push(state);
+          
+          state.models.forEach(function(model) {
+            if (model.transitionId >= 0) {
+              var conn = { from:state.id, to:model.transitionId };
+              if (!self.stateExist(conn.from, conn.to)) {
+                _state.stateConn.push(conn);
+              }
+            }  
+          });
+          
         });
         
         _state.stateIndex = _state.states.length;
         notifyStateChange();
+        notifyStateConnectionChange();
       };
-      
+            
       return service;
+      
     });
 })();
