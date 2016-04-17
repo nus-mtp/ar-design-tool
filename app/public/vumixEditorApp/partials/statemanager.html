@@ -12,21 +12,35 @@
   </nav>    
   <div class="content">
     <div class="sidebar" ui-view="defaultSidebar"></div>
-    <div class="alert alert-warning top-alert" role="alert">
-      <i class="fa fa-warning fa-lg"></i> <strong>Warning</strong>, Empty connectors are detected. Empty comnectors will be removed when reloaded. 
-    </div> 
+    <div ng-repeat="notification in notifications">
+      <div ng-click="notificationService.dismiss(notification)" class="alert alert-{{ notification.type }} top-alert" role="alert">
+        <i class="fa fa-{{ notification.type }} fa-lg"></i> <strong>{{ notification.type }}</strong> {{ notification.message }}
+      </div> 
+    </div>
     <vis-network id="state-graph" data="graphData" options="graphOptions" events="graphEvents"></vis-network>
   </div>
 </div>
 <loader></loader>
 <div ui-view="editor" id="state-editor-page" ng-show="editorService.open"></div>
+<!--
+<div ui-view="editor" id="state-editor-page" ng-show="editorService.open"></div>
+-->
 
 <bs-modal modal-id="edit-state" modal-size="md">
   <modal-body>
-    State Edit
+    <form id="state-editor-form" name="modal.stateEditorForm" class="form-horizontal bottom-divider">
+      <div class="form-group">
+        <label for="name-state-editor" class="col-sm-2 control-label">Name*</label>
+        <div class="col-sm-10">
+          <input type="text" id="name-state-editor" ng-model="stateEditor.name" name="nameStateEditor" class="form-control" placeholder="type new state name" ng-focus="unityMapperService.activateKeyboard()" ng-blur="unityMapperService.deactivateKeyboard()" required />
+          <span class="text-warning text-small" ng-show="modal.stateEditorForm.nameStateEditor.$error.required">Name cannot be empty</span>
+          <span class="text-warning text-small" ng-show="modal.stateEditorForm.nameStateEditor.$error.duplicate">Cannot duplicate name</span>
+        </div>
+      </div>
+    </form>
   </modal-body>
   <modal-footer>
-    <a href="#" data-dismiss="modal" class="btn btn-default">Apply</a>
+    <a href="#" data-dismiss="modal" class="btn btn-default" ng-disabled="modal.stateEditorForm.$invalid" ng-click="changeStateProperties()">Apply</a>
     <a href="#" data-dismiss="modal" class="btn btn-default">Close</a>
   </modal-footer>
 </bs-modal>

@@ -3,13 +3,16 @@
     .controller('managerController', function(
       $scope,
       $window,
+      $timeout,
       VisDataSet,
       editorService,
       unityMapperService,
-      stateService
+      stateService,
+      notificationService
     ) {            
       $scope.editMode = false;
       $scope.deleteMode = false;
+      $scope.notifications = [];
       
       $scope.graphData = { nodes:new VisDataSet(), edges:new VisDataSet() };
       $scope.graphOptions = { interaction: { selectConnectedEdges:false } };
@@ -17,9 +20,13 @@
         doubleClick: function(event) {
           if (event.nodes.length > 0) {
             if ($scope.editMode) {
-              $("#edit-state").modal('show')
+              $("#edit-state").modal('show');
+              $scope.modal.id = event.nodes[0];
             } else if ($scope.deleteMode) {
-              // delete state           
+              var deletedState = stateService.removeState(parseInt(event.nodes[0]));
+              if (deletedState) {
+                $scope.$apply();
+              }           
             } else {
               var name = stateService.getStateById(parseInt(event.nodes[0])).name;
               editorService.openEditor(event.nodes[0], name);
@@ -37,7 +44,9 @@
         }
       };
       
+      $scope.notificationService = notificationService;
       $scope.editorService = editorService;    
+      $scope.unityMapperService = unityMapperService;
       $scope.buildApkLink = "/users/"+uid+"/projects/"+pid+"/buildproject";
       
       stateService.subscribeToStateChange($scope, function() {
@@ -46,6 +55,7 @@
         _states.forEach(function(_state) {
           visNode.push({ id:_state.id, label:_state.name, shape:'box' });
         });
+        $scope.graphData.nodes.clear();
         $scope.graphData.nodes.update(visNode);
       });      
       
@@ -56,6 +66,10 @@
           conn.smooth = { enabled:true, type:'diagonalCross' };
         });
         $scope.graphData.edges.update(_conn);
+      });
+      
+      notificationService.subscribeToNotificationsChange($scope, function() {
+        $scope.notifications = angular.copy(notificationService.getAllNotifications());  
       });
       
       $scope.saveState = function() {
@@ -74,5 +88,29 @@
         $scope.deleteMode = data.deleteMode;
       });
       
+      $timeout(function() {
+        $scope.modal.stateEditorForm.nameStateEditor.$setValidity('duplicate', true); 
+      }, 0);
+      
+      // state editor modal
+      
+      $scope.modal = {};
+      $scope.stateEditor = {};
+      $scope.stateEditor.name = "";
+      
+      $scope.$watch("stateEditor.name", function() {
+        if (stateService.getStateByName($scope.stateEditor.name)) {
+          $scope.modal.stateEditorForm.nameStateEditor.$setValidity('duplicate', false); 
+        } else {
+          $scope.modal.stateEditorForm.nameStateEditor.$setValidity('duplicate', true); 
+        }
+      });
+      
+      $scope.changeStateProperties = function() {
+        stateService.setStateName(parseInt($scope.modal.id), $scope.stateEditor.name);
+        $scope.stateEditor.name = "";
+      };
+      
     }); 
+    
 })();

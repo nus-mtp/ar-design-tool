@@ -62,7 +62,9 @@
 }
 
 #state-manager-page .content .top-alert {
+  border-radius: 0;
   position: relative;
   margin-left: 300px;
+  margin-bottom: 0;
   z-index: 10;
 }

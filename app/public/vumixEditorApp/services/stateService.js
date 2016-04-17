@@ -1,7 +1,7 @@
 // this service serves as an API for states and models in asset bundles
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('stateService', function($rootScope, modelService, unityMapperService, $http) {  
+    .factory('stateService', function($rootScope, modelService, unityMapperService, notificationService, $http) {  
       
       var service = {};
       var _state = {};
@@ -54,7 +54,7 @@
         
         // notify changes
         notifyStateChange();
-        
+        notificationService.addFreeNotification("success", " - state '" + name + "' has been successfully created. Click to dismiss.");        
         return newState;
       }
       
@@ -73,8 +73,8 @@
         unityMapperService.deleteState();
         
         // notify changes
-        notifyStateChange();
-        
+        notifyStateChange();        
+        notificationService.addFreeNotification("success", " - state '" + removedState.name + "' has been successfully removed. Click to dismiss.");
         return removedState;
       };
       
@@ -101,6 +101,16 @@
                 console.log("error adding the image");
             });
       }
+      
+      service.setStateName = function(id, name) {
+        this.getStateById(id).name = name;
+        unityMapperService.setTargetState(id);
+        unityMapperService.setStateName(name);
+        notificationService.addFreeNotification("success", " - state has been renamed to '" + name + "' successfully. Click to dismiss.");
+        notifyStateChange();
+      };
+      
+      
 // STATE APIS END HERE
 
 // STATE OBJECT APIS START HERE

@@ -35,6 +35,7 @@
     <script type="text/javascript" src="/vumixEditorApp/services/stateService.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/services/modelService.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/services/loaderService.js"></script>
+    <script type="text/javascript" src="/vumixEditorApp/services/notificationService.js"></script>
     
     <script type="text/javascript" src="/vumixEditorApp/directives/_directives.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/directives/bsModalDirective.js"></script>

@@ -30,6 +30,9 @@
               var modalFooter = $el.find('modal-footer').children();
               $scope.id = $attrs.modalId;
               $scope.size = $attrs.modalSize;
+              if(!$scope.$$phase) {
+                $scope.$apply();
+              }
             }
           };
         }
