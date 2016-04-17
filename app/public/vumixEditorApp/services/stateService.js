@@ -124,25 +124,12 @@
         return state.models;
       }
       
-      // get all clickable state models
-      service.getClickableStateObjects = function(id)
-      {
-        var state = this.getStateById(id);
-        if (!state) {
-          return [];
-        }
-        return $.grep(state.models, function(objectState) {
-          return objectState.isClickable;
-        });
-      }
-      
       service.addTextStateObject = function(stateId, text) {
         _state.states.forEach(function(state) {
           if (state.id === stateId) {
             var newStateObject = {
               instanceName: text,
               id: state.modelIndex++,
-              isClickable: true,
               stateTransitionId: -1
             }
             state.models.push(newStateObject);
@@ -158,7 +145,6 @@
             var newStateObject = {
               instanceName: object.name,
               id: state.modelIndex++,
-              isClickable: true,
               stateTransitionId: -1
             }
             state.models.push(newStateObject);
@@ -235,9 +221,9 @@
         
         stateModel.states.forEach(function(el, index) {
           var state = {
-            id: index,
+            id: el.id,
             name: el.name,
-            modelIndex: el.stateObjects.length, 
+            modelIndex: el.stateObjects[el.stateObjects.length-1].id + 1, 
             models: el.stateObjects
           };
           _state.states.push(state);
@@ -253,7 +239,7 @@
           
         });
         
-        _state.stateIndex = _state.states.length;
+        _state.stateIndex = _state.states[_state.states.length - 1].id + 1;
         notifyStateChange();
         notifyStateConnectionChange();
       };
