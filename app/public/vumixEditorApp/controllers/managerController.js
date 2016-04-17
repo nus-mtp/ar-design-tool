@@ -24,6 +24,7 @@
               $scope.modal.id = event.nodes[0];
             } else if ($scope.deleteMode) {
               var deletedState = stateService.removeState(parseInt(event.nodes[0]));
+              $scope.graphData.nodes.remove(deletedState.id);
               if (deletedState) {
                 $scope.$apply();
               }           
@@ -55,7 +56,6 @@
         _states.forEach(function(_state) {
           visNode.push({ id:_state.id, label:_state.name, shape:'box' });
         });
-        $scope.graphData.nodes.clear();
         $scope.graphData.nodes.update(visNode);
       });      
       
