@@ -152,7 +152,7 @@
         });
         unityMapperService.createInstanceObject(object.id);
         notifyStateChange();
-      }
+      };
       
       service.removeStateObject = function(stateId, object) {
         _state.states.forEach(function(state) {
@@ -165,6 +165,31 @@
         unityMapperService.setTargetStateObject(object.id);
         unityMapperService.removeInstanceObject();
         notifyStateChange();
+      };
+      
+      service.updateStateObject = function(stateId, objects) {
+        // we are not replacing because, the objects input has extra key, which is "included"
+        var _objectStates = [];
+        unityMapperService.setTargetState(stateId);
+        objects.forEach(function(object) {
+          var _object = angular.copy(object);
+          delete _object["included"];
+          _objectStates.push(_object);
+          // change each webgl objects transition ID
+          unityMapperService.setTargetStateObject(_object.id);
+          if (_object.stateTransitionId === -1) {
+            unityMapperService.unsetTransitionId();
+          } else {
+            unityMapperService.setTransitionId(_object.stateTransitionId);
+          }
+        });
+        _state.states.forEach(function(state) {
+          if (state.id === stateId) {
+            state.models = angular.copy(_objectStates);
+            notificationService.addFreeNotification("success", " - connector has been successfully updated. Click to dismiss.");
+            notifyStateChange();
+          }
+        });
       }
       
 // STATE OBJECT APIS END HERE
@@ -220,10 +245,11 @@
         modelService.setModelsAvailability();
         
         stateModel.states.forEach(function(el, index) {
+          var lastStateObjId = el.stateObjects.length === 0 ? 0 : el.stateObjects[el.stateObjects.length-1].id;
           var state = {
             id: el.id,
             name: el.name,
-            modelIndex: el.stateObjects[el.stateObjects.length-1].id + 1, 
+            modelIndex: lastStateObjId + 1, 
             models: el.stateObjects
           };
           _state.states.push(state);
@@ -239,7 +265,8 @@
           
         });
         
-        _state.stateIndex = _state.states[_state.states.length - 1].id + 1;
+        var lastStateId = _state.states.length === 0 ? 0 : _state.states[_state.states.length - 1].id;
+        _state.stateIndex = lastStateId + 1;
         notifyStateChange();
         notifyStateConnectionChange();
       };

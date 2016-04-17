@@ -57,29 +57,17 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="model in modelOnCurrentState | orderBy:'name'">
+          <tr ng-repeat="model in connEditor.selectedModels | orderBy:'name'">
             <td></td>
-            <td><label for="checkbox-{{ model.name }}">{{ model.name }}<span ng-show="model.available" class="text-muted" style="font-size: 10px"> - Models already available</span></label></td>
-            <td><input id="checkbox-{{ model.name }}" type="checkbox" name="selectedModels[]" value="{{ model.name }}" ng-model="model.included" ng-disabled="model.available" /></td>
+            <td><label for="checkbox-{{ model.instanceName }}">{{ model.instanceName }}<span ng-show="false" class="text-muted" style="font-size: 10px"> - Models already available</span></label></td>
+            <td><input id="checkbox-{{ model.instanceName }}" type="checkbox" name="selectedModels[]" value="{{ model.instanceName }}" ng-model="model.included" ng-disabled="model.available" /></td>
           </tr>
         </tbody>
       </table>
     </div>
   </modal-body>
   <modal-footer>
-    <div class="row">
-      <div class="col-xs-6">
-        <a href="#" class="btn btn-default" onclick="document.getElementById('addModelInput').click()" style="width:100%">Add Model To Server</a>
-      </div>
-      <div class="col-xs-5 col-xs-offset-1">
-        <button ng-click="addModelsToAssetBundle()" data-dismiss="modal" class="btn btn-default" ng-disabled="!modelsSelected">Apply</button>
-        <a href="#" data-dismiss="modal" class="btn btn-default" style="width:50%">Close</a>
-      </div>
-      <div class="col-xs-12">
-        <p class="text-danger" style="text-align:left; margin-top:10px; font-size:14px">
-          File must be in (.obj,.fbx,.3ds) format {{ uploadError }}
-        </p>
-      </div>
-    </div>
+    <a href="" data-dismiss="modal" class="btn btn-default" ng-click="changeConnProperties()">Apply</button>
+    <a href="" data-dismiss="modal" class="btn btn-default">Close</a>
   </modal-footer>
 </bs-modal>

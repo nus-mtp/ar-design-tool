@@ -37,7 +37,19 @@
             }
           } else if (event.edges.length > 0) {
             if ($scope.editMode) {
-              // edit edge
+              var _edge = $scope.graphData.edges.get(event.edges[0]);
+              $scope.connEditor.selectedConnector = _edge;
+              $scope.connEditor.selectedModels = angular.copy(stateService.getStateObjects(_edge.from));
+              $scope.connEditor.selectedModels.forEach(function(model) {
+                // set included to true if the model has transition state
+                if (model.stateTransitionId === -1) {
+                  model.included = false;
+                } else {
+                  model.included = true;
+                }
+              });
+              $scope.$apply();
+              $("#edit-connector").modal('show');
             } else if ($scope.deleteMode) {
               // delete edge
             }
@@ -92,9 +104,10 @@
         $scope.modal.stateEditorForm.nameStateEditor.$setValidity('duplicate', true); 
       }, 0);
       
+      $scope.modal = {};
+      
       // state editor modal
       
-      $scope.modal = {};
       $scope.stateEditor = {};
       $scope.stateEditor.name = "";
       
@@ -111,6 +124,20 @@
         $scope.stateEditor.name = "";
       };
       
+      // conenctor editor modal
+      
+      $scope.connEditor = {};
+      $scope.connEditor.selectedConnector = {};
+      $scope.connEditor.selectedModels = [];
+            
+      $scope.changeConnProperties = function() {
+        $scope.connEditor.selectedModels.forEach(function(model) {
+          if (model.included) {
+            model.stateTransitionId = $scope.connEditor.selectedConnector.to;
+          }
+        });
+        stateService.updateStateObject($scope.connEditor.selectedConnector.from, $scope.connEditor.selectedModels);
+      };
     }); 
     
 })();
