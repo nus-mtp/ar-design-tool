@@ -44,7 +44,7 @@ public class SaveProgress : MonoBehaviour {
     private byte[] SerializeData()
     {
         BinaryFormatter bf = new BinaryFormatter();
-        ProjectState toSerialize = stateManager.ToSerial();
+        SerialProjectState toSerialize = stateManager.ToSerial();
         MemoryStream s = new MemoryStream();
         bf.Serialize(s, toSerialize);
         return s.ToArray();

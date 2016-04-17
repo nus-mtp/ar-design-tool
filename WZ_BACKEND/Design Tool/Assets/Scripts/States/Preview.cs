@@ -4,7 +4,6 @@ using System.Collections;
 public class Preview : MonoBehaviour {
 
     private bool isPreview = false;
-    private bool isStateChanger = false;
     private StateManager stateManager;
     private int transitionStateId;
     public void DisablePreview()
@@ -12,11 +11,11 @@ public class Preview : MonoBehaviour {
         isPreview = false;
     }
 
-    public void SetPreview(int transitionStateId, bool isStateChanger)
+    public void SetPreview(int transitionStateId)
     {
         isPreview = true;
         this.transitionStateId = transitionStateId;
-        this.isStateChanger = isStateChanger;
+        
     }
 
     void OnMouseDown()
@@ -27,7 +26,7 @@ public class Preview : MonoBehaviour {
         }
         else
         {
-            if (isStateChanger)
+            if (transitionStateId != -1)
             {
                 stateManager.SwitchState(transitionStateId);
             }

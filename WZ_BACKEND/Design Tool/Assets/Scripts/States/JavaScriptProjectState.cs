@@ -58,7 +58,6 @@ public class JavaScriptStateObject
     public JavaScriptStateObject(StateObject so){
         instanceName = so.instanceName;
         id = so.id;
-        isClickable = so.isClickable;
         stateTransitionId = so.transitionStateId;
     }
 }

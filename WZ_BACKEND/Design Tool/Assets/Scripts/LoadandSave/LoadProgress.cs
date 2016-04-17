@@ -12,7 +12,7 @@ public class LoadProgress : MonoBehaviour {
     private StateManager stateManager;
     private Facade facade;
 
-    public ProjectState projectState; 
+    public SerialProjectState projectState; 
   
     public void Load(string url)
     {
@@ -38,7 +38,7 @@ public class LoadProgress : MonoBehaviour {
         www.Dispose();
         BinaryFormatter bf = new BinaryFormatter();
         Stream stream = new MemoryStream(saveData);
-        projectState = (ProjectState)bf.Deserialize(stream);
+        projectState = (SerialProjectState)bf.Deserialize(stream);
         List<SerialState> states = projectState.serialStates;
         stateManager.InitialzeStates(states);
         facade.SendProjectInfo();

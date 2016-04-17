@@ -238,9 +238,9 @@ public class StateManager : MonoBehaviour
         stateNumber = toSwitch;
     }
 
-    public ProjectState ToSerial()
+    public SerialProjectState ToSerial()
     {
-        ProjectState project = new ProjectState();
+        SerialProjectState project = new SerialProjectState();
         List<SerialState> serialStates = new List<SerialState>();
         Dictionary<int, State>.Enumerator enumerator = stateList.GetEnumerator();
 

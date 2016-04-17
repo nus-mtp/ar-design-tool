@@ -37,7 +37,7 @@ public class StateObjectChanger : MonoBehaviour
         transitionStateText = transform.FindChild(TRANSITION_STATE_NAME).gameObject.GetComponentInChildren<Text>(); ;
 
 
-        if (stateObject.isClickable)
+        if (stateObject.transitionStateId != -1)
         {
             toggle = GetComponentInChildren<Toggle>();
             toggle.isOn = true;
@@ -93,7 +93,6 @@ public class StateObjectChanger : MonoBehaviour
         {
             toggle = GetComponentInChildren<Toggle>();
         }
-        stateObject.isClickable = toggle.isOn;
         if (toggle.isOn)
         {
             transitionStateText.text = TRANSITION_STATE_DISPLAY + stateObject.transitionStateId;

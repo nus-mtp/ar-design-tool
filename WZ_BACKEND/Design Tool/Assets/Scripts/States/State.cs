@@ -43,13 +43,13 @@ public class State
         so.id = nextStateObjectId;
         stateObjects.Add(so.id, so);
         nextStateObjectId++;
-        CreateStateObjectButton(so);
+        //CreateStateObjectButton(so);
     }
 
     public void AddToState(StateObject so)
     {
         stateObjects.Add(so.id, so);
-        CreateStateObjectButton(so);
+        //CreateStateObjectButton(so);
     }
 
     public void DestroyState()
@@ -120,10 +120,7 @@ public class State
         while (enumerator.MoveNext())
         {
             StateObject s = enumerator.Current.Value;
-            if (s.isClickable)
-            {
-                clickables.Add(s);
-            }
+            clickables.Add(s);
         }
         return clickables;
     }

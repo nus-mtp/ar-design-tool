@@ -8,7 +8,6 @@ public class StateObject{
     public StateObjectChanger stateObjectChanger;
     public string instanceName;
     public int id;
-    public bool isClickable;
     public int transitionStateId;
     public StateObjectType type;
 
@@ -19,18 +18,19 @@ public class StateObject{
         g.AddComponent<Transformable>();
         g.AddComponent<Preview>();
         this.type = type;
+        transitionStateId = -1;
     }
 
     public void Hide()
     {
         gameObject.SetActive(false);
-        button.SetActive(false);
+        //button.SetActive(false);
     }
 
     public void Show()
     {
         gameObject.SetActive(true);
-        button.SetActive(true);
+        //button.SetActive(true);
     }
 
     public void Destroy()
@@ -45,7 +45,7 @@ public class StateObject{
         Transformable t = gameObject.GetComponent<Transformable>();
         t.SetPreview();
         Preview p = gameObject.GetComponent<Preview>();
-        p.SetPreview(transitionStateId, isClickable);
+        p.SetPreview(transitionStateId);
     }
 
     public void DisablePreview()
@@ -64,7 +64,7 @@ public class StateObject{
 
     public void RemoveLink(int stateId)
     {
-        if (isClickable && transitionStateId == stateId)
+        if (transitionStateId == stateId)
         {
             UnSetTransition();
         }
@@ -72,13 +72,12 @@ public class StateObject{
 
     public void UnSetTransition()
     {
-        isClickable = false;
-        stateObjectChanger.UnSetIsStateChanger();
+        transitionStateId = -1;
+        //stateObjectChanger.UnSetIsStateChanger();
     }
 
     public void SetTransition(int transitionStateId)
     {
-        isClickable = true;
         this.transitionStateId = transitionStateId;
     }
 }

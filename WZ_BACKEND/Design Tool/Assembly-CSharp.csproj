@@ -52,11 +52,10 @@
      <Compile Include="Assets\Scripts\Spawning\ModelCreator.cs" />
      <Compile Include="Assets\Scripts\Spawning\TextCreator.cs" />
      <Compile Include="Assets\Scripts\States\JavaScriptProjectState.cs" />
-     <Compile Include="Assets\Scripts\States\ModelStateObject.cs" />
      <Compile Include="Assets\Scripts\States\Preview.cs" />
-     <Compile Include="Assets\Scripts\States\ProjectState.cs" />
-     <Compile Include="Assets\Scripts\States\SerialState.cs" />
-     <Compile Include="Assets\Scripts\States\SerialStateObject.cs" />
+     <Compile Include="Assets\Scripts\States\Serial stuff\SerialProjectState.cs" />
+     <Compile Include="Assets\Scripts\States\Serial stuff\SerialState.cs" />
+     <Compile Include="Assets\Scripts\States\Serial stuff\SerialStateObject.cs" />
      <Compile Include="Assets\Scripts\States\SpawnObjectWrapper.cs" />
      <Compile Include="Assets\Scripts\States\State.cs" />
      <Compile Include="Assets\Scripts\States\StateManager.cs" />
@@ -76,7 +75,6 @@
      <Compile Include="Assets\Scripts\Transformation Scripts\UserInterfaceButtons.cs" />
      <Compile Include="Assets\Scripts\Utility\DeleteSwitchState.cs" />
      <Compile Include="Assets\Scripts\Utility\TextureChange.cs" />
-     <Compile Include="Assets\Scripts\testdelete.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
