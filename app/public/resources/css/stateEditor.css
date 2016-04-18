@@ -1,0 +1,133 @@
+/* global */
+
+.page-view {
+    height: 100%;
+}
+
+/* Jeffrey's */
+
+#state-editor-page {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+#state-editor-page .resizable-panels { 
+  position: absolute;
+  top: 50px;
+  bottom: 0;
+  left: 0;
+  width: 300px;
+}
+
+#state-editor-page .resizable-panels .panel {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  margin: 0;
+  border: 0;
+  border-radius         : 0;
+  -moz-border-radius    : 0;
+  -webkit-border-radius : 0;
+}
+
+#state-editor-page .resizable-panels .panel + #state-editor-page .resizable-panels .panel {
+  border-top: 3px solid #0DAF83;
+}
+  
+#state-editor-page .resizable-panels .panel-heading, 
+#state-editor-page .resizable-panels .panel-body {
+  padding: 2px 10px;
+}
+
+#state-editor-page .resizable-panels .panel-heading {
+  background-color: #0FCC99;
+  border-radius: 0;
+  color: white;
+}
+
+#state-editor-page .resizable-panels .panel-title {
+  font-size: 14px;
+}
+
+#state-editor-page .resizable-panels .panel-body {
+  font-size: 12px;
+}
+
+#state-editor-page .resizable-panels .panel-button {
+  float: right;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+#state-editor-page nav.navbar {
+  background-color: #0DAF83;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+#state-editor-page nav.navbar a {
+  color: white;
+  font-size: 16px;
+}
+
+#state-editor-page .content {
+  padding-left: 300px;  
+}
+
+#state-editor-page .content nav.navbar {
+  background-color: #0FCC99;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+#state-editor-page .content nav.navbar a {  
+  color: white;
+  font-size: 14px;
+}
+
+#state-editor-page .content nav.navbar a:hover {
+  background-color: #0DAF83;
+  color: white;
+  font-size: 14px;
+}
+
+#state-editor-page .content nav.navbar a:focus {
+  background-color: #0DAF83;
+  color: white;
+  font-size: 14px;
+}
+
+#state-editor-page .content nav.navbar a.btn {
+  background-color: #097F60;
+  border: 0;
+  border-radius: 0;
+  color: white;
+  font-size: 14px;
+  height: 30px;
+  line-height: 0;
+  margin: 10px;
+  margin-left: 25px;
+  margin-right: 25px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#state-editor-page .content nav.navbar .nav.navbar-nav {
+  border-right: 4px solid #0DAF83;
+}
+
+#state-editor-page .custom-input {
+  border-radius: 0;
+}
+
+#state-editor-page .custom-input + .input-group-btn button {
+  background-color: #097F60; 
+  border-color: #097F60; 
+  border-radius: 0;
+  color: white;
+}

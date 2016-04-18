@@ -29,12 +29,10 @@
             image_url: "",
             upload: undefined
         }; 
-
-        var cookie = document.cookie.split(';')[0];
-        $scope.userid = uid;
         
-        $scope.model.image_url = "/resources/images/open_book.png";  //supposed to read from database
-        $scope.update.image_url = "/resources/images/open_book.png";
+        $scope.userid = uid;
+        $scope.model.image_url = "/resources/images/logo_white.png";  //supposed to read from database
+        $scope.update.image_url = "/resources/images/logo_white.png";
         
         var onFormLoaded = function() {          
           var requiredCheck = function() {
@@ -227,6 +225,7 @@
         };       
         
         $scope.addModel = function(){
+           $("#welcome_model").show();
            modelService.addModel($scope.model, $scope.model.upload, $scope.userid)
                 .then(function(model) {
                 $scope.models.push(model);

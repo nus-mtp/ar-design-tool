@@ -1,12 +1,12 @@
 <div class="wrapper" ng-controller="imageController">
     <div class="sidebar">
         <div id="welcome_image" class="side-bar-padding welcome-side" style="padding-top: 50px; color:#FFFFFF;">
-            <h1 class="center" style="margin-top: 0%; text-decoration:underline"> Upload Your Image Here! </h1>
+            <h1 class="center" style="margin-top: 0%;"> Upload Your Image </h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to upload your image </h2>
             <button type="button" class="center btn-large" id="uploadImage">Add Your New Image</button>
         </div>
         <div id="upload_image" class="side-bar-padding create-side">
-            <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Upload Your New Image Here!</h1>
+            <h1 class="center" style="margin-top: 0%; padding-top: 16%;"> Upload Your New Image</h1>
             <span>
               <form ng-submit="addImage()" name="imageForm" enctype="multipart/form-data" novalidate>
                 <h1> Image Name</h1>
@@ -19,13 +19,13 @@
                 <div class="text-warning" ng-show="imageForm.imageUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
                 <div class="text-warning" ng-show="imageForm.imageUpload.$error.fileSize">File size is bigger than 4 MB</div>
                 <span class="text-info">Max upload 4 MB file</span>
-                <input type="submit" class="center" value="Upload" style="margin-top:20px; background-color:#FFFFFF; color:#0daf83" ng-disabled="imageForm.$invalid">
+                <input type="submit" class="center" value="Upload" style="border:0;margin-top:20px; background-color:#FFFFFF; color:#0daf83" ng-disabled="imageForm.$invalid">
               </form>
           </span>
         </div>
         
         <div id="update_page" class="side-bar-padding update-side">
-            <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Image Here!</h1>
+            <h1 class="center" style="margin-top: 0%; padding-top:16%;"> Update Your Image</h1>
             <form name="updateImageForm" ng-submit="updateImage(update.id)" enctype="multipart/form-data" novalidate>
                 <h1> Image Name</h1>
                 <input type="text" name="image_name" placeholder="Image Name" ng-model="update.name"><br>
@@ -35,7 +35,7 @@
                 <div class="text-warning" ng-show="updateImageForm.updateUpload.$error.fileType">File extension is not valid, must be either .png or .jpg</div>
                 <div class="text-warning" ng-show="updateImageForm.updateUpload.$error.fileSize">File size is bigger than 4 MB</div>
                 <span class="text-muted">Max upload 8 MB file</span>
-                <input type="submit" class="center" value="Update" ng-disabled="updateImageForm.$invalid" style="margin-top:20px; margin-bottom:8px; background-color:#FFFFFF; color:#5bc0de">
+                <input type="submit" class="center" value="Update" ng-disabled="updateImageForm.$invalid" style="border:0; margin-top:20px; margin-bottom:8px; background-color:#FFFFFF; color:#5bc0de">
                 <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
         </div>
@@ -52,10 +52,10 @@
             <div id="image_list" class="flex-container">
                 <ul ng-repeat="img in images | filter:searchImage">
                     <li class="flex-item">
-                        <div class="card">
+                        <div class="card grey-bg">
                             <img class="card-img-top" ng-src="{{image.image_url}}" alt="Card image cap">
                                 <div class="card-block">
-                                    <p class="card-text" style="background-color: #0daf83; color: #FFFFFF; text-align:center; margin-bottom:0px;">{{img.name}}</p>
+                                    <p class="card-text name-holder">{{img.name}}</p>
                                 </div>
                         </div>
                     </li>

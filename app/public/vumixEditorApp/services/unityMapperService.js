@@ -1,10 +1,35 @@
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('unityMapperService', function($http) {      
+    .factory('unityMapperService', function($http, $interval) {      
       var service = {};
+      var q;
             
       service.setTransformMode = function(val) {
         SendMessage('Facade', 'SetTransformMode', val);
+      };
+      
+      service.scaleUpModel = function() {
+        q = $interval(function() {
+          SendMessage('Facade', 'ScaleUp');
+        });
+      };
+      
+      service.scaleDownModel = function() {
+        q = $interval(function() {
+          SendMessage('Facade', 'ScaleDown');
+        });
+      };
+      
+      service.cancelPromise = function() {
+        $interval.cancel(q);
+      };
+      
+      service.openPreview = function() {
+        SendMessage('Facade', 'TurnOnPreview');
+      };
+      
+      service.closePreview = function() {
+        SendMessage('Facade', 'TurnOffPreview');
       };
       
       // TODO: change name
@@ -32,6 +57,10 @@
       
       service.createState = function() {
         SendMessage('Facade', 'AddNewState');
+      };
+      
+      service.setStateName = function(name) {
+        SendMessage('Facade', 'ChangeStateName', name);
       };
       
       service.createInstanceObject = function(modelId) {
