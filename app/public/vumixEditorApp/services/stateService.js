@@ -225,6 +225,32 @@
         }
       };
       
+      service.removeStateConnection = function(fromId, toId) {
+        // set the state at fromID at webGL
+        unityMapperService.setTargetState(fromId);
+        
+        _state.stateConn.forEach(function(conn, index) {
+          if (conn.from === fromId && conn.to === toId) {
+            _state.stateConn.splice(index, 1);
+          }
+        });
+        
+        // reset the object at webgl and local database
+        var objects = this.getStateObjects(fromId);        
+        objects.forEach(function(obj) {
+          if (obj.stateTransitionId === toId) {
+            // reset at local database
+            obj.stateTransitionId = -1;
+            // reset at WebGL
+            unityMapperService.setTargetStateObject(toId);
+            unityMapperService.unsetTransitionId();
+          }
+        });
+        
+        notifyStateChange();
+        notifyStateConnectionChange();
+      };
+      
 // STATE CONNECTION APIS ENDS HERE
 
       // NOT SAFE TO CALL
@@ -252,11 +278,12 @@
             modelIndex: lastStateObjId + 1, 
             models: el.stateObjects
           };
+          
           _state.states.push(state);
           
           state.models.forEach(function(model) {
-            if (model.transitionId >= 0) {
-              var conn = { from:state.id, to:model.transitionId };
+            if (model.stateTransitionId != -1) {
+              var conn = { from:state.id, to:model.stateTransitionId };
               if (!self.stateExist(conn.from, conn.to)) {
                 _state.stateConn.push(conn);
               }

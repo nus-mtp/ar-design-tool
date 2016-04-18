@@ -23,8 +23,18 @@
               $("#edit-state").modal('show');
               $scope.modal.id = event.nodes[0];
             } else if ($scope.deleteMode) {
+              // delete connected edges of the graph 
+              // deleting the connected edges and free the model
+              var connectedEdges = this.nodesHandler.getConnectedEdges(parseInt(event.nodes[0]));
+              connectedEdges.forEach(function(connId) {
+                _conn = $scope.graphData.edges.get(connId);
+                stateService.removeStateConnection(_conn.from, _conn.to);
+              });
+              $scope.graphData.edges.remove(connectedEdges);
+              // delete the relevant node
               var deletedState = stateService.removeState(parseInt(event.nodes[0]));
-              $scope.graphData.nodes.remove(deletedState.id);
+              $scope.graphData.nodes.remove(deletedState.id);       
+              // tell angular to apply changes to the scope network       
               if (deletedState) {
                 $scope.$apply();
               }           
