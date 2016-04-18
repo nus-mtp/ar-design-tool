@@ -20,7 +20,7 @@
       $scope.modelsOnScreen = [];    
       
       editorService.subscribeToDisplayStateIdChange($scope, function() {
-        $scope.currentStateId = editorService.id;
+        $scope.currentStateId = parseInt(editorService.id);
         $scope.modelsOnScreen = angular.copy(stateService.getStateObjects($scope.currentStateId)); 
       });
       

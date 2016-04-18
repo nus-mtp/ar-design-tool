@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.min.css" />
     <link rel="stylesheet" href="/vendors/jquery-ui/themes/base/jquery-ui.min.css" />
+    <link rel="stylesheet" href="/vendors/vis/dist/vis.css" />
     <link rel="stylesheet" href="/resources/css/loader.css" />
     <link rel="stylesheet" href="/resources/css/stateEditor.css" />
     <link rel="stylesheet" href="/resources/css/stateManager.css" />
@@ -23,9 +24,10 @@
     <script type="text/javascript" src="/vendors/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="/vendors/jquery-ui/jquery-ui.min.js"></script>
     <script type="text/javascript" src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/vendors/vis/dist/vis.js"></script>
     <script type="text/javascript" src="/vendors/angular/angular.js"></script>
     <script type="text/javascript" src="/vendors/angular-ui-router/release/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="/vendors/jsPlumb/dist/js/jsPlumb-2.0.7.js"></script>
+    <script type="text/javascript" src="/vendors/angular-visjs/angular-vis.js"></script>
     
     <script type="text/javascript" src="/vumixEditorApp/services/_services.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/services/unityMapperService.js"></script>
@@ -33,18 +35,20 @@
     <script type="text/javascript" src="/vumixEditorApp/services/stateService.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/services/modelService.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/services/loaderService.js"></script>
+    <script type="text/javascript" src="/vumixEditorApp/services/notificationService.js"></script>
     
     <script type="text/javascript" src="/vumixEditorApp/directives/_directives.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/directives/bsModalDirective.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/directives/unityEditorDirective.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/directives/sidebarEditorDirective.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/directives/loaderDirective.js"></script>
+    <script type="text/javascript" src="/vumixEditorApp/directives/stateViewerDirective.js"></script>
     
     <script type="text/javascript" src="/vumixEditorApp/controllers/_controllers.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/controllers/editorController.js"></script>
     <script type="text/javascript" src="/vumixEditorApp/controllers/managerController.js"></script>
+    <script type="text/javascript" src="/vumixEditorApp/controllers/managerSidebarController.js"></script>
     
     <script type="text/javascript" src="/vumixEditorApp/app.js"></script>
-    <script type="text/javascript" src="/vumixEditorApp/JS/JsPlumbWrapper.js"></script>
 	</body>
 </html>
