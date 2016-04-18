@@ -8,13 +8,13 @@
 <div class="content">
   <nav class="navbar">
     <ul class="nav navbar-nav">
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Translation Cursor" ng-click="unityMapperService.setTransformMode('translate')"><i class="fa fa-arrows"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotation Cursor" ng-click="unityMapperService.setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Cursor" ng-click="unityMapperService.setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Translate Model" ng-click="unityMapperService.setTransformMode('translate')"><i class="fa fa-arrows"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Rotate Model" ng-click="unityMapperService.setTransformMode('rotate')"><i class="fa fa-repeat"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Model" ng-click="unityMapperService.setTransformMode('scale')"><i class="fa fa-arrows-alt"></i></a></li>
     </ul>
     <ul class="nav navbar-nav">
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zoom In Selected" ng-mousedown="unityMapperService.scaleUpModel()" ng-mouseup="unityMapperService.cancelPromise()"><i class="fa fa-search-plus"></i></a></li>
-      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Zoom Out Selected" ng-mousedown="unityMapperService.scaleDownModel()" ng-mouseup="unityMapperService.cancelPromise()"><i class="fa fa-search-minus"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Up Model With Aspect Ratio" ng-mousedown="unityMapperService.scaleUpModel()" ng-mouseup="unityMapperService.cancelPromise()"><i class="fa fa-search-plus"></i></a></li>
+      <li><a href="" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Scale Down Model With Aspect Ratio" ng-mousedown="unityMapperService.scaleDownModel()" ng-mouseup="unityMapperService.cancelPromise()"><i class="fa fa-search-minus"></i></a></li>
     </ul>
     <ul class="nav navbar-nav">
       <li><a href="" class="btn btn-default" ng-click="editorService.togglePreview()" >
@@ -68,7 +68,7 @@
   <modal-footer>
     <div class="row">
       <div class="col-xs-6">
-        <a href="#" class="btn btn-default" onclick="document.getElementById('addModelInput').click()" style="width:100%">Add Model To Server</a>
+        <a href="#" class="btn btn-default" onclick="document.getElementById('addModelInput').click()" style="width:100%">Choose File</a>
       </div>
       <div class="col-xs-5 col-xs-offset-1">
         <button ng-click="addModelsToAssetBundle()" data-dismiss="modal" class="btn btn-default" ng-disabled="!modelsSelected">Apply</button>

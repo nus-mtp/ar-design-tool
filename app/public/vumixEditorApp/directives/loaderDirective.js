@@ -2,7 +2,7 @@
   angular.module('vumixEditorApp.directives')
     .directive('loader', function(loaderService) {
       var template = '';
-      template += '<div class="loader-wrapper" ng-show="loaderStatus">';
+      template += '<div class="loader-wrapper centered-loader" ng-show="loaderStatus">';
       template += '  <div class="loader">';
       template += '  </div>';
       template += '  <p class="loader-status">{{ loaderText }}</p>'
