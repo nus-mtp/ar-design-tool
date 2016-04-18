@@ -78,7 +78,7 @@
           pid: pid,
           ids: _modelIds
         };
-        return $http.post(url, data).then(function(res) {
+        return $http.delete(url, data).then(function(res) {
           _models.onAssetBundle.forEach(function(_model, index) {
             if (model.id === _model.id) {
               _models.onAssetBundle.splice(index, 1);
@@ -116,13 +116,16 @@
         if (
           tokenisedExt !== 'fbx' &&
           tokenisedExt !== 'obj' &&
-          tokenisedExt !== '3ds'
+          tokenisedExt !== '3ds' && 
+          tokenisedExt !== 'jpg' &&
+          tokenisedExt !== 'png' &&
+          tokenisedExt !== 'jpge' 
         ) {
           throw { message:"[ERROR] Invalid file extenstion" };
         }
         _models.onServer.forEach(function(model) {
           if (model.name === tokenisedName) {
-            throw { message:"[ERROR] Model with same name exists" };
+            throw { message:"[ERROR] Media with same name exists" };
           }
         });        
         // If pass all the check        
