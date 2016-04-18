@@ -132,12 +132,21 @@
             
       $scope.changeConnProperties = function() {
         $scope.connEditor.selectedModels.forEach(function(model) {
-          if (model.included) {
+          // change transition id only if the direction is toward the edge has not selectedConnector
+          // the reason is because if the model is already selected for the other node,
+          // it will be re-assigned since, it is ticked.
+          if (model.included && model.stateTransitionId === -1) {
             model.stateTransitionId = $scope.connEditor.selectedConnector.to;
+          } else if (!model.included) {
+            model.stateTransitionId = -1;
           }
         });
         stateService.updateStateObject($scope.connEditor.selectedConnector.from, $scope.connEditor.selectedModels);
       };
-    }); 
-    
+      
+      $scope.getStateName = function(id) {
+        return stateService.getStateById(parseInt(id)) ? stateService.getStateById(parseInt(id)).name : "";
+      };
+      
+    });
 })();

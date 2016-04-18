@@ -59,8 +59,8 @@
         <tbody>
           <tr ng-repeat="model in connEditor.selectedModels | orderBy:'name'">
             <td></td>
-            <td><label for="checkbox-{{ model.instanceName }}">{{ model.instanceName }}<span ng-show="false" class="text-muted" style="font-size: 10px"> - Models already available</span></label></td>
-            <td><input id="checkbox-{{ model.instanceName }}" type="checkbox" name="selectedModels[]" value="{{ model.instanceName }}" ng-model="model.included" ng-disabled="model.available" /></td>
+            <td><label for="checkbox-{{ model.instanceName }}">{{ model.instanceName }}<span ng-show="model.stateTransitionId != -1" class="text-muted" style="font-size: 10px"> - Model is used to connect to state "{{ getStateName(model.stateTransitionId) }}"</span></label></td>
+            <td><input id="checkbox-{{ model.instanceName }}" type="checkbox" name="selectedModels[]" value="{{ model.instanceName }}" ng-model="model.included" ng-disabled="model.stateTransitionId != -1 && model.stateTransitionId != connEditor.selectedConnector.to" /></td>
           </tr>
         </tbody>
       </table>
