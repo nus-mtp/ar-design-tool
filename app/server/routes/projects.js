@@ -319,7 +319,7 @@ var checkCompleteAddModelOps = function(uid, pid, opCount, total, moveErrors, wa
  * POST
  * api: /api/users/{userId}/projects/removeProjModels
  */
-router.delete('/removeProjModels', function(req, res) {
+router.post('/removeProjModels', function(req, res) {
     console.log("removing models from project");
     var modelNames  = req.body.names;
     var pid         = req.body.pid;

@@ -145,7 +145,7 @@ var addMediaToProject = function(uid, pid, modelName, goodcall, badcall) {
 };
 
 var removeMediaFromProject = function(uid, pid, fileName, goodcallback, badcallback) {
-	var reverse = modelName.split('').reverse().join('');
+	var reverse = fileName.split('').reverse().join('');
 	var ext = reverse.split('.')[0];
 	ext = ext.split('').reverse().join('');
 	console.log("ext is: " + ext);
