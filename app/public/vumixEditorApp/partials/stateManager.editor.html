@@ -29,7 +29,7 @@
     </ul>
       <form class="navbar-form">
         <div class="input-group" style="margin-left:20px;">
-          <input ng-model="textModel" type="text" class="form-control custom-input" placeholder="Enter text">
+          <input ng-model="textModel" type="text" class="form-control custom-input" ng-focus="unityMapperService.activateKeyboard()" ng-blur="unityMapperService.deactivateKeyboard()" placeholder="Enter text">
           <div class="input-group-btn">
             <button class="btn btn-default" type="button" ng-click="addText(textModel)">Add</button>
           </div>
