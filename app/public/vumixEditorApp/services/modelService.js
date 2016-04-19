@@ -39,7 +39,6 @@
       }
       
       service.addAssetBundleModels = function(serverModels) {
-        loaderService.showLoader("Adding Models to Asset Bundle");
         var _modelIds = [];
         var url = '/api/users/' + uid + '/projects/addModels';
         serverModels.forEach(function(model) {
@@ -78,7 +77,7 @@
           pid: pid,
           modelNames: _modelIds
         };
-        return $http.delete(url, data).then(function(res) {
+        return $http.post(url, data).then(function(res) {
           _models.onAssetBundle.forEach(function(_model, index) {
             if (model.id === _model.id) {
               _models.onAssetBundle.splice(index, 1);
@@ -135,7 +134,7 @@
         fd.append('model_name', tokenisedName);
         fd.append('file_size', file.size);
         fd.append('file_extension', tokenisedExt);
-        loaderService.showLoader("Adding Model to Database");
+        loaderService.showLoader("Adding Model to Server");
         return $http.post(url, fd, {
           headers: {'Content-Type': undefined}
         }).then(function(res) {
