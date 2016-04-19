@@ -80,6 +80,7 @@
       }
       
       $scope.addModelsToAssetBundle = function() {
+        unityMapperService.saveState();
         loaderService.showLoader("Adding models to Asset Bundle");
         var _models = [];
         $scope.modelsOnServer.forEach(function(model){
@@ -101,12 +102,7 @@
       
       $scope.removeModelFromAssetBundle = function(model) {
         loaderService.showLoader("Removing Model from Asset Bundle");
-        var _models = $.grep($scope.modelsOnScreen, function(_model) {
-          return _model.instanceName === model.name;
-        });
-        _models.forEach(function(_model) {
-          $scope.removeModelFromScreen(_model);
-        });
+        stateService.removeStateObjectFromAllStates(model);
         modelService.deleteAssetBundleModel(model);
       };
       

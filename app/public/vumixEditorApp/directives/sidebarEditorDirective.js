@@ -38,8 +38,7 @@
       tmpl += '       <table class="table table-striped table-hover table-condensed">';
       tmpl += '         <thead>';
       tmpl += '           <tr class="warning">';
-      tmpl += '             <th class="col-xs-8">Model Name <span class="panel-button addModel" data-toggle="modal" data-target="#add-asset-to-local"><i class="fa fa-plus-square"></i>Add Model</span></th>';
-      tmpl += '             <th class="col-xs-2"></th>';
+      tmpl += '             <th class="col-xs-10">Model Name <span class="panel-button addModel" data-toggle="modal" data-target="#add-asset-to-local"><i class="fa fa-plus-square"></i>Add Model</span></th>';
       tmpl += '             <th class="col-xs-2"></th>';
       tmpl += '           </tr>';
       tmpl += '         </thead>';
@@ -47,7 +46,6 @@
       tmpl += '           <tr ng-repeat="model in modelsAvailable">';
       tmpl += '             <td>{{ model.name }}</td>';
       tmpl += '             <td><a href="" ng-click="addModelToScreen(model)">Add</a></td>';
-      tmpl += '             <td><a href="" ng-click="removeModelFromAssetBundle(model)">Delete</a></td>';
       tmpl += '           </tr>';
       tmpl += '         </tbody>';
       tmpl += '       </table>';

@@ -1,7 +1,7 @@
 // this service serves as an API for states and models in asset bundles
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('stateService', function($rootScope, modelService, unityMapperService, notificationService, $http) {  
+    .factory('stateService', function($rootScope, modelService, editorService, unityMapperService, notificationService, $http) {  
       
       var service = {};
       var _state = {};
@@ -167,6 +167,20 @@
         notifyStateChange();
       };
       
+      service.removeStateObjectFromAllStates = function(object) {
+        var self = this;        
+        _state.states.forEach(function(state) {
+          unityMapperService.setTargetState(state.id);
+          state.models = $.grep(state.models, function(model) {
+            if (model.instanceName === object.name) {
+              unityMapperService.setTargetStateObject(model.id);
+              unityMapperService.removeInstanceObject();
+            }
+            return model.instanceName != object.name;
+          });
+        });        
+      };
+      
       service.updateStateObject = function(stateId, objects) {
         // we are not replacing because, the objects input has extra key, which is "included"
         var _objectStates = [];
@@ -271,6 +285,7 @@
         modelService.setModelsAvailability();
         
         var _states = [];
+        var _stateConns = [];
         stateModel.states.forEach(function(el, index) {
           var lastStateObjId = el.stateObjects.length === 0 ? 0 : el.stateObjects[el.stateObjects.length-1].id;
           var state = {
@@ -279,25 +294,32 @@
             modelIndex: lastStateObjId + 1, 
             models: el.stateObjects
           };
-          _state.states.push(state);
+          _states.push(state);
           
           state.models.forEach(function(model) {
             if (model.stateTransitionId != -1) {
               var conn = { from:state.id, to:model.stateTransitionId };
               if (!self.stateExist(conn.from, conn.to)) {
-                _state.stateConn.push(conn);
+                _stateConns.push(conn);
               }
             }  
           });
           
         });
         
+        _state.states = angular.copy(_states);
+        _state.stateConn = angular.copy(_stateConns);
+        
         var lastStateId = _state.states.length === 0 ? 0 : _state.states[_state.states.length - 1].id;
         _state.stateIndex = lastStateId + 1;
         notifyStateChange();
         notifyStateConnectionChange();
-      };
             
+        // display the current state once reloaded
+        unityMapperService.setTargetState(editorService.id);
+        unityMapperService.displayState();
+      };
+      
       return service;
       
     });

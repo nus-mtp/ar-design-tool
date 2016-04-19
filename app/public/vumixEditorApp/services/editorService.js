@@ -5,7 +5,7 @@
       
       service.open = false;
       service.preview = false;
-      service.id = -1;
+      service.id = 0;
       service.name = "";
       
       var notifyDisplayStateIdChange = function() {
