@@ -1,12 +1,12 @@
 <div class="wrapper" ng-controller="managerController" >
     <div class="sidebar">
         <div id="welcome_page" class="side-bar-padding welcome-side" style="padding-top: 50px; color:#FFFFFF;">
-            <h1 class="center" style="margin-top: 0%; text-decoration:underline"> Welcome to Vumix !</h1>
+            <h1 class="center" style="margin-top: 0%;"> Welcome to Vumix</h1>
             <h2 class="center" style="margin-bottom: 24%"> Click on the button below to start a new project </h2>
             <button type="button" class="center btn-large" id="createProject">Create Your New Project</button>
         </div>
         <div id="create_project" class="side-bar-padding create-side">
-            <h1 class="center" style="margin-top: 0%; padding-top: 16%; text-decoration:underline;"> Create Your New Project!</h1>
+            <h1 class="center" style="margin-top: 0%; padding-top: 16%;"> Create Your New Project</h1>
             <form name="addProjectForm" ng-submit="addProject()" enctype="multipart/form-data" novalidate>
               <div class="form-group">
                 <h2>Company Name</h2>
@@ -20,16 +20,17 @@
                 <span class="text-warning" ng-show="addProjectForm.projectName.$error.fileName">Project name is already exist</span>
               </div>
               <h2> Upload Your Vuforia Package</h2>
-              <a style="text-decoration: underline; color:#FFFFFF;" target="_blank" href="https://developer.vuforia.com/">Find out how to create a target</a>
+              <a style="text-decoration: underline; color:#FFFFFF;" target="_blank" href="https://developer.vuforia.com/support">Find out how to create a target</a>
               <input type ="file" ng-model="project.upload" id="upload_file" name="projectUpload" onchange="angular.element(this).scope().uploadFile()" />
               <div class="text-warning" ng-show="addProjectForm.projectUpload.$error.required">Project file cannot be empty</div>
               <div class="text-warning" ng-show="addProjectForm.projectUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
+              <span class="text-muted">Valid file extension is .unitypackage</span>
               <input type="submit" class="center" value="Create" ng-disabled="addProjectForm.$invalid" style="border:0; margin-top:20px; background-color:#FFFFFF; color:#0daf83">
             </form>
         </div>
         
         <div id="update_page" class="side-bar-padding update-side">
-             <h1 class="center" style="margin-top: 0%; padding-top:16%; text-decoration:underline"> Update Your Project Here!</h1>
+             <h1 class="center" style="margin-top: 0%; padding-top:16%;"> Update Your Project</h1>
              <form name="updateProjectForm" ng-submit="updateProject(update.id)" enctype="multipart/form-data" novalidate>
                 <h2>Company Name</h2>
                 <input type="text" name="comName" ng-model="update.com_name" ><br>
@@ -39,6 +40,7 @@
                 <input type ="file" ng-model="update.upload" name="updateUpload" onchange="angular.element(this).scope().updateFile()"/> 
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.required">Project file cannot be empty</div>
                 <div class="text-danger" ng-show="updateProjectForm.updateUpload.$error.fileType">File extension is not valid, must be .unitypackage</div>
+                <span class="text-muted">Valid file extension is .unitypackage</span>
                 <input type="submit" class="center" value="Update" ng-disabled="updateProjectForm.$invalid" style="border:0; margin-top:20px; margin-bottom:8px;  background-color:#FFFFFF; color:#5bc0de">
                 <button type="button" class="center btn-cancel" id="cancel_update">Cancel</button>
             </form>
@@ -66,8 +68,8 @@
                             </div>
                         </li>
                     </div>
-                    <button class="btn btn-danger" ng-click="deleteProject(pr.id)">Delete</button>
-                    <button class="button btn btn-info" id="update_btn" ng-click="getProject(pr.id)">Update</button>
+                    <button class="btn btn-danger glyphicon glyphicon-trash clickable icon-delete" ng-click="deleteProject(pr.id)"></button>
+                    <button class="btn btn-info glyphicon glyphicon-pencil clickable icon-update" ng-click="getProject(pr.id)"></button>
                 </ul>
             </div>
         </div>

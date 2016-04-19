@@ -1,7 +1,7 @@
 // this service serves as an API for states and models in asset bundles
 (function() {
   angular.module('vumixEditorApp.services')
-    .factory('stateService', function($rootScope, modelService, unityMapperService, $http) {  
+    .factory('stateService', function($rootScope, modelService, unityMapperService, notificationService, $http) {  
       
       var service = {};
       var _state = {};
@@ -9,12 +9,12 @@
       
       var notifyStateChange = function() {
         $rootScope.$emit('_$stateChange');
-      }
+      };
       
       service.subscribeToStateChange = function($scope, callback) {
         var handler = $rootScope.$on('_$stateChange', callback);
         $scope.$on('$destroy', handler);
-      }
+      };
       
 // STATE APIS START HERE
 
@@ -24,9 +24,16 @@
       }
       
       // get single state given id
-      service.getState = function(id) {
+      service.getStateById = function(id) {
         return $.grep(_state.states, function(state) {
           return state.id === id;
+        })[0];
+      }
+      
+      // get single state given name
+      service.getStateByName = function(name) {
+        return $.grep(_state.states, function(state) {
+          return state.name === name;
         })[0];
       }
       
@@ -47,7 +54,7 @@
         
         // notify changes
         notifyStateChange();
-        
+        notificationService.addFreeNotification("success", " - state '" + name + "' has been successfully created. Click to dismiss.");        
         return newState;
       }
       
@@ -66,8 +73,8 @@
         unityMapperService.deleteState();
         
         // notify changes
-        notifyStateChange();
-        
+        notifyStateChange();        
+        notificationService.addFreeNotification("success", " - state '" + removedState.name + "' has been successfully removed. Click to dismiss.");
         return removedState;
       };
       
@@ -94,29 +101,27 @@
                 console.log("error adding the image");
             });
       }
+      
+      service.setStateName = function(id, name) {
+        this.getStateById(id).name = name;
+        unityMapperService.setTargetState(id);
+        unityMapperService.setStateName(name);
+        notificationService.addFreeNotification("success", " - state has been renamed to '" + name + "' successfully. Click to dismiss.");
+        notifyStateChange();
+      };
+      
+      
 // STATE APIS END HERE
 
 // STATE OBJECT APIS START HERE
 
       // get all state models given id of state
       service.getStateObjects = function(id) {
-        var state = this.getState(id);
+        var state = this.getStateById(id);
         if (!state) {
           return [];
         }  
         return state.models;
-      }
-      
-      // get all clickable state models
-      service.getClickableStateObjects = function(id)
-      {
-        var state = this.getState(id);
-        if (!state) {
-          return [];
-        }
-        return $.grep(state.models, function(objectState) {
-          return objectState.isClickable;
-        });
       }
       
       service.addTextStateObject = function(stateId, text) {
@@ -125,7 +130,6 @@
             var newStateObject = {
               instanceName: text,
               id: state.modelIndex++,
-              isClickable: true,
               stateTransitionId: -1
             }
             state.models.push(newStateObject);
@@ -141,7 +145,6 @@
             var newStateObject = {
               instanceName: object.name,
               id: state.modelIndex++,
-              isClickable: true,
               stateTransitionId: -1
             }
             state.models.push(newStateObject);
@@ -149,7 +152,7 @@
         });
         unityMapperService.createInstanceObject(object.id);
         notifyStateChange();
-      }
+      };
       
       service.removeStateObject = function(stateId, object) {
         _state.states.forEach(function(state) {
@@ -162,9 +165,93 @@
         unityMapperService.setTargetStateObject(object.id);
         unityMapperService.removeInstanceObject();
         notifyStateChange();
+      };
+      
+      service.updateStateObject = function(stateId, objects) {
+        // we are not replacing because, the objects input has extra key, which is "included"
+        var _objectStates = [];
+        unityMapperService.setTargetState(stateId);
+        objects.forEach(function(object) {
+          var _object = angular.copy(object);
+          delete _object["included"];
+          _objectStates.push(_object);
+          // change each webgl objects transition ID
+          unityMapperService.setTargetStateObject(_object.id);
+          if (_object.stateTransitionId === -1) {
+            unityMapperService.unsetTransitionId();
+          } else {
+            unityMapperService.setTransitionId(_object.stateTransitionId);
+          }
+        });
+        _state.states.forEach(function(state) {
+          if (state.id === stateId) {
+            state.models = angular.copy(_objectStates);
+            notificationService.addFreeNotification("success", " - connector has been successfully updated. Click to dismiss.");
+            notifyStateChange();
+          }
+        });
       }
       
 // STATE OBJECT APIS END HERE
+
+// STATE CONNECTION APIS START HERE
+
+      _state.stateConn = [];
+      
+      var notifyStateConnectionChange = function() {
+        $rootScope.$emit('_$stateConnChange');
+      };
+      
+      service.subscribeToStateConnectionChange = function($scope, callback) {
+        var handler = $rootScope.$on('_$stateConnChange', callback);
+        $scope.$on('$destroy', handler);
+      };
+      
+      service.getAllStateConnection = function() {
+        return _state.stateConn;
+      };
+      
+      service.stateExist = function(fromId, toId) {
+        var _conn = $.grep(_state.stateConn, function(conn) {
+          return conn.from === fromId && conn.to === toId;
+        });
+        return _conn.length > 0;
+      };
+      
+      service.addStateConnection = function(fromId, toId) {
+        if(!this.stateExist(fromId, toId)) {
+          _state.stateConn.push({ from:fromId, to:toId });
+          notifyStateConnectionChange();
+        }
+      };
+      
+      service.removeStateConnection = function(fromId, toId) {
+        // set the state at fromID at webGL
+        unityMapperService.setTargetState(fromId);
+        
+        _state.stateConn.forEach(function(conn, index) {
+          if (conn.from === fromId && conn.to === toId) {
+            _state.stateConn.splice(index, 1);
+          }
+        });
+        
+        // reset the object at webgl and local database
+        var objects = this.getStateObjects(fromId);        
+        objects.forEach(function(obj) {
+          if (obj.stateTransitionId === toId) {
+            // reset at local database
+            obj.stateTransitionId = -1;
+            // reset at WebGL
+            unityMapperService.setTargetStateObject(toId);
+            unityMapperService.unsetTransitionId();
+          }
+        });
+        
+        notifyStateChange();
+        notifyStateConnectionChange();
+      };
+      
+// STATE CONNECTION APIS ENDS HERE
 
       // NOT SAFE TO CALL
       // add model to existing class, given name
@@ -185,20 +272,33 @@
         
         var _states = [];
         stateModel.states.forEach(function(el, index) {
+          var lastStateObjId = el.stateObjects.length === 0 ? 0 : el.stateObjects[el.stateObjects.length-1].id;
           var state = {
-            id: index,
+            id: el.id,
             name: el.name,
-            modelIndex: el.stateObjects.length, 
+            modelIndex: lastStateObjId + 1, 
             models: el.stateObjects
           };
-          _states.push(state);
+          _state.states.push(state);
+          
+          state.models.forEach(function(model) {
+            if (model.stateTransitionId != -1) {
+              var conn = { from:state.id, to:model.stateTransitionId };
+              if (!self.stateExist(conn.from, conn.to)) {
+                _state.stateConn.push(conn);
+              }
+            }  
+          });
+          
         });
         
-        _state.states = angular.copy(_states);
-        _state.stateIndex = _state.states.length;
+        var lastStateId = _state.states.length === 0 ? 0 : _state.states[_state.states.length - 1].id;
+        _state.stateIndex = lastStateId + 1;
         notifyStateChange();
+        notifyStateConnectionChange();
       };
-      
+            
       return service;
+      
     });
 })();

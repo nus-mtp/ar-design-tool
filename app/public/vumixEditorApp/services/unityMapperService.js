@@ -86,6 +86,14 @@
         SendMessage('Facade', 'SetActiveGameObject');
       };
       
+      service.activateKeyboard = function() {
+        SendMessage('Facade', 'TurnOffKeyboard');
+      };
+      
+      service.deactivateKeyboard = function() {
+        SendMessage('Facade', 'TurnOnKeyboard');
+      };
+      
       return service;
     }); 
 })();
