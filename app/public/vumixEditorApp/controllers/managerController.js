@@ -47,9 +47,9 @@
             }
           } else if (event.edges.length > 0) {
             if ($scope.editMode) {
-              var _edge = $scope.graphData.edges.get(event.edges[0]);
-              $scope.connEditor.selectedConnector = _edge;
-              $scope.connEditor.selectedModels = angular.copy(stateService.getStateObjects(_edge.from));
+              var _conn = $scope.graphData.edges.get(event.edges[0]);
+              $scope.connEditor.selectedConnector = _conn;
+              $scope.connEditor.selectedModels = angular.copy(stateService.getStateObjects(_conn.from));
               $scope.connEditor.selectedModels.forEach(function(model) {
                 // set included to true if the model has transition state
                 if (model.stateTransitionId === -1) {
@@ -61,7 +61,10 @@
               $scope.$apply();
               $("#edit-connector").modal('show');
             } else if ($scope.deleteMode) {
-              // delete edge
+              var _conn = $scope.graphData.edges.get(event.edges[0]);
+              stateService.removeStateConnection(_conn.from, _conn.to);
+              $scope.graphData.edges.remove(event.edges);
+              $scope.$apply();             
             }
           }
         }
