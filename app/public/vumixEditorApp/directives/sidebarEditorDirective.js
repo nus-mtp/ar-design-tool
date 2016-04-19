@@ -7,9 +7,9 @@
       tmpl += ' <div class="resizable-panels">';
       tmpl += '   <div class="panel panel-default" id="panel-selector">';      
       tmpl += '     <div class="panel-heading">';
-      tmpl += '       <span class="panel-title">Selector</span>';
-      tmpl += '       <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Maximise" class="panel-button maximise"><i class="fa fa-square-o"></i></span>';
-      tmpl += '       <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Minimise" class="panel-button equalise"><i class="fa fa-server"></i></span>';
+      tmpl += '       <span class="panel-title">Selected Resources</span>';
+      tmpl += '       <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Maximise" class="panel-button maximise"><i class="fa fa-plus"></i></span>';
+      tmpl += '       <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Minimise" class="panel-button equalise"><i class="fa fa-minus"></i></span>';
       tmpl += '     </div>';
       tmpl += '     <div class="panel-body">';
       tmpl += '       <table class="table table-striped table-hover table-condensed">';
@@ -30,9 +30,9 @@
       tmpl += '   </div>';
       tmpl += '   <div class="panel panel-default" id="panel-browser">';      
       tmpl += '     <div class="panel-heading">';
-      tmpl += '       <span class="panel-title">Resources</span>';
-      tmpl += '       <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Maximise" class="panel-button maximise"><i class="fa fa-square-o"></i></span>';
-      tmpl += '       <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Minimise" class="panel-button equalise"><i class="fa fa-server"></i></span>';
+      tmpl += '       <span class="panel-title">Resources Library</span>';
+      tmpl += '       <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Maximise" class="panel-button maximise"><i class="fa fa-plus"></i></span>';
+      tmpl += '       <span data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Minimise" class="panel-button equalise"><i class="fa fa-minus"></i></span>';
       tmpl += '     </div>';
       tmpl += '     <div class="panel-body">';
       tmpl += '       <table class="table table-striped table-hover table-condensed">';
