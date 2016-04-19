@@ -13,6 +13,7 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: 70%;
+  position: inherit;
 }
 
 .below-top-bar {
@@ -40,7 +41,7 @@ body {
 
 .container {
   background: $light-green;
-  height: 400px;
+  height: 450px;
   width: 100%;
 }
 
@@ -57,22 +58,22 @@ body {
 }
 
 .subtitle {
-  font-size: 20px;
-  margin-left: 30%;
+  font-size: 12px;
+  margin-left: 27%;
   margin-top: -13px;
   width: 50%; 
 }
 
 .sub-content {
   font-size: 20px;
-  margin-top: 130px;
   text-align: right;
 }
 
 .vertical-line {
   border-left: thick solid $bg-color;
+  border-width: 3px;
+  margin-bottom: -40px;
   margin-left: 100px;
-  margin-top: 70px;  
   text-align: left;
 }
 

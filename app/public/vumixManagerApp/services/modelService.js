@@ -41,7 +41,7 @@
               
        updateModel: function(models, update, update_file , userId, id){
            var fd = new FormData();
-           var uploadUrl = '/api/users/' + userId + '/models/ '+ id;
+           var uploadUrl = '/api/users/' + userId + '/models/'+ id;
            fd.append('file', update_file);
            fd.append('uid', userId);
            fd.append('model_name', update.name);

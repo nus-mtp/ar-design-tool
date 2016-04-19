@@ -110,15 +110,75 @@ var copyModel = function(uid, pid, fileName, goodcallback, badcallback) {
 	});
 };
 
-var removeProjModel = function(uid, pid, fileName, goodcallback, badcallback) {
-	console.log('removing model from project '+pid+' dir');
-	var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
+var copyImage = function(uid, pid, fileName, goodcallback, badcallback) {
+	console.log('copying model into project '+pid+' dir');
+	var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+model_path+fileName);
+	var dest = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.images+fileName);
 
+	utils.copyFile(file, dest, function() {
+		goodcallback();
+	}, function(err) {
+		console.log("error found in copyImage");
+		badcallback(fileName, err);
+	});
+};
+
+var addMediaToProject = function(uid, pid, modelName, goodcall, badcall) {
+	var reverse = modelName.split('').reverse().join('');
+	var ext = reverse.split('.')[0];
+	ext = ext.split('').reverse().join('');
+	console.log("ext is: " + ext);
+	if(ext=='obj'||ext=='3ds'||ext=='fbx') {
+		copyModel(uid, pid, modelName, function() {
+			goodcall();
+		}, function(filename, err) {
+			badcall(filename, err);
+		});
+	} else {
+		console.log("object is an image");	
+		copyImage(uid, pid, modelName, function() {
+			goodcall();
+		}, function(filename, err) {
+			badcall(filename, err);
+		});
+	}
+};
+
+var removeMediaFromProject = function(uid, pid, fileName, goodcallback, badcallback) {
+	var reverse = fileName.split('').reverse().join('');
+	var ext = reverse.split('.')[0];
+	ext = ext.split('').reverse().join('');
+	console.log("ext is: " + ext);
+	if(ext=='obj'||ext=='3ds'||ext=='fbx') {
+		console.log("media is an object:")
+		var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.models+fileName);
+		
+		removeProjAsset(uid, pid, file, function() {
+			goodcallback();
+		}, function(err) {
+			console.log("error found in removeProjAsset");
+			badcallback(fileName, err);
+		});
+	} else {
+		console.log("object is an image");
+		var file = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.images+fileName);
+		removeProjAsset(uid, pid, file, function() {
+			goodcallback();
+		}, function(err) {
+			console.log("error found in removeProjAsset");
+			badcallback(fileName, err);
+		});
+	}
+};
+
+var removeProjAsset = function(uid, pid, file, goodcallback, badcallback) {
+	console.log('removing model from project '+pid+' dir');
+	console.log("deleting file: "+file);
 	utils.deleteFile(file, function() {
 		goodcallback();
 	}, function(err) {
 		console.log("error found in removeProjModel");
-		badcallback(fileName, err);
+		badcallback(err);
 	});
 };
 
@@ -142,7 +202,6 @@ var rebuildAssetBundle = function(uid, pid, goodcallback, badcallback) {
 	console.log('rebuilding assetbundle...');
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -executeMethod CreateAssetBundles.BuildAllAssetBundles -quit -batchmode';
-	// places webglbundles.unity3d inside Assets folder of unity project
 	console.log('running: ' + rebuild_cmd);
 	const rebuild = exec(rebuild_cmd, function(error, stdout, stderr) {
 		console.log("stdout: " + stdout);
@@ -248,9 +307,10 @@ module.exports.copyStateDat			= copyStateDat;
 module.exports.createProj 			= createProj;
 module.exports.deleteProj 			= deleteProj;
 
-module.exports.removeProjModel 		= removeProjModel;		
-module.exports.deleteModel 			= deleteModel;
-module.exports.moveModel 			= moveModel;
-module.exports.copyModel 			= copyModel;
+module.exports.removeMediaFromProject 	= removeMediaFromProject;
+module.exports.addMediaToProject 		= addMediaToProject;	
+module.exports.deleteModel 				= deleteModel;
+module.exports.moveModel 				= moveModel;
+module.exports.copyModel 				= copyModel;
 
 module.exports.buildApk				= buildApk;

@@ -28,6 +28,7 @@ router.get('/auth/google/callback', passport.authenticate('google', {
 router.get('/logout', function(req, res) {
 	console.log("logging out!");
 	console.log('===============//');
+	console.log(req.session);
 	req.logout();
 	req.session.destroy();
 	res.redirect('/');
