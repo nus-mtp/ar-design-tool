@@ -138,6 +138,16 @@ public class BuildProject : MonoBehaviour {
         AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
     }
 
+    private static void SetAndroidSettings()
+    {
+        PlayerSettings.Android.targetDevice = AndroidTargetDevice.ARMv7;
+        PlayerSettings.Android.androidTVCompatibility = false;
+        PlayerSettings.SetGraphicsAPIs(
+                   BuildTarget.Android,
+                   new UnityEngine.Rendering.GraphicsDeviceType[] { UnityEngine.Rendering.GraphicsDeviceType.OpenGLES2 });
+    }
+
+
     [MenuItem("File/Build Android 2D")]
     public static void BuildAndroid2D()
     {
