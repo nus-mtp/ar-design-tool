@@ -16,17 +16,17 @@
 
 ##Folder Structure
 
-	|-----	bower_components	(Dependencies installed by bower)
-	|-----	node_modules		(Dependencies installed by npm) 
-	|-----	public		 		(Static files to be served to frontend) 
-	|-----	server				(Modules and configs used by server)
-	|-----	test							
-	|-----	vumix.js			(app file)
-	|-----	bower.json
-	|-----	documentjs.json
-	|-----	gulpfile.js
-	|-----	package.json		
-	L-----	README.MD 			
+	/bower_components/	(Dependencies installed by bower)
+	/node_modules/		(Dependencies installed by npm) 
+	/public/	 		(Static files to be served to frontend) 
+	/server/			(Modules and configs used by server)
+	/test/							
+	/vumix.js			(app file)
+	/bower.json
+	/documentjs.json
+	/gulpfile.js
+	/package.json		
+	/README.MD 			
 
 ##How to Document using DocumentJS
 

@@ -47,7 +47,7 @@
         });        
         var data = {
           pid: pid,
-          ids: _modelIds
+          modelNames: _modelIds
         }
         return $http.post(url, data).then(function(res) {
           serverModels.forEach(function(model) {
@@ -76,7 +76,7 @@
         var url = '/api/users/' + uid + '/projects/removeProjModels';
         var data = {
           pid: pid,
-          names: _modelIds
+          modelNames: _modelIds
         };
         return $http.delete(url, data).then(function(res) {
           _models.onAssetBundle.forEach(function(_model, index) {

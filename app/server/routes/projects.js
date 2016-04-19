@@ -1,9 +1,9 @@
 /**
- * @module projectApi
- * @parent VUMIX
- * This is the api for user projects  
+ * @module ProjectsAPI
+ * @parent Routes
+ * All project apis goes here
+ * To use, require module from /server/routes/projects    
  */
-
 var file_paths  = require('../config/file_path'),
     unity       = require('../modules/unity'),
     models      = require('../models'),
@@ -26,11 +26,10 @@ var router = express.Router({mergeParams: true});
 var upload = multer({ storage: storage });
 
 /**
- * @module fetchAllProjects
- * @parent projectApi
- * Returns all projects of user with {userid}
- * GET
- * api: /api/users/{userId}/projects
+ * @module GET/api/users/:userId/projects
+ * @parent ProjectsAPI
+ * @body
+ * GET Returns all projects of user with {userid}
  */
 router.get('/', auth.isLoggedIn, function(req, res) {
     models.project.findAll({
@@ -47,11 +46,10 @@ router.get('/', auth.isLoggedIn, function(req, res) {
 });
 
 /**
- * @module fetchOneProject
- * @parent projectApi
- * Returns one project with {id} of user with {userid}
- * GET
- * api: /api/users/{userId}/projects/{id}
+ * @module GET/api/users/:userId/projects/:id
+ * @parent ProjectsAPI
+ * @body
+ * GET Returns one project with {id} of user with {userid}
  */
 router.get('/:id', function(req, res) {
     models.project.find({
@@ -73,12 +71,18 @@ router.get('/:id', function(req, res) {
 });
 
 /**
- * @module insertProject
- * @parent projectApi
- * @param req.body.userId, req.body.name, req.body.company_name, req.body.marker_type, req.body.project_dat_file, req.body.assetbundle_id
- * create new project owned by user with {userId}
- * POST
- * api: /api/users/{userId}/projects
+ * @module POST/api/users/:userId/projects/
+ * @parent ProjectsAPI
+ * @param req.body.name
+ * Name of project
+ * @param req.body.company_name
+ * Name of company
+ * @param req.body.marker_type
+ * Marker type: either 2D or 3D
+ * @param req.file
+ * Vuforia marker file
+ * @body
+ * POST create new project owned by user with {userId}
  */
 router.post('/', upload.single('file'), function(req, res) {
     console.log('inserting project:');
@@ -134,11 +138,10 @@ var createProjectInDB = function(newProj, vuforia_pkg, goodCallback, badCallback
 };
 
 /**
- * @module deleteProject
- * @parent projectApi
- * Delete project with {id} owned by user with {userId}
- * DELETE
- * api: /api/users/{userId}/projects/{id}
+ * @module DELETE/api/users/:userId/projects/:id
+ * @parent ProjectsAPI
+ * @body
+ * DELETE Delete project with {id} owned by user with {userId}
  */
 router.delete('/:id', function(req, res) {
     var uid = req.params.userId;
@@ -176,12 +179,18 @@ var deleteProjectDB = function(uid, id, _project, goodCallback, badCallback) {
 };
 
 /**
- * @module updateProject
- * @parent projectApi
- * @param req.body.name, req.body.company_name, req.body.marker_type, req.body.project_dat_file, req.body.assetbundle_id, req.body.last_published, req.body.thumbnail_loc
- * update project with {id} owned by user with {userId}
- * PUT
- * api: /api/users/{userId}/projects/{id}
+ * @module PUT/api/users/:userId/projects/:id
+ * @parent ProjectsAPI
+ * @param req.body.name
+ * Name of project
+ * @param req.body.company_name
+ * Name of company
+ * @param req.body.marker_type
+ * Marker type: either 2D or 3D
+ * @param req.file
+ * Vuforia marker file
+ * @body
+ * PUT update project with {id} owned by user with {userId}
  */
 router.put('/:id', upload.single('file'), function(req, res) {
     var uid = req.params.userId;
@@ -219,8 +228,7 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
     models.project.update({
         name: req.body.name || project.name,
         marker_type: req.body.marker_type || project.marker_type,
-        company_name: req.body.company_name || project.company_name,
-        last_published: req.body.last_published || project.last_published
+        company_name: req.body.company_name || project.company_name
     }, {
         where: {
             id: id,
@@ -237,16 +245,18 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
 };
 
 /**
- * @module addProjModels
- * @parent projectApi
- * @param req.body.ids, req.body.pid, req.params.userId
- * copies models with model names submitted in body owned by user with {userId} to project folder with {pid} and rebuilds assetbundle for that project
- * POST
- * api: /api/users/{userId}/projects/addModels
+ * @module POST/api/users/:userId/projects/addModels
+ * @parent ProjectsAPI
+ * @param req.body.modelNames
+ * Array of models to be added into the project with pid
+ * @param req.body.pid
+ * Project id.
+ * @body
+ * POST adds an array of models into a project with pid
  */
 router.post('/addModels', function(req, res) {
     console.log("adding model into project");
-    var modelNames  = req.body.ids;
+    var modelNames  = req.body.modelNames;
     var pid         = req.body.pid;
     var uid         = req.params.userId;
  
@@ -312,16 +322,18 @@ var checkCompleteAddModelOps = function(uid, pid, opCount, total, moveErrors, wa
 };
 
 /**
- * @module removeProjModels
- * @parent projectApi
- * @param req.body.ids, req.body.pid, req.params.userId
- * removes models with ids owned by user with {userId} in project folder with {pid} and rebuilds assetbundle for that project
- * POST
- * api: /api/users/{userId}/projects/removeProjModels
+ * @module DELETE/api/users/:userId/projects/removeProjModels
+ * @parent ProjectsAPI
+ * @param req.body.modelNames
+ * Array of models to be removed from the project with pid
+ * @param req.body.pid
+ * Project id.
+ * @body
+ * DELETE removes models with ids owned by user with {userId} in project folder with {pid} and rebuilds assetbundle for that project
  */
 router.post('/removeProjModels', function(req, res) {
     console.log("removing models from project");
-    var modelNames  = req.body.names;
+    var modelNames  = req.body.modelNames;
     var pid         = req.body.pid;
     var uid         = req.params.userId;
 
