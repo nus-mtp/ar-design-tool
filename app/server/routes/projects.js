@@ -262,7 +262,7 @@ router.post('/addModels', function(req, res) {
     }
 
     for(x in modelNames) {
-        unity.copyModel(uid, pid, modelNames[x], function() {
+        unity.addMediaToProject(uid, pid, modelNames[x], function() {
             opCount++;
             checkCompleteAddModelOps(uid, pid, opCount, total, errmsg, function(moveErrors) {
                 warnRes(moveErrors);
@@ -319,7 +319,7 @@ var checkCompleteAddModelOps = function(uid, pid, opCount, total, moveErrors, wa
  * POST
  * api: /api/users/{userId}/projects/removeProjModels
  */
-router.delete('/removeProjModels', function(req, res) {
+router.post('/removeProjModels', function(req, res) {
     console.log("removing models from project");
     var modelNames  = req.body.names;
     var pid         = req.body.pid;
@@ -331,7 +331,7 @@ router.delete('/removeProjModels', function(req, res) {
 
     for(i in modelNames) {
         //TODO: unity remove models
-        unity.removeProjModel(uid, pid, modelNames[i], function() {
+        unity.removeMediaFromProject(uid, pid, modelNames[i], function() {
             opCount++;
             checkCompleteRemoveModelOps(uid, pid, opCount, total, errMsg, function(delErrors) {
                 warnRes(delErrors);
@@ -366,6 +366,7 @@ router.delete('/removeProjModels', function(req, res) {
 
 var checkCompleteRemoveModelOps = function(uid, pid, opCount, total, delErrors, warningCall, goodCall, badCall) {
     if(opCount==total) {
+        console.log("rebuilding asset bundle");
         unity.rebuildAssetBundle(uid, pid, function() {
             if(delErrors.length>0) {
                 warningCall(delErrors);
