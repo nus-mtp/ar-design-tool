@@ -109,6 +109,10 @@
         modelService.deleteAssetBundleModel(model);
       };
       
+      $scope.saveState = function() {
+        unityMapperService.saveState();
+      };
+      
       $scope.goNextState = function() {
         editorService.openEditor(($scope.currentStateId + 1) % stateService.getAllStates().length);        
       };
