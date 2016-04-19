@@ -99,6 +99,7 @@
       
       $scope.saveState = function() {
         unityMapperService.saveState();
+        notificationService.addFreeNotification("success", " - Project has been saved successfully");
       };
       
       $scope.buildState = function() {
