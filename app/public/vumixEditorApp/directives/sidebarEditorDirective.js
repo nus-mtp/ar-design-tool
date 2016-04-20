@@ -21,7 +21,7 @@
       tmpl += '         </thead>';
       tmpl += '         <tbody>';
       tmpl += '           <tr ng-repeat="model in modelsOnScreen" ng-click="selectModelOnScreen(model)">';
-      tmpl += '             <td>{{ model.instanceName }}</td>';
+      tmpl += '             <td class="clickable">{{ model.instanceName }}</td>';
       tmpl += '             <td><a href="" ng-click="removeModelFromScreen(model)">Delete</a></td>';
       tmpl += '           </tr>';
       tmpl += '         </tbody>';
@@ -46,7 +46,7 @@
       tmpl += '         </thead>';
       tmpl += '         <tbody>';
       tmpl += '           <tr ng-repeat="model in modelsAvailable">';
-      tmpl += '             <td>{{ model.name }}</td>';
+      tmpl += '             <td class="clickable">{{ model.name }}</td>';
       tmpl += '             <td><a href="" ng-click="addModelToScreen(model)">Add</a></td>';
       tmpl += '             <td><a href="" ng-click="removeModelFromAssetBundle(model)">Delete</a></td>';
       tmpl += '           </tr>';
