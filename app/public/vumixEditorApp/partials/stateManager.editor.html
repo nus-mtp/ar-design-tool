@@ -108,12 +108,12 @@
                       
     var overlayCanvasContext = document.getElementById('overlay-canvas').getContext('2d');
     var $window = angular.element(el).injector().get('$window');
-    var width = 200;
+    var width = 300;
     var height = 150;
-    overlayCanvasContext.clearRect(0, 0, width, height);
+    overlayCanvasContext.clearRect(0, 0, width, height + 10);
     overlayCanvasContext.save();
     overlayCanvasContext.globalAlpha = 0.7;
-    overlayCanvasContext.drawImage(keyboardImage, 20, 20);   
+    overlayCanvasContext.drawImage(keyboardImage, 0, 10, width, height);   
     overlayCanvasContext.restore();
   }
   

@@ -13,8 +13,8 @@
                     
           $scope.height = $window.outerHeight - 100;          
           $scope.width = $window.innerWidth - 300;
-          $scope.overlayHeight = 150;
-          $scope.overlayWidth = 200;
+          $scope.overlayWidth = 300;
+          $scope.overlayHeight = 210;
           
           angular.element($window).bind('resize', function(evt) {
             if (this === evt) {              
