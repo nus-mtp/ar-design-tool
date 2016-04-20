@@ -174,9 +174,14 @@ var writeJson = function(dest, json, goodcall, badcall) {
 	});
 };
 
+var writeFile = function(dest, string) {
+	fs.writeFile(dest, string);
+};
+
 module.exports.checkExistsIfNotCreate = checkExistsIfNotCreate;
 module.exports.moveFileToDest = moveFileToDest;
 module.exports.deleteFile = deleteFile;
 module.exports.deleteDir = deleteDir;
 module.exports.writeJson = writeJson;
+module.exports.writeFile = writeFile;
 module.exports.copyFile = copyFile;

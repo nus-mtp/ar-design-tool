@@ -31,7 +31,7 @@ var assetbundle_name = '/webglbundles.unity3d';
  * @body
  * This function runs the command line unity command to rebuild the vuforia package located at vuforia_path.
  */
-var rebuildVuforiaPackage = function(uid, pid, vuforia_path) {
+var rebuildVuforiaPackage = function(uid, pid, vuforia_path, com, name) {
 	console.log('rebuilding vuforia package...');
 	var project_path 	= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var rebuild_cmd 	= '"'+file_paths.unity+'" ' + '-projectPath "'+project_path+'" -importPackage "'+vuforia_path+'" -quit -batchmode';
@@ -45,6 +45,7 @@ var rebuildVuforiaPackage = function(uid, pid, vuforia_path) {
 		}
 	});
 	rebuild.on('exit', function(code) {
+		changeName(com, name, pid, uid);	
 		console.log('Rebuild Vuforia pkg child process exited with code ' + code);
 	});
 };
@@ -63,12 +64,12 @@ var rebuildVuforiaPackage = function(uid, pid, vuforia_path) {
  * @body
  * moveVuforia moves the vuforia location from one location to the destination path which is vuforia_path
  */
-var moveVuforia = function(location, uid, pid, fileName) {
+var moveVuforia = function(location, uid, pid, fileName, com, name) {
 	console.log('in moveVuforia');
 	var project_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid);
 	var vuforia_path = project_path+file_paths.vuforia+fileName;
 	utils.moveFileToDest(location, vuforia_path, function() {
-		rebuildVuforiaPackage(uid, pid, vuforia_path);
+		rebuildVuforiaPackage(uid, pid, vuforia_path, com, name);
 	});
 };
 
@@ -109,7 +110,7 @@ var updateVuforia = function(uid, pid, vuforia_pkg) {
  * and the rebuild vuforia pkg function is called. Default state files and assetbundles are made available to the frontend by copying them to the public storage folder.
  * The public storage folder has the following route: /public/storage/uid/pid/
  */
-var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
+var createProj = function(uid, pid, com, name, vuforia_pkg, callback, failCallback) {
 	var public_project_path = path.join(__dirname, '../../'+file_paths.public_path+uid+'/'+pid+'/');
 	var project_path 		= path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+'/');
 	var unity_cmd 			= '"'+file_paths.unity+'" -createProject "'+project_path+'" -importPackage "'+path.join(__dirname, '../../'+file_paths.app_builder)+'" -quit -batchmode';
@@ -128,13 +129,21 @@ var createProj = function(uid, pid, vuforia_pkg, callback, failCallback) {
 	});
 	unity.on('exit', function(code) {
 		if(code==0) {
-			moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name);
+			moveVuforia(vuforia_pkg.path, uid, pid, vuforia_name, com, name);
 			copyDefaultState(uid, pid);
 			copyAssetBundle(uid, pid);
 			console.log("Creating new project child process exited with code " + code);
 			callback();
 		}
 	});
+};
+
+var changeName = function(com, name, pid, uid) {
+	var bundle_path = path.join(__dirname, '../../'+file_paths.storage_path+uid+unity_path+pid+file_paths.bundleidentifier);
+	com = com.replace(" ", "");
+	name = com.replace(" ", "");
+	var comName = "com."+com+'.'+name;
+	utils.writeFile(bundle_path, comName);
 };
 
 /**

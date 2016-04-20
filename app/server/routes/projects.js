@@ -124,7 +124,7 @@ var createProjectInDB = function(newProj, vuforia_pkg, goodCallback, badCallback
             }
         });
     }).then(function(newproject) {
-        unity.createProj(newproject.uid, newproject.id, vuforia_pkg, function() {
+        unity.createProj(newproject.uid, newproject.id, newproject.company_name, newproject.name, vuforia_pkg, function() {
             goodCallback(newproject);
         }, function(err) {
             badCallback(err);
