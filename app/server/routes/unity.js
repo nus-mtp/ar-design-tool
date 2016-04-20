@@ -34,7 +34,7 @@ var upload = multer({ storage:storage });
  * @body
  * POST uploades state.dat file to the server
  */
-router.post('/users/:uid/projects/:pid/uploadstate', upload.single('binary'), function(req, res, next) {
+router.post('/users/:uid/projects/:pid/uploadstate', auth.isLoggedIn, upload.single('binary'), function(req, res, next) {
     console.log('saving state.dat file');
     var uid = req.params.uid;
     var pid = req.params.pid;
@@ -65,7 +65,7 @@ router.post('/users/:uid/projects/:pid/uploadstate', upload.single('binary'), fu
  * @body
  * POST sends state JSON file to be saved as a JSON file on server.
  */
-router.post('/saveproject', function(req, res) {
+router.post('/saveproject', auth.isLoggedIn, function(req, res) {
     console.log('saving json state file');
     unity.saveStateJson(req.body.uid, req.body.pid, req.body.json, function() {
         console.log('save state json file ok');
@@ -82,7 +82,7 @@ router.post('/saveproject', function(req, res) {
  * @body
  * GET Build apk for a specified project, a download of the apk file is receive.
  */
-router.get('/users/:uid/projects/:pid/buildproject', function(req, res, next) {
+router.get('/users/:uid/projects/:pid/buildproject', auth.isLoggedIn, function(req, res, next) {
     unity.buildApk(req.params.uid, req.params.pid, function(down_path) {
         console.log("down path is: " + down_path);
         res.download(down_path);

@@ -16,7 +16,7 @@ var router = express.Router();
  * @body
  * GET Returns all users registered with the system
  */
-router.get('/', function(req, res) {
+router.get('/', auth.isLoggedIn, function(req, res) {
     models.googleUser.findAll().then(function(users){
         res.json({status: "ok", length: users.length, data: users});            
     });
@@ -28,7 +28,7 @@ router.get('/', function(req, res) {
  * @body
  * GET Returns one user with {id} registered with the system
  */
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isLoggedIn, function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {
         if(user) {
             res.json({status: "ok", length: 1, data: [user]});
@@ -78,7 +78,7 @@ router.post('/', function(req, res) {
  * @body
  * DELETE Delete user with {id}
  */
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isLoggedIn, function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {
         if(user) {
             models.googleUser.destroy({
@@ -104,7 +104,7 @@ router.delete('/:id', function(req, res) {
  * @body
  * PUT update user with {id}
  */
-router.put('/:id', function(req, res) {
+router.put('/:id', auth.isLoggedIn, function(req, res) {
     models.googleUser.findById(req.params.id).then(function(user) {
         if(user) {
             models.googleUser.update({

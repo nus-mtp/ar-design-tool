@@ -52,7 +52,7 @@ router.get('/', auth.isLoggedIn, function(req, res) {
  * @body
  * GET Returns one project with {id} of user with {userid}
  */
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isLoggedIn, function(req, res) {
     models.project.find({
         where: {
             uid: req.params.userId,
@@ -85,7 +85,7 @@ router.get('/:id', function(req, res) {
  * @body
  * POST create new project owned by user with {userId}
  */
-router.post('/', upload.single('file'), function(req, res) {
+router.post('/', auth.isLoggedIn, upload.single('file'), function(req, res) {
     console.log('inserting project:');
     var newProj = {
         uid: req.params.userId,
@@ -144,7 +144,7 @@ var createProjectInDB = function(newProj, vuforia_pkg, goodCallback, badCallback
  * @body
  * DELETE Delete project with {id} owned by user with {userId}
  */
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isLoggedIn, function(req, res) {
     var uid = req.params.userId;
     var id  = req.params.id;
     var _project;
@@ -193,7 +193,7 @@ var deleteProjectDB = function(uid, id, _project, goodCallback, badCallback) {
  * @body
  * PUT update project with {id} owned by user with {userId}
  */
-router.put('/:id', upload.single('file'), function(req, res) {
+router.put('/:id', auth.isLoggedIn, upload.single('file'), function(req, res) {
     var uid = req.params.userId;
     var id  = req.params.id;
     var pkg = req.file;
@@ -255,7 +255,7 @@ var updateProjectDB = function(req, project, id, uid, goodCallback, badCallback)
  * @body
  * POST adds an array of models into a project with pid
  */
-router.post('/addModels', function(req, res) {
+router.post('/addModels', auth.isLoggedIn, function(req, res) {
     console.log("adding model into project");
     var modelNames  = req.body.modelNames;
     var pid         = req.body.pid;
@@ -332,7 +332,7 @@ var checkCompleteAddModelOps = function(uid, pid, opCount, total, moveErrors, wa
  * @body
  * DELETE removes models with ids owned by user with {userId} in project folder with {pid} and rebuilds assetbundle for that project
  */
-router.post('/removeProjModels', function(req, res) {
+router.post('/removeProjModels', auth.isLoggedIn, function(req, res) {
     console.log("removing models from project");
     var modelNames  = req.body.modelNames;
     var pid         = req.body.pid;

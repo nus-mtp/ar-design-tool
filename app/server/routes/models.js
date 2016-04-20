@@ -51,7 +51,7 @@ router.get('/', auth.isLoggedIn, function(req, res) {
  * @body
  * GET Returns one model with {id} of user with {userid}
  */
-router.get('/:id', function(req, res) {
+router.get('/:id', auth.isLoggedIn, function(req, res) {
     models.model.find({
         where: {
             uid: req.params.userId,
@@ -81,7 +81,7 @@ router.get('/:id', function(req, res) {
  * @body
  * POST create new model owned by user with {userId}
  */
-router.post('/', upload.single("file"), function(req, res) {
+router.post('/', auth.isLoggedIn, upload.single("file"), function(req, res) {
     console.log('uploading model...');
     var physical_model = req.file;
     var ext = req.body.file_extension;
@@ -141,7 +141,7 @@ var insertModelDB = function(newModel, physical_model, goodCallback, badCallback
  * @body
  * DELETE Delete model with {id} owned by user with {userId}
  */
-router.delete('/:id', function(req, res) {
+router.delete('/:id', auth.isLoggedIn, function(req, res) {
     var uid = req.params.userId;
     var modelName = '';
     var model;
@@ -189,7 +189,7 @@ var deleteModelDB = function(id, uid, modelName, model, goodCallback, badCallbac
  * @body
  * PUT update model with {id} owned by user with {userId}
  */
-router.put('/:id', upload.single("file"), function(req, res) {
+router.put('/:id', auth.isLoggedIn, upload.single("file"), function(req, res) {
     console.log("uploading model");
     var id = req.params.id;
     var uid = req.params.userId;
