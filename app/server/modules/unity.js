@@ -45,7 +45,9 @@ var rebuildVuforiaPackage = function(uid, pid, vuforia_path, com, name) {
 		}
 	});
 	rebuild.on('exit', function(code) {
-		changeName(com, name, pid, uid);	
+		if(com && name) {
+			changeName(com, name, pid, uid);	
+		}
 		console.log('Rebuild Vuforia pkg child process exited with code ' + code);
 	});
 };
