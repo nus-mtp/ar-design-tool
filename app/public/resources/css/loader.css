@@ -20,6 +20,7 @@
 .loader-wrapper
 .loader {
   margin: 80px auto;
+  margin-top: 15%;
   font-size: 15px;
   position: relative;
   text-indent: -9999em;
