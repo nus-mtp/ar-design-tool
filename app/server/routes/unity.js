@@ -5,6 +5,7 @@
  * To use, require module from /server/routes/unity    
  */
 var file_paths  = require('../config/file_path'),
+    auth        = require('./authentication'),
     unity       = require('../modules/unity');
     
 var express = require('express'),

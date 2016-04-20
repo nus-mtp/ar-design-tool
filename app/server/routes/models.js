@@ -5,7 +5,8 @@
  * All model apis goes here
  * To use, require module from /server/routes/models    
  */
- var file_paths  = require('../config/file_path'),
+var file_paths  = require('../config/file_path'),
+    auth        = require('./authentication'),
     utils       = require('../modules/utils'),
     unity       = require('../modules/unity'),
     models      = require('../models'),
@@ -31,7 +32,7 @@ var upload = multer({ storage: storage });
  * @body
  * GET Returns all models of user with {userid}
  */
-router.get('/', function(req, res) {
+router.get('/', auth.isLoggedIn, function(req, res) {
     models.model.findAll({
         where: {
             uid: req.params.userId

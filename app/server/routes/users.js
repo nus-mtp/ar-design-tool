@@ -4,7 +4,8 @@
  * All user apis goes here
  * To use, require module from /server/routes/users
  */
-var models  = require('../models'),
+var auth    = require('./authentication'),
+    models  = require('../models'),
     express = require('express');
 
 var router = express.Router();
