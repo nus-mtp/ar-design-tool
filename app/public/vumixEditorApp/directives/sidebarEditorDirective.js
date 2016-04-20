@@ -21,7 +21,7 @@
       tmpl += '         </thead>';
       tmpl += '         <tbody>';
       tmpl += '           <tr ng-repeat="model in modelsOnScreen" ng-click="selectModelOnScreen(model)">';
-      tmpl += '             <td>{{ model.instanceName }}</td>';
+      tmpl += '             <td class="clickable">{{ model.instanceName }}</td>';
       tmpl += '             <td><a href="" ng-click="removeModelFromScreen(model)">Delete</a></td>';
       tmpl += '           </tr>';
       tmpl += '         </tbody>';
@@ -45,11 +45,11 @@
       tmpl += '         </thead>';
       tmpl += '         <tbody>';
       tmpl += '           <tr ng-repeat="model in modelsAvailable">';
-      tmpl += '             <td>{{ model.name }}</td>';
+      tmpl += '             <td class="clickable">{{ model.name }}</td>';
       tmpl += '             <td><a href="" ng-click="addModelToScreen(model)">Add</a></td>';
       tmpl += '           </tr>';
       tmpl += '           <tr>';
-      tmpl += '             <td><input ng-model="textModel" type="text" class="form-control custom-input input-sm" ng-focus="unityMapperService.activateKeyboard()" ng-blur="unityMapperService.deactivateKeyboard()" placeholder="Enter text"></td>';
+      tmpl += '             <td><input ng-model="textModel" type="text" class="form-control custom-input input-sm" ng-focus="unityMapperService.activateKeyboard()" ng-blur="unityMapperService.deactivateKeyboard()" placeholder="Enter 3D text"></td>';
       tmpl += '             <td style="vertical-align:middle;"><a href="" ng-click="addText(textModel)">Add</a></td>';
       tmpl += '           </tr>';
       tmpl += '         </tbody>';
