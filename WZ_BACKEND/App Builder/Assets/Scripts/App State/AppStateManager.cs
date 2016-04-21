@@ -52,8 +52,14 @@ public class AppStateManager : MonoBehaviour
 
     public string GetCurrentStateName()
     {
-        return states[currentStateId].name;
+        foreach (State s in stateComponents)
+        {
+            if (s.id == currentStateId)
+                return s.gameObject.name;
+        }
+        return "";
     }
+
     public void GoBack()
     {
         if (usageStack.Count > 0)
