@@ -1,325 +1,325 @@
   
-  var angularHelper = (function () {
-    var angularHelper = function () { };
-    var defaultApplicationName = "vumixEditorApp";
-    angularHelper.compile = function ($targetDom, htmlToCompile, applicationName) {
-      var $injector = angular.injector(["ng", applicationName || defaultApplicationName]);
-      $injector.invoke(["$compile", "$rootScope", function ($compile, $rootScope) {
-        var $scope = $targetDom.append(htmlToCompile).scope();
-        $compile($targetDom)($scope || $rootScope);
-        $rootScope.$digest();
-      }]);
-    }
-    return angularHelper;
-  })();
+//   var angularHelper = (function () {
+//     var angularHelper = function () { };
+//     var defaultApplicationName = "vumixEditorApp";
+//     angularHelper.compile = function ($targetDom, htmlToCompile, applicationName) {
+//       var $injector = angular.injector(["ng", applicationName || defaultApplicationName]);
+//       $injector.invoke(["$compile", "$rootScope", function ($compile, $rootScope) {
+//         var $scope = $targetDom.append(htmlToCompile).scope();
+//         $compile($targetDom)($scope || $rootScope);
+//         $rootScope.$digest();
+//       }]);
+//     }
+//     return angularHelper;
+//   })();
   
-    var numberOfElements = 0;
-    var htmlBase = 'drawingArea';
+//     var numberOfElements = 0;
+//     var htmlBase = 'drawingArea';
     
-    jsPlumb.ready(function () {
+//     jsPlumb.ready(function () {
         
-    var id = 0;
-    var options = [];
-    var stateName = $('<select>');
-    stateName.append($('<option></option>').attr('value', '#').text('Select an option'));
-	//FIX DOM:
-	  $("#taskcontainer0")[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
+//     var id = 0;
+//     var options = [];
+//     var stateName = $('<select>');
+//     stateName.append($('<option></option>').attr('value', '#').text('Select an option'));
+// 	//FIX DOM:
+// 	  $("#taskcontainer0")[0].innerHTML = $(("#taskcontainer0"))[0].innerHTML;
     
    
-	jsPlumb.draggable($(".task"));
+// 	jsPlumb.draggable($(".task"));
     
-	jsPlumb.importDefaults({
-		Endpoint : ["Dot", {radius:15}],
-		EndpointStyle : { fillStyle : "gray" },
-		HoverPaintStyle : {strokeStyle:"gray", lineWidth:10 },
-        ConnectionOverlays : [
-					[ "Arrow", { location:0.8 } ],
-					[ "Label", { 
-						location:0.2,
-						id:"label",
-					}]
-				]
-    });
+// 	jsPlumb.importDefaults({
+// 		Endpoint : ["Dot", {radius:15}],
+// 		EndpointStyle : { fillStyle : "gray" },
+// 		HoverPaintStyle : {strokeStyle:"gray", lineWidth:10 },
+//         ConnectionOverlays : [
+// 					[ "Arrow", { location:0.8 } ],
+// 					[ "Label", { 
+// 						location:0.2,
+// 						id:"label",
+// 					}]
+// 				]
+//     });
     
-	var workflowConnectorStartpoint = {
-		isSource: true,
-		isTarget: true,
-		maxConnections: 10,					 
-		anchor:"BottomCenter",
-        paintStyle: { fillStyle: 'lightblue' },
-		endpoint : ["Dot", {radius:15}],
-        overlays:[
-                	[ "Label", { 
-	                	location:[0.5, 1.5], 
-	                } ]
-                ]
-        /*beforeDetach: function (conn) {
-        return confirm("Detach connection?");
-        }*/
-	};
+// 	var workflowConnectorStartpoint = {
+// 		isSource: true,
+// 		isTarget: true,
+// 		maxConnections: 10,					 
+// 		anchor:"BottomCenter",
+//         paintStyle: { fillStyle: 'lightblue' },
+// 		endpoint : ["Dot", {radius:15}],
+//         overlays:[
+//                 	[ "Label", { 
+// 	                	location:[0.5, 1.5], 
+// 	                } ]
+//                 ]
+//         /*beforeDetach: function (conn) {
+//         return confirm("Detach connection?");
+//         }*/
+// 	};
 	
-	var workflowConnectorEndpoint = {
-		isSource: false,
-		isTarget: true,
-		maxConnections: 10,				 
-		anchor: 'TopCenter',
-		paintStyle: { fillStyle: 'gray' },
-		endpoint: ["Dot", {radius:15}],
-        overlays:[
-                	[ "Label", { 
-	                	location:[0.5, 1.5], 
-	                } ]
-                ]
-	};
+// 	var workflowConnectorEndpoint = {
+// 		isSource: false,
+// 		isTarget: true,
+// 		maxConnections: 10,				 
+// 		anchor: 'TopCenter',
+// 		paintStyle: { fillStyle: 'gray' },
+// 		endpoint: ["Dot", {radius:15}],
+//         overlays:[
+//                 	[ "Label", { 
+// 	                	location:[0.5, 1.5], 
+// 	                } ]
+//                 ]
+// 	};
 	
-    //the code below allows source without circle but dragging has to be disabled first. 
-    //jsPlumb.makeSource(
-    //    $('.startpoint'), {
-    //        anchor: 'Continuous'
-    //});
+//     //the code below allows source without circle but dragging has to be disabled first. 
+//     //jsPlumb.makeSource(
+//     //    $('.startpoint'), {
+//     //        anchor: 'Continuous'
+//     //});
     
     
-	jsPlumb.addEndpoint(
-		$('.startpoint'),
-		workflowConnectorStartpoint
-	);
+// 	jsPlumb.addEndpoint(
+// 		$('.startpoint'),
+// 		workflowConnectorStartpoint
+// 	);
 	
-    var makeTarget = {
-        anchor: 'Continuous',
-        /*beforeDetach: function (conn) {
-        return confirm("Detach connection?");
-        }*/
-    };
+//     var makeTarget = {
+//         anchor: 'Continuous',
+//         /*beforeDetach: function (conn) {
+//         return confirm("Detach connection?");
+//         }*/
+//     };
     
-    jsPlumb.makeTarget(
-        $('.endpoint'), 
-        makeTarget
-    );
+//     jsPlumb.makeTarget(
+//         $('.endpoint'), 
+//         makeTarget
+//     );
     
-    var init = function(connection) {
-        console.log("this runs");
-				connection.getOverlay("label").setLabel("whatever");
-	};
+//     var init = function(connection) {
+//         console.log("this runs");
+// 				connection.getOverlay("label").setLabel("whatever");
+// 	};
     
-    jsPlumb.bind('click', function (connection, e) {
-        var options = [];
+//     jsPlumb.bind('click', function (connection, e) {
+//         var options = [];
         				
-        while(options.length > 0) {
-        options.pop();
-        }
+//         while(options.length > 0) {
+//         options.pop();
+//         }
         
-        if (connection.sourceId === "startpoint"){
-            connection.sourceId = "0";
-        }
+//         if (connection.sourceId === "startpoint"){
+//             connection.sourceId = "0";
+//         }
         
-        //$('#clickableModal').modal('show');
+//         //$('#clickableModal').modal('show');
         
-        showClickableModel(connection.Id);
+//         showClickableModel(connection.Id);
         
-        sourceId = parseInt(connection.sourceId);
-        options = getModelNames(sourceId);
-        connection.getOverlay("label").setLabel(options);
-        console.log("clicked options " + options);
+//         sourceId = parseInt(connection.sourceId);
+//         options = getModelNames(sourceId);
+//         connection.getOverlay("label").setLabel(options);
+//         console.log("clicked options " + options);
        
-    });
+//     });
 		
-	$('#'+htmlBase).on("click", ".button_remove", function () {
-		var parentnode = $(this)[0].parentNode.parentNode;
-		jsPlumb.detachAllConnections(parentnode);
-		jsPlumb.removeAllEndpoints(parentnode);
-		$(parentnode).remove(); 
-	});
+// 	$('#'+htmlBase).on("click", ".button_remove", function () {
+// 		var parentnode = $(this)[0].parentNode.parentNode;
+// 		jsPlumb.detachAllConnections(parentnode);
+// 		jsPlumb.removeAllEndpoints(parentnode);
+// 		$(parentnode).remove(); 
+// 	});
 						
-     $('#'+htmlBase).dblclick(function(e) {
-         addTask(undefined,e);
-     });
+//      $('#'+htmlBase).dblclick(function(e) {
+//          addTask(undefined,e);
+//      });
     
-	$('.button_save_task').click(function(){
-		saveFlowchart();
-	});
+// 	$('.button_save_task').click(function(){
+// 		saveFlowchart();
+// 	});
 	
-	$('.button_load_task').click(function(){
-		loadFlowchart();
-	});
-});
+// 	$('.button_load_task').click(function(){
+// 		loadFlowchart();
+// 	});
+// });
 
-function addTask(id, e){
+// function addTask(id, e){
 
-	if(typeof id === "undefined"){
-		numberOfElements++;
-		//id = "taskcontainer" + numberOfElements;
-        id = numberOfElements;
-	}
+// 	if(typeof id === "undefined"){
+// 		numberOfElements++;
+// 		//id = "taskcontainer" + numberOfElements;
+//         id = numberOfElements;
+// 	}
 	
-    var newState = $('<div class="task" id="' + id + '" data-nodetype="task">');
+//     var newState = $('<div class="task" id="' + id + '" data-nodetype="task">');
     
-    var top = e.pageY;
-    var left = e.pageX;
-    var width = $(window).width();
+//     var top = e.pageY;
+//     var left = e.pageX;
+//     var width = $(window).width();
     
-    if (left >= (0.8*width)){
-        left = 0.75*width;
-    }
+//     if (left >= (0.8*width)){
+//         left = 0.75*width;
+//     }
     
-    else if (left <= 320){
-        left = 320;
-    }
+//     else if (left <= 320){
+//         left = 320;
+//     }
     
-    if (top <= 150) {
-        top = 150;
-    }
+//     if (top <= 150) {
+//         top = 150;
+//     }
     
-    else if (top >=530){
-        top = 530;
-    }
+//     else if (top >=530){
+//         top = 530;
+//     }
     
-    //double click anywhere to create new state
-    newState.css({
-		  'top': top-150,
-		  'left': left-300
-		});
+//     //double click anywhere to create new state
+//     newState.css({
+// 		  'top': top-150,
+// 		  'left': left-300
+// 		});
         
-    newState.appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
-    var taskSourceConnectorEndpoint = {
-		isSource: true,
-		isTarget: true,
-		maxConnections: 10,
-        anchor:"BottomCenter",
-        paintStyle: { fillStyle: 'lightblue' },
-		endpoint : ["Dot", {radius:15}],
-        overlays:[
-                	[ "Label", { 
-	                	location:[0.5, 1.5], 
-	                } ]
-                ]
-	};
+//     newState.appendTo('#'+htmlBase).html($(("#taskcontainer0"))[0].innerHTML);
+//     var taskSourceConnectorEndpoint = {
+// 		isSource: true,
+// 		isTarget: true,
+// 		maxConnections: 10,
+//         anchor:"BottomCenter",
+//         paintStyle: { fillStyle: 'lightblue' },
+// 		endpoint : ["Dot", {radius:15}],
+//         overlays:[
+//                 	[ "Label", { 
+// 	                	location:[0.5, 1.5], 
+// 	                } ]
+//                 ]
+// 	};
 	
     
     
-	jsPlumb.addEndpoint(
-		$('#'+id),
-		taskSourceConnectorEndpoint
-	);
+// 	jsPlumb.addEndpoint(
+// 		$('#'+id),
+// 		taskSourceConnectorEndpoint
+// 	);
 	
-    //the code below allows source without circle but dragging has to be disabled first. 
-    //jsPlumb.makeSource(
-    //    $('#'+id), {
-    //        anchor: 'Continuous'
-    //    });
+//     //the code below allows source without circle but dragging has to be disabled first. 
+//     //jsPlumb.makeSource(
+//     //    $('#'+id), {
+//     //        anchor: 'Continuous'
+//     //    });
     
-	jsPlumb.makeTarget(
-        $('#'+id), {
-		  anchor: 'Continuous'
-		});
+// 	jsPlumb.makeTarget(
+//         $('#'+id), {
+// 		  anchor: 'Continuous'
+// 		});
     
-	jsPlumb.draggable($('#' + id),{containment:"parent"});
-	return id;
-}
+// 	jsPlumb.draggable($('#' + id),{containment:"parent"});
+// 	return id;
+// }
     
-function saveFlowchart(){
-	var nodes = []
-	$(".node").each(function (idx, elem) {
-	var $elem = $(elem);
-	var endpoints = jsPlumb.getEndpoints($elem.attr('id'));
-	console.log('endpoints of '+$elem.attr('id'));
-	console.log(endpoints);
-		nodes.push({
-			blockId: $elem.attr('id'),
-			nodetype: $elem.attr('data-nodetype'),
-			positionX: parseInt($elem.css("left"), 10),
-			positionY: parseInt($elem.css("top"), 10)
-		});
-	});
-	var connections = [];
-	$.each(jsPlumb.getConnections(), function (idx, connection) {
-		connections.push({
-			connectionId: connection.id,
-			pageSourceId: connection.sourceId,
-			pageTargetId: connection.targetId
-		});
-	});
+// function saveFlowchart(){
+// 	var nodes = []
+// 	$(".node").each(function (idx, elem) {
+// 	var $elem = $(elem);
+// 	var endpoints = jsPlumb.getEndpoints($elem.attr('id'));
+// 	console.log('endpoints of '+$elem.attr('id'));
+// 	console.log(endpoints);
+// 		nodes.push({
+// 			blockId: $elem.attr('id'),
+// 			nodetype: $elem.attr('data-nodetype'),
+// 			positionX: parseInt($elem.css("left"), 10),
+// 			positionY: parseInt($elem.css("top"), 10)
+// 		});
+// 	});
+// 	var connections = [];
+// 	$.each(jsPlumb.getConnections(), function (idx, connection) {
+// 		connections.push({
+// 			connectionId: connection.id,
+// 			pageSourceId: connection.sourceId,
+// 			pageTargetId: connection.targetId
+// 		});
+// 	});
 	
-	var flowChart = {};
-	flowChart.nodes = nodes;
-	flowChart.connections = connections;
-	flowChart.numberOfElements = numberOfElements;
+// 	var flowChart = {};
+// 	flowChart.nodes = nodes;
+// 	flowChart.connections = connections;
+// 	flowChart.numberOfElements = numberOfElements;
 	
-	var flowChartJson = JSON.stringify(flowChart);
-	//console.log(flowChartJson);
+// 	var flowChartJson = JSON.stringify(flowChart);
+// 	//console.log(flowChartJson);
 	
-	$('#jsonOutput').val(flowChartJson);
-}
+// 	$('#jsonOutput').val(flowChartJson);
+// }
 
-function loadFlowchart(){
-	var flowChartJson = $('#jsonOutput').val();
-	var flowChart = JSON.parse(flowChartJson);
-	var nodes = flowChart.nodes;
-	$.each(nodes, function( index, elem ) {
-		if(elem.nodetype === 'startpoint'){
-			repositionElement('startpoint', elem.positionX, elem.positionY);
-		}else if(elem.nodetype === 'endpoint'){
-			repositionElement('endpoint', elem.positionX, elem.positionY);
-		}else if(elem.nodetype === 'task'){
-			var id = addTask(elem.blockId);
-			repositionElement(id, elem.positionX, elem.positionY);
-		}else if(elem.nodetype === 'decision'){
-			var id = addDecision(elem.blockId);
-			repositionElement(id, elem.positionX, elem.positionY);
-		}else{
+// function loadFlowchart(){
+// 	var flowChartJson = $('#jsonOutput').val();
+// 	var flowChart = JSON.parse(flowChartJson);
+// 	var nodes = flowChart.nodes;
+// 	$.each(nodes, function( index, elem ) {
+// 		if(elem.nodetype === 'startpoint'){
+// 			repositionElement('startpoint', elem.positionX, elem.positionY);
+// 		}else if(elem.nodetype === 'endpoint'){
+// 			repositionElement('endpoint', elem.positionX, elem.positionY);
+// 		}else if(elem.nodetype === 'task'){
+// 			var id = addTask(elem.blockId);
+// 			repositionElement(id, elem.positionX, elem.positionY);
+// 		}else if(elem.nodetype === 'decision'){
+// 			var id = addDecision(elem.blockId);
+// 			repositionElement(id, elem.positionX, elem.positionY);
+// 		}else{
 			
-		}
-	});
+// 		}
+// 	});
 							
-	var connections = flowChart.connections;
-	$.each(connections, function( index, elem ) {
-		 var connection1 = jsPlumb.connect({
-			source: elem.pageSourceId,
-			target: elem.pageTargetId,
-			anchors: ["BottomCenter", [0.75, 0, 0, -1]]
+// 	var connections = flowChart.connections;
+// 	$.each(connections, function( index, elem ) {
+// 		 var connection1 = jsPlumb.connect({
+// 			source: elem.pageSourceId,
+// 			target: elem.pageTargetId,
+// 			anchors: ["BottomCenter", [0.75, 0, 0, -1]]
 			
-		});
-	});
+// 		});
+// 	});
 	
-	numberOfElements = flowChart.numberOfElements;
-}
+// 	numberOfElements = flowChart.numberOfElements;
+// }
 
 
-function repositionElement(id, posX, posY){
-	$('#'+id).css('left', posX);
-	$('#'+id).css('top', posY);
-	jsPlumb.repaint(id);
-}
+// function repositionElement(id, posX, posY){
+// 	$('#'+id).css('left', posX);
+// 	$('#'+id).css('top', posY);
+// 	jsPlumb.repaint(id);
+// }
 
-function attachClickable(id){
-        var clickableObjects = [];
-        var item = 0;
-        item = id;
+// function attachClickable(id){
+//         var clickableObjects = [];
+//         var item = 0;
+//         item = id;
         
-        var el = $('[ng-app=vumixEditorApp]')[0];
-        clickableObjects = angular.element(el).injector().get('stateService').getStateObjects(item);
-        console.log("this function attachClickable was called" + " " + item + " " + clickableObjects);
+//         var el = $('[ng-app=vumixEditorApp]')[0];
+//         clickableObjects = angular.element(el).injector().get('stateService').getStateObjects(item);
+//         console.log("this function attachClickable was called" + " " + item + " " + clickableObjects);
 
-        return clickableObjects;
-}
+//         return clickableObjects;
+// }
 
-function getModelNames(item){
-    var modelsInState = [];
-    var nameofModels = [];
-    var i, id=0;
-    id = item;
+// function getModelNames(item){
+//     var modelsInState = [];
+//     var nameofModels = [];
+//     var i, id=0;
+//     id = item;
     
-    modelsInState = attachClickable(id);
+//     modelsInState = attachClickable(id);
     
-    console.log("length of models in state" + modelsInState.length);
+//     console.log("length of models in state" + modelsInState.length);
     
-    for (i=0; i< modelsInState.length; i++){
-        nameofModels[i] = modelsInState[i].instanceName;
-    };
-        console.log("this function getModelNames was called" + " " + id + " " + nameofModels);
+//     for (i=0; i< modelsInState.length; i++){
+//         nameofModels[i] = modelsInState[i].instanceName;
+//     };
+//         console.log("this function getModelNames was called" + " " + id + " " + nameofModels);
 
-    return nameofModels;
-}
+//     return nameofModels;
+// }
 
-function showClickableModel(edgeId){
+// function showClickableModel(edgeId){
     
-}
+// }
