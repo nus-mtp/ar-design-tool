@@ -21,21 +21,21 @@
       // get all states
       service.getAllStates = function() {
         return _state.states;
-      }
+      };
       
       // get single state given id
       service.getStateById = function(id) {
         return $.grep(_state.states, function(state) {
           return state.id === id;
         })[0];
-      }
+      };
       
       // get single state given name
       service.getStateByName = function(name) {
         return $.grep(_state.states, function(state) {
           return state.name === name;
         })[0];
-      }
+      };
       
       // create state, given name
       service.createState = function(name) {
@@ -56,7 +56,7 @@
         notifyStateChange();
         notificationService.addFreeNotification("success", " - state '" + name + "' has been successfully created. Click to dismiss.");        
         return newState;
-      }
+      };
       
       service.removeState = function(id) {        
         // delete model from local db
@@ -100,7 +100,7 @@
             }, function errorCallback(res){
                 console.log("error adding the image");
             });
-      }
+      };
       
       service.setStateName = function(id, name) {
         this.getStateById(id).name = name;
@@ -122,7 +122,7 @@
           return [];
         }  
         return state.models;
-      }
+      };
       
       service.addTextStateObject = function(stateId, text) {
         _state.states.forEach(function(state) {
@@ -131,13 +131,13 @@
               instanceName: text,
               id: state.modelIndex++,
               stateTransitionId: -1
-            }
+            };
             state.models.push(newStateObject);
           }
         });
         unityMapperService.createText(text);
         notifyStateChange();
-      }
+      };
       
       service.addStateObject = function(stateId, object) {
         _state.states.forEach(function(state) {
@@ -146,7 +146,7 @@
               instanceName: object.name,
               id: state.modelIndex++,
               stateTransitionId: -1
-            }
+            };
             state.models.push(newStateObject);
           }
         });
@@ -204,7 +204,7 @@
             notifyStateChange();
           }
         });
-      }
+      };
       
 // STATE OBJECT APIS END HERE
 

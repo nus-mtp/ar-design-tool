@@ -5,7 +5,7 @@
       template += '<div class="loader-wrapper centered-loader" ng-show="loaderStatus">';
       template += '  <div class="loader">';
       template += '  </div>';
-      template += '  <p class="loader-status">{{ loaderText }}</p>'
+      template += '  <p class="loader-status">{{ loaderText }}</p>';
       template += '</div>';
       return {
         restrict: 'E',

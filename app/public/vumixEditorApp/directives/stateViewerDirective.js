@@ -7,6 +7,6 @@
       return {
         restrict: 'E',
         template: tmpl
-      }
+      };
     });
 })();

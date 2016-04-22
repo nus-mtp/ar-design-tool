@@ -69,7 +69,8 @@
       
       service.removeInstanceObject = function() {
         SendMessage('Facade', 'DeleteGameObject');
-      }
+      };
+      
       service.createText = function(input) {
         SendMessage('Facade', 'SpawnText', input);  
       };

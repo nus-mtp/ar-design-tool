@@ -57,7 +57,7 @@
       
       $scope.addText = function(text) {
         stateService.addTextStateObject($scope.currentStateId, text);
-      }
+      };
       
       $scope.selectModelOnScreen = function(object) {
         unityMapperService.setTargetStateObject(object.id);
@@ -73,11 +73,11 @@
         } finally {
           this.$apply();
         }
-      }
+      };
       
       $scope.deleteModelFromServer = function(model) {
         modelService.deleteServerModel(model);
-      }
+      };
       
       $scope.addModelsToAssetBundle = function() {
         unityMapperService.saveState();
@@ -89,7 +89,7 @@
           }
         });
         modelService.addAssetBundleModels(_models);
-      }
+      };
       
       $scope.anyModelSelected = function() {
         if ($scope.modelsOnServer.length === 0) {

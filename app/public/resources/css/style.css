@@ -220,8 +220,8 @@ input {
   flex-wrap: wrap;
   justify-content: flex-start;
   list-style: none;
-  margin-top: 75px;
   margin-left: -21px;
+  margin-top: 75px;
   padding: 0; }
 
 .flex-item .card img {
@@ -233,8 +233,8 @@ input {
   font-size: 14px;
   font-weight: bold;
   height: 28px;
+  margin-bottom: 0;
   padding-top: 5px;
-  margin-bottom: 0px;
   text-align: center; }
 
 .grey-bg {
@@ -260,7 +260,15 @@ ul {
   .btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover {
     background-color: #0daf83; }
 
-.btn-default:active:hover, .btn-default.active:hover, .open > .dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open > .dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open > .dropdown-toggle.btn-default.focus {
+.btn-default:active:hover,
+.btn-default.active:hover,
+.open > .dropdown-toggle.btn-default:hover,
+.btn-default:active:focus,
+.btn-default.active:focus,
+.open > .dropdown-toggle.btn-default:focus,
+.btn-default:active.focus,
+.btn-default.active.focus,
+.open > .dropdown-toggle.btn-default.focus {
   background-color: #0daf83; }
 
 .icon-delete {

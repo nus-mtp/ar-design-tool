@@ -16,7 +16,7 @@
   background-color: $bg-color; 
   color: $text-color; 
   margin-top: 2px;
-  
+
   :hover {
     background-color: $light-green;
   }
@@ -131,8 +131,8 @@ input {
   flex-wrap: wrap;
   justify-content: flex-start;
   list-style: none;
-  margin-top: 75px;
   margin-left: -21px;
+  margin-top: 75px;
   padding: 0;
 }
 
@@ -142,20 +142,21 @@ input {
     img {
       width: 164px;
     }
+
     .name-holder {
       background-color: $bg-grey; 
       color: $black; 
       font-size: 14px;
       font-weight: bold;
-      height: 28px;
+      height: 28px; 
+      margin-bottom: 0;
       padding-top: 5px;
-      margin-bottom:0px;
-      text-align:center;
+      text-align: center;
     }
   }
 }
 
-.grey-bg{
+.grey-bg {
   background: $black;
   opacity: 0.2;
 }
@@ -186,33 +187,41 @@ ul {
   }
 }
 
-.btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default{
+.btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
   background-color: $light-green;
-  
+
   &:hover {
-      background-color: $light-green;
+    background-color: $light-green;
   }
 }
 
-.btn-default:active:hover, .btn-default.active:hover, .open>.dropdown-toggle.btn-default:hover, .btn-default:active:focus, .btn-default.active:focus, .open>.dropdown-toggle.btn-default:focus, .btn-default:active.focus, .btn-default.active.focus, .open>.dropdown-toggle.btn-default.focus {
+.btn-default:active:hover, 
+.btn-default.active:hover, 
+.open>.dropdown-toggle.btn-default:hover, 
+.btn-default:active:focus, 
+.btn-default.active:focus, 
+.open>.dropdown-toggle.btn-default:focus, 
+.btn-default:active.focus, 
+.btn-default.active.focus, 
+.open>.dropdown-toggle.btn-default.focus {
   background-color: $light-green;
 }
 
 .icon-delete {
-    float: right;
-    font-size: 18px;
-    height: 40px;
-    margin-top: -193px;
-    padding-left: 10px;
-    width: 40px;
+  float: right;
+  font-size: 18px;
+  height: 40px;
+  margin-top: -193px;
+  padding-left: 10px;
+  width: 40px;
 }
 
 .icon-update {
-    float: right;
-    font-size: 18px;
-    height: 40px;
-    margin-right: 40px;
-    margin-top: -193px;
-    padding-left: 10px;
-    width: 40px;
+  float: right;
+  font-size: 18px;
+  height: 40px;
+  margin-right: 40px;
+  margin-top: -193px;
+  padding-left: 10px;
+  width: 40px;
 }

@@ -10,12 +10,12 @@
       
       var notifyDisplayStateIdChange = function() {
         $rootScope.$emit('_$displayStateIdChange');
-      }
+      };
       
       service.subscribeToDisplayStateIdChange = function($scope, callback) {
         var handler = $rootScope.$on('_$displayStateIdChange', callback);
         $scope.$on('$destroy', handler);
-      }
+      };
       
       service.openEditor = function(id, name) {
           this.id = id;

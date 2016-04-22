@@ -67,7 +67,7 @@
           var equalise = function() {
             $el.find("#panel-selector").outerHeight(totalHeight / 2.0);
             $el.find("#panel-browser").outerHeight(totalHeight / 2.0);
-          }
+          };
           
           angular.element($window).bind('resize', function(evt) {
             if (this === evt.target) {
@@ -106,6 +106,6 @@
           $el.find('[data-toggle="tooltip"]').tooltip();
           equalise();
         }
-      }
+      };
     });  
 })();

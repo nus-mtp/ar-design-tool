@@ -85,7 +85,7 @@ router.post('/', auth.isLoggedIn, upload.single("file"), function(req, res) {
     console.log('uploading model...');
     var physical_model = req.file;
     var ext = req.body.file_extension;
-    var modelName = req.body.model_name 
+    var modelName = req.body.model_name; 
     var destName = modelName+'.'+ext;
     var newModel = {
         uid: req.params.userId,
@@ -104,7 +104,7 @@ router.post('/', auth.isLoggedIn, upload.single("file"), function(req, res) {
             res.json({status: "fail", message: "model already exists!", length: 0, data: []});
         } else {
             insertModelDB(newModel, physical_model, function(model) {
-                console.log("successfully uploaded model!")
+                console.log("successfully uploaded model!");
                 res.json({status: "ok", message: "new model created!", length: 1, data: [model]});
             }, function(err) {
                 res.json({status: "fail", message: err.message, length: 0, data: []});
@@ -241,6 +241,6 @@ var updateModelDB = function(req, physical_model, id, model, goodCallback, badCa
         console.log('caught error in updateModelDB API function');
         badCallback(err);
     });
-}
+};
 
 module.exports = router;

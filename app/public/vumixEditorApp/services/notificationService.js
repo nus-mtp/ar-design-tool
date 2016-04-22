@@ -13,12 +13,12 @@
       service.subscribeToNotificationsChange = function($scope, callback) {
         var handler = $rootScope.$on('$_notificationsChange', callback);
         $scope.$on('$destroy', handler);
-      }
+      };
       
       // sticky notification, unclickable. Resolve the issue to dismiss
       // id 0: warning, there are empty connectors
       service.addNotification = function(id) {
-        if (id == 0) {
+        if (id === 0) {
           notifications.push({
             mode: 'sticky',
             type: "warning",

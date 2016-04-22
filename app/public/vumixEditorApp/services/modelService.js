@@ -10,33 +10,33 @@
       
       var notifyAssetBundleModelChange = function() {
         $rootScope.$emit('_$assetBundleModelChange');
-      }
+      };
       
       var notifyServerModelChange = function() {
         $rootScope.$emit('_$serverModelChange');
-      }
+      };
       
       service.subscribeToAssetBundleModelChange = function($scope, callback) {
         var handler = $rootScope.$on('_$assetBundleModelChange', callback);
         $scope.$on('$destroy', handler);
-      }
+      };
       
       service.subscribeToServerModelChange = function($scope, callback) {
         var handler = $rootScope.$on('_$serverModelChange', callback);
         $scope.$on('$destroy', handler);
-      }
+      };
       
 // ASSETBUNDLES OBJECT APIS START HERE   
 
       service.getAllAssetBundleModels = function() {
         return _models.onAssetBundle;
-      }
+      };
       
       service.setAssetBundleModels = function(models) {
         _models.onAssetBundleIndex = models.length;
         _models.onAssetBundle = angular.copy(models);
         notifyAssetBundleModelChange();
-      }
+      };
       
       service.addAssetBundleModels = function(serverModels) {
         var _modelIds = [];
@@ -47,13 +47,13 @@
         var data = {
           pid: pid,
           modelNames: _modelIds
-        }
+        };
         return $http.post(url, data).then(function(res) {
           serverModels.forEach(function(model) {
             var _model = {
               id: _models.onAssetBundleIndex++,
               name: model.name
-            }
+            };
             _models.onAssetBundle.push(_model);
           });        
           notifyAssetBundleModelChange();
@@ -64,7 +64,7 @@
             '/storage/' + uid + '/' + pid + '/state.dat'
           );   
         });
-      }
+      };
       
       service.deleteAssetBundleModel = function(model) { 
         var _modelIds = $.map($.grep(_models.onServer, function(_model) {
@@ -105,7 +105,7 @@
 
       service.getAllServerModels = function() {
         return _models.onServer;
-      }
+      };
       
       service.insertServerModel = function(file) {
         var url = '/api/users/' + uid + '/models';
@@ -142,10 +142,10 @@
           _models.onServer.push(res.data.data[0]);
           notifyServerModelChange();
         });
-      }
+      };
       
       service.deleteServerModel = function(model) {
-        loaderService.showLoader("Removing Model from Server")
+        loaderService.showLoader("Removing Model from Server");
         return $http({
           method: 'DELETE',
           url: '/api/users/' + uid + '/models/' + model.id 
@@ -159,7 +159,7 @@
           });
           notifyServerModelChange();
         });
-      }
+      };
       
       service.setModelsAvailability = function() {
         var _availableModelNames = [];
@@ -172,7 +172,7 @@
           }
         });  
         notifyServerModelChange();
-      }
+      };
       
 // SERVER OBJECT APIS END HERE         
       
