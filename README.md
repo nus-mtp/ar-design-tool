@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/nus-mtp/ar-design-tool.svg?branch=master)](https://travis-ci.org/nus-mtp/ar-design-tool)
-[![codecov.io](https://codecov.io/github/nus-mtp/ar-design-tool/coverage.svg?branch=master)](https://codecov.io/github/nus-mtp/ar-design-tool?branch=master)
+<!--[![codecov.io](https://codecov.io/github/nus-mtp/ar-design-tool/coverage.svg?branch=master)](https://codecov.io/github/nus-mtp/ar-design-tool?branch=master)-->
 
 ##Ar Design Tool
 
